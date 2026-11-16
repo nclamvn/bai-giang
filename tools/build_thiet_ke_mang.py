@@ -21,7 +21,7 @@ E = lambda s: html.escape(str(s), quote=True)
 # (số tiết, tên bài, mục giáo trình, trang, phương trình, bài tập cuối chương, nội dung, thư mục bài, ảnh bìa)
 CHUONG = [
     ('1', 'Tổng quan về thiết kế và hiệu năng mạng', [
-        (1, 'Thiết kế mạng bắt đầu từ dịch vụ', '1.1–1.5', '1–13', '1.1–1.6, 1.8', 'C1.1, C1.2, C1.7', 'Chu trình thiết kế và kiểm chứng; dịch vụ, QoS, SLA, metric; mạng như một hệ thống; vector yêu cầu và điều kiện nghiệm thu', None, None),
+        (1, 'Thiết kế mạng bắt đầu từ dịch vụ', '1.1–1.5', '1–13', '1.1–1.6, 1.8', 'C1.1, C1.2, C1.7', 'Chu trình thiết kế và kiểm chứng; dịch vụ, QoS, SLA, metric; mạng như một hệ thống; vector yêu cầu và điều kiện nghiệm thu', 'dich-vu/', 'tk-dich-vu'),
         (2, 'Gói tin qua ba chặng', '1.5.2, 1.6.1', '13–14', '1.7, 1.9–1.12', 'C1.3, C1.4', 'Mức sử dụng và dư địa; độ trễ đầu cuối bốn thành phần; trễ hàng đợi từ mô phỏng so với M/M/1; thời gian đáp ứng', 'goi-tin/', 'tk-goi-tin'),
         (3, 'Khi hàng đợi đầy', '1.6.2–1.6.4', '14–16', '1.13–1.18', 'C1.5', 'Bộ đệm K gói: mất gói, biến thiên trễ, lỗi bit, thông lượng và goodput; bộ đệm lớn có tốt hơn?', 'hang-doi/', 'tk-hang-doi'),
         (4, 'Độ sẵn sàng, RTO và RPO', '1.6.5', '16–18', '1.19, 2.17–2.19, 4.14', 'C2.8', 'MTBF, MTTR; hai đường lên chung một ống hay tách hai ngả; đồng hồ phục hồi bốn pha; công thức so với Monte Carlo', 'san-sang/', 'tk-san-sang'),

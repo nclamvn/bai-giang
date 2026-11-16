@@ -73,5 +73,19 @@ kiem('Câu 3 chương 4: 48 × 1 Gb/s trên 4 × 10 Gb/s → Ω = 1,2', Math.abs
   const mu = 12500; kiem('Tiết 2, ví dụ 4: W_q 80 µs ở ρ 0,5 và 720 µs ở ρ 0,9', Math.abs(F.mm1(0.5 * mu, mu).Wq - 80e-6) < 1e-9 && Math.abs(F.mm1(0.9 * mu, mu).Wq - 720e-6) < 1e-9);
   kiem('Tiết 2, bài 6: 4 + 150 + 20 + 10 = 184 ms', F.tDapUng({mang: 4e-3, mayChu: 0.15, csdl: 0.02, mayKhach: 0.01}) === 0.184); }
 
+// Tiết 1 (kit/mang/dich-vu.js, giáo án tk-dich-vu.json): số của ví dụ giải mẫu và đáp án
+{ const {danhGia, mucTieu, PHUONG_AN} = await import('../tools/robotics/kit/mang/dich-vu.js');
+  const tk = danhGia(PHUONG_AN[0].x), cb = danhGia(PHUONG_AN[1].x), mb = danhGia(PHUONG_AN[2].x);
+  kiem('Tiết 1, ví dụ 1: ρ = 1,4, mất ≈ 28,9 %, goodput lớp học ≈ 213 Mbit/s', Math.abs(tk.rho - 1.4) < 1e-9 && Math.abs(tk.kq.lh.v.P - 0.289) < 0.001 && Math.abs(tk.kq.lh.v.G - 213) < 1, `${f(tk.kq.lh.v.P * 100, 3)} %, ${f(tk.kq.lh.v.G, 3)} Mbit/s`);
+  const ut = danhGia({C: 500, qos: true, kep: false, dem: false});
+  kiem('Tiết 1, ví dụ 2: ưu tiên → lớp học đủ 300, sao lưu còn 200 Mbit/s', ut.kq.lh.ok.G && ut.kq.lh.ok.P && Math.abs(ut.kq.sl.v.G - 200) < 1e-6 && !ut.kq.sl.dat);
+  kiem('Tiết 1, ví dụ 3: một đường 0,99895 không đạt, hai đường 0,99995 đạt', Math.abs(tk.A - 0.99895) < 1e-5 && !tk.kq.lh.ok.A && Math.abs(cb.A - 0.99995) < 2e-6 && cb.kq.lh.ok.A, `${f(tk.A, 6)}, ${f(cb.A, 6)}`);
+  const J = [tk, cb, mb].map((e) => mucTieu(e).J), J3 = [tk, cb, mb].map((e) => mucTieu(e, [1, 1, 3, 1]).J);
+  kiem('Tiết 1, ví dụ 4: J ≈ 27,7; −1,79; −0,34 và với α3 = 3 ≈ 29,7; 2,51; 6,86', [27.7, -1.79, -0.34].every((v, i) => Math.abs(J[i] - v) < 0.01) && [29.7, 2.51, 6.86].every((v, i) => Math.abs(J3[i] - v) < 0.01), J.map((x) => f(x, 3)).join(' · '));
+  kiem('Tiết 1: Cân bằng và Mua băng thông đạt cả bốn dịch vụ, Tiết kiệm thì không', cb.datHet && mb.datHet && !tk.datHet);
+  const a1 = F.sanSang(1000, 4), a2 = F.sanSangSongSong([a1, a1]);
+  kiem('Tiết 1, bài 5: 0,99602 (≈ 2 095 phút/năm) và 0,999984 (≈ 8 phút/năm)', Math.abs(a1 - 0.99602) < 1e-5 && Math.abs(F.phutNgungNam(a1) - 2095) < 2 && Math.abs(a2 - 0.999984) < 1e-6 && Math.abs(F.phutNgungNam(a2) - 8.35) < 0.2, `${f(F.phutNgungNam(a1))}, ${f(F.phutNgungNam(a2), 3)} phút`);
+  const r4 = 790 / 500; kiem('Tiết 1, bài 4: ρ = 1,58, mất ≈ 36,7 %, goodput ≈ 247 Mbit/s', Math.abs(1 - 1 / r4 - 0.367) < 0.001 && Math.abs(390 / r4 - 247) < 0.5); }
+
 console.log(`\n${dem - loi}/${dem} đạt`);
 process.exit(loi ? 1 : 0);

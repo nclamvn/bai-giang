@@ -1,0 +1,131 @@
+{
+  "id": "tk-dich-vu",
+  "tiet": 1,
+  "bai": "thiet-ke-mang/dich-vu/",
+  "ten_bai": "Thiết kế mạng bắt đầu từ dịch vụ",
+  "ten_tiet": "Thiết kế theo yêu cầu dịch vụ: ánh xạ, đánh đổi và nghiệm thu",
+  "chuong": "Chương 1 · Tổng quan về thiết kế và hiệu năng mạng",
+  "muc": "1.1–1.5",
+  "trang": "1–13",
+  "pt": "(1.1)–(1.6), (1.8)",
+  "bt_sach": "Câu 1, câu 2, câu 7",
+  "dan": "Tiết mở đầu học phần đặt một mạng trường trước bốn dịch vụ có yêu cầu khác nhau, dùng chung một đường WAN. Sinh viên thấy vì sao thiết kế phải đi từ yêu cầu dịch vụ: lập vector yêu cầu, chọn quyết định thiết kế có căn cứ, cân nhắc đánh đổi, rồi nghiệm thu bằng so sánh số đo với ngưỡng.",
+  "muc_tieu": [
+    "Phát biểu định nghĩa mạng truyền thông, thiết kế mạng, hiệu năng mạng (mục 1.2.1) và nêu được vì sao thiết kế không bắt đầu từ việc chọn thiết bị.",
+    "Viết và giải thích ánh xạ thiết kế (1.1) và hàm mục tiêu đánh đổi (1.2); chỉ ra ý nghĩa của trọng số α.",
+    "Mô tả chu trình sáu bước (hình 1.2) và vòng phản hồi vận hành (1.3), gọi đúng tên x_k, u_k, w_k, y_k.",
+    "Phân biệt yêu cầu dịch vụ, QoS, SLA và metric hiệu năng (bảng 1.1); kể được năm nhóm thông tin của một mô tả dịch vụ.",
+    "Biểu diễn một mạng bằng đồ thị có hướng (1.4) với vector thuộc tính liên kết (1.5); phân biệt ba mặt phẳng dữ liệu, điều khiển, quản lý.",
+    "Lập vector yêu cầu (1.6) cho một dịch vụ cụ thể và kết luận đạt hay không đạt theo điều kiện nghiệm thu (1.8)."
+  ],
+  "can_co": [
+    "Khái niệm gói tin, địa chỉ IP, switch và router ở mức nhập môn mạng máy tính.",
+    "Đơn vị bit/s, Mbit/s, Gbit/s; ms, µs; số mũ cơ số 10.",
+    "Xác suất cơ bản: biến cố độc lập, phép nhân xác suất."
+  ],
+  "chuan_bi": {
+    "gv": [
+      "Máy tính có Chrome hoặc Edge bản mới, nối máy chiếu. Mở bài 3D trước giờ học một lần, bấm Lên lớp để màn hình giảng viên hiện phút và việc từng bước.",
+      "In phiếu bài tập (một trang A4) cho mỗi sinh viên, hoặc chiếu phiếu và cho làm vào vở.",
+      "Kẻ sẵn trên bảng khung bốn cột: Yêu cầu dịch vụ · QoS · SLA · Metric, để điền cùng lớp ở bước 7."
+    ],
+    "sv": [
+      "Đọc trước mục 1.1 đến 1.5, giáo trình trang 1–13.",
+      "Máy tính cầm tay."
+    ]
+  },
+  "hoat_dong": [
+    {"ten": "Mở đầu", "tu": 0, "den": 3, "buoc": [1], "muc": "Đặt tình huống: mạng trường có thiết bị chạy bình thường mà vẫn có dịch vụ không đạt.", "san_pham": "Sinh viên nêu giả thuyết vì sao, ghi lại để đối chiếu cuối tiết."},
+    {"ten": "Thiết kế là bài toán hệ thống", "tu": 3, "den": 19, "buoc": [2, 3, 4, 5, 6], "muc": "Quy trình hình 1.1, ba định nghĩa, ánh xạ (1.1), đánh đổi (1.2), chu trình và vòng phản hồi (1.3).", "san_pham": "Sinh viên ghi được (1.1), (1.2), (1.3) kèm ý nghĩa từng ký hiệu; trả lời hai câu hỏi trên màn hình."},
+    {"ten": "Ngôn ngữ chung", "tu": 19, "den": 26, "buoc": [7, 8], "muc": "Phân biệt yêu cầu, QoS, SLA, metric; luồng, mô hình và năm nhóm thông tin.", "san_pham": "Bảng bốn cột điền cho dịch vụ lớp học trực tuyến."},
+    {"ten": "Mạng như một hệ thống kỹ thuật", "tu": 26, "den": 33, "buoc": [9, 10], "muc": "Đồ thị G = (V, E), vector thuộc tính liên kết, ba mặt phẳng.", "san_pham": "Sinh viên vẽ đồ thị của mạng trường trong cảnh, ghi vector c_ij cho cạnh WAN."},
+    {"ten": "Từ dịch vụ đến nghiệm thu", "tu": 33, "den": 42, "buoc": [11, 12], "muc": "Lập vector yêu cầu (1.6), lập ma trận nghiệm thu (1.8), giải ví dụ 3 và 5.", "san_pham": "Phiếu bài tập câu 6 làm tại lớp; ma trận đạt/không đạt cho bốn dịch vụ."},
+    {"ten": "Tổng kết, giao bài", "tu": 42, "den": 45, "buoc": [13], "muc": "Chốt chuỗi dịch vụ → vector → quyết định → đánh đổi → nghiệm thu; giao câu 1, 2, 7.", "san_pham": "Sinh viên đối chiếu giả thuyết đầu tiết với kết luận."}
+  ],
+  "buoc": [
+    {"t": "Một mạng trường, bốn dịch vụ khác nhau", "tu": 0, "den": 3,
+      "gv": "Chiếu toàn cảnh: giảng đường, camera, phòng máy, router biên, đường WAN ra đám mây. Chỉ bốn màu gói là bốn dịch vụ. Hỏi: thiết bị đều chạy, vậy vì sao màn chiếu giảng đường xám và bảng 01 báo hai dịch vụ chưa đạt? Ghi hai ba giả thuyết của lớp lên góc bảng.",
+      "sv": "Quan sát bảng 01, nêu giả thuyết, ghi vào lề vở."},
+    {"t": "Từ yêu cầu tới kiểm chứng và quay lại", "tu": 3, "den": 6,
+      "gv": "Vẽ hình 1.1 thành năm khối nối tiếp: yêu cầu, thiết kế, mô hình hoá, đo kiểm, kết luận; thêm hai mũi tên phản hồi. Chuyển góc nhìn Đường WAN, chỉ gói đỏ rơi ở cổng ra: đó là kết quả đo, phải quay về sửa thiết kế chứ không sửa kết luận.",
+      "sv": "Chép sơ đồ năm khối và hai vòng phản hồi."},
+    {"t": "Mạng, thiết kế mạng, hiệu năng mạng", "tu": 6, "den": 9,
+      "gv": "Đọc chậm ba định nghĩa ở mục 1.2.1, gạch chân cụm \"tập yêu cầu dịch vụ đã được lượng hoá\" và danh sách tham số hiệu năng. Nêu ITU-T Y.1540 là nơi định nghĩa các tham số truyền gói IP.",
+      "sv": "Ghi ba định nghĩa; khoanh các tham số hiệu năng."},
+    {"t": "Thiết kế là một ánh xạ", "tu": 9, "den": 12,
+      "gv": "Viết (1.1), giải thích R_svc, C_env, X_net bằng bảng 02. Bấm Ưu tiên lớp học: lớp học hết mất gói, sao lưu hụt. Nhấn mạnh mỗi quyết định phải có căn cứ từ một yêu cầu. Cho lớp trả lời câu hỏi trên màn hình.",
+      "sv": "Ghi (1.1); trả lời câu hỏi chọn quyết định có căn cứ."},
+    {"t": "Không tối ưu được mọi thứ cùng lúc", "tu": 12, "den": 16,
+      "gv": "Viết (1.2). Bấm lần lượt ba phương án ở bảng 03, đọc D, mất gói, chi phí, A, J của từng phương án. Giải ví dụ 4 trên bảng: đổi α3 từ 1 lên 3, thứ hạng giữ nguyên nhưng khoảng cách giữa Cân bằng và Mua băng thông giãn ra. Cho lớp trả lời câu hỏi trên màn hình.",
+      "sv": "Ghi (1.2); điền bảng J của ba phương án vào vở; trả lời câu hỏi."},
+    {"t": "Chu trình sáu bước và vòng phản hồi", "tu": 16, "den": 19,
+      "gv": "Vẽ vòng sáu bước của hình 1.2. Viết (1.3), gọi tên x_k, u_k, w_k, y_k. Kéo Tải lớp học lên 1,3 (nhiễu w_k): phương án Cân bằng vẫn đạt. Tắt Sao lưu ban đêm (sao lưu chạy bù giờ học): lớp học vẫn đạt nhờ ưu tiên, sao lưu hụt goodput. Hỏi: u_k nên là gì?",
+      "sv": "Ghi (1.3); đề xuất một hành động u_k cho tình huống sao lưu chạy bù."},
+    {"t": "Yêu cầu, QoS, SLA, metric khác nhau thế nào", "tu": 19, "den": 23,
+      "gv": "Dùng khung bốn cột đã kẻ. Cùng lớp điền cho lớp học trực tuyến: yêu cầu (hình ổn định, tiếng không đứt), QoS (ưu tiên hàng đợi), SLA (trễ ≤ 100 ms, mất < 10⁻³, sẵn sàng 99,95 %), metric (trễ một chiều RFC 7679, mất gói RFC 7680, biến thiên trễ RFC 3393). Cho lớp trả lời câu hỏi trên màn hình.",
+      "sv": "Điền bảng bốn cột vào vở; trả lời câu hỏi phân loại."},
+    {"t": "Luồng lưu lượng và năm nhóm thông tin", "tu": 23, "den": 26,
+      "gv": "Nêu định nghĩa luồng và mô hình (mục 1.3.2). Chỉ bốn màu gói trên cảnh là bốn luồng. Liệt kê năm nhóm thông tin; với mỗi nhóm nêu hậu quả khi thiếu.",
+      "sv": "Ghi năm nhóm thông tin và hậu quả khi thiếu từng nhóm."},
+    {"t": "Mạng là một đồ thị có thuộc tính", "tu": 26, "den": 30,
+      "gv": "Bấm Đồ thị G = (V, E). Viết (1.4), (1.5). Đếm cùng lớp số nút, số cạnh có hướng. Đọc vector c_ij của cạnh WAN ở bảng 06. Nhấn mạnh băng thông cao chưa đủ: q_ij đổi thì kết quả lớp học đổi.",
+      "sv": "Vẽ đồ thị mạng trường vào vở, ghi vector c_ij của cạnh WAN."},
+    {"t": "Ba mặt phẳng: dữ liệu, điều khiển, quản lý", "tu": 30, "den": 33,
+      "gv": "Bấm Ba mặt phẳng: gói bốn màu là dữ liệu, hạt tím là điều khiển, hạt vàng là quản lý. Nêu định nghĩa SDN (RFC 7426), NFV; YANG, NETCONF, RESTCONF, NMDA mỗi thứ một câu.",
+      "sv": "Ghi chức năng ba mặt phẳng và vai trò của YANG, NETCONF, RESTCONF, NMDA."},
+    {"t": "Mỗi dịch vụ một vector yêu cầu", "tu": 33, "den": 37,
+      "gv": "Viết (1.6). Bấm r Lớp học, r Camera, r Sao lưu ở bảng 04 để thấy ba vector khác nhau. Giải ví dụ 5 trên bảng: vector của lớp học và ba metric cần đo. Nhắc ngưỡng trễ và mất lấy theo các lớp QoS của ITU-T Y.1541. Cho lớp trả lời câu hỏi trên màn hình.",
+      "sv": "Chép vector của lớp học; trả lời câu hỏi về ô không quy định."},
+    {"t": "Đạt hay không đạt là phép so sánh", "tu": 37, "den": 42,
+      "gv": "Viết (1.8). Đọc ma trận ở bảng 05. Tắt Hai đường WAN: lớp học hụt ô độ sẵn sàng. Giải ví dụ 3 trên bảng. Cho làm câu 6 phiếu bài tập trong 3 phút, gọi một sinh viên đọc kết luận. Cho lớp trả lời câu hỏi trên màn hình.",
+      "sv": "Làm câu 6 phiếu bài tập; trả lời câu hỏi về ô còn hụt."},
+    {"t": "Không bắt đầu từ việc chọn thiết bị", "tu": 42, "den": 45,
+      "gv": "Quay về giả thuyết đầu tiết, so với kết luận: nghẽn ở cổng WAN và lịch sao lưu, không ở thiết bị. Chốt chuỗi năm bước. Giao câu 1, 2, 7 cuối chương 1 và câu 4, 5 phiếu bài tập. Báo tiết sau: độ trễ đầu cuối.",
+      "sv": "Đối chiếu giả thuyết; ghi bài về nhà."}
+  ],
+  "vi_du": [
+    {"ten": "Mức sử dụng WAN của phương án Tiết kiệm", "de": "WAN 500 Mbit/s, một hàng đợi chung, mang lớp học trực tuyến 300 Mbit/s và sao lưu 400 Mbit/s cùng giờ học. Tính mức sử dụng, ước lượng tỉ lệ mất gói và goodput của lớp học.", "giai": "ρ = (300 + 400) / 500 = <b>1,4</b>: tải vượt dung lượng. Liên kết chỉ chuyển được 500 Mbit/s nên phần bị bỏ khoảng 1 − 1/ρ = 1 − 1/1,4 ≈ <b>28,6 %</b> (mô hình hàng đợi bộ đệm 200 gói của bài cho 28,9 %). Hàng chung không phân biệt luồng, nên lớp học cũng mất chừng ấy: goodput ≈ 300 × (1 − 0,289) ≈ <b>213 Mbit/s</b> &lt; 300 Mbit/s yêu cầu. Thiết bị không hỏng, thiết kế mới là chỗ sai."},
+    {"ten": "Ưu tiên lớp học, sao lưu vẫn chạy giờ học", "de": "Giữ WAN 500 Mbit/s, bật ưu tiên không chiếm quyền cho lớp học. Lớp học và sao lưu nhận được bao nhiêu?", "giai": "Lớp học được phục vụ trước: ρ<sub>1</sub> = 300/500 = 0,6 &lt; 1 nên đi đủ <b>300 Mbit/s</b>, trễ chờ chỉ vài chục µs. Sao lưu nhận phần còn lại 500 − 300 = <b>200 Mbit/s</b>, mất một nửa so với 400 Mbit/s cần: không đạt B<sub>min</sub>. Ưu tiên giải quyết lớp học nhưng không tạo thêm dung lượng; phải dời sao lưu ra ban đêm hoặc nâng WAN."},
+    {"ten": "Độ sẵn sàng một đường và hai đường WAN", "de": "Một đường WAN có MTBF 2 000 h, MTTR 2 h. Phần mạng trong trường có độ sẵn sàng 0,99995. Lớp học yêu cầu A<sub>min</sub> = 0,9995. Một đường có đạt không? Hai đường độc lập, tách ngả thì sao? Quy ra phút ngừng mỗi năm.", "giai": "A<sub>WAN</sub> = 2 000 / (2 000 + 2) ≈ 0,999001. Nối tiếp với phần trong trường: A ≈ 0,999001 × 0,99995 ≈ <b>0,99895</b> &lt; 0,9995: <b>không đạt</b>, khoảng (1 − 0,99895) × 525 960 ≈ 552 phút ngừng mỗi năm. Hai đường song song: 1 − (1 − 0,999001)<sup>2</sup> ≈ 0,999999; nhân 0,99995 được <b>0,99995</b> ≥ 0,9995: <b>đạt</b>, khoảng 27 phút ngừng mỗi năm. Phần trong trường giờ là giới hạn."},
+    {"ten": "Hàm mục tiêu (1.2) cho ba phương án", "de": "Chuẩn hoá D theo 10 ms, mất gói theo %, chi phí theo đơn vị, A theo số chữ số 9 (−log<sub>10</sub>(1 − A)). Với α = 1, các thành phần của ba phương án là: Tiết kiệm D = 0,75; P = 28,9; C = 1,00; A = 2,98. Cân bằng D = 0,36; P ≈ 0; C = 2,15; A = 4,29. Mua băng thông D = 0,35; P ≈ 0; C = 3,60; A = 4,29. Tính J và xếp hạng. Làm lại với α<sub>3</sub> = 3.", "giai": "J = D + P + C − A. Tiết kiệm: 0,75 + 28,9 + 1,00 − 2,98 ≈ <b>27,7</b>. Cân bằng: 0,36 + 0 + 2,15 − 4,29 ≈ <b>−1,79</b>. Mua băng thông: 0,35 + 0 + 3,60 − 4,29 ≈ <b>−0,34</b>. Thứ hạng: Cân bằng, Mua băng thông, Tiết kiệm. Với α<sub>3</sub> = 3: Tiết kiệm ≈ 29,7; Cân bằng ≈ 2,51; Mua băng thông ≈ 6,86. Thứ hạng giữ nguyên, nhưng khi chi phí nặng ký hơn, khoảng cách giữa hai phương án đạt yêu cầu giãn từ 1,45 lên 4,35. Trọng số là quyết định của người thiết kế, phải ghi rõ."},
+    {"ten": "Vector yêu cầu của lớp học trực tuyến (câu 7)", "de": "Lập vector (1.6) cho lớp học trực tuyến: 120 phiên đồng thời, mỗi phiên 2,5 Mbit/s, tốc độ đỉnh 1,5 lần trung bình. Đề xuất ít nhất ba metric cần đo.", "giai": "B<sub>min</sub> = 120 × 2,5 = 300 Mbit/s; B<sub>max</sub> = 450 Mbit/s. Theo lớp 0 của ITU-T Y.1541: D<sub>max</sub> = 100 ms, J<sub>max</sub> = 50 ms, P<sub>max</sub> = 10<sup>−3</sup>. A<sub>min</sub> = 0,9995 và T<sub>rec</sub> = 60 s là mức nhà trường đặt (giả định của bài). <b>r<sub>LH</sub> = [300 Mbit/s, 450 Mbit/s, 100 ms, 50 ms, 10<sup>−3</sup>, 0,9995, 60 s]</b>. Metric: trễ một chiều (RFC 7679), mất gói một chiều (RFC 7680), biến thiên trễ (RFC 3393), goodput, độ sẵn sàng; đo giữa máy trong giảng đường và nền tảng trên đám mây, trong giờ học, khi sao lưu đang chạy và khi không."}
+  ],
+  "bai_tap": [
+    {"so": "1", "de": "Phân biệt yêu cầu dịch vụ, QoS, SLA và metric hiệu năng. Cho ví dụ với dịch vụ VoIP và dịch vụ sao lưu dữ liệu.", "nguon": "câu 1 cuối chương 1", "dong": 5},
+    {"so": "2", "de": "Vì sao thiết kế mạng không nên bắt đầu từ việc chọn thiết bị? Trình bày quan hệ giữa yêu cầu, kiến trúc logic, kiến trúc vật lý và kiểm thử.", "nguon": "câu 2 cuối chương 1", "dong": 5},
+    {"so": "3", "de": "Chọn một dịch vụ trong mạng trường đại học, lập vector yêu cầu theo (1.6) và đề xuất ít nhất ba metric cần đo để kiểm chứng.", "nguon": "câu 7 cuối chương 1", "dong": 5},
+    {"so": "4", "de": "Lớp học trực tuyến tăng 30 % (390 Mbit/s), sao lưu 400 Mbit/s chạy giờ học, WAN 500 Mbit/s một hàng đợi chung. Tính ρ, ước lượng tỉ lệ mất bằng 1 − 1/ρ và goodput của lớp học. Lớp học có đạt B<sub>min</sub> = 390 Mbit/s không?", "nguon": "bài tính của tiết, theo (1.7), (1.8)", "dong": 4},
+    {"so": "5", "de": "Mỗi đường WAN có MTBF 1 000 h, MTTR 4 h. Tính độ sẵn sàng của một đường và của hai đường độc lập, tách ngả. So với A<sub>min</sub> = 0,9995 và quy ra phút ngừng mỗi năm (1 năm ≈ 525 960 phút).", "nguon": "bài tính của tiết, theo (1.8)", "dong": 4},
+    {"so": "6", "de": "Đo lớp học trực tuyến được D = 38 ms, J = 12 ms, P = 2·10<sup>−3</sup>, G = 310 Mbit/s, A = 0,9997. Với r<sub>LH</sub> ở ví dụ 5, lập bảng so sánh năm điều kiện (1.8) và kết luận.", "nguon": "làm tại lớp, theo (1.6), (1.8)", "dong": 3}
+  ],
+  "dap_an": [
+    {"so": "1", "giai": "Yêu cầu dịch vụ: điều ứng dụng cần. QoS: cơ chế mạng phục vụ lưu lượng. SLA: cam kết định lượng. Metric: đại lượng đo được có điểm đo, điều kiện đo, cách tính. VoIP: yêu cầu nghe rõ, không trễ; QoS ưu tiên tuyệt đối (EF); SLA trễ một chiều ≤ 100 ms, mất &lt; 10<sup>−3</sup>; metric trễ một chiều, biến thiên trễ, mất gói. Sao lưu: yêu cầu xong trong khung giờ; QoS lớp nền, giới hạn tốc độ giờ học; SLA hoàn tất trước 6h, goodput ≥ mức cần; metric goodput, thời gian hoàn tất. Đủ điểm khi nêu đúng bốn khái niệm và hai ví dụ có ngưỡng số."},
+    {"so": "2", "giai": "Thiết bị chỉ là một phần của X<sub>net</sub>; chọn trước thì không có căn cứ để biết đủ hay thừa, và lỗi có thể nằm ở chính sách, lịch, đường đi chứ không ở tốc độ. Quan hệ: yêu cầu (lượng hoá thành vector) quyết định kiến trúc logic (miền, định tuyến, phân đoạn, ưu tiên); kiến trúc logic chuyển thành kiến trúc vật lý (thiết bị, liên kết, vị trí, dự phòng); kiểm thử đối chiếu số đo với yêu cầu theo (1.8) và phản hồi về hai bước trước. Nêu được vòng phản hồi mới đủ điểm."},
+    {"so": "3", "giai": "Chấm theo: đủ bảy thành phần của (1.6), mỗi thành phần có số và đơn vị hoặc ghi rõ \"không quy định\" kèm lý do; ngưỡng trễ và mất có căn cứ (ví dụ lớp QoS Y.1541); ít nhất ba metric có điểm đo và điều kiện đo. Ví dụ đúng: camera 40 × 4 Mbit/s, B<sub>min</sub> = 160 Mbit/s, D<sub>max</sub> = 1 s (lớp 4), P<sub>max</sub> = 10<sup>−3</sup>; metric goodput tại NVR, mất gói, tỉ lệ khung hình ghi được."},
+    {"so": "4", "giai": "ρ = (390 + 400) / 500 = <b>1,58</b>. Tỉ lệ mất ≈ 1 − 1/1,58 ≈ <b>36,7 %</b>. Goodput lớp học ≈ 390 × (1 − 0,367) ≈ <b>247 Mbit/s</b> &lt; 390: <b>không đạt</b>. Cần ưu tiên lớp học, dời sao lưu hoặc nâng WAN."},
+    {"so": "5", "giai": "Một đường: A = 1 000 / 1 004 ≈ <b>0,99602</b> &lt; 0,9995: không đạt; ngừng ≈ (1 − 0,99602) × 525 960 ≈ <b>2 095 phút</b>, khoảng 35 giờ mỗi năm. Hai đường: A = 1 − (1 − 0,99602)<sup>2</sup> ≈ 1 − 1,59·10<sup>−5</sup> ≈ <b>0,999984</b> ≥ 0,9995: đạt; ngừng ≈ <b>8 phút</b> mỗi năm. Điều kiện: hai đường hỏng độc lập, tức đi khác ngả."},
+    {"so": "6", "giai": "D = 38 ms ≤ 100 ms ✓; J = 12 ms ≤ 50 ms ✓; P = 2·10<sup>−3</sup> &gt; 10<sup>−3</sup> ✗; G = 310 ≥ 300 Mbit/s ✓; A = 0,9997 ≥ 0,9995 ✓. Một điều kiện không đạt nên <b>dịch vụ không đạt</b>. Hướng xử lý: tìm nơi mất gói (hàng đợi cổng WAN khi có sao lưu, lỗi đường truyền), không kết luận \"gần đạt\"."}
+  ],
+  "kiem_tra": [
+    {"q": "Trong (1.1) D : (R_svc, C_env) → X_net, C_env là gì?", "o": ["Tập quyết định thiết kế", "Ràng buộc về địa điểm, ngân sách, thiết bị, nhân lực, chính sách", "Tập yêu cầu dịch vụ", "Chi phí vận hành"], "a": 1, "giai": "C<sub>env</sub> là ràng buộc môi trường; R<sub>svc</sub> là yêu cầu, X<sub>net</sub> là quyết định."},
+    {"q": "Trong (1.2), vì sao A(x) mang dấu trừ?", "o": ["Vì độ sẵn sàng luôn âm", "Vì độ sẵn sàng càng cao thì J càng nhỏ, tức phương án càng tốt", "Vì A không quan trọng", "Do quy ước đơn vị"], "a": 1, "giai": "Bài toán là cực tiểu J; trễ, mất gói, chi phí càng nhỏ càng tốt, còn độ sẵn sàng càng lớn càng tốt."},
+    {"q": "\"Trễ một chiều không vượt 100 ms trong giờ học\" thuộc loại nào?", "o": ["Yêu cầu dịch vụ", "QoS", "SLA", "Metric"], "a": 2, "giai": "Đó là cam kết định lượng có ngưỡng. Metric là đại lượng đo (trễ một chiều theo RFC 7679)."},
+    {"q": "Mặt phẳng nào tính đường đi và trao đổi thông tin định tuyến?", "o": ["Dữ liệu", "Điều khiển", "Quản lý", "Ứng dụng"], "a": 1, "giai": "Dữ liệu chuyển tiếp gói; quản lý cấu hình và giám sát."},
+    {"q": "Vector yêu cầu thiếu T_rec thì thiết kế thiếu gì?", "o": ["Tiêu chí chọn phương án dự phòng", "Băng thông tối thiểu", "Ngưỡng trễ", "Không thiếu gì"], "a": 0, "giai": "Không có thời gian phục hồi yêu cầu thì không biết cần dự phòng nóng, nguội hay chỉ cần sửa chữa."},
+    {"q": "Một dịch vụ đạt bốn trong năm điều kiện của (1.8). Kết luận?", "o": ["Đạt", "Gần đạt, chấp nhận", "Không đạt", "Tùy người nghiệm thu"], "a": 2, "giai": "(1.8) đòi cả năm điều kiện cùng thoả."}
+  ],
+  "tom_tat": [
+    "Thiết kế là ánh xạ từ yêu cầu dịch vụ và ràng buộc môi trường sang quyết định: D : (R<sub>svc</sub>, C<sub>env</sub>) → X<sub>net</sub> (1.1). Mỗi quyết định phải có căn cứ từ một yêu cầu.",
+    "Thiết kế là đánh đổi: min J(x) = α<sub>1</sub>D + α<sub>2</sub>P<sub>loss</sub> + α<sub>3</sub>C<sub>op</sub> − α<sub>4</sub>A (1.2); trọng số do người thiết kế chọn và phải ghi rõ.",
+    "Thiết kế là vòng lặp: sáu bước của hình 1.2 và x<sub>k+1</sub> = f(x<sub>k</sub>, u<sub>k</sub>, w<sub>k</sub>), y<sub>k</sub> = g(x<sub>k</sub>) (1.3).",
+    "Yêu cầu dịch vụ, QoS, SLA, metric là bốn khái niệm khác nhau (bảng 1.1); mạng mô tả bằng đồ thị G = (V, E) với thuộc tính c<sub>ij</sub> (1.4, 1.5) và ba mặt phẳng.",
+    "Mỗi dịch vụ một vector r<sub>s</sub> (1.6); đạt khi đủ cả năm điều kiện của (1.8), quyết định bằng so sánh số đo với ngưỡng."
+  ],
+  "nguon": [
+    "Hoàng Trọng Minh, Giáo trình Thiết kế và hiệu năng mạng (học phần TEL1459), Học viện Công nghệ Bưu chính Viễn thông, 2026: mục 1.1–1.5, trang 1–13; phương trình (1.1)–(1.6), (1.8); hình 1.1, 1.2; bảng 1.1; câu 1, 2, 7 cuối chương 1.",
+    "ITU-T Y.1541 (2011), Network performance objectives for IP-based services: lớp QoS 0, 3, 4, 5 (ngưỡng trễ, biến thiên trễ, mất gói dùng trong bài). ITU-T Y.1540 (2019): định nghĩa tham số truyền gói IP.",
+    "RFC 7679 (trễ một chiều), RFC 7680 (mất gói một chiều), RFC 3393 (biến thiên trễ), RFC 2475 (DiffServ), RFC 7426 (SDN), RFC 7950 (YANG), RFC 6241 (NETCONF), RFC 8040 (RESTCONF), RFC 8342 (NMDA); ITU-T E.800; ETSI GS NFV 002.",
+    "Ưu tiên không chiếm quyền: L. Kleinrock, Queueing Systems, Vol. 2 (1976), mục 3.6. Độ sẵn sàng MTBF 2 000 h, MTTR 2 h như bài tập 8 chương 2 của giáo trình.",
+    "Giả định của bài: băng thông bốn dịch vụ, A_min và T_rec, chi phí theo đơn vị tương đối, bộ đệm 200 gói, gói trung bình 1 250 byte, trễ cố định 3,5 ms, độ sẵn sàng phần trong trường 0,99995, thời gian chuyển đường dự phòng khoảng 1 s."
+  ]
+}

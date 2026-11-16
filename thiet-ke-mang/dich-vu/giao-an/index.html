@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<!--BG-SHARE:start-->
+<meta property="og:type" content="website"><meta property="og:site_name" content="Sáng Ăn Khoai"><meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Thiết kế theo yêu cầu dịch vụ: ánh xạ, đánh đổi và nghiệm thu · Giáo án tiết 1 · Thiết kế và hiệu năng mạng"><meta property="og:description" content="Giáo án 45 phút, tiết 1 học phần Thiết kế và hiệu năng mạng: Thiết kế theo yêu cầu dịch vụ: ánh xạ, đánh đổi và nghiệm thu. Mục tiêu, diễn tiến theo phút, ví dụ giải mẫu, phiếu bài tập, đáp án và kiểm tra nhanh, theo giáo trình TEL1459 mục 1.1–1.5.">
+<meta property="og:url" content="https://nclamvn.github.io/bai-giang/thiet-ke-mang/dich-vu/giao-an/"><link rel="canonical" href="https://nclamvn.github.io/bai-giang/thiet-ke-mang/dich-vu/giao-an/">
+<meta property="og:image" content="https://nclamvn.github.io/bai-giang/design/the/thiet-ke-mang-dich-vu-giao-an.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Thiết kế theo yêu cầu dịch vụ: ánh xạ, đánh đổi và nghiệm thu">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nclamvn.github.io/bai-giang/design/the/thiet-ke-mang-dich-vu-giao-an.jpg">
+<!--BG-SHARE:end-->
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thiết kế theo yêu cầu dịch vụ: ánh xạ, đánh đổi và nghiệm thu · Giáo án tiết 1 · Thiết kế và hiệu năng mạng</title>
+<meta name="description" content="Giáo án 45 phút, tiết 1 học phần Thiết kế và hiệu năng mạng: Thiết kế theo yêu cầu dịch vụ: ánh xạ, đánh đổi và nghiệm thu. Mục tiêu, diễn tiến theo phút, ví dụ giải mẫu, phiếu bài tập, đáp án và kiểm tra nhanh, theo giáo trình TEL1459 mục 1.1–1.5.">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../design/logo/favicon-32.png"><link rel="apple-touch-icon" href="../../../design/logo/apple-touch-icon.png">
+<link rel="stylesheet" href="../../../design/house.css">
+<style>:root{--acc:#2B5D8C}
+*{box-sizing:border-box}
+html{scroll-padding-top:76px}
+body{margin:0;background:var(--bg-page);color:var(--bg-ink);font:500 16px/1.6 var(--bg-font);-webkit-font-smoothing:antialiased}
+a{color:var(--acc)}
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;min-height:60px;padding:8px max(16px,calc((100vw - 1120px)/2));background:var(--bg-glass-strong);-webkit-backdrop-filter:blur(var(--bg-blur)) saturate(1.6);backdrop-filter:blur(var(--bg-blur)) saturate(1.6);border-bottom:1px solid var(--bg-hair)}
+.bar .home{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--bg-ink);text-decoration:none;font-weight:600;min-height:44px;min-width:44px}
+.bar .lg{border-radius:8px}
+.bar .sep{width:1px;height:22px;background:var(--bg-hair2)}
+.bar .crumb{color:var(--bg-ink2);font-size:15px;text-decoration:none;min-height:44px;display:flex;align-items:center}
+.bar .sp{flex:1}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:var(--bg-r-sm);border:0;background:var(--bg-surface);color:var(--bg-ink);font:500 15px var(--bg-font);text-decoration:none;cursor:pointer;box-shadow:0 0 0 1px var(--bg-hair2);white-space:nowrap}
+.btn:hover{box-shadow:0 0 0 1px var(--bg-ink3)}
+.btn.pri{background:var(--bg-brand);color:var(--bg-brand-ink);box-shadow:none}
+.btn svg{width:18px;height:18px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:center;padding:44px 0 28px}
+.eye{font:600 14px var(--bg-font);color:var(--acc)}
+h1{margin:10px 0 12px;font:400 clamp(34px,4.4vw,56px)/1.08 var(--bg-serif);letter-spacing:-.025em}
+.lead{margin:0;color:var(--bg-ink2);font-size:17px;max-width:56ch}
+.badge{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--bg-warn,#B26A1A) 10%,#fff);color:#7a4a12;font-size:14px;font-weight:600}
+.cover{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:16/10;box-shadow:var(--bg-sh-2)}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover a{position:absolute;left:14px;bottom:14px}
+.tabs{position:sticky;top:60px;z-index:9;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 0;margin:0 0 8px;background:linear-gradient(var(--bg-page) 70%,transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;display:flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;color:var(--bg-ink2);font-weight:600;font-size:15px;text-decoration:none}
+.tabs a:hover{background:var(--bg-hair)}
+section{padding:28px 0 12px}
+h2{margin:0 0 6px;font:400 30px/1.2 var(--bg-serif);letter-spacing:-.015em}
+.sub{margin:0 0 20px;color:var(--bg-ink2)}
+.card{background:var(--bg-surface,#fff);border-radius:20px;padding:20px 22px;box-shadow:var(--bg-sh-1)}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+h3{margin:0 0 10px;font:600 17px/1.35 var(--bg-font)}
+ul.tick,ol.steps{margin:0;padding:0;list-style:none}
+ul.tick li{position:relative;padding:4px 0 4px 26px}
+ul.tick li::before{content:"";position:absolute;left:4px;top:13px;width:9px;height:5px;border:solid var(--acc);border-width:0 0 2px 2px;transform:rotate(-45deg)}
+ol.steps{counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:6px 0 10px 42px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:4px;width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;font:700 14px/28px var(--bg-font);text-align:center}
+kbd{font:600 13px var(--bg-mono);padding:1px 6px;border-radius:6px;background:var(--bg-hair);border:1px solid var(--bg-hair2)}
+code{font:500 14px var(--bg-mono)}
+.mini{font-size:14px;color:var(--bg-ink2)}
+table.fix{width:100%;border-collapse:collapse;font-size:15px}
+table.fix th,table.fix td{text-align:left;vertical-align:top;padding:10px 12px;border-top:1px solid var(--bg-hair)}
+table.fix th{width:30%;font-weight:600}
+.tl{display:flex;height:56px;border-radius:14px;overflow:hidden;margin:0 0 22px;box-shadow:inset 0 0 0 1px var(--bg-hair)}
+.tl a{display:flex;flex-direction:column;justify-content:center;padding:0 12px;min-width:0;color:var(--bg-ink);text-decoration:none;border-right:2px solid var(--bg-page)}
+.tl a:last-child{border:0}
+.tl b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl span{font-size:13px;color:var(--bg-ink2);font-variant-numeric:tabular-nums}
+.act{margin:0 0 18px}
+.act>header{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;padding:0 0 10px}
+.act>header h3{margin:0;font-size:19px}
+.act>header .min{font:600 14px var(--bg-mono);color:var(--acc)}
+.act>header p{flex-basis:100%;margin:0;color:var(--bg-ink2)}
+.row{display:grid;grid-template-columns:96px minmax(0,1.1fr) minmax(0,1.6fr) minmax(0,1fr);gap:14px;padding:14px 0;border-top:1px solid var(--bg-hair)}
+.row:first-of-type{border-top:0}
+.row .m{font:600 15px var(--bg-mono);font-variant-numeric:tabular-nums;color:var(--bg-ink)}
+.row .m span{display:block;font:500 13px var(--bg-font);color:var(--bg-ink3)}
+.row .t{font-weight:700}
+.row .t small{display:block;font-weight:500;color:var(--bg-ink3);font-size:13px}
+.row .k{display:none;font-size:13px;font-weight:600;color:var(--bg-ink3)}
+.row .hs{color:var(--bg-ink2)}
+.thead{display:grid;grid-template-columns:96px minmax(0,1.1fr) minmax(0,1.6fr) minmax(0,1fr);gap:14px;padding:0 0 8px;font-size:13px;font-weight:600;color:var(--bg-ink3)}
+.prod{margin-top:6px;font-size:14px;color:var(--bg-ink2)}
+.sheet-wrap{display:flex;justify-content:center;padding:8px 0 4px}
+.sheet-zoom{width:210mm;zoom:var(--z,1)}
+.paper{width:210mm;min-height:297mm;padding:11mm 13mm 10mm;background:#fff;color:#111;box-shadow:0 1px 2px rgba(0,0,0,.08),0 18px 48px -20px rgba(15,23,42,.35);font:500 10pt/1.42 var(--bg-font)}
+.paper header{display:flex;justify-content:space-between;align-items:flex-start;gap:10mm;padding-bottom:3mm;border-bottom:.4mm solid #111}
+.paper .pk{font:600 9pt var(--bg-font);color:#555}
+.paper h4{margin:1mm 0 0;font:700 14pt/1.2 var(--bg-font)}
+.paper .who{flex:none;display:grid;grid-template-columns:auto 1fr;gap:2.5mm 3mm;width:66mm;font-size:9.5pt;color:#333}
+.paper .who i{display:block;border-bottom:.25mm solid #999;height:5mm}
+.paper .lg2{display:flex;align-items:center;gap:2mm;font:600 9pt var(--bg-font);color:#333}
+.paper .lg2 img{width:7mm;height:7mm;border-radius:1.5mm}
+.part{margin-top:3.4mm}
+.part .ph{display:flex;align-items:baseline;gap:2.5mm;margin-bottom:1.6mm}
+.part .ph b{display:inline-flex;align-items:center;justify-content:center;width:5.6mm;height:5.6mm;border-radius:50%;background:#111;color:#fff;font:700 9pt var(--bg-font)}
+.part .ph strong{font-size:11pt}
+.part .ph em{font-style:normal;color:#666;font-size:9pt}
+.part p{margin:0 0 1.6mm}
+.chain{display:flex;align-items:center;gap:1.6mm}
+.chain span{flex:1;height:11mm;border:.3mm solid #444;border-radius:2mm;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:9.5pt;text-align:center;padding:0 1mm}
+.chain span.f{background:#f2f2f2}
+.chain i{font-style:normal;color:#666}
+.paper table{width:100%;border-collapse:collapse;font-size:9.5pt}
+.paper th{text-align:left;font-weight:700;background:#f2f2f2}
+.paper th,.paper td{border:.3mm solid #555;padding:1.4mm 2mm}
+.paper td{height:9.4mm}
+.paper td:first-child,.paper th:first-child{width:13mm;text-align:center}
+.paper table.free td,.paper table.free th{width:auto!important;text-align:left!important}
+.paper table.free td{height:auto;padding:1.8mm 2mm;font-size:9pt}
+.paper table.free td{height:8.6mm}
+.draw{position:relative;border:.3mm solid #999;border-radius:2mm;overflow:hidden}.draw svg{display:block;width:100%;height:100%}
+.lbl{display:grid;grid-template-columns:repeat(3,1fr);gap:2mm 5mm;margin-top:2mm}.lbl span{display:flex;align-items:flex-end;gap:1.5mm}.lbl i{flex:1;border-bottom:.25mm dotted #777;height:5.5mm}
+.paper td:nth-child(2),.paper th:nth-child(2){width:46mm}
+.q{margin-bottom:1.6mm}
+.q .qq{display:flex;gap:1.6mm}
+.q .qq b{flex:none}
+.ln{height:6.9mm;border-bottom:.25mm dotted #777}
+.ck{display:flex;align-items:center;gap:2.4mm;margin:1.2mm 0}
+.ck i{flex:none;width:4mm;height:4mm;border:.3mm solid #444;border-radius:.8mm}
+.paper footer{margin-top:3mm;padding-top:1.6mm;border-top:.25mm solid #bbb;display:flex;justify-content:space-between;font-size:8pt;color:#777}
+dl.ans{margin:0;display:grid;grid-template-columns:110px minmax(0,1fr);gap:0}
+dl.ans dt,dl.ans dd{margin:0;padding:12px 0;border-top:1px solid var(--bg-hair)}
+dl.ans dt{font-weight:700;color:var(--acc)}
+.src{margin:0;padding-left:20px;color:var(--bg-ink2);font-size:15px}
+.src li{margin:4px 0}
+.yccd li{margin:4px 0}
+.foot{margin:36px 0 0;padding:20px 0 40px;border-top:1px solid var(--bg-hair);color:var(--bg-ink3);font-size:14px;display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:space-between}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:22px;padding:28px 0 16px}.g2{grid-template-columns:1fr}
+  .thead{display:none}.row{grid-template-columns:72px minmax(0,1fr);gap:4px 12px}.row .m{grid-row:span 3}.row .k{display:block;margin-top:6px}}
+@media (max-width:560px){.bar .crumb,.bar .sep,.bar .opt{display:none}.bar .home span{display:none}.btn{padding:0 14px}
+  h2{font-size:24px}.tl{height:auto;flex-direction:column}.tl a{flex:none!important;padding:8px 12px;border-right:0;border-bottom:2px solid var(--bg-page)}
+  dl.ans{grid-template-columns:1fr}dl.ans dd{border-top:0;padding-top:0}.card{padding:16px}
+  table.fix,table.fix tbody,table.fix tr,table.fix th,table.fix td{display:block;width:auto}table.fix th{padding:12px 0 2px}table.fix td{border-top:0;padding:0 0 12px}}
+@page{size:A4;margin:12mm 13mm}
+@media print{
+  body{background:#fff;font-size:10pt;line-height:1.5}
+  h2{font-size:17pt;break-after:avoid}h3{break-after:avoid}.sub{margin-bottom:3mm}
+  .g2{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:4mm}
+  .act.card{break-inside:auto}.act>header{break-after:avoid}
+  .row .m{grid-row:auto}.row .k{display:none!important}.thead{display:grid!important}
+  table.fix th,table.fix td{padding:2mm 3mm}
+  .bar,.tabs,.cover,.noprint,.foot .noprint{display:none!important}
+  .wrap{max-width:none;padding:0}
+  .hero{display:block;padding:0 0 4mm}
+  h1{font-size:22pt;margin:2mm 0}
+  section{padding:4mm 0 0;break-inside:auto}
+  .card{box-shadow:none;border:.3mm solid #ccc;padding:4mm 5mm}
+  .g2>.card{break-inside:avoid}dl.ans dt,dl.ans dd{break-inside:avoid}
+  .row{break-inside:avoid;grid-template-columns:18mm 34mm minmax(0,1.7fr) minmax(0,1fr);gap:3mm;padding:2.6mm 0}
+  .thead{grid-template-columns:18mm 34mm minmax(0,1.7fr) minmax(0,1fr);gap:3mm}
+  #kich-ban{break-before:page}
+  #phieu{display:none}
+  .tl a{border-right-color:#fff}
+  body.in-phieu > *:not(main){display:none!important}
+  body.in-phieu main > *:not(#phieu){display:none!important}
+  body.in-phieu #phieu{display:block;padding:0}
+  body.in-phieu #phieu > :not(.sheet-wrap){display:none}
+  body.in-phieu .sheet-wrap{padding:0;display:block}
+  body.in-phieu .sheet-zoom{zoom:1!important;width:auto}
+  body.in-phieu .paper{width:auto;min-height:0;padding:0;box-shadow:none}
+}
+
+.vd{border-top:1px solid var(--line,#e6e2d8);padding:16px 0}.vd:first-child{border-top:0;padding-top:0}
+.vd h4{margin:0 0 6px;font-size:16px}.vd .de{margin:0 0 10px}.vd .giai{background:#f7f5ef;border-radius:10px;padding:12px 14px;font-size:15px;line-height:1.6}
+.qz{border-top:1px solid var(--line,#e6e2d8);padding:12px 0}.qz:first-child{border-top:0}.qz p{margin:0 0 6px;font-weight:600}
+.qz ol{margin:0 0 6px 18px;padding:0}.qz details{font-size:14.5px;color:#4a4f58}.qz summary{cursor:pointer;color:var(--acc)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0 0}.meta div{background:#f7f5ef;border-radius:10px;padding:10px 12px;font-size:13.5px}
+.meta b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b6f78;margin-bottom:2px}
+.tt li{margin:4px 0}
+.paper .bt{margin:0 0 3.2mm}.paper .bt .qq{display:flex;gap:2mm}.paper .bt .src{color:#6b6f78;font-size:8.5pt}
+</style>
+<style id="bg-vt">@view-transition{navigation:auto}#bgs-load{view-transition-name:bg-bia}::view-transition-group(bg-bia){animation-duration:.42s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}::view-transition-old(root),::view-transition-new(root){animation-duration:.24s}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
+<script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
+<script id="bg-sw">(function(){try{if(!("serviceWorker"in navigator)||!/(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname))return;var r=new URL("../../../",location.href).href;if(/[?&]sw=0/.test(location.search)){navigator.serviceWorker.getRegistrations().then(function(a){a.forEach(function(x){x.unregister()})});return}addEventListener("load",function(){setTimeout(function(){navigator.serviceWorker.register(r+"sw.js",{scope:r}).catch(function(){})},3000)})}catch(e){}})();</script>
+</head>
+<body>
+<div class="bar">
+  <a class="home" href="../../../"><img src="../../../design/logo/mark-96.webp" width="30" height="30" alt="" class="lg"><span>Sáng Ăn Khoai</span></a><span class="sep"></span><a class="crumb" href="../../../thiet-ke-mang/">Thiết kế và hiệu năng mạng</a>
+  <span class="sp"></span>
+  <button class="btn opt" type="button" data-print="gv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In giáo án</button>
+  <button class="btn" type="button" data-print="phieu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In phiếu</button>
+  <a class="btn pri" href="../"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a>
+</div>
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <div class="eye">Tiết 1 / 22 · 45 phút · Giáo án</div>
+      <h1>Thiết kế theo yêu cầu dịch vụ: ánh xạ, đánh đổi và nghiệm thu</h1>
+      <p class="lead">Tiết mở đầu học phần đặt một mạng trường trước bốn dịch vụ có yêu cầu khác nhau, dùng chung một đường WAN. Sinh viên thấy vì sao thiết kế phải đi từ yêu cầu dịch vụ: lập vector yêu cầu, chọn quyết định thiết kế có căn cứ, cân nhắc đánh đổi, rồi nghiệm thu bằng so sánh số đo với ngưỡng. Dùng cùng bài 3D <a href="../">Thiết kế mạng bắt đầu từ dịch vụ</a>: bấm <b>Lên lớp</b> trên thanh đầu bài để màn hình giảng viên hiện phút dự kiến và việc của từng bước.</p>
+      <div class="meta"><div><b>Chương</b>Chương 1 · Tổng quan về thiết kế và hiệu năng mạng</div><div><b>Mục giáo trình</b>1.1–1.5</div><div><b>Trang</b>1–13</div><div><b>Phương trình</b>(1.1)–(1.6), (1.8)</div><div><b>Bài tập cuối chương</b>Câu 1, câu 2, câu 7</div></div>
+    </div>
+    <div class="cover"><img src="../../../thu-vien/covers/tk-dich-vu.webp" alt="Cảnh 3D của bài Thiết kế mạng bắt đầu từ dịch vụ"><a class="btn pri" href="../"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a></div>
+  </div>
+  <nav class="tabs" aria-label="Các phần của giáo án"><a href="#muc-tieu">Mục tiêu</a><a href="#dien-tien">Diễn tiến 45 phút</a><a href="#vi-du">Ví dụ giải mẫu</a><a href="#phieu">Phiếu bài tập</a><a href="#dap-an">Đáp án</a><a href="#kiem-tra">Kiểm tra nhanh</a><a href="#tom-tat">Tóm tắt và nguồn</a></nav>
+
+  <section id="muc-tieu" aria-labelledby="h-mt">
+    <h2 id="h-mt">Mục tiêu và chuẩn bị</h2>
+    <div class="g2">
+      <div class="card"><h3>Sau tiết học, sinh viên có thể</h3><ul class="tick"><li>Phát biểu định nghĩa mạng truyền thông, thiết kế mạng, hiệu năng mạng (mục 1.2.1) và nêu được vì sao thiết kế không bắt đầu từ việc chọn thiết bị.</li><li>Viết và giải thích ánh xạ thiết kế (1.1) và hàm mục tiêu đánh đổi (1.2); chỉ ra ý nghĩa của trọng số α.</li><li>Mô tả chu trình sáu bước (hình 1.2) và vòng phản hồi vận hành (1.3), gọi đúng tên x_k, u_k, w_k, y_k.</li><li>Phân biệt yêu cầu dịch vụ, QoS, SLA và metric hiệu năng (bảng 1.1); kể được năm nhóm thông tin của một mô tả dịch vụ.</li><li>Biểu diễn một mạng bằng đồ thị có hướng (1.4) với vector thuộc tính liên kết (1.5); phân biệt ba mặt phẳng dữ liệu, điều khiển, quản lý.</li><li>Lập vector yêu cầu (1.6) cho một dịch vụ cụ thể và kết luận đạt hay không đạt theo điều kiện nghiệm thu (1.8).</li></ul>
+        <h3 style="margin-top:18px">Kiến thức cần có</h3><ul class="tick"><li>Khái niệm gói tin, địa chỉ IP, switch và router ở mức nhập môn mạng máy tính.</li><li>Đơn vị bit/s, Mbit/s, Gbit/s; ms, µs; số mũ cơ số 10.</li><li>Xác suất cơ bản: biến cố độc lập, phép nhân xác suất.</li></ul></div>
+      <div class="card"><h3>Chuẩn bị</h3><ul class="tick"><li>Máy tính có Chrome hoặc Edge bản mới, nối máy chiếu. Mở bài 3D trước giờ học một lần, bấm Lên lớp để màn hình giảng viên hiện phút và việc từng bước.</li><li>In phiếu bài tập (một trang A4) cho mỗi sinh viên, hoặc chiếu phiếu và cho làm vào vở.</li><li>Kẻ sẵn trên bảng khung bốn cột: Yêu cầu dịch vụ · QoS · SLA · Metric, để điền cùng lớp ở bước 7.</li><li>Sinh viên: Đọc trước mục 1.1 đến 1.5, giáo trình trang 1–13.</li><li>Sinh viên: Máy tính cầm tay.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="dien-tien" aria-labelledby="h-dt">
+    <h2 id="h-dt">Diễn tiến 45 phút</h2>
+    <p class="sub">Mỗi dòng là một bước trên màn chiếu, cùng tên và thứ tự với bài 3D. Phút là gợi ý; giảng viên chủ động co giãn.</p>
+    <div class="tl" role="list" aria-label="Phân bổ thời gian"><a href="#hd-0" style="flex:3;background:color-mix(in srgb,#2B5D8C 14%,#fff)"><b>Mở đầu</b><span>0–3′</span></a><a href="#hd-1" style="flex:16;background:color-mix(in srgb,#2B5D8C 21%,#fff)"><b>Thiết kế là bài toán hệ thống</b><span>3–19′</span></a><a href="#hd-2" style="flex:7;background:color-mix(in srgb,#2B5D8C 28%,#fff)"><b>Ngôn ngữ chung</b><span>19–26′</span></a><a href="#hd-3" style="flex:7;background:color-mix(in srgb,#2B5D8C 35%,#fff)"><b>Mạng như một hệ thống kỹ thuật</b><span>26–33′</span></a><a href="#hd-4" style="flex:9;background:color-mix(in srgb,#2B5D8C 42%,#fff)"><b>Từ dịch vụ đến nghiệm thu</b><span>33–42′</span></a><a href="#hd-5" style="flex:3;background:color-mix(in srgb,#2B5D8C 49%,#fff)"><b>Tổng kết, giao bài</b><span>42–45′</span></a></div>
+    <div class="act card" id="hd-0"><header><h3>1. Mở đầu</h3><span class="min">0–3′</span><p>Đặt tình huống: mạng trường có thiết bị chạy bình thường mà vẫn có dịch vụ không đạt.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">0–3′<span>3 phút</span></div><div class="t"><small>Bước 1/13</small>Một mạng trường, bốn dịch vụ khác nhau</div><div class="gv"><span class="k">Giảng viên</span>Chiếu toàn cảnh: giảng đường, camera, phòng máy, router biên, đường WAN ra đám mây. Chỉ bốn màu gói là bốn dịch vụ. Hỏi: thiết bị đều chạy, vậy vì sao màn chiếu giảng đường xám và bảng 01 báo hai dịch vụ chưa đạt? Ghi hai ba giả thuyết của lớp lên góc bảng.</div><div class="hs"><span class="k">Sinh viên</span>Quan sát bảng 01, nêu giả thuyết, ghi vào lề vở.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên nêu giả thuyết vì sao, ghi lại để đối chiếu cuối tiết.</div></div><div class="act card" id="hd-1"><header><h3>2. Thiết kế là bài toán hệ thống</h3><span class="min">3–19′</span><p>Quy trình hình 1.1, ba định nghĩa, ánh xạ (1.1), đánh đổi (1.2), chu trình và vòng phản hồi (1.3).</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">3–6′<span>3 phút</span></div><div class="t"><small>Bước 2/13</small>Từ yêu cầu tới kiểm chứng và quay lại</div><div class="gv"><span class="k">Giảng viên</span>Vẽ hình 1.1 thành năm khối nối tiếp: yêu cầu, thiết kế, mô hình hoá, đo kiểm, kết luận; thêm hai mũi tên phản hồi. Chuyển góc nhìn Đường WAN, chỉ gói đỏ rơi ở cổng ra: đó là kết quả đo, phải quay về sửa thiết kế chứ không sửa kết luận.</div><div class="hs"><span class="k">Sinh viên</span>Chép sơ đồ năm khối và hai vòng phản hồi.</div></div><div class="row"><div class="m">6–9′<span>3 phút</span></div><div class="t"><small>Bước 3/13</small>Mạng, thiết kế mạng, hiệu năng mạng</div><div class="gv"><span class="k">Giảng viên</span>Đọc chậm ba định nghĩa ở mục 1.2.1, gạch chân cụm "tập yêu cầu dịch vụ đã được lượng hoá" và danh sách tham số hiệu năng. Nêu ITU-T Y.1540 là nơi định nghĩa các tham số truyền gói IP.</div><div class="hs"><span class="k">Sinh viên</span>Ghi ba định nghĩa; khoanh các tham số hiệu năng.</div></div><div class="row"><div class="m">9–12′<span>3 phút</span></div><div class="t"><small>Bước 4/13</small>Thiết kế là một ánh xạ</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.1), giải thích R_svc, C_env, X_net bằng bảng 02. Bấm Ưu tiên lớp học: lớp học hết mất gói, sao lưu hụt. Nhấn mạnh mỗi quyết định phải có căn cứ từ một yêu cầu. Cho lớp trả lời câu hỏi trên màn hình.</div><div class="hs"><span class="k">Sinh viên</span>Ghi (1.1); trả lời câu hỏi chọn quyết định có căn cứ.</div></div><div class="row"><div class="m">12–16′<span>4 phút</span></div><div class="t"><small>Bước 5/13</small>Không tối ưu được mọi thứ cùng lúc</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.2). Bấm lần lượt ba phương án ở bảng 03, đọc D, mất gói, chi phí, A, J của từng phương án. Giải ví dụ 4 trên bảng: đổi α3 từ 1 lên 3, thứ hạng giữ nguyên nhưng khoảng cách giữa Cân bằng và Mua băng thông giãn ra. Cho lớp trả lời câu hỏi trên màn hình.</div><div class="hs"><span class="k">Sinh viên</span>Ghi (1.2); điền bảng J của ba phương án vào vở; trả lời câu hỏi.</div></div><div class="row"><div class="m">16–19′<span>3 phút</span></div><div class="t"><small>Bước 6/13</small>Chu trình sáu bước và vòng phản hồi</div><div class="gv"><span class="k">Giảng viên</span>Vẽ vòng sáu bước của hình 1.2. Viết (1.3), gọi tên x_k, u_k, w_k, y_k. Kéo Tải lớp học lên 1,3 (nhiễu w_k): phương án Cân bằng vẫn đạt. Tắt Sao lưu ban đêm (sao lưu chạy bù giờ học): lớp học vẫn đạt nhờ ưu tiên, sao lưu hụt goodput. Hỏi: u_k nên là gì?</div><div class="hs"><span class="k">Sinh viên</span>Ghi (1.3); đề xuất một hành động u_k cho tình huống sao lưu chạy bù.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên ghi được (1.1), (1.2), (1.3) kèm ý nghĩa từng ký hiệu; trả lời hai câu hỏi trên màn hình.</div></div><div class="act card" id="hd-2"><header><h3>3. Ngôn ngữ chung</h3><span class="min">19–26′</span><p>Phân biệt yêu cầu, QoS, SLA, metric; luồng, mô hình và năm nhóm thông tin.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">19–23′<span>4 phút</span></div><div class="t"><small>Bước 7/13</small>Yêu cầu, QoS, SLA, metric khác nhau thế nào</div><div class="gv"><span class="k">Giảng viên</span>Dùng khung bốn cột đã kẻ. Cùng lớp điền cho lớp học trực tuyến: yêu cầu (hình ổn định, tiếng không đứt), QoS (ưu tiên hàng đợi), SLA (trễ ≤ 100 ms, mất < 10⁻³, sẵn sàng 99,95 %), metric (trễ một chiều RFC 7679, mất gói RFC 7680, biến thiên trễ RFC 3393). Cho lớp trả lời câu hỏi trên màn hình.</div><div class="hs"><span class="k">Sinh viên</span>Điền bảng bốn cột vào vở; trả lời câu hỏi phân loại.</div></div><div class="row"><div class="m">23–26′<span>3 phút</span></div><div class="t"><small>Bước 8/13</small>Luồng lưu lượng và năm nhóm thông tin</div><div class="gv"><span class="k">Giảng viên</span>Nêu định nghĩa luồng và mô hình (mục 1.3.2). Chỉ bốn màu gói trên cảnh là bốn luồng. Liệt kê năm nhóm thông tin; với mỗi nhóm nêu hậu quả khi thiếu.</div><div class="hs"><span class="k">Sinh viên</span>Ghi năm nhóm thông tin và hậu quả khi thiếu từng nhóm.</div></div><div class="prod"><b>Kết quả:</b> Bảng bốn cột điền cho dịch vụ lớp học trực tuyến.</div></div><div class="act card" id="hd-3"><header><h3>4. Mạng như một hệ thống kỹ thuật</h3><span class="min">26–33′</span><p>Đồ thị G = (V, E), vector thuộc tính liên kết, ba mặt phẳng.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">26–30′<span>4 phút</span></div><div class="t"><small>Bước 9/13</small>Mạng là một đồ thị có thuộc tính</div><div class="gv"><span class="k">Giảng viên</span>Bấm Đồ thị G = (V, E). Viết (1.4), (1.5). Đếm cùng lớp số nút, số cạnh có hướng. Đọc vector c_ij của cạnh WAN ở bảng 06. Nhấn mạnh băng thông cao chưa đủ: q_ij đổi thì kết quả lớp học đổi.</div><div class="hs"><span class="k">Sinh viên</span>Vẽ đồ thị mạng trường vào vở, ghi vector c_ij của cạnh WAN.</div></div><div class="row"><div class="m">30–33′<span>3 phút</span></div><div class="t"><small>Bước 10/13</small>Ba mặt phẳng: dữ liệu, điều khiển, quản lý</div><div class="gv"><span class="k">Giảng viên</span>Bấm Ba mặt phẳng: gói bốn màu là dữ liệu, hạt tím là điều khiển, hạt vàng là quản lý. Nêu định nghĩa SDN (RFC 7426), NFV; YANG, NETCONF, RESTCONF, NMDA mỗi thứ một câu.</div><div class="hs"><span class="k">Sinh viên</span>Ghi chức năng ba mặt phẳng và vai trò của YANG, NETCONF, RESTCONF, NMDA.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên vẽ đồ thị của mạng trường trong cảnh, ghi vector c_ij cho cạnh WAN.</div></div><div class="act card" id="hd-4"><header><h3>5. Từ dịch vụ đến nghiệm thu</h3><span class="min">33–42′</span><p>Lập vector yêu cầu (1.6), lập ma trận nghiệm thu (1.8), giải ví dụ 3 và 5.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">33–37′<span>4 phút</span></div><div class="t"><small>Bước 11/13</small>Mỗi dịch vụ một vector yêu cầu</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.6). Bấm r Lớp học, r Camera, r Sao lưu ở bảng 04 để thấy ba vector khác nhau. Giải ví dụ 5 trên bảng: vector của lớp học và ba metric cần đo. Nhắc ngưỡng trễ và mất lấy theo các lớp QoS của ITU-T Y.1541. Cho lớp trả lời câu hỏi trên màn hình.</div><div class="hs"><span class="k">Sinh viên</span>Chép vector của lớp học; trả lời câu hỏi về ô không quy định.</div></div><div class="row"><div class="m">37–42′<span>5 phút</span></div><div class="t"><small>Bước 12/13</small>Đạt hay không đạt là phép so sánh</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.8). Đọc ma trận ở bảng 05. Tắt Hai đường WAN: lớp học hụt ô độ sẵn sàng. Giải ví dụ 3 trên bảng. Cho làm câu 6 phiếu bài tập trong 3 phút, gọi một sinh viên đọc kết luận. Cho lớp trả lời câu hỏi trên màn hình.</div><div class="hs"><span class="k">Sinh viên</span>Làm câu 6 phiếu bài tập; trả lời câu hỏi về ô còn hụt.</div></div><div class="prod"><b>Kết quả:</b> Phiếu bài tập câu 6 làm tại lớp; ma trận đạt/không đạt cho bốn dịch vụ.</div></div><div class="act card" id="hd-5"><header><h3>6. Tổng kết, giao bài</h3><span class="min">42–45′</span><p>Chốt chuỗi dịch vụ → vector → quyết định → đánh đổi → nghiệm thu; giao câu 1, 2, 7.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">42–45′<span>3 phút</span></div><div class="t"><small>Bước 13/13</small>Không bắt đầu từ việc chọn thiết bị</div><div class="gv"><span class="k">Giảng viên</span>Quay về giả thuyết đầu tiết, so với kết luận: nghẽn ở cổng WAN và lịch sao lưu, không ở thiết bị. Chốt chuỗi năm bước. Giao câu 1, 2, 7 cuối chương 1 và câu 4, 5 phiếu bài tập. Báo tiết sau: độ trễ đầu cuối.</div><div class="hs"><span class="k">Sinh viên</span>Đối chiếu giả thuyết; ghi bài về nhà.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên đối chiếu giả thuyết đầu tiết với kết luận.</div></div>
+  </section>
+
+  <section id="vi-du" aria-labelledby="h-vd">
+    <h2 id="h-vd">Ví dụ giải mẫu</h2>
+    <p class="sub">Giảng viên giải trên bảng trong tiết; số liệu đã kiểm bằng máy cùng công thức của bài 3D.</p>
+    <div class="card"><div class="vd"><h4>Ví dụ 1. Mức sử dụng WAN của phương án Tiết kiệm</h4><p class="de">WAN 500 Mbit/s, một hàng đợi chung, mang lớp học trực tuyến 300 Mbit/s và sao lưu 400 Mbit/s cùng giờ học. Tính mức sử dụng, ước lượng tỉ lệ mất gói và goodput của lớp học.</p><div class="giai">ρ = (300 + 400) / 500 = <b>1,4</b>: tải vượt dung lượng. Liên kết chỉ chuyển được 500 Mbit/s nên phần bị bỏ khoảng 1 − 1/ρ = 1 − 1/1,4 ≈ <b>28,6 %</b> (mô hình hàng đợi bộ đệm 200 gói của bài cho 28,9 %). Hàng chung không phân biệt luồng, nên lớp học cũng mất chừng ấy: goodput ≈ 300 × (1 − 0,289) ≈ <b>213 Mbit/s</b> &lt; 300 Mbit/s yêu cầu. Thiết bị không hỏng, thiết kế mới là chỗ sai.</div></div><div class="vd"><h4>Ví dụ 2. Ưu tiên lớp học, sao lưu vẫn chạy giờ học</h4><p class="de">Giữ WAN 500 Mbit/s, bật ưu tiên không chiếm quyền cho lớp học. Lớp học và sao lưu nhận được bao nhiêu?</p><div class="giai">Lớp học được phục vụ trước: ρ<sub>1</sub> = 300/500 = 0,6 &lt; 1 nên đi đủ <b>300 Mbit/s</b>, trễ chờ chỉ vài chục µs. Sao lưu nhận phần còn lại 500 − 300 = <b>200 Mbit/s</b>, mất một nửa so với 400 Mbit/s cần: không đạt B<sub>min</sub>. Ưu tiên giải quyết lớp học nhưng không tạo thêm dung lượng; phải dời sao lưu ra ban đêm hoặc nâng WAN.</div></div><div class="vd"><h4>Ví dụ 3. Độ sẵn sàng một đường và hai đường WAN</h4><p class="de">Một đường WAN có MTBF 2 000 h, MTTR 2 h. Phần mạng trong trường có độ sẵn sàng 0,99995. Lớp học yêu cầu A<sub>min</sub> = 0,9995. Một đường có đạt không? Hai đường độc lập, tách ngả thì sao? Quy ra phút ngừng mỗi năm.</p><div class="giai">A<sub>WAN</sub> = 2 000 / (2 000 + 2) ≈ 0,999001. Nối tiếp với phần trong trường: A ≈ 0,999001 × 0,99995 ≈ <b>0,99895</b> &lt; 0,9995: <b>không đạt</b>, khoảng (1 − 0,99895) × 525 960 ≈ 552 phút ngừng mỗi năm. Hai đường song song: 1 − (1 − 0,999001)<sup>2</sup> ≈ 0,999999; nhân 0,99995 được <b>0,99995</b> ≥ 0,9995: <b>đạt</b>, khoảng 27 phút ngừng mỗi năm. Phần trong trường giờ là giới hạn.</div></div><div class="vd"><h4>Ví dụ 4. Hàm mục tiêu (1.2) cho ba phương án</h4><p class="de">Chuẩn hoá D theo 10 ms, mất gói theo %, chi phí theo đơn vị, A theo số chữ số 9 (−log<sub>10</sub>(1 − A)). Với α = 1, các thành phần của ba phương án là: Tiết kiệm D = 0,75; P = 28,9; C = 1,00; A = 2,98. Cân bằng D = 0,36; P ≈ 0; C = 2,15; A = 4,29. Mua băng thông D = 0,35; P ≈ 0; C = 3,60; A = 4,29. Tính J và xếp hạng. Làm lại với α<sub>3</sub> = 3.</p><div class="giai">J = D + P + C − A. Tiết kiệm: 0,75 + 28,9 + 1,00 − 2,98 ≈ <b>27,7</b>. Cân bằng: 0,36 + 0 + 2,15 − 4,29 ≈ <b>−1,79</b>. Mua băng thông: 0,35 + 0 + 3,60 − 4,29 ≈ <b>−0,34</b>. Thứ hạng: Cân bằng, Mua băng thông, Tiết kiệm. Với α<sub>3</sub> = 3: Tiết kiệm ≈ 29,7; Cân bằng ≈ 2,51; Mua băng thông ≈ 6,86. Thứ hạng giữ nguyên, nhưng khi chi phí nặng ký hơn, khoảng cách giữa hai phương án đạt yêu cầu giãn từ 1,45 lên 4,35. Trọng số là quyết định của người thiết kế, phải ghi rõ.</div></div><div class="vd"><h4>Ví dụ 5. Vector yêu cầu của lớp học trực tuyến (câu 7)</h4><p class="de">Lập vector (1.6) cho lớp học trực tuyến: 120 phiên đồng thời, mỗi phiên 2,5 Mbit/s, tốc độ đỉnh 1,5 lần trung bình. Đề xuất ít nhất ba metric cần đo.</p><div class="giai">B<sub>min</sub> = 120 × 2,5 = 300 Mbit/s; B<sub>max</sub> = 450 Mbit/s. Theo lớp 0 của ITU-T Y.1541: D<sub>max</sub> = 100 ms, J<sub>max</sub> = 50 ms, P<sub>max</sub> = 10<sup>−3</sup>. A<sub>min</sub> = 0,9995 và T<sub>rec</sub> = 60 s là mức nhà trường đặt (giả định của bài). <b>r<sub>LH</sub> = [300 Mbit/s, 450 Mbit/s, 100 ms, 50 ms, 10<sup>−3</sup>, 0,9995, 60 s]</b>. Metric: trễ một chiều (RFC 7679), mất gói một chiều (RFC 7680), biến thiên trễ (RFC 3393), goodput, độ sẵn sàng; đo giữa máy trong giảng đường và nền tảng trên đám mây, trong giờ học, khi sao lưu đang chạy và khi không.</div></div></div>
+  </section>
+
+  <section id="phieu" aria-labelledby="h-ph">
+    <h2 id="h-ph">Phiếu bài tập</h2>
+    <p class="sub">Một trang A4. Làm trên lớp phần đầu, phần còn lại về nhà. <button class="btn noprint" type="button" data-print="phieu" style="margin-left:6px;vertical-align:middle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In phiếu</button></p>
+    <div class="sheet-wrap"><div class="sheet-zoom"><div class="paper" lang="vi">
+  <header><div><div class="lg2"><img src="../../../design/logo/mark-96.webp" alt="">Sáng Ăn Khoai · Thiết kế và hiệu năng mạng · Tiết 1 · Phiếu bài tập</div><h4>Thiết kế theo yêu cầu dịch vụ: ánh xạ, đánh đổi và nghiệm thu</h4></div>
+    <div class="who"><span>Họ tên</span><i></i><span>Mã sinh viên</span><i></i></div></header>
+  <div class="part bt"><div class="qq"><b>1.</b><span>Phân biệt yêu cầu dịch vụ, QoS, SLA và metric hiệu năng. Cho ví dụ với dịch vụ VoIP và dịch vụ sao lưu dữ liệu. <span class=src>(câu 1 cuối chương 1)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>2.</b><span>Vì sao thiết kế mạng không nên bắt đầu từ việc chọn thiết bị? Trình bày quan hệ giữa yêu cầu, kiến trúc logic, kiến trúc vật lý và kiểm thử. <span class=src>(câu 2 cuối chương 1)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>3.</b><span>Chọn một dịch vụ trong mạng trường đại học, lập vector yêu cầu theo (1.6) và đề xuất ít nhất ba metric cần đo để kiểm chứng. <span class=src>(câu 7 cuối chương 1)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>4.</b><span>Lớp học trực tuyến tăng 30 % (390 Mbit/s), sao lưu 400 Mbit/s chạy giờ học, WAN 500 Mbit/s một hàng đợi chung. Tính ρ, ước lượng tỉ lệ mất bằng 1 − 1/ρ và goodput của lớp học. Lớp học có đạt B<sub>min</sub> = 390 Mbit/s không? <span class=src>(bài tính của tiết, theo (1.7), (1.8))</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>5.</b><span>Mỗi đường WAN có MTBF 1 000 h, MTTR 4 h. Tính độ sẵn sàng của một đường và của hai đường độc lập, tách ngả. So với A<sub>min</sub> = 0,9995 và quy ra phút ngừng mỗi năm (1 năm ≈ 525 960 phút). <span class=src>(bài tính của tiết, theo (1.8))</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>6.</b><span>Đo lớp học trực tuyến được D = 38 ms, J = 12 ms, P = 2·10<sup>−3</sup>, G = 310 Mbit/s, A = 0,9997. Với r<sub>LH</sub> ở ví dụ 5, lập bảng so sánh năm điều kiện (1.8) và kết luận. <span class=src>(làm tại lớp, theo (1.6), (1.8))</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+  <footer><span>Giáo trình TEL1459, mục 1.1–1.5, tr. 1–13</span><span>nclamvn.github.io/bai-giang</span></footer>
+</div></div></div>
+  </section>
+
+  <section id="dap-an" aria-labelledby="h-da">
+    <h2 id="h-da">Đáp án và gợi ý chấm</h2>
+    <div class="card"><dl class="ans"><dt>1</dt><dd>Yêu cầu dịch vụ: điều ứng dụng cần. QoS: cơ chế mạng phục vụ lưu lượng. SLA: cam kết định lượng. Metric: đại lượng đo được có điểm đo, điều kiện đo, cách tính. VoIP: yêu cầu nghe rõ, không trễ; QoS ưu tiên tuyệt đối (EF); SLA trễ một chiều ≤ 100 ms, mất &lt; 10<sup>−3</sup>; metric trễ một chiều, biến thiên trễ, mất gói. Sao lưu: yêu cầu xong trong khung giờ; QoS lớp nền, giới hạn tốc độ giờ học; SLA hoàn tất trước 6h, goodput ≥ mức cần; metric goodput, thời gian hoàn tất. Đủ điểm khi nêu đúng bốn khái niệm và hai ví dụ có ngưỡng số.</dd><dt>2</dt><dd>Thiết bị chỉ là một phần của X<sub>net</sub>; chọn trước thì không có căn cứ để biết đủ hay thừa, và lỗi có thể nằm ở chính sách, lịch, đường đi chứ không ở tốc độ. Quan hệ: yêu cầu (lượng hoá thành vector) quyết định kiến trúc logic (miền, định tuyến, phân đoạn, ưu tiên); kiến trúc logic chuyển thành kiến trúc vật lý (thiết bị, liên kết, vị trí, dự phòng); kiểm thử đối chiếu số đo với yêu cầu theo (1.8) và phản hồi về hai bước trước. Nêu được vòng phản hồi mới đủ điểm.</dd><dt>3</dt><dd>Chấm theo: đủ bảy thành phần của (1.6), mỗi thành phần có số và đơn vị hoặc ghi rõ "không quy định" kèm lý do; ngưỡng trễ và mất có căn cứ (ví dụ lớp QoS Y.1541); ít nhất ba metric có điểm đo và điều kiện đo. Ví dụ đúng: camera 40 × 4 Mbit/s, B<sub>min</sub> = 160 Mbit/s, D<sub>max</sub> = 1 s (lớp 4), P<sub>max</sub> = 10<sup>−3</sup>; metric goodput tại NVR, mất gói, tỉ lệ khung hình ghi được.</dd><dt>4</dt><dd>ρ = (390 + 400) / 500 = <b>1,58</b>. Tỉ lệ mất ≈ 1 − 1/1,58 ≈ <b>36,7 %</b>. Goodput lớp học ≈ 390 × (1 − 0,367) ≈ <b>247 Mbit/s</b> &lt; 390: <b>không đạt</b>. Cần ưu tiên lớp học, dời sao lưu hoặc nâng WAN.</dd><dt>5</dt><dd>Một đường: A = 1 000 / 1 004 ≈ <b>0,99602</b> &lt; 0,9995: không đạt; ngừng ≈ (1 − 0,99602) × 525 960 ≈ <b>2 095 phút</b>, khoảng 35 giờ mỗi năm. Hai đường: A = 1 − (1 − 0,99602)<sup>2</sup> ≈ 1 − 1,59·10<sup>−5</sup> ≈ <b>0,999984</b> ≥ 0,9995: đạt; ngừng ≈ <b>8 phút</b> mỗi năm. Điều kiện: hai đường hỏng độc lập, tức đi khác ngả.</dd><dt>6</dt><dd>D = 38 ms ≤ 100 ms ✓; J = 12 ms ≤ 50 ms ✓; P = 2·10<sup>−3</sup> &gt; 10<sup>−3</sup> ✗; G = 310 ≥ 300 Mbit/s ✓; A = 0,9997 ≥ 0,9995 ✓. Một điều kiện không đạt nên <b>dịch vụ không đạt</b>. Hướng xử lý: tìm nơi mất gói (hàng đợi cổng WAN khi có sao lưu, lỗi đường truyền), không kết luận "gần đạt".</dd></dl></div>
+  </section>
+
+  <section id="kiem-tra" aria-labelledby="h-kt">
+    <h2 id="h-kt">Kiểm tra nhanh cuối tiết</h2>
+    <p class="sub">6 câu, khoảng 3 phút. Chiếu lên hoặc đọc to; mở đáp án sau khi lớp trả lời.</p>
+    <div class="card"><div class="qz"><p>1. Trong (1.1) D : (R_svc, C_env) → X_net, C_env là gì?</p><ol type="A"><li>Tập quyết định thiết kế</li><li>Ràng buộc về địa điểm, ngân sách, thiết bị, nhân lực, chính sách</li><li>Tập yêu cầu dịch vụ</li><li>Chi phí vận hành</li></ol><details><summary>Đáp án</summary><b>B.</b> C<sub>env</sub> là ràng buộc môi trường; R<sub>svc</sub> là yêu cầu, X<sub>net</sub> là quyết định.</details></div><div class="qz"><p>2. Trong (1.2), vì sao A(x) mang dấu trừ?</p><ol type="A"><li>Vì độ sẵn sàng luôn âm</li><li>Vì độ sẵn sàng càng cao thì J càng nhỏ, tức phương án càng tốt</li><li>Vì A không quan trọng</li><li>Do quy ước đơn vị</li></ol><details><summary>Đáp án</summary><b>B.</b> Bài toán là cực tiểu J; trễ, mất gói, chi phí càng nhỏ càng tốt, còn độ sẵn sàng càng lớn càng tốt.</details></div><div class="qz"><p>3. &quot;Trễ một chiều không vượt 100 ms trong giờ học&quot; thuộc loại nào?</p><ol type="A"><li>Yêu cầu dịch vụ</li><li>QoS</li><li>SLA</li><li>Metric</li></ol><details><summary>Đáp án</summary><b>C.</b> Đó là cam kết định lượng có ngưỡng. Metric là đại lượng đo (trễ một chiều theo RFC 7679).</details></div><div class="qz"><p>4. Mặt phẳng nào tính đường đi và trao đổi thông tin định tuyến?</p><ol type="A"><li>Dữ liệu</li><li>Điều khiển</li><li>Quản lý</li><li>Ứng dụng</li></ol><details><summary>Đáp án</summary><b>B.</b> Dữ liệu chuyển tiếp gói; quản lý cấu hình và giám sát.</details></div><div class="qz"><p>5. Vector yêu cầu thiếu T_rec thì thiết kế thiếu gì?</p><ol type="A"><li>Tiêu chí chọn phương án dự phòng</li><li>Băng thông tối thiểu</li><li>Ngưỡng trễ</li><li>Không thiếu gì</li></ol><details><summary>Đáp án</summary><b>A.</b> Không có thời gian phục hồi yêu cầu thì không biết cần dự phòng nóng, nguội hay chỉ cần sửa chữa.</details></div><div class="qz"><p>6. Một dịch vụ đạt bốn trong năm điều kiện của (1.8). Kết luận?</p><ol type="A"><li>Đạt</li><li>Gần đạt, chấp nhận</li><li>Không đạt</li><li>Tùy người nghiệm thu</li></ol><details><summary>Đáp án</summary><b>C.</b> (1.8) đòi cả năm điều kiện cùng thoả.</details></div></div>
+  </section>
+
+  <section id="tom-tat" aria-labelledby="h-tt">
+    <h2 id="h-tt">Tóm tắt và nguồn</h2>
+    <div class="g2">
+      <div class="card"><h3>Ghi nhớ</h3><ul class="tt"><li>Thiết kế là ánh xạ từ yêu cầu dịch vụ và ràng buộc môi trường sang quyết định: D : (R<sub>svc</sub>, C<sub>env</sub>) → X<sub>net</sub> (1.1). Mỗi quyết định phải có căn cứ từ một yêu cầu.</li><li>Thiết kế là đánh đổi: min J(x) = α<sub>1</sub>D + α<sub>2</sub>P<sub>loss</sub> + α<sub>3</sub>C<sub>op</sub> − α<sub>4</sub>A (1.2); trọng số do người thiết kế chọn và phải ghi rõ.</li><li>Thiết kế là vòng lặp: sáu bước của hình 1.2 và x<sub>k+1</sub> = f(x<sub>k</sub>, u<sub>k</sub>, w<sub>k</sub>), y<sub>k</sub> = g(x<sub>k</sub>) (1.3).</li><li>Yêu cầu dịch vụ, QoS, SLA, metric là bốn khái niệm khác nhau (bảng 1.1); mạng mô tả bằng đồ thị G = (V, E) với thuộc tính c<sub>ij</sub> (1.4, 1.5) và ba mặt phẳng.</li><li>Mỗi dịch vụ một vector r<sub>s</sub> (1.6); đạt khi đủ cả năm điều kiện của (1.8), quyết định bằng so sánh số đo với ngưỡng.</li></ul></div>
+      <div class="card"><h3>Nguồn</h3><ul class="src"><li>Hoàng Trọng Minh, Giáo trình Thiết kế và hiệu năng mạng (học phần TEL1459), Học viện Công nghệ Bưu chính Viễn thông, 2026: mục 1.1–1.5, trang 1–13; phương trình (1.1)–(1.6), (1.8); hình 1.1, 1.2; bảng 1.1; câu 1, 2, 7 cuối chương 1.</li><li>ITU-T Y.1541 (2011), Network performance objectives for IP-based services: lớp QoS 0, 3, 4, 5 (ngưỡng trễ, biến thiên trễ, mất gói dùng trong bài). ITU-T Y.1540 (2019): định nghĩa tham số truyền gói IP.</li><li>RFC 7679 (trễ một chiều), RFC 7680 (mất gói một chiều), RFC 3393 (biến thiên trễ), RFC 2475 (DiffServ), RFC 7426 (SDN), RFC 7950 (YANG), RFC 6241 (NETCONF), RFC 8040 (RESTCONF), RFC 8342 (NMDA); ITU-T E.800; ETSI GS NFV 002.</li><li>Ưu tiên không chiếm quyền: L. Kleinrock, Queueing Systems, Vol. 2 (1976), mục 3.6. Độ sẵn sàng MTBF 2 000 h, MTTR 2 h như bài tập 8 chương 2 của giáo trình.</li><li>Giả định của bài: băng thông bốn dịch vụ, A_min và T_rec, chi phí theo đơn vị tương đối, bộ đệm 200 gói, gói trung bình 1 250 byte, trễ cố định 3,5 ms, độ sẵn sàng phần trong trường 0,99995, thời gian chuyển đường dự phòng khoảng 1 s.</li></ul><p class="mini" style="margin-top:12px">Nội dung viết mới theo giáo trình TEL1459 của PGS.TS Hoàng Trọng Minh (PTIT, 2026); không chép văn bản hay hình của sách, công thức giữ đúng số hiệu để sinh viên tra lại.</p></div>
+    </div>
+  </section>
+  <div class="foot"><span>Bản 1 · 16/11/2026</span><span class="noprint">© 2026 Sáng Ăn Khoai · phi thương mại</span></div>
+</main>
+<script>
+(function(){
+  var z=document.querySelector('.sheet-zoom'),w=document.querySelector('.sheet-wrap');
+  function fit(){var mm=210*96/25.4;z.style.setProperty('--z',Math.min(1,(w.clientWidth)/mm).toFixed(3))}
+  fit();addEventListener('resize',fit);
+  document.querySelectorAll('[data-print]').forEach(function(b){b.addEventListener('click',function(){
+    document.body.classList.toggle('in-phieu',b.dataset.print==='phieu');window.print();})});
+  addEventListener('afterprint',function(){document.body.classList.remove('in-phieu')});
+})();
+</script>
+</body>
+</html>

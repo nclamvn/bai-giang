@@ -35,6 +35,7 @@ BESPOKE = {
     'crazyflie': ('robotics/crazyflie/index.html', 'Drone bốn cánh Crazyflie', 'covers/robo-crazyflie.webp'),
     'turtlebot3': ('robotics/turtlebot3/index.html', 'Robot tự hành TurtleBot3', 'covers/robo-turtlebot3.webp'),
     # học phần Thiết kế và hiệu năng mạng (đại học, theo giáo trình TEL1459); thứ tự bài ở CHAIN_MANG theo số bài
+    'tk-dich-vu': ('thiet-ke-mang/dich-vu/index.html', 'Thiết kế mạng bắt đầu từ dịch vụ', 'covers/tk-dich-vu.webp'),
     'tk-goi-tin': ('thiet-ke-mang/goi-tin/index.html', 'Gói tin qua ba chặng', 'covers/tk-goi-tin.webp'),
     'tk-hang-doi': ('thiet-ke-mang/hang-doi/index.html', 'Khi hàng đợi đầy', 'covers/tk-hang-doi.webp'),
     'tk-san-sang': ('thiet-ke-mang/san-sang/index.html', 'Độ sẵn sàng, RTO và RPO', 'covers/tk-san-sang.webp'),
@@ -52,7 +53,7 @@ BESPOKE = {
 }
 # mạch Sinh học tế bào 10, theo tools/build_pages.py (ROUTE)
 CHAIN_CELL = ['te-bao', 'transport-step', 'plasmolysis-step', 'ty-the', 'enzyme-step', 'mitosis-step']
-CHAIN_MANG = ['tk-goi-tin', 'tk-hang-doi', 'tk-san-sang', 'tk-van-hanh', 'tk-tai', 'tk-vlsm', 'tk-dinh-tuyen', 'tk-overlay', 'tk-toa-nha', 'tk-quang', 'tk-wifi', 'tk-phong-do', 'tk-qos', 'tk-5g']
+CHAIN_MANG = ['tk-dich-vu', 'tk-goi-tin', 'tk-hang-doi', 'tk-san-sang', 'tk-van-hanh', 'tk-tai', 'tk-vlsm', 'tk-dinh-tuyen', 'tk-overlay', 'tk-toa-nha', 'tk-quang', 'tk-wifi', 'tk-phong-do', 'tk-qos', 'tk-5g']
 CHAIN_ROBO = ['ur5e', 'hexapod', 'quadruped', 'jellyfish', 'crazyflie', 'turtlebot3']
 
 
