@@ -53,7 +53,7 @@ const CSS = () => `
 .alert{position:absolute;font:600 9.5px 'JetBrains Mono',monospace;letter-spacing:1.4px;color:#fff;background:${C.or};padding:3px 8px;border-radius:3px;white-space:nowrap;transition:opacity .2s}
 `;
 // nhãn trong dữ liệu viết hoa: đổi sang chữ thường kiểu câu, giữ từ viết tắt ASCII ngắn (TCP, DH, PID, MOVEJ) và số
-const ACR = new Set('ĐCT ĐCD TCP DH IK FK PID PD PI ISO ROS LDS IMU ESC PWM AMCL SLAM LIDAR MOVEJ MOVEL DOF RX RY RZ CPU GPU API EKF UR CW CCW BLDC AX OK DC USB SE TB GPS RPM MIT ABAD FR FL RR RL AA'.split(' '));
+const ACR = new Set('ĐCT ĐCD TCP DH IK FK PID PD PI ISO ROS LDS IMU ESC PWM AMCL SLAM LIDAR MOVEJ MOVEL DOF RX RY RZ CPU GPU API EKF UR CW CCW BLDC AX OK DC USB SE TB GPS RPM MIT ABAD FR FL RR RL AA WAN LAN VLAN IP RTT MDF IDF POE UPS AP UE UPF MEC RAN NR LTE EPC NSA SBA SLA SLO KPI CU DU RU AMF SMF PCF DN URLLC EMBB MMTC NG ECMP QOS DSCP'.split(' '));
 export const sc = (t) => {
   const s = String(t ?? ''); if (/</.test(s)) return s; // HTML: giữ nguyên
   const up = (x) => x === x.toLocaleUpperCase('vi') && x !== x.toLocaleLowerCase('vi');

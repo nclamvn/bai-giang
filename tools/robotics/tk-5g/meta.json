@@ -1,0 +1,1 @@
+{"title": "Gói tin 5G đầu-cuối và vị trí UPF", "description": "Thiết kế và hiệu năng mạng, bài 6.1 (BT 6.4, 6.5): chuỗi UE → gNB → truyền dẫn → UPF → ứng dụng. Đặt UPF và máy chủ MEC ở biên, vùng hay trung tâm; ngân sách trễ 20 ms tách theo từng đoạn; hàng đợi máy chủ biên mô phỏng bằng sự kiện rời rạc khi số thiết bị tăng.", "out": "thiet-ke-mang/5g-dau-cuoi/index.html"}

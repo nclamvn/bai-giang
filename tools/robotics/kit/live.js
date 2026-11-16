@@ -287,7 +287,7 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
   };
   const classEnd = () => { CL.on = false; };
   const mViews = Object.keys(views).filter((k) => ui.btn['v_' + k]); // góc máy riêng (quay phim, lắp ráp) không có nút trên bảng thì không hiện
-  const cap1 = (t) => { const x = String(t || '').trim().toLocaleLowerCase('vi'); return x.charAt(0).toLocaleUpperCase('vi') + x.slice(1); };
+  const cap1 = (t) => { const x = String(t || '').trim(); return x.charAt(0).toLocaleUpperCase('vi') + x.slice(1); }; // nhãn nút đã qua sc(): giữ từ viết tắt (WAN, UPF)
   const vLabel = (k) => cap1(ui.btn['v_' + k] ? ui.btn['v_' + k].textContent : k);
   mCap.querySelector('[data-r]').innerHTML = `<button data-m="tour" class="acc">Tự chạy</button>${extra.map((x) => `<button data-a="${x.key}">${x.label}</button>`).join('')}${mViews.map((k) => `<button data-v="${k}">${vLabel(k)}</button>`).join('')}<button data-m="min">Thu gọn</button>${window.BGShell ? '' : '<button data-m="full">Bảng số</button>'}`;
   mCap.addEventListener('click', (e) => {

@@ -1,0 +1,1 @@
+{"title": "Khi hàng đợi đầy", "description": "Thiết kế và hiệu năng mạng, bài 1.2: cổng ra router với bộ đệm K gói. Hàng đợi M/M/1/K chạy thật trong cảnh; mất gói (1.15), jitter (1.13, 1.14), xác suất lỗi gói theo BER (1.16), thông lượng và goodput (1.17, 1.18); đánh đổi giữa bộ đệm lớn và trễ, đối chiếu mô phỏng với lời giải M/M/1/K.", "out": "thiet-ke-mang/hang-doi/index.html"}

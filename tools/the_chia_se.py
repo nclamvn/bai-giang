@@ -28,6 +28,7 @@ EXTRA = {
     'chu-de/sinh-hoc-te-bao/index.html': {'cover': 'thu-vien/covers/te-bao.webp', 'eye': 'Lộ trình · Sinh học 10'},
     'lich-su-10/index.html': {'cover': 'thu-vien/covers/co-loa.webp', 'eye': 'Lộ trình · Lịch sử 10'},
     'robotics/index.html': {'cover': 'thu-vien/covers/robo-hexapod.webp', 'eye': 'Robotics · Đại học'},
+    'thiet-ke-mang/index.html': {'cover': 'thu-vien/covers/tk-goi-tin.webp', 'eye': 'Thiết kế và hiệu năng mạng · Đại học'},
     'thu-vien/index.html': {'cover': 'thu-vien/covers/blast-furnace-step.webp', 'eye': 'Thư viện · Lí, Hoá, Sinh, Địa'},
     'giao-vien/index.html': {'cover': 'mosaic-gv', 'eye': 'Cho giáo viên · Gói dạy thử 45 phút'},
     'kiem-may/index.html': {'cover': None, 'eye': 'Cho giáo viên · Dụng cụ lên lớp'},

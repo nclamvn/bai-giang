@@ -137,6 +137,19 @@ export const fspl = (d, f) => 20 * Math.log10(d) + 20 * Math.log10(f) - 147.55;
 export const mm1 = (lam, mu) => { const r = lam / mu; return r >= 1 ? {rho: r, W: Infinity, Wq: Infinity, L: Infinity} : {rho: r, W: 1 / (mu - lam), Wq: r / (mu - lam), L: r / (1 - r)}; };
 // M/M/1/K: xác suất chặn (mất gói) khi hệ đã có K gói (kể cả gói đang phục vụ)
 export const mm1kMat = (rho, K) => (Math.abs(rho - 1) < 1e-12 ? 1 / (K + 1) : ((1 - rho) * rho ** K) / (1 - rho ** (K + 1)));
+// M/M/1/K: số gói trung bình trong hệ L và thời gian trong hệ của gói được nhận W = L / (λ(1 − P_K)) (định lý Little)
+export function mm1k(lam, mu, K) {
+  const r = lam / mu, P = mm1kMat(r, K);
+  const L = Math.abs(r - 1) < 1e-9 ? K / 2 : r / (1 - r) - ((K + 1) * r ** (K + 1)) / (1 - r ** (K + 1));
+  return {rho: r, P, L, W: L / (lam * (1 - P)), thongLuong: lam * (1 - P)};
+}
+// M/M/c (công thức Erlang C): c máy, mỗi máy phục vụ μ yêu cầu/s. Mỗi yêu cầu vẫn mất 1/μ trên một máy; thêm máy chỉ bớt chờ
+export function mmc(lam, mu, c) {
+  const a = lam / mu, r = a / c; if (r >= 1) return {rho: r, W: Infinity, Wq: Infinity, Pw: 1};
+  let sum = 0, t = 1; for (let k = 0; k < c; k++) { if (k) t *= a / k; sum += t; }
+  const last = (t * a) / c / (1 - r), Pw = last / (sum + last), Wq = Pw / (c * mu - lam);
+  return {rho: r, Pw, Wq, W: Wq + 1 / mu};
+}
 // M/D/1 (cỡ gói cố định): Wq = ρ / (2μ(1 − ρ))
 export const md1 = (lam, mu) => { const r = lam / mu; return r >= 1 ? {rho: r, W: Infinity, Wq: Infinity} : {rho: r, Wq: r / (2 * mu * (1 - r)), W: 1 / mu + r / (2 * mu * (1 - r))}; };
 
@@ -144,7 +157,7 @@ export const md1 = (lam, mu) => { const r = lam / mu; return r >= 1 ? {rho: r, W
 export const byte = (B) => 8 * B, Mbps = (x) => x * 1e6, Gbps = (x) => x * 1e9, km = (x) => x * 1e3, ms = (s) => s * 1e3, us = (s) => s * 1e6;
 export function fmtThoiGian(s, d = 2) {
   if (!Number.isFinite(s)) return '∞';
-  const v = Math.abs(s), [x, u] = v >= 1 ? [s, 's'] : v >= 1e-3 ? [s * 1e3, 'ms'] : v >= 1e-6 ? [s * 1e6, 'µs'] : [s * 1e9, 'ns'];
+  const v = Math.abs(s), [x, u] = v >= 172800 ? [s / 86400, 'ngày'] : v >= 3600 ? [s / 3600, 'h'] : v >= 60 ? [s / 60, 'phút'] : v >= 1 ? [s, 's'] : v >= 1e-3 ? [s * 1e3, 'ms'] : v >= 1e-6 ? [s * 1e6, 'µs'] : [s * 1e9, 'ns'];
   return `${x.toFixed(Math.abs(x) >= 100 ? 0 : Math.abs(x) >= 10 ? Math.max(0, d - 1) : d).replace('.', ',')} ${u}`;
 }
 export function fmtBps(b, d = 1) { const v = Math.abs(b), [x, u] = v >= 1e9 ? [b / 1e9, 'Gbit/s'] : v >= 1e6 ? [b / 1e6, 'Mbit/s'] : v >= 1e3 ? [b / 1e3, 'kbit/s'] : [b, 'bit/s']; return `${x.toFixed(d).replace('.', ',')} ${u}`; }

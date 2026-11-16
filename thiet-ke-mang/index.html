@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thiết kế và hiệu năng mạng</title>
+<meta name="description" content="Học phần Thiết kế và hiệu năng mạng (đại học) thành 22 bài mô phỏng 3D: độ trễ, hàng đợi, yêu cầu, thiết kế logic, thiết kế vật lý, kiểm thử và mạng 5G.">
+<link rel="stylesheet" href="../design/house.css"><link rel="icon" type="image/png" sizes="32x32" href="../design/logo/favicon-32.png"><link rel="apple-touch-icon" href="../design/logo/apple-touch-icon.png">
+<style>
+:root{--bg:var(--bg-page);--paper:transparent;--ink:var(--bg-ink);--mute:var(--bg-ink3);--line:var(--bg-hair);--or:#e3562a}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--bg-font,system-ui,sans-serif);-webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+.mono{font-family:var(--bg-font);font-weight:600;font-size:13px}
+.top{display:flex;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line)}
+.top .code{background:var(--or);color:#fff;display:grid;place-content:center;padding:0 26px;font:700 20px "JetBrains Mono",monospace;letter-spacing:1px;text-decoration:none}
+.top .code small{display:block;font-size:13px;letter-spacing:2px;margin-top:2px;opacity:.9}
+.top .t{padding:18px 24px}
+.top h1{margin:2px 0 0;font-size:32px;letter-spacing:-.02em;line-height:1.1}
+.top h1 span{color:var(--or);font-weight:400}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 24px 64px}
+.intro{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:start;margin-bottom:30px}
+.intro p{margin:0 0 10px;font-size:16px}
+.how{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.how ol{margin:8px 0 0;padding-left:20px}.how li{margin:4px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 28px}
+.card{display:flex;flex-direction:column}
+.card .img{display:block;position:relative;aspect-ratio:16/9;background:#E4DCCB;overflow:hidden;border-radius:14px}
+.card .img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.card .img:hover img{transform:scale(1.03)}
+.card .img b{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.94);color:#15171C;font:600 13px var(--bg-mono,"JetBrains Mono",monospace);letter-spacing:.5px;padding:5px 10px;border-radius:8px;box-shadow:0 1px 3px rgba(16,24,40,.12)}
+.card .body{padding:16px 2px 0;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h2{margin:0;font:400 26px/1.2 var(--bg-serif);letter-spacing:-.012em}
+.card h2 small{display:block;font:600 13px var(--bg-font);color:var(--bg-ink3);margin-bottom:4px}
+.card p{margin:0}
+.card ul{margin:0;padding-left:18px}.card li{margin:2px 0}
+.nums{font:13px/1.6 "JetBrains Mono",monospace;color:var(--bg-ink2);background:#f3f4f6;border-radius:8px;padding:8px 12px}
+details{border-top:1px solid var(--line);padding-top:8px}
+summary{cursor:pointer;font-weight:600;font-size:14px}
+details ol{margin:8px 0 0;padding-left:20px;font-size:13.5px}details li{margin:3px 0}
+.note{font-size:13px;color:var(--bg-ink3)}
+.go{margin-top:auto;display:inline-flex;align-self:flex-start;align-items:center;gap:8px;background:var(--ink);color:#fff;text-decoration:none;font:700 13px "JetBrains Mono",monospace;letter-spacing:1.5px;padding:10px 16px;border-radius:4px}
+.go:hover{background:var(--or)}
+h3.sec{font:700 20px var(--bg-font);letter-spacing:-.01em;margin:40px 0 12px;display:flex;align-items:center;gap:10px}
+h3.sec:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ink)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.more{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.more a{display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--ink);box-shadow:0 1px 2px rgba(16,24,40,.04);transition:box-shadow .3s}
+.more a:hover{box-shadow:0 8px 24px -12px rgba(16,24,40,.18)}
+.more img{width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#f1f2f5}
+.more span{display:grid;gap:4px;padding:14px 16px 14px 0;font-size:14.5px;color:var(--mute)}.more b{font-size:18px;color:var(--ink)}.more small{font-size:13px;font-weight:600;color:var(--mute)}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:14.5px}
+.box p{margin:0 0 8px}.box p:last-child{margin:0}
+table.keys{border-collapse:collapse;width:100%;font-size:13.5px}
+table.keys td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+table.keys td:first-child{font:600 13px "JetBrains Mono",monospace;white-space:nowrap;color:var(--bg-ink2)}
+@media (max-width:860px){.intro,.grid,.cols,.more{grid-template-columns:1fr}.more a{grid-template-columns:120px 1fr}.top h1{font-size:25px}.top .code{padding:0 16px}.wrap{padding:20px 16px 48px}}
+body{font-family:var(--bg-font)}
+.top{display:block;padding-top:48px;padding-bottom:8px;border:0;background:none} .top h1{margin:8px 0 12px} .top .bg-lead{margin:0}
+.card .body{gap:12px} .card .body>.bg-btn{margin-top:auto;align-self:flex-start}
+h3.sec{font:400 clamp(26px,3.2vw,40px)/1.12 var(--bg-serif);letter-spacing:-.02em;margin:96px 0 28px} h3.sec:before{display:none}
+table.ds{width:100%;border-collapse:collapse} .ds td{padding:12px 12px 12px 0;border-top:1px solid var(--line);vertical-align:top}
+.ds tr.ch td{font:400 21px/1.3 var(--bg-serif);padding-top:32px;border-top:0} .ds .mono{width:52px;color:var(--mute)} .ds .mut{color:var(--mute)}
+.ds a{font-weight:600} @media (max-width:640px){.ds .mut{display:none}}
+.nguon{color:var(--mute);font-size:14px;max-width:760px}
+</style>
+</head>
+<body class="bg-hub">
+<header class="sitebar"><div class="in"><a class="brand" href="../" aria-label="Sáng Ăn Khoai, trang chính"><img src="../design/logo/mark-128.webp" alt="" width="32" height="32"><span>Sáng Ăn Khoai</span></a><div class="crumbs"><span aria-hidden="true">/</span><b>Đại học</b><span aria-hidden="true">/</span><b>Thiết kế và hiệu năng mạng</b></div><nav aria-label="Mục chính"><a href="../#bai-hoc">Bài học</a><a href="../#lo-trinh">Lộ trình</a><a href="../thu-vien/">Thư viện</a><a href="../#cho-giao-vien">Cho giáo viên</a></nav></div></header>
+<header class="top bg-frame">
+  <span class="bg-eyebrow">Đại học · Điện tử viễn thông</span><h1>Thiết kế và hiệu năng mạng</h1>
+  <p class="bg-lead">Từ yêu cầu dịch vụ tới thiết kế logic, vật lý, kiểm thử và mạng 5G, mỗi khái niệm một cảnh mạng chạy thật.</p>
+</header>
+<div class="wrap">
+  <section class="intro">
+    <div>
+      <p>Mỗi con số trên màn hình được tính từ công thức của giáo trình; trễ hàng đợi lấy từ mô phỏng sự kiện rời rạc chạy ngay trong trình duyệt và đặt cạnh lời giải lý thuyết để người học thấy mô hình khớp.</p>
+      <p>Các bài đã dựng có ảnh bìa bên dưới; bảng sau đó là toàn bộ 22 bài theo sáu chương, bài nào có liên kết là đã vào học được.</p>
+    </div>
+    <div class="how"><b>Kiểm chứng</b><ol><li>Mô phỏng khớp M/M/1 ở ρ 0,5, 0,8, 0,9 (sai lệch dưới 1 %), M/D/1, M/M/1/K (cả khi quá tải ρ = 1,3) và M/M/c (Erlang C)</li><li>Monte Carlo độ sẵn sàng khớp công thức nối tiếp 1.19 và song song 4.14</li><li>Bài tập có đáp số của giáo trình tính lại bằng máy mỗi lần dựng: ví dụ tr.43 (1 050 Mbit/s), BT 1.4, 2.5, 2.8, 3.3, 4.3, 4.5, 5.2</li><li>Mỗi số ngoài giáo trình có nguồn hoặc ghi rõ là giả định ngay cạnh con số</li></ol></div>
+  </section>
+  <div class="grid"><article class="card">
+  <a class="img" href="goi-tin/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-goi-tin.webp" alt="" loading="lazy"></a>
+  <div class="body"><h2 class="bg-h3"><small>Bài 1.1</small>Gói tin qua ba chặng</h2><p>Độ trễ đầu cuối tách bốn phần; trễ hàng đợi từ mô phỏng, đối chiếu M/M/1</p><a class="bg-btn sm" href="goi-tin/">Vào bài</a></div>
+</article><article class="card">
+  <a class="img" href="hang-doi/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-hang-doi.webp" alt="" loading="lazy"></a>
+  <div class="body"><h2 class="bg-h3"><small>Bài 1.2</small>Khi hàng đợi đầy</h2><p>Bộ đệm K gói ở cổng router: mất gói, jitter, lỗi bit, thông lượng và goodput; bộ đệm lớn có tốt hơn?</p><a class="bg-btn sm" href="hang-doi/">Vào bài</a></div>
+</article><article class="card">
+  <a class="img" href="san-sang/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-san-sang.webp" alt="" loading="lazy"></a>
+  <div class="body"><h2 class="bg-h3"><small>Bài 1.3</small>Độ sẵn sàng, RTO và RPO</h2><p>Hai đường lên chung một ống hay tách hai ngả; đồng hồ phục hồi bốn pha; công thức so với Monte Carlo 400 năm</p><a class="bg-btn sm" href="san-sang/">Vào bài</a></div>
+</article><article class="card">
+  <a class="img" href="van-hanh/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-van-hanh.webp" alt="" loading="lazy"></a>
+  <div class="body"><h2 class="bg-h3"><small>Bài 1.4</small>Vòng vận hành có kiểm chứng</h2><p>SNMP 5 phút hay telemetry 1 giây: bắt được bao nhiêu đợt bùng nổ; sai lệch Δk, độ phủ quan sát Γ</p><a class="bg-btn sm" href="van-hanh/">Vào bài</a></div>
+</article><article class="card">
+  <a class="img" href="toa-nha/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-toa-nha.webp" alt="" loading="lazy"></a>
+  <div class="body"><h2 class="bg-h3"><small>Bài 4.1</small>Tòa nhà 8 tầng: tủ mạng, cáp và PoE</h2><p>IDF mỗi tầng hay kéo về MDF, giới hạn 90 m, cổng, Ω, PoE, UPS</p><a class="bg-btn sm" href="toa-nha/">Vào bài</a></div>
+</article><article class="card">
+  <a class="img" href="5g-dau-cuoi/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-5g.webp" alt="" loading="lazy"></a>
+  <div class="body"><h2 class="bg-h3"><small>Bài 6.1</small>Gói tin 5G đầu-cuối và vị trí UPF</h2><p>UPF ở biên, vùng hay trung tâm; ngân sách 20 ms; máy chủ biên quá tải</p><a class="bg-btn sm" href="5g-dau-cuoi/">Vào bài</a></div>
+</article></div>
+  <h3 class="sec">22 bài theo sáu chương</h3>
+  <table class="ds"><tr class="ch"><td colspan="3">Chương 1 · Tổng quan về thiết kế và hiệu năng mạng</td></tr><tr><td class="mono">1.1</td><td><a href="goi-tin/">Gói tin qua ba chặng</a></td><td class="mut">Độ trễ đầu cuối tách bốn phần; trễ hàng đợi từ mô phỏng, đối chiếu M/M/1</td></tr><tr><td class="mono">1.2</td><td><a href="hang-doi/">Khi hàng đợi đầy</a></td><td class="mut">Bộ đệm K gói ở cổng router: mất gói, jitter, lỗi bit, thông lượng và goodput; bộ đệm lớn có tốt hơn?</td></tr><tr><td class="mono">1.3</td><td><a href="san-sang/">Độ sẵn sàng, RTO và RPO</a></td><td class="mut">Hai đường lên chung một ống hay tách hai ngả; đồng hồ phục hồi bốn pha; công thức so với Monte Carlo 400 năm</td></tr><tr><td class="mono">1.4</td><td><a href="van-hanh/">Vòng vận hành có kiểm chứng</a></td><td class="mut">SNMP 5 phút hay telemetry 1 giây: bắt được bao nhiêu đợt bùng nổ; sai lệch Δk, độ phủ quan sát Γ</td></tr><tr class="ch"><td colspan="3">Chương 2 · Phân tích yêu cầu thiết kế mạng</td></tr><tr><td class="mono">2.1</td><td>Từ &quot;mạng phải nhanh&quot; đến vector yêu cầu</td><td class="mut">Sáu nhóm ứng dụng, thẻ ngưỡng, đạt hay không</td></tr><tr><td class="mono">2.2</td><td>Đếm tải thật</td><td class="mut">Hệ số đồng thời, ma trận lưu lượng, dung lượng liên kết</td></tr><tr><td class="mono">2.3</td><td>Rủi ro và truy vết</td><td class="mut">Ma trận truy vết yêu cầu × quyết định × kiểm thử</td></tr><tr class="ch"><td colspan="3">Chương 3 · Thiết kế mạng logic</td></tr><tr><td class="mono">3.1</td><td>Ba lớp và vùng logic</td><td class="mut">Lớp logic nổi trên lớp vật lý, ma trận chính sách</td></tr><tr><td class="mono">3.2</td><td>Chia địa chỉ VLSM</td><td class="mut">Không gian địa chỉ cắt đôi dần, gộp tuyến</td></tr><tr><td class="mono">3.3</td><td>Định tuyến, ECMP và hội tụ</td><td class="mut">Đổi metric, luồng đổi đường; cắt liên kết, đồng hồ hội tụ</td></tr><tr><td class="mono">3.4</td><td>Underlay và overlay</td><td class="mut">Leaf-spine, đường hầm VXLAN mang các tenant</td></tr><tr class="ch"><td colspan="3">Chương 4 · Thiết kế mạng vật lý</td></tr><tr><td class="mono">4.1</td><td><a href="toa-nha/">Tòa nhà 8 tầng: tủ mạng, cáp và PoE</a></td><td class="mut">IDF mỗi tầng hay kéo về MDF, giới hạn 90 m, cổng, Ω, PoE, UPS</td></tr><tr><td class="mono">4.2</td><td>Ngân sách công suất quang</td><td class="mut">Ánh sáng mờ dần qua đầu nối, mối hàn</td></tr><tr><td class="mono">4.3</td><td>Wi-Fi: tốc độ PHY và thông lượng thật</td><td class="mut">Thời gian phát chia dữ liệu, điều khiển, tranh chấp</td></tr><tr class="ch"><td colspan="3">Chương 5 · Kiểm thử và đánh giá hiệu năng mạng</td></tr><tr><td class="mono">5.1</td><td>Phòng đo</td><td class="mut">Chạy n lần, khoảng tin cậy 95 %, kết luận theo chuỗi nguyên nhân</td></tr><tr><td class="mono">5.2</td><td>Ba hàng đợi QoS</td><td class="mut">Ưu tiên tuyệt đối làm đói hàng nền, ToS sang DSCP/ECN</td></tr><tr class="ch"><td colspan="3">Chương 6 · Các mô hình thiết kế và vận hành mạng 5G</td></tr><tr><td class="mono">6.1</td><td><a href="5g-dau-cuoi/">Gói tin 5G đầu-cuối và vị trí UPF</a></td><td class="mut">UPF ở biên, vùng hay trung tâm; ngân sách 20 ms; máy chủ biên quá tải</td></tr><tr><td class="mono">6.2</td><td>NSA và SA</td><td class="mut">Nút thắt ở LTE neo, truyền dẫn hay EPC; lõi SBA</td></tr><tr><td class="mono">6.3</td><td>Tách RAN và vô tuyến</td><td class="mut">RU, DU, CU; ngân sách đường truyền; dung lượng cell</td></tr><tr><td class="mono">6.4</td><td>Network slicing</td><td class="mut">Ba lát trên một hạ tầng, ảnh hưởng chéo</td></tr><tr><td class="mono">6.5</td><td>Bảo mật và vận hành vòng kín</td><td class="mut">Bề mặt tấn công sáu miền, thời gian vòng điều khiển</td></tr><tr><td class="mono">6.6</td><td>Vệ tinh, UAV và ISAC</td><td class="mut">Trễ lan truyền theo quỹ đạo, đánh đổi truyền thông và cảm nhận</td></tr></table>
+  <h3 class="sec">Nguồn</h3>
+  <p class="nguon">Nội dung theo giáo trình Thiết kế và hiệu năng mạng (học phần TEL1459), PGS.TS Hoàng Trọng Minh, Học viện Công nghệ Bưu chính Viễn thông, 2026. Dựng bài giảng theo đề nghị của tác giả. Hình và lời giảng trong bài là của Sáng Ăn Khoai, không chép hình hay văn bản của giáo trình; công thức giữ đúng số hiệu trong sách để người học tra lại.</p>
+</div>
+</body>
+</html>

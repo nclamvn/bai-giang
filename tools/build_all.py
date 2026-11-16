@@ -23,7 +23,7 @@ STEPS = [
     ('co-the-nguoi', [[PY, 'tools/co-the-nguoi/build.py']]),
     ('than-kinh', [[PY, 'tools/build_than_kinh.py']]),
     ('goi-day', [[PY, 'tools/build_goi_day.py']]),
-    ('robotics', [['node', 'build.mjs', '__cwd__tools/robotics'], [PY, 'tools/robotics/build_hub.py']]),
+    ('robotics', [['node', 'build.mjs', '__cwd__tools/robotics'], [PY, 'tools/robotics/build_hub.py'], [PY, 'tools/build_thiet_ke_mang.py']]),
     ('thu-vien', [[PY, 'tools/house_thu_vien.py']]),
     ('trang-muc', [[PY, 'tools/build_ls10.py'], [PY, 'tools/anh_nho.py'], [PY, 'tools/build_pages.py']]),
     ('the-chia-se', [[PY, 'tools/the_chia_se.py', '--strict']]),

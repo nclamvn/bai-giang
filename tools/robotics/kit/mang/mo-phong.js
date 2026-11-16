@@ -89,3 +89,46 @@ export function chayNhieuLop({C, lop, lap: kieu = 'uutien', buffer = Infinity, T
   const tb = (x) => x.reduce((a, b) => a + b, 0) / Math.max(1, x.length);
   return lop.map((L, c) => ({ten: L.ten, W: tb(W[c]), n: W[c].length, mat: matL[c] / Math.max(1, gui[c]), thongLuong: (W[c].length * L.Lbit) / (T - warm)}));
 }
+
+// Hàng đợi c máy, phục vụ theo thứ tự đến (FCFS), đến Poisson, thời gian phục vụ mũ trung bình tS: mỗi yêu cầu vào máy rảnh sớm
+// nhất. Dùng cho máy chủ ứng dụng ở site biên/vùng/trung tâm (bài 6.1); kiểm với Erlang C trong tests/mang_check.mjs.
+export function chayMMc({lam, tS, c, n = 20000, warm = 2000, seed = 3}) {
+  const r = rng(seed), ranh = new Array(c).fill(0), W = [];
+  let t = 0;
+  for (let i = 0; i < n + warm; i++) {
+    t += expo(r, 1 / lam);
+    let j = 0; for (let k = 1; k < c; k++) if (ranh[k] < ranh[j]) j = k;
+    const batDau = Math.max(t, ranh[j]), xong = batDau + expo(r, tS); ranh[j] = xong;
+    if (i >= warm) W.push(xong - t);
+  }
+  const sap = [...W].sort((a, b) => a - b);
+  return {W: W.reduce((a, b) => a + b, 0) / W.length, p95: sap[Math.floor(0.95 * sap.length)], rho: (lam * tS) / c, n: W.length};
+}
+
+// Độ sẵn sàng bằng Monte Carlo: mỗi thành phần luân phiên chạy/hỏng, thời gian chạy mũ trung bình MTBF, thời gian sửa mũ trung bình
+// MTTR (giờ). Dịch vụ chạy khi mọi thành phần nối tiếp chung (chung) chạy VÀ ít nhất một đường (duong: mảng các dãy thành phần
+// nối tiếp) chạy. Đường đang dùng là đường chạy có chỉ số nhỏ nhất; khi nó hỏng mà còn đường khác, dịch vụ ngừng tChuyen giờ
+// (phát hiện + chuyển mạch, công thức 2.19). Kiểm với 1.19 và 4.14 trong tests/mang_check.mjs.
+export function chayKhaDung({tp, chung = [], duong = [], nam = 200, seed = 21, tChuyen = 0}) {
+  const r = rng(seed), H = nam * 8766, ev = [];
+  for (const [ten, {mtbf, mttr}] of Object.entries(tp)) {
+    let t = expo(r, mtbf); while (t < H) { const s = expo(r, mttr); ev.push([t, ten, 0], [t + s, ten, 1]); t += s + expo(r, mtbf); }
+  }
+  ev.sort((a, b) => a[0] - b[0]);
+  const up = Object.fromEntries(Object.keys(tp).map((k) => [k, 1]));
+  const dUp = () => duong.map((d) => d.every((k) => up[k]));
+  const svc = () => chung.every((k) => up[k]) && (duong.length === 0 || dUp().some(Boolean));
+  let tTruoc = 0, chay = true, ngung = 0, suCo = 0, chuyen = 0, dang = 0;
+  const theo = {chung: 0, 'cả hai đường': 0, 'chuyển mạch': 0};
+  for (const [t, ten, v] of ev) {
+    if (!chay) { ngung += t - tTruoc; theo[chung.some((k) => !up[k]) ? 'chung' : 'cả hai đường'] += t - tTruoc; }
+    up[ten] = v; tTruoc = t;
+    const s = svc(), du = dUp();
+    if (chay && !s) suCo++;
+    if (s && duong.length) { const moi = du.findIndex(Boolean); if (moi !== dang && !du[dang] && chay) { chuyen++; ngung += tChuyen; theo['chuyển mạch'] += tChuyen; } dang = moi; }
+    chay = s;
+  }
+  if (!chay) { ngung += H - tTruoc; theo[chung.some((k) => !up[k]) ? 'chung' : 'cả hai đường'] += H - tTruoc; }
+  const k = 60 / nam; // giờ trong cả đợt → phút mỗi năm
+  return {A: 1 - ngung / H, phutNam: ngung * k, suCoNam: suCo / nam, chuyenNam: chuyen / nam, theo: Object.fromEntries(Object.entries(theo).map(([a, b]) => [a, b * k]))};
+}

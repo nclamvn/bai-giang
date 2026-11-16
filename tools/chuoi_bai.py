@@ -34,9 +34,17 @@ BESPOKE = {
     'jellyfish': ('robotics/jellyfish/index.html', 'Sứa robot', 'covers/robo-jellyfish.webp'),
     'crazyflie': ('robotics/crazyflie/index.html', 'Drone bốn cánh Crazyflie', 'covers/robo-crazyflie.webp'),
     'turtlebot3': ('robotics/turtlebot3/index.html', 'Robot tự hành TurtleBot3', 'covers/robo-turtlebot3.webp'),
+    # học phần Thiết kế và hiệu năng mạng (đại học, theo giáo trình TEL1459); thứ tự bài ở CHAIN_MANG theo số bài
+    'tk-goi-tin': ('thiet-ke-mang/goi-tin/index.html', 'Gói tin qua ba chặng', 'covers/tk-goi-tin.webp'),
+    'tk-hang-doi': ('thiet-ke-mang/hang-doi/index.html', 'Khi hàng đợi đầy', 'covers/tk-hang-doi.webp'),
+    'tk-san-sang': ('thiet-ke-mang/san-sang/index.html', 'Độ sẵn sàng, RTO và RPO', 'covers/tk-san-sang.webp'),
+    'tk-van-hanh': ('thiet-ke-mang/van-hanh/index.html', 'Vòng vận hành có kiểm chứng', 'covers/tk-van-hanh.webp'),
+    'tk-toa-nha': ('thiet-ke-mang/toa-nha/index.html', 'Tòa nhà 8 tầng: tủ mạng, cáp và PoE', 'covers/tk-toa-nha.webp'),
+    'tk-5g': ('thiet-ke-mang/5g-dau-cuoi/index.html', 'Gói tin 5G đầu-cuối và vị trí UPF', 'covers/tk-5g.webp'),
 }
 # mạch Sinh học tế bào 10, theo tools/build_pages.py (ROUTE)
 CHAIN_CELL = ['te-bao', 'transport-step', 'plasmolysis-step', 'ty-the', 'enzyme-step', 'mitosis-step']
+CHAIN_MANG = ['tk-goi-tin', 'tk-hang-doi', 'tk-san-sang', 'tk-van-hanh', 'tk-toa-nha', 'tk-5g']
 CHAIN_ROBO = ['ur5e', 'hexapod', 'quadruped', 'jellyfish', 'crazyflie', 'turtlebot3']
 
 
@@ -88,6 +96,10 @@ def build():
     for k, s in enumerate(CHAIN_ROBO):
         n = CHAIN_ROBO[k + 1] if k + 1 < len(CHAIN_ROBO) else None
         put(s, robo_crumb, nxt_lesson(n, f'Robotics · bài {k + 2}/{len(CHAIN_ROBO)}') if n else {'title': 'Mục lục Robotics', 'href': 'robotics/', 'sub': 'Sáu mô phỏng'}, 'Robotics', 'robo')
+    mang_crumb = [{'t': 'Thiết kế và hiệu năng mạng · Đại học', 'href': 'thiet-ke-mang/'}]
+    for k, s in enumerate(CHAIN_MANG):
+        n = CHAIN_MANG[k + 1] if k + 1 < len(CHAIN_MANG) else None
+        put(s, mang_crumb, nxt_lesson(n, f'Thiết kế và hiệu năng mạng · bài {k + 2}/{len(CHAIN_MANG)} đã dựng') if n else {'title': 'Mục lục học phần', 'href': 'thiet-ke-mang/', 'sub': '22 bài theo sáu chương'}, 'Mạng', 'mang')
     # thư viện: theo thứ tự danh mục trong từng môn; bài cuối của môn dẫn về thư viện
     for sub, (mon, key, _anchor) in SUBJ.items():
         lst = [c['slug'] for c in CAT if c['subject'] == sub and c['slug'] not in CHAIN_CELL]
