@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<!--BG-SHARE:start-->
+<meta property="og:type" content="website"><meta property="og:site_name" content="Sáng Ăn Khoai"><meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Độ trễ đầu cuối, mức sử dụng và thời gian đáp ứng · Giáo án tiết 2 · Thiết kế và hiệu năng mạng"><meta property="og:description" content="Giáo án 45 phút, tiết 2 học phần Thiết kế và hiệu năng mạng: Độ trễ đầu cuối, mức sử dụng và thời gian đáp ứng. Mục tiêu, diễn tiến theo phút, ví dụ giải mẫu, phiếu bài tập, đáp án và kiểm tra nhanh, theo giáo trình TEL1459 mục 1.5.2, 1.6.1.">
+<meta property="og:url" content="https://nclamvn.github.io/bai-giang/thiet-ke-mang/goi-tin/giao-an/"><link rel="canonical" href="https://nclamvn.github.io/bai-giang/thiet-ke-mang/goi-tin/giao-an/">
+<meta property="og:image" content="https://nclamvn.github.io/bai-giang/design/the/thiet-ke-mang-goi-tin-giao-an.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Độ trễ đầu cuối, mức sử dụng và thời gian đáp ứng">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nclamvn.github.io/bai-giang/design/the/thiet-ke-mang-goi-tin-giao-an.jpg">
+<!--BG-SHARE:end-->
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Độ trễ đầu cuối, mức sử dụng và thời gian đáp ứng · Giáo án tiết 2 · Thiết kế và hiệu năng mạng</title>
+<meta name="description" content="Giáo án 45 phút, tiết 2 học phần Thiết kế và hiệu năng mạng: Độ trễ đầu cuối, mức sử dụng và thời gian đáp ứng. Mục tiêu, diễn tiến theo phút, ví dụ giải mẫu, phiếu bài tập, đáp án và kiểm tra nhanh, theo giáo trình TEL1459 mục 1.5.2, 1.6.1.">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../design/logo/favicon-32.png"><link rel="apple-touch-icon" href="../../../design/logo/apple-touch-icon.png">
+<link rel="stylesheet" href="../../../design/house.css">
+<style>:root{--acc:#2B5D8C}
+*{box-sizing:border-box}
+html{scroll-padding-top:76px}
+body{margin:0;background:var(--bg-page);color:var(--bg-ink);font:500 16px/1.6 var(--bg-font);-webkit-font-smoothing:antialiased}
+a{color:var(--acc)}
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;min-height:60px;padding:8px max(16px,calc((100vw - 1120px)/2));background:var(--bg-glass-strong);-webkit-backdrop-filter:blur(var(--bg-blur)) saturate(1.6);backdrop-filter:blur(var(--bg-blur)) saturate(1.6);border-bottom:1px solid var(--bg-hair)}
+.bar .home{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--bg-ink);text-decoration:none;font-weight:600;min-height:44px;min-width:44px}
+.bar .lg{border-radius:8px}
+.bar .sep{width:1px;height:22px;background:var(--bg-hair2)}
+.bar .crumb{color:var(--bg-ink2);font-size:15px;text-decoration:none;min-height:44px;display:flex;align-items:center}
+.bar .sp{flex:1}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:var(--bg-r-sm);border:0;background:var(--bg-surface);color:var(--bg-ink);font:500 15px var(--bg-font);text-decoration:none;cursor:pointer;box-shadow:0 0 0 1px var(--bg-hair2);white-space:nowrap}
+.btn:hover{box-shadow:0 0 0 1px var(--bg-ink3)}
+.btn.pri{background:var(--bg-brand);color:var(--bg-brand-ink);box-shadow:none}
+.btn svg{width:18px;height:18px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:center;padding:44px 0 28px}
+.eye{font:600 14px var(--bg-font);color:var(--acc)}
+h1{margin:10px 0 12px;font:400 clamp(34px,4.4vw,56px)/1.08 var(--bg-serif);letter-spacing:-.025em}
+.lead{margin:0;color:var(--bg-ink2);font-size:17px;max-width:56ch}
+.badge{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--bg-warn,#B26A1A) 10%,#fff);color:#7a4a12;font-size:14px;font-weight:600}
+.cover{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:16/10;box-shadow:var(--bg-sh-2)}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover a{position:absolute;left:14px;bottom:14px}
+.tabs{position:sticky;top:60px;z-index:9;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 0;margin:0 0 8px;background:linear-gradient(var(--bg-page) 70%,transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;display:flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;color:var(--bg-ink2);font-weight:600;font-size:15px;text-decoration:none}
+.tabs a:hover{background:var(--bg-hair)}
+section{padding:28px 0 12px}
+h2{margin:0 0 6px;font:400 30px/1.2 var(--bg-serif);letter-spacing:-.015em}
+.sub{margin:0 0 20px;color:var(--bg-ink2)}
+.card{background:var(--bg-surface,#fff);border-radius:20px;padding:20px 22px;box-shadow:var(--bg-sh-1)}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+h3{margin:0 0 10px;font:600 17px/1.35 var(--bg-font)}
+ul.tick,ol.steps{margin:0;padding:0;list-style:none}
+ul.tick li{position:relative;padding:4px 0 4px 26px}
+ul.tick li::before{content:"";position:absolute;left:4px;top:13px;width:9px;height:5px;border:solid var(--acc);border-width:0 0 2px 2px;transform:rotate(-45deg)}
+ol.steps{counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:6px 0 10px 42px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:4px;width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;font:700 14px/28px var(--bg-font);text-align:center}
+kbd{font:600 13px var(--bg-mono);padding:1px 6px;border-radius:6px;background:var(--bg-hair);border:1px solid var(--bg-hair2)}
+code{font:500 14px var(--bg-mono)}
+.mini{font-size:14px;color:var(--bg-ink2)}
+table.fix{width:100%;border-collapse:collapse;font-size:15px}
+table.fix th,table.fix td{text-align:left;vertical-align:top;padding:10px 12px;border-top:1px solid var(--bg-hair)}
+table.fix th{width:30%;font-weight:600}
+.tl{display:flex;height:56px;border-radius:14px;overflow:hidden;margin:0 0 22px;box-shadow:inset 0 0 0 1px var(--bg-hair)}
+.tl a{display:flex;flex-direction:column;justify-content:center;padding:0 12px;min-width:0;color:var(--bg-ink);text-decoration:none;border-right:2px solid var(--bg-page)}
+.tl a:last-child{border:0}
+.tl b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl span{font-size:13px;color:var(--bg-ink2);font-variant-numeric:tabular-nums}
+.act{margin:0 0 18px}
+.act>header{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;padding:0 0 10px}
+.act>header h3{margin:0;font-size:19px}
+.act>header .min{font:600 14px var(--bg-mono);color:var(--acc)}
+.act>header p{flex-basis:100%;margin:0;color:var(--bg-ink2)}
+.row{display:grid;grid-template-columns:96px minmax(0,1.1fr) minmax(0,1.6fr) minmax(0,1fr);gap:14px;padding:14px 0;border-top:1px solid var(--bg-hair)}
+.row:first-of-type{border-top:0}
+.row .m{font:600 15px var(--bg-mono);font-variant-numeric:tabular-nums;color:var(--bg-ink)}
+.row .m span{display:block;font:500 13px var(--bg-font);color:var(--bg-ink3)}
+.row .t{font-weight:700}
+.row .t small{display:block;font-weight:500;color:var(--bg-ink3);font-size:13px}
+.row .k{display:none;font-size:13px;font-weight:600;color:var(--bg-ink3)}
+.row .hs{color:var(--bg-ink2)}
+.thead{display:grid;grid-template-columns:96px minmax(0,1.1fr) minmax(0,1.6fr) minmax(0,1fr);gap:14px;padding:0 0 8px;font-size:13px;font-weight:600;color:var(--bg-ink3)}
+.prod{margin-top:6px;font-size:14px;color:var(--bg-ink2)}
+.sheet-wrap{display:flex;justify-content:center;padding:8px 0 4px}
+.sheet-zoom{width:210mm;zoom:var(--z,1)}
+.paper{width:210mm;min-height:297mm;padding:11mm 13mm 10mm;background:#fff;color:#111;box-shadow:0 1px 2px rgba(0,0,0,.08),0 18px 48px -20px rgba(15,23,42,.35);font:500 10pt/1.42 var(--bg-font)}
+.paper header{display:flex;justify-content:space-between;align-items:flex-start;gap:10mm;padding-bottom:3mm;border-bottom:.4mm solid #111}
+.paper .pk{font:600 9pt var(--bg-font);color:#555}
+.paper h4{margin:1mm 0 0;font:700 14pt/1.2 var(--bg-font)}
+.paper .who{flex:none;display:grid;grid-template-columns:auto 1fr;gap:2.5mm 3mm;width:66mm;font-size:9.5pt;color:#333}
+.paper .who i{display:block;border-bottom:.25mm solid #999;height:5mm}
+.paper .lg2{display:flex;align-items:center;gap:2mm;font:600 9pt var(--bg-font);color:#333}
+.paper .lg2 img{width:7mm;height:7mm;border-radius:1.5mm}
+.part{margin-top:3.4mm}
+.part .ph{display:flex;align-items:baseline;gap:2.5mm;margin-bottom:1.6mm}
+.part .ph b{display:inline-flex;align-items:center;justify-content:center;width:5.6mm;height:5.6mm;border-radius:50%;background:#111;color:#fff;font:700 9pt var(--bg-font)}
+.part .ph strong{font-size:11pt}
+.part .ph em{font-style:normal;color:#666;font-size:9pt}
+.part p{margin:0 0 1.6mm}
+.chain{display:flex;align-items:center;gap:1.6mm}
+.chain span{flex:1;height:11mm;border:.3mm solid #444;border-radius:2mm;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:9.5pt;text-align:center;padding:0 1mm}
+.chain span.f{background:#f2f2f2}
+.chain i{font-style:normal;color:#666}
+.paper table{width:100%;border-collapse:collapse;font-size:9.5pt}
+.paper th{text-align:left;font-weight:700;background:#f2f2f2}
+.paper th,.paper td{border:.3mm solid #555;padding:1.4mm 2mm}
+.paper td{height:9.4mm}
+.paper td:first-child,.paper th:first-child{width:13mm;text-align:center}
+.paper table.free td,.paper table.free th{width:auto!important;text-align:left!important}
+.paper table.free td{height:auto;padding:1.8mm 2mm;font-size:9pt}
+.paper table.free td{height:8.6mm}
+.draw{position:relative;border:.3mm solid #999;border-radius:2mm;overflow:hidden}.draw svg{display:block;width:100%;height:100%}
+.lbl{display:grid;grid-template-columns:repeat(3,1fr);gap:2mm 5mm;margin-top:2mm}.lbl span{display:flex;align-items:flex-end;gap:1.5mm}.lbl i{flex:1;border-bottom:.25mm dotted #777;height:5.5mm}
+.paper td:nth-child(2),.paper th:nth-child(2){width:46mm}
+.q{margin-bottom:1.6mm}
+.q .qq{display:flex;gap:1.6mm}
+.q .qq b{flex:none}
+.ln{height:6.9mm;border-bottom:.25mm dotted #777}
+.ck{display:flex;align-items:center;gap:2.4mm;margin:1.2mm 0}
+.ck i{flex:none;width:4mm;height:4mm;border:.3mm solid #444;border-radius:.8mm}
+.paper footer{margin-top:3mm;padding-top:1.6mm;border-top:.25mm solid #bbb;display:flex;justify-content:space-between;font-size:8pt;color:#777}
+dl.ans{margin:0;display:grid;grid-template-columns:110px minmax(0,1fr);gap:0}
+dl.ans dt,dl.ans dd{margin:0;padding:12px 0;border-top:1px solid var(--bg-hair)}
+dl.ans dt{font-weight:700;color:var(--acc)}
+.src{margin:0;padding-left:20px;color:var(--bg-ink2);font-size:15px}
+.src li{margin:4px 0}
+.yccd li{margin:4px 0}
+.foot{margin:36px 0 0;padding:20px 0 40px;border-top:1px solid var(--bg-hair);color:var(--bg-ink3);font-size:14px;display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:space-between}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:22px;padding:28px 0 16px}.g2{grid-template-columns:1fr}
+  .thead{display:none}.row{grid-template-columns:72px minmax(0,1fr);gap:4px 12px}.row .m{grid-row:span 3}.row .k{display:block;margin-top:6px}}
+@media (max-width:560px){.bar .crumb,.bar .sep,.bar .opt{display:none}.bar .home span{display:none}.btn{padding:0 14px}
+  h2{font-size:24px}.tl{height:auto;flex-direction:column}.tl a{flex:none!important;padding:8px 12px;border-right:0;border-bottom:2px solid var(--bg-page)}
+  dl.ans{grid-template-columns:1fr}dl.ans dd{border-top:0;padding-top:0}.card{padding:16px}
+  table.fix,table.fix tbody,table.fix tr,table.fix th,table.fix td{display:block;width:auto}table.fix th{padding:12px 0 2px}table.fix td{border-top:0;padding:0 0 12px}}
+@page{size:A4;margin:12mm 13mm}
+@media print{
+  body{background:#fff;font-size:10pt;line-height:1.5}
+  h2{font-size:17pt;break-after:avoid}h3{break-after:avoid}.sub{margin-bottom:3mm}
+  .g2{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:4mm}
+  .act.card{break-inside:auto}.act>header{break-after:avoid}
+  .row .m{grid-row:auto}.row .k{display:none!important}.thead{display:grid!important}
+  table.fix th,table.fix td{padding:2mm 3mm}
+  .bar,.tabs,.cover,.noprint,.foot .noprint{display:none!important}
+  .wrap{max-width:none;padding:0}
+  .hero{display:block;padding:0 0 4mm}
+  h1{font-size:22pt;margin:2mm 0}
+  section{padding:4mm 0 0;break-inside:auto}
+  .card{box-shadow:none;border:.3mm solid #ccc;padding:4mm 5mm}
+  .g2>.card{break-inside:avoid}dl.ans dt,dl.ans dd{break-inside:avoid}
+  .row{break-inside:avoid;grid-template-columns:18mm 34mm minmax(0,1.7fr) minmax(0,1fr);gap:3mm;padding:2.6mm 0}
+  .thead{grid-template-columns:18mm 34mm minmax(0,1.7fr) minmax(0,1fr);gap:3mm}
+  #kich-ban{break-before:page}
+  #phieu{display:none}
+  .tl a{border-right-color:#fff}
+  body.in-phieu > *:not(main){display:none!important}
+  body.in-phieu main > *:not(#phieu){display:none!important}
+  body.in-phieu #phieu{display:block;padding:0}
+  body.in-phieu #phieu > :not(.sheet-wrap){display:none}
+  body.in-phieu .sheet-wrap{padding:0;display:block}
+  body.in-phieu .sheet-zoom{zoom:1!important;width:auto}
+  body.in-phieu .paper{width:auto;min-height:0;padding:0;box-shadow:none}
+}
+
+.vd{border-top:1px solid var(--line,#e6e2d8);padding:16px 0}.vd:first-child{border-top:0;padding-top:0}
+.vd h4{margin:0 0 6px;font-size:16px}.vd .de{margin:0 0 10px}.vd .giai{background:#f7f5ef;border-radius:10px;padding:12px 14px;font-size:15px;line-height:1.6}
+.qz{border-top:1px solid var(--line,#e6e2d8);padding:12px 0}.qz:first-child{border-top:0}.qz p{margin:0 0 6px;font-weight:600}
+.qz ol{margin:0 0 6px 18px;padding:0}.qz details{font-size:14.5px;color:#4a4f58}.qz summary{cursor:pointer;color:var(--acc)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0 0}.meta div{background:#f7f5ef;border-radius:10px;padding:10px 12px;font-size:13.5px}
+.meta b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b6f78;margin-bottom:2px}
+.tt li{margin:4px 0}
+.paper .bt{margin:0 0 3.2mm}.paper .bt .qq{display:flex;gap:2mm}.paper .bt .src{color:#6b6f78;font-size:8.5pt}
+</style>
+<style id="bg-vt">@view-transition{navigation:auto}#bgs-load{view-transition-name:bg-bia}::view-transition-group(bg-bia){animation-duration:.42s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}::view-transition-old(root),::view-transition-new(root){animation-duration:.24s}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
+<script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
+<script id="bg-sw">(function(){try{if(!("serviceWorker"in navigator)||!/(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname))return;var r=new URL("../../../",location.href).href;if(/[?&]sw=0/.test(location.search)){navigator.serviceWorker.getRegistrations().then(function(a){a.forEach(function(x){x.unregister()})});return}addEventListener("load",function(){setTimeout(function(){navigator.serviceWorker.register(r+"sw.js",{scope:r}).catch(function(){})},3000)})}catch(e){}})();</script>
+</head>
+<body>
+<div class="bar">
+  <a class="home" href="../../../"><img src="../../../design/logo/mark-96.webp" width="30" height="30" alt="" class="lg"><span>Sáng Ăn Khoai</span></a><span class="sep"></span><a class="crumb" href="../../../thiet-ke-mang/">Thiết kế và hiệu năng mạng</a>
+  <span class="sp"></span>
+  <button class="btn opt" type="button" data-print="gv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In giáo án</button>
+  <button class="btn" type="button" data-print="phieu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In phiếu</button>
+  <a class="btn pri" href="../"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a>
+</div>
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <div class="eye">Tiết 2 / 22 · 45 phút · Giáo án</div>
+      <h1>Độ trễ đầu cuối, mức sử dụng và thời gian đáp ứng</h1>
+      <p class="lead">Tiết này đi theo một gói tin qua ba chặng mạng trường để tách độ trễ đầu cuối thành bốn thành phần, rồi nối độ trễ với mức sử dụng liên kết, điều kiện dư địa và thời gian đáp ứng mà người dùng cảm nhận. Dùng cùng bài 3D <a href="../">Gói tin qua ba chặng</a>: bấm <b>Lên lớp</b> trên thanh đầu bài để màn hình giảng viên hiện phút dự kiến và việc của từng bước.</p>
+      <div class="meta"><div><b>Chương</b>Chương 1 · Tổng quan về thiết kế và hiệu năng mạng</div><div><b>Mục giáo trình</b>1.5.2, 1.6.1</div><div><b>Trang</b>13–14</div><div><b>Phương trình</b>(1.7), (1.9), (1.10), (1.11), (1.12)</div><div><b>Bài tập cuối chương</b>Câu 3, câu 4</div></div>
+    </div>
+    <div class="cover"><img src="../../../thu-vien/covers/tk-goi-tin.webp" alt="Cảnh 3D của bài Gói tin qua ba chặng"><a class="btn pri" href="../"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a></div>
+  </div>
+  <nav class="tabs" aria-label="Các phần của giáo án"><a href="#muc-tieu">Mục tiêu</a><a href="#dien-tien">Diễn tiến 45 phút</a><a href="#vi-du">Ví dụ giải mẫu</a><a href="#phieu">Phiếu bài tập</a><a href="#dap-an">Đáp án</a><a href="#kiem-tra">Kiểm tra nhanh</a><a href="#tom-tat">Tóm tắt và nguồn</a></nav>
+
+  <section id="muc-tieu" aria-labelledby="h-mt">
+    <h2 id="h-mt">Mục tiêu và chuẩn bị</h2>
+    <div class="g2">
+      <div class="card"><h3>Sau tiết học, sinh viên có thể</h3><ul class="tick"><li>Viết và giải thích biểu thức độ trễ đầu cuối (1.10) cho một đường đi nhiều chặng, gọi đúng tên và nguồn gốc của bốn thành phần.</li><li>Tính trễ truyền theo (1.11) và trễ lan truyền theo khoảng cách cho số liệu cụ thể, chỉ ra thành phần nào giảm khi tăng tốc độ cổng.</li><li>Tính mức sử dụng liên kết (1.7) và kiểm điều kiện quy hoạch Σb ≤ ηC (1.9).</li><li>Giải thích vì sao trễ chờ tăng rất nhanh khi ρ tiến tới 1, dùng lời giải M/M/1 và đối chiếu với mô phỏng.</li><li>Phân tích thời gian đáp ứng (1.12) để xác định nút thắt nằm ở mạng hay ở máy chủ.</li><li>Nêu các điều kiện đo phải ghi kèm một kết quả độ trễ để kết quả lặp lại và so sánh được.</li></ul>
+        <h3 style="margin-top:18px">Kiến thức cần có</h3><ul class="tick"><li>Đơn vị bit, byte, bit/s; tiền tố k, M, G (1 byte = 8 bit).</li><li>Chuyển mạch gói, khái niệm hàng đợi ở cổng ra của switch và router (học phần Mạng máy tính).</li><li>Tiết 1: dịch vụ, QoS, SLA, metric hiệu năng, vector yêu cầu (1.6) và điều kiện nghiệm thu (1.8).</li></ul></div>
+      <div class="card"><h3>Chuẩn bị</h3><ul class="tick"><li>Máy tính có Chrome hoặc Edge bản mới, nối máy chiếu. Mở bài 3D trước giờ học một lần, bấm Lên lớp để màn hình giảng viên hiện phút và việc từng bước.</li><li>In phiếu bài tập (một trang A4) cho mỗi sinh viên, hoặc chiếu phiếu và cho làm vào vở.</li><li>Bảng và bút để giải ví dụ 1 đến 4; máy tính cầm tay để tính nhanh cùng lớp.</li><li>Sinh viên: Đọc trước mục 1.5.2 và 1.6.1, giáo trình trang 13–14.</li><li>Sinh viên: Máy tính cầm tay.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="dien-tien" aria-labelledby="h-dt">
+    <h2 id="h-dt">Diễn tiến 45 phút</h2>
+    <p class="sub">Mỗi dòng là một bước trên màn chiếu, cùng tên và thứ tự với bài 3D. Phút là gợi ý; giảng viên chủ động co giãn.</p>
+    <div class="tl" role="list" aria-label="Phân bổ thời gian"><a href="#hd-0" style="flex:4;background:color-mix(in srgb,#2B5D8C 14%,#fff)"><b>Mở đầu</b><span>0–4′</span></a><a href="#hd-1" style="flex:16;background:color-mix(in srgb,#2B5D8C 21%,#fff)"><b>Độ trễ đầu cuối</b><span>4–20′</span></a><a href="#hd-2" style="flex:11;background:color-mix(in srgb,#2B5D8C 28%,#fff)"><b>Mức sử dụng và hàng đợi</b><span>20–31′</span></a><a href="#hd-3" style="flex:7;background:color-mix(in srgb,#2B5D8C 35%,#fff)"><b>Vận dụng</b><span>31–38′</span></a><a href="#hd-4" style="flex:5;background:color-mix(in srgb,#2B5D8C 42%,#fff)"><b>Thời gian đáp ứng và đo</b><span>38–43′</span></a><a href="#hd-5" style="flex:2;background:color-mix(in srgb,#2B5D8C 49%,#fff)"><b>Tổng kết và kiểm tra nhanh</b><span>43–45′</span></a></div>
+    <div class="act card" id="hd-0"><header><h3>1. Mở đầu</h3><span class="min">0–4′</span><p>Đặt câu hỏi của tiết: một trang học liệu mở chậm, chậm ở đâu?</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">0–4′<span>4 phút</span></div><div class="t"><small>Bước 1/13</small>Một gói tin đi từ lớp học tới máy chủ học liệu</div><div class="gv"><span class="k">Giảng viên</span>Hỏi lớp: khi một trang học liệu mở chậm, chậm ở đâu? Ghi ba bốn câu trả lời lên góc bảng. Chỉ trên cảnh ba chặng: máy học viên, tủ truy nhập, router biên, đường WAN, trung tâm dữ liệu. Nêu định nghĩa độ trễ một chiều theo điều kiện đo xác định (RFC 7679).</div><div class="hs"><span class="k">Sinh viên</span>Đoán thành phần chiếm phần lớn độ trễ, ghi vào lề vở để so cuối tiết.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên đoán thành phần chiếm phần lớn độ trễ, ghi lại để đối chiếu cuối tiết.</div></div><div class="act card" id="hd-1"><header><h3>2. Độ trễ đầu cuối</h3><span class="min">4–20′</span><p>Xây biểu thức (1.10), tính từng thành phần với số liệu của cảnh.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">4–9′<span>5 phút</span></div><div class="t"><small>Bước 2/13</small>Độ trễ đầu cuối là tổng bốn thành phần</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.10) lên bảng, giải thích từng số hạng: lan truyền, truyền, chờ, xử lý; nhấn mạnh tổng lấy trên mọi liên kết e của đường P. Bấm Gửi gói tin, chỉ màu từng pha trên gói và bảng 04.</div><div class="hs"><span class="k">Sinh viên</span>Chép (1.10), ghi màu tương ứng mỗi thành phần.</div></div><div class="row"><div class="m">9–13′<span>4 phút</span></div><div class="t"><small>Bước 3/13</small>Gói lớn trên liên kết chậm</div><div class="gv"><span class="k">Giảng viên</span>Giải ví dụ 1 trên bảng: 1 500 byte trên 100 Mbit/s và 10 Gbit/s. Kéo tốc độ WAN xuống 10 Mbit/s để lớp thấy thành phần cam lớn gấp mười. Hỏi câu trắc nghiệm trên màn chiếu.</div><div class="hs"><span class="k">Sinh viên</span>Tính cùng giảng viên, trả lời câu hỏi trên màn chiếu.</div></div><div class="row"><div class="m">13–17′<span>4 phút</span></div><div class="t"><small>Bước 4/13</small>Khoảng cách thì không mua được</div><div class="gv"><span class="k">Giảng viên</span>Nêu v ≈ 2·10⁸ m/s trong cáp, tính 60 m, 2 km, 300 km. Kéo độ dài WAN lên 1 000 km, chỉ thanh xanh lớn dần trong khi tốc độ cổng không đổi.</div><div class="hs"><span class="k">Sinh viên</span>Tính d<sub>prop</sub> cho ba khoảng cách, điền cột lan truyền trong bảng của ví dụ 2.</div></div><div class="row"><div class="m">17–20′<span>3 phút</span></div><div class="t"><small>Bước 5/13</small>Mỗi nút cần thời gian đọc và chuyển gói</div><div class="gv"><span class="k">Giảng viên</span>Liệt kê việc một router làm với mỗi gói: đọc tiêu đề, tra bảng, áp chính sách. Nói rõ 5 µs và 20 µs là giả định của bài; số thật phụ thuộc thiết bị và tính năng bật. Hoàn tất bảng ví dụ 2: tổng khoảng 1,81 ms.</div><div class="hs"><span class="k">Sinh viên</span>Cộng bốn thành phần cho ba chặng, đối chiếu với tổng trên bảng 04.</div></div><div class="prod"><b>Kết quả:</b> Bảng bốn thành phần cho chặng WAN, giải ví dụ 1 và 2.</div></div><div class="act card" id="hd-2"><header><h3>3. Mức sử dụng và hàng đợi</h3><span class="min">20–31′</span><p>Định nghĩa ρ (1.7), quan sát trễ chờ tăng khi ρ → 1, đối chiếu mô phỏng với M/M/1.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">20–23′<span>3 phút</span></div><div class="t"><small>Bước 6/13</small>Mức sử dụng của một liên kết</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.7). Giải thích luồng f đi qua liên kết e; trên WAN của bài, gói của ta chia cổng với lưu lượng nền. Kéo tải nền về 0,3 để có điểm xuất phát.</div><div class="hs"><span class="k">Sinh viên</span>Chép (1.7), nêu một ví dụ ba luồng cùng đi qua một liên kết.</div></div><div class="row"><div class="m">23–28′<span>5 phút</span></div><div class="t"><small>Bước 7/13</small>Khi tải tiến gần 1</div><div class="gv"><span class="k">Giảng viên</span>Kéo tải nền lên 0,9, chỉ cột hàng đợi ở router biên. Giải ví dụ 4 bằng M/M/1: μ = C/L, λ = ρμ, W<sub>q</sub> = ρ/(μ − λ). Hỏi câu trắc nghiệm.</div><div class="hs"><span class="k">Sinh viên</span>Tính W<sub>q</sub> ở ρ = 0,5 và 0,9, rút ra tỉ số 9 lần.</div></div><div class="row"><div class="m">28–31′<span>3 phút</span></div><div class="t"><small>Bước 8/13</small>Số trên màn hình không gõ sẵn</div><div class="gv"><span class="k">Giảng viên</span>Chỉ bảng 05: chấm đỏ là mô phỏng hàng chục nghìn gói, đường liền là M/M/1. Giải thích ý nghĩa kiểm chứng mô hình (sẽ học kỹ ở tiết 17).</div><div class="hs"><span class="k">Sinh viên</span>Nêu một lý do cần đối chiếu mô phỏng với lý thuyết trước khi tin kết quả.</div></div><div class="prod"><b>Kết quả:</b> Ví dụ 4: trễ chờ ở ρ = 0,5 và 0,9.</div></div><div class="act card" id="hd-3"><header><h3>4. Vận dụng</h3><span class="min">31–38′</span><p>Câu 3 và câu 4 cuối chương: thành phần nào giảm khi tăng tốc độ cổng; mức sử dụng và dư địa.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">31–35′<span>4 phút</span></div><div class="t"><small>Bước 9/13</small>Thành phần nào giảm khi tăng tốc độ cổng?</div><div class="gv"><span class="k">Giảng viên</span>Giao bài 1 trên phiếu (câu 3 cuối chương), cho 3 phút. Gọi một sinh viên trình bày; chốt: tăng C giảm d<sub>tx</sub> và gián tiếp d<sub>queue</sub>; d<sub>prop</sub> theo khoảng cách, d<sub>proc</sub> theo thiết bị. Hỏi câu trắc nghiệm.</div><div class="hs"><span class="k">Sinh viên</span>Làm bài 1 trên phiếu, trình bày khi được gọi.</div></div><div class="row"><div class="m">35–38′<span>3 phút</span></div><div class="t"><small>Bước 10/13</small>Đủ băng thông chưa chắc đã đủ</div><div class="gv"><span class="k">Giảng viên</span>Bấm BT 1.4, giải câu 4 cuối chương: ρ = 0,8, dư địa bằng 0 với η = 0,8. Kéo dữ liệu nền lên 520 Mbit/s để thấy vượt ngưỡng. Nhấn mạnh (1.9): quy hoạch theo η·C, không theo C.</div><div class="hs"><span class="k">Sinh viên</span>Làm bài 4 trên phiếu, giải thích vì sao dư địa bằng 0 vẫn là vấn đề.</div></div><div class="prod"><b>Kết quả:</b> Bài 1 và bài 4 trên phiếu.</div></div><div class="act card" id="hd-4"><header><h3>5. Thời gian đáp ứng và đo</h3><span class="min">38–43′</span><p>Nối độ trễ mạng với thời gian người dùng chờ (1.12); điều kiện đo một kết quả độ trễ.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">38–41′<span>3 phút</span></div><div class="t"><small>Bước 11/13</small>Không phải chậm nào cũng do mạng</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.12). Đặt máy chủ xử lý 150 ms, nâng WAN lên 1 Gbit/s: thời gian đáp ứng gần như không đổi. Giải ví dụ 5. Quay lại câu đoán đầu giờ.</div><div class="hs"><span class="k">Sinh viên</span>So câu đoán đầu giờ với kết quả; chỉ ra khi nào nâng băng thông là vô ích.</div></div><div class="row"><div class="m">41–43′<span>2 phút</span></div><div class="t"><small>Bước 12/13</small>Một chiều hay khứ hồi, đo ở đâu</div><div class="gv"><span class="k">Giảng viên</span>Phân biệt độ trễ một chiều (cần đồng bộ đồng hồ) với thời gian khứ hồi của ping. Liệt kê điều kiện đo phải ghi: điểm đo, kích thước gói, mức tải, thời gian đo, số lần lặp.</div><div class="hs"><span class="k">Sinh viên</span>Ghi danh sách điều kiện đo vào vở.</div></div><div class="prod"><b>Kết quả:</b> Ví dụ 5: khi nào nâng băng thông không giúp được.</div></div><div class="act card" id="hd-5"><header><h3>6. Tổng kết và kiểm tra nhanh</h3><span class="min">43–45′</span><p>Ghép mỗi thành phần với đòn bẩy thiết kế; 6 câu kiểm tra nhanh.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">43–45′<span>2 phút</span></div><div class="t"><small>Bước 13/13</small>Thiết kế can thiệp vào đâu</div><div class="gv"><span class="k">Giảng viên</span>Tóm tắt bốn đòn bẩy thiết kế theo bốn thành phần. Chiếu 6 câu kiểm tra nhanh, lớp trả lời đồng thanh hoặc giơ tay; giao bài 2, 3, 5, 6 về nhà. Giới thiệu tiết 3: hàng đợi đầy thì mất gói.</div><div class="hs"><span class="k">Sinh viên</span>Trả lời kiểm tra nhanh; ghi bài tập về nhà.</div></div><div class="prod"><b>Kết quả:</b> Đáp án kiểm tra nhanh; bài 2, 3, 5, 6 làm ở nhà.</div></div>
+  </section>
+
+  <section id="vi-du" aria-labelledby="h-vd">
+    <h2 id="h-vd">Ví dụ giải mẫu</h2>
+    <p class="sub">Giảng viên giải trên bảng trong tiết; số liệu đã kiểm bằng máy cùng công thức của bài 3D.</p>
+    <div class="card"><div class="vd"><h4>Ví dụ 1. Trễ truyền theo (1.11)</h4><p class="de">Tính trễ truyền của gói 1 500 byte trên liên kết 100 Mbit/s và 10 Gbit/s; của gói 64 byte trên 100 Mbit/s.</p><div class="giai">L = 1 500 × 8 = 12 000 bit. d<sub>tx</sub> = L/C = 12 000 / 10<sup>8</sup> = 1,2·10<sup>−4</sup> s = <b>0,12 ms</b>. Trên 10 Gbit/s: 12 000 / 10<sup>10</sup> = <b>1,2 µs</b>. Gói 64 byte = 512 bit trên 100 Mbit/s: <b>5,12 µs</b>. Trễ truyền tỉ lệ thuận với kích thước gói và tỉ lệ nghịch với tốc độ cổng.</div></div><div class="vd"><h4>Ví dụ 2. Độ trễ một chiều của ba chặng theo (1.10)</h4><p class="de">Gói 1 500 byte đi ba chặng: (1) cáp đồng 60 m, 1 Gbit/s, ρ = 0,1; (2) cáp quang 2 km, 10 Gbit/s, ρ = 0,3; (3) WAN 300 km, 100 Mbit/s, ρ = 0,6. Lưu lượng nền gói trung bình 1 000 byte (mô hình M/M/1). Xử lý: 5 µs ở tủ truy nhập, 20 µs ở mỗi router (giả định). Tính độ trễ một chiều.</p><div class="giai">Chặng 1: d<sub>tx</sub> = 12 µs, d<sub>prop</sub> = 60/2·10<sup>8</sup> = 0,3 µs, d<sub>queue</sub> ≈ 0,9 µs, d<sub>proc</sub> = 5 µs.<br>Chặng 2: d<sub>tx</sub> = 1,2 µs, d<sub>prop</sub> = 10 µs, d<sub>queue</sub> ≈ 0,34 µs, d<sub>proc</sub> = 20 µs.<br>Chặng 3: d<sub>tx</sub> = 120 µs, d<sub>prop</sub> = 1 500 µs, μ = 10<sup>8</sup>/8 000 = 12 500 gói/s, λ = 0,6μ = 7 500 gói/s, d<sub>queue</sub> = ρ/(μ − λ) = 0,6/5 000 = 120 µs, d<sub>proc</sub> = 20 µs.<br>Tổng ≈ <b>1,81 ms</b>, trong đó lan truyền trên WAN chiếm khoảng 83 %.</div></div><div class="vd"><h4>Ví dụ 3. Mức sử dụng và dư địa (câu 4 cuối chương)</h4><p class="de">Liên kết 1 Gbit/s mang thoại 80 Mbit/s, video 300 Mbit/s, dữ liệu nền 420 Mbit/s. Tính mức sử dụng và dư địa với η = 0,8.</p><div class="giai">Σb = 80 + 300 + 420 = 800 Mbit/s. ρ = 800/1 000 = <b>0,8</b> theo (1.7). Dư địa tới ngưỡng khai thác: η·C − Σb = 800 − 800 = <b>0 Mbit/s</b>. Liên kết vẫn chở được tải trung bình nhưng đã chạm ngưỡng (1.9): không còn chỗ cho dao động tải, overhead, tái định tuyến hay bùng nổ, nên phải nâng cấp hoặc dời bớt luồng.</div></div><div class="vd"><h4>Ví dụ 4. Trễ chờ khi tải tiến gần 1</h4><p class="de">Liên kết 100 Mbit/s, gói trung bình 1 000 byte, đến theo Poisson, cỡ gói phân bố mũ. Tính trễ chờ trung bình ở ρ = 0,5 và ρ = 0,9.</p><div class="giai">μ = C/L = 10<sup>8</sup>/8 000 = 12 500 gói/s. ρ = 0,5: λ = 6 250 gói/s, W<sub>q</sub> = ρ/(μ − λ) = 0,5/6 250 = <b>80 µs</b>. ρ = 0,9: λ = 11 250 gói/s, W<sub>q</sub> = 0,9/1 250 = <b>720 µs</b>. Tải tăng chưa tới hai lần, trễ chờ tăng 9 lần vì W<sub>q</sub> ∝ ρ/(1 − ρ).</div></div><div class="vd"><h4>Ví dụ 5. Thời gian đáp ứng theo (1.12)</h4><p class="de">Dùng kết quả ví dụ 2 cho cả chiều đi và chiều về. Máy chủ xử lý 30 ms; sau đó máy chủ chậm lại còn 150 ms. Nâng WAN lên 1 Gbit/s có giúp người dùng không?</p><div class="giai">D<sub>net</sub> = 2 × 1,81 ≈ 3,62 ms. T = 3,62 + 30 ≈ <b>33,6 ms</b>; khi máy chủ 150 ms: T ≈ <b>153,6 ms</b>. Nâng WAN lên 1 Gbit/s chỉ giảm trễ truyền 108 µs và trễ chờ khoảng 120 µs mỗi chiều: tổng bớt chưa tới 0,5 ms, khoảng 0,3 % của 153,6 ms. Nút thắt là máy chủ, không phải mạng.</div></div></div>
+  </section>
+
+  <section id="phieu" aria-labelledby="h-ph">
+    <h2 id="h-ph">Phiếu bài tập</h2>
+    <p class="sub">Một trang A4. Làm trên lớp phần đầu, phần còn lại về nhà. <button class="btn noprint" type="button" data-print="phieu" style="margin-left:6px;vertical-align:middle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In phiếu</button></p>
+    <div class="sheet-wrap"><div class="sheet-zoom"><div class="paper" lang="vi">
+  <header><div><div class="lg2"><img src="../../../design/logo/mark-96.webp" alt="">Sáng Ăn Khoai · Thiết kế và hiệu năng mạng · Tiết 2 · Phiếu bài tập</div><h4>Độ trễ đầu cuối, mức sử dụng và thời gian đáp ứng</h4></div>
+    <div class="who"><span>Họ tên</span><i></i><span>Mã sinh viên</span><i></i></div></header>
+  <div class="part bt"><div class="qq"><b>1.</b><span>Một luồng đi qua ba liên kết. Viết biểu thức độ trễ đầu cuối theo (1.10). Thành phần nào giảm khi tăng tốc độ cổng, thành phần nào phụ thuộc khoảng cách vật lý? <span class=src>(câu 3 cuối chương 1)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>2.</b><span>Tính trễ truyền của gói 64 byte và gói 1 500 byte trên liên kết 10 Mbit/s và 1 Gbit/s (bốn kết quả).</span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>3.</b><span>Tính trễ lan truyền trên 2 km sợi quang và trên tuyến cáp dài 1 600 km (v = 2·10⁸ m/s). Tăng tốc độ cổng có rút ngắn được hai con số này không?</span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>4.</b><span>Liên kết 1 Gbit/s mang thoại 80 Mbit/s, video 300 Mbit/s, dữ liệu nền 420 Mbit/s. Tính mức sử dụng và nhận xét dư địa nếu η = 0,8. <span class=src>(câu 4 cuối chương 1)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>5.</b><span>Liên kết 100 Mbit/s, gói trung bình 1 000 byte (M/M/1). Tính trễ chờ trung bình khi tải 60 Mbit/s và 90 Mbit/s. Trễ chờ tăng bao nhiêu lần?</span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>6.</b><span>Một ứng dụng có trễ mạng 2 ms mỗi chiều, máy chủ xử lý 150 ms, cơ sở dữ liệu 20 ms, máy khách 10 ms. Tính thời gian đáp ứng theo (1.12). Nâng băng thông mạng giúp được tối đa bao nhiêu phần trăm?</span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+  <footer><span>Giáo trình TEL1459, mục 1.5.2, 1.6.1, tr. 13–14</span><span>nclamvn.github.io/bai-giang</span></footer>
+</div></div></div>
+  </section>
+
+  <section id="dap-an" aria-labelledby="h-da">
+    <h2 id="h-da">Đáp án và gợi ý chấm</h2>
+    <div class="card"><dl class="ans"><dt>1</dt><dd>D = Σ<sub>e=1..3</sub>(d<sub>prop,e</sub> + d<sub>tx,e</sub> + d<sub>queue,e</sub> + d<sub>proc,e</sub>). Tăng tốc độ cổng giảm d<sub>tx</sub> = L/C, và giảm d<sub>queue</sub> gián tiếp vì ρ = Σb/C nhỏ lại. d<sub>prop</sub> = d/v chỉ phụ thuộc chiều dài và môi trường. d<sub>proc</sub> phụ thuộc thiết bị và chính sách. Cho đủ điểm khi nêu đúng cả bốn và lý do của d<sub>queue</sub>.</dd><dt>2</dt><dd>64 byte = 512 bit: 51,2 µs trên 10 Mbit/s; 0,512 µs trên 1 Gbit/s. 1 500 byte = 12 000 bit: 1,2 ms trên 10 Mbit/s; 12 µs trên 1 Gbit/s.</dd><dt>3</dt><dd>2 km: 2 000/2·10⁸ = 10 µs. 1 600 km: 1,6·10⁶/2·10⁸ = 8 ms. Không: trễ lan truyền không phụ thuộc tốc độ cổng; chỉ rút ngắn được bằng đường đi ngắn hơn hoặc đặt dịch vụ gần người dùng.</dd><dt>4</dt><dd>ρ = 800/1 000 = 0,8. Dư địa η·C − Σb = 0. Đạt tải trung bình nhưng chạm ngưỡng khai thác (1.9): không còn chỗ cho dao động, overhead, tái định tuyến, bùng nổ.</dd><dt>5</dt><dd>μ = 12 500 gói/s. 60 Mbit/s: ρ = 0,6, λ = 7 500, W<sub>q</sub> = 0,6/5 000 = 120 µs. 90 Mbit/s: ρ = 0,9, λ = 11 250, W<sub>q</sub> = 0,9/1 250 = 720 µs. Tăng 6 lần.</dd><dt>6</dt><dd>T = 4 + 150 + 20 + 10 = 184 ms. Mạng chỉ chiếm 4/184 ≈ 2,2 %: dù băng thông vô hạn, thời gian đáp ứng giảm không quá 2,2 % (thực tế còn ít hơn, vì trễ lan truyền không đổi).</dd></dl></div>
+  </section>
+
+  <section id="kiem-tra" aria-labelledby="h-kt">
+    <h2 id="h-kt">Kiểm tra nhanh cuối tiết</h2>
+    <p class="sub">6 câu, khoảng 3 phút. Chiếu lên hoặc đọc to; mở đáp án sau khi lớp trả lời.</p>
+    <div class="card"><div class="qz"><p>1. Thành phần nào của độ trễ chỉ phụ thuộc khoảng cách và môi trường truyền?</p><ol type="A"><li>Trễ truyền</li><li>Trễ lan truyền</li><li>Trễ chờ</li><li>Trễ xử lý</li></ol><details><summary>Đáp án</summary><b>B.</b> d<sub>prop</sub> = d/v.</details></div><div class="qz"><p>2. Trễ truyền của gói 1 500 byte trên liên kết 1 Gbit/s là bao nhiêu?</p><ol type="A"><li>1,2 µs</li><li>12 µs</li><li>120 µs</li><li>1,2 ms</li></ol><details><summary>Đáp án</summary><b>B.</b> 12 000 bit / 10<sup>9</sup> bit/s = 12 µs.</details></div><div class="qz"><p>3. Theo M/M/1, mức sử dụng tăng từ 0,5 lên 0,9 thì trễ chờ trung bình tăng khoảng bao nhiêu lần?</p><ol type="A"><li>1,8 lần</li><li>4,5 lần</li><li>9 lần</li><li>Không đổi</li></ol><details><summary>Đáp án</summary><b>C.</b> ρ/(1 − ρ) đi từ 1 lên 9.</details></div><div class="qz"><p>4. Liên kết 10 Gbit/s đang mang 7,5 Gbit/s, hệ số khai thác mục tiêu η = 0,8. Dư địa còn lại là bao nhiêu?</p><ol type="A"><li>2,5 Gbit/s</li><li>0,5 Gbit/s</li><li>0 Gbit/s</li><li>Đã vượt ngưỡng</li></ol><details><summary>Đáp án</summary><b>B.</b> η·C − Σb = 8 − 7,5 = 0,5 Gbit/s.</details></div><div class="qz"><p>5. Lệnh ping cho biết đại lượng nào?</p><ol type="A"><li>Độ trễ một chiều</li><li>Thời gian khứ hồi</li><li>Trễ truyền</li><li>Mức sử dụng</li></ol><details><summary>Đáp án</summary><b>B.</b> Độ trễ một chiều (RFC 7679) cần đồng hồ hai đầu đồng bộ; ping đo thời gian khứ hồi.</details></div><div class="qz"><p>6. Máy chủ chiếm 90 % thời gian đáp ứng. Nâng gấp đôi băng thông mạng thì thời gian đáp ứng giảm nhiều nhất bao nhiêu?</p><ol type="A"><li>Một nửa</li><li>Dưới 10 %</li><li>Khoảng 45 %</li><li>Không thể tính</li></ol><details><summary>Đáp án</summary><b>B.</b> Phần mạng chỉ là 10 %; dù mạng nhanh vô hạn, thời gian đáp ứng giảm không quá 10 % (1.12).</details></div></div>
+  </section>
+
+  <section id="tom-tat" aria-labelledby="h-tt">
+    <h2 id="h-tt">Tóm tắt và nguồn</h2>
+    <div class="g2">
+      <div class="card"><h3>Ghi nhớ</h3><ul class="tt"><li>D<sub>e2e</sub> = Σ(d<sub>prop</sub> + d<sub>tx</sub> + d<sub>queue</sub> + d<sub>proc</sub>) trên mọi liên kết của đường đi (1.10).</li><li>d<sub>tx</sub> = L/C (1.11) giảm khi tăng tốc độ cổng; d<sub>prop</sub> = d/v chỉ giảm khi rút ngắn đường đi.</li><li>ρ<sub>e</sub> = Σb<sub>f</sub>/C<sub>e</sub> (1.7); trễ chờ tăng rất nhanh khi ρ → 1, nên quy hoạch theo Σb ≤ ηC (1.9).</li><li>Thời gian đáp ứng (1.12) gồm cả máy chủ, cơ sở dữ liệu, máy khách: tìm thành phần lớn nhất trước khi nâng băng thông.</li><li>Một kết quả độ trễ phải kèm điều kiện đo: điểm đo, kích thước gói, tải, thời gian, số lần lặp.</li></ul></div>
+      <div class="card"><h3>Nguồn</h3><ul class="src"><li>Hoàng Trọng Minh, Giáo trình Thiết kế và hiệu năng mạng (học phần TEL1459), Học viện Công nghệ Bưu chính Viễn thông, 2026: mục 1.5.2, 1.6.1, trang 13–14; phương trình (1.7), (1.9)–(1.12); câu 3, câu 4 cuối chương 1.</li><li>RFC 7679, A One-Way Delay Metric for IP Performance Metrics (IPPM), 2016.</li><li>Kurose J. F., Ross K. W., Computer Networking: A Top-Down Approach, 8th ed., Pearson, 2021, mục 1.4: tốc độ lan truyền khoảng 2·10⁸ m/s trong cáp đồng và sợi quang.</li><li>Jain R., The Art of Computer Systems Performance Analysis, Wiley, 1991, chương 31: lời giải hàng đợi M/M/1.</li><li>Thời gian xử lý 5 µs, 20 µs, tải các chặng 1 và 2, cỡ gói nền 1 000 byte là giả định của bài, ghi cạnh số trên màn hình.</li></ul><p class="mini" style="margin-top:12px">Nội dung viết mới theo giáo trình TEL1459 của PGS.TS Hoàng Trọng Minh (PTIT, 2026); không chép văn bản hay hình của sách, công thức giữ đúng số hiệu để sinh viên tra lại.</p></div>
+    </div>
+  </section>
+  <div class="foot"><span>Bản 1 · 16/11/2026</span><span class="noprint">© 2026 Sáng Ăn Khoai · phi thương mại</span></div>
+</main>
+<script>
+(function(){
+  var z=document.querySelector('.sheet-zoom'),w=document.querySelector('.sheet-wrap');
+  function fit(){var mm=210*96/25.4;z.style.setProperty('--z',Math.min(1,(w.clientWidth)/mm).toFixed(3))}
+  fit();addEventListener('resize',fit);
+  document.querySelectorAll('[data-print]').forEach(function(b){b.addEventListener('click',function(){
+    document.body.classList.toggle('in-phieu',b.dataset.print==='phieu');window.print();})});
+  addEventListener('afterprint',function(){document.body.classList.remove('in-phieu')});
+})();
+</script>
+</body>
+</html>

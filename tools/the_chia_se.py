@@ -68,6 +68,10 @@ def info(rel, s):
         slug = rel.split('/')[1]
         g = json.loads((ROOT / f'tools/goi-day/{slug}.json').read_text(encoding='utf-8'))
         cover, eye, head = f'thu-vien/covers/{slug}.webp', f'Gói dạy thử · {g["mon"]} {g["lop"]} · 45 phút', g['ten_tiet']
+    elif rel.startswith('thiet-ke-mang/') and rel.endswith('/giao-an/index.html'):
+        bai = rel[:-len('giao-an/index.html')]
+        g = next(json.loads(f.read_text(encoding='utf-8')) for f in (ROOT / 'tools/giao-an-mang').glob('*.json') if json.loads(f.read_text(encoding='utf-8'))['bai'] == bai)
+        cover, eye, head = f'thu-vien/covers/{g["id"]}.webp', f'Giáo án · Tiết {g["tiet"]} · Thiết kế và hiệu năng mạng', g['ten_tiet']
     else:
         x = EXTRA.get(rel, {'cover': None, 'eye': ''})
         cover, eye = x['cover'], x['eye']

@@ -66,5 +66,12 @@ kiem('Câu 3 chương 4: 48 × 1 Gb/s trên 4 × 10 Gb/s → Ω = 1,2', Math.abs
   const r20 = chayDCF({N: 20, Cphy: C, nTx: 40000, seed: 2});
   kiem('802.11 DCF 20 trạm: có va chạm, thông lượng thấp hơn một trạm', r20.pVaCham > 0.1 && r20.thongLuong < r1.thongLuong, `va chạm ${f(r20.pVaCham * 100, 3)} %`); }
 
+// Giáo án tiết 2 (tools/giao-an-mang/tk-goi-tin.json): số của ví dụ giải mẫu tính lại bằng cùng công thức
+{ const ch = [[1e9, 60, 0.1, 5e-6], [10e9, 2e3, 0.3, 20e-6], [100e6, 300e3, 0.6, 20e-6]]; let tong = 0;
+  for (const [C, d, r, pr] of ch) { const mu = C / 8000; tong += F.dTruyen(12000, C) + F.dLanTruyen(d) + F.mm1(r * mu, mu).Wq + pr; }
+  kiem('Tiết 2, ví dụ 2: độ trễ một chiều ba chặng ≈ 1,81 ms', Math.abs(tong - 1.8097e-3) < 1e-6, `${f(tong * 1e3)} ms`);
+  const mu = 12500; kiem('Tiết 2, ví dụ 4: W_q 80 µs ở ρ 0,5 và 720 µs ở ρ 0,9', Math.abs(F.mm1(0.5 * mu, mu).Wq - 80e-6) < 1e-9 && Math.abs(F.mm1(0.9 * mu, mu).Wq - 720e-6) < 1e-9);
+  kiem('Tiết 2, bài 6: 4 + 150 + 20 + 10 = 184 ms', F.tDapUng({mang: 4e-3, mayChu: 0.15, csdl: 0.02, mayKhach: 0.01}) === 0.184); }
+
 console.log(`\n${dem - loi}/${dem} đạt`);
 process.exit(loi ? 1 : 0);

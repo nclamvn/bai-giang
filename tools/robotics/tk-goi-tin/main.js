@@ -117,7 +117,7 @@ function tinh() {
 }
 
 // ---------------- bảng
-ui.header({code: '1.1', kicker: 'THIẾT KẾ VÀ HIỆU NĂNG MẠNG · MỤC 1.5–1.6 · ĐỘ TRỄ ĐẦU CUỐI', title: 'Gói tin qua ba chặng', sub: 'LAN TRUYỀN · TRUYỀN · HÀNG ĐỢI · XỬ LÝ', hub: HUB_URL + 'thiet-ke-mang/',
+ui.header({code: 'T2', kicker: 'THIẾT KẾ VÀ HIỆU NĂNG MẠNG · TIẾT 2 · MỤC 1.5.2, 1.6.1 · ĐỘ TRỄ ĐẦU CUỐI', title: 'Gói tin qua ba chặng', sub: 'LAN TRUYỀN · TRUYỀN · HÀNG ĐỢI · XỬ LÝ', hub: HUB_URL + 'thiet-ke-mang/',
   right: [['3', 'CHẶNG'], ['1.10', 'PHƯƠNG TRÌNH'], ['M/M/1', 'ĐỐI CHIẾU MÔ PHỎNG']]});
 ui.panel(28, 112, 300, 232, 'ĐƯỜNG ĐI · BA CHẶNG', '01');
 const hopRows = [0, 1, 2].map((i) => { const y = 146 + i * 62; ui.rule(42, y + 52, 272); return {ten: ui.text(42, y, '', 'v', 'font-size:11.5px;font-weight:600;width:272px;white-space:nowrap'), sub: ui.text(42, y + 18, '', 'v', 'font-size:10.5px;color:#626773;width:272px;white-space:nowrap'), tai: ui.bar(42, y + 34, 272, 'TẢI NỀN', {lw: 60, vw: 62})}; });
@@ -272,29 +272,42 @@ const views = {
   dc: () => ({tx: 11.5, ty: 1.8, tz: 0.8, az: 24, el: 16, d: 20, sx: 0, sy: -30}),
 };
 
-// ---------------- bài giảng
+// ---------------- bài giảng · tiết 2 (45 phút), theo mục 1.5.2 và 1.6.1 của giáo trình; giáo án: tools/giao-an-mang/tk-goi-tin.json
+// Tên bước (t) phải khớp từng bước của giáo án; tests/smoke.py kiểm.
 const CAP = [
-  {k: 'Mục 1.5–1.6 · bài toán', t: 'Một gói tin đi từ lớp học tới máy chủ học liệu', b: 'Gói tin rời máy học viên, qua tủ truy nhập, qua router biên của trường, chạy trên đường WAN tới trung tâm dữ liệu. Mỗi chặng góp một phần vào độ trễ. Bài này tách độ trễ thành bốn phần để biết thiết kế nên can thiệp ở đâu.', e: 'D = Σ(lan truyền + truyền + hàng đợi + xử lý) · (1.10)'},
-  {k: 'Bốn thành phần', t: 'Gói màu đổi theo pha', b: 'Đỏ thẫm là lúc gói đứng chờ trong hàng đợi, cam là lúc đẩy từng bit lên dây, xanh là lúc tín hiệu chạy trên cáp, xám là lúc nút xử lý. Phát lại đã làm chậm, thời lượng mỗi pha theo tỉ lệ đóng góp thật của nó.', e: 'thanh ở bảng 04 có cùng bốn màu'},
-  {k: 'Trễ truyền · 1.11', t: 'Gói lớn trên liên kết chậm', b: 'Đẩy L bit lên liên kết C bit/s mất L/C giây. Gói 1 500 byte trên WAN 100 Mbit/s mất 0,12 ms, trên cáp quang 10 Gbit/s chỉ 1,2 µs. Hạ tốc độ WAN xuống 10 Mbit/s để thấy thành phần cam lớn lên mười lần.', e: 'd_truyền = L / C',
-    ask: {q: 'Tăng tốc độ cổng WAN lên 10 lần thì thành phần nào giảm 10 lần?', o: ['Trễ lan truyền', 'Trễ truyền L/C', 'Trễ xử lý'], a: 1, e: 'L/C tỉ lệ nghịch với C. Trễ lan truyền chỉ phụ thuộc khoảng cách và môi trường.'}},
-  {k: 'Trễ lan truyền', t: 'Khoảng cách thì không mua được', b: 'Tín hiệu trong cáp đồng hay sợi quang đi khoảng 2·10⁸ m/s. 300 km mất 1,5 ms, dù cổng nhanh đến đâu. Kéo độ dài WAN lên 1 000 km: thành phần xanh lớn dần mà tốc độ cổng không giúp được.', e: 'd_lan truyền = d / v, v ≈ 2·10⁸ m/s'},
-  {k: 'Trễ hàng đợi · 1.7', t: 'Khi tải tiến gần 1', b: 'Cổng ra WAN cùng lúc phục vụ gói của mình và lưu lượng nền. Mức sử dụng ρ càng gần 1, gói càng phải chờ lâu. Kéo tải nền WAN lên 0,9: cột hàng đợi ở router biên cao lên, thành phần đỏ thẫm lấn hết các phần khác.', e: 'ρ = Σ b / C  ·  M/M/1: W_q = ρ / (μ − λ)',
-    ask: {q: 'Tốc độ danh định của WAN giữ nguyên, tải nền tăng từ 0,5 lên 0,9. Điều gì xảy ra?', o: ['Trễ không đổi vì cổng vẫn 100 Mbit/s', 'Trễ hàng đợi tăng nhiều lần', 'Trễ lan truyền tăng'], a: 1, e: 'Theo M/M/1, W_q tỉ lệ với ρ/(1 − ρ): từ 1 lên 9, tức gấp chín lần. Mô phỏng ở bảng 05 cho cùng kết quả.'}},
-  {k: 'Mô phỏng và lý thuyết', t: 'Số trên màn hình không gõ sẵn', b: 'Trễ hàng đợi được tính bằng mô phỏng sự kiện rời rạc: hàng chục nghìn gói đến ngẫu nhiên, xếp hàng, được phục vụ. Chấm đỏ là kết quả mô phỏng, đường liền là lời giải M/M/1. Hai cái khớp nhau: đây là cách kiểm một mô hình trước khi tin nó (mục 5.1.3).', e: 'bảng 05 · chấm = mô phỏng, đường = M/M/1'},
-  {k: 'Thời gian đáp ứng · 1.12', t: 'Không phải chậm nào cũng do mạng', b: 'Người dùng chờ trễ mạng đi về cộng thời gian máy chủ xử lý. Đặt máy chủ xử lý 150 ms rồi nâng WAN lên 1 Gbit/s: thời gian đáp ứng gần như không đổi. Tăng băng thông chỉ có ích khi mạng là phần lớn nhất.', e: 'T_đáp ứng = D_mạng + T_máy chủ + T_csdl + T_máy khách'},
-  {k: 'BT 1.4 · mức sử dụng và dư địa', t: 'Đủ băng thông chưa chắc đã đủ', b: 'Liên kết 1 Gbit/s mang thoại 80, video 300, dữ liệu nền 420 Mbit/s: ρ = 0,8. Với hệ số khai thác mục tiêu η = 0,8, dư địa bằng 0: lưu lượng vẫn qua được nhưng không còn chỗ hấp thụ bùng nổ hay tái định tuyến.', e: 'Σ b ≤ η·C   (1.9)'},
+  {k: 'Tiết 2 · mục 1.6.1', t: 'Một gói tin đi từ lớp học tới máy chủ học liệu', b: 'Độ trễ là thời gian từ khi gói bắt đầu rời nguồn tới khi được nhận ở đích, đo trong điều kiện xác định (RFC 7679 cho độ trễ một chiều). Gói của bài đi ba chặng: máy học viên tới tủ truy nhập, tủ truy nhập tới router biên, router biên qua đường WAN tới trung tâm dữ liệu. Tiết này tách độ trễ thành bốn phần để biết thiết kế nên can thiệp ở đâu.', e: 'câu hỏi của tiết: độ trễ đến từ đâu và giảm bằng cách nào'},
+  {k: 'Phương trình 1.10', t: 'Độ trễ đầu cuối là tổng bốn thành phần', b: 'Trên mỗi liên kết e của đường đi P, gói mất bốn khoảng thời gian: lan truyền tín hiệu, truyền gói lên dây, chờ trong hàng đợi và xử lý tại nút. Độ trễ đầu cuối là tổng của chúng trên mọi chặng. Gói trong cảnh đổi màu theo pha: đỏ thẫm là chờ, cam là truyền, xanh là lan truyền, xám là xử lý; thời lượng mỗi pha theo tỉ lệ đóng góp thật.', e: 'D_e2e = Σ_(e∈P) (d_prop + d_tx + d_queue + d_proc)   (1.10)'},
+  {k: 'Trễ truyền · 1.11', t: 'Gói lớn trên liên kết chậm', b: 'Đẩy hết L bit của một gói lên liên kết C bit/s mất L/C giây. Gói 1 500 byte trên WAN 100 Mbit/s mất 0,12 ms; trên cáp quang 10 Gbit/s chỉ 1,2 µs. Hạ tốc độ WAN xuống 10 Mbit/s: thành phần cam lớn gấp mười. Với liên kết chậm, một gói lớn có thể làm gói thoại phía sau phải chờ đáng kể.', e: 'd_tx = L / C   (1.11)',
+    ask: {q: 'Tăng tốc độ cổng WAN lên 10 lần thì thành phần nào giảm đúng 10 lần?', o: ['Trễ lan truyền', 'Trễ truyền L/C', 'Trễ xử lý'], a: 1, e: 'L/C tỉ lệ nghịch với C. Trễ lan truyền chỉ phụ thuộc khoảng cách và môi trường truyền.'}},
+  {k: 'Trễ lan truyền', t: 'Khoảng cách thì không mua được', b: 'Tín hiệu trong cáp đồng hay sợi quang đi khoảng 2·10⁸ m/s, chừng hai phần ba tốc độ ánh sáng trong chân không. 60 m cáp trong phòng chỉ 0,3 µs, 2 km cáp quang 10 µs, còn 300 km đường WAN 1,5 ms dù cổng nhanh đến đâu. Kéo độ dài WAN lên 1 000 km: thành phần xanh lớn dần, tốc độ cổng không giúp được.', e: 'd_prop = d / v,  v ≈ 2·10⁸ m/s'},
+  {k: 'Trễ xử lý', t: 'Mỗi nút cần thời gian đọc và chuyển gói', b: 'Tại mỗi switch, router, nút phải đọc tiêu đề, tra bảng chuyển tiếp, áp chính sách rồi mới đưa gói sang cổng ra. Chuyển tiếp bằng phần cứng thường chỉ vài micro giây; xử lý bằng phần mềm, mã hoá hay kiểm tra sâu có thể lâu hơn nhiều. Bài giả định 5 µs ở tủ truy nhập và 20 µs ở mỗi router.', e: 'd_proc phụ thuộc thiết bị và chính sách bật trên nó'},
+  {k: 'Mức sử dụng · 1.7', t: 'Mức sử dụng của một liên kết', b: 'Một liên kết thường mang nhiều luồng cùng lúc. Mức sử dụng ρ là tổng tốc độ các luồng đi qua liên kết chia cho dung lượng của nó. Trên đường WAN của bài, gói của ta đi chung với lưu lượng nền; thanh trượt Tải nền WAN đặt ρ của chặng 3.', e: 'ρ_e = Σ_(f: e∈P_f) b_f / C_e   (1.7)'},
+  {k: 'Trễ hàng đợi', t: 'Khi tải tiến gần 1', b: 'Khi cổng ra đang bận, gói mới phải xếp hàng. ρ càng gần 1, hàng càng dài và trễ chờ tăng rất nhanh, dù tốc độ danh định không đổi. Kéo tải nền WAN lên 0,9: cột hàng đợi ở router biên cao lên, thành phần đỏ thẫm lấn các phần khác. Với mô hình M/M/1, trễ chờ tỉ lệ với ρ/(1 − ρ).', e: 'M/M/1: W_q = ρ / (μ − λ),  λ = ρ·μ',
+    ask: {q: 'Tốc độ danh định của WAN giữ nguyên, tải nền tăng từ 0,5 lên 0,9. Trễ chờ theo M/M/1 thay đổi thế nào?', o: ['Không đổi vì cổng vẫn 100 Mbit/s', 'Tăng khoảng 9 lần', 'Tăng khoảng 1,8 lần'], a: 1, e: 'ρ/(1 − ρ) đi từ 1 lên 9. Mô phỏng ở bảng 05 cho cùng kết quả.'}},
+  {k: 'Mô phỏng và lý thuyết', t: 'Số trên màn hình không gõ sẵn', b: 'Trễ hàng đợi trong bài được tính bằng mô phỏng sự kiện rời rạc: hàng chục nghìn gói đến ngẫu nhiên, xếp hàng, được phục vụ. Chấm đỏ là kết quả mô phỏng, đường liền là lời giải M/M/1. Hai cái khớp nhau: đó là cách kiểm một mô hình trước khi dùng nó để kết luận, như mục 5.1.3 sẽ trình bày.', e: 'bảng 05 · chấm = mô phỏng, đường = M/M/1'},
+  {k: 'Câu 3 · chương 1', t: 'Thành phần nào giảm khi tăng tốc độ cổng?', b: 'Với một luồng qua ba liên kết, độ trễ đầu cuối là tổng mười hai số hạng. Tăng tốc độ cổng làm giảm trễ truyền, và gián tiếp giảm trễ chờ vì ρ nhỏ lại. Trễ lan truyền chỉ phụ thuộc chiều dài và môi trường; trễ xử lý phụ thuộc thiết bị. Ở cấu hình mặc định, 300 km đường WAN là phần lớn nhất.', e: 'D = Σ_(e=1..3) (d_prop,e + d_tx,e + d_queue,e + d_proc,e)',
+    ask: {q: 'Đường WAN 300 km, 100 Mbit/s, tải 0,6. Thành phần nào lớn nhất trong độ trễ một chiều?', o: ['Trễ truyền của gói 1 500 byte', 'Trễ lan truyền trên 300 km', 'Trễ xử lý ở router'], a: 1, e: '1,5 ms lan truyền so với 0,12 ms truyền, khoảng 0,12 ms chờ và vài chục µs xử lý.'}},
+  {k: 'Bài tập 4 · chương 1 · 1.9', t: 'Đủ băng thông chưa chắc đã đủ', b: 'Liên kết 1 Gbit/s mang thoại 80, video 300 và dữ liệu nền 420 Mbit/s: ρ = 0,8. Với hệ số khai thác mục tiêu η = 0,8, dư địa bằng 0: lưu lượng vẫn qua được nhưng không còn chỗ cho dao động tải, overhead, tái định tuyến hay bùng nổ. Quy hoạch dung lượng giữ tổng tải dưới η·C chứ không dưới C.', e: 'Σ_(f: e∈P_f) b_f ≤ η·C_e,  0 < η < 1   (1.9)'},
+  {k: 'Thời gian đáp ứng · 1.12', t: 'Không phải chậm nào cũng do mạng', b: 'Người dùng cảm nhận thời gian đáp ứng: trễ mạng đi và về, cộng thời gian máy chủ, cơ sở dữ liệu và thiết bị đầu cuối xử lý. Đặt máy chủ xử lý 150 ms rồi nâng WAN lên 1 Gbit/s: thời gian đáp ứng gần như không đổi. Tăng băng thông chỉ có ích khi mạng là thành phần lớn nhất.', e: 'T_resp = D_net + T_server + T_db + T_client   (1.12)'},
+  {k: 'Đo độ trễ', t: 'Một chiều hay khứ hồi, đo ở đâu', b: 'Độ trễ một chiều theo RFC 7679 cần đồng hồ hai đầu đồng bộ; lệnh ping chỉ cho thời gian khứ hồi. Một con số độ trễ chỉ dùng được khi kèm điều kiện đo: điểm đo, kích thước gói, mức tải, thời gian đo, số lần lặp. Thiếu các điều kiện đó, hai kết quả không so sánh được với nhau.', e: 'kết quả = con số + điều kiện đo (bảng 1.3)'},
+  {k: 'Tổng kết', t: 'Thiết kế can thiệp vào đâu', b: 'Tăng tốc độ cổng giảm trễ truyền và gián tiếp giảm trễ chờ. Quy hoạch đường đi, đặt máy chủ gần người dùng giảm trễ lan truyền. Chính sách hàng đợi và giữ ρ dưới η tác động trực tiếp đến trễ chờ. Thiết bị chuyển tiếp bằng phần cứng giữ trễ xử lý nhỏ. Tiết sau: khi hàng đợi đầy, gói không chỉ chờ mà còn bị mất.', e: 'mỗi thành phần một đòn bẩy thiết kế'},
 ];
 const ev = [], at = (t, o) => ev.push({at: t, ...o});
 at(0.2, {cap: 0}); at(1, {click: 'reset'}); at(2, {click: 'v_hero'});
-at(9, {cap: 1}); at(9.2, {click: 'go'}); at(12, {click: 'v_lop'});
-at(19, {cap: 2}); at(19.5, {click: 'v_wan'}); at(21, {slide: 'C3', to: 0, dur: 2}); at(27, {slide: 'C3', to: LOGC(100e6, 10e6, 1e9), dur: 1.2});
-at(30, {cap: 3}); at(31, {slide: 'd3', to: 1, dur: 2}); at(37, {slide: 'd3', to: LOGC(300e3, 1e3, 1000e3), dur: 1.2});
-at(40, {cap: 4}); at(40.5, {click: 'v_hero'}); at(41, {slide: 'rho3', to: 0.9 / 0.95, dur: 2.5}); at(48, {slide: 'rho3', to: 0.6 / 0.95, dur: 1.5});
-at(52, {cap: 5}); at(60, {cap: 6}); at(61, {slide: 'tSv', to: 0.75, dur: 1.5}); at(64, {slide: 'C3', to: 1, dur: 1.5}); at(69, {slide: 'C3', to: LOGC(100e6, 10e6, 1e9), dur: 1}); at(70, {slide: 'tSv', to: 0.15, dur: 1});
-at(72, {cap: 7}); at(73, {click: 'bt14'}); at(74, {slide: 'nen', to: 520 / 600, dur: 1.5}); at(78, {slide: 'nen', to: 420 / 600, dur: 1});
+at(10, {cap: 1}); at(10.2, {click: 'go'}); at(13, {click: 'v_lop'});
+at(21, {cap: 2}); at(21.5, {click: 'v_wan'}); at(23, {slide: 'C3', to: 0, dur: 2}); at(29, {slide: 'C3', to: LOGC(100e6, 10e6, 1e9), dur: 1.2});
+at(32, {cap: 3}); at(33, {slide: 'd3', to: 1, dur: 2}); at(39, {slide: 'd3', to: LOGC(300e3, 1e3, 1000e3), dur: 1.2});
+at(42, {cap: 4}); at(42.5, {click: 'v_dc'});
+at(51, {cap: 5}); at(51.5, {click: 'v_hero'}); at(52, {slide: 'rho3', to: 0.3 / 0.95, dur: 1.5});
+at(60, {cap: 6}); at(61, {slide: 'rho3', to: 0.9 / 0.95, dur: 2.5}); at(68, {slide: 'rho3', to: 0.6 / 0.95, dur: 1.5});
+at(71, {cap: 7});
+at(80, {cap: 8}); at(81, {click: 'go'});
+at(90, {cap: 9}); at(91, {click: 'bt14'}); at(92, {slide: 'nen', to: 520 / 600, dur: 1.5}); at(96, {slide: 'nen', to: 420 / 600, dur: 1});
+at(100, {cap: 10}); at(101, {slide: 'tSv', to: 0.75, dur: 1.5}); at(104, {slide: 'C3', to: 1, dur: 1.5}); at(109, {slide: 'C3', to: LOGC(100e6, 10e6, 1e9), dur: 1}); at(110, {slide: 'tSv', to: 0.15, dur: 1});
+at(113, {cap: 11}); at(113.5, {click: 'v_lop'});
+at(122, {cap: 12}); at(122.5, {click: 'v_hero'});
 ev.sort((a, b) => a.at - b.at);
 
 sim.reset(); tinh(); S.tDirty = false;
-runLive({stage: st, ui, sim, views, captions: CAP, script: {events: ev, duration: 86}, firstView: 'hero', extra: [{key: 'go', label: 'Gửi gói tin'}],
+runLive({stage: st, ui, sim, views, captions: CAP, script: {events: ev, duration: 132}, firstView: 'hero', extra: [{key: 'go', label: 'Gửi gói tin'}],
   keys: {1: 'v_hero', 2: 'v_lop', 3: 'v_wan', 4: 'v_dc', g: 'go'}});

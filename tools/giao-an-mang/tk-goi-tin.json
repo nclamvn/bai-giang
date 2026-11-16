@@ -1,0 +1,105 @@
+{
+  "id": "tk-goi-tin",
+  "tiet": 2,
+  "bai": "thiet-ke-mang/goi-tin/",
+  "ten_bai": "Gói tin qua ba chặng",
+  "ten_tiet": "Độ trễ đầu cuối, mức sử dụng và thời gian đáp ứng",
+  "chuong": "Chương 1 · Tổng quan về thiết kế và hiệu năng mạng",
+  "muc": "1.5.2, 1.6.1",
+  "trang": "13–14",
+  "pt": "(1.7), (1.9), (1.10), (1.11), (1.12)",
+  "bt_sach": "Câu 3, câu 4",
+  "dan": "Tiết này đi theo một gói tin qua ba chặng mạng trường để tách độ trễ đầu cuối thành bốn thành phần, rồi nối độ trễ với mức sử dụng liên kết, điều kiện dư địa và thời gian đáp ứng mà người dùng cảm nhận.",
+  "muc_tieu": [
+    "Viết và giải thích biểu thức độ trễ đầu cuối (1.10) cho một đường đi nhiều chặng, gọi đúng tên và nguồn gốc của bốn thành phần.",
+    "Tính trễ truyền theo (1.11) và trễ lan truyền theo khoảng cách cho số liệu cụ thể, chỉ ra thành phần nào giảm khi tăng tốc độ cổng.",
+    "Tính mức sử dụng liên kết (1.7) và kiểm điều kiện quy hoạch Σb ≤ ηC (1.9).",
+    "Giải thích vì sao trễ chờ tăng rất nhanh khi ρ tiến tới 1, dùng lời giải M/M/1 và đối chiếu với mô phỏng.",
+    "Phân tích thời gian đáp ứng (1.12) để xác định nút thắt nằm ở mạng hay ở máy chủ.",
+    "Nêu các điều kiện đo phải ghi kèm một kết quả độ trễ để kết quả lặp lại và so sánh được."
+  ],
+  "can_co": [
+    "Đơn vị bit, byte, bit/s; tiền tố k, M, G (1 byte = 8 bit).",
+    "Chuyển mạch gói, khái niệm hàng đợi ở cổng ra của switch và router (học phần Mạng máy tính).",
+    "Tiết 1: dịch vụ, QoS, SLA, metric hiệu năng, vector yêu cầu (1.6) và điều kiện nghiệm thu (1.8)."
+  ],
+  "chuan_bi": {
+    "gv": [
+      "Máy tính có Chrome hoặc Edge bản mới, nối máy chiếu. Mở bài 3D trước giờ học một lần, bấm Lên lớp để màn hình giảng viên hiện phút và việc từng bước.",
+      "In phiếu bài tập (một trang A4) cho mỗi sinh viên, hoặc chiếu phiếu và cho làm vào vở.",
+      "Bảng và bút để giải ví dụ 1 đến 4; máy tính cầm tay để tính nhanh cùng lớp."
+    ],
+    "sv": [
+      "Đọc trước mục 1.5.2 và 1.6.1, giáo trình trang 13–14.",
+      "Máy tính cầm tay."
+    ]
+  },
+  "hoat_dong": [
+    {"ten": "Mở đầu", "tu": 0, "den": 4, "buoc": [1], "muc": "Đặt câu hỏi của tiết: một trang học liệu mở chậm, chậm ở đâu?", "san_pham": "Sinh viên đoán thành phần chiếm phần lớn độ trễ, ghi lại để đối chiếu cuối tiết."},
+    {"ten": "Độ trễ đầu cuối", "tu": 4, "den": 20, "buoc": [2, 3, 4, 5], "muc": "Xây biểu thức (1.10), tính từng thành phần với số liệu của cảnh.", "san_pham": "Bảng bốn thành phần cho chặng WAN, giải ví dụ 1 và 2."},
+    {"ten": "Mức sử dụng và hàng đợi", "tu": 20, "den": 31, "buoc": [6, 7, 8], "muc": "Định nghĩa ρ (1.7), quan sát trễ chờ tăng khi ρ → 1, đối chiếu mô phỏng với M/M/1.", "san_pham": "Ví dụ 4: trễ chờ ở ρ = 0,5 và 0,9."},
+    {"ten": "Vận dụng", "tu": 31, "den": 38, "buoc": [9, 10], "muc": "Câu 3 và câu 4 cuối chương: thành phần nào giảm khi tăng tốc độ cổng; mức sử dụng và dư địa.", "san_pham": "Bài 1 và bài 4 trên phiếu."},
+    {"ten": "Thời gian đáp ứng và đo", "tu": 38, "den": 43, "buoc": [11, 12], "muc": "Nối độ trễ mạng với thời gian người dùng chờ (1.12); điều kiện đo một kết quả độ trễ.", "san_pham": "Ví dụ 5: khi nào nâng băng thông không giúp được."},
+    {"ten": "Tổng kết và kiểm tra nhanh", "tu": 43, "den": 45, "buoc": [13], "muc": "Ghép mỗi thành phần với đòn bẩy thiết kế; 6 câu kiểm tra nhanh.", "san_pham": "Đáp án kiểm tra nhanh; bài 2, 3, 5, 6 làm ở nhà."}
+  ],
+  "buoc": [
+    {"t": "Một gói tin đi từ lớp học tới máy chủ học liệu", "tu": 0, "den": 4, "gv": "Hỏi lớp: khi một trang học liệu mở chậm, chậm ở đâu? Ghi ba bốn câu trả lời lên góc bảng. Chỉ trên cảnh ba chặng: máy học viên, tủ truy nhập, router biên, đường WAN, trung tâm dữ liệu. Nêu định nghĩa độ trễ một chiều theo điều kiện đo xác định (RFC 7679).", "sv": "Đoán thành phần chiếm phần lớn độ trễ, ghi vào lề vở để so cuối tiết."},
+    {"t": "Độ trễ đầu cuối là tổng bốn thành phần", "tu": 4, "den": 9, "gv": "Viết (1.10) lên bảng, giải thích từng số hạng: lan truyền, truyền, chờ, xử lý; nhấn mạnh tổng lấy trên mọi liên kết e của đường P. Bấm Gửi gói tin, chỉ màu từng pha trên gói và bảng 04.", "sv": "Chép (1.10), ghi màu tương ứng mỗi thành phần."},
+    {"t": "Gói lớn trên liên kết chậm", "tu": 9, "den": 13, "gv": "Giải ví dụ 1 trên bảng: 1 500 byte trên 100 Mbit/s và 10 Gbit/s. Kéo tốc độ WAN xuống 10 Mbit/s để lớp thấy thành phần cam lớn gấp mười. Hỏi câu trắc nghiệm trên màn chiếu.", "sv": "Tính cùng giảng viên, trả lời câu hỏi trên màn chiếu."},
+    {"t": "Khoảng cách thì không mua được", "tu": 13, "den": 17, "gv": "Nêu v ≈ 2·10⁸ m/s trong cáp, tính 60 m, 2 km, 300 km. Kéo độ dài WAN lên 1 000 km, chỉ thanh xanh lớn dần trong khi tốc độ cổng không đổi.", "sv": "Tính d<sub>prop</sub> cho ba khoảng cách, điền cột lan truyền trong bảng của ví dụ 2."},
+    {"t": "Mỗi nút cần thời gian đọc và chuyển gói", "tu": 17, "den": 20, "gv": "Liệt kê việc một router làm với mỗi gói: đọc tiêu đề, tra bảng, áp chính sách. Nói rõ 5 µs và 20 µs là giả định của bài; số thật phụ thuộc thiết bị và tính năng bật. Hoàn tất bảng ví dụ 2: tổng khoảng 1,81 ms.", "sv": "Cộng bốn thành phần cho ba chặng, đối chiếu với tổng trên bảng 04."},
+    {"t": "Mức sử dụng của một liên kết", "tu": 20, "den": 23, "gv": "Viết (1.7). Giải thích luồng f đi qua liên kết e; trên WAN của bài, gói của ta chia cổng với lưu lượng nền. Kéo tải nền về 0,3 để có điểm xuất phát.", "sv": "Chép (1.7), nêu một ví dụ ba luồng cùng đi qua một liên kết."},
+    {"t": "Khi tải tiến gần 1", "tu": 23, "den": 28, "gv": "Kéo tải nền lên 0,9, chỉ cột hàng đợi ở router biên. Giải ví dụ 4 bằng M/M/1: μ = C/L, λ = ρμ, W<sub>q</sub> = ρ/(μ − λ). Hỏi câu trắc nghiệm.", "sv": "Tính W<sub>q</sub> ở ρ = 0,5 và 0,9, rút ra tỉ số 9 lần."},
+    {"t": "Số trên màn hình không gõ sẵn", "tu": 28, "den": 31, "gv": "Chỉ bảng 05: chấm đỏ là mô phỏng hàng chục nghìn gói, đường liền là M/M/1. Giải thích ý nghĩa kiểm chứng mô hình (sẽ học kỹ ở tiết 17).", "sv": "Nêu một lý do cần đối chiếu mô phỏng với lý thuyết trước khi tin kết quả."},
+    {"t": "Thành phần nào giảm khi tăng tốc độ cổng?", "tu": 31, "den": 35, "gv": "Giao bài 1 trên phiếu (câu 3 cuối chương), cho 3 phút. Gọi một sinh viên trình bày; chốt: tăng C giảm d<sub>tx</sub> và gián tiếp d<sub>queue</sub>; d<sub>prop</sub> theo khoảng cách, d<sub>proc</sub> theo thiết bị. Hỏi câu trắc nghiệm.", "sv": "Làm bài 1 trên phiếu, trình bày khi được gọi."},
+    {"t": "Đủ băng thông chưa chắc đã đủ", "tu": 35, "den": 38, "gv": "Bấm BT 1.4, giải câu 4 cuối chương: ρ = 0,8, dư địa bằng 0 với η = 0,8. Kéo dữ liệu nền lên 520 Mbit/s để thấy vượt ngưỡng. Nhấn mạnh (1.9): quy hoạch theo η·C, không theo C.", "sv": "Làm bài 4 trên phiếu, giải thích vì sao dư địa bằng 0 vẫn là vấn đề."},
+    {"t": "Không phải chậm nào cũng do mạng", "tu": 38, "den": 41, "gv": "Viết (1.12). Đặt máy chủ xử lý 150 ms, nâng WAN lên 1 Gbit/s: thời gian đáp ứng gần như không đổi. Giải ví dụ 5. Quay lại câu đoán đầu giờ.", "sv": "So câu đoán đầu giờ với kết quả; chỉ ra khi nào nâng băng thông là vô ích."},
+    {"t": "Một chiều hay khứ hồi, đo ở đâu", "tu": 41, "den": 43, "gv": "Phân biệt độ trễ một chiều (cần đồng bộ đồng hồ) với thời gian khứ hồi của ping. Liệt kê điều kiện đo phải ghi: điểm đo, kích thước gói, mức tải, thời gian đo, số lần lặp.", "sv": "Ghi danh sách điều kiện đo vào vở."},
+    {"t": "Thiết kế can thiệp vào đâu", "tu": 43, "den": 45, "gv": "Tóm tắt bốn đòn bẩy thiết kế theo bốn thành phần. Chiếu 6 câu kiểm tra nhanh, lớp trả lời đồng thanh hoặc giơ tay; giao bài 2, 3, 5, 6 về nhà. Giới thiệu tiết 3: hàng đợi đầy thì mất gói.", "sv": "Trả lời kiểm tra nhanh; ghi bài tập về nhà."}
+  ],
+  "vi_du": [
+    {"ten": "Trễ truyền theo (1.11)", "de": "Tính trễ truyền của gói 1 500 byte trên liên kết 100 Mbit/s và 10 Gbit/s; của gói 64 byte trên 100 Mbit/s.", "giai": "L = 1 500 × 8 = 12 000 bit. d<sub>tx</sub> = L/C = 12 000 / 10<sup>8</sup> = 1,2·10<sup>−4</sup> s = <b>0,12 ms</b>. Trên 10 Gbit/s: 12 000 / 10<sup>10</sup> = <b>1,2 µs</b>. Gói 64 byte = 512 bit trên 100 Mbit/s: <b>5,12 µs</b>. Trễ truyền tỉ lệ thuận với kích thước gói và tỉ lệ nghịch với tốc độ cổng."},
+    {"ten": "Độ trễ một chiều của ba chặng theo (1.10)", "de": "Gói 1 500 byte đi ba chặng: (1) cáp đồng 60 m, 1 Gbit/s, ρ = 0,1; (2) cáp quang 2 km, 10 Gbit/s, ρ = 0,3; (3) WAN 300 km, 100 Mbit/s, ρ = 0,6. Lưu lượng nền gói trung bình 1 000 byte (mô hình M/M/1). Xử lý: 5 µs ở tủ truy nhập, 20 µs ở mỗi router (giả định). Tính độ trễ một chiều.", "giai": "Chặng 1: d<sub>tx</sub> = 12 µs, d<sub>prop</sub> = 60/2·10<sup>8</sup> = 0,3 µs, d<sub>queue</sub> ≈ 0,9 µs, d<sub>proc</sub> = 5 µs.<br>Chặng 2: d<sub>tx</sub> = 1,2 µs, d<sub>prop</sub> = 10 µs, d<sub>queue</sub> ≈ 0,34 µs, d<sub>proc</sub> = 20 µs.<br>Chặng 3: d<sub>tx</sub> = 120 µs, d<sub>prop</sub> = 1 500 µs, μ = 10<sup>8</sup>/8 000 = 12 500 gói/s, λ = 0,6μ = 7 500 gói/s, d<sub>queue</sub> = ρ/(μ − λ) = 0,6/5 000 = 120 µs, d<sub>proc</sub> = 20 µs.<br>Tổng ≈ <b>1,81 ms</b>, trong đó lan truyền trên WAN chiếm khoảng 83 %."},
+    {"ten": "Mức sử dụng và dư địa (câu 4 cuối chương)", "de": "Liên kết 1 Gbit/s mang thoại 80 Mbit/s, video 300 Mbit/s, dữ liệu nền 420 Mbit/s. Tính mức sử dụng và dư địa với η = 0,8.", "giai": "Σb = 80 + 300 + 420 = 800 Mbit/s. ρ = 800/1 000 = <b>0,8</b> theo (1.7). Dư địa tới ngưỡng khai thác: η·C − Σb = 800 − 800 = <b>0 Mbit/s</b>. Liên kết vẫn chở được tải trung bình nhưng đã chạm ngưỡng (1.9): không còn chỗ cho dao động tải, overhead, tái định tuyến hay bùng nổ, nên phải nâng cấp hoặc dời bớt luồng."},
+    {"ten": "Trễ chờ khi tải tiến gần 1", "de": "Liên kết 100 Mbit/s, gói trung bình 1 000 byte, đến theo Poisson, cỡ gói phân bố mũ. Tính trễ chờ trung bình ở ρ = 0,5 và ρ = 0,9.", "giai": "μ = C/L = 10<sup>8</sup>/8 000 = 12 500 gói/s. ρ = 0,5: λ = 6 250 gói/s, W<sub>q</sub> = ρ/(μ − λ) = 0,5/6 250 = <b>80 µs</b>. ρ = 0,9: λ = 11 250 gói/s, W<sub>q</sub> = 0,9/1 250 = <b>720 µs</b>. Tải tăng chưa tới hai lần, trễ chờ tăng 9 lần vì W<sub>q</sub> ∝ ρ/(1 − ρ)."},
+    {"ten": "Thời gian đáp ứng theo (1.12)", "de": "Dùng kết quả ví dụ 2 cho cả chiều đi và chiều về. Máy chủ xử lý 30 ms; sau đó máy chủ chậm lại còn 150 ms. Nâng WAN lên 1 Gbit/s có giúp người dùng không?", "giai": "D<sub>net</sub> = 2 × 1,81 ≈ 3,62 ms. T = 3,62 + 30 ≈ <b>33,6 ms</b>; khi máy chủ 150 ms: T ≈ <b>153,6 ms</b>. Nâng WAN lên 1 Gbit/s chỉ giảm trễ truyền 108 µs và trễ chờ khoảng 120 µs mỗi chiều: tổng bớt chưa tới 0,5 ms, khoảng 0,3 % của 153,6 ms. Nút thắt là máy chủ, không phải mạng."}
+  ],
+  "bai_tap": [
+    {"so": "1", "de": "Một luồng đi qua ba liên kết. Viết biểu thức độ trễ đầu cuối theo (1.10). Thành phần nào giảm khi tăng tốc độ cổng, thành phần nào phụ thuộc khoảng cách vật lý?", "nguon": "câu 3 cuối chương 1", "dong": 4},
+    {"so": "2", "de": "Tính trễ truyền của gói 64 byte và gói 1 500 byte trên liên kết 10 Mbit/s và 1 Gbit/s (bốn kết quả).", "dong": 3},
+    {"so": "3", "de": "Tính trễ lan truyền trên 2 km sợi quang và trên tuyến cáp dài 1 600 km (v = 2·10⁸ m/s). Tăng tốc độ cổng có rút ngắn được hai con số này không?", "dong": 3},
+    {"so": "4", "de": "Liên kết 1 Gbit/s mang thoại 80 Mbit/s, video 300 Mbit/s, dữ liệu nền 420 Mbit/s. Tính mức sử dụng và nhận xét dư địa nếu η = 0,8.", "nguon": "câu 4 cuối chương 1", "dong": 3},
+    {"so": "5", "de": "Liên kết 100 Mbit/s, gói trung bình 1 000 byte (M/M/1). Tính trễ chờ trung bình khi tải 60 Mbit/s và 90 Mbit/s. Trễ chờ tăng bao nhiêu lần?", "dong": 3},
+    {"so": "6", "de": "Một ứng dụng có trễ mạng 2 ms mỗi chiều, máy chủ xử lý 150 ms, cơ sở dữ liệu 20 ms, máy khách 10 ms. Tính thời gian đáp ứng theo (1.12). Nâng băng thông mạng giúp được tối đa bao nhiêu phần trăm?", "dong": 3}
+  ],
+  "dap_an": [
+    {"so": "1", "giai": "D = Σ<sub>e=1..3</sub>(d<sub>prop,e</sub> + d<sub>tx,e</sub> + d<sub>queue,e</sub> + d<sub>proc,e</sub>). Tăng tốc độ cổng giảm d<sub>tx</sub> = L/C, và giảm d<sub>queue</sub> gián tiếp vì ρ = Σb/C nhỏ lại. d<sub>prop</sub> = d/v chỉ phụ thuộc chiều dài và môi trường. d<sub>proc</sub> phụ thuộc thiết bị và chính sách. Cho đủ điểm khi nêu đúng cả bốn và lý do của d<sub>queue</sub>."},
+    {"so": "2", "giai": "64 byte = 512 bit: 51,2 µs trên 10 Mbit/s; 0,512 µs trên 1 Gbit/s. 1 500 byte = 12 000 bit: 1,2 ms trên 10 Mbit/s; 12 µs trên 1 Gbit/s."},
+    {"so": "3", "giai": "2 km: 2 000/2·10⁸ = 10 µs. 1 600 km: 1,6·10⁶/2·10⁸ = 8 ms. Không: trễ lan truyền không phụ thuộc tốc độ cổng; chỉ rút ngắn được bằng đường đi ngắn hơn hoặc đặt dịch vụ gần người dùng."},
+    {"so": "4", "giai": "ρ = 800/1 000 = 0,8. Dư địa η·C − Σb = 0. Đạt tải trung bình nhưng chạm ngưỡng khai thác (1.9): không còn chỗ cho dao động, overhead, tái định tuyến, bùng nổ."},
+    {"so": "5", "giai": "μ = 12 500 gói/s. 60 Mbit/s: ρ = 0,6, λ = 7 500, W<sub>q</sub> = 0,6/5 000 = 120 µs. 90 Mbit/s: ρ = 0,9, λ = 11 250, W<sub>q</sub> = 0,9/1 250 = 720 µs. Tăng 6 lần."},
+    {"so": "6", "giai": "T = 4 + 150 + 20 + 10 = 184 ms. Mạng chỉ chiếm 4/184 ≈ 2,2 %: dù băng thông vô hạn, thời gian đáp ứng giảm không quá 2,2 % (thực tế còn ít hơn, vì trễ lan truyền không đổi)."}
+  ],
+  "kiem_tra": [
+    {"q": "Thành phần nào của độ trễ chỉ phụ thuộc khoảng cách và môi trường truyền?", "o": ["Trễ truyền", "Trễ lan truyền", "Trễ chờ", "Trễ xử lý"], "a": 1, "giai": "d<sub>prop</sub> = d/v."},
+    {"q": "Trễ truyền của gói 1 500 byte trên liên kết 1 Gbit/s là bao nhiêu?", "o": ["1,2 µs", "12 µs", "120 µs", "1,2 ms"], "a": 1, "giai": "12 000 bit / 10<sup>9</sup> bit/s = 12 µs."},
+    {"q": "Theo M/M/1, mức sử dụng tăng từ 0,5 lên 0,9 thì trễ chờ trung bình tăng khoảng bao nhiêu lần?", "o": ["1,8 lần", "4,5 lần", "9 lần", "Không đổi"], "a": 2, "giai": "ρ/(1 − ρ) đi từ 1 lên 9."},
+    {"q": "Liên kết 10 Gbit/s đang mang 7,5 Gbit/s, hệ số khai thác mục tiêu η = 0,8. Dư địa còn lại là bao nhiêu?", "o": ["2,5 Gbit/s", "0,5 Gbit/s", "0 Gbit/s", "Đã vượt ngưỡng"], "a": 1, "giai": "η·C − Σb = 8 − 7,5 = 0,5 Gbit/s."},
+    {"q": "Lệnh ping cho biết đại lượng nào?", "o": ["Độ trễ một chiều", "Thời gian khứ hồi", "Trễ truyền", "Mức sử dụng"], "a": 1, "giai": "Độ trễ một chiều (RFC 7679) cần đồng hồ hai đầu đồng bộ; ping đo thời gian khứ hồi."},
+    {"q": "Máy chủ chiếm 90 % thời gian đáp ứng. Nâng gấp đôi băng thông mạng thì thời gian đáp ứng giảm nhiều nhất bao nhiêu?", "o": ["Một nửa", "Dưới 10 %", "Khoảng 45 %", "Không thể tính"], "a": 1, "giai": "Phần mạng chỉ là 10 %; dù mạng nhanh vô hạn, thời gian đáp ứng giảm không quá 10 % (1.12)."}
+  ],
+  "tom_tat": [
+    "D<sub>e2e</sub> = Σ(d<sub>prop</sub> + d<sub>tx</sub> + d<sub>queue</sub> + d<sub>proc</sub>) trên mọi liên kết của đường đi (1.10).",
+    "d<sub>tx</sub> = L/C (1.11) giảm khi tăng tốc độ cổng; d<sub>prop</sub> = d/v chỉ giảm khi rút ngắn đường đi.",
+    "ρ<sub>e</sub> = Σb<sub>f</sub>/C<sub>e</sub> (1.7); trễ chờ tăng rất nhanh khi ρ → 1, nên quy hoạch theo Σb ≤ ηC (1.9).",
+    "Thời gian đáp ứng (1.12) gồm cả máy chủ, cơ sở dữ liệu, máy khách: tìm thành phần lớn nhất trước khi nâng băng thông.",
+    "Một kết quả độ trễ phải kèm điều kiện đo: điểm đo, kích thước gói, tải, thời gian, số lần lặp."
+  ],
+  "nguon": [
+    "Hoàng Trọng Minh, Giáo trình Thiết kế và hiệu năng mạng (học phần TEL1459), Học viện Công nghệ Bưu chính Viễn thông, 2026: mục 1.5.2, 1.6.1, trang 13–14; phương trình (1.7), (1.9)–(1.12); câu 3, câu 4 cuối chương 1.",
+    "RFC 7679, A One-Way Delay Metric for IP Performance Metrics (IPPM), 2016.",
+    "Kurose J. F., Ross K. W., Computer Networking: A Top-Down Approach, 8th ed., Pearson, 2021, mục 1.4: tốc độ lan truyền khoảng 2·10⁸ m/s trong cáp đồng và sợi quang.",
+    "Jain R., The Art of Computer Systems Performance Analysis, Wiley, 1991, chương 31: lời giải hàng đợi M/M/1.",
+    "Thời gian xử lý 5 µs, 20 µs, tải các chặng 1 và 2, cỡ gói nền 1 000 byte là giả định của bài, ghi cạnh số trên màn hình."
+  ]
+}

@@ -123,6 +123,13 @@ def build():
         if key in out:
             out[key]['pack'] = f"giao-vien/{g['id']}/"
             out[key]['plan'] = [{'t': x['t'], 'm': [x['tu'], x['den']], 'gv': x['gv'], 'hs': x['hs']} for x in g['buoc']]
+    # giáo án đại học học phần mạng (tools/giao-an-mang/*.json, tools/build_giao_an_mang.py): cùng cách nối, sinh viên thay học sinh
+    for f in sorted((ROOT / 'tools/giao-an-mang').glob('*.json')):
+        g = json.loads(f.read_text(encoding='utf-8'))
+        key = path_of(g['id'])
+        if key in out:
+            out[key]['pack'] = f"{g['bai']}giao-an/"
+            out[key]['plan'] = [{'t': x['t'], 'm': [x['tu'], x['den']], 'gv': x['gv'], 'hs': x['sv']} for x in g['buoc']]
     return out
 
 
