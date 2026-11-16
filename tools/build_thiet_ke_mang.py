@@ -25,11 +25,11 @@ CHUONG = [
         ('1.4', 'Vòng vận hành có kiểm chứng', 'SNMP 5 phút hay telemetry 1 giây: bắt được bao nhiêu đợt bùng nổ; sai lệch Δk, độ phủ quan sát Γ', 'van-hanh/', 'tk-van-hanh')]),
     ('2', 'Phân tích yêu cầu thiết kế mạng', [
         ('2.1', 'Từ "mạng phải nhanh" đến vector yêu cầu', 'Sáu nhóm ứng dụng, thẻ ngưỡng, đạt hay không', None, None),
-        ('2.2', 'Đếm tải thật', 'Hệ số đồng thời, ma trận lưu lượng, dung lượng liên kết', None, None),
+        ('2.2', 'Đếm tải thật', '2 000 người đăng ký, bao nhiêu dùng cùng lúc: hệ số đồng thời, p95, ma trận lưu lượng, dung lượng liên kết', 'dem-tai/', 'tk-tai'),
         ('2.3', 'Rủi ro và truy vết', 'Ma trận truy vết yêu cầu × quyết định × kiểm thử', None, None)]),
     ('3', 'Thiết kế mạng logic', [
         ('3.1', 'Ba lớp và vùng logic', 'Lớp logic nổi trên lớp vật lý, ma trận chính sách', None, None),
-        ('3.2', 'Chia địa chỉ VLSM', 'Không gian địa chỉ cắt đôi dần, gộp tuyến', None, None),
+        ('3.2', 'Chia địa chỉ VLSM', 'Ba tòa, 18 phòng ban, một khối /20: tiền tố theo tăng trưởng, căn biên, gộp 18 tuyến thành 3', 'vlsm/', 'tk-vlsm'),
         ('3.3', 'Định tuyến, ECMP và hội tụ', 'Đổi metric, luồng đổi đường; cắt liên kết, đồng hồ hội tụ', None, None),
         ('3.4', 'Underlay và overlay', 'Leaf-spine, đường hầm VXLAN mang các tenant', None, None)]),
     ('4', 'Thiết kế mạng vật lý', [
@@ -38,7 +38,7 @@ CHUONG = [
         ('4.3', 'Wi-Fi: tốc độ PHY và thông lượng thật', 'Thời gian phát chia dữ liệu, điều khiển, tranh chấp', None, None)]),
     ('5', 'Kiểm thử và đánh giá hiệu năng mạng', [
         ('5.1', 'Phòng đo', 'Chạy n lần, khoảng tin cậy 95 %, kết luận theo chuỗi nguyên nhân', None, None),
-        ('5.2', 'Ba hàng đợi QoS', 'Ưu tiên tuyệt đối làm đói hàng nền, ToS sang DSCP/ECN', None, None)]),
+        ('5.2', 'Ba hàng đợi QoS', 'Một hàng chung, ưu tiên tuyệt đối, ưu tiên có trần; lớp nền bị bỏ đói; ToS sang DSCP và ECN', 'qos/', 'tk-qos')]),
     ('6', 'Các mô hình thiết kế và vận hành mạng 5G', [
         ('6.1', 'Gói tin 5G đầu-cuối và vị trí UPF', 'UPF ở biên, vùng hay trung tâm; ngân sách 20 ms; máy chủ biên quá tải', '5g-dau-cuoi/', 'tk-5g'),
         ('6.2', 'NSA và SA', 'Nút thắt ở LTE neo, truyền dẫn hay EPC; lõi SBA', None, None),

@@ -39,12 +39,15 @@ BESPOKE = {
     'tk-hang-doi': ('thiet-ke-mang/hang-doi/index.html', 'Khi hàng đợi đầy', 'covers/tk-hang-doi.webp'),
     'tk-san-sang': ('thiet-ke-mang/san-sang/index.html', 'Độ sẵn sàng, RTO và RPO', 'covers/tk-san-sang.webp'),
     'tk-van-hanh': ('thiet-ke-mang/van-hanh/index.html', 'Vòng vận hành có kiểm chứng', 'covers/tk-van-hanh.webp'),
+    'tk-tai': ('thiet-ke-mang/dem-tai/index.html', 'Đếm tải thật', 'covers/tk-tai.webp'),
+    'tk-vlsm': ('thiet-ke-mang/vlsm/index.html', 'Chia địa chỉ VLSM', 'covers/tk-vlsm.webp'),
     'tk-toa-nha': ('thiet-ke-mang/toa-nha/index.html', 'Tòa nhà 8 tầng: tủ mạng, cáp và PoE', 'covers/tk-toa-nha.webp'),
+    'tk-qos': ('thiet-ke-mang/qos/index.html', 'Ba hàng đợi QoS', 'covers/tk-qos.webp'),
     'tk-5g': ('thiet-ke-mang/5g-dau-cuoi/index.html', 'Gói tin 5G đầu-cuối và vị trí UPF', 'covers/tk-5g.webp'),
 }
 # mạch Sinh học tế bào 10, theo tools/build_pages.py (ROUTE)
 CHAIN_CELL = ['te-bao', 'transport-step', 'plasmolysis-step', 'ty-the', 'enzyme-step', 'mitosis-step']
-CHAIN_MANG = ['tk-goi-tin', 'tk-hang-doi', 'tk-san-sang', 'tk-van-hanh', 'tk-toa-nha', 'tk-5g']
+CHAIN_MANG = ['tk-goi-tin', 'tk-hang-doi', 'tk-san-sang', 'tk-van-hanh', 'tk-tai', 'tk-vlsm', 'tk-toa-nha', 'tk-qos', 'tk-5g']
 CHAIN_ROBO = ['ur5e', 'hexapod', 'quadruped', 'jellyfish', 'crazyflie', 'turtlebot3']
 
 

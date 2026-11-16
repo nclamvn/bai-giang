@@ -1,0 +1,1 @@
+{"title": "Chia địa chỉ VLSM", "description": "Thiết kế và hiệu năng mạng, bài 3.2: ba tòa nhà, 18 phòng ban, khối 10.10.0.0/20. Tiền tố theo nhu cầu và dự phòng tăng trưởng (3.7), hệ số sử dụng (3.8), VLSM so với mọi subnet cùng cỡ, căn biên, gộp tuyến CIDR; câu 3 chương 3 (/25, 126 host); IPv6 (3.6).", "out": "thiet-ke-mang/vlsm/index.html"}
