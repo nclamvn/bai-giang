@@ -41,13 +41,18 @@ BESPOKE = {
     'tk-van-hanh': ('thiet-ke-mang/van-hanh/index.html', 'Vòng vận hành có kiểm chứng', 'covers/tk-van-hanh.webp'),
     'tk-tai': ('thiet-ke-mang/dem-tai/index.html', 'Đếm tải thật', 'covers/tk-tai.webp'),
     'tk-vlsm': ('thiet-ke-mang/vlsm/index.html', 'Chia địa chỉ VLSM', 'covers/tk-vlsm.webp'),
+    'tk-dinh-tuyen': ('thiet-ke-mang/dinh-tuyen/index.html', 'Định tuyến, ECMP và hội tụ', 'covers/tk-dinh-tuyen.webp'),
+    'tk-overlay': ('thiet-ke-mang/overlay/index.html', 'Underlay và overlay', 'covers/tk-overlay.webp'),
     'tk-toa-nha': ('thiet-ke-mang/toa-nha/index.html', 'Tòa nhà 8 tầng: tủ mạng, cáp và PoE', 'covers/tk-toa-nha.webp'),
+    'tk-quang': ('thiet-ke-mang/quang/index.html', 'Ngân sách công suất quang', 'covers/tk-quang.webp'),
+    'tk-wifi': ('thiet-ke-mang/wifi/index.html', 'Wi-Fi: tốc độ PHY và thông lượng thật', 'covers/tk-wifi.webp'),
+    'tk-phong-do': ('thiet-ke-mang/phong-do/index.html', 'Phòng đo', 'covers/tk-phong-do.webp'),
     'tk-qos': ('thiet-ke-mang/qos/index.html', 'Ba hàng đợi QoS', 'covers/tk-qos.webp'),
     'tk-5g': ('thiet-ke-mang/5g-dau-cuoi/index.html', 'Gói tin 5G đầu-cuối và vị trí UPF', 'covers/tk-5g.webp'),
 }
 # mạch Sinh học tế bào 10, theo tools/build_pages.py (ROUTE)
 CHAIN_CELL = ['te-bao', 'transport-step', 'plasmolysis-step', 'ty-the', 'enzyme-step', 'mitosis-step']
-CHAIN_MANG = ['tk-goi-tin', 'tk-hang-doi', 'tk-san-sang', 'tk-van-hanh', 'tk-tai', 'tk-vlsm', 'tk-toa-nha', 'tk-qos', 'tk-5g']
+CHAIN_MANG = ['tk-goi-tin', 'tk-hang-doi', 'tk-san-sang', 'tk-van-hanh', 'tk-tai', 'tk-vlsm', 'tk-dinh-tuyen', 'tk-overlay', 'tk-toa-nha', 'tk-quang', 'tk-wifi', 'tk-phong-do', 'tk-qos', 'tk-5g']
 CHAIN_ROBO = ['ur5e', 'hexapod', 'quadruped', 'jellyfish', 'crazyflie', 'turtlebot3']
 
 

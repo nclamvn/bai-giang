@@ -30,14 +30,14 @@ CHUONG = [
     ('3', 'Thiết kế mạng logic', [
         ('3.1', 'Ba lớp và vùng logic', 'Lớp logic nổi trên lớp vật lý, ma trận chính sách', None, None),
         ('3.2', 'Chia địa chỉ VLSM', 'Ba tòa, 18 phòng ban, một khối /20: tiền tố theo tăng trưởng, căn biên, gộp 18 tuyến thành 3', 'vlsm/', 'tk-vlsm'),
-        ('3.3', 'Định tuyến, ECMP và hội tụ', 'Đổi metric, luồng đổi đường; cắt liên kết, đồng hồ hội tụ', None, None),
-        ('3.4', 'Underlay và overlay', 'Leaf-spine, đường hầm VXLAN mang các tenant', None, None)]),
+        ('3.3', 'Định tuyến, ECMP và hội tụ', 'Dijkstra trong trang: đổi metric, luồng dời chỗ; ECMP chia đều hay băm; cắt liên kết, hội tụ bốn pha', 'dinh-tuyen/', 'tk-dinh-tuyen'),
+        ('3.4', 'Underlay và overlay', 'Leaf-spine dưới, ba tenant VXLAN trên; gói đi hai tầng, lỗi MTU, một spine hỏng thì mọi tenant cùng chịu', 'overlay/', 'tk-overlay')]),
     ('4', 'Thiết kế mạng vật lý', [
         ('4.1', 'Tòa nhà 8 tầng: tủ mạng, cáp và PoE', 'IDF mỗi tầng hay kéo về MDF, giới hạn 90 m, cổng, Ω, PoE, UPS', 'toa-nha/', 'tk-toa-nha'),
-        ('4.2', 'Ngân sách công suất quang', 'Ánh sáng mờ dần qua đầu nối, mối hàn', None, None),
-        ('4.3', 'Wi-Fi: tốc độ PHY và thông lượng thật', 'Thời gian phát chia dữ liệu, điều khiển, tranh chấp', None, None)]),
+        ('4.2', 'Ngân sách công suất quang', 'Bậc thang công suất dọc tuyến: sợi, đầu nối, mối hàn, biên dự phòng; đầu nối bẩn; tuyến dài nhất còn đạt', 'quang/', 'tk-quang'),
+        ('4.3', 'Wi-Fi: tốc độ PHY và thông lượng thật', 'Mô phỏng 802.11 DCF: một máy chỉ được 5 % PHY, gộp khung, va chạm khi cả lớp cùng tải', 'wifi/', 'tk-wifi')]),
     ('5', 'Kiểm thử và đánh giá hiệu năng mạng', [
-        ('5.1', 'Phòng đo', 'Chạy n lần, khoảng tin cậy 95 %, kết luận theo chuỗi nguyên nhân', None, None),
+        ('5.1', 'Phòng đo', 'B có thật nhanh hơn A? Lặp n lần, khoảng tin cậy 95 %, khi nào được phép kết luận', 'phong-do/', 'tk-phong-do'),
         ('5.2', 'Ba hàng đợi QoS', 'Một hàng chung, ưu tiên tuyệt đối, ưu tiên có trần; lớp nền bị bỏ đói; ToS sang DSCP và ECN', 'qos/', 'tk-qos')]),
     ('6', 'Các mô hình thiết kế và vận hành mạng 5G', [
         ('6.1', 'Gói tin 5G đầu-cuối và vị trí UPF', 'UPF ở biên, vùng hay trung tâm; ngân sách 20 ms; máy chủ biên quá tải', '5g-dau-cuoi/', 'tk-5g'),

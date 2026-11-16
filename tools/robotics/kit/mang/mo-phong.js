@@ -132,3 +132,24 @@ export function chayKhaDung({tp, chung = [], duong = [], nam = 200, seed = 21, t
   const k = 60 / nam; // giờ trong cả đợt → phút mỗi năm
   return {A: 1 - ngung / H, phutNam: ngung * k, suCoNam: suCo / nam, chuyenNam: chuyen / nam, theo: Object.fromEntries(Object.entries(theo).map(([a, b]) => [a, b * k]))};
 }
+
+// IEEE 802.11 DCF bão hoà (mọi trạm luôn có khung chờ gửi): mỗi trạm đếm lùi ngẫu nhiên trong [0, CW]; một trạm về 0 thì gửi
+// thành công, từ hai trạm trở lên thì va chạm và các trạm va chạm nhân đôi CW (tới CWmax). Thời gian tính bằng giây; OFDM 5 GHz:
+// slot 9 µs, SIFS 16 µs, DIFS = SIFS + 2 slot (IEEE 802.11). Trả về thông lượng dữ liệu và tỉ lệ thời gian dữ liệu, điều khiển,
+// tranh chấp theo cách tách của giáo trình (4.6). nGop = số khung gộp trong một lần gửi (A-MPDU).
+export function chayDCF({N, Cphy, Lbyte = 1500, nGop = 1, tPre = 40e-6, cAck = 24e6, cwMin = 15, cwMax = 1023, nTx = 6000, seed = 4, ghi = 0}) {
+  const r = rng(seed), SLOT = 9e-6, SIFS = 16e-6, DIFS = SIFS + 2 * SLOT;
+  const tData = tPre + (nGop * (Lbyte + 34) * 8) / Cphy;   // 34 byte tiêu đề MAC + FCS mỗi khung (giả định gần đúng)
+  const tAck = 20e-6 + ((nGop > 1 ? 32 : 14) * 8) / cAck;  // ACK hoặc Block ACK ở tốc độ cơ sở
+  const cw = new Array(N).fill(cwMin), bo = Array.from({length: N}, () => Math.floor(r() * (cwMin + 1)));
+  let t = 0, tD = 0, tC = 0, tT = 0, ok = 0, vc = 0, gui = 0; const nk = [];
+  while (gui < nTx) {
+    const m = Math.min(...bo); t += m * SLOT; tT += m * SLOT; for (let i = 0; i < N; i++) bo[i] -= m;
+    const ai = []; for (let i = 0; i < N; i++) if (bo[i] === 0) ai.push(i);
+    gui++;
+    if (ai.length === 1) { ok++; const i = ai[0]; t += tData + SIFS + tAck + DIFS; tD += tData - tPre; tC += tPre + SIFS + tAck + DIFS; cw[i] = cwMin; bo[i] = Math.floor(r() * (cw[i] + 1)); if (nk.length < ghi) nk.push({tram: [i], ok: true}); }
+    else { vc++; t += tData + SIFS + tAck + DIFS; tT += tData + SIFS + tAck + DIFS; for (const i of ai) { cw[i] = Math.min(cwMax, 2 * cw[i] + 1); bo[i] = Math.floor(r() * (cw[i] + 1)); } if (nk.length < ghi) nk.push({tram: ai, ok: false}); }
+    // các trạm còn lại giữ số đếm (đóng băng khi kênh bận) và đếm tiếp sau DIFS
+  }
+  return {thongLuong: (ok * nGop * Lbyte * 8) / t, pVaCham: vc / gui, fData: tD / t, fCtrl: tC / t, fCont: tT / t, tData, tAck, nhatKy: nk};
+}

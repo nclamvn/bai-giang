@@ -2,7 +2,7 @@
 //  1) mô phỏng sự kiện rời rạc khớp lý thuyết hàng đợi (M/M/1, M/D/1, M/M/1/K);
 //  2) các bài tập có đáp số của giáo trình ra đúng số. Chạy: node tests/mang_check.mjs
 import * as F from '../tools/robotics/kit/mang/cong-thuc.js';
-import {chayHangDoi, lap, chayNhieuLop, chayMMc, chayKhaDung} from '../tools/robotics/kit/mang/mo-phong.js';
+import {chayHangDoi, lap, chayNhieuLop, chayMMc, chayKhaDung, chayDCF} from '../tools/robotics/kit/mang/mo-phong.js';
 
 let loi = 0, dem = 0;
 const kiem = (ten, ok, chiTiet = '') => { dem++; if (!ok) loi++; console.log(`${ok ? 'ĐẠT' : 'LỖI'}  ${ten}${chiTiet ? '  · ' + chiTiet : ''}`); };
@@ -55,6 +55,16 @@ kiem('Song song 4.14: hai phần tử 0,99 → 0,9999', gan(F.sanSangSongSong([0
   const s2 = chayKhaDung({tp: {...tp, ong2: tp.ong}, chung: ['rt'], duong: [['a', 'ong'], ['b', 'ong2']], nam: 10000, seed: 4}), Ap = Aa * Aong, l2 = Art * F.sanSangSongSong([Ap, Ap]);
   kiem('Monte Carlo: hai đường tách ống (4.14)', gan(1 - s2.A, 1 - l2, 0.1), `ngừng mô phỏng ${f(s2.phutNam)} phút/năm, lý thuyết ${f((1 - l2) * 525960)}`); }
 kiem('BT 2.8: MTBF 2 000 h, MTTR 2 h → A ≈ 0,999', Math.abs(F.sanSang(2000, 2) - 0.999) < 0.0005, f(F.sanSang(2000, 2), 5));
+
+kiem('4.4: −1 dBm, 8 km × 0,5 dB/km, 4 đầu nối × 0,75, 4 mối hàn × 0,3, M = 3 dB → −12,2 dBm', Math.abs(F.congSuatThu({Ptx: -1, alpha: 0.5, L: 8, nc: 4, Lc: 0.75, ns: 4, Ls: 0.3, M: 3}) + 12.2) < 1e-9);
+kiem('Câu 3 chương 4: 48 × 1 Gb/s trên 4 × 10 Gb/s → Ω = 1,2', Math.abs(F.oversub([48e9], [40e9]) - 1.2) < 1e-9);
+
+// DCF một trạm: không va chạm, thông lượng = dữ liệu / (DIFS + CWmin/2 slot + T_data + SIFS + T_ack), so công thức kín
+{ const C = 600e6, r1 = chayDCF({N: 1, Cphy: C, nTx: 40000, seed: 2}), SIFS = 16e-6, DIFS = 34e-6, slot = 9e-6;
+  const lt = (1500 * 8) / (DIFS + 7.5 * slot + r1.tData + SIFS + r1.tAck);
+  kiem('802.11 DCF một trạm khớp công thức kín, không va chạm', gan(r1.thongLuong, lt, 0.01) && r1.pVaCham === 0, `${f(r1.thongLuong / 1e6)} so với ${f(lt / 1e6)} Mbit/s`);
+  const r20 = chayDCF({N: 20, Cphy: C, nTx: 40000, seed: 2});
+  kiem('802.11 DCF 20 trạm: có va chạm, thông lượng thấp hơn một trạm', r20.pVaCham > 0.1 && r20.thongLuong < r1.thongLuong, `va chạm ${f(r20.pVaCham * 100, 3)} %`); }
 
 console.log(`\n${dem - loi}/${dem} đạt`);
 process.exit(loi ? 1 : 0);
