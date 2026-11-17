@@ -568,7 +568,7 @@ def main():
                    f'Trang: {SITE}\n\nTệp trong repo này được dựng tự động; mã nguồn bên thứ ba và giấy phép: NOTICE.md.\n')
     w('NOTICE.md', '# Giấy phép bên thứ ba\n\n- three.js, MIT License, © 2010–2026 three.js authors.\n'
                    '- Bộ dựng cảnh 3D dựa trên mã mở theo MIT License (teardown, claude-motion); bản quyền thuộc các tác giả gốc.\n'
-                   '- Phông Be Vietnam Pro, JetBrains Mono, Noto Serif: SIL Open Font License 1.1 (tệp OFL-*.txt trong design/fonts).\n')
+                   '- Phông Be Vietnam Pro, JetBrains Mono: SIL Open Font License 1.1 (tệp OFL-*.txt trong design/fonts).\n')
     # quét dấu vết: không còn nhãn, đường dẫn của site chính
     loi = []
     for p in OUT.rglob('*'):

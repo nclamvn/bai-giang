@@ -1,15 +1,15 @@
-# Hệ thiết kế và vỏ bài học chung (bản 15 · ngôn ngữ "Trang giấy")
+# Hệ thiết kế và vỏ bài học chung (bản 17 · ngôn ngữ "trang tài liệu sống")
 
-## Ngôn ngữ thiết kế chuẩn: Trang giấy (từ 10/11/2026)
+## Ngôn ngữ thiết kế chuẩn: trang tài liệu sống (từ 18/11/2026)
 
-Đây là ngôn ngữ giao diện chuẩn của toàn bộ sản phẩm. Trang mới, bài mới và mọi lần sửa giao diện đều theo sáu nguyên tắc dưới đây; không mở biến thể khác.
+Đây là ngôn ngữ giao diện chuẩn của toàn bộ sản phẩm (thay "Trang giấy" bản 15). Đặc tả đầy đủ, mổ xẻ từ video tham chiếu: [`docs/thiet-ke-giao-dien-doc.md`](thiet-ke-giao-dien-doc.md). Trang mới, bài mới và mọi lần sửa giao diện đều theo sáu nguyên tắc dưới đây.
 
-1. **Nền giấy, mực ấm.** Nền `--bg-page` #F3EFE6, chữ `--bg-ink` #1D1B16, chữ phụ #4B473D và #5A5548. Không dùng trắng tinh hay xám lạnh làm nền trang.
-2. **Một màu nhấn, dùng hiếm.** `--bg-nhan` #A8481C (màu vỏ khoai nướng) chỉ xuất hiện một lần trên một màn hình, cho đúng một chữ hoặc một chi tiết. Nút chính dùng mực `--bg-brand`, không dùng màu nhấn. Màu môn chỉ cho chấm đánh dấu và số liệu.
-3. **Tiêu đề serif mảnh, câu thường.** Noto Serif 400 cho mọi tiêu đề (trang, mục, tên bài trong danh sách); Be Vietnam Pro 400–600 cho phần còn lại. Không viết hoa giãn chữ, không chữ đậm 700 cho tiêu đề.
-4. **Kẻ mảnh thay cho hộp.** Trang mục không dùng hộp trắng đổ bóng. Danh sách là các dòng có kẻ mảnh; ô bài là ảnh bo góc với chữ đặt thẳng trên nền giấy; chỗ buộc phải đóng khung thì dùng một đường viền mảnh. Bóng đổ chỉ còn cho bảng kính nổi trên cảnh 3D.
-5. **Ít chữ, nhiều khoảng trắng.** Không viết đoạn giới thiệu cho điều giao diện đã tự nói. Mục cách nhau 72–152 px. Mỗi màn chỉ một thứ được nổi bật.
-6. **Nội dung đứng trước giao diện.** Hình của bài (cảnh 3D, ảnh bìa) là thứ có màu; giao diện quanh nó trung tính và lùi lại.
+1. **Nền trắng, mực trung tính.** Nền `--bg-page` #FFFFFF, thẻ `--bg-card` #FBFBF8, kẻ `--bg-line` #ECECEA, chữ `--bg-ink` #141416, chữ phụ #4A4A4F, nhãn `--bg-mut` #76767A.
+2. **Hai màu tín hiệu, dùng hiếm.** `--bg-sig` #CC2A53 cho bước đang giảng, số thứ tự, trạng thái hoàn chỉnh; `--bg-amber` #D9A065 cho gạch dưới dải chỉ số, chấm danh sách, bản sơ bộ. Nút chính dùng mực. Màu môn chỉ cho chấm đánh dấu và số liệu.
+3. **Tiêu đề sans 500, nhãn mono chữ hoa.** Be Vietnam Pro 500 giãn âm cho tiêu đề (tên trang lớn, cao dòng ~1); JetBrains Mono chữ hoa giãn 0,14–0,16em cho nhãn, dải nhận diện, chân trang. Không dùng serif, không chữ đậm 700 cho tiêu đề.
+4. **Trang dọc theo một trục.** Dải nhận diện, đầu trang hai cột (tên và chú giải | câu hỏi và đoạn mở), cảnh hoặc ảnh tràn ngang mờ mép, dải chỉ số, thẻ, danh sách đánh số, dải chân. Lớp chung trong `design/house.css`: `bg-meta`, `bg-head`, `bg-say`, `bg-legend`, `bg-band`, `bg-tag`, `bg-stats`, `bg-card`, `bg-steps`, `bg-foot`.
+5. **Không đổ bóng, không kính mờ ở trang mục.** Thẻ là nền #FBFBF8 với một đường viền mảnh, bo 14 px; nút bo 8 px.
+6. **Nội dung đứng trước giao diện.** Cảnh 3D là thứ có màu; giao diện quanh nó trung tính và lùi lại. Bài 3D đọc theo chiều dọc: bộ kit dùng `tools/robotics/kit/doc.js`, các bài còn lại dùng khung `shell/khung.js`.
 
 Token ở `design/tokens.json` là nguồn duy nhất của các giá trị trên. Bố cục mẫu: trang chính (`tools/bai-giang.template.html`, `tools/trang-chu.css`).
 
@@ -23,7 +23,7 @@ Mọi trang của Sáng Ăn Khoai dùng một bộ token, một bộ phông, m�
 | `design/tokens.json` | Màu, cỡ chữ, góc bo, khoảng cách, bóng, thời lượng chuyển động, hai biến thể, chế độ Máy chiếu | sửa tay rồi chạy `python3 tools/design.py` |
 | `design/house.css` | Token dạng biến CSS `--bg-*` và `@font-face` cho các trang dựng bằng Python (trang chính, chủ đề, lộ trình, Robotics, Kiểm máy) | sinh tự động |
 | `design/icons.svg` | Bộ biểu tượng nét 1,75 px, lưới 24 px | sinh tự động từ `tools/design.py` |
-| `design/fonts/` | Be Vietnam Pro (giao diện), Noto Serif 400 và 600 (tiêu đề), JetBrains Mono (chỉ cho con số); tập con Latin + tiếng Việt, woff2, tổng 244 KB, giấy phép SIL OFL | không sửa |
+| `design/fonts/` | Be Vietnam Pro (giao diện, tiêu đề), JetBrains Mono (nhãn, con số); tập con Latin + tiếng Việt, woff2, giấy phép SIL OFL | không sửa |
 | `tools/chuoi_bai.py` | Thứ tự bài, chủ đề của từng bài, "Bài tiếp theo", ảnh bìa màn tải | sửa tay |
 | `shell/bg-shell.js` | Vỏ bài học v2 | sửa tay; khối giữa `/*TOKENS:start*/` và `/*TOKENS:end*/` do `tools/design.py` ghi |
 
@@ -50,9 +50,9 @@ Trang chính, Thư viện, các trang lộ trình, Robotics, Giáo viên, Kiểm
 | Vai | Quy chuẩn | Lớp |
 |---|---|---|
 | Độ rộng, mép | nội dung tối đa 1240 px, lề 24 px (16 px trên điện thoại): mép trái trùng logo thanh trên, 124 px ở màn 1440 | `.wrap`, `.sitebar .in`, `.bg-frame` |
-| Tiêu đề trang | Noto Serif 400, 38–68 px; riêng màn đầu trang chính 44–96 px. Chỉ trang chính được tô màu nhấn cho một chữ | `h1`, `h1.bg-display` |
+| Tiêu đề trang | Be Vietnam Pro 500, 40–84 px, giãn âm; màn đầu trang chính 48–104 px | `h1`, `h1.bg-display` |
 | Dòng trên tiêu đề, đoạn mở | 13 px thường màu `--bg-ink3`; đoạn mở 17 px, tối đa 62 ký tự | `.bg-eyebrow`, `.bg-lead` |
-| Tiêu đề mục, tiêu đề thẻ | Noto Serif 400, 26–40 px và 26 px | `.bg-h2`, `.bg-h3` |
+| Tiêu đề mục, tiêu đề thẻ | Be Vietnam Pro 500, 24–34 px và 20 px | `.bg-h2`, `.bg-h3` |
 | Nút | bo 10 px, nền mực `--bg-brand`, cao 46 px (`.sm` 36 px); `.ghost` nền trong viền mảnh; tắt thì nền nhạt chữ xám | `.bg-btn`, `.bg-btn.sm`, `.bg-btn.ghost` |
 | Liên kết chữ | gạch chân mảnh, cách chữ 6 px, vùng chạm 44 px | `.bg-tl` |
 | Thẻ, hộp | không đổ bóng: trên trang mục `--bg-sh-1` và `--bg-sh-2` là một đường kẻ mảnh | |
@@ -68,7 +68,7 @@ Thang 7 cỡ: 13 · 15 · 17 · 20 · 26 · 34 · 48 px (`--bg-fs-xs` … `--bg-
 - Không viết hoa giãn chữ cho nhãn tiếng Việt dài hơn hai từ (dấu chồng hai tầng sẽ dính dòng trên).
 - Chiều cao dòng 1,6 cho đoạn văn, 1,4 cho giao diện.
 - Phông đơn cách chỉ cho con số đo; nhãn dùng phông giao diện.
-- Tiêu đề dùng Noto Serif 400; không dùng chữ tô gradient.
+- Tiêu đề dùng Be Vietnam Pro 500; không dùng chữ tô gradient.
 
 ## Một gia đình giao diện
 

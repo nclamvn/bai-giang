@@ -109,7 +109,7 @@ def card_html(kind):
     html,body{{margin:0;width:{W}px;height:{H}px;background:#fff;font-family:'Be Vietnam Pro',sans-serif;color:#15171C}}
     body{{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center}}
     img{{width:150px;height:150px}} .k{{font-size:30px;font-weight:600;color:#5B6472;letter-spacing:.02em}}
-    h1{{margin:0;font:600 76px/1.12 'Noto Serif',Georgia,serif;letter-spacing:-.02em}}
+    h1{{margin:0;font:500 76px/1.08 'Be Vietnam Pro',sans-serif;letter-spacing:-.04em}}
     .row{{display:flex;gap:28px;margin-top:22px}} .row div{{min-width:230px;padding:22px 26px;border-radius:22px;background:#f6f7f9;display:grid;gap:4px}}
     .row b{{font-size:48px;font-weight:600;letter-spacing:-.02em}} .row span{{font-size:22px;color:#5B6472}}
     .u{{margin-top:26px;font-size:28px;font-weight:600;color:#e3562a}}

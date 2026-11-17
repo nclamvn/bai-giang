@@ -162,7 +162,7 @@ Mọi bài 3D (Tế Bào, Ty Thể, Cổ Loa, Cơ thể người, Neuron, 6 mô 
 [`thu-vien/`](thu-vien/) là bản tiếng Việt của [Tongjiang Lab](https://github.com/smithjohn78390/tongjiang-lab) (铜匠实验室): 10 lý, 25 hoá, 5 sinh, 14 địa. Bản này được tác giả đồng ý cho dùng phi thương mại. Đã dịch 14.536 đoạn, khoảng 245 nghìn chữ Hán; kiểm tự động giữ nguyên biến, thẻ và ký tự thoát; cả 54 bài đúng cú pháp; không còn chữ Hán hiển thị. **Thư mục này theo giấy phép CC BY-NC 4.0 của bản gốc, không phải MIT.** Xem [`thu-vien/GHI-CONG.md`](thu-vien/GHI-CONG.md).
 
 ## Giao diện
-Mọi trang dùng chung một chuẩn trong [`tools/liquid_glass.py`](tools/liquid_glass.py): nền trắng, vật liệu kính lỏng phỏng theo iOS 27 và macOS 27 (nền mờ, bão hoà màu, viền sáng bên trong, bóng mềm, góc bo lớn, nút dạng viên thuốc), một bộ phông tự lưu cho cả site ở `design/fonts/` (Be Vietnam Pro cho chữ, Noto Serif cho tiêu đề trang mục, JetBrains Mono cho số đo; khai ở `design/tokens.json`, kể cả các mô phỏng robotics). Giao diện luôn sáng, kể cả khi máy đặt chế độ tối. 54 bài thư viện nhận cùng chuẩn qua khối CSS `lg-theme` mà `vi_tool.py apply` chèn vào.
+Ngôn ngữ "trang tài liệu sống" ([`docs/thiet-ke-giao-dien-doc.md`](docs/thiet-ke-giao-dien-doc.md), token ở `design/tokens.json`): nền trắng, thẻ #FBFBF8 viền mảnh, tiêu đề Be Vietnam Pro 500, nhãn JetBrains Mono chữ hoa, chấm tín hiệu đỏ và gạch hổ phách. Mọi trang đọc theo chiều dọc: dải nhận diện, đầu trang hai cột, cảnh 3D tràn ngang, dải chỉ số, danh sách bước sáng theo lời giảng. Bài bộ kit dựng trang dọc bằng `tools/robotics/kit/doc.js`; các bài còn lại chạy trong khung `shell/khung.js` (thêm `?doc=0` để mở bài toàn màn hình như cũ). Phông tự lưu ở `design/fonts/`.
 
 ## Tốc độ và dùng khi mạng yếu
 - **Bộ nhớ đệm theo mã băm** (`sw.js`, sinh bằng [`tools/sw.py`](tools/sw.py) ở bước cuối của `build_all.py`): `sw-manifest.json` ghi SHA-256 của mọi tệp site phục vụ. Tệp đã lưu đúng mã băm thì mở ngay từ máy, không hỏi mạng; chỉ tệp đổi nội dung mới tải lại sau mỗi lần đăng (GitHub Pages tự đổi ETag của mọi tệp mỗi lần đăng và chỉ cho lưu 10 phút). Tệp tải về được tính lại SHA-256, khớp mới lưu, nên bản trên máy luôn trùng từng byte với bản trên site. Bài đã mở vẫn mở được khi mất mạng. Khi máy rảnh và mạng tốt, bài đang học nhờ tải trước "Bài sau". Gỡ ở một máy: thêm `?sw=0`; gỡ toàn site: thêm `"tat": true` vào `sw-manifest.json`.
@@ -242,7 +242,7 @@ base64 -w 0 ribosome.bin > te-bao/ribosome.b64.txt
 - `thu-vien/`: CC BY-NC 4.0, theo bản gốc Tongjiang Lab; chỉ dùng phi thương mại.
 - Dữ liệu cấu trúc: RCSB PDB 3J7R, 6J5I, 6J5K.
 - `tools/robotics/`: MIT; phần phỏng theo teardown và claude-motion giữ giấy phép MIT gốc (`tools/robotics/LICENSE-teardown`). three.js MIT.
-- Phông Be Vietnam Pro, Noto Serif, JetBrains Mono: SIL Open Font License 1.1, tự lưu trữ trong `design/fonts/` kèm giấy phép.
+- Phông Be Vietnam Pro, JetBrains Mono: SIL Open Font License 1.1, tự lưu trữ trong `design/fonts/` kèm giấy phép.
 
 ## Nguồn
 - Voorhees RM, Fernández IS, Scheres SHW, Hegde RS. Structure of the mammalian ribosome-Sec61 complex to 3.4 Å resolution. Cell 2014. doi:10.1016/j.cell.2014.05.024. Toạ độ từ RCSB PDB 3J7R.

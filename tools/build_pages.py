@@ -250,7 +250,7 @@ footer{{font-size:13px;line-height:1.55;color:var(--lg-muted);border-top:1px sol
 {LG_CSS}
 {LG.PAPER_CSS}
 :root{{--muted:var(--bg-ink3);--ink2:var(--bg-ink2);--f-body:var(--bg-font);--f-mono:var(--bg-mono)}}
-.wrap{{padding-top:32px}}
+.wrap{{padding-top:0}} header.kv{{display:block}} header.kv h1{{font-size:clamp(40px,6vw,84px)}} header.kv p{{max-width:62ch}}
 @media (max-width:640px){{.wrap{{padding:max(12px,env(safe-area-inset-top)) 14px calc(36px + env(safe-area-inset-bottom));gap:16px}} header h1{{font-size:28px}} header p{{font-size:15px}} .nav .btn{{font-size:14px;padding:0 14px;min-height:44px}} .kpi{{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}} .kpi div{{padding:10px 12px}} .kpi b{{font-size:22px}} .step{{padding:12px;gap:10px;border-radius:20px}} .step h3{{font-size:17.5px}} .ycd ul{{font-size:13.5px}} table{{font-size:13px}} th,td{{padding:8px 10px}}}}
 @media (max-width:820px){{.step{{grid-template-columns:1fr}} .step .no{{display:none}} td:first-child{{display:none}} td:last-child{{width:32%}}}}
 </style>
@@ -258,12 +258,13 @@ footer{{font-size:13px;line-height:1.55;color:var(--lg-muted);border-top:1px sol
 <body class="bg-hub">
 {LG.site_bar(links['__L_LIB__'], [('Lộ trình', links['__L_LIB__'] + '#lo-trinh'), ('Sinh học tế bào 10', None)])}
 <div class="wrap">
-<header>
-  <span class="bg-eyebrow">Chủ đề · lớp 10 · chương trình GDPT 2018</span>
-  <h1>Sinh học tế bào bằng mô hình 3D</h1>
-  <p>Lộ trình 6 bài cho mạch Sinh học tế bào lớp 10, sắp theo thứ tự nội dung của chương trình môn Sinh học (Thông tư 32/2018/TT-BGDĐT). Mỗi bài ghi yêu cầu cần đạt mà bài dạy trực tiếp, trích nguyên văn chương trình. Bảng cuối trang liệt kê toàn bộ yêu cầu của mạch này và chỉ rõ yêu cầu nào chưa có bài. Thời lượng là gợi ý; giáo viên tự điều chỉnh.</p>
-  <p class="cov">{len(ROUTE)} bài · {n_ok} yêu cầu cần đạt có bài dạy trực tiếp · {n_rel} yêu cầu có bài liên quan · {n_no} chưa có bài</p>
-  <div class="nav"><a class="bg-btn" href="{E(links['__L_CELL__'])}">Hành Trình Vào Tế Bào</a><a class="bg-btn ghost" href="{E(links['__L_MITO__'])}">Vào Ty Thể</a></div>
+<header class="kv">
+  <div class="bg-meta" style="padding-top:8px"><div class="bg-mono">Sinh học · lớp 10<br>Chương trình GDPT 2018</div><div class="bg-mono r">{len(ROUTE)} bài theo thứ tự chương trình<br>Yêu cầu cần đạt đối chiếu bằng máy</div></div>
+  <div class="bg-head"><div><h1>Sinh học tế bào bằng mô hình 3D</h1>
+    <div class="bg-legend"><span style="--c:var(--bg-sig)">Có bài · {n_ok}</span><span style="--c:var(--bg-amber)">Liên quan · {n_rel}</span><span>Chưa có bài · {n_no}</span></div></div>
+    <div class="bg-say"><h2>Sáu bài, đi từ tế bào tới nguyên phân</h2><p>Lộ trình 6 bài cho mạch Sinh học tế bào lớp 10, sắp theo thứ tự nội dung của chương trình môn Sinh học (Thông tư 32/2018/TT-BGDĐT). Mỗi bài ghi yêu cầu cần đạt mà bài dạy trực tiếp, trích nguyên văn chương trình. Bảng cuối trang liệt kê toàn bộ yêu cầu của mạch này và chỉ rõ yêu cầu nào chưa có bài. Thời lượng là gợi ý; giáo viên tự điều chỉnh.</p>
+      <div class="cta"><a class="bg-btn" href="{E(links['__L_CELL__'])}">Hành Trình Vào Tế Bào</a><a class="bg-btn ghost" href="{E(links['__L_MITO__'])}">Vào Ty Thể</a></div></div></div>
+  <div class="bg-stats" style="--n:4"><div><b>{len(ROUTE)}<small>bài</small></b><span>Lộ trình lớp 10</span></div><div><b>{n_ok}</b><span>Yêu cầu có bài dạy</span></div><div><b>{n_rel}</b><span>Yêu cầu có bài liên quan</span></div><div><b>{total}</b><span>Yêu cầu của mạch</span></div></div>
 </header>
 <h2 class="bg-h2">Lộ trình</h2>
 <section class="route">

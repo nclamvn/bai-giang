@@ -102,6 +102,7 @@ h2.sec{margin:28px 0 0} .feat .bg-btn,.muc .bg-btn{justify-self:start;margin-top
 footer{font-size:13px;color:var(--muted);border-top:1px solid var(--lg-hair);padding-top:18px;display:grid;gap:8px}
 footer ul{margin:0;padding-left:18px} footer a{color:inherit}
 @media (max-width:760px){.wrap{padding:16px 12px 40px;gap:14px} .feat{grid-template-columns:1fr} .feat img{min-height:0;aspect-ratio:16/10} .kpi{grid-template-columns:1fr;gap:8px} .kpi div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 14px} .kpi b{font-size:18px;text-align:right} .bsg{grid-template-columns:1fr} .cd{padding:14px} .ch h3{font-size:18px}}
+header.kv{display:block} header.kv h1{font-size:clamp(40px,6vw,84px);margin:0} header.kv p{max-width:62ch}
 </style>
 <style id="bg-vt">@view-transition{navigation:auto}#bgs-load{view-transition-name:bg-bia}::view-transition-group(bg-bia){animation-duration:.42s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}::view-transition-old(root),::view-transition-new(root){animation-duration:.24s}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
 <script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
@@ -110,10 +111,13 @@ footer ul{margin:0;padding-left:18px} footer a{color:inherit}
 <body class="bg-hub">
 <header class="sitebar"><div class="in"><a class="brand" href="../" aria-label="Sáng Ăn Khoai, trang chính"><img src="../design/logo/mark-128.webp" alt="" width="32" height="32"><span>Sáng Ăn Khoai</span></a><div class="crumbs"><span aria-hidden="true">/</span><a href="../#lo-trinh">Lộ trình</a><span aria-hidden="true">/</span><b>Lịch sử 10</b></div><nav aria-label="Mục chính"><a href="../#bai-hoc">Bài học</a><a href="../#lo-trinh">Lộ trình</a><a href="../thu-vien/">Thư viện</a><a href="../#cho-giao-vien">Cho giáo viên</a></nav></div></header>
 <div class="wrap">
-<header>
-  <span class="bg-eyebrow">Lịch sử · lớp 10 · chương trình GDPT 2018, sửa đổi 2025</span>
-  <h1>Lịch sử 10 bằng mô hình 3D</h1>
-  <p>Lộ trình bám theo chương trình môn Lịch sử, nên dùng chung được cho cả ba bộ sách Kết nối tri thức, Chân trời sáng tạo và Cánh diều. Mỗi mục ghi nguyên văn yêu cầu cần đạt và cảnh 3D sẽ dựng. Nội dung bài được viết mới từ nguồn khảo cổ, sử liệu công khai, có dẫn nguồn từng con số; phần phỏng dựng luôn được ghi rõ. Trang không chép nội dung sách giáo khoa.</p>
+<header class="kv">
+  <div class="bg-meta" style="padding-top:8px"><div class="bg-mono">Lịch sử · lớp 10<br>GDPT 2018, sửa đổi 2025</div><div class="bg-mono r">Dùng chung ba bộ sách<br>Kết nối tri thức · Chân trời sáng tạo · Cánh diều</div></div>
+  <div class="bg-head"><div><h1>Lịch sử 10 bằng mô hình 3D</h1>
+    <div class="bg-legend"><span style="--c:var(--bg-sig)">Có bài 3D · 1</span><span style="--c:var(--bg-amber)">Đang dựng</span><span>Chuyên đề lựa chọn</span></div></div>
+    <div class="bg-say"><h2>Đọc văn minh từ dấu tích, theo số đo khảo cổ</h2><p>Lộ trình bám theo chương trình môn Lịch sử, nên dùng chung được cho cả ba bộ sách Kết nối tri thức, Chân trời sáng tạo và Cánh diều. Mỗi mục ghi nguyên văn yêu cầu cần đạt và cảnh 3D sẽ dựng. Nội dung bài được viết mới từ nguồn khảo cổ, sử liệu công khai, có dẫn nguồn từng con số; phần phỏng dựng luôn được ghi rõ. Trang không chép nội dung sách giáo khoa.</p>
+      <div class="cta"><a class="bg-btn" href="co-loa/">Mở Thành Cổ Loa</a><a class="bg-btn ghost" href="#lo-trinh-ct">Xem lộ trình</a></div></div></div>
+  <div class="bg-stats" style="--n:4"><div><b>7</b><span>Chủ đề và thực hành</span></div><div><b>66</b><span>Yêu cầu cần đạt</span></div><div><b>52</b><span>Yêu cầu chuyên đề</span></div><div><b>3</b><span>Bộ sách đối chiếu</span></div></div>
 </header>
 <a class="feat glass" href="co-loa/">
   <img src="../thu-vien/covers/co-loa.webp" alt="Mô hình 3D ba vòng thành Cổ Loa trên đồng bằng">
@@ -121,7 +125,7 @@ footer ul{margin:0;padding-left:18px} footer a{color:inherit}
   <p>Ba vòng thành đất dựng theo số đo khảo cổ trên đồng bằng ven sông Hoàng Giang. Kéo dòng thời gian từ thế kỷ IV TCN đến ngày nay, mở mặt cắt lũy đúng tỉ lệ, xem kho mũi tên, trống đồng, và đặt truyền thuyết cạnh bằng chứng.</p>
   <span class="bg-btn sm">Vào bài</span></div>
 </a>
-<h2 class="sec bg-h2">Lộ trình theo chương trình</h2>
+<h2 class="sec bg-h2" id="lo-trinh-ct">Lộ trình theo chương trình</h2>
 <p class="small" style="margin:-8px 0 0">7 chủ đề và hoạt động thực hành · 66 yêu cầu cần đạt trích nguyên văn · bài 3D đầu tiên: Thành Cổ Loa; các mục khác đang dựng.</p>
 <section class="cd glass" id="cd1">
   <div class="ch"><span class="no">1</span><div><div class="lbl">Chủ đề 1 · thời lượng 10% (chung chủ đề 1–2)</div><h3>Lịch sử và sử học</h3></div></div>

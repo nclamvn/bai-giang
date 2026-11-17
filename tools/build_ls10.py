@@ -150,15 +150,19 @@ h2.sec{{margin:28px 0 0}} .feat .bg-btn,.muc .bg-btn{{justify-self:start;margin-
 footer{{font-size:13px;color:var(--muted);border-top:1px solid var(--lg-hair);padding-top:18px;display:grid;gap:8px}}
 footer ul{{margin:0;padding-left:18px}} footer a{{color:inherit}}
 @media (max-width:760px){{.wrap{{padding:16px 12px 40px;gap:14px}} .feat{{grid-template-columns:1fr}} .feat img{{min-height:0;aspect-ratio:16/10}} .kpi{{grid-template-columns:1fr;gap:8px}} .kpi div{{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 14px}} .kpi b{{font-size:18px;text-align:right}} .bsg{{grid-template-columns:1fr}} .cd{{padding:14px}} .ch h3{{font-size:18px}}}}
+header.kv{{display:block}} header.kv h1{{font-size:clamp(40px,6vw,84px);margin:0}} header.kv p{{max-width:62ch}}
 </style>
 </head>
 <body class="bg-hub">
 {LG.site_bar(hub, [('Lộ trình', hub + '#lo-trinh'), ('Lịch sử 10', None)])}
 <div class="wrap">
-<header>
-  <span class="bg-eyebrow">Lịch sử · lớp 10 · chương trình GDPT 2018, sửa đổi 2025</span>
-  <h1>Lịch sử 10 bằng mô hình 3D</h1>
-  <p>Lộ trình bám theo chương trình môn Lịch sử, nên dùng chung được cho cả ba bộ sách Kết nối tri thức, Chân trời sáng tạo và Cánh diều. Mỗi mục ghi nguyên văn yêu cầu cần đạt và cảnh 3D sẽ dựng. Nội dung bài được viết mới từ nguồn khảo cổ, sử liệu công khai, có dẫn nguồn từng con số; phần phỏng dựng luôn được ghi rõ. Trang không chép nội dung sách giáo khoa.</p>
+<header class="kv">
+  <div class="bg-meta" style="padding-top:8px"><div class="bg-mono">Lịch sử · lớp 10<br>GDPT 2018, sửa đổi 2025</div><div class="bg-mono r">Dùng chung ba bộ sách<br>Kết nối tri thức · Chân trời sáng tạo · Cánh diều</div></div>
+  <div class="bg-head"><div><h1>Lịch sử 10 bằng mô hình 3D</h1>
+    <div class="bg-legend"><span style="--c:var(--bg-sig)">Có bài 3D · 1</span><span style="--c:var(--bg-amber)">Đang dựng</span><span>Chuyên đề lựa chọn</span></div></div>
+    <div class="bg-say"><h2>Đọc văn minh từ dấu tích, theo số đo khảo cổ</h2><p>Lộ trình bám theo chương trình môn Lịch sử, nên dùng chung được cho cả ba bộ sách Kết nối tri thức, Chân trời sáng tạo và Cánh diều. Mỗi mục ghi nguyên văn yêu cầu cần đạt và cảnh 3D sẽ dựng. Nội dung bài được viết mới từ nguồn khảo cổ, sử liệu công khai, có dẫn nguồn từng con số; phần phỏng dựng luôn được ghi rõ. Trang không chép nội dung sách giáo khoa.</p>
+      <div class="cta"><a class="bg-btn" href="{E(coloa)}">Mở Thành Cổ Loa</a><a class="bg-btn ghost" href="#lo-trinh-ct">Xem lộ trình</a></div></div></div>
+  <div class="bg-stats" style="--n:4"><div><b>7</b><span>Chủ đề và thực hành</span></div><div><b>{n_y}</b><span>Yêu cầu cần đạt</span></div><div><b>{n_cd}</b><span>Yêu cầu chuyên đề</span></div><div><b>3</b><span>Bộ sách đối chiếu</span></div></div>
 </header>
 <a class="feat glass" href="{E(coloa)}">
   <img src="{E(cover)}" alt="Mô hình 3D ba vòng thành Cổ Loa trên đồng bằng">
@@ -166,7 +170,7 @@ footer ul{{margin:0;padding-left:18px}} footer a{{color:inherit}}
   <p>Ba vòng thành đất dựng theo số đo khảo cổ trên đồng bằng ven sông Hoàng Giang. Kéo dòng thời gian từ thế kỷ IV TCN đến ngày nay, mở mặt cắt lũy đúng tỉ lệ, xem kho mũi tên, trống đồng, và đặt truyền thuyết cạnh bằng chứng.</p>
   <span class="bg-btn sm">Vào bài</span></div>
 </a>
-<h2 class="sec bg-h2">Lộ trình theo chương trình</h2>
+<h2 class="sec bg-h2" id="lo-trinh-ct">Lộ trình theo chương trình</h2>
 <p class="small" style="margin:-8px 0 0">7 chủ đề và hoạt động thực hành · {n_y} yêu cầu cần đạt trích nguyên văn · bài 3D đầu tiên: Thành Cổ Loa; các mục khác đang dựng.</p>
 {''.join(secs)}
 <h2 class="sec bg-h2">Chuyên đề học tập lựa chọn</h2>
