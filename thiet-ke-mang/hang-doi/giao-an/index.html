@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<!--BG-SHARE:start-->
+<meta property="og:type" content="website"><meta property="og:site_name" content="Sáng Ăn Khoai"><meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Mất gói, biến thiên trễ, lỗi gói, thông lượng và goodput · Giáo án tiết 3 · Thiết kế và hiệu năng mạng"><meta property="og:description" content="Giáo án 45 phút, tiết 3 học phần Thiết kế và hiệu năng mạng: Mất gói, biến thiên trễ, lỗi gói, thông lượng và goodput. Mục tiêu, diễn tiến theo phút, ví dụ giải mẫu, phiếu bài tập, đáp án và kiểm tra nhanh, theo giáo trình TEL1459 mục 1.6.2–1.6.4.">
+<meta property="og:url" content="https://nclamvn.github.io/bai-giang/thiet-ke-mang/hang-doi/giao-an/"><link rel="canonical" href="https://nclamvn.github.io/bai-giang/thiet-ke-mang/hang-doi/giao-an/">
+<meta property="og:image" content="https://nclamvn.github.io/bai-giang/design/the/thiet-ke-mang-hang-doi-giao-an.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Mất gói, biến thiên trễ, lỗi gói, thông lượng và goodput">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nclamvn.github.io/bai-giang/design/the/thiet-ke-mang-hang-doi-giao-an.jpg">
+<!--BG-SHARE:end-->
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mất gói, biến thiên trễ, lỗi gói, thông lượng và goodput · Giáo án tiết 3 · Thiết kế và hiệu năng mạng</title>
+<meta name="description" content="Giáo án 45 phút, tiết 3 học phần Thiết kế và hiệu năng mạng: Mất gói, biến thiên trễ, lỗi gói, thông lượng và goodput. Mục tiêu, diễn tiến theo phút, ví dụ giải mẫu, phiếu bài tập, đáp án và kiểm tra nhanh, theo giáo trình TEL1459 mục 1.6.2–1.6.4.">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../design/logo/favicon-32.png"><link rel="apple-touch-icon" href="../../../design/logo/apple-touch-icon.png">
+<link rel="stylesheet" href="../../../design/house.css">
+<style>:root{--acc:#2B5D8C}
+*{box-sizing:border-box}
+html{scroll-padding-top:76px}
+body{margin:0;background:var(--bg-page);color:var(--bg-ink);font:500 16px/1.6 var(--bg-font);-webkit-font-smoothing:antialiased}
+a{color:var(--acc)}
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;min-height:60px;padding:8px max(16px,calc((100vw - 1120px)/2));background:var(--bg-glass-strong);-webkit-backdrop-filter:blur(var(--bg-blur)) saturate(1.6);backdrop-filter:blur(var(--bg-blur)) saturate(1.6);border-bottom:1px solid var(--bg-hair)}
+.bar .home{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--bg-ink);text-decoration:none;font-weight:600;min-height:44px;min-width:44px}
+.bar .lg{border-radius:8px}
+.bar .sep{width:1px;height:22px;background:var(--bg-hair2)}
+.bar .crumb{color:var(--bg-ink2);font-size:15px;text-decoration:none;min-height:44px;display:flex;align-items:center}
+.bar .sp{flex:1}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:var(--bg-r-sm);border:0;background:var(--bg-surface);color:var(--bg-ink);font:500 15px var(--bg-font);text-decoration:none;cursor:pointer;box-shadow:0 0 0 1px var(--bg-hair2);white-space:nowrap}
+.btn:hover{box-shadow:0 0 0 1px var(--bg-ink3)}
+.btn.pri{background:var(--bg-brand);color:var(--bg-brand-ink);box-shadow:none}
+.btn svg{width:18px;height:18px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:center;padding:44px 0 28px}
+.eye{font:600 14px var(--bg-font);color:var(--acc)}
+h1{margin:10px 0 12px;font:400 clamp(34px,4.4vw,56px)/1.08 var(--bg-serif);letter-spacing:-.025em}
+.lead{margin:0;color:var(--bg-ink2);font-size:17px;max-width:56ch}
+.badge{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--bg-warn,#B26A1A) 10%,#fff);color:#7a4a12;font-size:14px;font-weight:600}
+.cover{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:16/10;box-shadow:var(--bg-sh-2)}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover a{position:absolute;left:14px;bottom:14px}
+.tabs{position:sticky;top:60px;z-index:9;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 0;margin:0 0 8px;background:linear-gradient(var(--bg-page) 70%,transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;display:flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;color:var(--bg-ink2);font-weight:600;font-size:15px;text-decoration:none}
+.tabs a:hover{background:var(--bg-hair)}
+section{padding:28px 0 12px}
+h2{margin:0 0 6px;font:400 30px/1.2 var(--bg-serif);letter-spacing:-.015em}
+.sub{margin:0 0 20px;color:var(--bg-ink2)}
+.card{background:var(--bg-surface,#fff);border-radius:20px;padding:20px 22px;box-shadow:var(--bg-sh-1)}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+h3{margin:0 0 10px;font:600 17px/1.35 var(--bg-font)}
+ul.tick,ol.steps{margin:0;padding:0;list-style:none}
+ul.tick li{position:relative;padding:4px 0 4px 26px}
+ul.tick li::before{content:"";position:absolute;left:4px;top:13px;width:9px;height:5px;border:solid var(--acc);border-width:0 0 2px 2px;transform:rotate(-45deg)}
+ol.steps{counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:6px 0 10px 42px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:4px;width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;font:700 14px/28px var(--bg-font);text-align:center}
+kbd{font:600 13px var(--bg-mono);padding:1px 6px;border-radius:6px;background:var(--bg-hair);border:1px solid var(--bg-hair2)}
+code{font:500 14px var(--bg-mono)}
+.mini{font-size:14px;color:var(--bg-ink2)}
+table.fix{width:100%;border-collapse:collapse;font-size:15px}
+table.fix th,table.fix td{text-align:left;vertical-align:top;padding:10px 12px;border-top:1px solid var(--bg-hair)}
+table.fix th{width:30%;font-weight:600}
+.tl{display:flex;height:56px;border-radius:14px;overflow:hidden;margin:0 0 22px;box-shadow:inset 0 0 0 1px var(--bg-hair)}
+.tl a{display:flex;flex-direction:column;justify-content:center;padding:0 12px;min-width:0;color:var(--bg-ink);text-decoration:none;border-right:2px solid var(--bg-page)}
+.tl a:last-child{border:0}
+.tl b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl span{font-size:13px;color:var(--bg-ink2);font-variant-numeric:tabular-nums}
+.act{margin:0 0 18px}
+.act>header{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;padding:0 0 10px}
+.act>header h3{margin:0;font-size:19px}
+.act>header .min{font:600 14px var(--bg-mono);color:var(--acc)}
+.act>header p{flex-basis:100%;margin:0;color:var(--bg-ink2)}
+.row{display:grid;grid-template-columns:96px minmax(0,1.1fr) minmax(0,1.6fr) minmax(0,1fr);gap:14px;padding:14px 0;border-top:1px solid var(--bg-hair)}
+.row:first-of-type{border-top:0}
+.row .m{font:600 15px var(--bg-mono);font-variant-numeric:tabular-nums;color:var(--bg-ink)}
+.row .m span{display:block;font:500 13px var(--bg-font);color:var(--bg-ink3)}
+.row .t{font-weight:700}
+.row .t small{display:block;font-weight:500;color:var(--bg-ink3);font-size:13px}
+.row .k{display:none;font-size:13px;font-weight:600;color:var(--bg-ink3)}
+.row .hs{color:var(--bg-ink2)}
+.thead{display:grid;grid-template-columns:96px minmax(0,1.1fr) minmax(0,1.6fr) minmax(0,1fr);gap:14px;padding:0 0 8px;font-size:13px;font-weight:600;color:var(--bg-ink3)}
+.prod{margin-top:6px;font-size:14px;color:var(--bg-ink2)}
+.sheet-wrap{display:flex;justify-content:center;padding:8px 0 4px}
+.sheet-zoom{width:210mm;zoom:var(--z,1)}
+.paper{width:210mm;min-height:297mm;padding:11mm 13mm 10mm;background:#fff;color:#111;box-shadow:0 1px 2px rgba(0,0,0,.08),0 18px 48px -20px rgba(15,23,42,.35);font:500 10pt/1.42 var(--bg-font)}
+.paper header{display:flex;justify-content:space-between;align-items:flex-start;gap:10mm;padding-bottom:3mm;border-bottom:.4mm solid #111}
+.paper .pk{font:600 9pt var(--bg-font);color:#555}
+.paper h4{margin:1mm 0 0;font:700 14pt/1.2 var(--bg-font)}
+.paper .who{flex:none;display:grid;grid-template-columns:auto 1fr;gap:2.5mm 3mm;width:66mm;font-size:9.5pt;color:#333}
+.paper .who i{display:block;border-bottom:.25mm solid #999;height:5mm}
+.paper .lg2{display:flex;align-items:center;gap:2mm;font:600 9pt var(--bg-font);color:#333}
+.paper .lg2 img{width:7mm;height:7mm;border-radius:1.5mm}
+.part{margin-top:3.4mm}
+.part .ph{display:flex;align-items:baseline;gap:2.5mm;margin-bottom:1.6mm}
+.part .ph b{display:inline-flex;align-items:center;justify-content:center;width:5.6mm;height:5.6mm;border-radius:50%;background:#111;color:#fff;font:700 9pt var(--bg-font)}
+.part .ph strong{font-size:11pt}
+.part .ph em{font-style:normal;color:#666;font-size:9pt}
+.part p{margin:0 0 1.6mm}
+.chain{display:flex;align-items:center;gap:1.6mm}
+.chain span{flex:1;height:11mm;border:.3mm solid #444;border-radius:2mm;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:9.5pt;text-align:center;padding:0 1mm}
+.chain span.f{background:#f2f2f2}
+.chain i{font-style:normal;color:#666}
+.paper table{width:100%;border-collapse:collapse;font-size:9.5pt}
+.paper th{text-align:left;font-weight:700;background:#f2f2f2}
+.paper th,.paper td{border:.3mm solid #555;padding:1.4mm 2mm}
+.paper td{height:9.4mm}
+.paper td:first-child,.paper th:first-child{width:13mm;text-align:center}
+.paper table.free td,.paper table.free th{width:auto!important;text-align:left!important}
+.paper table.free td{height:auto;padding:1.8mm 2mm;font-size:9pt}
+.paper table.free td{height:8.6mm}
+.draw{position:relative;border:.3mm solid #999;border-radius:2mm;overflow:hidden}.draw svg{display:block;width:100%;height:100%}
+.lbl{display:grid;grid-template-columns:repeat(3,1fr);gap:2mm 5mm;margin-top:2mm}.lbl span{display:flex;align-items:flex-end;gap:1.5mm}.lbl i{flex:1;border-bottom:.25mm dotted #777;height:5.5mm}
+.paper td:nth-child(2),.paper th:nth-child(2){width:46mm}
+.q{margin-bottom:1.6mm}
+.q .qq{display:flex;gap:1.6mm}
+.q .qq b{flex:none}
+.ln{height:6.9mm;border-bottom:.25mm dotted #777}
+.ck{display:flex;align-items:center;gap:2.4mm;margin:1.2mm 0}
+.ck i{flex:none;width:4mm;height:4mm;border:.3mm solid #444;border-radius:.8mm}
+.paper footer{margin-top:3mm;padding-top:1.6mm;border-top:.25mm solid #bbb;display:flex;justify-content:space-between;font-size:8pt;color:#777}
+dl.ans{margin:0;display:grid;grid-template-columns:110px minmax(0,1fr);gap:0}
+dl.ans dt,dl.ans dd{margin:0;padding:12px 0;border-top:1px solid var(--bg-hair)}
+dl.ans dt{font-weight:700;color:var(--acc)}
+.src{margin:0;padding-left:20px;color:var(--bg-ink2);font-size:15px}
+.src li{margin:4px 0}
+.yccd li{margin:4px 0}
+.foot{margin:36px 0 0;padding:20px 0 40px;border-top:1px solid var(--bg-hair);color:var(--bg-ink3);font-size:14px;display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:space-between}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:22px;padding:28px 0 16px}.g2{grid-template-columns:1fr}
+  .thead{display:none}.row{grid-template-columns:72px minmax(0,1fr);gap:4px 12px}.row .m{grid-row:span 3}.row .k{display:block;margin-top:6px}}
+@media (max-width:560px){.bar .crumb,.bar .sep,.bar .opt{display:none}.bar .home span{display:none}.btn{padding:0 14px}
+  h2{font-size:24px}.tl{height:auto;flex-direction:column}.tl a{flex:none!important;padding:8px 12px;border-right:0;border-bottom:2px solid var(--bg-page)}
+  dl.ans{grid-template-columns:1fr}dl.ans dd{border-top:0;padding-top:0}.card{padding:16px}
+  table.fix,table.fix tbody,table.fix tr,table.fix th,table.fix td{display:block;width:auto}table.fix th{padding:12px 0 2px}table.fix td{border-top:0;padding:0 0 12px}}
+@page{size:A4;margin:12mm 13mm}
+@media print{
+  body{background:#fff;font-size:10pt;line-height:1.5}
+  h2{font-size:17pt;break-after:avoid}h3{break-after:avoid}.sub{margin-bottom:3mm}
+  .g2{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:4mm}
+  .act.card{break-inside:auto}.act>header{break-after:avoid}
+  .row .m{grid-row:auto}.row .k{display:none!important}.thead{display:grid!important}
+  table.fix th,table.fix td{padding:2mm 3mm}
+  .bar,.tabs,.cover,.noprint,.foot .noprint{display:none!important}
+  .wrap{max-width:none;padding:0}
+  .hero{display:block;padding:0 0 4mm}
+  h1{font-size:22pt;margin:2mm 0}
+  section{padding:4mm 0 0;break-inside:auto}
+  .card{box-shadow:none;border:.3mm solid #ccc;padding:4mm 5mm}
+  .g2>.card{break-inside:avoid}dl.ans dt,dl.ans dd{break-inside:avoid}
+  .row{break-inside:avoid;grid-template-columns:18mm 34mm minmax(0,1.7fr) minmax(0,1fr);gap:3mm;padding:2.6mm 0}
+  .thead{grid-template-columns:18mm 34mm minmax(0,1.7fr) minmax(0,1fr);gap:3mm}
+  #kich-ban{break-before:page}
+  #phieu{display:none}
+  .tl a{border-right-color:#fff}
+  body.in-phieu > *:not(main){display:none!important}
+  body.in-phieu main > *:not(#phieu){display:none!important}
+  body.in-phieu #phieu{display:block;padding:0}
+  body.in-phieu #phieu > :not(.sheet-wrap){display:none}
+  body.in-phieu .sheet-wrap{padding:0;display:block}
+  body.in-phieu .sheet-zoom{zoom:1!important;width:auto}
+  body.in-phieu .paper{width:auto;min-height:0;padding:0;box-shadow:none}
+}
+
+.vd{border-top:1px solid var(--line,#e6e2d8);padding:16px 0}.vd:first-child{border-top:0;padding-top:0}
+.vd h4{margin:0 0 6px;font-size:16px}.vd .de{margin:0 0 10px}.vd .giai{background:#f7f5ef;border-radius:10px;padding:12px 14px;font-size:15px;line-height:1.6}
+.qz{border-top:1px solid var(--line,#e6e2d8);padding:12px 0}.qz:first-child{border-top:0}.qz p{margin:0 0 6px;font-weight:600}
+.qz ol{margin:0 0 6px 18px;padding:0}.qz details{font-size:14.5px;color:#4a4f58}.qz summary{cursor:pointer;color:var(--acc)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0 0}.meta div{background:#f7f5ef;border-radius:10px;padding:10px 12px;font-size:13.5px}
+.meta b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b6f78;margin-bottom:2px}
+.tt li{margin:4px 0}
+.paper .bt{margin:0 0 3.2mm}.paper .bt .qq{display:flex;gap:2mm}.paper .bt .src{color:#6b6f78;font-size:8.5pt}
+</style>
+<style id="bg-vt">@view-transition{navigation:auto}#bgs-load{view-transition-name:bg-bia}::view-transition-group(bg-bia){animation-duration:.42s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}::view-transition-old(root),::view-transition-new(root){animation-duration:.24s}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
+<script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
+<script id="bg-sw">(function(){try{if(!("serviceWorker"in navigator)||!/(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname))return;var r=new URL("../../../",location.href).href;if(/[?&]sw=0/.test(location.search)){navigator.serviceWorker.getRegistrations().then(function(a){a.forEach(function(x){x.unregister()})});return}addEventListener("load",function(){setTimeout(function(){navigator.serviceWorker.register(r+"sw.js",{scope:r}).catch(function(){})},3000)})}catch(e){}})();</script>
+</head>
+<body>
+<div class="bar">
+  <a class="home" href="../../../"><img src="../../../design/logo/mark-96.webp" width="30" height="30" alt="" class="lg"><span>Sáng Ăn Khoai</span></a><span class="sep"></span><a class="crumb" href="../../../thiet-ke-mang/">Thiết kế và hiệu năng mạng</a>
+  <span class="sp"></span>
+  <button class="btn opt" type="button" data-print="gv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In giáo án</button>
+  <button class="btn" type="button" data-print="phieu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In phiếu</button>
+  <a class="btn pri" href="../"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a>
+</div>
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <div class="eye">Tiết 3 / 22 · 45 phút · Giáo án</div>
+      <h1>Mất gói, biến thiên trễ, lỗi gói, thông lượng và goodput</h1>
+      <p class="lead">Tiết 2 đã đo trễ và mức sử dụng. Tiết này đi tiếp năm đại lượng người dùng cảm thấy trực tiếp: gói có tới không (mất gói), trễ có đều không (biến thiên trễ), gói có lành không (lỗi gói theo BER), và liên kết thực sự mang được bao nhiêu cho ứng dụng (thông lượng, goodput). Cảnh là một cổng ra có bộ đệm hữu hạn, chạy hàng đợi M/M/1/K thật. Dùng cùng bài 3D <a href="../">Khi hàng đợi đầy</a>: bấm <b>Lên lớp</b> trên thanh đầu bài để màn hình giảng viên hiện phút dự kiến và việc của từng bước.</p>
+      <div class="meta"><div><b>Chương</b>Chương 1 · Tổng quan về thiết kế và hiệu năng mạng</div><div><b>Mục giáo trình</b>1.6.2–1.6.4</div><div><b>Trang</b>14–16</div><div><b>Phương trình</b>(1.13)–(1.18)</div><div><b>Bài tập cuối chương</b>Câu 5</div></div>
+    </div>
+    <div class="cover"><img src="../../../thu-vien/covers/tk-hang-doi.webp" alt="Cảnh 3D của bài Khi hàng đợi đầy"><a class="btn pri" href="../"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a></div>
+  </div>
+  <nav class="tabs" aria-label="Các phần của giáo án"><a href="#muc-tieu">Mục tiêu</a><a href="#dien-tien">Diễn tiến 45 phút</a><a href="#vi-du">Ví dụ giải mẫu</a><a href="#phieu">Phiếu bài tập</a><a href="#dap-an">Đáp án</a><a href="#kiem-tra">Kiểm tra nhanh</a><a href="#tom-tat">Tóm tắt và nguồn</a></nav>
+
+  <section id="muc-tieu" aria-labelledby="h-mt">
+    <h2 id="h-mt">Mục tiêu và chuẩn bị</h2>
+    <div class="g2">
+      <div class="card"><h3>Sau tiết học, sinh viên có thể</h3><ul class="tick"><li>Tính tỉ lệ mất gói theo (1.15) và nêu năm nguyên nhân mất gói giáo trình liệt kê; giải thích vì sao khi ρ &gt; 1 mất gói tiến tới 1 − 1/ρ.</li><li>Phân biệt biến thiên trễ với trễ lớn; tính IPDV theo (1.13) và J theo (1.14) từ một chuỗi trễ.</li><li>Tính xác suất lỗi gói theo BER bằng (1.16), biết khi nào được dùng xấp xỉ L·P_b.</li><li>Tính thông lượng (1.17) và goodput (1.18); giải thích vì sao thông lượng liên kết cao chưa đủ để kết luận dịch vụ đạt (câu 5).</li><li>Giải thích đánh đổi kích thước bộ đệm: giảm mất gói nhưng tăng trễ, và không chữa được quá tải.</li><li>Nêu điều kiện đo phải đi kèm mỗi metric (điểm đo, cỡ gói, mô hình lưu lượng, tải).</li></ul>
+        <h3 style="margin-top:18px">Kiến thức cần có</h3><ul class="tick"><li>Mức sử dụng ρ = λ/μ và độ trễ hàng đợi (tiết 2).</li><li>Xác suất của biến cố độc lập; luỹ thừa và xấp xỉ (1 − x)^n ≈ 1 − nx khi nx nhỏ.</li><li>Cấu trúc gói IP: tiêu đề IPv4 20 byte, TCP 20 byte.</li></ul></div>
+      <div class="card"><h3>Chuẩn bị</h3><ul class="tick"><li>Máy tính có Chrome hoặc Edge bản mới, nối máy chiếu. Mở bài 3D trước giờ học một lần, bấm Lên lớp để màn hình giảng viên hiện phút và việc từng bước.</li><li>In phiếu bài tập (một trang A4) cho mỗi sinh viên, hoặc chiếu phiếu và cho làm vào vở.</li><li>Viết sẵn trên góc bảng chuỗi trễ 20, 23, 21, 30, 22, 24 ms cho ví dụ 2.</li><li>Sinh viên: Đọc trước mục 1.6.2 đến 1.6.4, giáo trình trang 14–16.</li><li>Sinh viên: Máy tính cầm tay.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="dien-tien" aria-labelledby="h-dt">
+    <h2 id="h-dt">Diễn tiến 45 phút</h2>
+    <p class="sub">Mỗi dòng là một bước trên màn chiếu, cùng tên và thứ tự với bài 3D. Phút là gợi ý; giảng viên chủ động co giãn.</p>
+    <div class="tl" role="list" aria-label="Phân bổ thời gian"><a href="#hd-0" style="flex:3;background:color-mix(in srgb,#2B5D8C 14%,#fff)"><b>Mở đầu</b><span>0–3′</span></a><a href="#hd-1" style="flex:10;background:color-mix(in srgb,#2B5D8C 21%,#fff)"><b>Mất gói</b><span>3–13′</span></a><a href="#hd-2" style="flex:10;background:color-mix(in srgb,#2B5D8C 28%,#fff)"><b>Biến thiên trễ</b><span>13–23′</span></a><a href="#hd-3" style="flex:11;background:color-mix(in srgb,#2B5D8C 35%,#fff)"><b>Lỗi gói, thông lượng, goodput</b><span>23–34′</span></a><a href="#hd-4" style="flex:7;background:color-mix(in srgb,#2B5D8C 42%,#fff)"><b>Đánh đổi bộ đệm và kiểm mô hình</b><span>34–41′</span></a><a href="#hd-5" style="flex:4;background:color-mix(in srgb,#2B5D8C 49%,#fff)"><b>Tổng kết, giao bài</b><span>41–45′</span></a></div>
+    <div class="act card" id="hd-0"><header><h3>1. Mở đầu</h3><span class="min">0–3′</span><p>Nối với tiết 2: từ trễ và mức sử dụng sang ba câu hỏi gói có tới, trễ có đều, ứng dụng nhận bao nhiêu.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">0–3′<span>3 phút</span></div><div class="t"><small>Bước 1/13</small>Một cổng ra, ba nguồn, một bộ đệm có hạn</div><div class="gv"><span class="k">Giảng viên</span>Nhắc lại một câu của tiết 2: trễ hàng đợi tăng nhanh khi ρ tiến tới 1. Chiếu toàn cảnh: ba nguồn, router có ống bộ đệm, đường WAN, bảng trễ ở máy nhận. Nêu ba câu hỏi của tiết: gói có tới không, trễ có đều không, ứng dụng nhận được bao nhiêu.</div><div class="hs"><span class="k">Sinh viên</span>Ghi ba câu hỏi đo của tiết.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên nêu được ba câu hỏi đo của tiết.</div></div><div class="act card" id="hd-1"><header><h3>2. Mất gói</h3><span class="min">3–13′</span><p>Tràn bộ đệm, (1.15), điều kiện đo, năm nguyên nhân, quá tải và giới hạn 1 − 1/ρ.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">3–6′<span>3 phút</span></div><div class="t"><small>Bước 2/13</small>Gói bị bỏ khi bộ đệm đầy</div><div class="gv"><span class="k">Giảng viên</span>Chuyển góc Bộ đệm. Chỉ gói cam đang phát, gói đỏ rơi khi ống đủ K gói. Kéo K xuống 8, cho lớp đếm số gói rơi trong 20 giây. Viết (1.15).</div><div class="hs"><span class="k">Sinh viên</span>Đếm gói rơi; ghi (1.15).</div></div><div class="row"><div class="m">6–9′<span>3 phút</span></div><div class="t"><small>Bước 3/13</small>Đếm mất gói ở đâu, đếm thế nào</div><div class="gv"><span class="k">Giảng viên</span>Hỏi lớp: đếm N_tx ở đâu, N_rx ở đâu, trong bao lâu? Nêu RFC 7680 (mất gói một chiều, IPPM). Liệt kê năm nguyên nhân dưới (1.15): lỗi đường truyền, tràn hàng đợi, policing, định tuyến không ổn định, lỗi thiết bị. Giải ví dụ 1 trên bảng.</div><div class="hs"><span class="k">Sinh viên</span>Ghi năm nguyên nhân; làm ví dụ 1 cùng giảng viên.</div></div><div class="row"><div class="m">9–13′<span>4 phút</span></div><div class="t"><small>Bước 4/13</small>Nguồn không biết cổng đang đầy</div><div class="gv"><span class="k">Giảng viên</span>Đẩy tải lên 1,3. Cho lớp nhìn hàng chạm vạch K và nằm lì. Dẫn ra P_loss → 1 − 1/ρ bằng lập luận bảo toàn: cổng chỉ phát được μ, phần λ − μ phải rơi. Cho lớp trả lời câu hỏi trên màn hình.</div><div class="hs"><span class="k">Sinh viên</span>Ghi giới hạn 1 − 1/ρ và lập luận; trả lời câu hỏi.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên tính được P_loss từ số đếm và ước lượng mất gói khi quá tải.</div></div><div class="act card" id="hd-2"><header><h3>3. Biến thiên trễ</h3><span class="min">13–23′</span><p>IPDV (1.13), J (1.14), J theo tải và cách đọc J để tìm điểm nghẽn.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">13–16′<span>3 phút</span></div><div class="t"><small>Bước 5/13</small>Biến thiên trễ không phải là trễ lớn</div><div class="gv"><span class="k">Giảng viên</span>Chuyển góc Bảng trễ. Mỗi chấm là trễ một chiều của một gói. Viết (1.13), nêu RFC 3393. Nhấn mạnh: trễ trung bình có thể đạt ngưỡng mà thoại, video hội nghị vẫn hỏng vì trễ dao động.</div><div class="hs"><span class="k">Sinh viên</span>Ghi (1.13) và ví dụ dịch vụ nhạy với biến thiên trễ.</div></div><div class="row"><div class="m">16–20′<span>4 phút</span></div><div class="t"><small>Bước 6/13</small>Tính J từ một chuỗi trễ</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.14). Giải ví dụ 2 với chuỗi đã ghi sẵn trên bảng. Chỉ ra một gói trễ bất thường làm J tăng mạnh. Cho lớp trả lời câu hỏi trên màn hình.</div><div class="hs"><span class="k">Sinh viên</span>Tính J cho chuỗi sáu gói; trả lời câu hỏi.</div></div><div class="row"><div class="m">20–23′<span>3 phút</span></div><div class="t"><small>Bước 7/13</small>Jitter tăng theo tải</div><div class="gv"><span class="k">Giảng viên</span>Kéo tải 0,5 rồi 0,95, cho lớp so độ tản của các chấm và con số J ở bảng 04. Nêu cách đọc của giáo trình: J tăng theo tải thì nghi hàng đợi, phân lớp QoS hoặc chính sách ưu tiên.</div><div class="hs"><span class="k">Sinh viên</span>Ghi J ở hai mức tải; ghi cách đọc.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên tính J cho chuỗi sáu gói (ví dụ 2) và trả lời câu hỏi trên màn hình.</div></div><div class="act card" id="hd-3"><header><h3>4. Lỗi gói, thông lượng, goodput</h3><span class="min">23–34′</span><p>(1.16), (1.17), (1.18); điều kiện báo cáo thông lượng; câu 5.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">23–27′<span>4 phút</span></div><div class="t"><small>Bước 8/13</small>Gói dài thì dễ hỏng hơn</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.16), nêu giả thiết lỗi bit độc lập. Kéo cỡ gói lên 1 500 byte, BER lên 10⁻⁵: goodput tụt, thông lượng đứng yên. Giải ví dụ 3, nhấn mạnh khi nào xấp xỉ L·P_b hết đúng.</div><div class="hs"><span class="k">Sinh viên</span>Làm ví dụ 3; ghi điều kiện dùng xấp xỉ.</div></div><div class="row"><div class="m">27–30′<span>3 phút</span></div><div class="t"><small>Bước 9/13</small>Thông lượng phải kèm điều kiện đo</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.17). Nêu RFC 2544 (kiểm chuẩn thiết bị) và RFC 6349 (thông lượng TCP). Liệt kê năm điều kiện phải báo cáo kèm: cỡ gói, mô hình lưu lượng, giao thức, số luồng, điều kiện tải.</div><div class="hs"><span class="k">Sinh viên</span>Ghi (1.17) và năm điều kiện báo cáo.</div></div><div class="row"><div class="m">30–34′<span>4 phút</span></div><div class="t"><small>Bước 10/13</small>Liên kết bận chưa chắc ứng dụng nhận đủ</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.18). Kéo cỡ gói xuống 64 byte: goodput tụt mạnh. Giải ví dụ 4 trên bảng. Trả lời câu 5 cùng lớp. Cho lớp trả lời câu hỏi trên màn hình.</div><div class="hs"><span class="k">Sinh viên</span>Làm ví dụ 4; ghi dàn ý trả lời câu 5; trả lời câu hỏi.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên tính P_pkt, T, G (ví dụ 3, 4).</div></div><div class="act card" id="hd-4"><header><h3>5. Đánh đổi bộ đệm và kiểm mô hình</h3><span class="min">34–41′</span><p>K nhỏ và K lớn ở ρ &lt; 1 và ρ &gt; 1; đối chiếu cảnh, mô phỏng và M/M/1/K.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">34–38′<span>4 phút</span></div><div class="t"><small>Bước 11/13</small>Bộ đệm lớn không chữa được quá tải</div><div class="gv"><span class="k">Giảng viên</span>Bấm Bộ đệm lớn, rồi đẩy tải lên 1,3. Vẽ bảng bốn ô (K = 16, 64 × ρ = 0,85, 1,3) của ví dụ 5, điền từ bảng 06. Kết luận: bộ đệm đổi mất gói lấy trễ; quá tải chỉ chữa bằng giảm ρ.</div><div class="hs"><span class="k">Sinh viên</span>Điền bảng bốn ô; ghi kết luận.</div></div><div class="row"><div class="m">38–41′<span>3 phút</span></div><div class="t"><small>Bước 12/13</small>Ba con số, ba cách tính</div><div class="gv"><span class="k">Giảng viên</span>Chỉ bảng 03: mất gói đếm trong cảnh, mô phỏng 30 000 gói, lời giải M/M/1/K. Hỏi: lệch nhau thì nghi gì trước? Nhắc mục 5.1.3 về kiểm mô hình.</div><div class="hs"><span class="k">Sinh viên</span>Ghi ba con số và nhận xét độ khớp.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên điền bảng bốn ô của ví dụ 5 và rút kết luận.</div></div><div class="act card" id="hd-5"><header><h3>6. Tổng kết, giao bài</h3><span class="min">41–45′</span><p>Năm metric và điều kiện đo; ba ý cần nhớ; giao câu 5 và phiếu bài tập.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">41–45′<span>4 phút</span></div><div class="t"><small>Bước 13/13</small>Năm metric, mỗi metric một điều kiện đo</div><div class="gv"><span class="k">Giảng viên</span>Chốt năm metric (1.13)–(1.18) và ba ý cần nhớ. Giao câu 5 cuối chương 1 và phiếu bài tập câu 2–6. Báo tiết sau: độ sẵn sàng, RTO và RPO.</div><div class="hs"><span class="k">Sinh viên</span>Ghi năm metric và bài về nhà.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên ghi năm metric kèm điều kiện đo.</div></div>
+  </section>
+
+  <section id="vi-du" aria-labelledby="h-vd">
+    <h2 id="h-vd">Ví dụ giải mẫu</h2>
+    <p class="sub">Giảng viên giải trên bảng trong tiết; số liệu đã kiểm bằng máy cùng công thức của bài 3D.</p>
+    <div class="card"><div class="vd"><h4>Ví dụ 1. Tỉ lệ mất gói từ số đếm (1.15)</h4><p class="de">Trong 10 phút đo một chiều giữa giảng đường và máy chủ, máy phát gửi 20 000 gói thoại, máy nhận đếm được 19 940 gói. Tính tỉ lệ mất gói và so với ngưỡng 10<sup>−3</sup> của lớp 0 ITU-T Y.1541.</p><div class="giai">P<sub>loss</sub> = 1 − 19 940 / 20 000 = 60 / 20 000 = <b>0,3 %</b> = 3·10<sup>−3</sup> &gt; 10<sup>−3</sup>: <b>không đạt</b>. Kết quả chỉ có nghĩa kèm điều kiện: đo một chiều, 10 phút, giữa hai điểm đã nêu, ở tải lúc đo. Bước sau là tìm nguyên nhân trong năm loại giáo trình liệt kê.</div></div><div class="vd"><h4>Ví dụ 2. Biến thiên trễ của một chuỗi gói (1.13, 1.14)</h4><p class="de">Sáu gói liên tiếp có trễ một chiều 20, 23, 21, 30, 22, 24 ms. Tính IPDV giữa gói 4 và gói 3, và J theo (1.14). Nếu gói 4 có trễ 22 ms thì J bằng bao nhiêu?</p><div class="giai">IPDV<sub>4,3</sub> = 30 − 21 = <b>9 ms</b>. Các hiệu kề nhau: 3, 2, 9, 8, 2 ms; tổng 24 ms; N − 1 = 5 nên <b>J = 4,8 ms</b>. Nếu gói 4 là 22 ms: các hiệu 3, 2, 1, 0, 2 ms, tổng 8 ms, <b>J = 1,6 ms</b>. Một gói trễ bất thường làm J tăng ba lần trong khi trễ trung bình chỉ tăng từ 22 lên 23,3 ms.</div></div><div class="vd"><h4>Ví dụ 3. Xác suất lỗi gói theo BER (1.16)</h4><p class="de">Tính xác suất lỗi gói cho gói 1 500 byte và 64 byte ở BER 10<sup>−6</sup>; với gói 1 500 byte, làm lại ở BER 10<sup>−5</sup> và so với xấp xỉ L·P<sub>b</sub>.</p><div class="giai">Gói 1 500 byte: L = 12 000 bit; L·P<sub>b</sub> = 0,012; chính xác 1 − (1 − 10<sup>−6</sup>)<sup>12 000</sup> ≈ <b>1,19 %</b>. Gói 64 byte: L = 512 bit; ≈ <b>0,051 %</b>. Ở BER 10<sup>−5</sup>: L·P<sub>b</sub> = 0,12 nhưng chính xác ≈ <b>11,3 %</b>. Xấp xỉ chỉ dùng được khi L·P<sub>b</sub> ≪ 1; ở 0,12 đã sai gần 1 điểm phần trăm.</div></div><div class="vd"><h4>Ví dụ 4. Thông lượng và goodput (1.17, 1.18)</h4><p class="de">Trong Δt = 10 s, điểm đo nhận B<sub>rx</sub> = 950 Mbit. Gói 1 000 byte có 40 byte tiêu đề IPv4 và TCP; 2 % số gói là gói truyền lại. Tính T và G. Làm lại với gói 64 byte, cùng B<sub>rx</sub> và tỉ lệ truyền lại.</p><div class="giai">T = 950 / 10 = <b>95 Mbit/s</b>. Phần hữu ích mỗi gói 960/1 000 = 0,96; bỏ 2 % truyền lại: B<sub>app</sub> = 950 × 0,96 × 0,98 ≈ 893,8 Mbit, <b>G ≈ 89,4 Mbit/s</b>. Gói 64 byte: phần hữu ích 24/64 = 0,375; G = 950 × 0,375 × 0,98 / 10 ≈ <b>34,9 Mbit/s</b>. Cùng thông lượng 95 Mbit/s, goodput chênh gần ba lần.</div></div><div class="vd"><h4>Ví dụ 5. Bộ đệm nhỏ và lớn, tải dưới và trên 1</h4><p class="de">Cổng 100 Mbit/s, gói trung bình 1 000 byte (μ = 12 500 gói/s), hàng đợi M/M/1/K. Dùng bảng 06 (lời giải M/M/1/K) điền mất gói và thời gian trong hệ cho K = 16, 64 ở ρ = 0,85 và 1,3.</p><div class="giai">ρ = 0,85: K = 16 mất ≈ <b>1,19 %</b>, W ≈ 0,43 ms; K = 64 mất ≈ <b>4,6·10<sup>−6</sup></b>, W ≈ 0,53 ms. ρ = 1,3: K = 16 mất ≈ <b>23,3 %</b>, W ≈ 1,03 ms; K = 64 mất ≈ <b>23,1 %</b>, W ≈ 4,85 ms. Dưới tải, bộ đệm lớn giảm mất gói đáng kể với trễ tăng ít. Quá tải, mất gói gần bằng 1 − 1/1,3 ≈ 23,1 % dù K bao nhiêu, còn trễ tăng gần năm lần.</div></div></div>
+  </section>
+
+  <section id="phieu" aria-labelledby="h-ph">
+    <h2 id="h-ph">Phiếu bài tập</h2>
+    <p class="sub">Một trang A4. Làm trên lớp phần đầu, phần còn lại về nhà. <button class="btn noprint" type="button" data-print="phieu" style="margin-left:6px;vertical-align:middle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In phiếu</button></p>
+    <div class="sheet-wrap"><div class="sheet-zoom"><div class="paper" lang="vi">
+  <header><div><div class="lg2"><img src="../../../design/logo/mark-96.webp" alt="">Sáng Ăn Khoai · Thiết kế và hiệu năng mạng · Tiết 3 · Phiếu bài tập</div><h4>Mất gói, biến thiên trễ, lỗi gói, thông lượng và goodput</h4></div>
+    <div class="who"><span>Họ tên</span><i></i><span>Mã sinh viên</span><i></i></div></header>
+  <div class="part bt"><div class="qq"><b>1.</b><span>Phân biệt thông lượng và goodput. Tại sao thông lượng liên kết cao chưa đủ để kết luận dịch vụ ứng dụng đạt yêu cầu? <span class=src>(câu 5 cuối chương 1)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>2.</b><span>Phát 50 000 gói, nhận 49 965 gói. Tính P<sub>loss</sub> và so với ngưỡng 10<sup>−3</sup>. Nêu hai thông tin còn thiếu để kết luận có ý nghĩa. <span class=src>(theo (1.15))</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>3.</b><span>Năm gói liên tiếp có trễ 15, 18, 16, 25, 17 ms. Tính IPDV giữa gói 4 và gói 1, và J theo (1.14). Nhận xét về gói 4. <span class=src>(theo (1.13), (1.14))</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>4.</b><span>Gói 1 500 byte. Tính xác suất lỗi gói ở BER 10<sup>−7</sup> và 10<sup>−5</sup>, bằng công thức chính xác và bằng xấp xỉ L·P<sub>b</sub>. Ở mức BER nào xấp xỉ không còn dùng được? <span class=src>(theo (1.16))</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>5.</b><span>Trong 10 s nhận 600 Mbit; gói 512 byte có 40 byte tiêu đề; 3 % gói là gói truyền lại. Tính T và G. <span class=src>(theo (1.17), (1.18))</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>6.</b><span>Một cổng có tải đưa vào ρ = 1,2. Ước lượng tỉ lệ mất gói lâu dài. Nhân đôi bộ đệm thì mất gói và trễ thay đổi thế nào? Đề xuất hai cách sửa đúng chỗ. <span class=src>(đánh đổi bộ đệm)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+  <footer><span>Giáo trình TEL1459, mục 1.6.2–1.6.4, tr. 14–16</span><span>nclamvn.github.io/bai-giang</span></footer>
+</div></div></div>
+  </section>
+
+  <section id="dap-an" aria-labelledby="h-da">
+    <h2 id="h-da">Đáp án và gợi ý chấm</h2>
+    <div class="card"><dl class="ans"><dt>1</dt><dd>Thông lượng (1.17) đếm mọi bit qua điểm đo trong Δt; goodput (1.18) chỉ đếm dữ liệu hữu ích ở lớp ứng dụng, đã trừ tiêu đề, gói truyền lại và dữ liệu điều khiển. Liên kết có thể bận gần 100 % mà ứng dụng vẫn nhận thiếu vì: tiêu đề chiếm phần lớn khi gói nhỏ; gói lỗi hoặc mất phải truyền lại; lưu lượng điều khiển và lưu lượng của dịch vụ khác cùng chiếm liên kết. Vì vậy phải đo goodput ở lớp ứng dụng, kèm trễ, mất gói, và so với vector yêu cầu (1.6), (1.8). Đủ điểm khi nêu đúng hai định nghĩa và ít nhất hai nguyên nhân.</dd><dt>2</dt><dd>P<sub>loss</sub> = 1 − 49 965 / 50 000 = 35 / 50 000 = <b>7·10<sup>−4</sup></b> ≤ 10<sup>−3</sup>: đạt. Còn thiếu: điểm đo (một chiều từ đâu tới đâu), thời gian và điều kiện tải lúc đo (giờ cao điểm hay thấp điểm). Chấp nhận thêm: cỡ gói, loại lưu lượng.</dd><dt>3</dt><dd>IPDV<sub>4,1</sub> = 25 − 15 = <b>10 ms</b>. Các hiệu kề nhau 3, 2, 9, 8 ms, tổng 22 ms, N − 1 = 4, <b>J = 5,5 ms</b>. Gói 4 trễ bất thường, góp 17 ms trong 22 ms tổng độ lệch: nên xem hàng đợi tại thời điểm đó (bùng tải, gói lớn chen trước).</dd><dt>4</dt><dd>L = 12 000 bit. BER 10<sup>−7</sup>: chính xác ≈ <b>1,199·10<sup>−3</sup></b>, xấp xỉ 1,2·10<sup>−3</sup>: khớp. BER 10<sup>−5</sup>: chính xác ≈ <b>11,3 %</b>, xấp xỉ 12 %: lệch. Xấp xỉ chỉ dùng khi L·P<sub>b</sub> ≪ 1; từ khoảng 0,1 trở lên đã sai đáng kể.</dd><dt>5</dt><dd>T = 600 / 10 = <b>60 Mbit/s</b>. Phần hữu ích mỗi gói (512 − 40)/512 = 472/512 ≈ 0,922; bỏ 3 % truyền lại: G = 60 × 0,922 × 0,97 ≈ <b>53,7 Mbit/s</b>.</dd><dt>6</dt><dd>Mất gói → 1 − 1/1,2 ≈ <b>16,7 %</b>. Nhân đôi bộ đệm: mất gói gần như không đổi (phần vượt công suất vẫn phải rơi), trễ trong hệ tăng gần gấp đôi khi hàng đầy. Sửa đúng chỗ: nâng dung lượng cổng hoặc giảm tải (dời lưu lượng nền, giới hạn tốc độ nguồn); phân lớp ưu tiên để dịch vụ nhạy không chịu phần mất (tiết 18). Đủ điểm khi có con số 16,7 % và hai cách sửa tác động vào ρ hoặc phân lớp.</dd></dl></div>
+  </section>
+
+  <section id="kiem-tra" aria-labelledby="h-kt">
+    <h2 id="h-kt">Kiểm tra nhanh cuối tiết</h2>
+    <p class="sub">6 câu, khoảng 3 phút. Chiếu lên hoặc đọc to; mở đáp án sau khi lớp trả lời.</p>
+    <div class="card"><div class="qz"><p>1. Phát 10 000 gói, nhận 9 990 gói. P_loss bằng bao nhiêu?</p><ol type="A"><li>0,01 %</li><li>0,1 %</li><li>1 %</li><li>10 %</li></ol><details><summary>Đáp án</summary><b>B.</b> 1 − 9 990/10 000 = 10/10 000 = 10<sup>−3</sup> = 0,1 %.</details></div><div class="qz"><p>2. Tải đưa vào ρ = 1,5, bộ đệm rất lớn. Tỉ lệ mất gói lâu dài khoảng bao nhiêu?</p><ol type="A"><li>Gần 0</li><li>Khoảng 33 %</li><li>Khoảng 50 %</li><li>Khoảng 67 %</li></ol><details><summary>Đáp án</summary><b>B.</b> 1 − 1/1,5 ≈ 0,333.</details></div><div class="qz"><p>3. J theo (1.14) đo điều gì?</p><ol type="A"><li>Trễ trung bình</li><li>Trễ lớn nhất</li><li>Trung bình độ lệch trễ giữa hai gói kề nhau</li><li>Tỉ lệ gói trễ quá ngưỡng</li></ol><details><summary>Đáp án</summary><b>C.</b> J = 1/(N−1) Σ |D<sub>i</sub> − D<sub>i−1</sub>|.</details></div><div class="qz"><p>4. Gói 1 000 byte, BER 10⁻⁶. Xác suất lỗi gói xấp xỉ?</p><ol type="A"><li>0,1 %</li><li>0,8 %</li><li>8 %</li><li>10⁻⁶</li></ol><details><summary>Đáp án</summary><b>B.</b> L·P<sub>b</sub> = 8 000 × 10<sup>−6</sup> = 0,008 = 0,8 %.</details></div><div class="qz"><p>5. Thông lượng và goodput khác nhau ở chỗ nào?</p><ol type="A"><li>Goodput đo ở lớp vật lý</li><li>Goodput chỉ đếm dữ liệu hữu ích của ứng dụng</li><li>Thông lượng không tính gói truyền lại</li><li>Không khác nhau</li></ol><details><summary>Đáp án</summary><b>B.</b> Goodput trừ tiêu đề, gói truyền lại và dữ liệu điều khiển.</details></div><div class="qz"><p>6. Ở tải trên 1, tăng bộ đệm gấp bốn lần thì?</p><ol type="A"><li>Mất gói giảm bốn lần</li><li>Mất gói gần như không đổi, trễ tăng</li><li>Cả mất gói và trễ đều giảm</li><li>Không ảnh hưởng gì</li></ol><details><summary>Đáp án</summary><b>B.</b> Phần vượt công suất vẫn phải rơi; hàng dài hơn nên gói được nhận chờ lâu hơn.</details></div></div>
+  </section>
+
+  <section id="tom-tat" aria-labelledby="h-tt">
+    <h2 id="h-tt">Tóm tắt và nguồn</h2>
+    <div class="g2">
+      <div class="card"><h3>Ghi nhớ</h3><ul class="tt"><li>Mất gói P<sub>loss</sub> = 1 − N<sub>rx</sub>/N<sub>tx</sub> (1.15), đo một chiều theo RFC 7680, luôn kèm điểm đo và điều kiện đo. Khi ρ &gt; 1, P<sub>loss</sub> → 1 − 1/ρ dù bộ đệm lớn bao nhiêu.</li><li>Biến thiên trễ là độ dao động của trễ, không phải trễ lớn: IPDV<sub>i,j</sub> = D<sub>i</sub> − D<sub>j</sub> (1.13), J = 1/(N−1) Σ |D<sub>i</sub> − D<sub>i−1</sub>| (1.14). J tăng theo tải là dấu hiệu nghẽn ở hàng đợi hoặc chính sách QoS.</li><li>Lỗi gói P<sub>pkt</sub> = 1 − (1 − P<sub>b</sub>)<sup>L</sup> ≈ L·P<sub>b</sub> khi L·P<sub>b</sub> ≪ 1 (1.16): gói dài và BER cao làm goodput giảm.</li><li>Thông lượng T = B<sub>rx</sub>/Δt (1.17) phải báo cáo kèm cỡ gói, mô hình lưu lượng, giao thức, số luồng, tải. Goodput G = B<sub>app</sub>/Δt (1.18) mới là cái ứng dụng nhận.</li><li>Bộ đệm đổi mất gói lấy trễ và không chữa được quá tải; thiết kế đúng là giữ ρ dưới ngưỡng.</li></ul></div>
+      <div class="card"><h3>Nguồn</h3><ul class="src"><li>Hoàng Trọng Minh, Giáo trình Thiết kế và hiệu năng mạng (học phần TEL1459), Học viện Công nghệ Bưu chính Viễn thông, 2026: mục 1.6.2–1.6.4, trang 14–16; phương trình (1.13)–(1.18); câu 5 cuối chương 1.</li><li>RFC 3393 (IPDV, 2002), RFC 7680 (mất gói một chiều, 2016), RFC 2544 (kiểm chuẩn thiết bị liên mạng, 1999), RFC 6349 (kiểm thông lượng TCP, 2011); ITU-T Y.1541 lớp 0 (ngưỡng mất gói 10&lt;sup&gt;−3&lt;/sup&gt;).</li><li>Lời giải M/M/1/K: R. Jain, The Art of Computer Systems Performance Analysis (1991), chương 31. Tiêu đề IPv4 20 byte (RFC 791), TCP 20 byte (RFC 9293).</li><li>Giả định của bài: cổng 100 Mbit/s, cỡ gói phân bố mũ, các chuỗi trễ và số đếm trong ví dụ và bài tập.</li></ul><p class="mini" style="margin-top:12px">Nội dung viết mới theo giáo trình TEL1459 của PGS.TS Hoàng Trọng Minh (PTIT, 2026); không chép văn bản hay hình của sách, công thức giữ đúng số hiệu để sinh viên tra lại.</p></div>
+    </div>
+  </section>
+  <div class="foot"><span>Bản 1 · 16/11/2026</span><span class="noprint">© 2026 Sáng Ăn Khoai · phi thương mại</span></div>
+</main>
+<script>
+(function(){
+  var z=document.querySelector('.sheet-zoom'),w=document.querySelector('.sheet-wrap');
+  function fit(){var mm=210*96/25.4;z.style.setProperty('--z',Math.min(1,(w.clientWidth)/mm).toFixed(3))}
+  fit();addEventListener('resize',fit);
+  document.querySelectorAll('[data-print]').forEach(function(b){b.addEventListener('click',function(){
+    document.body.classList.toggle('in-phieu',b.dataset.print==='phieu');window.print();})});
+  addEventListener('afterprint',function(){document.body.classList.remove('in-phieu')});
+})();
+</script>
+</body>
+</html>

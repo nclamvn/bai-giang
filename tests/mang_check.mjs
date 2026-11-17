@@ -87,5 +87,15 @@ kiem('Câu 3 chương 4: 48 × 1 Gb/s trên 4 × 10 Gb/s → Ω = 1,2', Math.abs
   kiem('Tiết 1, bài 5: 0,99602 (≈ 2 095 phút/năm) và 0,999984 (≈ 8 phút/năm)', Math.abs(a1 - 0.99602) < 1e-5 && Math.abs(F.phutNgungNam(a1) - 2095) < 2 && Math.abs(a2 - 0.999984) < 1e-6 && Math.abs(F.phutNgungNam(a2) - 8.35) < 0.2, `${f(F.phutNgungNam(a1))}, ${f(F.phutNgungNam(a2), 3)} phút`);
   const r4 = 790 / 500; kiem('Tiết 1, bài 4: ρ = 1,58, mất ≈ 36,7 %, goodput ≈ 247 Mbit/s', Math.abs(1 - 1 / r4 - 0.367) < 0.001 && Math.abs(390 / r4 - 247) < 0.5); }
 
+// Tiết 3 (giáo án tk-hang-doi.json): số của ví dụ giải mẫu và đáp án
+{ const J = (d) => d.slice(1).reduce((s, x, i) => s + Math.abs(x - d[i]), 0) / (d.length - 1);
+  kiem('Tiết 3, ví dụ 1 và bài 2: P_loss 3·10⁻³ và 7·10⁻⁴', Math.abs(F.tiLeMat(20000, 19940) - 3e-3) < 1e-12 && Math.abs(F.tiLeMat(50000, 49965) - 7e-4) < 1e-12);
+  kiem('Tiết 3, ví dụ 2 và bài 3: J = 4,8; 1,6; 5,5 ms', Math.abs(J([20, 23, 21, 30, 22, 24]) - 4.8) < 1e-9 && Math.abs(J([20, 23, 21, 22, 22, 24]) - 1.6) < 1e-9 && Math.abs(J([15, 18, 16, 25, 17]) - 5.5) < 1e-9 && Math.abs(J([10, 14, 11, 15]) - 11 / 3) < 1e-9);
+  kiem('Tiết 3, ví dụ 3 và bài 4: lỗi gói 1,19 %; 0,051 %; 11,3 %; 1,199·10⁻³', Math.abs(F.pLoiGoi(1e-6, 12000) - 0.0119) < 1e-4 && Math.abs(F.pLoiGoi(1e-6, 512) - 5.12e-4) < 2e-6 && Math.abs(F.pLoiGoi(1e-5, 12000) - 0.113) < 5e-4 && Math.abs(F.pLoiGoi(1e-7, 12000) - 1.199e-3) < 1e-6);
+  kiem('Tiết 3, ví dụ 4 và bài 5: G ≈ 89,4; 34,9; 53,7 Mbit/s', Math.abs(950 * 0.96 * 0.98 / 10 - 89.4) < 0.05 && Math.abs(950 * 0.375 * 0.98 / 10 - 34.9) < 0.05 && Math.abs(60 * 472 / 512 * 0.97 - 53.7) < 0.05);
+  const mu = 12500, q = (r, K) => F.mm1k(r * mu, mu, K);
+  kiem('Tiết 3, ví dụ 5: M/M/1/K ở ρ 0,85 và 1,3, K 16 và 64', Math.abs(q(0.85, 16).P - 0.0119) < 1e-4 && Math.abs(q(0.85, 16).W - 0.43e-3) < 0.01e-3 && Math.abs(q(0.85, 64).P - 4.6e-6) < 0.1e-6 && Math.abs(q(0.85, 64).W - 0.53e-3) < 0.01e-3
+    && Math.abs(q(1.3, 16).P - 0.233) < 1e-3 && Math.abs(q(1.3, 16).W - 1.03e-3) < 0.01e-3 && Math.abs(q(1.3, 64).P - 0.231) < 1e-3 && Math.abs(q(1.3, 64).W - 4.85e-3) < 0.01e-3); }
+
 console.log(`\n${dem - loi}/${dem} đạt`);
 process.exit(loi ? 1 : 0);

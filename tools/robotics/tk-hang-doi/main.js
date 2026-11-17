@@ -1,4 +1,4 @@
-// Thiết kế và hiệu năng mạng · bài 1.2 · Khi hàng đợi đầy.
+// Thiết kế và hiệu năng mạng · tiết 3 · Khi hàng đợi đầy.
 // Theo giáo trình TEL1459 (Hoàng Trọng Minh, PTIT 2026), mục 1.6.2–1.6.4: biến thiên trễ (1.13, 1.14), tỉ lệ mất gói (1.15),
 // xác suất lỗi gói theo BER (1.16), thông lượng (1.17) và goodput (1.18); câu hỏi 5 cuối chương 1.
 // Cổng ra của router có bộ đệm K gói. Cảnh chạy một hàng đợi M/M/1/K thật, chậm lại để mắt theo được; bảng số chạy cùng mô
@@ -104,7 +104,7 @@ function vStep(dt) {
 function vReset() { const V = S.v; for (const g of GOI) { g.st = 'tu-do'; g.m.visible = false; } Object.assign(V, {q: [], thung: [], ntx: 0, nrx: 0, nmat: 0, tre: [], hist: [], next: S.t + 0.3, busyTo: S.t}); for (let i = 0; i < 250; i++) vStep(0.1); }
 
 // ---------------- bảng
-ui.header({code: '1.2', kicker: 'THIẾT KẾ VÀ HIỆU NĂNG MẠNG · MỤC 1.6.2–1.6.4 · HÀNG ĐỢI HỮU HẠN', title: 'Khi hàng đợi đầy', sub: 'MẤT GÓI · JITTER · THÔNG LƯỢNG · GOODPUT', hub: HUB_URL + 'thiet-ke-mang/',
+ui.header({code: 'T3', kicker: 'THIẾT KẾ VÀ HIỆU NĂNG MẠNG · TIẾT 3 · MỤC 1.6.2–1.6.4 · HÀNG ĐỢI HỮU HẠN', title: 'Khi hàng đợi đầy', sub: 'MẤT GÓI · JITTER · THÔNG LƯỢNG · GOODPUT', hub: HUB_URL + 'thiet-ke-mang/',
   right: [['K', 'GÓI BỘ ĐỆM'], ['1.13–1.18', 'PHƯƠNG TRÌNH'], ['M/M/1/K', 'ĐỐI CHIẾU MÔ PHỎNG']]});
 ui.panel(28, 112, 300, 210, 'CỔNG RA WAN · 100 MBIT/S', '01');
 const slR = ui.slider('rho', 42, 148, 272, 'TẢI ĐƯA VÀO', {lw: 92, vw: 74});
@@ -194,7 +194,7 @@ const sim = {
     const pm = kq.s.mat, pt = kq.lt.P, pv = V.ntx ? F.tiLeMat(V.ntx, V.ntx - V.nmat) : 0, pmx = Math.max(0.05, pm, pt) * 1.15;
     lossBars[0].set(pm / pmx, `${vn(pm * 100, 2)} %`, MAU.bad); lossBars[1].set(pt / pmx, `${vn(pt * 100, 2)} %`, C.ink);
     lossBig.textContent = `${vn(pv * 100, 1)} %`;
-    t03.innerHTML = `P<sub>mất</sub> = 1 − N<sub>rx</sub>/N<sub>tx</sub>: trong cảnh ${V.ntx} gói đến cổng, ${V.nmat} gói bị bỏ. Hai thanh trên: ${kq.s.n.toLocaleString('vi-VN')} gói ở tốc độ thật, mô phỏng so với lời giải M/M/1/K. ${S.rho > 1 ? `Khi ρ > 1, mất gói tiến tới 1 − 1/ρ = ${vn((1 - 1 / S.rho) * 100, 1)} %: phần vượt công suất phải rơi đi đâu đó.` : ''}`;
+    t03.innerHTML = `P<sub>loss</sub> = 1 − N<sub>rx</sub>/N<sub>tx</sub>: trong cảnh ${V.ntx} gói đến cổng, ${V.nmat} gói bị bỏ. Hai thanh trên: ${kq.s.n.toLocaleString('vi-VN')} gói ở tốc độ thật, mô phỏng so với lời giải M/M/1/K. ${S.rho > 1 ? `Khi ρ > 1, mất gói tiến tới 1 − 1/ρ = ${vn((1 - 1 / S.rho) * 100, 1)} %: phần vượt công suất phải rơi đi đâu đó.` : ''}`;
     // bảng 04: dải trễ của 60 gói liên tiếp từ mô phỏng thật, đường ngang là trễ trung bình
     const mau = kq.s.mau.slice(0, 60), mx = Math.max(...mau), W = 272; let g = `<rect x="0" y="0" width="${W}" height="80" fill="${C.chart}" stroke="${C.line}"/>`;
     mau.forEach((v, i) => { const x = 4 + (i / 59) * (W - 8), y = 76 - (v / mx) * 70; if (i) { const v0 = mau[i - 1], y0 = 76 - (v0 / mx) * 70; g += `<line x1="${x - (W - 8) / 59}" y1="${y0}" x2="${x}" y2="${y}" stroke="${C.line}" stroke-width=".8"/>`; } g += `<circle cx="${x}" cy="${y}" r="2.2" fill="${MAU.prop}"/>`; });
@@ -232,7 +232,7 @@ function cardOf(part) {
   if (part === 'thung') return {...base, k: 'Gói bị bỏ', t: 'Tràn bộ đệm', b: 'Mất gói do tràn hàng đợi là một trong các nguyên nhân giáo trình liệt kê dưới (1.15), cùng với lỗi đường truyền, policing, định tuyến không ổn định và lỗi thiết bị.', rows: [['Trong cảnh', () => `${S.v.nmat} / ${S.v.ntx} gói`]]};
   if (part === 'bang') return {...base, k: 'Máy nhận', t: 'Trễ của từng gói', b: 'Mỗi chấm là một gói, cao theo thời gian từ lúc vào hàng tới lúc tới đích. Vạch ngang là trễ trung bình; chấm đỏ là gói trễ hơn 1,5 lần trung bình. Dao động của các chấm chính là jitter.', rows: [['Jitter J', () => F.fmtThoiGian(S.kq.s.jitter, 2)]]};
   if (part === 'wan') return {...base, k: 'Đường WAN', t: '100 Mbit/s', b: 'Thông lượng đo được là bit nhận chia thời gian (1.17); goodput chỉ đếm phần dữ liệu ứng dụng (1.18).', rows: [['Thông lượng', () => F.fmtBps(S.kq.T, 1)], ['Goodput', () => F.fmtBps(S.kq.G, 1)]]};
-  if (part === 'nguon' || part === 'vao') return {...base, k: 'Ba nguồn', t: 'Thoại, video, dữ liệu nền', b: 'Ba nguồn dùng chung một cổng ra theo kiểu vào trước ra trước. Bài 5.2 tách chúng thành ba hàng ưu tiên.', rows: [['Tải đưa vào', () => `ρ = ${vn(S.rho, 2)}`]]};
+  if (part === 'nguon' || part === 'vao') return {...base, k: 'Ba nguồn', t: 'Thoại, video, dữ liệu nền', b: 'Ba nguồn dùng chung một cổng ra theo kiểu vào trước ra trước. Tiết 18 tách chúng thành ba hàng ưu tiên.', rows: [['Tải đưa vào', () => `ρ = ${vn(S.rho, 2)}`]]};
   return null;
 }
 
@@ -244,30 +244,43 @@ const views = {
   bang: () => ({tx: 8.0, ty: 1.9, tz: -1.2, az: -20, el: 8, d: 13, sx: 0, sy: -30}),
 };
 
-// ---------------- bài giảng
+// ---------------- bài giảng · tiết 3 (45 phút), theo mục 1.6.2–1.6.4 của giáo trình; giáo án: tools/giao-an-mang/tk-hang-doi.json
+// Tên bước (t) phải khớp từng bước của giáo án; tests/smoke.py kiểm.
 const CAP = [
-  {k: 'Mục 1.6 · bài toán', t: 'Một cổng ra, ba nguồn, một bộ đệm có hạn', b: 'Thoại, video và dữ liệu nền cùng đổ vào cổng WAN của router. Khi cổng bận, gói xếp hàng trong bộ đệm. Bộ đệm có K chỗ: đầy rồi thì gói mới bị bỏ. Bài này xem bốn thứ cùng đổi theo tải: mất gói, jitter, thông lượng và goodput.', e: 'hàng đợi M/M/1/K'},
-  {k: 'Tràn bộ đệm', t: 'Gói đỏ rơi vào thùng', b: 'Theo dõi ống phía trên router: gói cam ở đầu ống đang được phát lên dây. Mỗi khi ống đủ K gói, gói vừa tới bị bỏ và rơi vào thùng đỏ. Ở tải 0,85 việc này thỉnh thoảng mới xảy ra.', e: 'P_mất = 1 − N_rx / N_tx   (1.15)'},
-  {k: 'Quá tải', t: 'Nguồn không biết cổng đang đầy', b: 'Đẩy tải đưa vào lên 1,3. Hàng chạm vạch K và nằm lì ở đó; cứ ba gói đến thì gần một gói rơi. Phần vượt công suất cổng không thể đi đâu khác: mất gói tiến tới 1 − 1/ρ.', e: 'ρ > 1  →  P_mất → 1 − 1/ρ',
+  {k: 'Tiết 3 · mục 1.6.2–1.6.4', t: 'Một cổng ra, ba nguồn, một bộ đệm có hạn', b: 'Tiết trước đo trễ và mức sử dụng của một liên kết. Tiết này đi tiếp ba điều người dùng cảm thấy rõ hơn: gói có tới không, trễ có đều không, ứng dụng nhận được bao nhiêu. Thoại, video và dữ liệu nền cùng đổ vào cổng WAN 100 Mbit/s của router. Khi cổng bận, gói xếp hàng trong bộ đệm K chỗ; đầy rồi thì gói mới bị bỏ.', e: 'hàng đợi M/M/1/K: một cổng, bộ đệm K gói'},
+  {k: 'Mục 1.6.3 · phương trình 1.15', t: 'Gói bị bỏ khi bộ đệm đầy', b: 'Theo dõi ống phía trên router: gói cam ở đầu ống đang được phát lên dây. Mỗi khi ống đủ K gói, gói vừa tới bị bỏ (tail drop) và rơi vào thùng đỏ. Thu bộ đệm còn 8 gói: ở cùng tải 0,85, gói rơi dày hơn hẳn. Tỉ lệ mất là phần gói đã phát mà không tới điểm đo đích.', e: 'P_loss = 1 − N_rx / N_tx   (1.15)'},
+  {k: 'Mục 1.6.3 · RFC 7680', t: 'Đếm mất gói ở đâu, đếm thế nào', b: 'Con số mất gói chỉ có nghĩa khi đi kèm điểm đo và điều kiện đo: đếm từ đâu tới đâu, trong khoảng thời gian nào, ở tải nào. RFC 7680 định nghĩa metric mất gói một chiều cho IPPM. Tràn hàng đợi như trong cảnh chỉ là một nguyên nhân; giáo trình kể thêm lỗi đường truyền, policing, định tuyến không ổn định và lỗi thiết bị. Mỗi nguyên nhân để lại dấu vết khác nhau trên số đo.', e: 'mất gói = điểm đo + điều kiện đo + N_tx, N_rx'},
+  {k: 'Quá tải', t: 'Nguồn không biết cổng đang đầy', b: 'Đẩy tải đưa vào lên 1,3. Hàng chạm vạch K và nằm lì ở đó; cứ khoảng bốn gói đến thì một gói rơi. Phần vượt công suất cổng không thể đi đâu khác: mất gói tiến tới 1 − 1/ρ, ở đây khoảng 23 %.', e: 'ρ > 1  →  P_loss → 1 − 1/ρ',
     ask: {q: 'Tải đưa vào gấp 1,25 lần công suất cổng, bộ đệm rất lớn. Lâu dài, khoảng bao nhiêu phần trăm gói bị bỏ?', o: ['Gần 0 % vì bộ đệm lớn', 'Khoảng 20 %', 'Khoảng 25 %'], a: 1, e: '1 − 1/1,25 = 0,2. Bộ đệm chỉ hoãn việc bỏ gói chứ không xoá được phần vượt công suất.'}},
-  {k: 'Biến thiên trễ · 1.13, 1.14', t: 'Các chấm trên bảng nhảy lên xuống', b: 'Mỗi chấm ở máy nhận là trễ của một gói. Cùng một đường, cùng một cổng, nhưng gói gặp hàng dài thì trễ, gặp hàng ngắn thì nhanh. Độ dao động đó là jitter, và nó lớn dần theo tải dù trễ trung bình chưa vượt ngưỡng.', e: 'J = 1/(N−1) · Σ |D_i − D_(i−1)|'},
-  {k: 'Lỗi bit · 1.16', t: 'Gói dài thì dễ hỏng hơn', b: 'Với BER P_b, gói L bit lỗi với xác suất 1 − (1 − P_b)^L, xấp xỉ L·P_b khi nhỏ. Đẩy BER lên 10⁻⁵: gói 1 500 byte hỏng khoảng 11 %, thanh goodput tụt xuống trong khi thông lượng gần như không đổi.', e: 'P_gói = 1 − (1 − P_b)^L ≈ L·P_b'},
-  {k: 'Câu hỏi 5 · thông lượng và goodput', t: 'Liên kết bận chưa chắc ứng dụng nhận đủ', b: 'Thông lượng đếm mọi bit qua điểm đo. Goodput chỉ đếm dữ liệu ứng dụng: trừ tiêu đề, gói lỗi phải truyền lại, gói mất. Gói nhỏ 64 byte mất hơn nửa cho 40 byte tiêu đề, nên cùng một thông lượng, goodput thấp hơn nhiều.', e: 'T = B_rx / Δt   ·   G = B_app / Δt',
+  {k: 'Mục 1.6.2 · phương trình 1.13', t: 'Biến thiên trễ không phải là trễ lớn', b: 'Mỗi chấm ở máy nhận là trễ một chiều của một gói. Cùng đường, cùng cổng, nhưng gói gặp hàng dài thì trễ, gặp hàng ngắn thì nhanh. RFC 3393 định nghĩa biến thiên trễ IPDV là hiệu trễ một chiều giữa hai gói được chọn. Thoại, video hội nghị và đồng bộ thời gian suy giảm khi biến thiên trễ tăng, ngay cả khi trễ trung bình còn trong ngưỡng.', e: 'IPDV_(i,j) = D_i − D_j   (1.13)'},
+  {k: 'Phương trình 1.14', t: 'Tính J từ một chuỗi trễ', b: 'Với N gói liên tiếp, J là trung bình độ lệch tuyệt đối giữa hai gói kề nhau. Sáu gói có trễ 20, 23, 21, 30, 22, 24 ms: năm hiệu là 3, 2, 9, 8, 2 ms, tổng 24 ms, J = 24/5 = 4,8 ms. Riêng gói thứ tư góp 17 ms; bỏ nó đi thì J chỉ còn 2 ms. Bảng 04 làm đúng phép tính này trên 30 000 gói mô phỏng.', e: 'J = 1/(N−1) · Σ_(i=2..N) |D_i − D_(i−1)|   (1.14)',
+    ask: {q: 'Bốn gói liên tiếp có trễ 10, 14, 11, 15 ms. J theo (1.14) bằng bao nhiêu?', o: ['3,0 ms', 'Khoảng 3,67 ms', '12,5 ms'], a: 1, e: '(4 + 3 + 4) / 3 ≈ 3,67 ms. Chia cho N − 1 = 3 vì có ba cặp gói kề nhau.'}},
+  {k: 'Phương trình 1.14 · theo tải', t: 'Jitter tăng theo tải', b: 'Kéo tải xuống 0,5: hàng thường trống, các chấm nằm sát nhau. Kéo lên 0,95: hàng lúc dài lúc ngắn, chấm tản ra. Giáo trình chỉ cách đọc: nếu J tăng khi tải tăng, điểm nghẽn thường nằm ở hàng đợi, phân lớp QoS hoặc chính sách ưu tiên tại nút trung gian. J là manh mối để tìm chỗ sửa, không chỉ là con số để báo cáo.', e: 'J tăng theo ρ → xem hàng đợi, QoS, ưu tiên'},
+  {k: 'Mục 1.6.3 · phương trình 1.16', t: 'Gói dài thì dễ hỏng hơn', b: 'BER P_b là xác suất một bit sai sau kênh. Nếu lỗi bit độc lập, gói L bit lỗi với xác suất 1 − (1 − P_b)^L, xấp xỉ L·P_b khi tích này nhỏ. Gói 1 500 byte (12 000 bit) ở BER 10⁻⁶ hỏng khoảng 1,2 %; ở 10⁻⁵ hỏng khoảng 11 %, lúc đó xấp xỉ L·P_b = 12 % đã lệch. Đẩy BER lên: thanh goodput tụt trong khi thông lượng gần như đứng yên.', e: 'P_pkt = 1 − (1 − P_b)^L ≈ L·P_b  khi L·P_b ≪ 1   (1.16)'},
+  {k: 'Mục 1.6.4 · phương trình 1.17', t: 'Thông lượng phải kèm điều kiện đo', b: 'Thông lượng là số bit nhận được qua điểm đo chia cho khoảng thời gian. RFC 2544 dùng nó để kiểm chuẩn thiết bị liên mạng, RFC 6349 để kiểm thông lượng TCP. Một con số thông lượng đứng một mình dễ dẫn tới kết luận sai: phải báo cáo cùng cỡ gói, mô hình lưu lượng, giao thức, số luồng và điều kiện tải.', e: 'T = B_rx / Δt   (1.17)'},
+  {k: 'Phương trình 1.18 · câu 5', t: 'Liên kết bận chưa chắc ứng dụng nhận đủ', b: 'Goodput chỉ đếm dữ liệu hữu ích ở lớp ứng dụng: trừ tiêu đề, gói truyền lại và dữ liệu điều khiển. Hạ cỡ gói xuống 64 byte: 40 byte tiêu đề IPv4 và TCP chiếm hơn nửa mỗi gói, thông lượng vẫn thế mà goodput tụt mạnh. Đó là ý chính của câu 5: liên kết bận không chứng minh được ứng dụng đạt yêu cầu; phải đo ở lớp ứng dụng.', e: 'G = B_app / Δt   (1.18)',
     ask: {q: 'Hạ cỡ gói từ 1 500 xuống 64 byte, giữ nguyên tải. Goodput thay đổi thế nào?', o: ['Tăng vì gói nhỏ ít lỗi', 'Giảm mạnh vì tiêu đề chiếm phần lớn mỗi gói', 'Không đổi'], a: 1, e: '64 byte có 40 byte tiêu đề: chỉ 24 byte, tức 37,5 %, là dữ liệu ứng dụng.'}},
-  {k: 'Đánh đổi bộ đệm', t: 'Bộ đệm lớn không chữa được quá tải', b: 'Bấm Bộ đệm lớn: K = 64. Ở tải dưới 1, mất gói giảm hẳn nhưng gói được nhận phải chờ lâu hơn. Ở tải trên 1, bộ đệm lớn chỉ thêm trễ mà mất gói gần như cũ. Thiết kế đúng là giữ ρ dưới ngưỡng, không phải mua bộ đệm to.', e: 'bảng 06 · mất gói và thời gian trong hệ theo K'},
+  {k: 'Đánh đổi bộ đệm', t: 'Bộ đệm lớn không chữa được quá tải', b: 'Bấm Bộ đệm lớn: K = 64. Ở tải 0,85, mất gói giảm từ khoảng 1,2 % xuống cỡ 10⁻⁶, đổi lại thời gian trong hệ tăng từ 0,43 lên 0,53 ms. Ở tải 1,3, mất gói gần như giữ nguyên khoảng 23 % mà thời gian trong hệ tăng gần năm lần, từ 1,0 lên 4,9 ms. Thiết kế đúng là giữ ρ dưới ngưỡng, không phải mua bộ đệm to.', e: 'bảng 06 · mất gói và thời gian trong hệ theo K'},
   {k: 'Kiểm mô hình', t: 'Ba con số, ba cách tính', b: 'Mất gói hiện ba lần: đếm gói trong cảnh chậm, mô phỏng 30 000 gói ở tốc độ thật, và lời giải M/M/1/K. Ba con số gần nhau thì mới tin mô hình. Lệch nhau là dấu hiệu phải xem lại giả định, như mục 5.1.3 dặn.', e: 'cảnh ≈ mô phỏng ≈ M/M/1/K'},
+  {k: 'Tổng kết · câu 5', t: 'Năm metric, mỗi metric một điều kiện đo', b: 'Mất gói (1.15), biến thiên trễ (1.13, 1.14), xác suất lỗi gói (1.16), thông lượng (1.17), goodput (1.18): mỗi đại lượng cần điểm đo, điều kiện đo và cách tính thì mới dùng được để nghiệm thu. Ba ý cần nhớ: quá tải thì phần vượt công suất phải rơi; bộ đệm đổi mất gói lấy trễ; liên kết bận không có nghĩa ứng dụng nhận đủ. Về nhà: câu 5 cuối chương 1 và phiếu bài tập. Tiết sau: độ sẵn sàng.', e: 'đo cái ứng dụng nhận, không chỉ cái liên kết mang'},
 ];
 const ev = [], at = (t, o) => ev.push({at: t, ...o});
+const sR = (r) => (r - 0.3) / 1.2, sK = (k) => (k - 2) / 62, sL = (l) => (l - 64) / 1436;
 at(0.2, {cap: 0}); at(1, {click: 'reset'}); at(2, {click: 'v_hero'});
-at(10, {cap: 1}); at(10.5, {click: 'v_rt'}); at(13, {slide: 'K', to: (8 - 2) / 62, dur: 1.5});
-at(24, {cap: 2}); at(24.5, {click: 'xoa'}); at(25, {slide: 'rho', to: (1.3 - 0.3) / 1.2, dur: 2});
-at(38, {cap: 3}); at(38.5, {click: 'v_bang'}); at(39, {slide: 'rho', to: (0.85 - 0.3) / 1.2, dur: 1.5}); at(40, {slide: 'K', to: (16 - 2) / 62, dur: 1});
-at(50, {cap: 4}); at(50.5, {click: 'v_hero'}); at(51, {slide: 'L', to: 1, dur: 1.2}); at(53, {slide: 'ber', to: LOGC(1e-5, 1e-10, 1e-4), dur: 2}); at(59, {slide: 'ber', to: LOGC(1e-7, 1e-10, 1e-4), dur: 1});
-at(62, {cap: 5}); at(63, {slide: 'L', to: 0, dur: 2}); at(70, {slide: 'L', to: (1000 - 64) / 1436, dur: 1.2});
-at(74, {cap: 6}); at(74.5, {click: 'dem_lon'}); at(80, {slide: 'rho', to: (1.3 - 0.3) / 1.2, dur: 1.5}); at(85, {slide: 'rho', to: (0.85 - 0.3) / 1.2, dur: 1}); at(86, {slide: 'K', to: (16 - 2) / 62, dur: 1});
-at(88, {cap: 7}); at(88.5, {click: 'xoa'});
+at(11, {cap: 1}); at(11.5, {click: 'v_rt'}); at(14, {slide: 'K', to: sK(8), dur: 1.5});
+at(22, {cap: 2}); at(22.5, {click: 'v_hero'}); at(23, {click: 'xoa'});
+at(33, {cap: 3}); at(33.5, {click: 'v_rt'}); at(34, {click: 'xoa'}); at(34.5, {slide: 'rho', to: sR(1.3), dur: 2});
+at(45, {cap: 4}); at(45.5, {click: 'v_bang'}); at(46, {slide: 'rho', to: sR(0.85), dur: 1.5}); at(47, {slide: 'K', to: sK(16), dur: 1});
+at(56, {cap: 5});
+at(67, {cap: 6}); at(68, {slide: 'rho', to: sR(0.5), dur: 1.5}); at(72, {slide: 'rho', to: sR(0.95), dur: 2}); at(77, {slide: 'rho', to: sR(0.85), dur: 1});
+at(78, {cap: 7}); at(78.5, {click: 'v_hero'}); at(79, {slide: 'L', to: 1, dur: 1.2}); at(81, {slide: 'ber', to: LOGC(1e-5, 1e-10, 1e-4), dur: 2}); at(87, {slide: 'ber', to: LOGC(1e-7, 1e-10, 1e-4), dur: 1});
+at(89, {cap: 8}); at(90, {slide: 'L', to: sL(1000), dur: 1.2});
+at(100, {cap: 9}); at(101, {slide: 'L', to: 0, dur: 2}); at(108, {slide: 'L', to: sL(1000), dur: 1.2});
+at(111, {cap: 10}); at(111.5, {click: 'dem_lon'}); at(117, {slide: 'rho', to: sR(1.3), dur: 1.5}); at(122, {slide: 'rho', to: sR(0.85), dur: 1}); at(123, {slide: 'K', to: sK(16), dur: 1});
+at(124, {cap: 11}); at(124.5, {click: 'xoa'});
+at(135, {cap: 12}); at(135.5, {click: 'v_hero'});
 ev.sort((a, b) => a.at - b.at);
 
 sim.reset(); tinh(); S.dirty = false;
-runLive({stage: st, ui, sim, views, captions: CAP, script: {events: ev, duration: 100}, firstView: 'hero', extra: [{key: 'qua_tai', label: 'Quá tải'}],
+runLive({stage: st, ui, sim, views, captions: CAP, script: {events: ev, duration: 148}, firstView: 'hero', extra: [{key: 'qua_tai', label: 'Quá tải'}],
   keys: {1: 'v_hero', 2: 'v_rt', 3: 'v_bang', q: 'qua_tai'}});

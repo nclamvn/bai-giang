@@ -1,0 +1,130 @@
+{
+  "id": "tk-hang-doi",
+  "tiet": 3,
+  "bai": "thiet-ke-mang/hang-doi/",
+  "ten_bai": "Khi hàng đợi đầy",
+  "ten_tiet": "Mất gói, biến thiên trễ, lỗi gói, thông lượng và goodput",
+  "chuong": "Chương 1 · Tổng quan về thiết kế và hiệu năng mạng",
+  "muc": "1.6.2–1.6.4",
+  "trang": "14–16",
+  "pt": "(1.13)–(1.18)",
+  "bt_sach": "Câu 5",
+  "dan": "Tiết 2 đã đo trễ và mức sử dụng. Tiết này đi tiếp năm đại lượng người dùng cảm thấy trực tiếp: gói có tới không (mất gói), trễ có đều không (biến thiên trễ), gói có lành không (lỗi gói theo BER), và liên kết thực sự mang được bao nhiêu cho ứng dụng (thông lượng, goodput). Cảnh là một cổng ra có bộ đệm hữu hạn, chạy hàng đợi M/M/1/K thật.",
+  "muc_tieu": [
+    "Tính tỉ lệ mất gói theo (1.15) và nêu năm nguyên nhân mất gói giáo trình liệt kê; giải thích vì sao khi ρ > 1 mất gói tiến tới 1 − 1/ρ.",
+    "Phân biệt biến thiên trễ với trễ lớn; tính IPDV theo (1.13) và J theo (1.14) từ một chuỗi trễ.",
+    "Tính xác suất lỗi gói theo BER bằng (1.16), biết khi nào được dùng xấp xỉ L·P_b.",
+    "Tính thông lượng (1.17) và goodput (1.18); giải thích vì sao thông lượng liên kết cao chưa đủ để kết luận dịch vụ đạt (câu 5).",
+    "Giải thích đánh đổi kích thước bộ đệm: giảm mất gói nhưng tăng trễ, và không chữa được quá tải.",
+    "Nêu điều kiện đo phải đi kèm mỗi metric (điểm đo, cỡ gói, mô hình lưu lượng, tải)."
+  ],
+  "can_co": [
+    "Mức sử dụng ρ = λ/μ và độ trễ hàng đợi (tiết 2).",
+    "Xác suất của biến cố độc lập; luỹ thừa và xấp xỉ (1 − x)^n ≈ 1 − nx khi nx nhỏ.",
+    "Cấu trúc gói IP: tiêu đề IPv4 20 byte, TCP 20 byte."
+  ],
+  "chuan_bi": {
+    "gv": [
+      "Máy tính có Chrome hoặc Edge bản mới, nối máy chiếu. Mở bài 3D trước giờ học một lần, bấm Lên lớp để màn hình giảng viên hiện phút và việc từng bước.",
+      "In phiếu bài tập (một trang A4) cho mỗi sinh viên, hoặc chiếu phiếu và cho làm vào vở.",
+      "Viết sẵn trên góc bảng chuỗi trễ 20, 23, 21, 30, 22, 24 ms cho ví dụ 2."
+    ],
+    "sv": [
+      "Đọc trước mục 1.6.2 đến 1.6.4, giáo trình trang 14–16.",
+      "Máy tính cầm tay."
+    ]
+  },
+  "hoat_dong": [
+    {"ten": "Mở đầu", "tu": 0, "den": 3, "buoc": [1], "muc": "Nối với tiết 2: từ trễ và mức sử dụng sang ba câu hỏi gói có tới, trễ có đều, ứng dụng nhận bao nhiêu.", "san_pham": "Sinh viên nêu được ba câu hỏi đo của tiết."},
+    {"ten": "Mất gói", "tu": 3, "den": 13, "buoc": [2, 3, 4], "muc": "Tràn bộ đệm, (1.15), điều kiện đo, năm nguyên nhân, quá tải và giới hạn 1 − 1/ρ.", "san_pham": "Sinh viên tính được P_loss từ số đếm và ước lượng mất gói khi quá tải."},
+    {"ten": "Biến thiên trễ", "tu": 13, "den": 23, "buoc": [5, 6, 7], "muc": "IPDV (1.13), J (1.14), J theo tải và cách đọc J để tìm điểm nghẽn.", "san_pham": "Sinh viên tính J cho chuỗi sáu gói (ví dụ 2) và trả lời câu hỏi trên màn hình."},
+    {"ten": "Lỗi gói, thông lượng, goodput", "tu": 23, "den": 34, "buoc": [8, 9, 10], "muc": "(1.16), (1.17), (1.18); điều kiện báo cáo thông lượng; câu 5.", "san_pham": "Sinh viên tính P_pkt, T, G (ví dụ 3, 4)."},
+    {"ten": "Đánh đổi bộ đệm và kiểm mô hình", "tu": 34, "den": 41, "buoc": [11, 12], "muc": "K nhỏ và K lớn ở ρ < 1 và ρ > 1; đối chiếu cảnh, mô phỏng và M/M/1/K.", "san_pham": "Sinh viên điền bảng bốn ô của ví dụ 5 và rút kết luận."},
+    {"ten": "Tổng kết, giao bài", "tu": 41, "den": 45, "buoc": [13], "muc": "Năm metric và điều kiện đo; ba ý cần nhớ; giao câu 5 và phiếu bài tập.", "san_pham": "Sinh viên ghi năm metric kèm điều kiện đo."}
+  ],
+  "buoc": [
+    {"t": "Một cổng ra, ba nguồn, một bộ đệm có hạn", "tu": 0, "den": 3,
+      "gv": "Nhắc lại một câu của tiết 2: trễ hàng đợi tăng nhanh khi ρ tiến tới 1. Chiếu toàn cảnh: ba nguồn, router có ống bộ đệm, đường WAN, bảng trễ ở máy nhận. Nêu ba câu hỏi của tiết: gói có tới không, trễ có đều không, ứng dụng nhận được bao nhiêu.",
+      "sv": "Ghi ba câu hỏi đo của tiết."},
+    {"t": "Gói bị bỏ khi bộ đệm đầy", "tu": 3, "den": 6,
+      "gv": "Chuyển góc Bộ đệm. Chỉ gói cam đang phát, gói đỏ rơi khi ống đủ K gói. Kéo K xuống 8, cho lớp đếm số gói rơi trong 20 giây. Viết (1.15).",
+      "sv": "Đếm gói rơi; ghi (1.15)."},
+    {"t": "Đếm mất gói ở đâu, đếm thế nào", "tu": 6, "den": 9,
+      "gv": "Hỏi lớp: đếm N_tx ở đâu, N_rx ở đâu, trong bao lâu? Nêu RFC 7680 (mất gói một chiều, IPPM). Liệt kê năm nguyên nhân dưới (1.15): lỗi đường truyền, tràn hàng đợi, policing, định tuyến không ổn định, lỗi thiết bị. Giải ví dụ 1 trên bảng.",
+      "sv": "Ghi năm nguyên nhân; làm ví dụ 1 cùng giảng viên."},
+    {"t": "Nguồn không biết cổng đang đầy", "tu": 9, "den": 13,
+      "gv": "Đẩy tải lên 1,3. Cho lớp nhìn hàng chạm vạch K và nằm lì. Dẫn ra P_loss → 1 − 1/ρ bằng lập luận bảo toàn: cổng chỉ phát được μ, phần λ − μ phải rơi. Cho lớp trả lời câu hỏi trên màn hình.",
+      "sv": "Ghi giới hạn 1 − 1/ρ và lập luận; trả lời câu hỏi."},
+    {"t": "Biến thiên trễ không phải là trễ lớn", "tu": 13, "den": 16,
+      "gv": "Chuyển góc Bảng trễ. Mỗi chấm là trễ một chiều của một gói. Viết (1.13), nêu RFC 3393. Nhấn mạnh: trễ trung bình có thể đạt ngưỡng mà thoại, video hội nghị vẫn hỏng vì trễ dao động.",
+      "sv": "Ghi (1.13) và ví dụ dịch vụ nhạy với biến thiên trễ."},
+    {"t": "Tính J từ một chuỗi trễ", "tu": 16, "den": 20,
+      "gv": "Viết (1.14). Giải ví dụ 2 với chuỗi đã ghi sẵn trên bảng. Chỉ ra một gói trễ bất thường làm J tăng mạnh. Cho lớp trả lời câu hỏi trên màn hình.",
+      "sv": "Tính J cho chuỗi sáu gói; trả lời câu hỏi."},
+    {"t": "Jitter tăng theo tải", "tu": 20, "den": 23,
+      "gv": "Kéo tải 0,5 rồi 0,95, cho lớp so độ tản của các chấm và con số J ở bảng 04. Nêu cách đọc của giáo trình: J tăng theo tải thì nghi hàng đợi, phân lớp QoS hoặc chính sách ưu tiên.",
+      "sv": "Ghi J ở hai mức tải; ghi cách đọc."},
+    {"t": "Gói dài thì dễ hỏng hơn", "tu": 23, "den": 27,
+      "gv": "Viết (1.16), nêu giả thiết lỗi bit độc lập. Kéo cỡ gói lên 1 500 byte, BER lên 10⁻⁵: goodput tụt, thông lượng đứng yên. Giải ví dụ 3, nhấn mạnh khi nào xấp xỉ L·P_b hết đúng.",
+      "sv": "Làm ví dụ 3; ghi điều kiện dùng xấp xỉ."},
+    {"t": "Thông lượng phải kèm điều kiện đo", "tu": 27, "den": 30,
+      "gv": "Viết (1.17). Nêu RFC 2544 (kiểm chuẩn thiết bị) và RFC 6349 (thông lượng TCP). Liệt kê năm điều kiện phải báo cáo kèm: cỡ gói, mô hình lưu lượng, giao thức, số luồng, điều kiện tải.",
+      "sv": "Ghi (1.17) và năm điều kiện báo cáo."},
+    {"t": "Liên kết bận chưa chắc ứng dụng nhận đủ", "tu": 30, "den": 34,
+      "gv": "Viết (1.18). Kéo cỡ gói xuống 64 byte: goodput tụt mạnh. Giải ví dụ 4 trên bảng. Trả lời câu 5 cùng lớp. Cho lớp trả lời câu hỏi trên màn hình.",
+      "sv": "Làm ví dụ 4; ghi dàn ý trả lời câu 5; trả lời câu hỏi."},
+    {"t": "Bộ đệm lớn không chữa được quá tải", "tu": 34, "den": 38,
+      "gv": "Bấm Bộ đệm lớn, rồi đẩy tải lên 1,3. Vẽ bảng bốn ô (K = 16, 64 × ρ = 0,85, 1,3) của ví dụ 5, điền từ bảng 06. Kết luận: bộ đệm đổi mất gói lấy trễ; quá tải chỉ chữa bằng giảm ρ.",
+      "sv": "Điền bảng bốn ô; ghi kết luận."},
+    {"t": "Ba con số, ba cách tính", "tu": 38, "den": 41,
+      "gv": "Chỉ bảng 03: mất gói đếm trong cảnh, mô phỏng 30 000 gói, lời giải M/M/1/K. Hỏi: lệch nhau thì nghi gì trước? Nhắc mục 5.1.3 về kiểm mô hình.",
+      "sv": "Ghi ba con số và nhận xét độ khớp."},
+    {"t": "Năm metric, mỗi metric một điều kiện đo", "tu": 41, "den": 45,
+      "gv": "Chốt năm metric (1.13)–(1.18) và ba ý cần nhớ. Giao câu 5 cuối chương 1 và phiếu bài tập câu 2–6. Báo tiết sau: độ sẵn sàng, RTO và RPO.",
+      "sv": "Ghi năm metric và bài về nhà."}
+  ],
+  "vi_du": [
+    {"ten": "Tỉ lệ mất gói từ số đếm (1.15)", "de": "Trong 10 phút đo một chiều giữa giảng đường và máy chủ, máy phát gửi 20 000 gói thoại, máy nhận đếm được 19 940 gói. Tính tỉ lệ mất gói và so với ngưỡng 10<sup>−3</sup> của lớp 0 ITU-T Y.1541.", "giai": "P<sub>loss</sub> = 1 − 19 940 / 20 000 = 60 / 20 000 = <b>0,3 %</b> = 3·10<sup>−3</sup> &gt; 10<sup>−3</sup>: <b>không đạt</b>. Kết quả chỉ có nghĩa kèm điều kiện: đo một chiều, 10 phút, giữa hai điểm đã nêu, ở tải lúc đo. Bước sau là tìm nguyên nhân trong năm loại giáo trình liệt kê."},
+    {"ten": "Biến thiên trễ của một chuỗi gói (1.13, 1.14)", "de": "Sáu gói liên tiếp có trễ một chiều 20, 23, 21, 30, 22, 24 ms. Tính IPDV giữa gói 4 và gói 3, và J theo (1.14). Nếu gói 4 có trễ 22 ms thì J bằng bao nhiêu?", "giai": "IPDV<sub>4,3</sub> = 30 − 21 = <b>9 ms</b>. Các hiệu kề nhau: 3, 2, 9, 8, 2 ms; tổng 24 ms; N − 1 = 5 nên <b>J = 4,8 ms</b>. Nếu gói 4 là 22 ms: các hiệu 3, 2, 1, 0, 2 ms, tổng 8 ms, <b>J = 1,6 ms</b>. Một gói trễ bất thường làm J tăng ba lần trong khi trễ trung bình chỉ tăng từ 22 lên 23,3 ms."},
+    {"ten": "Xác suất lỗi gói theo BER (1.16)", "de": "Tính xác suất lỗi gói cho gói 1 500 byte và 64 byte ở BER 10<sup>−6</sup>; với gói 1 500 byte, làm lại ở BER 10<sup>−5</sup> và so với xấp xỉ L·P<sub>b</sub>.", "giai": "Gói 1 500 byte: L = 12 000 bit; L·P<sub>b</sub> = 0,012; chính xác 1 − (1 − 10<sup>−6</sup>)<sup>12 000</sup> ≈ <b>1,19 %</b>. Gói 64 byte: L = 512 bit; ≈ <b>0,051 %</b>. Ở BER 10<sup>−5</sup>: L·P<sub>b</sub> = 0,12 nhưng chính xác ≈ <b>11,3 %</b>. Xấp xỉ chỉ dùng được khi L·P<sub>b</sub> ≪ 1; ở 0,12 đã sai gần 1 điểm phần trăm."},
+    {"ten": "Thông lượng và goodput (1.17, 1.18)", "de": "Trong Δt = 10 s, điểm đo nhận B<sub>rx</sub> = 950 Mbit. Gói 1 000 byte có 40 byte tiêu đề IPv4 và TCP; 2 % số gói là gói truyền lại. Tính T và G. Làm lại với gói 64 byte, cùng B<sub>rx</sub> và tỉ lệ truyền lại.", "giai": "T = 950 / 10 = <b>95 Mbit/s</b>. Phần hữu ích mỗi gói 960/1 000 = 0,96; bỏ 2 % truyền lại: B<sub>app</sub> = 950 × 0,96 × 0,98 ≈ 893,8 Mbit, <b>G ≈ 89,4 Mbit/s</b>. Gói 64 byte: phần hữu ích 24/64 = 0,375; G = 950 × 0,375 × 0,98 / 10 ≈ <b>34,9 Mbit/s</b>. Cùng thông lượng 95 Mbit/s, goodput chênh gần ba lần."},
+    {"ten": "Bộ đệm nhỏ và lớn, tải dưới và trên 1", "de": "Cổng 100 Mbit/s, gói trung bình 1 000 byte (μ = 12 500 gói/s), hàng đợi M/M/1/K. Dùng bảng 06 (lời giải M/M/1/K) điền mất gói và thời gian trong hệ cho K = 16, 64 ở ρ = 0,85 và 1,3.", "giai": "ρ = 0,85: K = 16 mất ≈ <b>1,19 %</b>, W ≈ 0,43 ms; K = 64 mất ≈ <b>4,6·10<sup>−6</sup></b>, W ≈ 0,53 ms. ρ = 1,3: K = 16 mất ≈ <b>23,3 %</b>, W ≈ 1,03 ms; K = 64 mất ≈ <b>23,1 %</b>, W ≈ 4,85 ms. Dưới tải, bộ đệm lớn giảm mất gói đáng kể với trễ tăng ít. Quá tải, mất gói gần bằng 1 − 1/1,3 ≈ 23,1 % dù K bao nhiêu, còn trễ tăng gần năm lần."}
+  ],
+  "bai_tap": [
+    {"so": "1", "de": "Phân biệt thông lượng và goodput. Tại sao thông lượng liên kết cao chưa đủ để kết luận dịch vụ ứng dụng đạt yêu cầu?", "nguon": "câu 5 cuối chương 1", "dong": 5},
+    {"so": "2", "de": "Phát 50 000 gói, nhận 49 965 gói. Tính P<sub>loss</sub> và so với ngưỡng 10<sup>−3</sup>. Nêu hai thông tin còn thiếu để kết luận có ý nghĩa.", "nguon": "theo (1.15)", "dong": 3},
+    {"so": "3", "de": "Năm gói liên tiếp có trễ 15, 18, 16, 25, 17 ms. Tính IPDV giữa gói 4 và gói 1, và J theo (1.14). Nhận xét về gói 4.", "nguon": "theo (1.13), (1.14)", "dong": 3},
+    {"so": "4", "de": "Gói 1 500 byte. Tính xác suất lỗi gói ở BER 10<sup>−7</sup> và 10<sup>−5</sup>, bằng công thức chính xác và bằng xấp xỉ L·P<sub>b</sub>. Ở mức BER nào xấp xỉ không còn dùng được?", "nguon": "theo (1.16)", "dong": 4},
+    {"so": "5", "de": "Trong 10 s nhận 600 Mbit; gói 512 byte có 40 byte tiêu đề; 3 % gói là gói truyền lại. Tính T và G.", "nguon": "theo (1.17), (1.18)", "dong": 3},
+    {"so": "6", "de": "Một cổng có tải đưa vào ρ = 1,2. Ước lượng tỉ lệ mất gói lâu dài. Nhân đôi bộ đệm thì mất gói và trễ thay đổi thế nào? Đề xuất hai cách sửa đúng chỗ.", "nguon": "đánh đổi bộ đệm", "dong": 4}
+  ],
+  "dap_an": [
+    {"so": "1", "giai": "Thông lượng (1.17) đếm mọi bit qua điểm đo trong Δt; goodput (1.18) chỉ đếm dữ liệu hữu ích ở lớp ứng dụng, đã trừ tiêu đề, gói truyền lại và dữ liệu điều khiển. Liên kết có thể bận gần 100 % mà ứng dụng vẫn nhận thiếu vì: tiêu đề chiếm phần lớn khi gói nhỏ; gói lỗi hoặc mất phải truyền lại; lưu lượng điều khiển và lưu lượng của dịch vụ khác cùng chiếm liên kết. Vì vậy phải đo goodput ở lớp ứng dụng, kèm trễ, mất gói, và so với vector yêu cầu (1.6), (1.8). Đủ điểm khi nêu đúng hai định nghĩa và ít nhất hai nguyên nhân."},
+    {"so": "2", "giai": "P<sub>loss</sub> = 1 − 49 965 / 50 000 = 35 / 50 000 = <b>7·10<sup>−4</sup></b> ≤ 10<sup>−3</sup>: đạt. Còn thiếu: điểm đo (một chiều từ đâu tới đâu), thời gian và điều kiện tải lúc đo (giờ cao điểm hay thấp điểm). Chấp nhận thêm: cỡ gói, loại lưu lượng."},
+    {"so": "3", "giai": "IPDV<sub>4,1</sub> = 25 − 15 = <b>10 ms</b>. Các hiệu kề nhau 3, 2, 9, 8 ms, tổng 22 ms, N − 1 = 4, <b>J = 5,5 ms</b>. Gói 4 trễ bất thường, góp 17 ms trong 22 ms tổng độ lệch: nên xem hàng đợi tại thời điểm đó (bùng tải, gói lớn chen trước)."},
+    {"so": "4", "giai": "L = 12 000 bit. BER 10<sup>−7</sup>: chính xác ≈ <b>1,199·10<sup>−3</sup></b>, xấp xỉ 1,2·10<sup>−3</sup>: khớp. BER 10<sup>−5</sup>: chính xác ≈ <b>11,3 %</b>, xấp xỉ 12 %: lệch. Xấp xỉ chỉ dùng khi L·P<sub>b</sub> ≪ 1; từ khoảng 0,1 trở lên đã sai đáng kể."},
+    {"so": "5", "giai": "T = 600 / 10 = <b>60 Mbit/s</b>. Phần hữu ích mỗi gói (512 − 40)/512 = 472/512 ≈ 0,922; bỏ 3 % truyền lại: G = 60 × 0,922 × 0,97 ≈ <b>53,7 Mbit/s</b>."},
+    {"so": "6", "giai": "Mất gói → 1 − 1/1,2 ≈ <b>16,7 %</b>. Nhân đôi bộ đệm: mất gói gần như không đổi (phần vượt công suất vẫn phải rơi), trễ trong hệ tăng gần gấp đôi khi hàng đầy. Sửa đúng chỗ: nâng dung lượng cổng hoặc giảm tải (dời lưu lượng nền, giới hạn tốc độ nguồn); phân lớp ưu tiên để dịch vụ nhạy không chịu phần mất (tiết 18). Đủ điểm khi có con số 16,7 % và hai cách sửa tác động vào ρ hoặc phân lớp."}
+  ],
+  "kiem_tra": [
+    {"q": "Phát 10 000 gói, nhận 9 990 gói. P_loss bằng bao nhiêu?", "o": ["0,01 %", "0,1 %", "1 %", "10 %"], "a": 1, "giai": "1 − 9 990/10 000 = 10/10 000 = 10<sup>−3</sup> = 0,1 %."},
+    {"q": "Tải đưa vào ρ = 1,5, bộ đệm rất lớn. Tỉ lệ mất gói lâu dài khoảng bao nhiêu?", "o": ["Gần 0", "Khoảng 33 %", "Khoảng 50 %", "Khoảng 67 %"], "a": 1, "giai": "1 − 1/1,5 ≈ 0,333."},
+    {"q": "J theo (1.14) đo điều gì?", "o": ["Trễ trung bình", "Trễ lớn nhất", "Trung bình độ lệch trễ giữa hai gói kề nhau", "Tỉ lệ gói trễ quá ngưỡng"], "a": 2, "giai": "J = 1/(N−1) Σ |D<sub>i</sub> − D<sub>i−1</sub>|."},
+    {"q": "Gói 1 000 byte, BER 10⁻⁶. Xác suất lỗi gói xấp xỉ?", "o": ["0,1 %", "0,8 %", "8 %", "10⁻⁶"], "a": 1, "giai": "L·P<sub>b</sub> = 8 000 × 10<sup>−6</sup> = 0,008 = 0,8 %."},
+    {"q": "Thông lượng và goodput khác nhau ở chỗ nào?", "o": ["Goodput đo ở lớp vật lý", "Goodput chỉ đếm dữ liệu hữu ích của ứng dụng", "Thông lượng không tính gói truyền lại", "Không khác nhau"], "a": 1, "giai": "Goodput trừ tiêu đề, gói truyền lại và dữ liệu điều khiển."},
+    {"q": "Ở tải trên 1, tăng bộ đệm gấp bốn lần thì?", "o": ["Mất gói giảm bốn lần", "Mất gói gần như không đổi, trễ tăng", "Cả mất gói và trễ đều giảm", "Không ảnh hưởng gì"], "a": 1, "giai": "Phần vượt công suất vẫn phải rơi; hàng dài hơn nên gói được nhận chờ lâu hơn."}
+  ],
+  "tom_tat": [
+    "Mất gói P<sub>loss</sub> = 1 − N<sub>rx</sub>/N<sub>tx</sub> (1.15), đo một chiều theo RFC 7680, luôn kèm điểm đo và điều kiện đo. Khi ρ &gt; 1, P<sub>loss</sub> → 1 − 1/ρ dù bộ đệm lớn bao nhiêu.",
+    "Biến thiên trễ là độ dao động của trễ, không phải trễ lớn: IPDV<sub>i,j</sub> = D<sub>i</sub> − D<sub>j</sub> (1.13), J = 1/(N−1) Σ |D<sub>i</sub> − D<sub>i−1</sub>| (1.14). J tăng theo tải là dấu hiệu nghẽn ở hàng đợi hoặc chính sách QoS.",
+    "Lỗi gói P<sub>pkt</sub> = 1 − (1 − P<sub>b</sub>)<sup>L</sup> ≈ L·P<sub>b</sub> khi L·P<sub>b</sub> ≪ 1 (1.16): gói dài và BER cao làm goodput giảm.",
+    "Thông lượng T = B<sub>rx</sub>/Δt (1.17) phải báo cáo kèm cỡ gói, mô hình lưu lượng, giao thức, số luồng, tải. Goodput G = B<sub>app</sub>/Δt (1.18) mới là cái ứng dụng nhận.",
+    "Bộ đệm đổi mất gói lấy trễ và không chữa được quá tải; thiết kế đúng là giữ ρ dưới ngưỡng."
+  ],
+  "nguon": [
+    "Hoàng Trọng Minh, Giáo trình Thiết kế và hiệu năng mạng (học phần TEL1459), Học viện Công nghệ Bưu chính Viễn thông, 2026: mục 1.6.2–1.6.4, trang 14–16; phương trình (1.13)–(1.18); câu 5 cuối chương 1.",
+    "RFC 3393 (IPDV, 2002), RFC 7680 (mất gói một chiều, 2016), RFC 2544 (kiểm chuẩn thiết bị liên mạng, 1999), RFC 6349 (kiểm thông lượng TCP, 2011); ITU-T Y.1541 lớp 0 (ngưỡng mất gói 10<sup>−3</sup>).",
+    "Lời giải M/M/1/K: R. Jain, The Art of Computer Systems Performance Analysis (1991), chương 31. Tiêu đề IPv4 20 byte (RFC 791), TCP 20 byte (RFC 9293).",
+    "Giả định của bài: cổng 100 Mbit/s, cỡ gói phân bố mũ, các chuỗi trễ và số đếm trong ví dụ và bài tập."
+  ]
+}
