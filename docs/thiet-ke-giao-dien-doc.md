@@ -68,6 +68,20 @@ Không có thanh ứng dụng, không đổ bóng, không kính mờ. Màu chỉ
   - chạm dọc trên cảnh cuộn trang, kéo ngang thì xoay cảnh;
   - thanh trượt kéo được ngay trong thẻ.
 
+### Bài 3D không dùng bộ kit (tế bào, ty thể, thần kinh, cơ thể người, Cổ Loa, 54 bài thí nghiệm)
+- `shell/khung.js`, gắn bởi `tools/inject_shell.py` ngay sau `<meta charset>`. Ở cửa sổ chính, đoạn mã đầu trang nạp `khung.js` rồi dừng phần còn lại của trang (thẻ `<plaintext>`), nên mã nặng của bài không chạy hai lần.
+- Trang dọc gồm:
+  - dải nhận diện, tên bài, chú giải (môn, chủ đề, gói dạy);
+  - lời giảng của bước (phút và việc của giáo viên khi bài có gói dạy);
+  - khung cảnh tràn ngang chứa chính bài (`<iframe name="bgs-canh">`, cùng địa chỉ);
+  - dải chỉ số, danh sách bước sáng theo bài, thẻ bài tiếp theo và gói dạy, dải chân.
+- Vỏ trong khung báo trạng thái bằng `postMessage`; trang ngoài gửi `{t:'go'|'start'|'stop'}`. Liên kết của bài mở ở trang ngoài (`<base target="_top">`).
+- Trang ngoài cho `window.BGShell` và `window.BG_SEQ` trỏ vào bài trong khung (kiểm thử, công cụ).
+- Lối thoát và ngoại lệ:
+  - `?doc=0` chạy bài toàn màn hình như cũ;
+  - bản offline một tệp và bản đăng nơi khác không có khung;
+  - bài bộ kit dựng với `--no-khung`.
+
 ### Site TEL1459
 
 - `tools/xuat_tel1459.py`: mục lục và giáo án dùng cùng token và cấu trúc.
@@ -79,5 +93,5 @@ Không có thanh ứng dụng, không đổ bóng, không kính mờ. Màu chỉ
 ## 5. Lộ trình
 
 1. **Giai đoạn 1.** Bài 3D bộ kit (30 bài) và toàn bộ site TEL1459.
-2. **Giai đoạn 2.** Trang chủ, thư viện, giáo viên, các trang chủ đề và giáo án của Sáng Ăn Khoai, cùng ngôn ngữ (vẫn giữ nhận diện riêng).
-3. **Giai đoạn 3.** Các họ bài không dùng bộ kit (tế bào, ty thể, thần kinh, cơ thể người, Cổ Loa, …) chuyển sang bố cục dọc.
+2. **Giai đoạn 2.** Token chung (nền trắng, sans thay serif ở mọi trang), trang chủ, thư viện, mục lục Robotics và Thiết kế mạng (dải nhận diện, đầu trang hai cột, dải cảnh, dải chỉ số), giáo viên, chủ đề, giáo án.
+3. **Giai đoạn 3.** 59 bài không dùng bộ kit chạy trong khung tài liệu dọc (`shell/khung.js`).

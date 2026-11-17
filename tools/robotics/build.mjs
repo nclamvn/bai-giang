@@ -74,7 +74,7 @@ for (const name of names) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#F3EFE6">
+<meta name="theme-color" content="#FFFFFF">
 <title>${meta.title}</title>
 <meta name="description" content="${meta.description}">
 ${pre}</head>
@@ -91,6 +91,6 @@ ${js}
   const out = outDir ? path.join(outDir, `${name}.html`) : path.join(REPO, meta.out || path.join('robotics', name, 'index.html'));
   fs.mkdirSync(path.dirname(out), {recursive: true});
   fs.writeFileSync(out, html);
-  execFileSync('python3', [path.join(REPO, 'tools/inject_shell.py'), ...(hub ? [`--root=${hub}`] : []), `--as=${meta.out || `robotics/${name}/index.html`}`, out], {stdio: 'inherit'});
+  execFileSync('python3', [path.join(REPO, 'tools/inject_shell.py'), '--no-khung', ...(hub ? [`--root=${hub}`] : []), `--as=${meta.out || `robotics/${name}/index.html`}`, out], {stdio: 'inherit'});
   console.log(`${path.relative(process.cwd(), out)}  ${(html.length / 1024).toFixed(0)} KB  ${Date.now() - t0} ms`);
 }

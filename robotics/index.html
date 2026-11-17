@@ -68,7 +68,7 @@ html[data-x]{}body{font-family:var(--bg-font)}
 .top h1{margin:8px 0 12px} .top .bg-lead{margin:0}
 .card .body{gap:12px} .card details ul{margin:8px 0 10px} .card details .nums{margin-bottom:8px}
 .card .body>.bg-btn{margin-top:auto;align-self:flex-start}
-h3.sec{font:400 clamp(26px,3.2vw,40px)/1.12 var(--bg-serif);letter-spacing:-.02em;margin:96px 0 28px} h3.sec:before{display:none}
+h3.sec{font:500 clamp(24px,2.8vw,34px)/1.18 var(--bg-font);letter-spacing:-.03em;margin:72px 0 24px;color:var(--bg-ink);text-transform:none} h3.sec:before{display:none}
 </style>
 <style id="bg-vt">@view-transition{navigation:auto}#bgs-load{view-transition-name:bg-bia}::view-transition-group(bg-bia){animation-duration:.42s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}::view-transition-old(root),::view-transition-new(root){animation-duration:.24s}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
 <script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
@@ -76,10 +76,16 @@ h3.sec{font:400 clamp(26px,3.2vw,40px)/1.12 var(--bg-serif);letter-spacing:-.02e
 </head>
 <body class="bg-hub">
 <header class="sitebar"><div class="in"><a class="brand" href="../" aria-label="Sáng Ăn Khoai, trang chính"><img src="../design/logo/mark-128.webp" alt="" width="32" height="32"><span>Sáng Ăn Khoai</span></a><div class="crumbs"><span aria-hidden="true">/</span><a href="../#lo-trinh">Lộ trình</a><span aria-hidden="true">/</span><b>Robotics</b></div><nav aria-label="Mục chính"><a href="../#bai-hoc">Bài học</a><a href="../#lo-trinh">Lộ trình</a><a href="../thu-vien/">Thư viện</a><a href="../#cho-giao-vien">Cho giáo viên</a></nav></div></header>
-<header class="top bg-frame">
-  <span class="bg-eyebrow">Đại học · kỹ sư · mô phỏng chạy trực tiếp</span><h1>Robotics</h1>
-  <p class="bg-lead">Động học, động lực học, điều khiển, cảm biến và định vị trên sáu robot thật.</p>
-</header>
+<div class="wrap" style="padding-top:0;padding-bottom:0">
+  <div class="bg-meta"><div class="bg-mono">Robotics · Đại học, kỹ sư<br>6 robot thật · mô phỏng chạy trực tiếp</div><div class="bg-mono r">Số liệu từ tài liệu hãng và bài báo gốc<br>Bài giảng tự chạy · bấm để cầm lái</div></div>
+  <header class="bg-head"><div><h1>Robotics</h1>
+    <div class="bg-legend"><span style="--c:var(--bg-sig)">Động học</span><span style="--c:var(--bg-amber)">Động lực học</span><span style="--c:var(--bg-s-ly)">Điều khiển</span><span style="--c:var(--bg-s-hoa)">Cảm biến</span><span>Định vị</span></div></div>
+    <div class="bg-say"><h2>Sáu robot thật, mỗi robot một bài</h2><p>Không phải video: mọi thanh đo, biểu đồ và con số trên màn hình chạy từ phép tính ngay trong trình duyệt, theo số liệu của hãng.</p>
+      <div class="cta"><a class="bg-btn" href="ur5e/">Mở Cánh tay robot 6 trục</a><a class="bg-btn ghost" href="#robot">Xem 6 robot</a></div></div>
+  </header>
+</div>
+<a class="bg-band" href="ur5e/" aria-label="Mở Cánh tay robot 6 trục"><img src="../thu-vien/covers/robo-ur5e.webp" alt="" style="aspect-ratio:16/6.4;object-position:50% 45%"><span class="bg-tag" style="left:55%;top:48%"><i>1</i>Universal Robots UR5e · Cánh tay robot 6 trục</span></a>
+<div class="wrap" style="padding-top:0;padding-bottom:0"><div class="bg-stats" style="--n:4"><div><b>6<small>robot</small></b><span>Mô phỏng chạy trực tiếp</span></div><div><b>5</b><span>Mảng kiến thức</span></div><div><b>25<small>giây</small></b><span>Để yên là tự giảng tiếp</span></div><div><b>0</b><span>Video, mọi số tính trực tiếp</span></div></div></div>
 <div class="wrap">
   <section class="intro">
     <div>
@@ -92,7 +98,7 @@ h3.sec{font:400 clamp(26px,3.2vw,40px)/1.12 var(--bg-serif);letter-spacing:-.02e
       <li>Giao bài: tái hiện một con số trên màn hình bằng tính tay từ công thức trong khung lời giảng.</li>
     </ol></div>
   </section>
-  <div class="grid">
+  <div class="grid" id="robot">
 <article class="card">
   <a class="img" href="ur5e/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/robo-ur5e.webp" alt="" loading="lazy"></a>
   <div class="body">

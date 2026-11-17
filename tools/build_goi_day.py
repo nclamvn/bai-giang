@@ -72,7 +72,7 @@ a{color:var(--acc)}
 .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
 .hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:center;padding:44px 0 28px}
 .eye{font:600 14px var(--bg-font);color:var(--acc)}
-h1{margin:10px 0 12px;font:400 clamp(34px,4.4vw,56px)/1.08 var(--bg-serif);letter-spacing:-.025em}
+h1{margin:10px 0 12px;font:500 clamp(34px,4.4vw,56px)/1.08 var(--bg-font);letter-spacing:-.025em}
 .lead{margin:0;color:var(--bg-ink2);font-size:17px;max-width:56ch}
 .badge{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--bg-warn,#B26A1A) 10%,#fff);color:#7a4a12;font-size:14px;font-weight:600}
 .cover{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:16/10;box-shadow:var(--bg-sh-2)}
@@ -83,7 +83,7 @@ h1{margin:10px 0 12px;font:400 clamp(34px,4.4vw,56px)/1.08 var(--bg-serif);lette
 .tabs a{flex:none;display:flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;color:var(--bg-ink2);font-weight:600;font-size:15px;text-decoration:none}
 .tabs a:hover{background:var(--bg-hair)}
 section{padding:28px 0 12px}
-h2{margin:0 0 6px;font:400 30px/1.2 var(--bg-serif);letter-spacing:-.015em}
+h2{margin:0 0 6px;font:500 30px/1.2 var(--bg-font);letter-spacing:-.015em}
 .sub{margin:0 0 20px;color:var(--bg-ink2)}
 .card{background:var(--bg-surface,#fff);border-radius:20px;padding:20px 22px;box-shadow:var(--bg-sh-1)}
 .g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}

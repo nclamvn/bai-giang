@@ -82,19 +82,27 @@ def build(root='../'):
 <style>{CSS}body{{font-family:var(--bg-font)}}
 .top{{display:block;padding-top:48px;padding-bottom:8px;border:0;background:none}} .top h1{{margin:8px 0 12px}} .top .bg-lead{{margin:0}}
 .card .body{{gap:12px}} .card .body>.bg-btn{{margin-top:auto;align-self:flex-start}}
-h3.sec{{font:400 clamp(26px,3.2vw,40px)/1.12 var(--bg-serif);letter-spacing:-.02em;margin:96px 0 28px}} h3.sec:before{{display:none}}
+h3.sec{{font:500 clamp(24px,2.8vw,34px)/1.18 var(--bg-font);letter-spacing:-.03em;margin:72px 0 24px;color:var(--bg-ink);text-transform:none}} h3.sec:before{{display:none}}
 table.ds{{width:100%;border-collapse:collapse}} .ds td{{padding:12px 12px 12px 0;border-top:1px solid var(--line);vertical-align:top}}
-.ds tr.ch td{{font:400 21px/1.3 var(--bg-serif);padding-top:32px;border-top:0}} .ds .mono{{width:52px;color:var(--mute)}} .ds .mut{{color:var(--mute)}}
+.ds tr.ch td{{font:500 21px/1.3 var(--bg-font);padding-top:32px;border-top:0}} .ds .mono{{width:52px;color:var(--mute)}} .ds .mut{{color:var(--mute)}}
 .ds a{{font-weight:600}} .ds .mu{{width:120px;color:var(--mute);font-size:14px}} .ds .pt{{font-size:12.5px;font-family:var(--bg-mono,monospace)}} .card .nut{{display:flex;gap:8px;margin-top:auto}} @media (max-width:640px){{.ds .mut,.ds .mu{{display:none}}}}
 .nguon{{color:var(--mute);font-size:14px;max-width:760px}}
 </style>
 </head>
 <body class="bg-hub">
 {LG.site_bar(root, [('Đại học', None), ('Thiết kế và hiệu năng mạng', None)])}
-<header class="top bg-frame">
-  <span class="bg-eyebrow">Đại học · Điện tử viễn thông</span><h1>Thiết kế và hiệu năng mạng</h1>
-  <p class="bg-lead">Từ yêu cầu dịch vụ tới thiết kế logic, vật lý, kiểm thử và mạng 5G, mỗi khái niệm một cảnh mạng chạy thật.</p>
-</header>
+<div class="wrap">
+  <div class="bg-meta"><div class="bg-mono">TEL1459 · Đại học<br>Điện tử viễn thông · {len(TIET)} tiết · {len(CHUONG)} chương</div><div class="bg-mono r">Theo giáo trình của PGS.TS Hoàng Trọng Minh<br>Bài 3D chạy trực tiếp · giáo án 45 phút</div></div>
+  <header class="bg-head"><div><h1>Thiết kế và hiệu năng mạng</h1>
+    <div class="bg-legend"><span style="--c:var(--bg-sig)">Hoàn chỉnh · {len(GA)}</span><span style="--c:var(--bg-amber)">Bản sơ bộ · {len(MAU) - len(GA)}</span><span>Đang soạn · {len(TIET) - len(MAU)}</span></div></div>
+    <div class="bg-say"><h2>Mỗi tiết một cảnh mạng chạy thật</h2><p>Từ yêu cầu dịch vụ tới thiết kế logic, vật lý, kiểm thử và mạng 5G. Số trên màn hình tính từ công thức của giáo trình; trễ hàng đợi lấy từ mô phỏng chạy ngay trong trình duyệt.</p>
+      <div class="cta"><a class="bg-btn" href="{MAU[0][7]}">Mở tiết 1</a><a class="bg-btn ghost" href="#tiet">Xem {len(TIET)} tiết</a></div></div>
+  </header>
+</div>
+<a class="bg-band" href="{MAU[0][7]}" aria-label="Mở tiết 1"><img src="{root}thu-vien/covers/{MAU[0][8]}.webp" alt="Cảnh 3D tiết 1: {E(MAU[0][1])}" style="aspect-ratio:16/6.4"><span class="bg-tag" style="left:50%;top:52%"><i>1</i>Tiết 1 · {E(MAU[0][1])}</span></a>
+<div class="wrap">
+  <div class="bg-stats" style="--n:4;margin-bottom:36px"><div><b>{len(TIET)}<small>tiết</small></b><span>Mỗi tiết 45 phút</span></div><div><b>{len(MAU)}</b><span>Tiết có bài 3D</span></div><div><b>{len(GA)}</b><span>Giáo án hoàn chỉnh</span></div><div><b>{len(CHUONG)}<small>chương</small></b><span>Theo giáo trình</span></div></div>
+</div>
 <div class="wrap">
   <section class="intro">
     <div>
@@ -104,7 +112,7 @@ table.ds{{width:100%;border-collapse:collapse}} .ds td{{padding:12px 12px 12px 0
     <div class="how"><b>Kiểm chứng</b><ol>{kiem}</ol></div>
   </section>
   <div class="grid">{cards}</div>
-  <h3 class="sec">22 tiết theo sáu chương</h3>
+  <h3 class="sec" id="tiet">22 tiết theo sáu chương</h3>
   <table class="ds">{''.join(rows)}</table>
   <h3 class="sec">Nguồn</h3>
   <p class="nguon">Nội dung theo giáo trình Thiết kế và hiệu năng mạng (học phần TEL1459), PGS.TS Hoàng Trọng Minh, Học viện Công nghệ Bưu chính Viễn thông, 2026. Dựng bài giảng theo đề nghị của tác giả. Hình và lời giảng trong bài là của Sáng Ăn Khoai, không chép hình hay văn bản của giáo trình; công thức giữ đúng số hiệu trong sách để người học tra lại.</p>

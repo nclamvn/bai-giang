@@ -39,6 +39,7 @@ for spec, (rel, subs) in MODS.items():
 imports['three'] = imports['three/webgpu']
 
 html = pathlib.Path(src).read_text(encoding='utf-8')
+html = re.sub(r'<!--BG-KHUNG:start-->.*?<!--BG-KHUNG:end-->\n?', '', html, flags=re.S)  # bản một tệp: bài toàn màn hình, không khung tài liệu
 m = re.search(r'<script type="importmap">.*?</script>', html, re.S)
 if not m: sys.exit('Không thấy import map trong trang')
 used = set(re.findall(r"""['"](three(?:/[A-Za-z0-9_./-]+)?)['"]""", html))

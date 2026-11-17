@@ -155,15 +155,21 @@ def build(links):
 .top h1{{margin:8px 0 12px}} .top .bg-lead{{margin:0}}
 .card .body{{gap:12px}} .card details ul{{margin:8px 0 10px}} .card details .nums{{margin-bottom:8px}}
 .card .body>.bg-btn{{margin-top:auto;align-self:flex-start}}
-h3.sec{{font:400 clamp(26px,3.2vw,40px)/1.12 var(--bg-serif);letter-spacing:-.02em;margin:96px 0 28px}} h3.sec:before{{display:none}}
+h3.sec{{font:500 clamp(24px,2.8vw,34px)/1.18 var(--bg-font);letter-spacing:-.03em;margin:72px 0 24px;color:var(--bg-ink);text-transform:none}} h3.sec:before{{display:none}}
 </style>
 </head>
 <body class="bg-hub">
 {LG.site_bar(links['hub'], [('Lộ trình', links['hub'] + '#lo-trinh'), ('Robotics', None)])}
-<header class="top bg-frame">
-  <span class="bg-eyebrow">Đại học · kỹ sư · mô phỏng chạy trực tiếp</span><h1>Robotics</h1>
-  <p class="bg-lead">Động học, động lực học, điều khiển, cảm biến và định vị trên sáu robot thật.</p>
-</header>
+<div class="wrap" style="padding-top:0;padding-bottom:0">
+  <div class="bg-meta"><div class="bg-mono">Robotics · Đại học, kỹ sư<br>{len(ROBOTS)} robot thật · mô phỏng chạy trực tiếp</div><div class="bg-mono r">Số liệu từ tài liệu hãng và bài báo gốc<br>Bài giảng tự chạy · bấm để cầm lái</div></div>
+  <header class="bg-head"><div><h1>Robotics</h1>
+    <div class="bg-legend"><span style="--c:var(--bg-sig)">Động học</span><span style="--c:var(--bg-amber)">Động lực học</span><span style="--c:var(--bg-s-ly)">Điều khiển</span><span style="--c:var(--bg-s-hoa)">Cảm biến</span><span>Định vị</span></div></div>
+    <div class="bg-say"><h2>Sáu robot thật, mỗi robot một bài</h2><p>Không phải video: mọi thanh đo, biểu đồ và con số trên màn hình chạy từ phép tính ngay trong trình duyệt, theo số liệu của hãng.</p>
+      <div class="cta"><a class="bg-btn" href="{links['sims'][ROBOTS[0]['key']]}">Mở {E(ROBOTS[0]['title'])}</a><a class="bg-btn ghost" href="#robot">Xem {len(ROBOTS)} robot</a></div></div>
+  </header>
+</div>
+<a class="bg-band" href="{links['sims'][ROBOTS[0]['key']]}" aria-label="Mở {E(ROBOTS[0]['title'])}"><img src="{links['covers'][ROBOTS[0]['key']]}" alt="" style="aspect-ratio:16/6.4;object-position:50% 45%"><span class="bg-tag" style="left:55%;top:48%"><i>1</i>{E(ROBOTS[0]['robot'])} · {E(ROBOTS[0]['title'])}</span></a>
+<div class="wrap" style="padding-top:0;padding-bottom:0"><div class="bg-stats" style="--n:4"><div><b>{len(ROBOTS)}<small>robot</small></b><span>Mô phỏng chạy trực tiếp</span></div><div><b>5</b><span>Mảng kiến thức</span></div><div><b>25<small>giây</small></b><span>Để yên là tự giảng tiếp</span></div><div><b>0</b><span>Video, mọi số tính trực tiếp</span></div></div></div>
 <div class="wrap">
   <section class="intro">
     <div>
@@ -176,7 +182,7 @@ h3.sec{{font:400 clamp(26px,3.2vw,40px)/1.12 var(--bg-serif);letter-spacing:-.02
       <li>Giao bài: tái hiện một con số trên màn hình bằng tính tay từ công thức trong khung lời giảng.</li>
     </ol></div>
   </section>
-  <div class="grid">
+  <div class="grid" id="robot">
 {chr(10).join(cards)}
   </div>
   <h3 class="sec">Cùng bộ dựng, cho phổ thông</h3>

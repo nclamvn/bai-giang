@@ -118,7 +118,7 @@ body{font-family:var(--bg-font);color:var(--bg-ink);font-size:var(--bg-fs-sm);li
 .bg-ico{width:20px;height:20px;flex:none;vertical-align:middle}
 :focus-visible{outline:2px solid var(--bg-focus);outline-offset:2px;border-radius:6px}
 .bg-num{font-family:var(--bg-mono);font-variant-numeric:tabular-nums}
-.bg-serif{font-family:var(--bg-serif);font-weight:400;letter-spacing:-.015em}
+.bg-serif{font-family:var(--bg-font);font-weight:400;letter-spacing:-.015em}
 h1,h2,h3{text-wrap:balance}
 p,li{text-wrap:pretty}
 /* màn cảm ứng (máy tính bảng, điện thoại): vùng chạm từ 44 px cho nút chữ và dòng mở rộng */

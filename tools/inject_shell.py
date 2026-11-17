@@ -95,12 +95,30 @@ def patch_free_rect(html: str) -> str:
     return html
 
 
-def inject(html: str, adapter=None, key=None, root=None) -> str:
+def khung_js():
+    return minify((ROOT / 'shell/khung.js').read_text(encoding='utf-8'), 'khung')
+
+
+def khung(html, seq, root):
+    """Trang dọc (shell/khung.js) cho bài không dùng bộ kit: ở cửa sổ chính, nạp khung rồi dừng phần còn lại của trang;
+    trong khung cảnh (iframe name="bgs-canh") và khi mở ?doc=0, bài chạy như cũ."""
+    if not seq or root.startswith('http'): return ''  # bản đăng nơi khác (đường dẫn tuyệt đối): giữ bài toàn màn hình
+    g = lambda pat: (lambda m: H.unescape(m.group(1)).strip() if m else '')(re.search(pat, html, re.S | re.I))
+    data = {k: seq.get(k) for k in ('title', 'crumb', 'subject', 's', 'cover', 'next', 'pack') if seq.get(k)}
+    data.update(root=root, desc=g(r'<meta name="description" content="([^"]*)"'), doc_title=g(r'<title>(.*?)</title>'))
+    j = json.dumps(data, ensure_ascii=False).replace('</', '<\\/')
+    src = f'{root}shell/dist/{dist("khung", khung_js())}'
+    return ('<!--BG-KHUNG:start--><script>(function(){if(window!==top||/[?&]doc=0\\b/.test(location.search))return;'
+            f'window.BG_KHUNG={j};document.write(\'<link rel="stylesheet" href="{root}design/house.css"><script src="{src}"><\\/script><plaintext style="display:none">\')}})()</script><!--BG-KHUNG:end-->\n')
+
+
+def inject(html: str, adapter=None, key=None, root=None, doc=True) -> str:
     seq = SEQ.get(key) if key else None
     root = root or (rel_root(key) if key else '../')
     if adapter == 'thu-vien': html = patch_free_rect(html)
     html = re.sub(r'<!--BG-SHELL:start-->.*?<!--BG-SHELL:end-->\n?', '', html, flags=re.S)
     html = re.sub(r'<!--BG-LOAD:start-->.*?<!--BG-LOAD:end-->', '', html, flags=re.S)
+    html = re.sub(r'<!--BG-KHUNG:start-->.*?<!--BG-KHUNG:end-->\n?', '', html, flags=re.S)
     html = re.sub(r'<meta name="bg-root"[^>]*>\n?', '', html)
     html = re.sub(r'<link rel="(?:icon|apple-touch-icon)"[^>]*>\n?', '', html)  # favicon của Sáng Ăn Khoai thay favicon cũ
     html = re.sub(r'<!--BG-TOKENS:start-->.*?<!--BG-TOKENS:end-->\n?', '', html, flags=re.S)
@@ -109,6 +127,11 @@ def inject(html: str, adapter=None, key=None, root=None) -> str:
     # token và phông có sẵn trong <head> để chữ đúng ngay khung hình đầu, trước khi mã của vỏ chạy
     head = f'<meta name="bg-root" content="{root}">\n<link rel="icon" type="image/png" sizes="32x32" href="{root}design/logo/favicon-32.png"><link rel="apple-touch-icon" href="{root}design/logo/apple-touch-icon.png">\n<!--BG-TOKENS:start--><style id="bg-tokens">' + D.fontface(root=root + 'design/fonts/') + D.tokens_css() + '</style><!--BG-TOKENS:end-->\n'
     html = html.replace('<head>', '<head>\n' + head, 1) if '<head>' in html else re.sub(r'(<head[^>]*>)', lambda m: m.group(1) + head, html, count=1)
+    if doc and seq:
+        k = khung(html, seq, root)
+        mc = re.search(r'<meta charset="?utf-8"?\s*/?>\n?', html, re.I)
+        if k and mc: html = html[:mc.end()] + k + html[mc.end():]
+        elif k: html = html.replace(head, head + k, 1)
     # chuẩn thành phần đặt cuối <head>, sau CSS riêng của bài, để vai màu của nút giống nhau trên mọi bài
     std = '<!--BG-STD:start--><style id="bg-std">' + D.std_css('body.bgs-on') + '</style><!--BG-STD:end-->\n'
     m = re.search(r'<body[^>]*>', html)
@@ -131,13 +154,14 @@ def key_of(p: pathlib.Path):
 
 
 if __name__ == '__main__':
-    args = sys.argv[1:]; adapter = None; root = None; as_key = None
+    args = sys.argv[1:]; adapter = None; root = None; as_key = None; doc = True
     while args and args[0].startswith('--'):
         a = args.pop(0)
         if a.startswith('--adapter='): adapter = a.split('=', 1)[1]
         elif a.startswith('--root='): root = a.split('=', 1)[1]
         elif a.startswith('--as='): as_key = a.split('=', 1)[1]
+        elif a == '--no-khung': doc = False
     for f in args:
         p = pathlib.Path(f)
-        p.write_text(inject(p.read_text(encoding='utf-8'), adapter, as_key or key_of(p), root), encoding='utf-8')
+        p.write_text(inject(p.read_text(encoding='utf-8'), adapter, as_key or key_of(p), root, doc and not root), encoding='utf-8')
     print(f'đã nhúng vỏ vào {len(args)} tệp' + (f' (bộ gắn {adapter})' if adapter else ''))
