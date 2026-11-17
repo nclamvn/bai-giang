@@ -5,7 +5,9 @@ Mỗi bài 3D có một khoá là đường dẫn tệp tính từ gốc repo (v
 Đường dẫn trong dữ liệu đều tính từ gốc site; vỏ bài ghép với <meta name="bg-root"> lúc chạy.
 Chạy riêng để xem:  python3 tools/chuoi_bai.py
 """
-import json, pathlib
+import html
+import json
+import re, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CAT = json.loads((ROOT / 'thu-vien/catalog.vi.json').read_text(encoding='utf-8'))
@@ -125,12 +127,14 @@ def build():
             out[key]['pack'] = f"giao-vien/{g['id']}/"
             out[key]['plan'] = [{'t': x['t'], 'm': [x['tu'], x['den']], 'gv': x['gv'], 'hs': x['hs']} for x in g['buoc']]
     # giáo án đại học học phần mạng (tools/giao-an-mang/*.json, tools/build_giao_an_mang.py): cùng cách nối, sinh viên thay học sinh
+    # giáo án viết HTML (sub, sup, b); màn hình Lên lớp hiện chữ thuần nên bỏ thẻ và giải mã thực thể
+    _txt = lambda h: html.unescape(re.sub(r'<[^>]+>', '', h))
     for f in sorted((ROOT / 'tools/giao-an-mang').glob('*.json')):
         g = json.loads(f.read_text(encoding='utf-8'))
         key = path_of(g['id'])
         if key in out:
             out[key]['pack'] = f"{g['bai']}giao-an/"
-            out[key]['plan'] = [{'t': x['t'], 'm': [x['tu'], x['den']], 'gv': x['gv'], 'hs': x['sv']} for x in g['buoc']]
+            out[key]['plan'] = [{'t': x['t'], 'm': [x['tu'], x['den']], 'gv': _txt(x['gv']), 'hs': _txt(x['sv'])} for x in g['buoc']]
     return out
 
 

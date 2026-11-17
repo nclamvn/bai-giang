@@ -1,0 +1,130 @@
+{
+  "id": "tk-san-sang",
+  "tiet": 4,
+  "bai": "thiet-ke-mang/san-sang/",
+  "ten_bai": "Độ sẵn sàng, RTO và RPO",
+  "ten_tiet": "Độ sẵn sàng, độ tin cậy, dự phòng và yêu cầu phục hồi",
+  "chuong": "Chương 1 · Tổng quan về thiết kế và hiệu năng mạng",
+  "muc": "1.6.5 (kèm 2.5.1–2.5.2, 4.4.3)",
+  "trang": "16–18 (kèm 57–58, 112)",
+  "pt": "(1.19), (2.17)–(2.19), (4.14)",
+  "bt_sach": "Bài tập 8 chương 2",
+  "dan": "Tiết 1 đã nêu độ sẵn sàng là một thành phần của vector yêu cầu. Tiết này đi sâu: độ sẵn sàng khác độ tin cậy ra sao, vì sao hai đường dự phòng chung một ống cáp gần như vô ích, và làm sao biến RTO, RPO thành những bước vận hành đo được. Mục 1.6.5 của giáo trình được bổ sung bằng các công thức ở mục 2.5 và 4.4.3 để tiết học trọn một chủ đề.",
+  "muc_tieu": [
+    "Phân biệt độ sẵn sàng, độ tin cậy và khả năng bảo trì; tính độ tin cậy theo (2.17).",
+    "Tính độ sẵn sàng theo (1.19) và quy ra thời gian ngừng mỗi năm; giải bài tập 8 chương 2.",
+    "Tính độ sẵn sàng của cấu trúc nối tiếp và song song (4.14); nhận ra miền lỗi chung và đưa nó vào phép tính như phần tử nối tiếp.",
+    "Giải thích đánh đổi RTO, chi phí và tổn thất (hình 1.6); chia RTO thành bốn pha theo (2.19) để chọn chỗ đầu tư.",
+    "Phân biệt RTO và RPO; chọn chu kỳ sao lưu theo RPO.",
+    "Đối chiếu kết quả công thức với mô phỏng Monte Carlo và chỉ ra phần công thức bỏ sót."
+  ],
+  "can_co": [
+    "Vector yêu cầu và điều kiện nghiệm thu (tiết 1): A_min, T_rec.",
+    "Xác suất biến cố độc lập; hàm mũ e^x.",
+    "Một năm ≈ 8 766 giờ ≈ 525 960 phút."
+  ],
+  "chuan_bi": {
+    "gv": [
+      "Máy tính có Chrome hoặc Edge bản mới, nối máy chiếu. Mở bài 3D trước giờ học một lần, bấm Lên lớp để màn hình giảng viên hiện phút và việc từng bước.",
+      "In phiếu bài tập (một trang A4) cho mỗi sinh viên, hoặc chiếu phiếu và cho làm vào vở.",
+      "Kẻ sẵn trên bảng bảng quy đổi: 99 %, 99,9 %, 99,99 %, 99,999 % và thời gian ngừng mỗi năm (để trống cột phải)."
+    ],
+    "sv": [
+      "Đọc trước mục 1.6.5 (trang 16–18) và mục 2.5.1–2.5.2 (trang 57–58).",
+      "Máy tính cầm tay có hàm e^x."
+    ]
+  },
+  "hoat_dong": [
+    {"ten": "Mở đầu", "tu": 0, "den": 3, "buoc": [1], "muc": "Đặt câu hỏi: hai đường lên có chắc gấp đôi?", "san_pham": "Sinh viên dự đoán độ sẵn sàng của hai đường chung ống, ghi lại để đối chiếu."},
+    {"ten": "Ba khái niệm, hai công thức", "tu": 3, "den": 15, "buoc": [2, 3, 4, 5], "muc": "Sẵn sàng, tin cậy, bảo trì; (2.17); (1.19) và bài tập 8; hai hướng tăng A.", "san_pham": "Sinh viên điền bảng quy đổi số chín và giải bài tập 8 chương 2."},
+    {"ten": "Dự phòng và miền lỗi", "tu": 15, "den": 23, "buoc": [6, 7], "muc": "Ống chung là phần tử nối tiếp; tách ngả và (4.14).", "san_pham": "Sinh viên tính A của hai cấu trúc (ví dụ 3) và đối chiếu với dự đoán đầu tiết."},
+    {"ten": "Yêu cầu phục hồi", "tu": 23, "den": 33, "buoc": [8, 9, 10], "muc": "Hình 1.6; (2.19) và bốn pha; pha phát hiện với BFD và OSPF.", "san_pham": "Sinh viên kiểm RTO cho ba tình huống (ví dụ 4)."},
+    {"ten": "RPO và kiểm mô hình", "tu": 33, "den": 41, "buoc": [11, 12], "muc": "RPO và chu kỳ sao lưu; công thức so với Monte Carlo.", "san_pham": "Sinh viên chọn chu kỳ sao lưu theo RPO (ví dụ 5)."},
+    {"ten": "Tổng kết, giao bài", "tu": 41, "den": 45, "buoc": [13], "muc": "Bốn ý cần nhớ; giao bài tập 8 chương 2 và phiếu bài tập.", "san_pham": "Sinh viên ghi bốn ý và bài về nhà."}
+  ],
+  "buoc": [
+    {"t": "Hai đường lên có chắc gấp đôi?", "tu": 0, "den": 3,
+      "gv": "Chiếu toàn cảnh: trường, nhà cung cấp, hai đường cáp. Hỏi: mỗi đường A = 0,999, hai đường thì cả hệ bao nhiêu? Ghi các dự đoán của lớp lên góc bảng (thường là 0,999999).",
+      "sv": "Ghi dự đoán của mình."},
+    {"t": "Sẵn sàng, tin cậy, bảo trì là ba chuyện khác nhau", "tu": 3, "den": 6,
+      "gv": "Nêu ba định nghĩa theo mục 1.6.5 và 2.5.1. Cho ví dụ đời thường: xe máy hay hỏng nhưng sửa trong 5 phút (tin cậy thấp, sẵn sàng cao). Nhấn mạnh ba khái niệm áp cả cho quy trình vận hành.",
+      "sv": "Ghi ba định nghĩa và một ví dụ của mình."},
+    {"t": "Độ tin cậy giảm dần theo thời gian", "tu": 6, "den": 9,
+      "gv": "Viết (2.17), giải thích λ = 1/MTBF khi phân bố mũ. Giải ví dụ 2 trên bảng: R(1 tháng) và R(1 năm) với MTBF 2 000 h. Chỉ dòng R một năm ở bảng 02.",
+      "sv": "Tính R(730 h) và R(8 766 h) cùng giảng viên."},
+    {"t": "MTBF 2 000 giờ, MTTR 2 giờ", "tu": 9, "den": 12,
+      "gv": "Viết (1.19) và (2.18). Giải bài tập 8 chương 2 (ví dụ 1). Cùng lớp điền bảng quy đổi số chín. Cho lớp trả lời câu hỏi trên màn hình.",
+      "sv": "Điền bảng quy đổi; trả lời câu hỏi."},
+    {"t": "Hai cách tăng độ sẵn sàng", "tu": 12, "den": 15,
+      "gv": "Kéo MTBF lên 10 000 h, rồi trả về và kéo MTTR xuống 0,5 h: hai cách cho A gần bằng nhau. Liệt kê biện pháp cho mỗi hướng theo giáo trình. Hỏi: cách nào thường rẻ hơn với một trường đại học?",
+      "sv": "Ghi biện pháp tăng MTBF, giảm MTTR (phần thứ hai của bài tập 8)."},
+    {"t": "Một gầu máy xúc, hai sợi cáp", "tu": 15, "den": 19,
+      "gv": "Chọn Chung một ống, góc Phố trước, bấm Máy xúc đào. Cho lớp thấy cả hai đường đứt. Định nghĩa miền lỗi chung; kể thêm ví dụ: chung cột điện, chung nguồn, chung phòng máy.",
+      "sv": "Ghi định nghĩa miền lỗi chung và ba ví dụ."},
+    {"t": "Đường B đi ngõ sau", "tu": 19, "den": 23,
+      "gv": "Chọn Tách hai ngả, đào lại. Viết (4.14). Giải ví dụ 3 trên bảng: A của hai cấu trúc và phút ngừng mỗi năm. Đối chiếu với dự đoán đầu tiết. Cho lớp trả lời câu hỏi trên màn hình.",
+      "sv": "Làm ví dụ 3; so với dự đoán; trả lời câu hỏi."},
+    {"t": "RTO càng nhỏ càng đắt", "tu": 23, "den": 26,
+      "gv": "Vẽ phác hình 1.6: hai đường cong chi phí phục hồi và tổn thất theo RTO. Kéo RTO từ 1 giờ xuống 1 phút, chỉ đồng hồ đổi màu. Hỏi: RTO nào cho thi trực tuyến, RTO nào cho trang tin tức của trường?",
+      "sv": "Đề xuất RTO cho hai dịch vụ, có lý do."},
+    {"t": "Bốn pha của một lần phục hồi", "tu": 26, "den": 30,
+      "gv": "Viết (2.19). Chọn Chung một ống, đào: đọc bốn pha trên đồng hồ và bảng 04. Giải ví dụ 4 phần chung ống. Hỏi: pha nào chiếm nhiều nhất, đầu tư vào đâu?",
+      "sv": "Ghi bốn pha và thời gian từng pha."},
+    {"t": "Phát hiện chậm cũng là ngừng", "tu": 30, "den": 33,
+      "gv": "Chọn Tách hai ngả, OSPF hello, hỏng cổng A: đọc 40 s phát hiện. Đổi sang BFD, làm lại. Giải ví dụ 4 phần tách ngả. Nêu RFC 5880 (BFD), RFC 2328 (OSPF).",
+      "sv": "So sánh tổng thời gian phục hồi với OSPF và BFD."},
+    {"t": "Mất bao nhiêu dữ liệu thì chấp nhận được", "tu": 33, "den": 37,
+      "gv": "Định nghĩa RPO theo mục 2.5.2, vẽ phác trục thời gian hình 1.7 (bản chụp, lỗi, khôi phục). Kéo chu kỳ sao lưu lên 72 h rồi xuống 12 h ở bảng 05. Giải ví dụ 5. Cho lớp trả lời câu hỏi trên màn hình.",
+      "sv": "Làm ví dụ 5; trả lời câu hỏi."},
+    {"t": "Công thức và 400 năm mô phỏng", "tu": 37, "den": 41,
+      "gv": "Chỉ bảng 03: công thức và Monte Carlo. Hỏi: vì sao lệch? (thời gian chuyển đường). Chỉ bảng 06: ngừng theo nguyên nhân. Nhấn mạnh mô hình phải chứa cả quy trình phục hồi.",
+      "sv": "Ghi hai con số và nguyên nhân lệch."},
+    {"t": "Dự phòng chỉ có ích khi độc lập", "tu": 41, "den": 45,
+      "gv": "Chốt bốn ý: hai hướng tăng A; dự phòng phải độc lập; RTO theo dịch vụ, chia bốn pha; sao lưu không dài hơn RPO. Giao bài tập 8 chương 2 và phiếu câu 2–6. Báo tiết sau: vòng vận hành có kiểm chứng.",
+      "sv": "Ghi bốn ý và bài về nhà."}
+  ],
+  "vi_du": [
+    {"ten": "Bài tập 8 chương 2", "de": "Một dịch vụ có MTBF 2 000 giờ và MTTR 2 giờ. Tính độ sẵn sàng theo (2.18), quy ra thời gian ngừng mỗi năm. Đề xuất một biện pháp tăng MTBF và một biện pháp giảm MTTR.", "giai": "A = 2 000 / 2 002 ≈ <b>0,999</b> (99,9 %). Ngừng ≈ (1 − 0,999) × 8 766 ≈ <b>8,76 giờ mỗi năm</b>. Tăng MTBF: thiết bị cấp doanh nghiệp, nguồn kép, môi trường phòng máy tốt, hoặc đường dự phòng độc lập. Giảm MTTR: giám sát có cảnh báo, linh kiện dự phòng tại chỗ, sao lưu cấu hình để thay nhanh, quy trình khoanh vùng lỗi."},
+    {"ten": "Độ tin cậy theo thời gian (2.17)", "de": "Một đường truyền có MTBF 2 000 giờ, giả thiết phân bố mũ. Tính xác suất chạy không lỗi suốt một tháng (730 giờ) và suốt một năm (8 766 giờ). So với độ sẵn sàng ở ví dụ 1.", "giai": "λ = 1/2 000 h<sup>−1</sup>. R(730) = e<sup>−0,365</sup> ≈ <b>0,694</b>. R(8 766) = e<sup>−4,38</sup> ≈ <b>0,0125</b>. Trong một năm gần như chắc chắn có ít nhất một lần hỏng, vậy mà độ sẵn sàng vẫn 0,999 vì mỗi lần chỉ mất 2 giờ. Tin cậy và sẵn sàng là hai đại lượng khác nhau."},
+    {"ten": "Hai đường chung ống và tách ngả (4.14)", "de": "Router biên A<sub>r</sub> = 0,99996 (MTBF 100 000 h, MTTR 4 h). Mỗi đường A<sub>l</sub> = 0,999. Ống cáp bị cắt trung bình 1 lần/năm, sửa 12 giờ: A<sub>o</sub> = 8 766 / 8 778 ≈ 0,99863. Tính A cả hệ khi hai đường chung một ống và khi mỗi đường một ống trên ngả riêng. Quy ra phút ngừng mỗi năm.", "giai": "Chung ống: A = A<sub>r</sub> × A<sub>o</sub> × [1 − (1 − A<sub>l</sub>)<sup>2</sup>] ≈ 0,99996 × 0,99863 × 0,999999 ≈ <b>0,99859</b>, khoảng <b>741 phút</b>/năm. Một đường đơn cùng router và ống ngừng khoảng 1 264 phút: thêm đường thứ hai chỉ bớt được phần lỗi của đường, phần ống chung còn nguyên. Tách ngả: mỗi nhánh A<sub>l</sub>A<sub>o</sub> ≈ 0,99764; A = A<sub>r</sub> × [1 − (1 − 0,99764)<sup>2</sup>] ≈ <b>0,99995</b>, khoảng <b>24 phút</b>/năm. Phần còn lại chủ yếu là router đơn."},
+    {"ten": "Kiểm RTO bằng bốn pha (2.19)", "de": "RTO = 1 giờ. Tính tổng bốn pha trong ba tình huống: (a) chung ống, máy xúc đào: phát hiện 0,15 s, khoanh vùng 30 phút, hàn nối 12 giờ, xác nhận 15 phút; (b) tách ngả, phát hiện bằng BFD 0,15 s, chuyển đường 1 s, xác nhận tự động 10 s; (c) như (b) nhưng phát hiện bằng OSPF 40 s.", "giai": "(a) 0,15 s + 0,5 h + 12 h + 0,25 h ≈ <b>12,75 giờ</b> &gt; 1 giờ: không đạt; pha sửa chữa chiếm 94 %. (b) 0,15 + 0 + 1 + 10 ≈ <b>11,2 s</b>: đạt. (c) 40 + 0 + 1 + 10 = <b>51 s</b>: đạt RTO 1 giờ, nhưng mỗi lần hỏng mất 51 s thay vì 11 s; với dịch vụ có RTO vài giây thì không đạt. Pha dài nhất chỉ ra chỗ phải đầu tư."},
+    {"ten": "Chu kỳ sao lưu theo RPO", "de": "Cấu hình router thay đổi vài lần mỗi ngày. Hiện sao lưu mỗi 24 giờ. Nhà trường đặt RPO = 4 giờ cho cấu hình mạng. Có đạt không? Cần sao lưu tối thiểu bao nhiêu lần mỗi ngày?", "giai": "Tệ nhất router hỏng ngay trước lần sao lưu kế tiếp: mất trọn <b>24 giờ</b> thay đổi &gt; 4 giờ: <b>không đạt</b>. Cần chu kỳ ≤ 4 giờ, tức ít nhất <b>6 lần mỗi ngày</b>; cách tốt hơn là sao lưu tự động mỗi khi cấu hình thay đổi. RPO là yêu cầu về dữ liệu, không thay được bằng việc có dự phòng đường truyền."}
+  ],
+  "bai_tap": [
+    {"so": "1", "de": "Một dịch vụ có MTBF là 2 000 giờ và MTTR là 2 giờ. Tính độ sẵn sàng theo phương trình (2.18). Đề xuất một biện pháp tăng MTBF và một biện pháp giảm MTTR.", "nguon": "bài tập 8 cuối chương 2", "dong": 4},
+    {"so": "2", "de": "Một switch có MTBF 50 000 giờ, MTTR 8 giờ (chờ hàng thay thế). Nhà trường để sẵn một switch dự trữ, MTTR còn 2 giờ. Tính A trước và sau, và phút ngừng mỗi năm.", "nguon": "theo (1.19)", "dong": 3},
+    {"so": "3", "de": "Thiết bị có MTBF 10 000 giờ. Tính xác suất chạy không lỗi suốt một tháng (730 giờ) và suốt một năm (8 766 giờ).", "nguon": "theo (2.17)", "dong": 3},
+    {"so": "4", "de": "Ba nhánh song song độc lập, mỗi nhánh A = 0,99. Tính A cả hệ. Nếu cả ba nhánh dùng chung một nguồn điện có A = 0,9995 thì A cả hệ là bao nhiêu? Nhận xét.", "nguon": "theo (4.14)", "dong": 3},
+    {"so": "5", "de": "Một dịch vụ có RTO = 5 phút. Hiện tại: phát hiện bằng OSPF 40 s, khoanh vùng thủ công 3 phút, chuyển đường 1 s, xác nhận 2 phút. Có đạt RTO không? Nếu chỉ thay OSPF bằng BFD (0,15 s) thì sao? Đề xuất cách đạt.", "nguon": "theo (2.19)", "dong": 4},
+    {"so": "6", "de": "Phân biệt RTO và RPO. Với hệ thống quản trị mạng sao lưu cơ sở dữ liệu mỗi 12 giờ và RPO = 1 giờ, kết luận và đề xuất.", "nguon": "mục 2.5.2", "dong": 4}
+  ],
+  "dap_an": [
+    {"so": "1", "giai": "A = 2 000 / (2 000 + 2) ≈ <b>0,999</b>, ngừng khoảng 8,76 giờ/năm. Tăng MTBF: thiết bị tốt hơn, nguồn kép, dự phòng độc lập. Giảm MTTR: giám sát và cảnh báo, linh kiện dự phòng tại chỗ, sao lưu cấu hình, quy trình khoanh vùng. Đủ điểm khi tính đúng A và mỗi hướng có một biện pháp cụ thể."},
+    {"so": "2", "giai": "Trước: A = 50 000 / 50 008 ≈ <b>0,99984</b>, ngừng ≈ <b>84 phút</b>/năm. Sau: A = 50 000 / 50 002 ≈ <b>0,99996</b>, ngừng ≈ <b>21 phút</b>/năm. Giảm MTTR bốn lần thì thời gian ngừng giảm gần bốn lần, không cần mua thiết bị tốt hơn."},
+    {"so": "3", "giai": "λ = 10<sup>−4</sup> h<sup>−1</sup>. R(730) = e<sup>−0,073</sup> ≈ <b>0,930</b>. R(8 766) = e<sup>−0,877</sup> ≈ <b>0,416</b>."},
+    {"so": "4", "giai": "Song song: A = 1 − 0,01<sup>3</sup> = <b>0,999999</b>. Có nguồn chung: A = 0,9995 × 0,999999 ≈ <b>0,9995</b>. Nguồn chung là phần tử nối tiếp quyết định cả hệ; ba nhánh gần như vô ích nếu không có nguồn độc lập."},
+    {"so": "5", "giai": "Hiện tại: 40 + 180 + 1 + 120 = <b>341 s</b> &gt; 300 s: không đạt. Chỉ thay BFD: 0,15 + 180 + 1 + 120 ≈ <b>301 s</b>: vẫn không đạt. Pha khoanh vùng mới là pha lớn: tự động khoanh vùng (ví dụ 10 s) cho 0,15 + 10 + 1 + 120 ≈ 131 s: đạt. Chấp nhận các phương án khác nếu tổng ≤ 300 s và chỉ rõ pha được cải thiện."},
+    {"so": "6", "giai": "RTO: thời gian tối đa để khôi phục dịch vụ. RPO: lượng dữ liệu tối đa được phép mất khi khôi phục. Sao lưu 12 giờ, RPO 1 giờ: tệ nhất mất 12 giờ dữ liệu &gt; 1 giờ: <b>không đạt</b>. Đề xuất: sao lưu tăng dần mỗi giờ hoặc sao chép liên tục sang máy dự phòng."}
+  ],
+  "kiem_tra": [
+    {"q": "MTBF 1 000 h, MTTR 1 h. Độ sẵn sàng xấp xỉ?", "o": ["0,9", "0,99", "0,999", "0,9999"], "a": 2, "giai": "1 000 / 1 001 ≈ 0,999."},
+    {"q": "99,99 % tương đương khoảng bao nhiêu phút ngừng mỗi năm?", "o": ["5 phút", "53 phút", "526 phút", "8,8 giờ"], "a": 1, "giai": "10<sup>−4</sup> × 525 960 ≈ 53 phút."},
+    {"q": "Hai nhánh song song độc lập, mỗi nhánh A = 0,99. A cả hệ?", "o": ["0,98", "0,99", "0,995", "0,9999"], "a": 3, "giai": "1 − 0,01<sup>2</sup> = 0,9999."},
+    {"q": "Hai đường dự phòng chung một ống cáp. Ống cáp phải được tính như?", "o": ["Một nhánh song song", "Một phần tử nối tiếp với cả hai đường", "Không cần tính", "Một nhánh thứ ba"], "a": 1, "giai": "Hỏng ống thì mất cả hai: đó là miền lỗi chung."},
+    {"q": "Trong (2.19), đã có đường dự phòng tự động, pha nào thường dài nhất?", "o": ["Phát hiện", "Sửa chữa", "Hàn nối", "Mua thiết bị"], "a": 0, "giai": "Chuyển đường chỉ khoảng một giây; phát hiện có thể 40 s với OSPF hello."},
+    {"q": "RPO trả lời câu hỏi nào?", "o": ["Phục hồi trong bao lâu", "Được phép mất bao nhiêu dữ liệu", "Bao lâu hỏng một lần", "Bao nhiêu đường dự phòng"], "a": 1, "giai": "RTO là thời gian, RPO là lượng dữ liệu."}
+  ],
+  "tom_tat": [
+    "Độ sẵn sàng A = MTBF/(MTBF + MTTR) (1.19), (2.18); độ tin cậy R(t) = e<sup>−λt</sup> (2.17). Tin cậy thấp vẫn có thể sẵn sàng cao nếu sửa nhanh.",
+    "Tăng A bằng hai hướng: tăng MTBF (thiết bị, môi trường, dự phòng) hoặc giảm MTTR (giám sát, quy trình, tự động hoá).",
+    "Song song A<sub>k</sub> = 1 − Π(1 − A<sub>i</sub>) (4.14) chỉ đúng khi các nhánh độc lập; miền lỗi chung (ống, nguồn, phòng máy) tính như phần tử nối tiếp.",
+    "RTO đặt theo mức quan trọng của dịch vụ (hình 1.6) và chia thành bốn pha T<sub>detect</sub> + T<sub>isolate</sub> + T<sub>repair</sub> + T<sub>verify</sub> ≤ RTO (2.19).",
+    "RPO là lượng dữ liệu được phép mất; chu kỳ sao lưu không được dài hơn RPO."
+  ],
+  "nguon": [
+    "Hoàng Trọng Minh, Giáo trình Thiết kế và hiệu năng mạng (học phần TEL1459), Học viện Công nghệ Bưu chính Viễn thông, 2026: mục 1.6.5 (trang 16–18, hình 1.6, 1.7), mục 2.5.1–2.5.2 (trang 57–58), mục 4.4.3 (trang 112); phương trình (1.19), (2.17)–(2.19), (4.14); bài tập 8 chương 2.",
+    "RFC 5880 (BFD; thời gian phát hiện = hệ số nhân × khoảng gửi), RFC 2328 (OSPF, RouterDeadInterval mặc định 40 s); ITU-T E.800 (thuật ngữ độ sẵn sàng).",
+    "Monte Carlo độ sẵn sàng: kit/mang/mo-phong.js, kiểm với công thức nối tiếp và song song trong tests/mang_check.mjs.",
+    "Giả định của bài: router MTBF 100 000 h, MTTR 4 h; ống bị cắt 1 lần/năm, sửa 12 h; khoanh vùng thủ công 30 phút; chuyển đường 1 s; xác nhận 10 s hoặc 15 phút; các số trong bài tập."
+  ]
+}

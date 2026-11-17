@@ -1,4 +1,4 @@
-// Thiết kế và hiệu năng mạng · bài 1.4 · Vòng vận hành có kiểm chứng.
+// Thiết kế và hiệu năng mạng · tiết 5 · Vòng vận hành có kiểm chứng.
 // Theo giáo trình TEL1459 (Hoàng Trọng Minh, PTIT 2026), mục 1.7.2 và 1.9: telemetry (RFC 9232), sai lệch giữa trạng thái quan
 // sát và mong muốn Δk = ‖y_k − y*_k‖ (1.21), độ phủ quan sát Γ (1.28); câu hỏi 6 cuối chương 1 (polling và streaming).
 // Một liên kết lõi có những đợt bùng nổ ngắn. Hỏi SNMP mỗi 5 phút thì trung bình hoá mất đợt bùng nổ; đẩy telemetry mỗi giây thì
@@ -87,7 +87,7 @@ function veManHinh(tNow) {
 }
 
 // ---------------- bảng
-ui.header({code: '1.4', kicker: 'THIẾT KẾ VÀ HIỆU NĂNG MẠNG · MỤC 1.7.2, 1.9 · TELEMETRY', title: 'Vòng vận hành có kiểm chứng', sub: 'ĐO · SO VỚI MỤC TIÊU · CẢNH BÁO', hub: HUB_URL + 'thiet-ke-mang/',
+ui.header({code: 'T5', kicker: 'THIẾT KẾ VÀ HIỆU NĂNG MẠNG · TIẾT 5 · MỤC 1.7–1.10 · VẬN HÀNH CÓ KIỂM CHỨNG', title: 'Vòng vận hành có kiểm chứng', sub: 'ĐO · SO VỚI MỤC TIÊU · CẢNH BÁO', hub: HUB_URL + 'thiet-ke-mang/',
   right: [['Δk', 'SAI LỆCH'], ['1.21 · 1.28', 'PHƯƠNG TRÌNH'], ['Γ', 'ĐỘ PHỦ QUAN SÁT']]});
 ui.panel(28, 112, 300, 170, 'CÁCH THU THẬP', '01');
 const slT = ui.slider('tau', 42, 148, 272, 'CHU KỲ', {lw: 92, vw: 74});
@@ -161,7 +161,7 @@ const sim = {
       BURST.forEach(([a, b], k) => { const dd = kq.det[k]; g += `<rect x="${X(a)}" y="6" width="${Math.max(3, X(b) - X(a))}" height="28" fill="${dd.thay ? MAU.ok : MAU.bad}"/><text x="${X(a) + 2}" y="54" font-family="JetBrains Mono" font-size="9" fill="${C.ink}">${dd.thay ? '+' + F.fmtThoiGian(dd.tre, 0) : 'lỡ'}</text>`; });
       g += `<text x="0" y="68" font-family="JetBrains Mono" font-size="9" fill="#626773">0</text><text x="${W}" y="68" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">60 phút</text>`; bSvg.innerHTML = g; }
     bBig.textContent = `${kq.nThay} / ${BURST.length}`; bBig.style.color = kq.nThay === BURST.length ? MAU.ok : MAU.bad;
-    t03.innerHTML = `Bốn đợt bùng nổ dài 20–60 s lên gần 100 %. ${kq.nThay ? `Phát hiện trung bình sau ${F.fmtThoiGian(kq.treTB, 0)} kể từ lúc đợt bắt đầu.` : ''} ${kq.nThay < BURST.length ? 'Đợt bị lỡ vẫn làm rơi gói và tăng jitter (bài 1.2), chỉ là không ai thấy.' : ''}`;
+    t03.innerHTML = `Bốn đợt bùng nổ dài 20–60 s lên gần 100 %. ${kq.nThay ? `Phát hiện trung bình sau ${F.fmtThoiGian(kq.treTB, 0)} kể từ lúc đợt bắt đầu.` : ''} ${kq.nThay < BURST.length ? 'Đợt bị lỡ vẫn làm rơi gói và tăng jitter (tiết 3), chỉ là không ai thấy.' : ''}`;
     // bảng 04
     YS.forEach((s, i) => { const ok = kq.phu.has(s.k); yRows[i].innerHTML = `<span style="color:${ok ? MAU.ok : MAU.bad};font-weight:700">${ok ? '✓' : '✗'}</span> ${s.ten}`; });
     gBig.textContent = `${kq.phu.size} / ${YS.length} = ${vn(kq.Gamma, 2)}`;
@@ -202,25 +202,41 @@ const views = {
 };
 
 // ---------------- bài giảng
+// Bài giảng · tiết 5 (45 phút), theo mục 1.7–1.10 của giáo trình; giáo án: tools/giao-an-mang/tk-van-hanh.json.
+// Tên bước (t) phải khớp từng bước của giáo án; tests/smoke.py kiểm. Cảnh giữ vòng vận hành; các mục 5G-Advanced, 6G đọc qua bốn câu hỏi của 1.10.2.
 const CAP = [
-  {k: 'Mục 1.7.2 · bài toán', t: 'Biết mạng đang ra sao bằng cách nào?', b: 'Phòng vận hành không nhìn thấy gói tin, chỉ thấy số đo gửi về. Liên kết lõi xanh đậm có bốn đợt bùng nổ ngắn trong một giờ. Câu hỏi: với cách thu thập đang dùng, có ai biết không?', e: 'Δk = ‖y_k − y*_k‖   (1.21)'},
-  {k: 'Polling 5 phút', t: 'Trung bình hoá san phẳng đợt bùng nổ', b: 'SNMP hỏi mỗi năm phút, lấy hiệu bộ đếm chia cho 300 giây. Đợt bùng nổ 30 giây lên 98 % bị hoà vào 270 giây ở 45 %: số đo chỉ khoảng 50 %, dưới ngưỡng. Màn hình xanh phẳng lặng trong khi gói đang rơi.', e: 'y = trung bình của tải trong khoảng hỏi'},
-  {k: 'Streaming 1 giây', t: 'Thấy ngay, sau vài giây', b: 'Chuyển sang telemetry đẩy mỗi giây. Đường xanh bám sát đường xám, cả bốn đợt đều vượt ngưỡng và cảnh báo trong vòng một hai giây.', e: 'câu hỏi 6 · polling so với streaming',
-    ask: {q: 'Một đợt bùng nổ 20 s lên 99 %, nền 45 %. Hỏi mỗi 300 s thì số đo của khoảng đó khoảng bao nhiêu?', o: ['Khoảng 99 %', 'Khoảng 49 %', 'Khoảng 80 %'], a: 1, e: '(20 × 0,99 + 280 × 0,45) / 300 ≈ 0,49. Dưới ngưỡng 0,8 xa.'}},
-  {k: 'Chi phí', t: 'Đo dày thì tốn', b: 'Chu kỳ ngắn hơn 300 lần, dữ liệu thu thập nhiều hơn 300 lần. Kéo thanh chu kỳ: có một khoảng đủ ngắn để bắt các đợt dài nhất mà không phải trả giá như đo từng giây. Thiết kế giám sát cũng là bài toán đánh đổi.', e: 'băng thông thu thập = số thiết bị × cỡ mẫu / chu kỳ'},
-  {k: 'Độ phủ quan sát · 1.28', t: 'Đo nhiều chưa chắc đã đủ', b: 'Chỉ có bộ đếm giao diện và CPU thì suy ra được nghẽn, mất gói, quá tải, nhưng mù với trễ dịch vụ, suy giảm quang, đổi đường. Bật thêm đo chủ động, công suất quang và sự kiện định tuyến để Γ lên 1.', e: 'Γ = |{y ∈ Y suy ra được từ M}| / |Y|',
-    ask: {q: 'Thêm metric "độ sâu hàng đợi" khi đã có "bộ đếm giao diện". Γ thay đổi thế nào trong bảng của bài?', o: ['Tăng thêm một trạng thái', 'Không đổi vì nghẽn đã suy ra được', 'Giảm'], a: 1, e: 'Nghẽn đã có từ bộ đếm giao diện. Metric mới chỉ có giá trị khi nó mở ra trạng thái chưa thấy.'}},
-  {k: 'Vòng khép kín', t: 'Đo, so, quyết, làm', b: 'Một vòng vận hành có kiểm chứng gồm đo trạng thái, so với mục tiêu để có Δk, quyết định, rồi hành động phục hồi hay tối ưu. Vòng không bao giờ nhanh hơn khâu đo của nó: hỏi năm phút một lần thì không thể phản ứng trong một phút.', e: 'thời gian vòng ≥ chu kỳ đo'},
+  {k: 'Tiết 5 · mục 1.7', t: 'Mạng đã chạy, làm sao biết nó còn đạt?', b: 'Bốn tiết trước là thiết kế: yêu cầu, trễ, mất gói, độ sẵn sàng. Tiết này là vận hành: mạng đã chạy, tải thay đổi từng giây, làm sao biết nó còn đạt yêu cầu. Liên kết lõi 2 xuống truy nhập 3 có những đợt bùng nổ ngắn. Trên màn hình phòng vận hành, đường xám là tải thật, đường xanh là cái người vận hành đo được.', e: 'thiết kế → vận hành → kiểm chứng → điều chỉnh'},
+  {k: 'Mục 1.7.1 · phương trình 1.20', t: 'Ba hướng đánh giá và một kế hoạch đánh giá', b: 'Đánh giá hiệu năng có ba hướng: đo kiểm thực nghiệm (thật nhưng phụ thuộc môi trường), mô phỏng (nhiều kịch bản nhưng phải xác thực mô hình), phân tích mô hình (nhanh nhưng dựa trên giả thiết đơn giản). Bài này dùng cả ba. Mỗi thí nghiệm cần đủ năm thành phần trước khi chạy, và báo cáo phải ghi metric, điểm đo, thời gian, cỡ gói, mô hình tải, số lần lặp.', e: 'E = (M, F, L, S, A)   (1.20)'},
+  {k: 'Mục 1.7.2 · câu 6', t: 'Hỏi định kỳ bỏ lỡ đợt bùng nổ', b: 'SNMP hỏi bộ đếm giao diện mỗi 5 phút, mức sử dụng là trung bình của cả khoảng. Đợt bùng nổ 24 giây lên 97 % bị pha loãng vào 276 giây còn lại ở khoảng 45 %: con số đo ra quanh 50 %, xa ngưỡng 80 %. Người vận hành không hề biết người dùng vừa chịu nghẽn. Polling có độ trễ phát hiện và không đủ chi tiết cho biến động ngắn.', e: 'mẫu 5 phút = trung bình 300 giây'},
+  {k: 'Telemetry · câu 6', t: 'Thiết bị tự đẩy dữ liệu', b: 'Đổi sang telemetry: thiết bị tự đẩy mẫu mỗi giây theo đăng ký, không chờ bị hỏi. RFC 9232 mô tả khung telemetry; RFC 8639, 8641 định nghĩa đăng ký nhận thông báo và cập nhật datastore YANG. Cả bốn đợt bùng nổ đều bị bắt, chậm chừng một giây. Đổi lại, dữ liệu thu thập nhiều gấp 300 lần: thiết kế phải chọn dữ liệu nào, tần suất nào, thu ở đâu, xử lý ra sao.', e: 'polling: hỏi rồi chờ · streaming: đăng ký rồi nhận',
+    ask: {q: 'Đợt bùng nổ dài 20 s. Chu kỳ đo nào chắc chắn có ít nhất một mẫu nằm trọn trong đợt?', o: ['5 phút', '1 phút', '10 s'], a: 2, e: 'Chu kỳ phải ngắn hơn khoảng một nửa thời gian của hiện tượng; 10 s cho ít nhất một khoảng nằm trọn trong 20 s.'}},
+  {k: 'Phương trình 1.21', t: 'Sai lệch giữa trạng thái đo và mục tiêu', b: 'Vận hành có kiểm chứng là so liên tục trạng thái quan sát y_k với trạng thái mong muốn y*_k. Ở đây y* là mức sử dụng 0,8, hệ số khai thác mục tiêu của tiết 2. Khi Δk vượt ngưỡng, hệ thống cảnh báo, phân tích nguyên nhân hoặc tự phục hồi. Bảng 06 cho thấy vòng khép kín không nhanh hơn khâu đo của nó.', e: 'Δ_k = ‖y_k − y*_k‖   (1.21)'},
+  {k: 'Mục 1.9.3 · phương trình 1.28', t: 'Đo nhiều chưa chắc thấy đủ', b: 'Chỉ có bộ đếm giao diện và CPU thì suy ra được ba trong sáu trạng thái cần kiểm soát: Γ = 0,5. Thêm độ sâu hàng đợi không tăng Γ vì nghẽn đã thấy rồi. Thêm đo chủ động, công suất quang, sự kiện định tuyến thì Γ lên 1. Telemetry đúng là thu đúng dữ liệu để suy ra trạng thái ảnh hưởng SLA, không phải thu thật nhiều.', e: 'Γ = |{y ∈ Y : y suy ra được từ M}| / |Y|   (1.28)',
+    ask: {q: 'Có 8 trạng thái cần kiểm soát; bộ metric hiện tại suy ra được 6. Γ bằng bao nhiêu và nên làm gì?', o: ['0,75; thêm metric cho đúng hai trạng thái còn thiếu', '0,75; tăng tần suất mọi metric', '6; đủ rồi'], a: 0, e: 'Γ = 6/8 = 0,75. Tăng tần suất không giúp suy ra trạng thái chưa có nguồn đo.'}},
+  {k: 'Mục 1.8.1', t: 'Từ mạng IP sang mạng dịch vụ lập trình được', b: 'Lớp học, camera, robot, cảm biến, thực tế mở rộng cần những thứ khác nhau. Nút thắt không chỉ là băng thông mà là khả năng ánh xạ yêu cầu thành tài nguyên truyền dẫn, tính toán, chính sách, cô lập, giám sát và phục hồi. 5GS tách xử lý điều khiển, quản lý phiên và chuyển tiếp (AMF, SMF, UPF); 5G-Advanced bắt đầu từ Release 18. Người thiết kế phải chọn cả vị trí chức năng mạng và điểm đo.', e: 'yêu cầu → tài nguyên + chính sách + giám sát'},
+  {k: 'Mục 1.8.2 · phương trình 1.22 · câu 8', t: 'Lát cắt mạng không phải VLAN', b: 'VLAN phân đoạn miền lớp 2; VPN cho kết nối riêng trên hạ tầng chung; lát cắt mạng gắn với mục tiêu dịch vụ và cam kết tài nguyên (RFC 9543). Một lát cắt phải có điểm biên, yêu cầu tài nguyên, mức cô lập, metric giám sát và chính sách QoS. Thành phần M_n nối thẳng với tiết này: không đo được thì lát cắt chỉ còn là phân đoạn logic.', e: 'S_n = (P_n, R_n, I_n, M_n, Q_n)   (1.22)'},
+  {k: 'Mục 1.8.3 · phương trình 1.23 · câu 9', t: 'Xử lý ở biên chỉ có lợi khi tổng trễ nhỏ hơn', b: 'MEC đưa tính toán về gần người dùng: trễ truyền tải giảm, nhưng xử lý phụ thuộc máy chủ biên và tải tại chỗ. Ví dụ giả định: tập trung 5 + 20 + 15 + 20 = 60 ms; ở biên 5 + 2 + 35 + 2 = 44 ms, có lợi; nếu máy biên quá tải, xử lý 60 ms thì tổng 69 ms, thua tập trung. MEC là bài toán đồng thiết kế mạng, tính toán, vị trí dữ liệu và di động phiên.', e: 'T_edge = D_access + D_transport + T_proc + D_return   (1.23)'},
+  {k: 'Mục 1.8.4–1.8.5 · phương trình 1.24 · câu 10', t: 'Vòng điều khiển cần dữ liệu đo tin được', b: 'Bộ điều khiển RAN trong O-RAN chọn hành động từ dữ liệu đo, mục tiêu QoS và trạng thái dịch vụ. Tắt đo chủ động: Γ tụt, bộ điều khiển mù với trễ dịch vụ. Dữ liệu thiếu thì hành động có thể làm hiệu năng tệ đi. AI for Network dùng AI để vận hành mạng; Network for AI là mạng phục vụ AI phân tán. Cả hai phải đánh giá bằng tác động lên trễ, mất gói, SLA, năng lượng, không chỉ bằng độ chính xác dự đoán.', e: 'u_t = π(z_t, q_t, s_t)   (1.24)'},
+  {k: 'Mục 1.8.6–1.8.7 · phương trình 1.25, 1.26 · câu 11, 12', t: 'Trễ lan truyền biến thiên và metric cảm nhận', b: 'Với UAV hay vệ tinh, khoảng cách thay đổi theo thời gian nên trễ lan truyền không còn là hằng số. UAV cách 3 km: khoảng 10 µs; vệ tinh quỹ đạo thấp cách 1 000 km: khoảng 3,3 ms; vệ tinh địa tĩnh cao 35 786 km: khoảng 119 ms một chặng. ISAC dùng cùng tín hiệu vô tuyến cho truyền thông và cảm nhận, nên phải thêm metric cảm nhận như xác suất phát hiện, sai số định vị, và cân hai mục tiêu bằng trọng số.', e: 'd_prop(t) = r(t)/c   (1.25) · J_ISAC = β1·J_comm + β2·J_sense + β3·C_resource   (1.26)'},
+  {k: 'Mục 1.9.1–1.9.2 · phương trình 1.27 · câu 13', t: 'Bảo mật, chống chịu, năng lượng là ràng buộc từ đầu', b: 'Ảo hoá, AI, tự động hoá làm miền tấn công lan ra telemetry, mô hình, giao diện lập trình. Thiết kế an toàn phải trả lời: miền nào cô lập, sự cố lan qua đâu, dữ liệu nào cần bảo vệ, phát hiện sai lệch thì rollback về đâu. Hiệu quả năng lượng là bit hữu ích trên joule: 10 Gbit/s ở 2 kW là 5 Mbit/J, tốt hơn 12 Gbit/s ở 3 kW (4 Mbit/J). Telemetry mỗi giây cũng tốn năng lượng thu, lưu, xử lý.', e: 'η_EE = B_useful / E_total   (1.27)'},
+  {k: 'Mục 1.10 · bảng 1.5', t: 'Bốn câu hỏi trước mọi công nghệ mới', b: 'Chuỗi thiết kế hiện đại: xác định dịch vụ, lượng hoá yêu cầu, ánh xạ tài nguyên, cô lập và bảo mật, đo kiểm, giám sát và tối ưu; bước cuối quay về bước đầu. Trước một công nghệ mới, hỏi bốn câu: phục vụ dịch vụ nào, tác động metric nào, cần thêm tài nguyên hay dữ liệu gì, tạo rủi ro gì. Về nhà: câu 6, 8–13 chương 1. Tiết sau mở chương 2: phân tích yêu cầu.', e: 'dịch vụ nào · metric nào · tốn gì · rủi ro gì'},
 ];
 const ev = [], at = (t, o) => ev.push({at: t, ...o});
 at(0.2, {cap: 0}); at(1, {click: 'reset'}); at(2, {click: 'v_hero'});
-at(9, {cap: 1}); at(10, {click: 'v_man'});
-at(26, {cap: 2}); at(27, {click: 'stream'});
-at(40, {cap: 3}); at(41, {click: 'v_hero'}); at(42, {slide: 'tau', to: LOGC(10, 1, 900), dur: 2});
-at(52, {cap: 4}); at(53, {click: 'm_probe'}); at(55, {click: 'm_opt'}); at(57, {click: 'm_log'});
-at(64, {cap: 5});
+at(11, {cap: 1}); at(11.5, {click: 'v_man'});
+at(22, {cap: 2}); at(22.5, {click: 'poll'});
+at(33, {cap: 3}); at(33.5, {click: 'stream'});
+at(44, {cap: 4}); at(44.5, {click: 'v_hero'}); at(46, {slide: 'tau', to: LOGC(10, 1, 900), dur: 2});
+at(55, {cap: 5}); at(57, {click: 'm_q'}); at(60, {click: 'm_probe'}); at(62.5, {click: 'm_opt'}); at(65, {click: 'm_log'});
+at(67, {cap: 6});
+at(78, {cap: 7});
+at(89, {cap: 8});
+at(100, {cap: 9}); at(102, {click: 'm_probe'}); at(108, {click: 'm_probe'});
+at(111, {cap: 10});
+at(124, {cap: 11}); at(125, {slide: 'tau', to: 0, dur: 1.5}); at(130, {slide: 'tau', to: LOGC(10, 1, 900), dur: 1.5});
+at(135, {cap: 12}); at(135.5, {click: 'v_hero'});
 ev.sort((a, b) => a.at - b.at);
 
 sim.reset(); tinh(); S.dirty = false;
-runLive({stage: st, ui, sim, views, captions: CAP, script: {events: ev, duration: 74}, firstView: 'hero', extra: [{key: 'stream', label: 'Telemetry 1 s'}],
+runLive({stage: st, ui, sim, views, captions: CAP, script: {events: ev, duration: 148}, firstView: 'hero', extra: [{key: 'stream', label: 'Telemetry 1 s'}],
   keys: {1: 'v_hero', 2: 'v_man', p: 'poll', s: 'stream'}});

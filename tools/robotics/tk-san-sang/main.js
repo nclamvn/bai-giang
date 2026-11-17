@@ -1,4 +1,4 @@
-// Thiết kế và hiệu năng mạng · bài 1.3 · Độ sẵn sàng, RTO và RPO.
+// Thiết kế và hiệu năng mạng · tiết 4 · Độ sẵn sàng, RTO và RPO.
 // Theo giáo trình TEL1459 (Hoàng Trọng Minh, PTIT 2026): độ sẵn sàng (1.19, 2.18), độ tin cậy (2.17), yêu cầu phục hồi
 // T_detect + T_isolate + T_repair + T_verify ≤ RTO (2.19), RPO (mục 2.5.2), song song (4.14); bài tập 8 chương 2.
 // Trường có hai đường lên tới nhà cung cấp. Đặt chung một ống cáp thì một gầu máy xúc cắt cả hai; tách hai ngả thì chỉ mất một
@@ -94,7 +94,7 @@ function tinh() {
 }
 
 // ---------------- bảng
-ui.header({code: '1.3', kicker: 'THIẾT KẾ VÀ HIỆU NĂNG MẠNG · MỤC 1.6.5, 2.5 · DỰ PHÒNG VÀ PHỤC HỒI', title: 'Độ sẵn sàng, RTO và RPO', sub: 'HAI ĐƯỜNG LÊN · MỘT ỐNG HAY HAI NGẢ', hub: HUB_URL + 'thiet-ke-mang/',
+ui.header({code: 'T4', kicker: 'THIẾT KẾ VÀ HIỆU NĂNG MẠNG · TIẾT 4 · MỤC 1.6.5, 2.5 · DỰ PHÒNG VÀ PHỤC HỒI', title: 'Độ sẵn sàng, RTO và RPO', sub: 'HAI ĐƯỜNG LÊN · MỘT ỐNG HAY HAI NGẢ', hub: HUB_URL + 'thiet-ke-mang/',
   right: [['2', 'ĐƯỜNG LÊN'], ['1.19 · 2.19', 'PHƯƠNG TRÌNH'], ['400 NĂM', 'MONTE CARLO']]});
 ui.panel(28, 112, 300, 176, 'PHƯƠNG ÁN · HAI ĐƯỜNG LÊN', '01');
 const t01a = ui.text(42, 148, '', 'v', 'font-size:12px;font-weight:600;width:272px;white-space:normal');
@@ -257,30 +257,42 @@ const views = {
   dial: () => ({tx: 0, ty: 3.4, tz: -0.4, az: 0, el: 6, d: 10, sx: 0, sy: -30}),
 };
 
-// ---------------- bài giảng
+// ---------------- bài giảng · tiết 4 (45 phút), theo mục 1.6.5 và 2.5.1–2.5.2 của giáo trình; giáo án: tools/giao-an-mang/tk-san-sang.json
+// Tên bước (t) phải khớp từng bước của giáo án; tests/smoke.py kiểm.
 const CAP = [
-  {k: 'Mục 1.6.5, 2.5 · bài toán', t: 'Hai đường lên có chắc gấp đôi?', b: 'Trường thuê hai đường cáp quang tới nhà cung cấp để không bao giờ mất mạng. Câu hỏi của thiết kế: hai đường đó có thể cùng hỏng không? Bài này đo bằng hai cách, công thức độ sẵn sàng và mô phỏng 400 năm vận hành.', e: 'A = MTBF / (MTBF + MTTR)   (1.19)'},
-  {k: 'Miền lỗi chung', t: 'Một gầu máy xúc, hai sợi cáp', b: 'Hai sợi đang nằm chung một ống ở phố trước. Bấm Máy xúc đào: cả hai đứt cùng lúc, dịch vụ ngừng tới khi đội cáp hàn nối xong. Đồng hồ phục hồi chạy hết bốn pha và vượt xa RTO một giờ.', e: 'ống chung nối tiếp với cả hai đường'},
-  {k: 'Tách ngả · 4.14', t: 'Đường B đi ngõ sau', b: 'Chuyển sang Tách hai ngả rồi đào lại. Lần này chỉ đường A đứt; định tuyến phát hiện và chuyển sang B trong chưa tới hai giây. Monte Carlo cho thấy thời gian ngừng mỗi năm giảm nhiều lần.', e: 'A = 1 − (1 − A₁)(1 − A₂)',
-    ask: {q: 'Hai đường, mỗi đường A = 0,999, chung một ống có A = 0,9986. Độ sẵn sàng cả hệ gần nhất với?', o: ['0,999999 như hai đường song song', '0,9986, bị ống chung giới hạn', '0,998'], a: 1, e: 'Phần song song gần bằng 1 nhưng nhân với ống chung 0,9986: cả hệ không thể vượt phần tử nối tiếp yếu nhất.'}},
-  {k: 'Yêu cầu phục hồi · 2.19', t: 'Phát hiện chậm cũng là ngừng', b: 'Đổi sang OSPF hello: router chờ 40 giây không nghe thấy hàng xóm mới kết luận đường hỏng. Mỗi lần hỏng một đường là 40 giây ngừng, cộng dồn qua năm. BFD phát hiện trong 150 ms: cùng hai đường, ít ngừng hơn.', e: 'T_detect + T_isolate + T_repair + T_verify ≤ RTO'},
-  {k: 'MTBF và MTTR', t: 'Hai cách tăng độ sẵn sàng', b: 'Kéo MTBF lên là mua thiết bị tốt hơn hoặc thêm dự phòng. Kéo MTTR xuống là giám sát, quy trình thay thế, tự động hoá cấu hình. Cùng một mức độ sẵn sàng có thể đạt bằng cả hai đường.', e: 'A tăng khi MTBF tăng hoặc MTTR giảm'},
-  {k: 'Bài tập 8 · chương 2', t: 'MTBF 2 000 giờ, MTTR 2 giờ', b: 'A = 2 000 / 2 002 ≈ 0,999. Nghe rất cao, nhưng 0,1 % của một năm là gần 8 giờ 46 phút mất dịch vụ. Với một trường đang thi trực tuyến, chừng đó có thể là quá nhiều.', e: '(1 − 0,999) × 8 766 h ≈ 8,8 h/năm',
+  {k: 'Tiết 4 · mục 1.6.5', t: 'Hai đường lên có chắc gấp đôi?', b: 'Trường thuê hai đường cáp quang tới nhà cung cấp để không bao giờ mất mạng. Câu hỏi của thiết kế: hai đường đó có thể cùng hỏng không? Tiết này trả lời bằng hai cách, công thức độ sẵn sàng và mô phỏng 400 năm vận hành, rồi đi tiếp tới câu hỏi thứ hai: hỏng rồi thì phục hồi trong bao lâu và mất bao nhiêu dữ liệu.', e: 'dự phòng · miền lỗi · RTO · RPO'},
+  {k: 'Mục 1.6.5, 2.5.1', t: 'Sẵn sàng, tin cậy, bảo trì là ba chuyện khác nhau', b: 'Độ sẵn sàng là xác suất hệ thống đang ở trạng thái cung cấp được dịch vụ, hay tỉ lệ thời gian dùng được. Độ tin cậy là xác suất chạy không lỗi suốt một khoảng thời gian. Khả năng bảo trì là mức dễ phát hiện, sửa và khôi phục. Ba khái niệm áp cho thiết bị, liên kết, tuyến đường, nguồn điện, và cả quy trình vận hành.', e: 'sẵn sàng ≠ tin cậy ≠ bảo trì'},
+  {k: 'Phương trình 2.17', t: 'Độ tin cậy giảm dần theo thời gian', b: 'Nếu thời gian giữa hai lỗi phân bố mũ với cường độ lỗi λ = 1/MTBF, xác suất còn chạy sau thời gian t là e^(−λt). Một đường MTBF 2 000 giờ: chạy trọn một tháng không lỗi với xác suất khoảng 0,69, trọn một năm chỉ khoảng 0,012. Gần như chắc chắn hỏng ít nhất một lần trong năm, vậy mà độ sẵn sàng vẫn 0,999 vì sửa nhanh.', e: 'R(t) = e^(−λt)   (2.17)'},
+  {k: 'Phương trình 1.19 · bài tập 8 chương 2', t: 'MTBF 2 000 giờ, MTTR 2 giờ', b: 'A = 2 000 / 2 002 ≈ 0,999. Nghe rất cao, nhưng 0,1 % của một năm là khoảng 8 giờ 45 phút mất dịch vụ. Với một trường đang thi trực tuyến, chừng đó có thể là quá nhiều. Công thức chỉ là xấp xỉ trung bình dài hạn, không nói lần ngừng rơi vào lúc nào.', e: 'A = MTBF / (MTBF + MTTR)   (1.19), (2.18)',
     ask: {q: '"Ba số chín" (99,9 %) tương đương khoảng bao nhiêu thời gian ngừng mỗi năm?', o: ['Khoảng 53 phút', 'Khoảng 8,8 giờ', 'Khoảng 3,6 ngày'], a: 1, e: '0,001 × 8 766 giờ ≈ 8,8 giờ. Bốn số chín mới là khoảng 53 phút.'}},
-  {k: 'RPO', t: 'Mất bao nhiêu dữ liệu thì chấp nhận được', b: 'RTO hỏi phục hồi trong bao lâu; RPO hỏi được phép mất bao nhiêu dữ liệu. Với cấu hình mạng, nếu sao lưu mỗi ngày mà router hỏng cuối ngày, mọi thay đổi trong ngày đó mất theo. Chu kỳ sao lưu phải ngắn hơn RPO.', e: 'chu kỳ sao lưu ≤ RPO'},
+  {k: 'MTBF và MTTR', t: 'Hai cách tăng độ sẵn sàng', b: 'Kéo MTBF lên là thiết bị tốt hơn, môi trường tốt hơn hoặc thêm dự phòng. Kéo MTTR xuống là giám sát, quy trình thay thế, tự động hoá cấu hình, khả năng rollback và khoanh vùng lỗi. Đẩy MTBF lên 10 000 giờ hay hạ MTTR xuống nửa giờ đều cho độ sẵn sàng tương đương; thường cách thứ hai rẻ hơn.', e: 'A tăng khi MTBF tăng hoặc MTTR giảm'},
+  {k: 'Miền lỗi chung', t: 'Một gầu máy xúc, hai sợi cáp', b: 'Hai sợi đang nằm chung một ống ở phố trước. Bấm Máy xúc đào: cả hai đứt cùng lúc, dịch vụ ngừng tới khi đội cáp hàn nối xong. Hai đường độc lập về thiết bị nhưng chung một miền lỗi: ống cáp phải đếm như một phần tử nối tiếp với cả hai.', e: 'ống chung nối tiếp với cả hai đường'},
+  {k: 'Phương trình 4.14', t: 'Đường B đi ngõ sau', b: 'Chuyển sang Tách hai ngả rồi đào lại. Lần này chỉ đường A đứt; định tuyến phát hiện và chuyển sang B trong khoảng một giây. Với n nhánh song song và độc lập, xác suất cả hệ mất dịch vụ là tích xác suất từng nhánh mất. Theo công thức, thời gian ngừng mỗi năm giảm từ khoảng 740 xuống khoảng 24 phút; Monte Carlo cho con số gần đó.', e: 'A_k = 1 − Π (1 − A_i)   (4.14)',
+    ask: {q: 'Hai đường, mỗi đường A = 0,999, chung một ống có A = 0,9986. Độ sẵn sàng cả hệ gần nhất với?', o: ['0,999999 như hai đường song song', '0,9986, bị ống chung giới hạn', '0,998'], a: 1, e: 'Phần song song gần bằng 1 nhưng nhân với ống chung 0,9986: cả hệ không vượt được phần tử nối tiếp yếu nhất.'}},
+  {k: 'Hình 1.6', t: 'RTO càng nhỏ càng đắt', b: 'RTO là thời gian tối đa chấp nhận được để khôi phục dịch vụ. RTO càng nhỏ thì yêu cầu về dự phòng, tự động chuyển mạch, giám sát và vận hành càng cao: chi phí khôi phục tăng, tổn thất do ngừng giảm. Vì vậy RTO đặt theo mức quan trọng của từng dịch vụ, không áp một ngưỡng cho mọi ứng dụng.', e: 'RTO nhỏ → chi phí phục hồi tăng, tổn thất giảm'},
+  {k: 'Phương trình 2.19', t: 'Bốn pha của một lần phục hồi', b: 'Đồng hồ chia một lần phục hồi thành bốn cung: phát hiện, khoanh vùng, sửa hoặc chuyển, xác nhận. Chung ống, máy xúc đào: khoanh vùng nửa giờ, hàn nối mười hai giờ, xác nhận mười lăm phút, vượt xa RTO một giờ. Tách bốn pha mới biết nên đầu tư vào giám sát, dự phòng hay quy trình sửa chữa.', e: 'T_detect + T_isolate + T_repair + T_verify ≤ RTO   (2.19)'},
+  {k: 'Phương trình 2.19 · pha phát hiện', t: 'Phát hiện chậm cũng là ngừng', b: 'Đã tách ngả, đổi sang OSPF hello: router chờ 40 giây không nghe thấy hàng xóm mới kết luận đường hỏng. Mỗi lần hỏng một đường là 40 giây ngừng, cộng dồn qua năm. BFD phát hiện trong khoảng 150 ms: cùng hai đường, ít ngừng hơn. Khi đã có dự phòng, pha phát hiện thường là pha dài nhất.', e: 'BFD 3 × 50 ms so với OSPF 40 s'},
+  {k: 'Mục 2.5.2 · hình 1.7', t: 'Mất bao nhiêu dữ liệu thì chấp nhận được', b: 'RTO hỏi phục hồi trong bao lâu; RPO hỏi được phép mất tối đa bao nhiêu dữ liệu khi khôi phục. Với mạng, RPO gắn với cấu hình, log, cơ sở dữ liệu quản trị. Nếu sao lưu cấu hình mỗi ngày mà router hỏng cuối ngày, mọi thay đổi trong ngày mất theo. Chu kỳ sao lưu phải không dài hơn RPO.', e: 'chu kỳ sao lưu ≤ RPO',
+    ask: {q: 'Sao lưu cấu hình mỗi 24 giờ, RPO đặt 4 giờ. Kết luận?', o: ['Đạt, vì có sao lưu', 'Không đạt: tệ nhất mất 24 giờ thay đổi', 'Đạt nếu RTO nhỏ'], a: 1, e: 'Tệ nhất là mất trọn một chu kỳ 24 giờ > 4 giờ. Cần sao lưu ít nhất mỗi 4 giờ, hoặc sao lưu khi có thay đổi.'}},
   {k: 'Kiểm mô hình', t: 'Công thức và 400 năm mô phỏng', b: 'Thanh công thức và thanh Monte Carlo gần nhau: cách tính nối tiếp, song song là đúng. Chỗ chúng lệch là thời gian chuyển đường, thứ công thức 1.19 không chứa. Muốn kết luận về dịch vụ thật, phải đưa cả quy trình phục hồi vào mô hình.', e: 'công thức ≈ Monte Carlo, trừ phần chuyển đường'},
+  {k: 'Tổng kết · bài tập 8', t: 'Dự phòng chỉ có ích khi độc lập', b: 'Độ sẵn sàng tăng bằng MTBF lớn hoặc MTTR nhỏ; song song chỉ có ích khi các nhánh không chung miền lỗi; RTO đặt theo mức quan trọng và chia thành bốn pha để biết đầu tư vào đâu; RPO quyết định chu kỳ sao lưu. Về nhà: bài tập 8 chương 2 và phiếu bài tập. Tiết sau: vòng vận hành có kiểm chứng.', e: 'độc lập · bốn pha · RTO theo dịch vụ · sao lưu ≤ RPO'},
 ];
 const ev = [], at = (t, o) => ev.push({at: t, ...o});
 at(0.2, {cap: 0}); at(1, {click: 'reset'}); at(2, {click: 'v_hero'});
-at(9, {cap: 1}); at(9.5, {click: 'v_pho'}); at(11, {click: 'dao'}); at(17, {click: 'v_hero'});
-at(21, {cap: 2}); at(21.5, {click: 'tach'}); at(23, {click: 'v_pho'}); at(24, {click: 'dao'}); at(30, {click: 'v_hero'});
-at(34, {cap: 3}); at(34.5, {click: 'hello'}); at(35, {click: 'v_dial'}); at(36, {click: 'hong_a'}); at(44, {click: 'bfd'}); at(44.5, {click: 'hong_a'}); at(51, {click: 'v_hero'});
-at(53, {cap: 4}); at(54, {slide: 'mtbfL', to: LOGC(10000, 500, 50000), dur: 1.5}); at(58, {slide: 'mttrL', to: LOGC(0.5, 0.5, 48), dur: 1.5}); at(62, {click: 'bt28'});
-at(64, {cap: 5}); at(65, {click: 'chung'});
-at(74, {cap: 6}); at(75, {slide: 'bk', to: LOGC(72, 0.25, 168), dur: 1.5}); at(80, {slide: 'bk', to: LOGC(12, 0.25, 168), dur: 1.2});
-at(84, {cap: 7}); at(84.5, {click: 'tach'});
+at(11, {cap: 1});
+at(22, {cap: 2}); at(24, {slide: 'mtbfL', to: LOGC(10000, 500, 50000), dur: 1.5}); at(30, {click: 'bt28'});
+at(33, {cap: 3}); at(33.5, {click: 'bt28'});
+at(44, {cap: 4}); at(45, {slide: 'mtbfL', to: LOGC(10000, 500, 50000), dur: 1.5}); at(49, {click: 'bt28'}); at(49.5, {slide: 'mttrL', to: LOGC(0.5, 0.5, 48), dur: 1.5}); at(54, {click: 'bt28'});
+at(55, {cap: 5}); at(55.5, {click: 'chung'}); at(56, {click: 'v_pho'}); at(57.5, {click: 'dao'}); at(64, {click: 'v_hero'});
+at(67, {cap: 6}); at(67.5, {click: 'tach'}); at(69, {click: 'v_pho'}); at(70, {click: 'dao'}); at(76, {click: 'v_hero'});
+at(79, {cap: 7}); at(79.5, {click: 'v_dial'}); at(81, {slide: 'rto', to: LOGC(1 / 60, 1 / H, 48), dur: 2}); at(86, {slide: 'rto', to: LOGC(1, 1 / H, 48), dur: 1.2});
+at(90, {cap: 8}); at(90.5, {click: 'chung'}); at(91.5, {click: 'dao'});
+at(101, {cap: 9}); at(101.5, {click: 'tach'}); at(102, {click: 'hello'}); at(103, {click: 'hong_a'}); at(107, {click: 'bfd'}); at(107.5, {click: 'hong_a'});
+at(112, {cap: 10}); at(112.5, {click: 'v_hero'}); at(113, {slide: 'bk', to: LOGC(72, 0.25, 168), dur: 1.5}); at(118, {slide: 'bk', to: LOGC(12, 0.25, 168), dur: 1.2});
+at(124, {cap: 11});
+at(135, {cap: 12});
 ev.sort((a, b) => a.at - b.at);
 
 sim.reset(); tinh(); S.dirty = false;
-runLive({stage: st, ui, sim, views, captions: CAP, script: {events: ev, duration: 94}, firstView: 'hero', extra: [{key: 'dao', label: 'Máy xúc đào'}],
+runLive({stage: st, ui, sim, views, captions: CAP, script: {events: ev, duration: 148}, firstView: 'hero', extra: [{key: 'dao', label: 'Máy xúc đào'}],
   keys: {1: 'v_hero', 2: 'v_pho', 3: 'v_dial', d: 'dao'}});

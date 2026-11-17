@@ -1,0 +1,131 @@
+{
+  "id": "tk-van-hanh",
+  "tiet": 5,
+  "bai": "thiet-ke-mang/van-hanh/",
+  "ten_bai": "Vòng vận hành có kiểm chứng",
+  "ten_tiet": "Đánh giá, telemetry, nền tảng 5G-Advanced và 6G, ràng buộc mới",
+  "chuong": "Chương 1 · Tổng quan về thiết kế và hiệu năng mạng",
+  "muc": "1.7–1.10",
+  "trang": "18–30",
+  "pt": "(1.20)–(1.28)",
+  "bt_sach": "Câu 6, câu 8–13",
+  "dan": "Tiết khép chương 1. Nửa đầu dùng cảnh 3D phòng vận hành để thấy vì sao polling bỏ lỡ biến động ngắn, telemetry bắt được, và vì sao đo nhiều chưa chắc thấy đủ. Nửa sau đọc các trụ cột 5G-Advanced và 6G (slicing, MEC, O-RAN, AI/ML, NTN, ISAC, IMT-2030) và các ràng buộc mới (bảo mật, năng lượng, độ phức tạp) qua một lăng kính duy nhất: công nghệ đó tác động metric nào và cần dữ liệu gì để kiểm chứng. Chi tiết từng công nghệ để các tiết 8, 13, 20–22.",
+  "muc_tieu": [
+    "Phân biệt ba hướng đánh giá hiệu năng và lập kế hoạch đánh giá theo bộ năm thành phần (1.20).",
+    "So sánh polling và telemetry dạng đăng ký về độ trễ phát hiện, độ chi tiết và chi phí thu thập (câu 6).",
+    "Tính sai lệch Δk (1.21) và độ phủ quan sát Γ (1.28); giải thích vì sao đúng dữ liệu quan trọng hơn nhiều dữ liệu.",
+    "Mô tả lát cắt mạng bằng (1.22) và phân biệt với VLAN, VPN (câu 8); tính và so sánh thời gian đáp ứng MEC bằng (1.23) (câu 9).",
+    "Giải thích vòng điều khiển (1.24), hai hướng AI/ML (câu 10), trễ lan truyền biến thiên (1.25) (câu 11), metric ISAC (1.26) (câu 12).",
+    "Tính hiệu quả năng lượng (1.27) và nêu bốn câu hỏi an toàn, bốn câu hỏi trước công nghệ mới (câu 13, mục 1.10)."
+  ],
+  "can_co": [
+    "Hệ số khai thác mục tiêu η và mức sử dụng (tiết 2).",
+    "Vector yêu cầu và điều kiện nghiệm thu (tiết 1); ba mặt phẳng dữ liệu, điều khiển, quản lý.",
+    "Tốc độ ánh sáng c ≈ 3·10⁸ m/s."
+  ],
+  "chuan_bi": {
+    "gv": [
+      "Máy tính có Chrome hoặc Edge bản mới, nối máy chiếu. Mở bài 3D trước giờ học một lần, bấm Lên lớp để màn hình giảng viên hiện phút và việc từng bước.",
+      "In phiếu bài tập (một trang A4) cho mỗi sinh viên, hoặc chiếu phiếu và cho làm vào vở.",
+      "Kẻ sẵn trên bảng bảng 1.5 rút gọn (sáu bước, cột kết quả để trống) để điền ở bước cuối."
+    ],
+    "sv": [
+      "Đọc trước mục 1.7 đến 1.10, giáo trình trang 18–30; đọc kỹ 1.7.2 và 1.9.3.",
+      "Máy tính cầm tay."
+    ]
+  },
+  "hoat_dong": [
+    {"ten": "Mở đầu", "tu": 0, "den": 3, "buoc": [1], "muc": "Chuyển từ thiết kế sang vận hành.", "san_pham": "Sinh viên nêu một hiện tượng mạng mà đo trung bình có thể che mất."},
+    {"ten": "Đánh giá và thu thập", "tu": 3, "den": 13, "buoc": [2, 3, 4], "muc": "Ba hướng đánh giá, (1.20); polling và telemetry.", "san_pham": "Sinh viên tính mức sử dụng trung bình 5 phút che mất đợt bùng nổ (ví dụ 1)."},
+    {"ten": "Kiểm chứng trong vận hành", "tu": 13, "den": 19, "buoc": [5, 6], "muc": "Δk (1.21) và Γ (1.28).", "san_pham": "Sinh viên tính Γ cho các bộ metric (ví dụ 2)."},
+    {"ten": "Trụ cột 5G-Advanced và 6G", "tu": 19, "den": 37, "buoc": [7, 8, 9, 10, 11], "muc": "Mạng dịch vụ lập trình được; slicing (1.22); MEC (1.23); O-RAN và AI (1.24); NTN, UAV (1.25); ISAC (1.26).", "san_pham": "Sinh viên giải ví dụ 3, 4 và điền bảng: công nghệ, metric tác động, dữ liệu cần đo."},
+    {"ten": "Ràng buộc mới và cách tiếp cận", "tu": 37, "den": 45, "buoc": [12, 13], "muc": "Bảo mật, chống chịu, năng lượng (1.27); bảng 1.5 và bốn câu hỏi; giao bài.", "san_pham": "Sinh viên giải ví dụ 5 và điền bảng 1.5 rút gọn."}
+  ],
+  "buoc": [
+    {"t": "Mạng đã chạy, làm sao biết nó còn đạt?", "tu": 0, "den": 3,
+      "gv": "Chiếu toàn cảnh: sáu thiết bị, liên kết xanh có bùng nổ, phòng vận hành. Hỏi: nếu chỉ xem mức sử dụng trung bình mỗi giờ, người vận hành có thấy nghẽn 20 giây không?",
+      "sv": "Trả lời, nêu một ví dụ hiện tượng ngắn."},
+    {"t": "Ba hướng đánh giá và một kế hoạch đánh giá", "tu": 3, "den": 7,
+      "gv": "Nêu ba hướng đánh giá theo 1.7.1 và ưu, nhược mỗi hướng. Viết (1.20), giải thích M, F, L, S, A bằng chính bài này: M là mức sử dụng, F là chu kỳ đo, L là các mức 1 s, 10 s, 300 s, S là chuỗi tải có bùng nổ, A là đếm số đợt bắt được. Nêu các thông tin bảng 1.3 đòi khi báo cáo.",
+      "sv": "Ghi (1.20) và điền năm thành phần cho thí nghiệm trong cảnh."},
+    {"t": "Hỏi định kỳ bỏ lỡ đợt bùng nổ", "tu": 7, "den": 10,
+      "gv": "Bấm SNMP 5 phút, góc Màn hình. Chỉ đường xám và đường xanh. Giải ví dụ 1 phần polling trên bảng.",
+      "sv": "Tính mức sử dụng trung bình 5 phút của ví dụ 1."},
+    {"t": "Thiết bị tự đẩy dữ liệu", "tu": 10, "den": 13,
+      "gv": "Bấm Telemetry 1 s. Chỉ bảng 03 (bắt được) và bảng 05 (chi phí). Nêu RFC 9232, 8639, 8641. Giải ví dụ 1 phần chi phí. Cho lớp trả lời câu hỏi trên màn hình. Dàn ý câu 6.",
+      "sv": "So sánh hai cách theo ba tiêu chí; trả lời câu hỏi."},
+    {"t": "Sai lệch giữa trạng thái đo và mục tiêu", "tu": 13, "den": 16,
+      "gv": "Viết (1.21), y* = 0,8 lấy từ η của tiết 2. Chỉ bảng 02. Nêu ba phản ứng khi Δ vượt ngưỡng: cảnh báo, phân tích nguyên nhân, tự phục hồi. Chỉ bảng 06: vòng khép kín không nhanh hơn khâu đo.",
+      "sv": "Ghi (1.21) và ba phản ứng."},
+    {"t": "Đo nhiều chưa chắc thấy đủ", "tu": 16, "den": 19,
+      "gv": "Viết (1.28). Bấm lần lượt các nút metric, đọc Γ ở bảng 04. Giải ví dụ 2. Cho lớp trả lời câu hỏi trên màn hình.",
+      "sv": "Làm ví dụ 2; trả lời câu hỏi."},
+    {"t": "Từ mạng IP sang mạng dịch vụ lập trình được", "tu": 19, "den": 23,
+      "gv": "Nêu nút thắt mới theo 1.8.1: ánh xạ yêu cầu thành tài nguyên, chính sách, cô lập, giám sát. Định nghĩa 5GS (AMF, SMF, UPF) và 5G-Advanced (từ Release 18). Bắt đầu bảng ba cột trên bảng: công nghệ, metric tác động, dữ liệu cần đo.",
+      "sv": "Kẻ bảng ba cột vào vở."},
+    {"t": "Lát cắt mạng không phải VLAN", "tu": 23, "den": 27,
+      "gv": "Viết (1.22), giải thích năm thành phần. So sánh VLAN, VPN, lát cắt theo phạm vi, mức cô lập, cách kiểm chứng SLA (dàn ý câu 8). Nhấn M_n: nối với Γ ở bước 6. Điền một dòng bảng ba cột.",
+      "sv": "Ghi (1.22); điền bảng so sánh ba khái niệm."},
+    {"t": "Xử lý ở biên chỉ có lợi khi tổng trễ nhỏ hơn", "tu": 27, "den": 30,
+      "gv": "Viết (1.23). Giải ví dụ 3 trên bảng: tập trung, biên bình thường, biên quá tải. Dàn ý câu 9: giảm trễ truyền tải nhưng thêm bài toán vị trí, đồng bộ, di động phiên.",
+      "sv": "Làm ví dụ 3; ghi dàn ý câu 9."},
+    {"t": "Vòng điều khiển cần dữ liệu đo tin được", "tu": 30, "den": 33,
+      "gv": "Viết (1.24). Tắt Đo chủ động trên cảnh: Γ tụt. Hỏi: bộ điều khiển thiếu dữ liệu đo z_t về trễ thì quyết định thế nào? Nêu xApp, rApp. Phân biệt AI for Network và Network for AI, mỗi hướng một metric kiểm chứng (dàn ý câu 10).",
+      "sv": "Ghi (1.24); nêu một metric cho mỗi hướng AI/ML."},
+    {"t": "Trễ lan truyền biến thiên và metric cảm nhận", "tu": 33, "den": 37,
+      "gv": "Viết (1.25). Giải ví dụ 4: UAV, vệ tinh quỹ đạo thấp, địa tĩnh. Dàn ý câu 11: trễ, ngân sách đường truyền, handover thay đổi theo hình học. Viết (1.26), nêu metric cảm nhận (dàn ý câu 12). Nhắc 6G gọi là IMT-2030, sáu nhóm kịch bản theo ITU-R M.2160.",
+      "sv": "Làm ví dụ 4; ghi metric cảm nhận."},
+    {"t": "Bảo mật, chống chịu, năng lượng là ràng buộc từ đầu", "tu": 37, "den": 41,
+      "gv": "Định nghĩa resilience. Nêu bốn câu hỏi an toàn của 1.9.1. Viết (1.27), giải ví dụ 5. Kéo chu kỳ telemetry về 1 s: chi phí thu thập cũng là năng lượng. Dàn ý câu 13.",
+      "sv": "Làm ví dụ 5; ghi bốn câu hỏi an toàn."},
+    {"t": "Bốn câu hỏi trước mọi công nghệ mới", "tu": 41, "den": 45,
+      "gv": "Điền nhanh bảng 1.5 rút gọn cùng lớp. Chốt bốn câu hỏi của 1.10.2. Giao câu 6, 8–13 chương 1 (phiếu bài tập). Báo tiết sau: chương 2, từ \"mạng phải nhanh\" đến vector yêu cầu.",
+      "sv": "Điền bảng 1.5; ghi bốn câu hỏi và bài về nhà."}
+  ],
+  "vi_du": [
+    {"ten": "Polling che mất đợt bùng nổ", "de": "Liên kết có nền khoảng 45 %; một đợt bùng nổ dài 24 s lên 97 %. SNMP hỏi mỗi 5 phút. Tính mức sử dụng đo được của khoảng chứa đợt bùng nổ và so với ngưỡng 0,8. Tính băng thông thu thập cho 50 thiết bị, mỗi lần gửi 2 kB, ở chu kỳ 300 s và 1 s.", "giai": "Trung bình khoảng 300 s ≈ (24 × 0,97 + 276 × 0,45) / 300 ≈ <b>0,49</b> &lt; 0,8: <b>không cảnh báo</b>, đợt nghẽn bị che mất. Với mẫu 1 s, mẫu nằm trong đợt bùng nổ là 0,97 &gt; 0,8: bắt được ngay. Băng thông thu thập 50 × 2 000 × 8 / τ: τ = 300 s cho ≈ <b>2,7 kbit/s</b>; τ = 1 s cho <b>800 kbit/s</b>, gấp 300 lần, chưa kể lưu trữ và xử lý."},
+    {"ten": "Độ phủ quan sát (1.28)", "de": "Sáu trạng thái cần kiểm soát: nghẽn, mất gói, trễ dịch vụ vượt SLA, suy giảm quang, quá tải thiết bị, đổi đường định tuyến. Bộ đếm giao diện suy ra nghẽn và mất gói; CPU suy ra quá tải; độ sâu hàng đợi suy ra nghẽn; đo chủ động suy ra trễ SLA và mất gói; công suất quang suy ra suy giảm quang; sự kiện định tuyến suy ra đổi đường. Tính Γ cho: (a) bộ đếm + CPU; (b) thêm hàng đợi; (c) thêm đo chủ động, công suất quang, sự kiện định tuyến.", "giai": "(a) Suy ra được nghẽn, mất gói, quá tải: <b>Γ = 3/6 = 0,5</b>. (b) Hàng đợi chỉ thêm nghẽn, đã có: <b>Γ vẫn 0,5</b>. (c) Thêm trễ SLA, suy giảm quang, đổi đường: <b>Γ = 6/6 = 1</b>. Thêm metric trùng nguồn không tăng Γ; cần metric phủ đúng trạng thái còn thiếu."},
+    {"ten": "Có nên đưa xử lý về biên (1.23)", "de": "Một tác vụ suy luận video. Tập trung: truy nhập 5 ms, truyền tải 20 ms, xử lý 15 ms, trả kết quả 20 ms. Ở biên: truy nhập 5 ms, truyền tải 2 ms, trả kết quả 2 ms; xử lý 35 ms khi máy biên bình thường, 60 ms khi quá tải (các số là giả định của bài). So sánh.", "giai": "Tập trung: 5 + 20 + 15 + 20 = <b>60 ms</b>. Biên bình thường: 5 + 2 + 35 + 2 = <b>44 ms</b>: nhanh hơn 16 ms. Biên quá tải: 5 + 2 + 60 + 2 = <b>69 ms</b>: chậm hơn tập trung. MEC chỉ có lợi khi phần xử lý tại biên không ăn hết phần trễ truyền tải tiết kiệm được; thiết kế phải định cỡ máy biên theo tải."},
+    {"ten": "Trễ lan truyền theo khoảng cách (1.25)", "de": "Tính trễ lan truyền một chặng với c ≈ 3·10<sup>8</sup> m/s cho: UAV cách trạm 3 km; vệ tinh quỹ đạo thấp cách 1 000 km; vệ tinh địa tĩnh ở độ cao 35 786 km (đặt thẳng trên đầu).", "giai": "UAV: 3·10<sup>3</sup> / 3·10<sup>8</sup> = <b>10 µs</b>. Quỹ đạo thấp: 10<sup>6</sup> / 3·10<sup>8</sup> ≈ <b>3,3 ms</b>, và thay đổi khi vệ tinh di chuyển. Địa tĩnh: 3,5786·10<sup>7</sup> / 3·10<sup>8</sup> ≈ <b>119 ms</b> một chặng; đi lên rồi xuống là gần 240 ms trước khi tính xử lý. Với nút bay, d<sub>prop</sub> là hàm của thời gian, không phải hằng số."},
+    {"ten": "Hiệu quả năng lượng (1.27)", "de": "Phương án A mang 10 Gbit/s hữu ích, tiêu thụ 2 kW. Phương án B mang 12 Gbit/s hữu ích, tiêu thụ 3 kW. So sánh η<sub>EE</sub>. Mỗi năm mỗi phương án tiêu thụ bao nhiêu MWh nếu chạy liên tục?", "giai": "η<sub>A</sub> = 10<sup>10</sup> / 2 000 = <b>5 Mbit/J</b>; η<sub>B</sub> = 1,2·10<sup>10</sup> / 3 000 = <b>4 Mbit/J</b>. B nhiều thông lượng hơn 20 % nhưng kém hiệu quả năng lượng 20 %. Năng lượng một năm: A ≈ 2 kW × 8 766 h ≈ <b>17,5 MWh</b>; B ≈ <b>26,3 MWh</b>. Chọn B chỉ khi yêu cầu thật sự cần 12 Gbit/s."}
+  ],
+  "bai_tap": [
+    {"so": "1", "de": "Nêu vai trò của telemetry trong mạng hiện đại. So sánh ngắn gọn polling truyền thống và telemetry dạng đăng ký/streaming.", "nguon": "câu 6 cuối chương 1", "dong": 3},
+    {"so": "2", "de": "Phân biệt VLAN, VPN và network slicing theo phạm vi kỹ thuật, mức cô lập và cách kiểm chứng SLA.", "nguon": "câu 8 cuối chương 1", "dong": 3},
+    {"so": "3", "de": "Giải thích vì sao MEC có thể giảm thời gian đáp ứng nhưng cũng làm tăng độ phức tạp của thiết kế mạng.", "nguon": "câu 9 cuối chương 1", "dong": 3},
+    {"so": "4", "de": "Trình bày hai hướng AI/ML trong mạng: AI for Network và Network for AI. Với mỗi hướng, nêu một metric cần đo để kiểm chứng hiệu quả.", "nguon": "câu 10 cuối chương 1", "dong": 3},
+    {"so": "5", "de": "Vì sao NTN và UAV làm cho độ trễ, ngân sách đường truyền và handover trở thành các ràng buộc thiết kế quan trọng hơn so với mạng cố định?", "nguon": "câu 11 cuối chương 1", "dong": 3},
+    {"so": "6", "de": "ISAC làm thay đổi tập metric hiệu năng như thế nào so với mạng truyền thông thuần túy?", "nguon": "câu 12 cuối chương 1", "dong": 2},
+    {"so": "7", "de": "Trong bối cảnh IMT-2030, vì sao bảo mật, chống chịu lỗi và hiệu quả năng lượng phải được xem là ràng buộc thiết kế từ đầu?", "nguon": "câu 13 cuối chương 1", "dong": 3}
+  ],
+  "dap_an": [
+    {"so": "1", "giai": "Telemetry (RFC 9232) tạo, thu thập, tương quan và tiêu thụ dữ liệu mạng để hiểu trạng thái và hỗ trợ tự động hoá; là đầu vào của Δk (1.21) và Γ (1.28). Polling: trạm quản lý hỏi định kỳ (SNMP), có độ trễ phát hiện bằng cỡ chu kỳ, số đo là trung bình nên che biến động ngắn, tải dồn vào trạm hỏi. Streaming: thiết bị đẩy theo đăng ký (RFC 8639, 8641, YANG), chu kỳ ngắn hoặc theo sự kiện, bắt được biến động ngắn, đổi lại dữ liệu nhiều, cần pipeline lưu và xử lý. Đủ điểm khi có vai trò và ít nhất ba tiêu chí so sánh."},
+    {"so": "2", "giai": "VLAN: phân đoạn miền quảng bá lớp 2 trong một mạng, cô lập logic ở lớp 2, không có cam kết hiệu năng, kiểm chứng chỉ là kết nối đúng miền. VPN: kết nối riêng trên hạ tầng dùng chung (lớp 2 hoặc lớp 3, có thể qua nhiều miền), cô lập địa chỉ và định tuyến, SLA nếu có là của nhà cung cấp. Lát cắt mạng: dịch vụ kết nối logic gắn mục tiêu hiệu năng và cam kết tài nguyên giữa các điểm biên (RFC 9543), có thể trải RAN, truyền tải, lõi; cô lập cả tài nguyên; kiểm chứng bằng metric M<sub>n</sub> theo (1.22)."},
+    {"so": "3", "giai": "Giảm: thành phần truyền tải trong (1.23) nhỏ đi vì xử lý gần người dùng; giảm tải về lõi. Phức tạp hơn: phải chọn vị trí máy chủ biên, định cỡ năng lực xử lý (quá tải thì T<sub>proc</sub> tăng, như ví dụ 3), backhaul cho biên, đồng bộ dữ liệu giữa biên và trung tâm, chuyển phiên khi người dùng di động, bảo mật nhiều điểm hơn, giám sát nhiều nút hơn."},
+    {"so": "4", "giai": "AI for Network: AI/ML phục vụ quản lý và tối ưu mạng (dự báo tải, phát hiện bất thường, tiết kiệm năng lượng, cân bằng tải). Metric kiểm chứng: số lần vi phạm SLA giảm, năng lượng tiết kiệm, thời gian phát hiện bất thường, không chỉ độ chính xác dự đoán. Network for AI: mạng phục vụ ứng dụng AI phân tán (dữ liệu huấn luyện, suy luận biên, đồng bộ mô hình). Metric: trễ truyền dữ liệu hoặc tham số mô hình, thời gian đồng bộ một vòng huấn luyện, thông lượng giữa nút tính toán."},
+    {"so": "5", "giai": "Khoảng cách lớn và thay đổi theo thời gian: d<sub>prop</sub>(t) = r(t)/c (1.25), từ vài ms (quỹ đạo thấp) tới khoảng 119 ms một chặng (địa tĩnh), lại biến thiên. Suy hao đường truyền phụ thuộc khoảng cách và góc ngẩng nên ngân sách đường truyền thay đổi liên tục. Nút di chuyển (vệ tinh, UAV) nên handover thường xuyên và phải dự đoán được. Thêm ràng buộc năng lượng của UAV và an toàn bay. Mạng cố định có các đại lượng này gần như hằng số."},
+    {"so": "6", "giai": "Ngoài metric truyền thông (SNR, BER, thông lượng, trễ) phải thêm metric cảm nhận: xác suất phát hiện, xác suất báo động giả, sai số định vị, độ phân giải khoảng cách và vận tốc. Bài toán tối ưu trở thành đánh đổi có trọng số (1.26) giữa chất lượng truyền, chất lượng cảm nhận và chi phí tài nguyên."},
+    {"so": "7", "giai": "Ảo hoá, AI, tự động hoá làm miền tấn công lan ra telemetry, mô hình, API, chuỗi cung ứng phần mềm; thêm sau khi xong topo sẽ phá địa chỉ, định tuyến, QoS hoặc năng lực thiết bị. Chống chịu đòi dự phòng, phân miền lỗi, thời gian phát hiện và phục hồi ngay trong kiến trúc; tự động hoá thiếu rollback làm lỗi lan nhanh hơn. Năng lượng: mật độ trạm, tài nguyên tính toán, telemetry đều tốn; η<sub>EE</sub> (1.27) phải là metric từ đầu. IMT-2030 nêu bền vững, bảo mật và chống chịu là nguyên tắc thiết kế (ITU-R M.2160)."}
+  ],
+  "kiem_tra": [
+    {"q": "Trong (1.20), thành phần L là gì?", "o": ["Tập metric", "Tập mức khảo sát của các yếu tố", "Kịch bản lưu lượng", "Phương pháp phân tích"], "a": 1, "giai": "M metric, F yếu tố, L mức, S kịch bản, A phân tích."},
+    {"q": "Vì sao SNMP hỏi mỗi 5 phút có thể không thấy một đợt nghẽn 20 s?", "o": ["SNMP không đo mức sử dụng", "Số đo là trung bình cả khoảng, đợt ngắn bị pha loãng", "SNMP chỉ đo CPU", "Đợt nghẽn không làm mất gói"], "a": 1, "giai": "Hiệu bộ đếm chia khoảng hỏi cho mức trung bình 300 s."},
+    {"q": "Bộ metric suy ra được 5 trên 10 trạng thái cần kiểm soát. Γ bằng?", "o": ["0,05", "0,5", "2", "5"], "a": 1, "giai": "Γ = 5/10."},
+    {"q": "Thành phần nào trong (1.22) làm cho lát cắt mạng kiểm chứng được?", "o": ["P_n điểm biên", "M_n tập metric giám sát", "I_n mức cô lập", "Không thành phần nào"], "a": 1, "giai": "Không có metric thì không kiểm được SLA của lát cắt."},
+    {"q": "Vệ tinh cách 600 km. Trễ lan truyền một chặng khoảng?", "o": ["0,2 ms", "2 ms", "20 ms", "200 ms"], "a": 1, "giai": "6·10<sup>5</sup> / 3·10<sup>8</sup> = 2 ms."},
+    {"q": "η_EE theo (1.27) đo gì?", "o": ["Công suất tiêu thụ", "Số bit hữu ích trên mỗi joule", "Thông lượng cực đại", "Hiệu suất nguồn điện"], "a": 1, "giai": "η<sub>EE</sub> = B<sub>useful</sub> / E<sub>total</sub>."}
+  ],
+  "tom_tat": [
+    "Ba hướng đánh giá: đo kiểm, mô phỏng, phân tích; mọi thí nghiệm có đủ E = (M, F, L, S, A) (1.20) và báo cáo kèm điều kiện đo.",
+    "Polling cho trung bình và phát hiện chậm; telemetry dạng đăng ký bắt được biến động ngắn nhưng tốn chi phí thu, lưu, xử lý. Vận hành có kiểm chứng dựa trên Δ<sub>k</sub> = ‖y<sub>k</sub> − y*<sub>k</sub>‖ (1.21).",
+    "Đúng dữ liệu hơn nhiều dữ liệu: độ phủ quan sát Γ (1.28).",
+    "5G-Advanced và 6G (IMT-2030) mở rộng thiết kế sang slicing (1.22), MEC (1.23), điều khiển RAN (1.24), nút bay (1.25), ISAC (1.26); mỗi trụ cột phải gắn với metric và dữ liệu để kiểm chứng.",
+    "Bảo mật, chống chịu, năng lượng (1.27) và độ phức tạp vận hành là ràng buộc từ đầu. Trước công nghệ mới, hỏi: dịch vụ nào, metric nào, tốn gì, rủi ro gì."
+  ],
+  "nguon": [
+    "Hoàng Trọng Minh, Giáo trình Thiết kế và hiệu năng mạng (học phần TEL1459), Học viện Công nghệ Bưu chính Viễn thông, 2026: mục 1.7–1.10, trang 18–30; phương trình (1.20)–(1.28); bảng 1.3, 1.5; câu 6, 8–13 cuối chương 1.",
+    "RFC 9232 (khung telemetry), RFC 8639 và RFC 8641 (đăng ký thông báo, cập nhật datastore YANG), RFC 9543 (IETF network slice); 3GPP TS 23.501 (5GS); ITU-R M.2160 (IMT-2030).",
+    "Độ cao quỹ đạo địa tĩnh 35 786 km: hằng số vật lý của quỹ đạo đồng bộ Trái Đất.",
+    "Giả định của bài: chuỗi tải tổng hợp có bốn đợt bùng nổ; 50 thiết bị × 2 kB mỗi lần gửi; bảng nối metric với trạng thái; các số trễ MEC, công suất và khoảng cách trong ví dụ."
+  ]
+}

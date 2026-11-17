@@ -1,4 +1,4 @@
-// Thiết kế và hiệu năng mạng · bài 1.1 · Gói tin qua ba chặng.
+// Thiết kế và hiệu năng mạng · tiết 2 · Gói tin qua ba chặng.
 // Theo giáo trình TEL1459 (Hoàng Trọng Minh, PTIT 2026), mục 1.5–1.6: độ trễ đầu cuối (1.10), trễ truyền (1.11), thời gian đáp
 // ứng (1.12), mức sử dụng và dư địa (1.7, 1.9). Mọi con số trên màn hình tính từ kit/mang/cong-thuc.js; trễ hàng đợi lấy từ
 // mô phỏng sự kiện rời rạc kit/mang/mo-phong.js, đặt cạnh lời giải M/M/1 để người học thấy mô phỏng khớp lý thuyết.

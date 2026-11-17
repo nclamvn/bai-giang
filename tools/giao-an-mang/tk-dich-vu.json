@@ -62,7 +62,7 @@
       "gv": "Vẽ vòng sáu bước của hình 1.2. Viết (1.3), gọi tên x_k, u_k, w_k, y_k. Kéo Tải lớp học lên 1,3 (nhiễu w_k): phương án Cân bằng vẫn đạt. Tắt Sao lưu ban đêm (sao lưu chạy bù giờ học): lớp học vẫn đạt nhờ ưu tiên, sao lưu hụt goodput. Hỏi: u_k nên là gì?",
       "sv": "Ghi (1.3); đề xuất một hành động u_k cho tình huống sao lưu chạy bù."},
     {"t": "Yêu cầu, QoS, SLA, metric khác nhau thế nào", "tu": 19, "den": 23,
-      "gv": "Dùng khung bốn cột đã kẻ. Cùng lớp điền cho lớp học trực tuyến: yêu cầu (hình ổn định, tiếng không đứt), QoS (ưu tiên hàng đợi), SLA (trễ ≤ 100 ms, mất < 10⁻³, sẵn sàng 99,95 %), metric (trễ một chiều RFC 7679, mất gói RFC 7680, biến thiên trễ RFC 3393). Cho lớp trả lời câu hỏi trên màn hình.",
+      "gv": "Dùng khung bốn cột đã kẻ. Cùng lớp điền cho lớp học trực tuyến: yêu cầu (hình ổn định, tiếng không đứt), QoS (ưu tiên hàng đợi), SLA (trễ ≤ 100 ms, mất &lt; 10⁻³, sẵn sàng 99,95 %), metric (trễ một chiều RFC 7679, mất gói RFC 7680, biến thiên trễ RFC 3393). Cho lớp trả lời câu hỏi trên màn hình.",
       "sv": "Điền bảng bốn cột vào vở; trả lời câu hỏi phân loại."},
     {"t": "Luồng lưu lượng và năm nhóm thông tin", "tu": 23, "den": 26,
       "gv": "Nêu định nghĩa luồng và mô hình (mục 1.3.2). Chỉ bốn màu gói trên cảnh là bốn luồng. Liệt kê năm nhóm thông tin; với mỗi nhóm nêu hậu quả khi thiếu.",

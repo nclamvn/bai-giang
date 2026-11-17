@@ -97,5 +97,21 @@ kiem('Câu 3 chương 4: 48 × 1 Gb/s trên 4 × 10 Gb/s → Ω = 1,2', Math.abs
   kiem('Tiết 3, ví dụ 5: M/M/1/K ở ρ 0,85 và 1,3, K 16 và 64', Math.abs(q(0.85, 16).P - 0.0119) < 1e-4 && Math.abs(q(0.85, 16).W - 0.43e-3) < 0.01e-3 && Math.abs(q(0.85, 64).P - 4.6e-6) < 0.1e-6 && Math.abs(q(0.85, 64).W - 0.53e-3) < 0.01e-3
     && Math.abs(q(1.3, 16).P - 0.233) < 1e-3 && Math.abs(q(1.3, 16).W - 1.03e-3) < 0.01e-3 && Math.abs(q(1.3, 64).P - 0.231) < 1e-3 && Math.abs(q(1.3, 64).W - 4.85e-3) < 0.01e-3); }
 
+// Tiết 4 (giáo án tk-san-sang.json): số của ví dụ giải mẫu và đáp án
+{ const A = F.sanSang, PN = F.phutNgungNam, R = (mtbf, t) => F.doTinCay(1 / mtbf, t);
+  kiem('Tiết 4, ví dụ 1: A = 0,999, ngừng ≈ 8,76 h/năm', Math.abs(A(2000, 2) - 0.999) < 1e-5 && Math.abs((1 - A(2000, 2)) * 8766 - 8.76) < 0.01);
+  kiem('Tiết 4, ví dụ 2 và bài 3: R = 0,694; 0,0125; 0,930; 0,416', Math.abs(R(2000, 730) - 0.694) < 1e-3 && Math.abs(R(2000, 8766) - 0.0125) < 1e-4 && Math.abs(R(1e4, 730) - 0.930) < 1e-3 && Math.abs(R(1e4, 8766) - 0.416) < 1e-3);
+  const Ar = A(1e5, 4), Al = A(2000, 2), Ao = A(8766, 12), ch = Ar * Ao * F.sanSangSongSong([Al, Al]), ta = Ar * F.sanSangSongSong([Al * Ao, Al * Ao]);
+  kiem('Tiết 4, ví dụ 3: chung ống 0,99859 (≈ 741 phút), tách ngả 0,99995 (≈ 24 phút), một đường ≈ 1 264 phút', Math.abs(ch - 0.99859) < 1e-5 && Math.abs(PN(ch) - 741) < 1 && Math.abs(ta - 0.99995) < 1e-5 && Math.abs(PN(ta) - 24) < 0.5 && Math.abs(PN(Ar * Al * Ao) - 1264) < 1);
+  kiem('Tiết 4, ví dụ 4 và bài 5: 12,75 h; 11,15 s; 51 s; 341 s; 301 s; 131 s', Math.abs(0.15 + 1800 + 12 * 3600 + 900 - 12.75 * 3600) < 1 && Math.abs(0.15 + 1 + 10 - 11.15) < 1e-9 && 40 + 1 + 10 === 51 && 40 + 180 + 1 + 120 === 341 && Math.abs(0.15 + 180 + 1 + 120 - 301.15) < 1e-9 && Math.abs(0.15 + 10 + 1 + 120 - 131.15) < 1e-9);
+  kiem('Tiết 4, bài 2 và bài 4: 84 → 21 phút; 0,999999 → 0,9995', Math.abs(PN(A(50000, 8)) - 84) < 0.5 && Math.abs(PN(A(50000, 2)) - 21) < 0.5 && Math.abs(F.sanSangSongSong([0.99, 0.99, 0.99]) - 0.999999) < 1e-12 && Math.abs(0.9995 * F.sanSangSongSong([0.99, 0.99, 0.99]) - 0.9995) < 1e-6); }
+
+// Tiết 5 (giáo án tk-van-hanh.json): số của ví dụ giải mẫu
+{ const c = 3e8;
+  kiem('Tiết 5, ví dụ 1: trung bình 5 phút ≈ 0,49 < 0,8; thu thập 2,7 kbit/s và 800 kbit/s', Math.abs((24 * 0.97 + 276 * 0.45) / 300 - 0.49) < 0.005 && Math.abs(50 * 2000 * 8 / 300 - 2667) < 1 && 50 * 2000 * 8 / 1 === 800000);
+  kiem('Tiết 5, ví dụ 3: MEC 60, 44, 69 ms', 5 + 20 + 15 + 20 === 60 && 5 + 2 + 35 + 2 === 44 && 5 + 2 + 60 + 2 === 69);
+  kiem('Tiết 5, ví dụ 4: 10 µs; 3,3 ms; 119 ms', Math.abs(3e3 / c - 10e-6) < 1e-12 && Math.abs(1e6 / c - 3.33e-3) < 1e-5 && Math.abs(35786e3 / c - 0.119) < 0.0005 && Math.abs(6e5 / c - 2e-3) < 1e-9);
+  kiem('Tiết 5, ví dụ 5: 5 và 4 Mbit/J; 17,5 và 26,3 MWh/năm', 1e10 / 2000 === 5e6 && 1.2e10 / 3000 === 4e6 && Math.abs(2 * 8766 / 1000 - 17.5) < 0.05 && Math.abs(3 * 8766 / 1000 - 26.3) < 0.05); }
+
 console.log(`\n${dem - loi}/${dem} đạt`);
 process.exit(loi ? 1 : 0);

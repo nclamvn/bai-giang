@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<!--BG-SHARE:start-->
+<meta property="og:type" content="website"><meta property="og:site_name" content="Sáng Ăn Khoai"><meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Đánh giá, telemetry, nền tảng 5G-Advanced và 6G, ràng buộc mới · Giáo án tiết 5 · Thiết kế và hiệu năng mạng"><meta property="og:description" content="Giáo án 45 phút, tiết 5 học phần Thiết kế và hiệu năng mạng: Đánh giá, telemetry, nền tảng 5G-Advanced và 6G, ràng buộc mới. Mục tiêu, diễn tiến theo phút, ví dụ giải mẫu, phiếu bài tập, đáp án và kiểm tra nhanh, theo giáo trình TEL1459 mục 1.7–1.10.">
+<meta property="og:url" content="https://nclamvn.github.io/bai-giang/thiet-ke-mang/van-hanh/giao-an/"><link rel="canonical" href="https://nclamvn.github.io/bai-giang/thiet-ke-mang/van-hanh/giao-an/">
+<meta property="og:image" content="https://nclamvn.github.io/bai-giang/design/the/thiet-ke-mang-van-hanh-giao-an.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Đánh giá, telemetry, nền tảng 5G-Advanced và 6G, ràng buộc mới">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nclamvn.github.io/bai-giang/design/the/thiet-ke-mang-van-hanh-giao-an.jpg">
+<!--BG-SHARE:end-->
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đánh giá, telemetry, nền tảng 5G-Advanced và 6G, ràng buộc mới · Giáo án tiết 5 · Thiết kế và hiệu năng mạng</title>
+<meta name="description" content="Giáo án 45 phút, tiết 5 học phần Thiết kế và hiệu năng mạng: Đánh giá, telemetry, nền tảng 5G-Advanced và 6G, ràng buộc mới. Mục tiêu, diễn tiến theo phút, ví dụ giải mẫu, phiếu bài tập, đáp án và kiểm tra nhanh, theo giáo trình TEL1459 mục 1.7–1.10.">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../design/logo/favicon-32.png"><link rel="apple-touch-icon" href="../../../design/logo/apple-touch-icon.png">
+<link rel="stylesheet" href="../../../design/house.css">
+<style>:root{--acc:#2B5D8C}
+*{box-sizing:border-box}
+html{scroll-padding-top:76px}
+body{margin:0;background:var(--bg-page);color:var(--bg-ink);font:500 16px/1.6 var(--bg-font);-webkit-font-smoothing:antialiased}
+a{color:var(--acc)}
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;min-height:60px;padding:8px max(16px,calc((100vw - 1120px)/2));background:var(--bg-glass-strong);-webkit-backdrop-filter:blur(var(--bg-blur)) saturate(1.6);backdrop-filter:blur(var(--bg-blur)) saturate(1.6);border-bottom:1px solid var(--bg-hair)}
+.bar .home{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--bg-ink);text-decoration:none;font-weight:600;min-height:44px;min-width:44px}
+.bar .lg{border-radius:8px}
+.bar .sep{width:1px;height:22px;background:var(--bg-hair2)}
+.bar .crumb{color:var(--bg-ink2);font-size:15px;text-decoration:none;min-height:44px;display:flex;align-items:center}
+.bar .sp{flex:1}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:var(--bg-r-sm);border:0;background:var(--bg-surface);color:var(--bg-ink);font:500 15px var(--bg-font);text-decoration:none;cursor:pointer;box-shadow:0 0 0 1px var(--bg-hair2);white-space:nowrap}
+.btn:hover{box-shadow:0 0 0 1px var(--bg-ink3)}
+.btn.pri{background:var(--bg-brand);color:var(--bg-brand-ink);box-shadow:none}
+.btn svg{width:18px;height:18px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:center;padding:44px 0 28px}
+.eye{font:600 14px var(--bg-font);color:var(--acc)}
+h1{margin:10px 0 12px;font:400 clamp(34px,4.4vw,56px)/1.08 var(--bg-serif);letter-spacing:-.025em}
+.lead{margin:0;color:var(--bg-ink2);font-size:17px;max-width:56ch}
+.badge{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--bg-warn,#B26A1A) 10%,#fff);color:#7a4a12;font-size:14px;font-weight:600}
+.cover{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:16/10;box-shadow:var(--bg-sh-2)}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover a{position:absolute;left:14px;bottom:14px}
+.tabs{position:sticky;top:60px;z-index:9;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 0;margin:0 0 8px;background:linear-gradient(var(--bg-page) 70%,transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;display:flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;color:var(--bg-ink2);font-weight:600;font-size:15px;text-decoration:none}
+.tabs a:hover{background:var(--bg-hair)}
+section{padding:28px 0 12px}
+h2{margin:0 0 6px;font:400 30px/1.2 var(--bg-serif);letter-spacing:-.015em}
+.sub{margin:0 0 20px;color:var(--bg-ink2)}
+.card{background:var(--bg-surface,#fff);border-radius:20px;padding:20px 22px;box-shadow:var(--bg-sh-1)}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+h3{margin:0 0 10px;font:600 17px/1.35 var(--bg-font)}
+ul.tick,ol.steps{margin:0;padding:0;list-style:none}
+ul.tick li{position:relative;padding:4px 0 4px 26px}
+ul.tick li::before{content:"";position:absolute;left:4px;top:13px;width:9px;height:5px;border:solid var(--acc);border-width:0 0 2px 2px;transform:rotate(-45deg)}
+ol.steps{counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:6px 0 10px 42px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:4px;width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;font:700 14px/28px var(--bg-font);text-align:center}
+kbd{font:600 13px var(--bg-mono);padding:1px 6px;border-radius:6px;background:var(--bg-hair);border:1px solid var(--bg-hair2)}
+code{font:500 14px var(--bg-mono)}
+.mini{font-size:14px;color:var(--bg-ink2)}
+table.fix{width:100%;border-collapse:collapse;font-size:15px}
+table.fix th,table.fix td{text-align:left;vertical-align:top;padding:10px 12px;border-top:1px solid var(--bg-hair)}
+table.fix th{width:30%;font-weight:600}
+.tl{display:flex;height:56px;border-radius:14px;overflow:hidden;margin:0 0 22px;box-shadow:inset 0 0 0 1px var(--bg-hair)}
+.tl a{display:flex;flex-direction:column;justify-content:center;padding:0 12px;min-width:0;color:var(--bg-ink);text-decoration:none;border-right:2px solid var(--bg-page)}
+.tl a:last-child{border:0}
+.tl b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl span{font-size:13px;color:var(--bg-ink2);font-variant-numeric:tabular-nums}
+.act{margin:0 0 18px}
+.act>header{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;padding:0 0 10px}
+.act>header h3{margin:0;font-size:19px}
+.act>header .min{font:600 14px var(--bg-mono);color:var(--acc)}
+.act>header p{flex-basis:100%;margin:0;color:var(--bg-ink2)}
+.row{display:grid;grid-template-columns:96px minmax(0,1.1fr) minmax(0,1.6fr) minmax(0,1fr);gap:14px;padding:14px 0;border-top:1px solid var(--bg-hair)}
+.row:first-of-type{border-top:0}
+.row .m{font:600 15px var(--bg-mono);font-variant-numeric:tabular-nums;color:var(--bg-ink)}
+.row .m span{display:block;font:500 13px var(--bg-font);color:var(--bg-ink3)}
+.row .t{font-weight:700}
+.row .t small{display:block;font-weight:500;color:var(--bg-ink3);font-size:13px}
+.row .k{display:none;font-size:13px;font-weight:600;color:var(--bg-ink3)}
+.row .hs{color:var(--bg-ink2)}
+.thead{display:grid;grid-template-columns:96px minmax(0,1.1fr) minmax(0,1.6fr) minmax(0,1fr);gap:14px;padding:0 0 8px;font-size:13px;font-weight:600;color:var(--bg-ink3)}
+.prod{margin-top:6px;font-size:14px;color:var(--bg-ink2)}
+.sheet-wrap{display:flex;justify-content:center;padding:8px 0 4px}
+.sheet-zoom{width:210mm;zoom:var(--z,1)}
+.paper{width:210mm;min-height:297mm;padding:11mm 13mm 10mm;background:#fff;color:#111;box-shadow:0 1px 2px rgba(0,0,0,.08),0 18px 48px -20px rgba(15,23,42,.35);font:500 10pt/1.42 var(--bg-font)}
+.paper header{display:flex;justify-content:space-between;align-items:flex-start;gap:10mm;padding-bottom:3mm;border-bottom:.4mm solid #111}
+.paper .pk{font:600 9pt var(--bg-font);color:#555}
+.paper h4{margin:1mm 0 0;font:700 14pt/1.2 var(--bg-font)}
+.paper .who{flex:none;display:grid;grid-template-columns:auto 1fr;gap:2.5mm 3mm;width:66mm;font-size:9.5pt;color:#333}
+.paper .who i{display:block;border-bottom:.25mm solid #999;height:5mm}
+.paper .lg2{display:flex;align-items:center;gap:2mm;font:600 9pt var(--bg-font);color:#333}
+.paper .lg2 img{width:7mm;height:7mm;border-radius:1.5mm}
+.part{margin-top:3.4mm}
+.part .ph{display:flex;align-items:baseline;gap:2.5mm;margin-bottom:1.6mm}
+.part .ph b{display:inline-flex;align-items:center;justify-content:center;width:5.6mm;height:5.6mm;border-radius:50%;background:#111;color:#fff;font:700 9pt var(--bg-font)}
+.part .ph strong{font-size:11pt}
+.part .ph em{font-style:normal;color:#666;font-size:9pt}
+.part p{margin:0 0 1.6mm}
+.chain{display:flex;align-items:center;gap:1.6mm}
+.chain span{flex:1;height:11mm;border:.3mm solid #444;border-radius:2mm;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:9.5pt;text-align:center;padding:0 1mm}
+.chain span.f{background:#f2f2f2}
+.chain i{font-style:normal;color:#666}
+.paper table{width:100%;border-collapse:collapse;font-size:9.5pt}
+.paper th{text-align:left;font-weight:700;background:#f2f2f2}
+.paper th,.paper td{border:.3mm solid #555;padding:1.4mm 2mm}
+.paper td{height:9.4mm}
+.paper td:first-child,.paper th:first-child{width:13mm;text-align:center}
+.paper table.free td,.paper table.free th{width:auto!important;text-align:left!important}
+.paper table.free td{height:auto;padding:1.8mm 2mm;font-size:9pt}
+.paper table.free td{height:8.6mm}
+.draw{position:relative;border:.3mm solid #999;border-radius:2mm;overflow:hidden}.draw svg{display:block;width:100%;height:100%}
+.lbl{display:grid;grid-template-columns:repeat(3,1fr);gap:2mm 5mm;margin-top:2mm}.lbl span{display:flex;align-items:flex-end;gap:1.5mm}.lbl i{flex:1;border-bottom:.25mm dotted #777;height:5.5mm}
+.paper td:nth-child(2),.paper th:nth-child(2){width:46mm}
+.q{margin-bottom:1.6mm}
+.q .qq{display:flex;gap:1.6mm}
+.q .qq b{flex:none}
+.ln{height:6.9mm;border-bottom:.25mm dotted #777}
+.ck{display:flex;align-items:center;gap:2.4mm;margin:1.2mm 0}
+.ck i{flex:none;width:4mm;height:4mm;border:.3mm solid #444;border-radius:.8mm}
+.paper footer{margin-top:3mm;padding-top:1.6mm;border-top:.25mm solid #bbb;display:flex;justify-content:space-between;font-size:8pt;color:#777}
+dl.ans{margin:0;display:grid;grid-template-columns:110px minmax(0,1fr);gap:0}
+dl.ans dt,dl.ans dd{margin:0;padding:12px 0;border-top:1px solid var(--bg-hair)}
+dl.ans dt{font-weight:700;color:var(--acc)}
+.src{margin:0;padding-left:20px;color:var(--bg-ink2);font-size:15px}
+.src li{margin:4px 0}
+.yccd li{margin:4px 0}
+.foot{margin:36px 0 0;padding:20px 0 40px;border-top:1px solid var(--bg-hair);color:var(--bg-ink3);font-size:14px;display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:space-between}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:22px;padding:28px 0 16px}.g2{grid-template-columns:1fr}
+  .thead{display:none}.row{grid-template-columns:72px minmax(0,1fr);gap:4px 12px}.row .m{grid-row:span 3}.row .k{display:block;margin-top:6px}}
+@media (max-width:560px){.bar .crumb,.bar .sep,.bar .opt{display:none}.bar .home span{display:none}.btn{padding:0 14px}
+  h2{font-size:24px}.tl{height:auto;flex-direction:column}.tl a{flex:none!important;padding:8px 12px;border-right:0;border-bottom:2px solid var(--bg-page)}
+  dl.ans{grid-template-columns:1fr}dl.ans dd{border-top:0;padding-top:0}.card{padding:16px}
+  table.fix,table.fix tbody,table.fix tr,table.fix th,table.fix td{display:block;width:auto}table.fix th{padding:12px 0 2px}table.fix td{border-top:0;padding:0 0 12px}}
+@page{size:A4;margin:12mm 13mm}
+@media print{
+  body{background:#fff;font-size:10pt;line-height:1.5}
+  h2{font-size:17pt;break-after:avoid}h3{break-after:avoid}.sub{margin-bottom:3mm}
+  .g2{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:4mm}
+  .act.card{break-inside:auto}.act>header{break-after:avoid}
+  .row .m{grid-row:auto}.row .k{display:none!important}.thead{display:grid!important}
+  table.fix th,table.fix td{padding:2mm 3mm}
+  .bar,.tabs,.cover,.noprint,.foot .noprint{display:none!important}
+  .wrap{max-width:none;padding:0}
+  .hero{display:block;padding:0 0 4mm}
+  h1{font-size:22pt;margin:2mm 0}
+  section{padding:4mm 0 0;break-inside:auto}
+  .card{box-shadow:none;border:.3mm solid #ccc;padding:4mm 5mm}
+  .g2>.card{break-inside:avoid}dl.ans dt,dl.ans dd{break-inside:avoid}
+  .row{break-inside:avoid;grid-template-columns:18mm 34mm minmax(0,1.7fr) minmax(0,1fr);gap:3mm;padding:2.6mm 0}
+  .thead{grid-template-columns:18mm 34mm minmax(0,1.7fr) minmax(0,1fr);gap:3mm}
+  #kich-ban{break-before:page}
+  #phieu{display:none}
+  .tl a{border-right-color:#fff}
+  body.in-phieu > *:not(main){display:none!important}
+  body.in-phieu main > *:not(#phieu){display:none!important}
+  body.in-phieu #phieu{display:block;padding:0}
+  body.in-phieu #phieu > :not(.sheet-wrap){display:none}
+  body.in-phieu .sheet-wrap{padding:0;display:block}
+  body.in-phieu .sheet-zoom{zoom:1!important;width:auto}
+  body.in-phieu .paper{width:auto;min-height:0;padding:0;box-shadow:none}
+}
+
+.vd{border-top:1px solid var(--line,#e6e2d8);padding:16px 0}.vd:first-child{border-top:0;padding-top:0}
+.vd h4{margin:0 0 6px;font-size:16px}.vd .de{margin:0 0 10px}.vd .giai{background:#f7f5ef;border-radius:10px;padding:12px 14px;font-size:15px;line-height:1.6}
+.qz{border-top:1px solid var(--line,#e6e2d8);padding:12px 0}.qz:first-child{border-top:0}.qz p{margin:0 0 6px;font-weight:600}
+.qz ol{margin:0 0 6px 18px;padding:0}.qz details{font-size:14.5px;color:#4a4f58}.qz summary{cursor:pointer;color:var(--acc)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0 0}.meta div{background:#f7f5ef;border-radius:10px;padding:10px 12px;font-size:13.5px}
+.meta b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b6f78;margin-bottom:2px}
+.tt li{margin:4px 0}
+.paper .bt{margin:0 0 3.2mm}.paper .bt .qq{display:flex;gap:2mm}.paper .bt .src{color:#6b6f78;font-size:8.5pt}
+</style>
+<style id="bg-vt">@view-transition{navigation:auto}#bgs-load{view-transition-name:bg-bia}::view-transition-group(bg-bia){animation-duration:.42s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}::view-transition-old(root),::view-transition-new(root){animation-duration:.24s}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
+<script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
+<script id="bg-sw">(function(){try{if(!("serviceWorker"in navigator)||!/(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname))return;var r=new URL("../../../",location.href).href;if(/[?&]sw=0/.test(location.search)){navigator.serviceWorker.getRegistrations().then(function(a){a.forEach(function(x){x.unregister()})});return}addEventListener("load",function(){setTimeout(function(){navigator.serviceWorker.register(r+"sw.js",{scope:r}).catch(function(){})},3000)})}catch(e){}})();</script>
+</head>
+<body>
+<div class="bar">
+  <a class="home" href="../../../"><img src="../../../design/logo/mark-96.webp" width="30" height="30" alt="" class="lg"><span>Sáng Ăn Khoai</span></a><span class="sep"></span><a class="crumb" href="../../../thiet-ke-mang/">Thiết kế và hiệu năng mạng</a>
+  <span class="sp"></span>
+  <button class="btn opt" type="button" data-print="gv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In giáo án</button>
+  <button class="btn" type="button" data-print="phieu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In phiếu</button>
+  <a class="btn pri" href="../"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a>
+</div>
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <div class="eye">Tiết 5 / 22 · 45 phút · Giáo án</div>
+      <h1>Đánh giá, telemetry, nền tảng 5G-Advanced và 6G, ràng buộc mới</h1>
+      <p class="lead">Tiết khép chương 1. Nửa đầu dùng cảnh 3D phòng vận hành để thấy vì sao polling bỏ lỡ biến động ngắn, telemetry bắt được, và vì sao đo nhiều chưa chắc thấy đủ. Nửa sau đọc các trụ cột 5G-Advanced và 6G (slicing, MEC, O-RAN, AI/ML, NTN, ISAC, IMT-2030) và các ràng buộc mới (bảo mật, năng lượng, độ phức tạp) qua một lăng kính duy nhất: công nghệ đó tác động metric nào và cần dữ liệu gì để kiểm chứng. Chi tiết từng công nghệ để các tiết 8, 13, 20–22. Dùng cùng bài 3D <a href="../">Vòng vận hành có kiểm chứng</a>: bấm <b>Lên lớp</b> trên thanh đầu bài để màn hình giảng viên hiện phút dự kiến và việc của từng bước.</p>
+      <div class="meta"><div><b>Chương</b>Chương 1 · Tổng quan về thiết kế và hiệu năng mạng</div><div><b>Mục giáo trình</b>1.7–1.10</div><div><b>Trang</b>18–30</div><div><b>Phương trình</b>(1.20)–(1.28)</div><div><b>Bài tập cuối chương</b>Câu 6, câu 8–13</div></div>
+    </div>
+    <div class="cover"><img src="../../../thu-vien/covers/tk-van-hanh.webp" alt="Cảnh 3D của bài Vòng vận hành có kiểm chứng"><a class="btn pri" href="../"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a></div>
+  </div>
+  <nav class="tabs" aria-label="Các phần của giáo án"><a href="#muc-tieu">Mục tiêu</a><a href="#dien-tien">Diễn tiến 45 phút</a><a href="#vi-du">Ví dụ giải mẫu</a><a href="#phieu">Phiếu bài tập</a><a href="#dap-an">Đáp án</a><a href="#kiem-tra">Kiểm tra nhanh</a><a href="#tom-tat">Tóm tắt và nguồn</a></nav>
+
+  <section id="muc-tieu" aria-labelledby="h-mt">
+    <h2 id="h-mt">Mục tiêu và chuẩn bị</h2>
+    <div class="g2">
+      <div class="card"><h3>Sau tiết học, sinh viên có thể</h3><ul class="tick"><li>Phân biệt ba hướng đánh giá hiệu năng và lập kế hoạch đánh giá theo bộ năm thành phần (1.20).</li><li>So sánh polling và telemetry dạng đăng ký về độ trễ phát hiện, độ chi tiết và chi phí thu thập (câu 6).</li><li>Tính sai lệch Δk (1.21) và độ phủ quan sát Γ (1.28); giải thích vì sao đúng dữ liệu quan trọng hơn nhiều dữ liệu.</li><li>Mô tả lát cắt mạng bằng (1.22) và phân biệt với VLAN, VPN (câu 8); tính và so sánh thời gian đáp ứng MEC bằng (1.23) (câu 9).</li><li>Giải thích vòng điều khiển (1.24), hai hướng AI/ML (câu 10), trễ lan truyền biến thiên (1.25) (câu 11), metric ISAC (1.26) (câu 12).</li><li>Tính hiệu quả năng lượng (1.27) và nêu bốn câu hỏi an toàn, bốn câu hỏi trước công nghệ mới (câu 13, mục 1.10).</li></ul>
+        <h3 style="margin-top:18px">Kiến thức cần có</h3><ul class="tick"><li>Hệ số khai thác mục tiêu η và mức sử dụng (tiết 2).</li><li>Vector yêu cầu và điều kiện nghiệm thu (tiết 1); ba mặt phẳng dữ liệu, điều khiển, quản lý.</li><li>Tốc độ ánh sáng c ≈ 3·10⁸ m/s.</li></ul></div>
+      <div class="card"><h3>Chuẩn bị</h3><ul class="tick"><li>Máy tính có Chrome hoặc Edge bản mới, nối máy chiếu. Mở bài 3D trước giờ học một lần, bấm Lên lớp để màn hình giảng viên hiện phút và việc từng bước.</li><li>In phiếu bài tập (một trang A4) cho mỗi sinh viên, hoặc chiếu phiếu và cho làm vào vở.</li><li>Kẻ sẵn trên bảng bảng 1.5 rút gọn (sáu bước, cột kết quả để trống) để điền ở bước cuối.</li><li>Sinh viên: Đọc trước mục 1.7 đến 1.10, giáo trình trang 18–30; đọc kỹ 1.7.2 và 1.9.3.</li><li>Sinh viên: Máy tính cầm tay.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="dien-tien" aria-labelledby="h-dt">
+    <h2 id="h-dt">Diễn tiến 45 phút</h2>
+    <p class="sub">Mỗi dòng là một bước trên màn chiếu, cùng tên và thứ tự với bài 3D. Phút là gợi ý; giảng viên chủ động co giãn.</p>
+    <div class="tl" role="list" aria-label="Phân bổ thời gian"><a href="#hd-0" style="flex:3;background:color-mix(in srgb,#2B5D8C 14%,#fff)"><b>Mở đầu</b><span>0–3′</span></a><a href="#hd-1" style="flex:10;background:color-mix(in srgb,#2B5D8C 21%,#fff)"><b>Đánh giá và thu thập</b><span>3–13′</span></a><a href="#hd-2" style="flex:6;background:color-mix(in srgb,#2B5D8C 28%,#fff)"><b>Kiểm chứng trong vận hành</b><span>13–19′</span></a><a href="#hd-3" style="flex:18;background:color-mix(in srgb,#2B5D8C 35%,#fff)"><b>Trụ cột 5G-Advanced và 6G</b><span>19–37′</span></a><a href="#hd-4" style="flex:8;background:color-mix(in srgb,#2B5D8C 42%,#fff)"><b>Ràng buộc mới và cách tiếp cận</b><span>37–45′</span></a></div>
+    <div class="act card" id="hd-0"><header><h3>1. Mở đầu</h3><span class="min">0–3′</span><p>Chuyển từ thiết kế sang vận hành.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">0–3′<span>3 phút</span></div><div class="t"><small>Bước 1/13</small>Mạng đã chạy, làm sao biết nó còn đạt?</div><div class="gv"><span class="k">Giảng viên</span>Chiếu toàn cảnh: sáu thiết bị, liên kết xanh có bùng nổ, phòng vận hành. Hỏi: nếu chỉ xem mức sử dụng trung bình mỗi giờ, người vận hành có thấy nghẽn 20 giây không?</div><div class="hs"><span class="k">Sinh viên</span>Trả lời, nêu một ví dụ hiện tượng ngắn.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên nêu một hiện tượng mạng mà đo trung bình có thể che mất.</div></div><div class="act card" id="hd-1"><header><h3>2. Đánh giá và thu thập</h3><span class="min">3–13′</span><p>Ba hướng đánh giá, (1.20); polling và telemetry.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">3–7′<span>4 phút</span></div><div class="t"><small>Bước 2/13</small>Ba hướng đánh giá và một kế hoạch đánh giá</div><div class="gv"><span class="k">Giảng viên</span>Nêu ba hướng đánh giá theo 1.7.1 và ưu, nhược mỗi hướng. Viết (1.20), giải thích M, F, L, S, A bằng chính bài này: M là mức sử dụng, F là chu kỳ đo, L là các mức 1 s, 10 s, 300 s, S là chuỗi tải có bùng nổ, A là đếm số đợt bắt được. Nêu các thông tin bảng 1.3 đòi khi báo cáo.</div><div class="hs"><span class="k">Sinh viên</span>Ghi (1.20) và điền năm thành phần cho thí nghiệm trong cảnh.</div></div><div class="row"><div class="m">7–10′<span>3 phút</span></div><div class="t"><small>Bước 3/13</small>Hỏi định kỳ bỏ lỡ đợt bùng nổ</div><div class="gv"><span class="k">Giảng viên</span>Bấm SNMP 5 phút, góc Màn hình. Chỉ đường xám và đường xanh. Giải ví dụ 1 phần polling trên bảng.</div><div class="hs"><span class="k">Sinh viên</span>Tính mức sử dụng trung bình 5 phút của ví dụ 1.</div></div><div class="row"><div class="m">10–13′<span>3 phút</span></div><div class="t"><small>Bước 4/13</small>Thiết bị tự đẩy dữ liệu</div><div class="gv"><span class="k">Giảng viên</span>Bấm Telemetry 1 s. Chỉ bảng 03 (bắt được) và bảng 05 (chi phí). Nêu RFC 9232, 8639, 8641. Giải ví dụ 1 phần chi phí. Cho lớp trả lời câu hỏi trên màn hình. Dàn ý câu 6.</div><div class="hs"><span class="k">Sinh viên</span>So sánh hai cách theo ba tiêu chí; trả lời câu hỏi.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên tính mức sử dụng trung bình 5 phút che mất đợt bùng nổ (ví dụ 1).</div></div><div class="act card" id="hd-2"><header><h3>3. Kiểm chứng trong vận hành</h3><span class="min">13–19′</span><p>Δk (1.21) và Γ (1.28).</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">13–16′<span>3 phút</span></div><div class="t"><small>Bước 5/13</small>Sai lệch giữa trạng thái đo và mục tiêu</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.21), y* = 0,8 lấy từ η của tiết 2. Chỉ bảng 02. Nêu ba phản ứng khi Δ vượt ngưỡng: cảnh báo, phân tích nguyên nhân, tự phục hồi. Chỉ bảng 06: vòng khép kín không nhanh hơn khâu đo.</div><div class="hs"><span class="k">Sinh viên</span>Ghi (1.21) và ba phản ứng.</div></div><div class="row"><div class="m">16–19′<span>3 phút</span></div><div class="t"><small>Bước 6/13</small>Đo nhiều chưa chắc thấy đủ</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.28). Bấm lần lượt các nút metric, đọc Γ ở bảng 04. Giải ví dụ 2. Cho lớp trả lời câu hỏi trên màn hình.</div><div class="hs"><span class="k">Sinh viên</span>Làm ví dụ 2; trả lời câu hỏi.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên tính Γ cho các bộ metric (ví dụ 2).</div></div><div class="act card" id="hd-3"><header><h3>4. Trụ cột 5G-Advanced và 6G</h3><span class="min">19–37′</span><p>Mạng dịch vụ lập trình được; slicing (1.22); MEC (1.23); O-RAN và AI (1.24); NTN, UAV (1.25); ISAC (1.26).</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">19–23′<span>4 phút</span></div><div class="t"><small>Bước 7/13</small>Từ mạng IP sang mạng dịch vụ lập trình được</div><div class="gv"><span class="k">Giảng viên</span>Nêu nút thắt mới theo 1.8.1: ánh xạ yêu cầu thành tài nguyên, chính sách, cô lập, giám sát. Định nghĩa 5GS (AMF, SMF, UPF) và 5G-Advanced (từ Release 18). Bắt đầu bảng ba cột trên bảng: công nghệ, metric tác động, dữ liệu cần đo.</div><div class="hs"><span class="k">Sinh viên</span>Kẻ bảng ba cột vào vở.</div></div><div class="row"><div class="m">23–27′<span>4 phút</span></div><div class="t"><small>Bước 8/13</small>Lát cắt mạng không phải VLAN</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.22), giải thích năm thành phần. So sánh VLAN, VPN, lát cắt theo phạm vi, mức cô lập, cách kiểm chứng SLA (dàn ý câu 8). Nhấn M_n: nối với Γ ở bước 6. Điền một dòng bảng ba cột.</div><div class="hs"><span class="k">Sinh viên</span>Ghi (1.22); điền bảng so sánh ba khái niệm.</div></div><div class="row"><div class="m">27–30′<span>3 phút</span></div><div class="t"><small>Bước 9/13</small>Xử lý ở biên chỉ có lợi khi tổng trễ nhỏ hơn</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.23). Giải ví dụ 3 trên bảng: tập trung, biên bình thường, biên quá tải. Dàn ý câu 9: giảm trễ truyền tải nhưng thêm bài toán vị trí, đồng bộ, di động phiên.</div><div class="hs"><span class="k">Sinh viên</span>Làm ví dụ 3; ghi dàn ý câu 9.</div></div><div class="row"><div class="m">30–33′<span>3 phút</span></div><div class="t"><small>Bước 10/13</small>Vòng điều khiển cần dữ liệu đo tin được</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.24). Tắt Đo chủ động trên cảnh: Γ tụt. Hỏi: bộ điều khiển thiếu dữ liệu đo z_t về trễ thì quyết định thế nào? Nêu xApp, rApp. Phân biệt AI for Network và Network for AI, mỗi hướng một metric kiểm chứng (dàn ý câu 10).</div><div class="hs"><span class="k">Sinh viên</span>Ghi (1.24); nêu một metric cho mỗi hướng AI/ML.</div></div><div class="row"><div class="m">33–37′<span>4 phút</span></div><div class="t"><small>Bước 11/13</small>Trễ lan truyền biến thiên và metric cảm nhận</div><div class="gv"><span class="k">Giảng viên</span>Viết (1.25). Giải ví dụ 4: UAV, vệ tinh quỹ đạo thấp, địa tĩnh. Dàn ý câu 11: trễ, ngân sách đường truyền, handover thay đổi theo hình học. Viết (1.26), nêu metric cảm nhận (dàn ý câu 12). Nhắc 6G gọi là IMT-2030, sáu nhóm kịch bản theo ITU-R M.2160.</div><div class="hs"><span class="k">Sinh viên</span>Làm ví dụ 4; ghi metric cảm nhận.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên giải ví dụ 3, 4 và điền bảng: công nghệ, metric tác động, dữ liệu cần đo.</div></div><div class="act card" id="hd-4"><header><h3>5. Ràng buộc mới và cách tiếp cận</h3><span class="min">37–45′</span><p>Bảo mật, chống chịu, năng lượng (1.27); bảng 1.5 và bốn câu hỏi; giao bài.</p></header><div class="thead"><span>Phút</span><span>Trên màn chiếu</span><span>Giảng viên</span><span>Sinh viên</span></div><div class="row"><div class="m">37–41′<span>4 phút</span></div><div class="t"><small>Bước 12/13</small>Bảo mật, chống chịu, năng lượng là ràng buộc từ đầu</div><div class="gv"><span class="k">Giảng viên</span>Định nghĩa resilience. Nêu bốn câu hỏi an toàn của 1.9.1. Viết (1.27), giải ví dụ 5. Kéo chu kỳ telemetry về 1 s: chi phí thu thập cũng là năng lượng. Dàn ý câu 13.</div><div class="hs"><span class="k">Sinh viên</span>Làm ví dụ 5; ghi bốn câu hỏi an toàn.</div></div><div class="row"><div class="m">41–45′<span>4 phút</span></div><div class="t"><small>Bước 13/13</small>Bốn câu hỏi trước mọi công nghệ mới</div><div class="gv"><span class="k">Giảng viên</span>Điền nhanh bảng 1.5 rút gọn cùng lớp. Chốt bốn câu hỏi của 1.10.2. Giao câu 6, 8–13 chương 1 (phiếu bài tập). Báo tiết sau: chương 2, từ "mạng phải nhanh" đến vector yêu cầu.</div><div class="hs"><span class="k">Sinh viên</span>Điền bảng 1.5; ghi bốn câu hỏi và bài về nhà.</div></div><div class="prod"><b>Kết quả:</b> Sinh viên giải ví dụ 5 và điền bảng 1.5 rút gọn.</div></div>
+  </section>
+
+  <section id="vi-du" aria-labelledby="h-vd">
+    <h2 id="h-vd">Ví dụ giải mẫu</h2>
+    <p class="sub">Giảng viên giải trên bảng trong tiết; số liệu đã kiểm bằng máy cùng công thức của bài 3D.</p>
+    <div class="card"><div class="vd"><h4>Ví dụ 1. Polling che mất đợt bùng nổ</h4><p class="de">Liên kết có nền khoảng 45 %; một đợt bùng nổ dài 24 s lên 97 %. SNMP hỏi mỗi 5 phút. Tính mức sử dụng đo được của khoảng chứa đợt bùng nổ và so với ngưỡng 0,8. Tính băng thông thu thập cho 50 thiết bị, mỗi lần gửi 2 kB, ở chu kỳ 300 s và 1 s.</p><div class="giai">Trung bình khoảng 300 s ≈ (24 × 0,97 + 276 × 0,45) / 300 ≈ <b>0,49</b> &lt; 0,8: <b>không cảnh báo</b>, đợt nghẽn bị che mất. Với mẫu 1 s, mẫu nằm trong đợt bùng nổ là 0,97 &gt; 0,8: bắt được ngay. Băng thông thu thập 50 × 2 000 × 8 / τ: τ = 300 s cho ≈ <b>2,7 kbit/s</b>; τ = 1 s cho <b>800 kbit/s</b>, gấp 300 lần, chưa kể lưu trữ và xử lý.</div></div><div class="vd"><h4>Ví dụ 2. Độ phủ quan sát (1.28)</h4><p class="de">Sáu trạng thái cần kiểm soát: nghẽn, mất gói, trễ dịch vụ vượt SLA, suy giảm quang, quá tải thiết bị, đổi đường định tuyến. Bộ đếm giao diện suy ra nghẽn và mất gói; CPU suy ra quá tải; độ sâu hàng đợi suy ra nghẽn; đo chủ động suy ra trễ SLA và mất gói; công suất quang suy ra suy giảm quang; sự kiện định tuyến suy ra đổi đường. Tính Γ cho: (a) bộ đếm + CPU; (b) thêm hàng đợi; (c) thêm đo chủ động, công suất quang, sự kiện định tuyến.</p><div class="giai">(a) Suy ra được nghẽn, mất gói, quá tải: <b>Γ = 3/6 = 0,5</b>. (b) Hàng đợi chỉ thêm nghẽn, đã có: <b>Γ vẫn 0,5</b>. (c) Thêm trễ SLA, suy giảm quang, đổi đường: <b>Γ = 6/6 = 1</b>. Thêm metric trùng nguồn không tăng Γ; cần metric phủ đúng trạng thái còn thiếu.</div></div><div class="vd"><h4>Ví dụ 3. Có nên đưa xử lý về biên (1.23)</h4><p class="de">Một tác vụ suy luận video. Tập trung: truy nhập 5 ms, truyền tải 20 ms, xử lý 15 ms, trả kết quả 20 ms. Ở biên: truy nhập 5 ms, truyền tải 2 ms, trả kết quả 2 ms; xử lý 35 ms khi máy biên bình thường, 60 ms khi quá tải (các số là giả định của bài). So sánh.</p><div class="giai">Tập trung: 5 + 20 + 15 + 20 = <b>60 ms</b>. Biên bình thường: 5 + 2 + 35 + 2 = <b>44 ms</b>: nhanh hơn 16 ms. Biên quá tải: 5 + 2 + 60 + 2 = <b>69 ms</b>: chậm hơn tập trung. MEC chỉ có lợi khi phần xử lý tại biên không ăn hết phần trễ truyền tải tiết kiệm được; thiết kế phải định cỡ máy biên theo tải.</div></div><div class="vd"><h4>Ví dụ 4. Trễ lan truyền theo khoảng cách (1.25)</h4><p class="de">Tính trễ lan truyền một chặng với c ≈ 3·10<sup>8</sup> m/s cho: UAV cách trạm 3 km; vệ tinh quỹ đạo thấp cách 1 000 km; vệ tinh địa tĩnh ở độ cao 35 786 km (đặt thẳng trên đầu).</p><div class="giai">UAV: 3·10<sup>3</sup> / 3·10<sup>8</sup> = <b>10 µs</b>. Quỹ đạo thấp: 10<sup>6</sup> / 3·10<sup>8</sup> ≈ <b>3,3 ms</b>, và thay đổi khi vệ tinh di chuyển. Địa tĩnh: 3,5786·10<sup>7</sup> / 3·10<sup>8</sup> ≈ <b>119 ms</b> một chặng; đi lên rồi xuống là gần 240 ms trước khi tính xử lý. Với nút bay, d<sub>prop</sub> là hàm của thời gian, không phải hằng số.</div></div><div class="vd"><h4>Ví dụ 5. Hiệu quả năng lượng (1.27)</h4><p class="de">Phương án A mang 10 Gbit/s hữu ích, tiêu thụ 2 kW. Phương án B mang 12 Gbit/s hữu ích, tiêu thụ 3 kW. So sánh η<sub>EE</sub>. Mỗi năm mỗi phương án tiêu thụ bao nhiêu MWh nếu chạy liên tục?</p><div class="giai">η<sub>A</sub> = 10<sup>10</sup> / 2 000 = <b>5 Mbit/J</b>; η<sub>B</sub> = 1,2·10<sup>10</sup> / 3 000 = <b>4 Mbit/J</b>. B nhiều thông lượng hơn 20 % nhưng kém hiệu quả năng lượng 20 %. Năng lượng một năm: A ≈ 2 kW × 8 766 h ≈ <b>17,5 MWh</b>; B ≈ <b>26,3 MWh</b>. Chọn B chỉ khi yêu cầu thật sự cần 12 Gbit/s.</div></div></div>
+  </section>
+
+  <section id="phieu" aria-labelledby="h-ph">
+    <h2 id="h-ph">Phiếu bài tập</h2>
+    <p class="sub">Một trang A4. Làm trên lớp phần đầu, phần còn lại về nhà. <button class="btn noprint" type="button" data-print="phieu" style="margin-left:6px;vertical-align:middle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In phiếu</button></p>
+    <div class="sheet-wrap"><div class="sheet-zoom"><div class="paper" lang="vi">
+  <header><div><div class="lg2"><img src="../../../design/logo/mark-96.webp" alt="">Sáng Ăn Khoai · Thiết kế và hiệu năng mạng · Tiết 5 · Phiếu bài tập</div><h4>Đánh giá, telemetry, nền tảng 5G-Advanced và 6G, ràng buộc mới</h4></div>
+    <div class="who"><span>Họ tên</span><i></i><span>Mã sinh viên</span><i></i></div></header>
+  <div class="part bt"><div class="qq"><b>1.</b><span>Nêu vai trò của telemetry trong mạng hiện đại. So sánh ngắn gọn polling truyền thống và telemetry dạng đăng ký/streaming. <span class=src>(câu 6 cuối chương 1)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>2.</b><span>Phân biệt VLAN, VPN và network slicing theo phạm vi kỹ thuật, mức cô lập và cách kiểm chứng SLA. <span class=src>(câu 8 cuối chương 1)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>3.</b><span>Giải thích vì sao MEC có thể giảm thời gian đáp ứng nhưng cũng làm tăng độ phức tạp của thiết kế mạng. <span class=src>(câu 9 cuối chương 1)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>4.</b><span>Trình bày hai hướng AI/ML trong mạng: AI for Network và Network for AI. Với mỗi hướng, nêu một metric cần đo để kiểm chứng hiệu quả. <span class=src>(câu 10 cuối chương 1)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>5.</b><span>Vì sao NTN và UAV làm cho độ trễ, ngân sách đường truyền và handover trở thành các ràng buộc thiết kế quan trọng hơn so với mạng cố định? <span class=src>(câu 11 cuối chương 1)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>6.</b><span>ISAC làm thay đổi tập metric hiệu năng như thế nào so với mạng truyền thông thuần túy? <span class=src>(câu 12 cuối chương 1)</span></span></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>7.</b><span>Trong bối cảnh IMT-2030, vì sao bảo mật, chống chịu lỗi và hiệu quả năng lượng phải được xem là ràng buộc thiết kế từ đầu? <span class=src>(câu 13 cuối chương 1)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+  <footer><span>Giáo trình TEL1459, mục 1.7–1.10, tr. 18–30</span><span>nclamvn.github.io/bai-giang</span></footer>
+</div></div></div>
+  </section>
+
+  <section id="dap-an" aria-labelledby="h-da">
+    <h2 id="h-da">Đáp án và gợi ý chấm</h2>
+    <div class="card"><dl class="ans"><dt>1</dt><dd>Telemetry (RFC 9232) tạo, thu thập, tương quan và tiêu thụ dữ liệu mạng để hiểu trạng thái và hỗ trợ tự động hoá; là đầu vào của Δk (1.21) và Γ (1.28). Polling: trạm quản lý hỏi định kỳ (SNMP), có độ trễ phát hiện bằng cỡ chu kỳ, số đo là trung bình nên che biến động ngắn, tải dồn vào trạm hỏi. Streaming: thiết bị đẩy theo đăng ký (RFC 8639, 8641, YANG), chu kỳ ngắn hoặc theo sự kiện, bắt được biến động ngắn, đổi lại dữ liệu nhiều, cần pipeline lưu và xử lý. Đủ điểm khi có vai trò và ít nhất ba tiêu chí so sánh.</dd><dt>2</dt><dd>VLAN: phân đoạn miền quảng bá lớp 2 trong một mạng, cô lập logic ở lớp 2, không có cam kết hiệu năng, kiểm chứng chỉ là kết nối đúng miền. VPN: kết nối riêng trên hạ tầng dùng chung (lớp 2 hoặc lớp 3, có thể qua nhiều miền), cô lập địa chỉ và định tuyến, SLA nếu có là của nhà cung cấp. Lát cắt mạng: dịch vụ kết nối logic gắn mục tiêu hiệu năng và cam kết tài nguyên giữa các điểm biên (RFC 9543), có thể trải RAN, truyền tải, lõi; cô lập cả tài nguyên; kiểm chứng bằng metric M<sub>n</sub> theo (1.22).</dd><dt>3</dt><dd>Giảm: thành phần truyền tải trong (1.23) nhỏ đi vì xử lý gần người dùng; giảm tải về lõi. Phức tạp hơn: phải chọn vị trí máy chủ biên, định cỡ năng lực xử lý (quá tải thì T<sub>proc</sub> tăng, như ví dụ 3), backhaul cho biên, đồng bộ dữ liệu giữa biên và trung tâm, chuyển phiên khi người dùng di động, bảo mật nhiều điểm hơn, giám sát nhiều nút hơn.</dd><dt>4</dt><dd>AI for Network: AI/ML phục vụ quản lý và tối ưu mạng (dự báo tải, phát hiện bất thường, tiết kiệm năng lượng, cân bằng tải). Metric kiểm chứng: số lần vi phạm SLA giảm, năng lượng tiết kiệm, thời gian phát hiện bất thường, không chỉ độ chính xác dự đoán. Network for AI: mạng phục vụ ứng dụng AI phân tán (dữ liệu huấn luyện, suy luận biên, đồng bộ mô hình). Metric: trễ truyền dữ liệu hoặc tham số mô hình, thời gian đồng bộ một vòng huấn luyện, thông lượng giữa nút tính toán.</dd><dt>5</dt><dd>Khoảng cách lớn và thay đổi theo thời gian: d<sub>prop</sub>(t) = r(t)/c (1.25), từ vài ms (quỹ đạo thấp) tới khoảng 119 ms một chặng (địa tĩnh), lại biến thiên. Suy hao đường truyền phụ thuộc khoảng cách và góc ngẩng nên ngân sách đường truyền thay đổi liên tục. Nút di chuyển (vệ tinh, UAV) nên handover thường xuyên và phải dự đoán được. Thêm ràng buộc năng lượng của UAV và an toàn bay. Mạng cố định có các đại lượng này gần như hằng số.</dd><dt>6</dt><dd>Ngoài metric truyền thông (SNR, BER, thông lượng, trễ) phải thêm metric cảm nhận: xác suất phát hiện, xác suất báo động giả, sai số định vị, độ phân giải khoảng cách và vận tốc. Bài toán tối ưu trở thành đánh đổi có trọng số (1.26) giữa chất lượng truyền, chất lượng cảm nhận và chi phí tài nguyên.</dd><dt>7</dt><dd>Ảo hoá, AI, tự động hoá làm miền tấn công lan ra telemetry, mô hình, API, chuỗi cung ứng phần mềm; thêm sau khi xong topo sẽ phá địa chỉ, định tuyến, QoS hoặc năng lực thiết bị. Chống chịu đòi dự phòng, phân miền lỗi, thời gian phát hiện và phục hồi ngay trong kiến trúc; tự động hoá thiếu rollback làm lỗi lan nhanh hơn. Năng lượng: mật độ trạm, tài nguyên tính toán, telemetry đều tốn; η<sub>EE</sub> (1.27) phải là metric từ đầu. IMT-2030 nêu bền vững, bảo mật và chống chịu là nguyên tắc thiết kế (ITU-R M.2160).</dd></dl></div>
+  </section>
+
+  <section id="kiem-tra" aria-labelledby="h-kt">
+    <h2 id="h-kt">Kiểm tra nhanh cuối tiết</h2>
+    <p class="sub">6 câu, khoảng 3 phút. Chiếu lên hoặc đọc to; mở đáp án sau khi lớp trả lời.</p>
+    <div class="card"><div class="qz"><p>1. Trong (1.20), thành phần L là gì?</p><ol type="A"><li>Tập metric</li><li>Tập mức khảo sát của các yếu tố</li><li>Kịch bản lưu lượng</li><li>Phương pháp phân tích</li></ol><details><summary>Đáp án</summary><b>B.</b> M metric, F yếu tố, L mức, S kịch bản, A phân tích.</details></div><div class="qz"><p>2. Vì sao SNMP hỏi mỗi 5 phút có thể không thấy một đợt nghẽn 20 s?</p><ol type="A"><li>SNMP không đo mức sử dụng</li><li>Số đo là trung bình cả khoảng, đợt ngắn bị pha loãng</li><li>SNMP chỉ đo CPU</li><li>Đợt nghẽn không làm mất gói</li></ol><details><summary>Đáp án</summary><b>B.</b> Hiệu bộ đếm chia khoảng hỏi cho mức trung bình 300 s.</details></div><div class="qz"><p>3. Bộ metric suy ra được 5 trên 10 trạng thái cần kiểm soát. Γ bằng?</p><ol type="A"><li>0,05</li><li>0,5</li><li>2</li><li>5</li></ol><details><summary>Đáp án</summary><b>B.</b> Γ = 5/10.</details></div><div class="qz"><p>4. Thành phần nào trong (1.22) làm cho lát cắt mạng kiểm chứng được?</p><ol type="A"><li>P_n điểm biên</li><li>M_n tập metric giám sát</li><li>I_n mức cô lập</li><li>Không thành phần nào</li></ol><details><summary>Đáp án</summary><b>B.</b> Không có metric thì không kiểm được SLA của lát cắt.</details></div><div class="qz"><p>5. Vệ tinh cách 600 km. Trễ lan truyền một chặng khoảng?</p><ol type="A"><li>0,2 ms</li><li>2 ms</li><li>20 ms</li><li>200 ms</li></ol><details><summary>Đáp án</summary><b>B.</b> 6·10<sup>5</sup> / 3·10<sup>8</sup> = 2 ms.</details></div><div class="qz"><p>6. η_EE theo (1.27) đo gì?</p><ol type="A"><li>Công suất tiêu thụ</li><li>Số bit hữu ích trên mỗi joule</li><li>Thông lượng cực đại</li><li>Hiệu suất nguồn điện</li></ol><details><summary>Đáp án</summary><b>B.</b> η<sub>EE</sub> = B<sub>useful</sub> / E<sub>total</sub>.</details></div></div>
+  </section>
+
+  <section id="tom-tat" aria-labelledby="h-tt">
+    <h2 id="h-tt">Tóm tắt và nguồn</h2>
+    <div class="g2">
+      <div class="card"><h3>Ghi nhớ</h3><ul class="tt"><li>Ba hướng đánh giá: đo kiểm, mô phỏng, phân tích; mọi thí nghiệm có đủ E = (M, F, L, S, A) (1.20) và báo cáo kèm điều kiện đo.</li><li>Polling cho trung bình và phát hiện chậm; telemetry dạng đăng ký bắt được biến động ngắn nhưng tốn chi phí thu, lưu, xử lý. Vận hành có kiểm chứng dựa trên Δ<sub>k</sub> = ‖y<sub>k</sub> − y*<sub>k</sub>‖ (1.21).</li><li>Đúng dữ liệu hơn nhiều dữ liệu: độ phủ quan sát Γ (1.28).</li><li>5G-Advanced và 6G (IMT-2030) mở rộng thiết kế sang slicing (1.22), MEC (1.23), điều khiển RAN (1.24), nút bay (1.25), ISAC (1.26); mỗi trụ cột phải gắn với metric và dữ liệu để kiểm chứng.</li><li>Bảo mật, chống chịu, năng lượng (1.27) và độ phức tạp vận hành là ràng buộc từ đầu. Trước công nghệ mới, hỏi: dịch vụ nào, metric nào, tốn gì, rủi ro gì.</li></ul></div>
+      <div class="card"><h3>Nguồn</h3><ul class="src"><li>Hoàng Trọng Minh, Giáo trình Thiết kế và hiệu năng mạng (học phần TEL1459), Học viện Công nghệ Bưu chính Viễn thông, 2026: mục 1.7–1.10, trang 18–30; phương trình (1.20)–(1.28); bảng 1.3, 1.5; câu 6, 8–13 cuối chương 1.</li><li>RFC 9232 (khung telemetry), RFC 8639 và RFC 8641 (đăng ký thông báo, cập nhật datastore YANG), RFC 9543 (IETF network slice); 3GPP TS 23.501 (5GS); ITU-R M.2160 (IMT-2030).</li><li>Độ cao quỹ đạo địa tĩnh 35 786 km: hằng số vật lý của quỹ đạo đồng bộ Trái Đất.</li><li>Giả định của bài: chuỗi tải tổng hợp có bốn đợt bùng nổ; 50 thiết bị × 2 kB mỗi lần gửi; bảng nối metric với trạng thái; các số trễ MEC, công suất và khoảng cách trong ví dụ.</li></ul><p class="mini" style="margin-top:12px">Nội dung viết mới theo giáo trình TEL1459 của PGS.TS Hoàng Trọng Minh (PTIT, 2026); không chép văn bản hay hình của sách, công thức giữ đúng số hiệu để sinh viên tra lại.</p></div>
+    </div>
+  </section>
+  <div class="foot"><span>Bản 1 · 16/11/2026</span><span class="noprint">© 2026 Sáng Ăn Khoai · phi thương mại</span></div>
+</main>
+<script>
+(function(){
+  var z=document.querySelector('.sheet-zoom'),w=document.querySelector('.sheet-wrap');
+  function fit(){var mm=210*96/25.4;z.style.setProperty('--z',Math.min(1,(w.clientWidth)/mm).toFixed(3))}
+  fit();addEventListener('resize',fit);
+  document.querySelectorAll('[data-print]').forEach(function(b){b.addEventListener('click',function(){
+    document.body.classList.toggle('in-phieu',b.dataset.print==='phieu');window.print();})});
+  addEventListener('afterprint',function(){document.body.classList.remove('in-phieu')});
+})();
+</script>
+</body>
+</html>
