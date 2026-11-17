@@ -32,19 +32,19 @@ E = lambda s: html.escape(str(s), quote=True)
 NHAN_CAM = ['Sáng Ăn Khoai', 'Sang An Khoai', 'sang-an-khoai', 'bai-giang', 'thu-vien', 'giao-vien', 'design/logo', 'robotics/_chung',
             'thiet-ke-mang/', 'goi-day', 'dieu-khien']
 
-LOGO = ("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='#0B0F19'/>"
+LOGO = ("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='#141416'/>"
         "<path d='M10 21.5 16 10.5l6 11z' fill='none' stroke='#fff' stroke-width='1.6' stroke-linejoin='round'/>"
-        "<circle cx='16' cy='10.5' r='2.7' fill='#5B8CFF'/><circle cx='10' cy='21.5' r='2.7' fill='#fff'/><circle cx='22' cy='21.5' r='2.7' fill='#fff'/></svg>")
+        "<circle cx='16' cy='10.5' r='2.7' fill='#CC2A53'/><circle cx='10' cy='21.5' r='2.7' fill='#fff'/><circle cx='22' cy='21.5' r='2.7' fill='#fff'/></svg>")
 LOGO_URI = 'data:image/svg+xml,' + LOGO.replace('#', '%23').replace('<', '%3C').replace('>', '%3E')
 
 # bảng màu phẳng cho vỏ bài 3D: thay token của site chính, không đổ bóng, không kính mờ
-TOKEN = {'bg-page': '#FFFFFF', 'bg-surface': '#FFFFFF', 'bg-glass': '#FFFFFF', 'bg-glass-strong': '#FFFFFF', 'bg-ink': '#0B0F19',
-         'bg-ink2': '#394150', 'bg-ink3': '#5B6372', 'bg-hair': 'rgba(11,15,25,.10)', 'bg-hair2': 'rgba(11,15,25,.20)',
-         'bg-brand': '#0B0F19', 'bg-brand-ink': '#FFFFFF', 'bg-nhan': '#2451D6', 'bg-focus': '#2451D6', 'bg-r-lg': '12px',
-         'bg-r-md': '10px', 'bg-r-sm': '8px', 'bg-sh-1': '0 0 0 1px rgba(11,15,25,.08)', 'bg-sh-2': '0 0 0 1px rgba(11,15,25,.10)',
+TOKEN = {'bg-page': '#FFFFFF', 'bg-surface': '#FBFBF8', 'bg-glass': '#FFFFFF', 'bg-glass-strong': '#FFFFFF', 'bg-ink': '#141416',
+         'bg-ink2': '#4A4A4F', 'bg-ink3': '#66666B', 'bg-hair': 'rgba(20,20,22,.10)', 'bg-hair2': 'rgba(20,20,22,.20)',
+         'bg-brand': '#141416', 'bg-brand-ink': '#FFFFFF', 'bg-nhan': '#CC2A53', 'bg-focus': '#2451D6', 'bg-r-lg': '14px',
+         'bg-r-md': '10px', 'bg-r-sm': '8px', 'bg-sh-1': '0 0 0 1px rgba(20,20,22,.08)', 'bg-sh-2': '0 0 0 1px rgba(20,20,22,.10)',
          'bg-blur': 'none'}
 PHANG_3D = """<style id="phang">html #app .cp{border-radius:10px!important;box-shadow:none!important;border:1px solid #E7E9EE!important}
-html #app .bt{border-radius:8px!important;border-color:#D7DBE2!important}html #app .bt.on{background:#0B0F19!important;border-color:#0B0F19!important;color:#fff!important}
+html #app .bt{border-radius:8px!important;border-color:#D7DBE2!important}html #app .bt.on{background:#141416!important;border-color:#141416!important;color:#fff!important}
 html #app .call{box-shadow:none!important;border:1px solid #E7E9EE;border-radius:6px!important}html #app .tourchip{box-shadow:none!important;border:1px solid #E7E9EE}
 html #app .cap .e{border-radius:6px}</style>"""
 
@@ -84,38 +84,38 @@ FONT = lambda up: '\n'.join(
     for w in ws for u, r in [('latin', 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD'),
                               ('vietnamese', 'U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB')])
 CSS = r"""
-:root{--ink:#0B0F19;--ink2:#394150;--mut:#6B7280;--line:#E7E9EE;--soft:#F5F6F8;--soft2:#EEF0F3;--bg:#fff;--acc:#2451D6;--acc-soft:#EEF2FF;
---ok:#167A4A;--ok-soft:#E7F4EC;--so:#2451D6;--sans:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
+:root{--ink:#141416;--ink2:#4A4A4F;--mut:#8A8A8E;--line:#ECECEA;--soft:#FBFBF8;--soft2:#F4F4F0;--bg:#fff;--acc:#CC2A53;--acc-soft:#FBEFF2;--amber:#D9A065;
+--ok:#141416;--ok-soft:#F4F4F0;--so:#B9803F;--sans:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:76px}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 a{color:inherit;text-underline-offset:3px;text-decoration-thickness:1px}img{display:block;max-width:100%}
-.wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,5vw,56px)}
 .mono{font-family:var(--mono)}.mut{color:var(--mut)}
-.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}
-.top .in{display:flex;align-items:center;gap:12px;height:64px}
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
+.top .in{display:flex;align-items:center;gap:12px;height:58px}
 .brand{display:flex;align-items:center;gap:11px;text-decoration:none;min-width:0}
-.brand img{width:30px;height:30px;flex:none}.brand b{display:block;font-weight:600;font-size:15px;letter-spacing:-.01em;line-height:1.2;white-space:nowrap}
-.brand small{display:block;font:500 11px/1.3 var(--mono);color:var(--mut);letter-spacing:.06em}
+.brand img{width:28px;height:28px;flex:none}.brand b{display:block;font-weight:500;font-size:14.5px;letter-spacing:-.01em;line-height:1.2;white-space:nowrap}
+.brand small{display:block;font:400 10.5px/1.3 var(--mono);color:var(--mut);letter-spacing:.14em}
 .crumb{display:flex;align-items:center;gap:10px;color:var(--mut);font-size:14px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .crumb:before{content:'';width:1px;height:20px;background:var(--line);flex:none}
 .sp{flex:1}.links{display:flex;gap:2px}.links a{padding:8px 12px;border-radius:8px;text-decoration:none;font-size:14px;color:var(--ink2);font-weight:500}
 .links a:hover{background:var(--soft);color:var(--ink)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:#fff;
-font:600 14px/1 var(--sans);color:var(--ink);text-decoration:none;cursor:pointer;white-space:nowrap;transition:border-color .15s,background .15s}
-.btn:hover{border-color:#C6CBD3}.btn.pri{background:var(--ink);border-color:var(--ink);color:#fff}.btn.pri:hover{background:#232A38;border-color:#232A38}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:8px;border:1px solid #E2E2E0;background:#fff;
+font:500 14px/1 var(--sans);color:var(--ink);text-decoration:none;cursor:pointer;white-space:nowrap;transition:border-color .15s,background .15s}
+.btn:hover{border-color:#C9C9C6}.btn.pri{background:var(--ink);border-color:var(--ink);color:#fff}.btn.pri:hover{background:#2A2A2E;border-color:#2A2A2E}
 .btn.sm{height:34px;padding:0 13px;font-size:13px;border-radius:8px}.btn svg{width:16px;height:16px;flex:none}
-.btn[aria-disabled=true]{color:#A0A6B1;border-style:dashed;pointer-events:none}
-.eye{font:500 12px/1.4 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--mut)}
-h1{font-size:clamp(36px,5.2vw,60px);line-height:1.04;letter-spacing:-.04em;font-weight:700;margin:16px 0 18px}
-h2{font-size:clamp(24px,2.6vw,30px);letter-spacing:-.028em;line-height:1.2;margin:0;font-weight:700}
-h3{font-size:18px;letter-spacing:-.015em;line-height:1.35;margin:0;font-weight:600}
-.lead{font-size:18px;line-height:1.65;color:var(--ink2);max-width:720px;margin:0}
-section{padding:72px 0;border-top:1px solid var(--line)}section.first{border-top:0}
+.btn[aria-disabled=true]{color:#B5B5B8;border-style:dashed;pointer-events:none}
+.eye{font:400 11px/1.75 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+h1{font-size:clamp(46px,7.6vw,100px);line-height:.98;letter-spacing:-.05em;font-weight:500;margin:0}
+h2{font-size:clamp(22px,2.4vw,28px);letter-spacing:-.025em;line-height:1.22;margin:0;font-weight:500}
+h3{font-size:17px;letter-spacing:-.012em;line-height:1.35;margin:0;font-weight:500}
+.lead{font-size:17px;line-height:1.62;color:var(--ink2);max-width:640px;margin:0}
+section{padding:clamp(48px,7vw,80px) 0;border-top:1px solid var(--line)}section.first{border-top:0}
 .sh{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:28px;flex-wrap:wrap}.sh p{margin:6px 0 0;color:var(--mut);max-width:640px}
-.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;font:600 11.5px/1 var(--sans);white-space:nowrap}
-.chip:before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
-.chip.xong{background:var(--ok-soft);color:var(--ok)}.chip.so-bo{background:var(--acc-soft);color:var(--so)}.chip.soan{background:var(--soft);color:var(--mut)}
-.foot{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--mut);font-size:13.5px}.foot .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:7px;font:400 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;color:var(--mut)}
+.chip:before{content:'';width:7px;height:7px;border-radius:50%;background:#D4D4D2}
+.chip.xong{color:var(--ink)}.chip.xong:before{background:var(--acc)}.chip.so-bo:before{background:var(--amber)}
+.foot{border-top:1px solid var(--line);padding:28px 0 52px;font:400 11px/1.6 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}.foot .r{color:var(--ink)}.foot .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media (max-width:720px){.wrap{padding:0 18px}.links{display:none}section{padding:52px 0}.lead{font-size:16.5px}.brand small{display:none}}
 """
 ICON = {
@@ -152,45 +152,57 @@ def thanh(up, crumb='', right=''):
 
 
 def chan():
-    return f'''<footer class="foot"><div class="wrap in"><span>{TEN} · {MA} · Theo giáo trình của {TAC_GIA}</span><span>{BAN}</span></div></footer>'''
+    return f'''<footer class="foot"><div class="wrap in"><span>{MA} · {TEN} · Theo giáo trình của {TAC_GIA}</span><span class="r">{BAN}</span></div></footer>'''
 
 
 # ---------------------------------------------------------------- trang mục lục
 CSS_MUC = r"""
-.hero{padding:72px 0 64px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:64px;align-items:end}
-.hero .by{margin:22px 0 0;font-size:15px;color:var(--ink2)}.hero .by b{font-weight:600;color:var(--ink)}
-.hero .cta{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
-.map{border:1px solid var(--line);border-radius:14px;padding:22px 22px 18px}
-.map .r{display:grid;grid-template-columns:28px 1fr;align-items:center;gap:10px;padding:7px 0}
-.map .r>span{font:600 12px var(--mono);color:var(--mut)}.map .cells{display:flex;gap:6px;flex-wrap:wrap}
-.map a,.map i{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font:600 12px var(--mono);text-decoration:none;font-style:normal}
-.map .xong{background:var(--ink);color:#fff}.map .so-bo{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
-.map .soan{color:#A0A6B1;box-shadow:inset 0 0 0 1px var(--line);background:var(--soft)}
-.map a:hover{transform:translateY(-1px)}.map .lg{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
-.map .lg span{display:flex;align-items:center;gap:7px}.map .lg i{width:12px;height:12px;border-radius:3px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.stats div{padding:22px 0 22px 22px;border-left:1px solid var(--line)}.stats div:first-child{border-left:0;padding-left:0}
-.stats b{display:block;font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.1}.stats span{font-size:13.5px;color:var(--mut)}
-.ch{padding:64px 0 8px;border-top:0}.ch+.ch{border-top:1px solid var(--line)}
-.ch-h{display:grid;grid-template-columns:72px 1fr;gap:8px;margin-bottom:22px}.ch-h .num{font:600 15px var(--mono);color:var(--acc);padding-top:6px}
-.ch-h p{margin:6px 0 0;color:var(--mut);font-size:14.5px}
+.mt{display:flex;justify-content:space-between;gap:24px;padding:clamp(28px,4vw,44px) 0 0}.mt .r{text-align:right}
+.hero{padding:clamp(28px,4vw,44px) 0 clamp(28px,4vw,40px);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start}
+.leg{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:clamp(18px,2.4vw,28px)}
+.hero .say{padding-top:clamp(4px,1vw,12px)}.hero .say h2{margin-bottom:12px}.hero .by{margin:14px 0 0;font-size:15px;color:var(--ink2)}.hero .by b{font-weight:500;color:var(--ink)}
+.hero .cta{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.band{position:relative;max-width:1600px;margin:0 auto;overflow:hidden}.band img{width:100%;aspect-ratio:16/7;object-fit:cover;object-position:50% 46%}
+.band:before,.band:after{content:'';position:absolute;left:0;right:0;height:16%;z-index:1;pointer-events:none}.band:before{top:0;background:linear-gradient(#fff,rgba(255,255,255,0))}.band:after{bottom:0;background:linear-gradient(rgba(255,255,255,0),#fff)}
+.band .tag{position:absolute;left:50%;top:54%;z-index:2;display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:6px;background:#fff;box-shadow:0 0 0 1px var(--line);font:400 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.band .tag i{width:16px;height:16px;border-radius:50%;background:var(--acc);color:#fff;font:600 9.5px/16px var(--mono);font-style:normal;text-align:center;letter-spacing:0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats div{padding:16px 16px 14px;border-left:1px solid var(--line);min-width:0}.stats div:first-child{border-left:0;padding-left:0}
+.stats b{display:block;font-size:clamp(26px,3vw,34px);font-weight:500;letter-spacing:-.03em;line-height:1.1}.stats b small{font-size:.42em;color:var(--mut);margin-left:4px;letter-spacing:0;font-weight:500}
+.stats span{display:flex;align-items:center;gap:7px;margin-top:6px;font:400 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stats span:before{content:'';flex:none;width:6px;height:6px;border-radius:50%;background:#B5B5B8}.stats div:first-child span{color:var(--ink)}.stats div:first-child span:before{background:var(--acc)}
+.stats div:after{content:'';display:block;width:22px;height:2px;margin-top:9px;border-radius:2px;background:var(--amber)}
+.cards{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px;padding:16px 0 0}
+.card{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:18px 20px 18px}
+.card>header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px;font:400 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#6E6E72}.card>header span:last-child{color:#A7A7AB}
+.map .r{display:grid;grid-template-columns:30px 1fr;align-items:center;gap:10px;padding:5px 0}
+.map .r>span{font:400 11px var(--mono);letter-spacing:.08em;color:var(--mut)}.map .cells{display:flex;gap:6px;flex-wrap:wrap}
+.map .cells a,.map .cells i{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font:500 12px var(--mono);text-decoration:none;font-style:normal}
+.map .cells .xong{background:var(--ink);color:#fff}.map .cells .so-bo{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.map .cells .soan{color:#B5B5B8;box-shadow:inset 0 0 0 1px var(--line);background:#fff}
+.map .cells a:hover{transform:translateY(-1px)}.map .lg{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.dung ol{list-style:none;margin:0;padding:0;counter-reset:d}.dung li{display:grid;grid-template-columns:30px minmax(0,1fr);padding:9px 0;border-top:1px solid var(--line);counter-increment:d;font-size:14.5px;line-height:1.55;color:var(--ink2)}
+.dung li:first-child{border-top:0;padding-top:0}.dung li:before{content:counter(d,decimal-leading-zero);font:400 11px/2 var(--mono);color:var(--acc)}.dung li b{color:var(--ink);font-weight:500}
+.dung kbd{font:500 11.5px var(--mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 5px;background:#fff}
+.ch{padding:clamp(48px,6vw,72px) 0 8px;border-top:0}.ch+.ch{border-top:1px solid var(--line)}
+.ch-h{display:grid;grid-template-columns:72px 1fr;gap:8px;margin-bottom:18px}.ch-h .num{font:400 12px var(--mono);letter-spacing:.1em;color:var(--acc);padding-top:9px}
+.ch-h p{margin:6px 0 0;font:400 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
 .tiet{list-style:none;margin:0 0 0 72px;padding:0}
-.t{display:grid;grid-template-columns:176px minmax(0,1fr) auto;gap:24px;align-items:center;padding:20px 0;border-top:1px solid var(--line)}
+.t{display:grid;grid-template-columns:176px minmax(0,1fr) auto;gap:24px;align-items:center;padding:18px 0;border-top:1px solid var(--line)}
 .t:first-child{border-top:0}
-.t .th{aspect-ratio:3/2;border-radius:10px;overflow:hidden;background:var(--soft);display:block}
-.t .th img{width:100%;height:100%;object-fit:cover}.t .th.trong{display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--line);font:600 12px var(--mono);color:#A0A6B1}
-.t .k{font:500 12px var(--mono);color:var(--mut);letter-spacing:.02em}.t h3{margin:4px 0 6px}.t h3 a{text-decoration:none}.t h3 a:hover{text-decoration:underline}
-.t p{margin:0;color:var(--ink2);font-size:14.5px;line-height:1.55}.t .pt{margin-top:8px;font:500 12.5px/1.5 var(--mono);color:var(--mut)}
-.t .act{display:flex;flex-direction:column;align-items:flex-end;gap:10px}.t .act .b{display:flex;gap:8px}
-.cach{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.cach div{border:1px solid var(--line);border-radius:14px;padding:22px}
-.cach b{font:600 13px var(--mono);color:var(--acc)}.cach h3{margin:10px 0 8px}.cach p{margin:0;color:var(--ink2);font-size:14.5px}
-.cach kbd{font:600 12px var(--mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:1px 6px;background:#fff}
-.ng{display:grid;grid-template-columns:1fr 1fr;gap:48px}.ng ul{margin:0;padding:0;list-style:none}.ng li{padding:12px 0;border-top:1px solid var(--line);color:var(--ink2);font-size:15px}
-.ng li:first-child{border-top:0;padding-top:0}
-@media (max-width:980px){.hero{grid-template-columns:1fr;gap:40px;padding-top:48px}.t{grid-template-columns:120px minmax(0,1fr)}.t .act{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}
-.tiet{margin-left:0}.ch-h{grid-template-columns:52px 1fr}.cach{grid-template-columns:1fr}.ng{grid-template-columns:1fr;gap:28px}}
-@media (max-width:600px){.t .th{aspect-ratio:16/9}.stats{grid-template-columns:1fr 1fr}.stats div:nth-child(3){border-left:0;padding-left:0}.stats div:nth-child(n+3){border-top:1px solid var(--line)}
-.t{grid-template-columns:1fr;gap:14px}.t .th{max-width:100%}.t .act{flex-wrap:wrap;gap:10px}.map a,.map i{width:30px;height:30px}}
+.t .th{aspect-ratio:3/2;border-radius:10px;overflow:hidden;background:var(--soft);display:block;box-shadow:inset 0 0 0 1px var(--line)}
+.t .th img{width:100%;height:100%;object-fit:cover}.t .th.trong{display:grid;place-items:center;font:400 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#B5B5B8}
+.t .k{font:400 10.5px var(--mono);color:var(--mut);letter-spacing:.14em;text-transform:uppercase}.t h3{margin:5px 0 6px;font-size:18px}.t h3 a{text-decoration:none}.t h3 a:hover{text-decoration:underline}
+.t p{margin:0;color:var(--ink2);font-size:14.5px;line-height:1.55}.t .pt{margin-top:8px;font:400 11.5px/1.5 var(--mono);color:var(--mut)}
+.t .act{display:flex;flex-direction:column;align-items:flex-end;gap:12px}.t .act .b{display:flex;gap:8px}
+.t.soan h3,.t.soan p{color:#A7A7AB}
+.ng{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,2vw,26px) clamp(20px,2.4vw,34px)}.ng>div{display:grid;grid-template-columns:30px minmax(0,1fr)}
+.ng .n{font:400 11.5px/1.9 var(--mono);color:var(--acc)}.ng p{margin:0;font-size:14px;line-height:1.55;color:var(--ink2)}.ng p b{display:block;color:var(--ink);font-weight:500;font-size:15.5px;margin-bottom:4px}
+@media (max-width:1100px){.ng{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){.hero{grid-template-columns:1fr;gap:28px}.cards{grid-template-columns:1fr}.t{grid-template-columns:120px minmax(0,1fr)}.t .act{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}
+.tiet{margin-left:0}.ch-h{grid-template-columns:52px 1fr}.band img{aspect-ratio:16/9}}
+@media (max-width:640px){.mt .r{display:none}.band img{aspect-ratio:5/4}.band .tag{left:24%}.stats{grid-template-columns:1fr 1fr}.stats div:nth-child(3){border-left:0;padding-left:0}.stats div:nth-child(n+3){border-top:1px solid var(--line)}
+.t{grid-template-columns:1fr;gap:14px}.t .th{aspect-ratio:16/9}.t .act{flex-wrap:wrap;gap:10px}.map .cells a,.map .cells i{width:30px;height:30px}.ng{grid-template-columns:1fr}}
 """
 
 
@@ -213,53 +225,53 @@ def trang_muc_luc(chuong):
             ten = f'<a href="{t["slug"]}/">{E(t["ten"])}</a>' if t['slug'] else E(t['ten'])
             b3d = f'<a class="btn sm pri" href="{t["slug"]}/">{ICON["play"]}Bài 3D</a>' if t['slug'] else '<span class="btn sm" aria-disabled="true">Bài 3D</span>'
             ga = f'<a class="btn sm" href="{t["slug"]}/giao-an/">{ICON["doc"]}Giáo án</a>' if t['ga'] else '<span class="btn sm" aria-disabled="true">Giáo án</span>'
-            items.append(f'''<li class="t" id="tiet-{t["n"]}">{th}
+            items.append(f'''<li class="t {st}" id="tiet-{t["n"]}">{th}
   <div><div class="k">Tiết {t["n"]:02d} · mục {E(t["muc"])} · tr. {E(t["trang"])}</div><h3>{ten}</h3><p>{E(t["nd"])}</p>
   <div class="pt">PT {E(t["pt"])} · Bài tập {E(t["bt"])}</div></div>
   <div class="act"><span class="chip {st}">{nhan}</span><div class="b">{b3d}{ga}</div></div></li>''')
         sections.append(f'''<section class="ch" id="chuong-{c["so"]}"><div class="wrap">
-  <div class="ch-h"><span class="num">{int(c["so"]):02d}</span><div><h2>{E(c["ten"])}</h2><p>{len(c["tiet"])} tiết · tiết {c["tiet"][0]["n"]}–{c["tiet"][-1]["n"]}</p></div></div>
+  <div class="ch-h"><span class="num">C{int(c["so"]):02d}</span><div><h2>{E(c["ten"])}</h2><p>{len(c["tiet"])} tiết · tiết {c["tiet"][0]["n"]}–{c["tiet"][-1]["n"]}</p></div></div>
   <ol class="tiet">{"".join(items)}</ol>
 </div></section>''')
-    ng = ''.join(f'<li>{E(x)}</li>' for x in DM.KIEM)
+    ghi = [('Lời giảng viết mới', f'Theo giáo trình {TEN} ({MA}) của {TAC_GIA}; không chép văn bản hay hình của sách.'),
+           ('Giữ số hiệu công thức', 'Công thức đánh đúng số hiệu của giáo trình để sinh viên tra lại.'),
+           ('Hoàn chỉnh và sơ bộ', 'Tiết hoàn chỉnh có bài 3D 13 bước và giáo án; tiết sơ bộ có bài 3D, lời giảng đang viết lại theo chuẩn tiết 45 phút.'),
+           ('Không cần cài đặt', 'Chạy trên Chrome hoặc Edge bản mới, máy chiếu hay máy tính bảng.')]
+    ghi += list(zip(['Mô phỏng hàng đợi', 'Monte Carlo độ sẵn sàng', 'Đáp số tính lại', 'Mỗi số có nguồn'] + ['Kiểm bằng máy'] * 9, DM.KIEM))
+    ng = ''.join(f'<div><span class="n">{k + 1:02d}</span><p><b>{E(a)}</b>{E(b)}</p></div>' for k, (a, b) in enumerate(ghi))
     desc = f'Học phần {TEN} ({MA}): 22 tiết bài giảng 3D tương tác và giáo án 45 phút, theo giáo trình của {TAC_GIA}.'
     return f'''{dau_trang('', f'{TEN} · {MA}', desc, CSS_MUC)}
 <body>
 {thanh('', right='<nav class="links"><a href="#chuong-1">Tiết học</a><a href="#cach-dung">Cách dùng</a><a href="#noi-dung">Về nội dung</a></nav>')}
 <main>
-<div class="wrap"><div class="hero">
-  <div>
-    <div class="eye">{MA} · Học phần đại học · 22 tiết</div>
-    <h1>{TEN}</h1>
-    <p class="lead">Bài giảng 3D tương tác và giáo án 45 phút cho từng tiết học. Mỗi con số trên màn hình được tính từ mô hình thật: hàng đợi, độ sẵn sàng, ngân sách quang, vô tuyến.</p>
+<div class="wrap"><div class="mt"><div class="eye">{MA}<br>Học phần đại học · 22 tiết · 6 chương</div><div class="eye r">Theo giáo trình của {TAC_GIA}<br>Bài 3D chạy trực tiếp · giáo án 45 phút</div></div>
+<div class="hero">
+  <div><h1>{TEN}</h1>
+    <div class="leg"><span class="chip xong">Hoàn chỉnh · {xong}</span><span class="chip so-bo">Bản sơ bộ · {co_bai - xong}</span><span class="chip soan">Đang soạn · {len(tat) - co_bai}</span></div></div>
+  <div class="say"><h2>Mỗi tiết một cảnh 3D, mỗi con số tính từ mô hình</h2>
+    <p class="lead">Bài giảng 3D tương tác và giáo án 45 phút cho từng tiết. Hàng đợi, độ sẵn sàng, ngân sách quang, vô tuyến: số trên màn hình chạy từ chính công thức của giáo trình, đổi tham số là số đổi theo.</p>
     <p class="by">Theo giáo trình của <b>{TAC_GIA}</b></p>
-    <div class="cta"><a class="btn pri" href="#chuong-1">{ICON["arrow"]}Xem 22 tiết</a><a class="btn" href="{tat[0]["slug"]}/">{ICON["play"]}Mở tiết 1</a></div>
-  </div>
-  <div class="map" aria-label="Tiến độ 22 tiết theo chương">
+    <div class="cta"><a class="btn pri" href="{tat[0]["slug"]}/">{ICON["play"]}Mở tiết 1</a><a class="btn" href="#chuong-1">{ICON["arrow"]}Xem 22 tiết</a></div></div>
+</div></div>
+<a class="band" href="{tat[0]["slug"]}/" aria-label="Mở tiết 1: {E(tat[0]["ten"])}"><img src="anh/{tat[0]["id"]}.webp" alt="Cảnh 3D tiết 1: {E(tat[0]["ten"])}"><span class="tag"><i>1</i>Tiết 1 · {E(tat[0]["ten"])}</span></a>
+<div class="wrap">
+<div class="stats"><div><b>22<small>tiết</small></b><span>Mỗi tiết 45 phút</span></div><div><b>6<small>chương</small></b><span>Theo giáo trình</span></div><div><b>146</b><span>Công thức giữ số hiệu</span></div><div><b>74</b><span>Câu hỏi cuối chương</span></div></div>
+<div class="cards">
+  <div class="card map" aria-label="Tiến độ 22 tiết theo chương"><header><span>Tiến độ 22 tiết</span><span>01</span></header>
     {"".join(cells)}
-    <div class="lg"><span><i style="background:var(--ink)"></i>Hoàn chỉnh · {xong}</span><span><i style="box-shadow:inset 0 0 0 1.5px var(--ink)"></i>Bản sơ bộ · {co_bai - xong}</span><span><i style="background:var(--soft);box-shadow:inset 0 0 0 1px var(--line)"></i>Đang soạn · {len(tat) - co_bai}</span></div>
+    <div class="lg"><span class="chip xong">Hoàn chỉnh · {xong}</span><span class="chip so-bo">Sơ bộ · {co_bai - xong}</span><span class="chip soan">Đang soạn · {len(tat) - co_bai}</span></div>
+  </div>
+  <div class="card dung" id="cach-dung"><header><span>Một tiết trên lớp</span><span>02</span></header>
+    <ol><li><span><b>Mở bài 3D trên máy chiếu.</b> Bài tự chạy như một bài giảng; bấm vào cảnh để tự điều khiển, <kbd>←</kbd> <kbd>→</kbd> chuyển bước, <kbd>F</kbd> toàn màn hình.</span></li>
+      <li><span><b>Bật màn hình giảng viên.</b> Nút Lên lớp mở cửa sổ riêng: phút dự kiến, việc của giảng viên và sinh viên ở từng bước, đồng hồ tiết học.</span></li>
+      <li><span><b>In giáo án và phiếu.</b> Mục tiêu, diễn tiến theo phút, ví dụ giải mẫu, phiếu A4 lấy câu hỏi cuối chương, đáp án, kiểm tra nhanh.</span></li></ol>
   </div>
 </div>
-<div class="stats"><div><b>22</b><span>tiết, mỗi tiết 45 phút</span></div><div><b>6</b><span>chương</span></div><div><b>146</b><span>công thức giữ đúng số hiệu</span></div><div><b>74</b><span>câu hỏi cuối chương</span></div></div>
 </div>
 {"".join(sections)}
-<section id="cach-dung"><div class="wrap">
-  <div class="sh"><div><div class="eye">Cách dùng</div><h2 style="margin-top:10px">Một tiết học trên lớp</h2><p>Mỗi tiết hoàn chỉnh gồm bài 3D có lời giảng từng bước và giáo án in được, cùng tên bước và thứ tự.</p></div></div>
-  <div class="cach">
-    <div><b>01</b><h3>Mở bài 3D trên máy chiếu</h3><p>Bài tự chạy như một bài giảng. Bấm vào cảnh để tự điều khiển; <kbd>←</kbd> <kbd>→</kbd> chuyển bước, <kbd>B</kbd> màn đen, <kbd>F</kbd> toàn màn hình.</p></div>
-    <div><b>02</b><h3>Bật màn hình giảng viên</h3><p>Nút <b>Lên lớp</b> mở cửa sổ riêng cho máy giảng viên: phút dự kiến, việc của giảng viên và sinh viên ở từng bước, đồng hồ tiết học.</p></div>
-    <div><b>03</b><h3>In giáo án và phiếu</h3><p>Giáo án có mục tiêu, diễn tiến theo phút, ví dụ giải mẫu, phiếu bài tập A4 lấy câu hỏi cuối chương, đáp án và câu kiểm tra nhanh.</p></div>
-  </div>
-</div></section>
 <section id="noi-dung"><div class="wrap">
-  <div class="sh"><div><div class="eye">Về nội dung</div><h2 style="margin-top:10px">Bám giáo trình, kiểm bằng máy</h2></div></div>
-  <div class="ng">
-    <ul>{ng}</ul>
-    <ul><li>Lời giảng viết mới theo giáo trình {TEN} ({MA}) của {TAC_GIA}; không chép văn bản hay hình của sách.</li>
-      <li>Công thức giữ đúng số hiệu của giáo trình để sinh viên tra lại.</li>
-      <li>Tiết <b>hoàn chỉnh</b> có bài 3D 13 bước và giáo án. Tiết <b>sơ bộ</b> có bài 3D, lời giảng đang được viết lại theo chuẩn tiết 45 phút.</li>
-      <li>Chạy trên trình duyệt Chrome hoặc Edge bản mới, không cần cài đặt.</li></ul>
-  </div>
+  <div class="sh"><div><div class="eye">Về nội dung</div><h2 style="margin-top:8px">Bám giáo trình, kiểm bằng máy</h2></div></div>
+  <div class="ng">{ng}</div>
 </div></section>
 </main>
 {chan()}
@@ -270,25 +282,30 @@ def trang_muc_luc(chuong):
 
 # ---------------------------------------------------------------- trang giáo án
 CSS_GA = r"""
-.gh{padding:56px 0 48px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;align-items:start}
-.gh h1{font-size:clamp(30px,4vw,46px);margin:14px 0 16px}
-.meta{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.meta div{padding:14px 14px 14px 0;font-size:14px;line-height:1.45}.meta div+div{padding-left:14px;border-left:1px solid var(--line)}
-.meta b{display:block;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
-.cov{position:relative;border-radius:14px;overflow:hidden;background:var(--soft);aspect-ratio:3/2}.cov img{width:100%;height:100%;object-fit:cover}
-.cov .btn{position:absolute;left:16px;bottom:16px}
-.lay{display:grid;grid-template-columns:200px minmax(0,1fr);gap:56px;padding-bottom:24px}
+.mt{display:flex;justify-content:space-between;gap:24px;padding:clamp(28px,4vw,44px) 0 0}.mt .r{text-align:right}
+.gh{padding:clamp(24px,3.6vw,40px) 0 clamp(20px,3vw,32px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start}
+.gh h1{font-size:clamp(36px,5vw,64px)}.gh .say .k{margin-bottom:10px}.gh .say .cta{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.meta{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.meta div{padding:16px 14px 14px;font-size:clamp(17px,1.8vw,22px);font-weight:500;letter-spacing:-.02em;line-height:1.25;border-left:1px solid var(--line);min-width:0}.meta div:first-child{border-left:0;padding-left:0}
+.meta b{display:flex;align-items:center;gap:7px;font:400 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-top:6px;order:2}.meta div{display:flex;flex-direction:column}
+.meta b:before{content:'';width:6px;height:6px;border-radius:50%;background:#B5B5B8}.meta div:first-child b{color:var(--ink)}.meta div:first-child b:before{background:var(--acc)}
+.meta div:after{content:'';order:3;display:block;width:22px;height:2px;margin-top:9px;border-radius:2px;background:var(--amber)}
+.cov{position:relative;max-width:1600px;margin:0 auto;overflow:hidden;display:block}.cov img{width:100%;aspect-ratio:16/6.4;object-fit:cover}
+.cov:before,.cov:after{content:'';position:absolute;left:0;right:0;height:16%;z-index:1;pointer-events:none}.cov:before{top:0;background:linear-gradient(#fff,rgba(255,255,255,0))}.cov:after{bottom:0;background:linear-gradient(rgba(255,255,255,0),#fff)}
+.cov .tag{position:absolute;left:50%;top:52%;z-index:2;display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:6px;background:#fff;box-shadow:0 0 0 1px var(--line);font:400 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.cov .tag i{width:16px;height:16px;border-radius:50%;background:var(--acc);color:#fff;font:600 9.5px/16px var(--mono);font-style:normal;text-align:center;letter-spacing:0}
+.lay{display:grid;grid-template-columns:200px minmax(0,1fr);gap:56px;padding:clamp(28px,4vw,48px) clamp(16px,5vw,56px) 24px}
 .toc{position:sticky;top:92px;align-self:start;display:flex;flex-direction:column;gap:2px;font-size:14px}
-.toc a{padding:7px 12px;border-radius:8px;text-decoration:none;color:var(--mut);border-left:2px solid transparent}.toc a:hover{color:var(--ink);background:var(--soft)}
+.toc a{padding:7px 0 7px 14px;text-decoration:none;color:var(--mut);border-left:1px solid var(--line)}.toc a:before{content:attr(data-n);font:400 10.5px var(--mono);color:#B5B5B8;margin-right:10px}.toc a:hover{color:var(--ink);background:var(--soft)}
 .blk{padding:44px 0;border-top:1px solid var(--line)}.blk:first-child{border-top:0;padding-top:8px}.blk>h2{margin-bottom:6px}.blk>.sub{margin:0 0 22px;color:var(--mut);font-size:15px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:40px}.g2 h3{margin-bottom:10px}
 ul.li{margin:0;padding:0;list-style:none}ul.li li{position:relative;padding:8px 0 8px 22px;border-top:1px solid var(--line);color:var(--ink2);font-size:15px}
-ul.li li:first-child{border-top:0}ul.li li:before{content:'';position:absolute;left:2px;top:17px;width:8px;height:8px;border-radius:2px;background:var(--acc)}
-.tl{display:flex;gap:3px;margin:0 0 28px;height:56px}.tl a{display:flex;flex-direction:column;justify-content:center;padding:0 12px;border-radius:8px;text-decoration:none;min-width:0;overflow:hidden;background:var(--soft)}
+ul.li li:first-child{border-top:0}ul.li li:before{content:'';position:absolute;left:2px;top:18px;width:6px;height:6px;border-radius:50%;background:var(--amber)}
+.tl{display:flex;gap:3px;margin:0 0 28px;height:56px}.tl a{display:flex;flex-direction:column;justify-content:center;padding:0 12px;border-radius:8px;text-decoration:none;min-width:0;overflow:hidden;background:var(--soft);box-shadow:inset 0 0 0 1px var(--line)}
 .tl a:nth-child(even){background:var(--soft2)}.tl a:hover{background:var(--acc-soft)}
 .tl b{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tl span{font:500 11.5px var(--mono);color:var(--mut)}
-.hd{margin:0 0 28px}.hd>header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1.5px solid var(--ink)}
-.hd>header .n{font:600 13px var(--mono);color:var(--acc)}.hd>header .m{margin-left:auto;font:500 13px var(--mono);color:var(--mut)}
+.hd{margin:0 0 28px}.hd>header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--ink)}
+.hd>header .n{font:400 12px var(--mono);color:var(--acc)}.hd>header .m{margin-left:auto;font:400 12px var(--mono);color:var(--mut)}
 .hd>p{margin:12px 0 4px;color:var(--ink2);font-size:15px}
 .row{display:grid;grid-template-columns:84px minmax(0,.9fr) minmax(0,1.5fr) minmax(0,1fr);gap:20px;padding:16px 0;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.6}
 .row .m{font:600 13px var(--mono)}.row .m span{display:block;font-weight:500;color:var(--mut);font-size:11.5px}
@@ -296,17 +313,17 @@ ul.li li:first-child{border-top:0}ul.li li:before{content:'';position:absolute;l
 .row .k{display:none;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--mut);margin-bottom:2px}
 .row .sv{color:var(--ink2)}.th{display:grid;grid-template-columns:84px minmax(0,.9fr) minmax(0,1.5fr) minmax(0,1fr);gap:20px;padding:14px 0 8px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--mut);border-bottom:1px solid var(--line)}
 .kq{margin-top:12px;font-size:14px;color:var(--ink2)}.kq b{color:var(--ink)}
-.vd{padding:22px 0;border-top:1px solid var(--line)}.vd:first-child{border-top:0;padding-top:0}.vd h3{margin-bottom:8px}.vd h3 span{font:600 13px var(--mono);color:var(--acc);margin-right:10px}
-.vd .de{margin:0 0 12px;color:var(--ink2)}.vd .giai{background:var(--soft);border-radius:10px;padding:14px 18px;font-size:15px}
+.vd{padding:22px 0;border-top:1px solid var(--line)}.vd:first-child{border-top:0;padding-top:0}.vd h3{margin-bottom:8px}.vd h3 span{font:400 12px var(--mono);color:var(--acc);margin-right:10px}
+.vd .de{margin:0 0 12px;color:var(--ink2)}.vd .giai{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px 18px;font-size:15px}
 .vd .giai:before{content:'Lời giải';display:block;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
-.ans{display:grid;grid-template-columns:40px 1fr;margin:0}.ans dt{font:600 14px var(--mono);color:var(--acc);padding:14px 0;border-top:1px solid var(--line)}
+.ans{display:grid;grid-template-columns:40px 1fr;margin:0}.ans dt{font:400 13px var(--mono);color:var(--acc);padding:14px 0;border-top:1px solid var(--line)}
 .ans dd{margin:0;padding:14px 0;border-top:1px solid var(--line);color:var(--ink2);font-size:15px}.ans dt:first-of-type,.ans dd:first-of-type{border-top:0;padding-top:0}
 .qz{padding:16px 0;border-top:1px solid var(--line)}.qz:first-child{border-top:0;padding-top:0}.qz p{margin:0 0 8px;font-weight:600}
 .qz ol{margin:0 0 8px;padding-left:22px;color:var(--ink2)}.qz details{font-size:14.5px;color:var(--ink2)}.qz summary{cursor:pointer;color:var(--acc);font-weight:600;font-size:13.5px}
 .src li{font-size:14px}
 .nav2{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:40px 0 64px;border-top:1px solid var(--line)}
-.nav2 a{border:1px solid var(--line);border-radius:12px;padding:18px 20px;text-decoration:none}.nav2 a:hover{border-color:#C6CBD3}.nav2 a.r{text-align:right}
-.nav2 small{display:block;font:500 12px var(--mono);color:var(--mut);margin-bottom:4px}.nav2 b{font-weight:600}
+.nav2 a{border:1px solid var(--line);border-radius:14px;padding:18px 20px;text-decoration:none;background:var(--soft)}.nav2 a:hover{border-color:#C9C9C6}.nav2 a.r{text-align:right}
+.nav2 small{display:block;font:400 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}.nav2 b{font-weight:500}
 /* phiếu A4 */
 .sheet-wrap{overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--soft);padding:20px}
 .sheet-zoom{width:210mm;transform-origin:0 0;transform:scale(var(--z,1));margin-bottom:calc((var(--z,1) - 1) * 297mm)}
@@ -317,11 +334,11 @@ ul.li li:first-child{border-top:0}ul.li li:before{content:'';position:absolute;l
 .paper .q{margin:0 0 4mm}.paper .q .d{display:flex;gap:2mm}.paper .q .s{color:#6B7280;font-size:8.5pt}
 .paper .ln{border-bottom:.5pt solid #C9CED6;height:7.4mm}
 .paper footer{display:flex;justify-content:space-between;margin-top:6mm;padding-top:3mm;border-top:.6pt solid #C9CED6;font-size:8pt;color:#6B7280}
-@media (max-width:980px){.gh{grid-template-columns:1fr}.lay{grid-template-columns:1fr}.toc{display:none}.meta{grid-template-columns:repeat(2,minmax(0,1fr))}.meta div:nth-child(odd){border-left:0;padding-left:0}
+@media (max-width:980px){.gh{grid-template-columns:1fr;gap:24px}.lay{grid-template-columns:1fr}.toc{display:none}.cov img{aspect-ratio:16/9}.meta{grid-template-columns:repeat(2,minmax(0,1fr))}.meta div:nth-child(odd){border-left:0;padding-left:0}
 .meta div{border-top:1px solid var(--line)}.meta div:nth-child(-n+2){border-top:0}.g2{grid-template-columns:1fr;gap:24px}
 .th{display:none}.row{grid-template-columns:1fr;gap:6px}.row .k{display:block;margin-top:6px}.tl{height:auto;flex-wrap:wrap}.tl a{flex:1 1 40%!important;padding:10px 12px}}
-@media (max-width:600px){.nav2{grid-template-columns:1fr}.top .btn .l{display:none}.top .btn{padding:0 11px}}
-@media print{@page{size:A4;margin:14mm}body{font-size:10.5pt}.top,.toc,.cov .btn,.noprint,.nav2,.foot{display:none!important}.gh{padding:0 0 6mm;grid-template-columns:1fr}.cov{display:none}
+@media (max-width:640px){.mt .r{display:none}.cov img{aspect-ratio:5/4}.cov .tag{left:20%}.nav2{grid-template-columns:1fr}.top .btn .l{display:none}.top .btn{padding:0 11px}}
+@media print{@page{size:A4;margin:14mm}body{font-size:10.5pt}.top,.toc,.noprint,.nav2,.foot,.mt{display:none!important}.gh{padding:0 0 6mm;grid-template-columns:1fr}.cov{display:none!important}
 .lay{display:block}.blk{padding:6mm 0;break-inside:auto}.row,.vd,.qz{break-inside:avoid}.qz details{display:block}.qz details>*{display:block}
 #phieu{break-before:page}.sheet-wrap{border:0;padding:0;background:none}.sheet-zoom{transform:none;margin:0}.paper{box-shadow:none;padding:0;min-height:auto;width:auto}
 body.in-phieu main>*:not(.lay),body.in-phieu .lay>*:not(.ct),body.in-phieu .ct>*:not(#phieu),body.in-phieu #phieu>*:not(.sheet-wrap){display:none!important}body.in-phieu #phieu{break-before:auto;padding:0;border:0}}
@@ -358,7 +375,7 @@ def trang_giao_an(g, t, truoc, sau):
     da = ''.join(f'<dt>{E(x["so"])}</dt><dd>{x["giai"]}</dd>' for x in g['dap_an'])
     qz = ''.join(f'<div class="qz"><p>{k + 1}. {E(q["q"])}</p><ol type="A">{"".join(f"<li>{E(o)}</li>" for o in q["o"])}</ol><details><summary>Đáp án</summary><b>{"ABCDEF"[q["a"]]}.</b> {q["giai"]}</details></div>'
                  for k, q in enumerate(g['kiem_tra']))
-    meta = ''.join(f'<div><b>{a}</b>{E(b)}</div>' for a, b in [('Chương', g['chuong'].split('·')[0].strip()), ('Mục', g['muc']), ('Trang', g['trang']), ('Phương trình', g['pt']), ('Bài tập', g['bt_sach'])])
+    meta = ''.join(f'<div><b>{a}</b><span>{E(b)}</span></div>' for a, b in [('Chương', g['chuong'].split('·')[0].strip()), ('Mục', g['muc']), ('Trang', g['trang']), ('Phương trình', g['pt']), ('Bài tập', g['bt_sach'])])
     nav = ''
     if truoc or sau:
         a = (f'<a href="../../{truoc["slug"]}/giao-an/"><small>← Tiết {truoc["n"]}</small><b>{E(truoc["ga"]["ten_tiet"])}</b></a>' if truoc else '<span></span>')
@@ -374,17 +391,16 @@ def trang_giao_an(g, t, truoc, sau):
 <body>
 {thanh(up, f'Tiết {g["tiet"]} · Giáo án', right)}
 <main>
-<div class="wrap"><div class="gh">
-  <div>
-    <div class="eye">Tiết {g["tiet"]:02d} / 22 · Giáo án 45 phút</div>
-    <h1>{E(g["ten_tiet"])}</h1>
-    <p class="lead">{E(g["dan"])}</p>
-    <div class="meta">{meta}</div>
-  </div>
-  <div class="cov"><img src="{up}anh/{E(g["id"])}.webp" alt="Cảnh 3D của bài {E(g["ten_bai"])}"><a class="btn pri" href="../">{ICON["play"]}Mở bài 3D: {E(g["ten_bai"])}</a></div>
+<div class="wrap"><div class="mt"><div class="eye">Tiết {g["tiet"]:02d} / 22<br>{MA} · Giáo án 45 phút</div><div class="eye r">{E(g["chuong"].split("·")[0].strip())}<br>{nb} bước trên màn chiếu</div></div>
+<div class="gh">
+  <div><h1>{E(g["ten_tiet"])}</h1></div>
+  <div class="say"><div class="eye k">Dùng cùng bài 3D</div><p class="lead">{E(g["dan"])}</p>
+    <div class="cta noprint"><a class="btn pri" href="../">{ICON["play"]}Mở bài 3D</a><a class="btn" href="#dien-tien">{ICON["arrow"]}Diễn tiến 45 phút</a></div></div>
 </div></div>
-<div class="wrap lay">
-  <nav class="toc" aria-label="Các phần"><a href="#muc-tieu">Mục tiêu</a><a href="#dien-tien">Diễn tiến 45 phút</a><a href="#vi-du">Ví dụ giải mẫu</a><a href="#phieu">Phiếu bài tập</a><a href="#dap-an">Đáp án</a><a href="#kiem-tra">Kiểm tra nhanh</a><a href="#tom-tat">Tóm tắt, nguồn</a></nav>
+<a class="cov noprint" href="../" aria-label="Mở bài 3D: {E(g["ten_bai"])}"><img src="{up}anh/{E(g["id"])}.webp" alt="Cảnh 3D của bài {E(g["ten_bai"])}"><span class="tag"><i>{g["tiet"]}</i>{E(g["ten_bai"])}</span></a>
+<div class="wrap"><div class="meta">{meta}</div></div>
+<div class="lay" style="max-width:1180px;margin:0 auto">
+  <nav class="toc" aria-label="Các phần"><a href="#muc-tieu" data-n="01">Mục tiêu</a><a href="#dien-tien" data-n="02">Diễn tiến 45 phút</a><a href="#vi-du" data-n="03">Ví dụ giải mẫu</a><a href="#phieu" data-n="04">Phiếu bài tập</a><a href="#dap-an" data-n="05">Đáp án</a><a href="#kiem-tra" data-n="06">Kiểm tra nhanh</a><a href="#tom-tat" data-n="07">Tóm tắt, nguồn</a></nav>
   <div class="ct">
     <div class="blk" id="muc-tieu"><h2>Mục tiêu và chuẩn bị</h2><p class="sub">Dùng cùng bài 3D <a href="../">{E(g["ten_bai"])}</a>; nút Lên lớp trong bài mở màn hình giảng viên với phút và việc từng bước.</p>
       <div class="g2"><div><h3>Sau tiết học, sinh viên có thể</h3><ul class="li">{"".join(f"<li>{E(x)}</li>" for x in g["muc_tieu"])}</ul></div>

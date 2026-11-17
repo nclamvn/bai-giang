@@ -14,7 +14,7 @@
 <meta name="description" content="Học phần Thiết kế và hiệu năng mạng (đại học) thành 22 tiết bài giảng 3D có giáo án 45 phút: độ trễ, hàng đợi, yêu cầu, thiết kế logic, thiết kế vật lý, kiểm thử và mạng 5G.">
 <link rel="stylesheet" href="../design/house.css"><link rel="icon" type="image/png" sizes="32x32" href="../design/logo/favicon-32.png"><link rel="apple-touch-icon" href="../design/logo/apple-touch-icon.png">
 <style>
-:root{--bg:var(--bg-page);--paper:transparent;--ink:var(--bg-ink);--mute:var(--bg-ink3);--line:var(--bg-hair);--or:#e3562a}
+:root{--bg:var(--bg-page);--paper:var(--bg-card);--ink:var(--bg-ink);--mute:var(--bg-ink3);--line:var(--bg-line);--or:var(--bg-sig)}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--bg-font,system-ui,sans-serif);-webkit-font-smoothing:antialiased;
 }
@@ -33,24 +33,24 @@ a{color:inherit}
 .how ol{margin:8px 0 0;padding-left:20px}.how li{margin:4px 0}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 28px}
 .card{display:flex;flex-direction:column}
-.card .img{display:block;position:relative;aspect-ratio:16/9;background:#E4DCCB;overflow:hidden;border-radius:14px}
+.card .img{display:block;position:relative;aspect-ratio:16/9;background:var(--bg-card);overflow:hidden;border-radius:14px;box-shadow:inset 0 0 0 1px var(--bg-line)}
 .card .img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
 .card .img:hover img{transform:scale(1.03)}
-.card .img b{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.94);color:#15171C;font:600 13px var(--bg-mono,"JetBrains Mono",monospace);letter-spacing:.5px;padding:5px 10px;border-radius:8px;box-shadow:0 1px 3px rgba(16,24,40,.12)}
+.card .img b{position:absolute;left:12px;top:12px;background:#fff;color:var(--bg-ink);font:500 10.5px var(--bg-mono);letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:6px;box-shadow:0 0 0 1px var(--bg-line)}
 .card .body{padding:16px 2px 0;display:flex;flex-direction:column;gap:10px;flex:1}
-.card h2{margin:0;font:400 26px/1.2 var(--bg-serif);letter-spacing:-.012em}
-.card h2 small{display:block;font:600 13px var(--bg-font);color:var(--bg-ink3);margin-bottom:4px}
+.card h2{margin:0;font:500 22px/1.25 var(--bg-font);letter-spacing:-.02em}
+.card h2 small{display:block;font:500 10.5px/1.6 var(--bg-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--bg-mut);margin-bottom:6px}
 .card p{margin:0}
 .card ul{margin:0;padding-left:18px}.card li{margin:2px 0}
-.nums{font:13px/1.6 "JetBrains Mono",monospace;color:var(--bg-ink2);background:#f3f4f6;border-radius:8px;padding:8px 12px}
+.nums{font:12.5px/1.6 var(--bg-mono);color:var(--bg-ink2);background:var(--bg-card);border:1px solid var(--bg-line);border-radius:10px;padding:8px 12px}
 details{border-top:1px solid var(--line);padding-top:8px}
 summary{cursor:pointer;font-weight:600;font-size:14px}
 details ol{margin:8px 0 0;padding-left:20px;font-size:13.5px}details li{margin:3px 0}
 .note{font-size:13px;color:var(--bg-ink3)}
 .go{margin-top:auto;display:inline-flex;align-self:flex-start;align-items:center;gap:8px;background:var(--ink);color:#fff;text-decoration:none;font:700 13px "JetBrains Mono",monospace;letter-spacing:1.5px;padding:10px 16px;border-radius:4px}
 .go:hover{background:var(--or)}
-h3.sec{font:700 20px var(--bg-font);letter-spacing:-.01em;margin:40px 0 12px;display:flex;align-items:center;gap:10px}
-h3.sec:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ink)}
+h3.sec{font:500 10.5px var(--bg-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--bg-mut);margin:40px 0 14px;display:flex;align-items:center;gap:8px}
+h3.sec:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--bg-sig)}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 .more{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 .more a{display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--ink);box-shadow:0 1px 2px rgba(16,24,40,.04);transition:box-shadow .3s}

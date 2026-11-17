@@ -59,17 +59,17 @@ FEATURED = [
 CSS = (ROOT / 'tools/trang-chinh.css').read_text(encoding='utf-8')
 LIB_TPL = (ROOT / 'tools/thu-vien.template.html').read_text(encoding='utf-8')
 N_SHOWN = 8  # số bài hiện sẵn trong mục lục; các bài sau mở bằng nút "Xem cả … bài"
-HERO = 'than-kinh'  # bìa của bài đứng làm hình lớn duy nhất ở màn đầu
-HERO_ALT = 'Neuron phát sáng với bao myelin chia đốt và chuỳ synapse trên nền tối'
+HERO = 'dong-co'  # bìa của bài đứng làm dải cảnh tràn ngang ở màn đầu (nền sáng, hợp ngôn ngữ trang tài liệu)
+HERO_ALT = 'Động cơ xăng 4 kì cắt dọc trên bàn thử: xi lanh, piston, trục khuỷu, ống nạp'
 HOME_CSS = (ROOT / 'tools/trang-chu.css').read_text(encoding='utf-8')
 N_LABS = 16  # số thí nghiệm hiện sẵn trên trang chính khi chưa chọn môn
 
 
 def hero():
-    """Hình lớn duy nhất của trang chủ: một bài, ảnh tràn khung, chú thích một dòng bên dưới."""
+    """Dải cảnh tràn ngang của màn đầu: ảnh một bài, mép trên dưới mờ vào nền, thẻ số đỏ mang tên bài."""
     href, cov, _, mon, lv, title, desc = next(f for f in FEATURED if f[1] == HERO)
-    return f'''<a class="feat" href="{href}" aria-label="{E(title)}, vào bài"><div class="im"><img src="__L_BASE__covers/{cov}.webp" alt="{E(HERO_ALT)}" fetchpriority="high" width="960" height="600"></div>
-    <div class="fc"><b>{E(title)}</b><span class="d">{E(desc)}</span><span class="k">{E(mon)} · {E(lv)}</span></div></a>'''
+    return f'''<a class="bg-band feat" href="{href}" aria-label="{E(title)}, vào bài"><img src="__L_BASE__covers/{cov}.webp" alt="{E(HERO_ALT)}" fetchpriority="high" width="960" height="640">
+  <span class="bg-tag"><i>1</i>{E(title)} · {E(mon)} {E(lv)}</span></a>'''
 
 
 def featured():

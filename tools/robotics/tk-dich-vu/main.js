@@ -146,7 +146,7 @@ const dvRows = DV.map((d, i) => {
 });
 ui.panel(28, 356, 300, 210, 'QUYẾT ĐỊNH THIẾT KẾ X_NET · 1.1', '02');
 const xSvg = ui.svg(42, 390, 272, 96);
-const slT = ui.slider('tang', 42, 496, 272, 'TẢI LỚP HỌC', {lw: 92, vw: 96});
+const slT = ui.slider('tang', 42, 496, 272, 'TẢI LỚP HỌC', {lw: 84, vw: 132});
 const xTxt = ui.text(42, 522, '', 'sm', NHO);
 ui.panel(28, 578, 300, 188, 'ĐÁNH ĐỔI J(x) · 1.2', '03');
 const jSvg = ui.svg(42, 612, 272, 110);

@@ -5,6 +5,7 @@
 import * as THREE from 'three';
 import {warmComposer} from './warm.js';
 import {sc} from './ui.js';
+import {makeDoc} from './doc.js';
 
 const D2R = Math.PI / 180;
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
@@ -120,10 +121,11 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
   const qp = new URLSearchParams(location.search).get('q');
   let tier = qp !== null ? Math.min(2, +qp) : light ? 2 : 0, scale = 1;
   // màn hẹp (điện thoại, máy tính bảng dựng đứng): cảnh 3D phủ màn hình, lời giảng thành thẻ đọc được, bảng số mở khi cần
-  let compact = false, full = false;
+  let compact = false, full = false, DOC = null;
   const wantCompact = () => !!window.BGShell || innerWidth < 900 || innerHeight < 500; // có vỏ: cảnh trước ở mọi cỡ màn
   const barH = () => (document.body.classList.contains('bgs-on') ? (document.querySelector('.bgs-bar')?.getBoundingClientRect().height || 0) : 0);
   const fit = () => {
+    if (DOC) { compact = false; document.body.classList.remove('cmp', 'full'); scale = DOC.fit(); st.resize(W, H, clamp((devicePixelRatio || 1) * scale, 0.75, TIERS[tier].pr)); return; }
     compact = wantCompact() && !full;
     document.body.classList.toggle('cmp', compact); document.body.classList.toggle('full', wantCompact() && full);
     if (compact) { scale = 1; app.style.transform = ''; st.resize(innerWidth, innerHeight, clamp(devicePixelRatio || 1, 0.75, Math.min(1.5, TIERS[tier].pr))); return; }
@@ -135,6 +137,12 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
   const applyTier = () => { const {pr, ...q} = TIERS[tier]; st.setQuality(q); fit(); };
   applyTier(); addEventListener('resize', fit);
   addEventListener('orientationchange', () => setTimeout(fit, 250));
+  // bản 15: trang tài liệu cuộn dọc (kit/doc.js) là mặc định; ?doc=0 về bố cục khung 1600 × 900
+  if (new URLSearchParams(location.search).get('doc') !== '0' && !window.NO_DOC) {
+    if (st.framing) Object.assign(st.framing, {k: window.DOC_K ?? 0.76, off: 0.3});
+    DOC = makeDoc({ui, app, captions, W, H, onStep: (i) => { takeOver(); classGo(i); }, onTour: () => { if (AP.on) takeOver(); else { classEnd(); startTour(); } }});
+    fit();
+  }
   const toStage = (cx, cy) => { const r = app.getBoundingClientRect(); return [(cx - r.left) / scale, (cy - r.top) / scale]; };
 
   // thẻ lời giảng trên màn hẹp
@@ -144,6 +152,7 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
     const q = (sel) => mCap.querySelector(sel);
     q('.k').firstChild.textContent = sc(c.k || ''); // chữ thường kiểu câu, giữ tên riêng có số (UR5e, TurtleBot3) và từ viết tắt q('.k').lastChild.textContent = `${i + 1}/${captions.length}`;
     q('.t').textContent = c.t; q('.b').innerHTML = c.b; q('.e').textContent = c.e || '';
+    DOC?.show(c, i);
   };
 
   // trạng thái
@@ -151,7 +160,7 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
   const off = {az: 0, el: 0, k: 1};
   const cam = {...views[view](0, sim)};
   let ring = {t: -9, x: 0, y: 0};
-  const pulse = (k) => { const s = ui.spots[k]; if (s) ring = {t: T, x: s[0], y: s[1]}; };
+  const pulse = (k) => { if (DOC) { DOC.flash(k); return; } const s = ui.spots[k]; if (s) ring = {t: T, x: s[0], y: s[1]}; };
   const setView = (v) => {
     if (!views[v]) return;
     view = v; viewAt0 = T; Object.assign(off, {az: 0, el: 0, k: 1});
@@ -229,14 +238,16 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
   for (const [k, b] of Object.entries(ui.btn)) b.addEventListener('click', () => { takeOver(); pulse(k); if (k.startsWith('v_')) setView(k.slice(2)); else sim.act(k); });
   for (const [k, s] of Object.entries(ui.sliders)) {
     const d = document.createElement('div'); d.className = 'hit';
-    Object.assign(d.style, {left: `${s.x - 8}px`, top: `${s.y - 11}px`, width: `${s.w + 16}px`, height: '22px'});
-    const move = (e) => { const [x] = toStage(e.clientX, e.clientY); sim.slide(k, clamp((x - s.x) / s.w, 0, 1)); lastInput = T; };
+    const host = DOC?.hostOf(s), ox = host ? host.ox : 0, oy = host ? host.oy : 0;
+    Object.assign(d.style, {left: `${s.x - 8 - ox}px`, top: `${s.y - 11 - oy}px`, width: `${s.w + 16}px`, height: '22px'});
+    const sx = (e) => (host ? (e.clientX - host.el.getBoundingClientRect().left) / host.s() + ox : toStage(e.clientX, e.clientY)[0]);
+    const move = (e) => { const x = sx(e); sim.slide(k, clamp((x - s.x) / s.w, 0, 1)); lastInput = T; };
     d.addEventListener('pointerdown', (e) => {
       takeOver(); d.setPointerCapture(e.pointerId);
       const up = () => { removeEventListener('pointermove', move); removeEventListener('pointerup', up); };
       addEventListener('pointermove', move); addEventListener('pointerup', up); move(e);
     });
-    ui.root.appendChild(d);
+    (host ? host.el : ui.root).appendChild(d);
   }
   const held = new Set();
   addEventListener('keydown', (e) => {
@@ -267,7 +278,7 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
   });
   const endDrag = (e) => { if (e) pts.delete(e.pointerId); if (!pts.size) { drag = null; canvas.classList.remove('drag'); } pinch = 0; };
   canvas.addEventListener('pointerup', endDrag); canvas.addEventListener('pointercancel', endDrag);
-  canvas.addEventListener('wheel', (e) => { e.preventDefault(); takeOver(); off.k = clamp(off.k * Math.exp(e.deltaY * 0.0012), 0.3, 3); }, {passive: false});
+  canvas.addEventListener('wheel', (e) => { if (DOC && !e.ctrlKey && !e.metaKey && document.fullscreenElement !== DOC.stage) return; e.preventDefault(); takeOver(); off.k = clamp(off.k * Math.exp(e.deltaY * 0.0012), 0.3, 3); }, {passive: false});
 
   // chế độ lên lớp (vỏ Sáng Ăn Khoai): mỗi lời giảng là một bước; nhảy tới bước i = tua nhanh chuyến tham quan tới đầu đoạn đó
   const capAt = []; for (const e of E) if (e.cap !== undefined && capAt[e.cap] === undefined) capAt[e.cap] = e.at;
@@ -344,7 +355,7 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
         }
       }
       const rk = Math.max(0, 1 - (T - ring.t) / 0.55);
-      cursor = {x: pos[0], y: pos[1], press, ring: rk, ringX: ring.x, ringY: ring.y};
+      cursor = DOC ? {x: -99, y: -99, press: false, ring: 0, ringX: 0, ringY: 0} : {x: pos[0], y: pos[1], press, ring: rk, ringX: ring.x, ringY: ring.y};
     } else {
       if (T - lastInput > idle && !CL.on && !FOL && !sim.busy?.()) startTour(); // đang soi chi tiết hay đang lắp ráp thì không tự chạy lại
       const rk = Math.max(0, 1 - (T - ring.t) / 0.55);
@@ -368,6 +379,7 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
     st.frame({...cf, az: cf.az * D2R, el: cf.el * D2R}, sim.shadowAt?.());
     sim.draw({T, view, since, auto: AP.on});
     ui.pointer(cursor);
+    if (DOC && DOC.tour !== AP.on) { DOC.tour = AP.on; DOC.setTour(AP.on); }
     if (tourChip.classList.contains('on') !== AP.on || !tourChip.firstChild) {
       tourChip.classList.toggle('on', AP.on);
       tourChip.innerHTML = AP.on ? '<i></i>Bài giảng đang tự chạy · bấm để tự điều khiển' : '▶ Chạy lại bài giảng';
@@ -389,7 +401,7 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
       id: location.pathname.split('/').filter(Boolean).pop() || 'robotics', title: document.title, subject: shell.subject || 'Robotics · đại học', variant: shell.variant || 'pho-thong', objectives: shell.objectives || [],
       steps: captions.map((c) => ({t: c.t, note: [c.k, strip(c.b), c.e].filter(Boolean).join('\n\n'), sr: strip(c.b), ask: c.ask || null})),
       go: classGo, end: classEnd,
-      panels: [{label: 'Bảng số', icon: 'chart', open: false, apply: (o) => { full = o; fit(); }}],
+      panels: DOC ? [] : [{label: 'Bảng số', icon: 'chart', open: false, apply: (o) => { full = o; fit(); }}],
       keys: Object.entries(keys).slice(0, 8).map(([k, a]) => [k.toUpperCase(), (ui.btn[a] ? cap1(ui.btn[a].textContent) : a)]),
       credit: shell.credit || 'Mô phỏng chạy trực tiếp trong trình duyệt, dựng trên teardown của elvarofficial và claude-motion của whaleyxbt (MIT). Thông số máy lấy từ tài liệu của hãng; chỗ giả định ghi rõ trong bảng số.',
     });

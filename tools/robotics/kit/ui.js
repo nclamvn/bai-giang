@@ -4,30 +4,30 @@
 export const C = {ink: '#1D1B16', mute: '#626773', faint: '#d5d8de', line: '#e7e9ed', panel: '#ffffff', chart: '#f7f8fa', track: '#e9ebef', track2: '#e3e6ea', sub: '#626773', dot: '#1D1B16',
   or: '#e3562a', green: '#2fa36b', blue: '#3c79a8', violet: '#7a5ab8', gold: '#c99a2e'};
 const HOUSE_CSS = `
-#app,#app .ph,#app .sm,#app .bt,#app .call b,#app .cap,#app .cap .k{font-family:'Be Vietnam Pro',system-ui,sans-serif!important}
-#app .cp{background:#fff;border:0;border-radius:14px;box-shadow:0 0 0 .5px rgba(16,24,40,.07),0 8px 24px -14px rgba(16,24,40,.22)}
-#app .ph{font-weight:600;font-size:13px;color:#1D1B16}
-#app .ph i{width:6px;height:6px;border-radius:50%;background:#1D1B16}
-#app .pn{color:#9aa0aa}
-#app .sm{color:#626773}
-#app .bt{box-sizing:border-box;height:24px;padding:0 10px;border:1px solid #e3e6ea;border-radius:999px;background:#fff;color:#1D1B16;font-weight:600}
-#app .bt.on{background:#1D1B16;border-color:#1D1B16;color:#fff}
-#app .call{background:rgba(255,255,255,.94);border-radius:8px;padding:3px 8px 4px;box-shadow:0 1px 3px rgba(16,24,40,.08),0 0 0 .5px rgba(16,24,40,.08)}
-#app .call b{background:none;padding:0;box-shadow:none}
-#app .call span{color:#626773;padding-left:11px}
-#app .call b i{width:5px;height:5px;border-radius:50%;background:#1D1B16}
-#app .cap .b{font-size:12px;line-height:1.45}
-#app .cap .t{margin:2px 0 4px}
-#app .cap .k{color:#5B6472;font-weight:600}
-#app .cap .b{color:#454A55}
-#app .cap .e{background:#f3f4f6;border-radius:6px;position:absolute;top:-3px;right:62px;margin:0;font-size:11px}
-#app .cap .k{font-size:12.5px}
-#app .cap .k:before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#1D1B16;margin:0 8px 1px 0;vertical-align:middle}
-#app .tourchip{border:0;border-radius:999px;background:rgba(255,255,255,.95);box-shadow:0 0 0 .5px rgba(16,24,40,.1),0 6px 16px -8px rgba(16,24,40,.3);color:#1D1B16;font-family:'Be Vietnam Pro',system-ui,sans-serif}
-#app .alert{border-radius:999px;padding:4px 10px}
+:is(#app,.dk-card),:is(#app,.dk-card) .ph,:is(#app,.dk-card) .sm,:is(#app,.dk-card) .bt,:is(#app,.dk-card) .call b,:is(#app,.dk-card) .cap,:is(#app,.dk-card) .cap .k{font-family:'Be Vietnam Pro',system-ui,sans-serif!important}
+:is(#app,.dk-card) .cp{background:#fff;border:0;border-radius:14px;box-shadow:0 0 0 .5px rgba(16,24,40,.07),0 8px 24px -14px rgba(16,24,40,.22)}
+:is(#app,.dk-card) .ph{font-weight:600;font-size:13px;color:#1D1B16}
+:is(#app,.dk-card) .ph i{width:6px;height:6px;border-radius:50%;background:#1D1B16}
+:is(#app,.dk-card) .pn{color:#9aa0aa}
+:is(#app,.dk-card) .sm{color:#626773}
+:is(#app,.dk-card) .bt{box-sizing:border-box;height:24px;padding:0 10px;border:1px solid #e3e6ea;border-radius:999px;background:#fff;color:#1D1B16;font-weight:600}
+:is(#app,.dk-card) .bt.on{background:#1D1B16;border-color:#1D1B16;color:#fff}
+:is(#app,.dk-card) .call{background:rgba(255,255,255,.94);border-radius:8px;padding:3px 8px 4px;box-shadow:0 1px 3px rgba(16,24,40,.08),0 0 0 .5px rgba(16,24,40,.08)}
+:is(#app,.dk-card) .call b{background:none;padding:0;box-shadow:none}
+:is(#app,.dk-card) .call span{color:#626773;padding-left:11px}
+:is(#app,.dk-card) .call b i{width:5px;height:5px;border-radius:50%;background:#1D1B16}
+:is(#app,.dk-card) .cap .b{font-size:12px;line-height:1.45}
+:is(#app,.dk-card) .cap .t{margin:2px 0 4px}
+:is(#app,.dk-card) .cap .k{color:#5B6472;font-weight:600}
+:is(#app,.dk-card) .cap .b{color:#454A55}
+:is(#app,.dk-card) .cap .e{background:#f3f4f6;border-radius:6px;position:absolute;top:-3px;right:62px;margin:0;font-size:11px}
+:is(#app,.dk-card) .cap .k{font-size:12.5px}
+:is(#app,.dk-card) .cap .k:before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#1D1B16;margin:0 8px 1px 0;vertical-align:middle}
+:is(#app,.dk-card) .tourchip{border:0;border-radius:999px;background:rgba(255,255,255,.95);box-shadow:0 0 0 .5px rgba(16,24,40,.1),0 6px 16px -8px rgba(16,24,40,.3);color:#1D1B16;font-family:'Be Vietnam Pro',system-ui,sans-serif}
+:is(#app,.dk-card) .alert{border-radius:999px;padding:4px 10px}
 `;
 const CSS = () => `
-#app{font-family:var(--bg-font,system-ui,sans-serif);color:${C.ink};-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+#app,.dk-card .in{font-family:var(--bg-font,system-ui,sans-serif);color:${C.ink};-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
 .ui{position:absolute;inset:0;pointer-events:none}
 .mo{font-family:'JetBrains Mono',ui-monospace,monospace}
 .cp{position:absolute;background:${C.panel};border:1px solid ${C.line};border-radius:6px;box-shadow:0 2px 10px rgba(16,24,40,.06)}
@@ -71,10 +71,13 @@ export function createUI(app) {
   const add = (h) => { const n = el(h); root.appendChild(n); return n; };
   const btn = {};
   const ui = {root, add, btn, spots: {}};
+  // bố cục tài liệu (doc.js) cần biết nút nào thuộc đầu bảng, lời giảng hay lớp phủ trên cảnh
+  const role = (r, fn) => { const n0 = root.children.length; const out = fn(); for (let i = n0; i < root.children.length; i++) root.children[i].dataset.r = r; return out; };
 
   // đầu bảng kiểu nhà: dải mỏng 64 px, huy hiệu tròn góc thay khối cam, số liệu chính một dòng bên phải
-  ui.header = ({code, kicker, title, sub, right = [], hub}) => {
-    ui.hub = hub;
+  ui.header = (o) => role('hd', () => header(o));
+  const header = ({code, kicker, title, sub, right = [], hub}) => {
+    ui.hub = hub; ui.meta = {code, kicker, title, sub, right};
     const bw = Math.max(44, Math.round(sc(code).length * 9 + 20)), tx = 28 + bw + 14;
     add(`<div style="position:absolute;left:28px;top:14px;width:${bw}px;height:44px;border-radius:13px;background:#f1f2f5;box-shadow:inset 0 0 0 .5px rgba(16,24,40,.08);display:flex;align-items:center;justify-content:center;font:700 14px 'Be Vietnam Pro',system-ui,sans-serif;color:#1D1B16;letter-spacing:-.2px">${sc(code)}</div>`);
     add(`<div class="sm" style="position:absolute;left:${tx}px;top:13px;font-size:12px">${sc(kicker)}</div>`);
@@ -105,7 +108,7 @@ export function createUI(app) {
     if (center) add(`<div style="position:absolute;left:${tx + tw / 2}px;top:${y + 1}px;width:1px;height:10px;background:${C.faint}"></div>`);
     if (mark !== null) add(`<div style="position:absolute;left:${tx + tw * mark}px;top:${y + 1}px;width:1.5px;height:10px;background:${C.ink}"></div>`);
     const f = add(`<div style="position:absolute;left:${tx}px;top:${y + 4}px;height:4px;background:${C.or};border-radius:2px"></div>`);
-    const v = add(`<div class="v" style="position:absolute;left:${x + w - vw + 4}px;top:${y - 2}px;width:${vw - 4}px;text-align:right"></div>`);
+    const v = add(`<div class="v" style="position:absolute;right:${1600 - x - w}px;top:${y - 2}px;min-width:${vw - 4}px;text-align:right"></div>`);
     return {set(k, txt, col) {
       k = Math.max(center ? -1 : 0, Math.min(1, k));
       if (center) { const a = tw / 2, l = k < 0 ? a + a * k : a; f.style.left = `${tx + l}px`; f.style.width = `${Math.abs(k) * a}px`; }
@@ -159,7 +162,7 @@ export function createUI(app) {
     add(`<div style="position:absolute;left:${tx}px;top:${y + 4}px;width:${tw}px;height:3px;background:${C.track2};border-radius:2px"></div>`);
     const f = add(`<div style="position:absolute;left:${tx}px;top:${y + 4}px;height:3px;background:${C.ink};border-radius:2px"></div>`);
     const k = add(`<div style="position:absolute;left:${tx}px;top:${y - 1}px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#fff;border:1.5px solid ${C.ink}"></div>`);
-    const v = add(`<div class="v" style="position:absolute;left:${x + w - vw + 4}px;top:${y - 2}px;width:${vw - 4}px;text-align:right"></div>`);
+    const v = add(`<div class="v" style="position:absolute;right:${1600 - x - w}px;top:${y - 2}px;min-width:${vw - 4}px;text-align:right"></div>`);
     const s = {x: tx, w: tw, y: y + 5, set(t, txt) { t = Math.max(0, Math.min(1, t)); f.style.width = `${t * tw}px`; k.style.left = `${tx + t * tw}px`; v.textContent = txt; s.t = t; }, t: 0};
     ui.sliders[key] = s;
     return s;
@@ -167,9 +170,8 @@ export function createUI(app) {
   // lời giảng của từng bước
   // lời giảng không có tiêu đề chung: dòng chủ đề của từng bước thay vào, nên lời giảng có thêm một dòng
   ui.caption = (x, y, w, h) => {
-    ui.panel(x, y, w, h, '', '');
-    const box = add(`<div class="cap" style="left:${x + 14}px;top:${y + 13}px;width:${w - 28}px"></div>`);
-    const prog = add(`<div class="pn" style="right:${1600 - x - w + 14}px;top:${y + 15}px"></div>`);
+    const [box, prog] = role('cap', () => { ui.panel(x, y, w, h, '', '');
+      return [add(`<div class="cap" style="left:${x + 14}px;top:${y + 13}px;width:${w - 28}px"></div>`), add(`<div class="pn" style="right:${1600 - x - w + 14}px;top:${y + 15}px"></div>`)]; });
     let last = '';
     return {set(c, i, n) {
       const key = c ? c.t + i : '';
@@ -180,9 +182,9 @@ export function createUI(app) {
     }};
   };
   // nhãn có đường dẫn: items [{key,title,sub}] ; update([{key, p:[x,y]|null, dx, dy}], k)
-  const leaderSvg = add(`<svg style="position:absolute;inset:0;overflow:visible" width="1600" height="900"></svg>`);
+  const leaderSvg = add(`<svg style="position:absolute;inset:0;overflow:visible" width="1600" height="900"></svg>`); leaderSvg.dataset.r = 'ov';
   const calls = {};
-  ui.callouts = (items) => { for (const it of items) calls[it.key] = add(`<div class="call" style="opacity:0"><b><i></i>${sc(it.title)}</b>${it.sub ? `<span>${sc(it.sub)}</span>` : ''}</div>`); };
+  ui.callouts = (items) => role('ov', () => { for (const it of items) calls[it.key] = add(`<div class="call" style="opacity:0"><b><i></i>${sc(it.title)}</b>${it.sub ? `<span>${sc(it.sub)}</span>` : ''}</div>`); });
   ui.drawCallouts = (list, k = 1, line = C.ink) => {
     let g = '';
     const seen = new Set();
@@ -190,20 +192,24 @@ export function createUI(app) {
       const n = calls[c.key]; if (!n) continue; seen.add(c.key);
       if (!c.p || k < 0.02) { n.style.opacity = 0; continue; }
       const [px, py] = c.p, lx = px + (c.dx ?? 60), ly = py + (c.dy ?? -40);
-      n.style.opacity = k; n.style.left = `${lx + (c.dx < 0 ? -n.offsetWidth : 0)}px`; n.style.top = `${ly - 8}px`;
-      g += `<path d="M${px} ${py}L${lx} ${ly}" stroke="${line}" stroke-width=".8" fill="none" opacity="${k}"/><circle cx="${px}" cy="${py}" r="2.4" fill="${line === C.ink ? (C.dot || C.or) : line}" opacity="${k}"/>`;
+      // giữ nhãn trong phần cảnh đang hiện (bố cục tài liệu cắt mép trên điện thoại): chạm mép thì lật sang phía kia
+      const V = ui.view, w = n.offsetWidth; let left = lx + (c.dx < 0 ? -w : 0);
+      if (V) { if (px < V.x0 || px > V.x1) { n.style.opacity = 0; continue; } if (left < V.x0 + 6) left = Math.min(px + 14, V.x1 - 6 - w); else if (left + w > V.x1 - 6) left = Math.max(px - 14 - w, V.x0 + 6); }
+      n.style.opacity = k; n.style.left = `${left}px`; n.style.top = `${ly - 8}px`;
+      const ex = V ? (left + w / 2 < px ? left + w : left) : lx;
+      g += `<path d="M${px} ${py}L${ex} ${ly}" stroke="${line}" stroke-width=".8" fill="none" opacity="${k}"/><circle cx="${px}" cy="${py}" r="2.4" fill="${line === C.ink ? (C.dot || C.or) : line}" opacity="${k}"/>`;
     }
     for (const [key, n] of Object.entries(calls)) if (!seen.has(key)) n.style.opacity = 0;
     leaderSvg.innerHTML = g;
   };
-  const ring = add(`<div class="ring"></div>`);
-  const cur = add(`<div class="cur"><svg width="22" height="22" viewBox="0 0 34 34"><path d="M4 3 L30 13.5 L17.5 17.5 L13.5 30 Z" fill="#111" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg></div>`);
+  const ring = add(`<div class="ring" data-r="ov"></div>`);
+  const cur = add(`<div class="cur" data-r="ov"><svg width="22" height="22" viewBox="0 0 34 34"><path d="M4 3 L30 13.5 L17.5 17.5 L13.5 30 Z" fill="#111" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg></div>`);
   ui.pointer = (c) => {
     cur.style.display = c.x < 0 ? 'none' : 'block';
     cur.style.transform = `translate(${(c.x - 3).toFixed(1)}px, ${(c.y - 2).toFixed(1)}px) scale(${c.press ? 0.88 : 1})`;
     ring.style.left = `${c.ringX}px`; ring.style.top = `${c.ringY}px`;
     ring.style.opacity = String(c.ring * 0.85); ring.style.transform = `scale(${(0.35 + 0.9 * (1 - c.ring)).toFixed(3)})`;
   };
-  ui.alert = (x, y) => { const n = add(`<div class="alert" style="left:${x}px;top:${y}px;opacity:0"></div>`); return {set(t) { n.style.opacity = t ? 1 : 0; if (t) n.textContent = t; }}; };
+  ui.alert = (x, y) => { const n = add(`<div class="alert" data-r="ov" style="left:${x}px;top:${y}px;opacity:0"></div>`); return {set(t) { n.style.opacity = t ? 1 : 0; if (t) n.textContent = t; }}; };
   return ui;
 }

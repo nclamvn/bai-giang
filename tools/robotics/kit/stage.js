@@ -94,10 +94,13 @@ export function createStage({canvas, extent = 1.6, grid = 0.1, fade = 6, fov = 2
   const right = new V3().crossVectors(new V3(0, 1, 0), SUN).normalize(), upL = new V3().crossVectors(SUN, right), tmp = new V3();
   let texel = (2 * extent) / sun.shadow.mapSize.x;
   // cam: {tx, ty, tz, az, el (rad), d (m), sx, sy (px offset on the 1600x900 canvas)}
+  // framing: bố cục tài liệu bỏ bảng hai bên nên kéo máy lại gần (k) và giảm độ lệch né bảng (off)
+  const framing = {k: 1, off: 1};
   const frame = (cam, shadowAt) => {
-    camera.position.set(cam.tx + cam.d * Math.cos(cam.el) * Math.sin(cam.az), cam.ty + cam.d * Math.sin(cam.el), cam.tz + cam.d * Math.cos(cam.el) * Math.cos(cam.az));
+    const d = cam.d * framing.k;
+    camera.position.set(cam.tx + d * Math.cos(cam.el) * Math.sin(cam.az), cam.ty + d * Math.sin(cam.el), cam.tz + d * Math.cos(cam.el) * Math.cos(cam.az));
     camera.lookAt(cam.tx, cam.ty, cam.tz);
-    camera.setViewOffset(size.w, size.h, -(cam.sx ?? 0), -(cam.sy ?? 0), size.w, size.h);
+    camera.setViewOffset(size.w, size.h, -(cam.sx ?? 0) * framing.off, -(cam.sy ?? 0) * framing.off, size.w, size.h);
     camera.updateMatrixWorld();
     groundMat.uniforms.uC.value.set(cam.tx, 0, cam.tz);
     tmp.copy(shadowAt || new V3(cam.tx, cam.ty * 0.5, cam.tz));
@@ -118,7 +121,7 @@ export function createStage({canvas, extent = 1.6, grid = 0.1, fade = 6, fov = 2
     if (aoOn !== undefined) gtao.enabled = aoOn;
     if (shadow !== undefined) { sun.shadow.mapSize.set(shadow, shadow); sun.shadow.map?.dispose(); sun.shadow.map = null; texel = (2 * extent) / shadow; }
   };
-  return {renderer, scene, camera, composer, gtao, sun, ground, resize, frame, project, size, setQuality, noAO};
+  return {renderer, scene, camera, composer, gtao, sun, ground, resize, frame, project, size, setQuality, noAO, framing};
 }
 
 // Vật liệu dùng chung, độ nhám ≥ 0.45 để kim loại không loé trắng (quy tắc teardown)
