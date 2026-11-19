@@ -33,6 +33,8 @@ jobs:
         run: python tools/build_all.py --check
       - name: Mã băm toàn vẹn của tệp CDN
         run: python tools/sri.py --check
+      - name: Mô hình .glb đúng bản ghi (số bộ phận, xương, chuyển động, cỡ tệp)
+        run: python tools/kiem_glb.py
       - name: Mở thử các trang
         run: |
           pip install playwright

@@ -107,7 +107,8 @@ export function makeDoc({ui, app, captions, W = 1600, H = 900, onStep, onTour}) 
   const isOv = (n) => n.dataset.r === 'ov' || n.classList.contains('tourchip') || n.classList.contains('hit');
   const panels = [], rest = [];
   for (const n of kids) {
-    if (n.dataset.r === 'hd' || n.dataset.r === 'cap') { n.remove(); continue; }
+    // đầu bảng, lời giảng và dải tên các bước (div chứa [data-b]) đã có bản riêng trong trang dọc (dk-head, dk-say, dk-steps)
+    if (n.dataset.r === 'hd' || n.dataset.r === 'cap' || n.querySelector?.(':scope>[data-b]')) { n.remove(); continue; }
     if (isOv(n) || btns.has(n)) continue;
     if (n.classList.contains('cp')) panels.push({n, x: n.offsetLeft, y: n.offsetTop, w: n.offsetWidth, h: n.offsetHeight, items: []});
     else rest.push(n);

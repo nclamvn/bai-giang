@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parent.parent
 COV = ROOT / 'thu-vien/covers'
 MANIFEST = COV / 'khung.json'
 DANH_SACH = ['co-the-nguoi', 'dong-co', 'robo-ur5e', 'mako', 'robo-quadruped', 'robo-jellyfish', 'robo-hexapod', 'robo-crazyflie',
-             'robo-turtlebot3', 'thap-5-tang', 'may-anh', 'piranha', 'nhen', 'dong-ho', 'hai-dang']
+             'robo-turtlebot3', 'thap-5-tang', 'may-anh', 'piranha', 'nhen', 'dong-ho', 'hai-dang', 'may-di-bo']
 OUT_W, OUT_H = 960, 640
 FILL_H, FILL_W, TOL = 0.78, 0.80, 0.03
 

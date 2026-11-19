@@ -135,6 +135,7 @@ Mọi trang có khối thẻ og và twitter ngay sau `<meta charset>` cùng ản
 
 - Kiểm bằng máy: UR5e FK(IK) sai 1,5·10⁻¹² m trên 2000 tư thế; hexapod IK/FK khớp 3·10⁻¹⁶; chó robot IK/FK khớp 2·10⁻¹⁶ trên 8000 điểm, biên ổn định tĩnh khi đi bước ≥ 29 mm, mọi tư thế đi kiệu và bật nhảy (H tới 35 cm) trong tầm với và dưới mô men tối đa; drone giữ độ cao quanh 36–37k PWM, cú đẩy 2,5 mN·m hồi phục ở hệ số gốc; TurtleBot3 chạy 100 s kịch bản bài giảng không va chạm.
 - Phương pháp, phong cách bàn điều khiển và cách tổ chức trang theo [teardown](https://github.com/elvarofficial/teardown) (elvarofficial) dựa trên [claude-motion](https://github.com/whaleyxbt/claude-motion) (whaleyxbt), MIT; giấy phép gốc ở [`tools/robotics/LICENSE-teardown`](tools/robotics/LICENSE-teardown).
+- Bài [Máy đi bộ 30 m](vat-li-10/may-di-bo/) (Vật lí 10) dùng mô hình Stilt, khung xương và chuyển động của [AnyMachine](https://github.com/apekshik/anymachine) (Apekshik Panigrahi, MIT), nén cho web bằng gltf-transform; phép kiểm của AnyMachine (cần pít tông trong ống, trượt chân, nạp lại GLB để đếm) chạy lại trong bài và trong CI (`tools/kiem_glb.py`). Ghi chép: [`docs/anymachine-ap-dung.md`](docs/anymachine-ap-dung.md).
 - Mã: [`tools/robotics/`](tools/robotics/). `kit/` (sân khấu three.js r186 WebGL với GTAO, bảng điều khiển, vỏ trang tự chạy có 3 bậc chất lượng), mỗi robot một thư mục: phần tính (`kin.js`, `gait.js`, `quad.js`, `diff.js`; `quadruped/kin.js`, `jellyfish/kin.js`) không phụ thuộc three.js, `main.js` là phần vẽ và kịch bản bài giảng. Dựng: `cd tools/robotics && npm ci && node build.mjs` (mỗi trang một tệp ~0,95 MB, nhúng sẵn three.js và phông có tiếng Việt); mục lục bằng `python3 tools/build_pages.py`.
 - Hình khối dựng bằng mã theo cách teardown dựng V8 (`kit/shapes.js`): vỏ khớp tiện có bo mép và nắp vòm, ống loe, servo có đĩa trục và tai bắt vít, tấm waffle có lưới lỗ, bánh có gai, cánh quạt có biên dạng và xoắn; vật liệu nhựa phủ bóng, nhôm anod, mạch in, kính khói, cao su.
 - Lên lớp: Shift P hoặc nút Lên lớp; bút trình chiếu chuyển từng lời giảng; màn hình giáo viên, điện thoại điều khiển (xem [Dụng cụ lên lớp](#dụng-cụ-lên-lớp)). Trên điện thoại và máy tính bảng dựng đứng, cảnh 3D phủ màn hình, lời giảng thành thẻ đọc được, nút Bảng số mở lại bàn điều khiển.
@@ -241,7 +242,7 @@ base64 -w 0 ribosome.bin > te-bao/ribosome.b64.txt
 - `co-the-nguoi/`: mã BodyVista MIT; mô hình CC BY-SA 4.0 và CC BY-SA 2.1 JP, một phần chỉ dùng phi thương mại; xem `co-the-nguoi/GHI-CONG.md`.
 - `thu-vien/`: CC BY-NC 4.0, theo bản gốc Tongjiang Lab; chỉ dùng phi thương mại.
 - Dữ liệu cấu trúc: RCSB PDB 3J7R, 6J5I, 6J5K.
-- `tools/robotics/`: MIT; phần phỏng theo teardown và claude-motion giữ giấy phép MIT gốc (`tools/robotics/LICENSE-teardown`). three.js MIT.
+- `tools/robotics/`: MIT; phần phỏng theo teardown và claude-motion giữ giấy phép MIT gốc (`tools/robotics/LICENSE-teardown`). Mô hình Stilt (`vat-li-10/may-di-bo/may/stilt.glb`): MIT, AnyMachine (`tools/robotics/LICENSE-anymachine`). three.js MIT.
 - Phông Be Vietnam Pro, JetBrains Mono: SIL Open Font License 1.1, tự lưu trữ trong `design/fonts/` kèm giấy phép.
 
 ## Nguồn

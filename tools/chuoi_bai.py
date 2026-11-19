@@ -27,6 +27,7 @@ BESPOKE = {
     'hai-dang': ('vat-li-10/hai-dang/index.html', 'Hải đăng khung sắt', 'covers/hai-dang.webp'),
     'dong-ho': ('vat-li-11/dong-ho-co/index.html', 'Đồng hồ cơ', 'covers/dong-ho.webp'),
     'nhen': ('vat-li-10/nhen-thuy-luc/index.html', 'Nhện chân thuỷ lực', 'covers/nhen.webp'),
+    'may-di-bo': ('vat-li-10/may-di-bo/index.html', 'Máy đi bộ 30 m', 'covers/may-di-bo.webp'),
     'piranha': ('vat-li-10/ca-piranha/index.html', 'Cá piranha', 'covers/piranha.webp'),
     'may-anh': ('khtn-9/may-anh/index.html', 'Máy ảnh cắt lớp', 'covers/may-anh.webp'),
     'mang': ('sinh-hoc-11/ca-tho-bang-mang/index.html', 'Cá thở bằng mang', 'covers/mang.webp'),
@@ -94,7 +95,8 @@ def build():
     put('co-the-nguoi', [{'t': 'Khoa học tự nhiên 8', 'href': '#bai-hoc'}], nxt_lesson('te-bao', 'Từ cơ quan xuống tế bào'), 'Sinh học', 'sinh')
     put('dong-co', [{'t': 'Công nghệ 11', 'href': '#bai-hoc'}], nxt_lesson('ur5e', 'Từ cơ khí động lực sang robot công nghiệp'), 'Công nghệ', 'cong')
     put('mako', [{'t': 'Vật lí 10', 'href': 'thu-vien/?mon=phys'}], nxt_lesson('nhen', 'Từ lực của nước bên ngoài sang áp suất chất lỏng bên trong chân nhện'), 'Vật lí', 'ly')
-    put('nhen', [{'t': 'Vật lí 10', 'href': 'thu-vien/?mon=phys'}], nxt_lesson('piranha', 'Từ mô men ở khớp chân sang đòn bẩy của hàm cá'), 'Vật lí', 'ly')
+    put('nhen', [{'t': 'Vật lí 10', 'href': 'thu-vien/?mon=phys'}], nxt_lesson('may-di-bo', 'Từ chân thuỷ lực của nhện sang chân thuỷ lực cao 21 m'), 'Vật lí', 'ly')
+    put('may-di-bo', [{'t': 'Vật lí 10', 'href': 'thu-vien/?mon=phys'}], nxt_lesson('piranha', 'Từ mô men ở khớp gối sang đòn bẩy của hàm cá'), 'Vật lí', 'ly')
     put('piranha', [{'t': 'Vật lí 10', 'href': 'thu-vien/?mon=phys'}], nxt_lesson('hai-dang', 'Từ đòn bẩy của hàm sang mô men lật của tháp'), 'Vật lí', 'ly')
     put('hai-dang', [{'t': 'Vật lí 10', 'href': 'thu-vien/?mon=phys'}], nxt_lesson('thap-5-tang', 'Từ tháp sắt đứng gió sang tháp gỗ đứng động đất'), 'Vật lí', 'ly')
     put('thap-5-tang', [{'t': 'Vật lí 11', 'href': 'thu-vien/?mon=phys'}], nxt_lesson('dong-ho', 'Từ dao động của tháp gỗ sang dao động giữ nhịp đồng hồ'), 'Vật lí', 'ly')
