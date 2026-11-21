@@ -19,6 +19,7 @@ import subprocess
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import ve_sinh_ui                         # đọc kích thước ảnh (co_anh)
 import build_thiet_ke_mang as DM          # danh mục 22 tiết
 from build_giao_an_mang import load as nap_giao_an
 
@@ -88,12 +89,14 @@ CSS = r"""
 --ok:#141416;--ok-soft:#F4F4F0;--so:#B9803F;--sans:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:76px}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-a{color:inherit;text-underline-offset:3px;text-decoration-thickness:1px}img{display:block;max-width:100%}
+a{color:inherit;text-underline-offset:3px;text-decoration-thickness:1px}img{display:block;max-width:100%;height:auto}
+.skip{position:fixed;left:12px;top:12px;z-index:100;padding:10px 16px;border-radius:10px;background:var(--ink);color:#fff;font-size:14px;text-decoration:none;transform:translateY(-300%);transition:transform .16s cubic-bezier(.23,1,.32,1)}.skip:focus{transform:none}
+:where(button,.btn):active{scale:.97}
 .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,5vw,56px)}
 .mono{font-family:var(--mono)}.mut{color:var(--mut)}
 .top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
 .top .in{display:flex;align-items:center;gap:12px;height:58px}
-.brand{display:flex;align-items:center;gap:11px;text-decoration:none;min-width:0}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;min-width:0}.brand>span{min-width:0}.brand b{overflow:hidden;text-overflow:ellipsis}
 .brand img{width:28px;height:28px;flex:none}.brand b{display:block;font-weight:500;font-size:14.5px;letter-spacing:-.01em;line-height:1.2;white-space:nowrap}
 .brand small{display:block;font:400 10.5px/1.3 var(--mono);color:var(--mut);letter-spacing:.14em}
 .crumb{display:flex;align-items:center;gap:10px;color:var(--mut);font-size:14px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -242,8 +245,9 @@ def trang_muc_luc(chuong):
     desc = f'Học phần {TEN} ({MA}): 22 tiết bài giảng 3D tương tác và giáo án 45 phút, theo giáo trình của {TAC_GIA}.'
     return f'''{dau_trang('', f'{TEN} · {MA}', desc, CSS_MUC)}
 <body>
+<a class="skip" href="#chinh">Bỏ qua tới nội dung</a>
 {thanh('', right='<nav class="links"><a href="#chuong-1">Tiết học</a><a href="#cach-dung">Cách dùng</a><a href="#noi-dung">Về nội dung</a></nav>')}
-<main>
+<main id="chinh" tabindex="-1" style="outline:none!important">
 <div class="wrap"><div class="mt"><div class="eye">{MA}<br>Học phần đại học · 22 tiết · 6 chương</div><div class="eye r">Theo giáo trình của {TAC_GIA}<br>Bài 3D chạy trực tiếp · giáo án 45 phút</div></div>
 <div class="hero">
   <div><h1>{TEN}</h1>
@@ -337,7 +341,7 @@ ul.li li:first-child{border-top:0}ul.li li:before{content:'';position:absolute;l
 @media (max-width:980px){.gh{grid-template-columns:1fr;gap:24px}.lay{grid-template-columns:1fr}.toc{display:none}.cov img{aspect-ratio:16/9}.meta{grid-template-columns:repeat(2,minmax(0,1fr))}.meta div:nth-child(odd){border-left:0;padding-left:0}
 .meta div{border-top:1px solid var(--line)}.meta div:nth-child(-n+2){border-top:0}.g2{grid-template-columns:1fr;gap:24px}
 .th{display:none}.row{grid-template-columns:1fr;gap:6px}.row .k{display:block;margin-top:6px}.tl{height:auto;flex-wrap:wrap}.tl a{flex:1 1 40%!important;padding:10px 12px}}
-@media (max-width:640px){.mt .r{display:none}.cov img{aspect-ratio:5/4}.cov .tag{left:16px;top:auto;bottom:12%;max-width:calc(100% - 32px);line-height:1.5}.nav2{grid-template-columns:1fr}.top .btn .l{display:none}.top .btn{padding:0 11px}}
+@media (max-width:640px){.mt .r{display:none}.cov img{aspect-ratio:5/4}.cov .tag{left:16px;top:auto;bottom:12%;max-width:calc(100% - 32px);line-height:1.5}.nav2{grid-template-columns:1fr}.top .btn .l{display:none}.top .btn{padding:0 11px}.crumb{display:none}}
 @media print{@page{size:A4;margin:14mm}body{font-size:10.5pt}.top,.toc,.noprint,.nav2,.foot,.mt{display:none!important}.gh{padding:0 0 6mm;grid-template-columns:1fr}.cov{display:none!important}
 .lay{display:block}.blk{padding:6mm 0;break-inside:auto}.row,.vd,.qz{break-inside:avoid}.qz details{display:block}.qz details>*{display:block}
 #phieu{break-before:page}.sheet-wrap{border:0;padding:0;background:none}.sheet-zoom{transform:none;margin:0}.paper{box-shadow:none;padding:0;min-height:auto;width:auto}
@@ -389,8 +393,9 @@ def trang_giao_an(g, t, truoc, sau):
              f'<a class="btn sm pri" href="../">{ICON["play"]}<span class="l">Mở bài 3D</span></a>')
     return f'''{dau_trang(up, title, desc, CSS_GA)}
 <body>
+<a class="skip" href="#chinh">Bỏ qua tới nội dung</a>
 {thanh(up, f'Tiết {g["tiet"]} · Giáo án', right)}
-<main>
+<main id="chinh" tabindex="-1" style="outline:none!important">
 <div class="wrap"><div class="mt"><div class="eye">Tiết {g["tiet"]:02d} / 22<br>{MA} · Giáo án 45 phút</div><div class="eye r">{E(g["chuong"].split("·")[0].strip())}<br>{nb} bước trên màn chiếu</div></div>
 <div class="gh">
   <div><h1>{E(g["ten_tiet"])}</h1></div>
@@ -544,7 +549,15 @@ def main():
     tat = [t for c in chuong for t in c['tiet']]
     ds_bai = [t for t in tat if t['slug']]
     ds_ga = [t for t in tat if t['ga']]
-    w = lambda rel, txt: ((OUT / rel).parent.mkdir(parents=True, exist_ok=True), (OUT / rel).write_text(txt, encoding='utf-8'))
+    def kich_thuoc(rel, txt):
+        # vệ sinh giao diện (docs/ve-sinh-giao-dien.md): <img> trỏ tệp trong bản xuất mang width/height thật để giữ chỗ khi ảnh chưa về
+        def img(m):
+            t = m.group(0); src = re.search(r'\ssrc="([^"]+)"', t)
+            if (re.search(r'\swidth=', t) and re.search(r'\sheight=', t)) or not src or '{' in src.group(1) or re.match(r'(?:[a-z]+:)?//|data:', src.group(1)): return t
+            f = ((OUT / rel).parent / src.group(1)).resolve(); wh = ve_sinh_ui.co_anh(f) if f.is_file() else None
+            return t[:-1] + f' width="{wh[0]}" height="{wh[1]}">' if wh else t
+        return re.sub(r'<img\b[^>]*>', img, txt)
+    w = lambda rel, txt: ((OUT / rel).parent.mkdir(parents=True, exist_ok=True), (OUT / rel).write_text(kich_thuoc(rel, txt) if rel.endswith('.html') else txt, encoding='utf-8'))
     # vỏ, ảnh, phông
     vo = vo_bai(); vo_ten = f'vo-{hashlib.sha1(vo.encode()).hexdigest()[:8]}.js'; w(vo_ten, vo)
     w('favicon.svg', LOGO)
