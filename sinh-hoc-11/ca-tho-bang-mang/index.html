@@ -32,16 +32,16 @@ html[data-chieu]{--bg-ink:#000000;--bg-ink2:#141414;--bg-ink3:#262626;--bg-glass
 <meta name="theme-color" content="#FFFFFF">
 <title>Cá Thở Bằng Mang</title>
 <meta name="description" content="Mô phỏng 3D cá thở bằng mang: bơm miệng–nắp mang khi bơi chậm, ép dòng khi bơi nhanh (Roberts 1975), cá ngừ bắt buộc ép dòng, cá đáy luôn bơm; trao đổi ngược dòng lấy khoảng 75 % ô xi; diện tích mang theo Wegner và cộng sự 2010; nước ấm ít ô xi hơn. Cá từ Fish Kit (CC0). Sinh học 11, hô hấp và trao đổi khí ở động vật.">
-<link rel="modulepreload" href="../../robotics/_chung/chung-6FNZ2QFI.js">
-<link rel="modulepreload" href="../../robotics/_chung/chung-E6JYNZJ3.js">
-<link rel="modulepreload" href="../../robotics/_chung/chung-TZ4B56C2.js">
-<link rel="modulepreload" href="../../robotics/_chung/chung-PUTRL5FU.js">
-<link rel="modulepreload" href="../../robotics/_chung/chung-W2X4UNBR.js">
+<link rel="modulepreload" href="../../robotics/_chung/chung-LGCL3SX6.js">
+<link rel="modulepreload" href="../../robotics/_chung/chung-BIRDWQMS.js">
+<link rel="modulepreload" href="../../robotics/_chung/chung-W3YTEQYX.js">
+<link rel="modulepreload" href="../../robotics/_chung/chung-F5YHY4UG.js">
+<link rel="modulepreload" href="../../robotics/_chung/chung-422TV7AV.js">
 <!--BG-STD:start--><style id="bg-std">/* chuẩn thành phần Sáng Ăn Khoai: sinh bằng tools/design.py, không sửa tay */
 body.bgs-on :is(button,.btn,select){font-family:var(--bg-font)}
 body.bgs-on .btn{font-weight:600;letter-spacing:0;text-transform:none}
 body.bgs-on :is(.btn.primary,.btn.pri,.btn.gold,.btn.cta){background:var(--bg-brand)!important;background-image:none!important;border-color:var(--bg-brand)!important;color:var(--bg-brand-ink)!important;box-shadow:none!important;text-shadow:none!important}
-body.bgs-on :is(.btn.primary,.btn.pri,.btn.gold,.btn.cta):hover:not(:disabled){filter:brightness(1.18)}
+@media (hover:hover){body.bgs-on :is(.btn.primary,.btn.pri,.btn.gold,.btn.cta):hover:not(:disabled){filter:brightness(1.18)}}
 body.bgs-on :is(.btn.on,.btn.dark,.btn[aria-pressed="true"],.chip.on,.chip[aria-pressed="true"],.seg button.on,.sw button.on){background:var(--bg-ink)!important;background-image:none!important;border-color:var(--bg-ink)!important;color:var(--bg-page)!important}
 body.bgs-on :is(input[type=range],input[type=checkbox],input[type=radio]){accent-color:var(--bg-brand)}
 body.bgs-on :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible{outline:2px solid var(--bg-focus)!important;outline-offset:2px}
@@ -55,10 +55,10 @@ body.bgs-on :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible
 <!-- Dựng trên teardown của elvarofficial và claude-motion của whaleyxbt (MIT). Mã nguồn: github.com/nclamvn/bai-giang/tree/main/tools/robotics -->
 <!--BG-SHELL:start-->
 <script>window.BG_SEQ={"slug": "mang", "title": "Cá thở bằng mang", "crumb": [{"t": "Sinh học 11", "href": "#bai-hoc"}], "next": {"title": "Neuron và xung thần kinh", "href": "than-kinh/", "sub": "Từ trao đổi khí ở mang sang xung thần kinh"}, "cover": "thu-vien/covers/mang.webp", "subject": "Sinh học", "s": "sinh"};</script>
-<script src="../../shell/dist/bg-shell.min.js?v=27d982119f"></script>
+<script src="../../shell/dist/bg-shell.min.js?v=df9808a449"></script>
 <!--BG-SHELL:end-->
 <script type="module">
-import{a as gn}from"../../robotics/_chung/chung-6FNZ2QFI.js";import{b as hn}from"../../robotics/_chung/chung-E6JYNZJ3.js";import{a as un,c as mn,d as V}from"../../robotics/_chung/chung-TZ4B56C2.js";import"../../robotics/_chung/chung-PUTRL5FU.js";import{B as K,C as ve,D as Je,E as xt,F as Ze,G as Qe,Ga as sn,H as ut,K as ye,P as tn,Q as en,Qa as rn,R as Me,U as nn,Ua as A,Xa as ln,Ya as cn,aa as we,ba as ke,c as ne,ca as oe,f as We,s as ie,u as Z,v as Ht,va as on,w as It,x as Q,xa as an,y as be}from"../../robotics/_chung/chung-W2X4UNBR.js";var An={aji:"aji",seabass:"suzuki",mebaru:"mebaru",kasago:"kasago",saba:"saba",tachiuo:"tachiuo",sawara:"sawara",kamasu:"kamasu",buri:"buri",hiramasa:"hiramasa",kihada:"kihada",magochi:"magochi",kurodai:"kurodai",madai:"madai",katakuchi:"katakuchi",isaki:"isaki",isaki_young:"isaki_young",onagagure:"onagagure",kuchibuto:"kuchibuto",shibudai:"shibudai"},wi=new Set(["katakuchi"]),ki={tachiuo:1.52},Rn=40,_n=40,Ot=8,Se=20,Le=`
+import{a as gn}from"../../robotics/_chung/chung-LGCL3SX6.js";import{b as hn}from"../../robotics/_chung/chung-BIRDWQMS.js";import{a as un,c as mn,d as V}from"../../robotics/_chung/chung-W3YTEQYX.js";import"../../robotics/_chung/chung-F5YHY4UG.js";import{B as K,C as ve,D as Je,E as xt,F as Ze,G as Qe,Ga as sn,H as ut,K as ye,P as tn,Q as en,Qa as rn,R as Me,U as nn,Ua as A,Xa as ln,Ya as cn,aa as we,ba as ke,c as ne,ca as oe,f as We,s as ie,u as Z,v as Ht,va as on,w as It,x as Q,xa as an,y as be}from"../../robotics/_chung/chung-422TV7AV.js";var An={aji:"aji",seabass:"suzuki",mebaru:"mebaru",kasago:"kasago",saba:"saba",tachiuo:"tachiuo",sawara:"sawara",kamasu:"kamasu",buri:"buri",hiramasa:"hiramasa",kihada:"kihada",magochi:"magochi",kurodai:"kurodai",madai:"madai",katakuchi:"katakuchi",isaki:"isaki",isaki_young:"isaki_young",onagagure:"onagagure",kuchibuto:"kuchibuto",shibudai:"shibudai"},wi=new Set(["katakuchi"]),ki={tachiuo:1.52},Rn=40,_n=40,Ot=8,Se=20,Le=`
 uniform float uTime, uSnout, uLen, uLam, uBreath, uSwimAmp, uPectRest, uLookAt, uGill, uMouth, uFloor;
 uniform vec2 uEyeBulge;
 uniform vec4 uMouthShape, uMouthUpper;
@@ -472,7 +472,7 @@ if (uGillShape2.z > 0.5) {
 .tc .ls input{margin:12px 12px 6px;padding:8px 10px;border:1px solid #e3e6ea;border-radius:8px;font:13px 'Be Vietnam Pro',system-ui,sans-serif}
 .tc .chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 8px}
 .tc .list{overflow:auto;flex:1;min-height:0}
-.tc .it{padding:7px 14px;border-top:1px solid #f1f2f4;cursor:pointer}.tc .it:hover{background:#f6f7f9}.tc .it.on{background:#fff4ec}
+.tc .it{padding:7px 14px;border-top:1px solid #f1f2f4;cursor:pointer}@media (hover:hover){.tc .it:hover{background:#f6f7f9}}.tc .it.on{background:#fff4ec}
 .tc .it i{font-style:italic}.tc .it span{display:block;color:#6b7280;font-size:11.5px}
 .tc .dt{overflow:auto;padding:16px 20px;min-height:0}
 .tc .dt h3{margin:0;font-size:20px;font-style:italic}.tc .dt .au{color:#6b7280;font-size:12px}

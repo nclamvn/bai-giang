@@ -10,6 +10,7 @@
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nclamvn.github.io/bai-giang/design/the/thiet-ke-mang-san-sang-giao-an.jpg">
 <!--BG-SHARE:end-->
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#FFFFFF">
 <title>Độ sẵn sàng, độ tin cậy, dự phòng và yêu cầu phục hồi · Giáo án tiết 4 · Thiết kế và hiệu năng mạng</title>
 <meta name="description" content="Giáo án 45 phút, tiết 4 học phần Thiết kế và hiệu năng mạng: Độ sẵn sàng, độ tin cậy, dự phòng và yêu cầu phục hồi. Mục tiêu, diễn tiến theo phút, ví dụ giải mẫu, phiếu bài tập, đáp án và kiểm tra nhanh, theo giáo trình TEL1459 mục 1.6.5 (kèm 2.5.1–2.5.2, 4.4.3).">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../design/logo/favicon-32.png"><link rel="apple-touch-icon" href="../../../design/logo/apple-touch-icon.png">
@@ -26,7 +27,7 @@ a{color:var(--acc)}
 .bar .crumb{color:var(--bg-ink2);font-size:15px;text-decoration:none;min-height:44px;display:flex;align-items:center}
 .bar .sp{flex:1}
 .btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:var(--bg-r-sm);border:0;background:var(--bg-surface);color:var(--bg-ink);font:500 15px var(--bg-font);text-decoration:none;cursor:pointer;box-shadow:0 0 0 1px var(--bg-hair2);white-space:nowrap}
-.btn:hover{box-shadow:0 0 0 1px var(--bg-ink3)}
+@media (hover:hover){.btn:hover{box-shadow:0 0 0 1px var(--bg-ink3)}}
 .btn.pri{background:var(--bg-brand);color:var(--bg-brand-ink);box-shadow:none}
 .btn svg{width:18px;height:18px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
@@ -41,7 +42,7 @@ h1{margin:10px 0 12px;font:500 clamp(34px,4.4vw,56px)/1.08 var(--bg-font);letter
 .tabs{position:sticky;top:60px;z-index:9;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 0;margin:0 0 8px;background:linear-gradient(var(--bg-page) 70%,transparent)}
 .tabs::-webkit-scrollbar{display:none}
 .tabs a{flex:none;display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:8px;color:var(--bg-ink2);font-weight:500;font-size:14.5px;text-decoration:none}
-.tabs a:hover{background:var(--bg-hair)}
+@media (hover:hover){.tabs a:hover{background:var(--bg-hair)}}
 section{padding:28px 0 12px}
 h2{margin:0 0 6px;font:500 30px/1.2 var(--bg-font);letter-spacing:-.015em}
 .sub{margin:0 0 20px;color:var(--bg-ink2)}
@@ -173,7 +174,7 @@ dl.ans dt{font-weight:700;color:var(--acc)}
 <script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
 <script id="bg-sw">(function(){try{if(!("serviceWorker"in navigator)||!/(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname))return;var r=new URL("../../../",location.href).href;if(/[?&]sw=0/.test(location.search)){navigator.serviceWorker.getRegistrations().then(function(a){a.forEach(function(x){x.unregister()})});return}addEventListener("load",function(){setTimeout(function(){navigator.serviceWorker.register(r+"sw.js",{scope:r}).catch(function(){})},3000)})}catch(e){}})();</script>
 </head>
-<body>
+<body><a class="bg-skip" href="#noi-dung">Bỏ qua tới nội dung</a>
 <div class="bar">
   <a class="home" href="../../../"><img src="../../../design/logo/mark-96.webp" width="30" height="30" alt="" class="lg"><span>Sáng Ăn Khoai</span></a><span class="sep"></span><a class="crumb" href="../../../thiet-ke-mang/">Thiết kế và hiệu năng mạng</a>
   <span class="sp"></span>
@@ -181,7 +182,7 @@ dl.ans dt{font-weight:700;color:var(--acc)}
   <button class="btn" type="button" data-print="phieu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In phiếu</button>
   <a class="btn pri" href="../"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a>
 </div>
-<main class="wrap">
+<main class="wrap" id="noi-dung" style="outline:none!important" tabindex="-1">
   <div class="hero">
     <div>
       <div class="eye">Tiết 4 / 22 · 45 phút · Giáo án</div>
@@ -189,7 +190,7 @@ dl.ans dt{font-weight:700;color:var(--acc)}
       <p class="lead">Tiết 1 đã nêu độ sẵn sàng là một thành phần của vector yêu cầu. Tiết này đi sâu: độ sẵn sàng khác độ tin cậy ra sao, vì sao hai đường dự phòng chung một ống cáp gần như vô ích, và làm sao biến RTO, RPO thành những bước vận hành đo được. Mục 1.6.5 của giáo trình được bổ sung bằng các công thức ở mục 2.5 và 4.4.3 để tiết học trọn một chủ đề. Dùng cùng bài 3D <a href="../">Độ sẵn sàng, RTO và RPO</a>: bấm <b>Lên lớp</b> trên thanh đầu bài để màn hình giảng viên hiện phút dự kiến và việc của từng bước.</p>
       <div class="meta"><div><b>Chương</b>Chương 1 · Tổng quan về thiết kế và hiệu năng mạng</div><div><b>Mục giáo trình</b>1.6.5 (kèm 2.5.1–2.5.2, 4.4.3)</div><div><b>Trang</b>16–18 (kèm 57–58, 112)</div><div><b>Phương trình</b>(1.19), (2.17)–(2.19), (4.14)</div><div><b>Bài tập cuối chương</b>Bài tập 8 chương 2</div></div>
     </div>
-    <div class="cover"><img src="../../../thu-vien/covers/tk-san-sang.webp" alt="Cảnh 3D của bài Độ sẵn sàng, RTO và RPO"><a class="btn pri" href="../"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a></div>
+    <div class="cover"><img src="../../../thu-vien/covers/tk-san-sang.webp" alt="Cảnh 3D của bài Độ sẵn sàng, RTO và RPO" width="960" height="640"><a class="btn pri" href="../"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a></div>
   </div>
   <nav class="tabs" aria-label="Các phần của giáo án"><a href="#muc-tieu">Mục tiêu</a><a href="#dien-tien">Diễn tiến 45 phút</a><a href="#vi-du">Ví dụ giải mẫu</a><a href="#phieu">Phiếu bài tập</a><a href="#dap-an">Đáp án</a><a href="#kiem-tra">Kiểm tra nhanh</a><a href="#tom-tat">Tóm tắt và nguồn</a></nav>
 
@@ -219,7 +220,7 @@ dl.ans dt{font-weight:700;color:var(--acc)}
     <h2 id="h-ph">Phiếu bài tập</h2>
     <p class="sub">Một trang A4. Làm trên lớp phần đầu, phần còn lại về nhà. <button class="btn noprint" type="button" data-print="phieu" style="margin-left:6px;vertical-align:middle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In phiếu</button></p>
     <div class="sheet-wrap"><div class="sheet-zoom"><div class="paper" lang="vi">
-  <header><div><div class="lg2"><img src="../../../design/logo/mark-96.webp" alt="">Sáng Ăn Khoai · Thiết kế và hiệu năng mạng · Tiết 4 · Phiếu bài tập</div><h4>Độ sẵn sàng, độ tin cậy, dự phòng và yêu cầu phục hồi</h4></div>
+  <header><div><div class="lg2"><img src="../../../design/logo/mark-96.webp" alt="" width="96" height="96">Sáng Ăn Khoai · Thiết kế và hiệu năng mạng · Tiết 4 · Phiếu bài tập</div><h4>Độ sẵn sàng, độ tin cậy, dự phòng và yêu cầu phục hồi</h4></div>
     <div class="who"><span>Họ tên</span><i></i><span>Mã sinh viên</span><i></i></div></header>
   <div class="part bt"><div class="qq"><b>1.</b><span>Một dịch vụ có MTBF là 2 000 giờ và MTTR là 2 giờ. Tính độ sẵn sàng theo phương trình (2.18). Đề xuất một biện pháp tăng MTBF và một biện pháp giảm MTTR. <span class=src>(bài tập 8 cuối chương 2)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>2.</b><span>Một switch có MTBF 50 000 giờ, MTTR 8 giờ (chờ hàng thay thế). Nhà trường để sẵn một switch dự trữ, MTTR còn 2 giờ. Tính A trước và sau, và phút ngừng mỗi năm. <span class=src>(theo (1.19))</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>3.</b><span>Thiết bị có MTBF 10 000 giờ. Tính xác suất chạy không lỗi suốt một tháng (730 giờ) và suốt một năm (8 766 giờ). <span class=src>(theo (2.17))</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>4.</b><span>Ba nhánh song song độc lập, mỗi nhánh A = 0,99. Tính A cả hệ. Nếu cả ba nhánh dùng chung một nguồn điện có A = 0,9995 thì A cả hệ là bao nhiêu? Nhận xét. <span class=src>(theo (4.14))</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>5.</b><span>Một dịch vụ có RTO = 5 phút. Hiện tại: phát hiện bằng OSPF 40 s, khoanh vùng thủ công 3 phút, chuyển đường 1 s, xác nhận 2 phút. Có đạt RTO không? Nếu chỉ thay OSPF bằng BFD (0,15 s) thì sao? Đề xuất cách đạt. <span class=src>(theo (2.19))</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="part bt"><div class="qq"><b>6.</b><span>Phân biệt RTO và RPO. Với hệ thống quản trị mạng sao lưu cơ sở dữ liệu mỗi 12 giờ và RPO = 1 giờ, kết luận và đề xuất. <span class=src>(mục 2.5.2)</span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
   <footer><span>Giáo trình TEL1459, mục 1.6.5 (kèm 2.5.1–2.5.2, 4.4.3), tr. 16–18 (kèm 57–58, 112)</span><span>nclamvn.github.io/bai-giang</span></footer>

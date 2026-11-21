@@ -95,7 +95,7 @@ a{color:inherit}
 .card{display:flex;flex-direction:column}
 .card .img{display:block;position:relative;aspect-ratio:16/9;background:var(--bg-card);overflow:hidden;border-radius:14px;box-shadow:inset 0 0 0 1px var(--bg-line)}
 .card .img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
-.card .img:hover img{transform:scale(1.03)}
+@media (hover:hover){.card .img:hover img{transform:scale(1.03)}}
 .card .img b{position:absolute;left:12px;top:12px;background:#fff;color:var(--bg-ink);font:500 10.5px var(--bg-mono);letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:6px;box-shadow:0 0 0 1px var(--bg-line)}
 .card .body{padding:16px 2px 0;display:flex;flex-direction:column;gap:10px;flex:1}
 .card h2{margin:0;font:500 22px/1.25 var(--bg-font);letter-spacing:-.02em}
@@ -108,13 +108,13 @@ summary{cursor:pointer;font-weight:600;font-size:14px}
 details ol{margin:8px 0 0;padding-left:20px;font-size:13.5px}details li{margin:3px 0}
 .note{font-size:13px;color:var(--bg-ink3)}
 .go{margin-top:auto;display:inline-flex;align-self:flex-start;align-items:center;gap:8px;background:var(--ink);color:#fff;text-decoration:none;font:700 13px "JetBrains Mono",monospace;letter-spacing:1.5px;padding:10px 16px;border-radius:4px}
-.go:hover{background:var(--or)}
+@media (hover:hover){.go:hover{background:var(--or)}}
 h3.sec{font:500 10.5px var(--bg-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--bg-mut);margin:40px 0 14px;display:flex;align-items:center;gap:8px}
 h3.sec:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--bg-sig)}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 .more{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 .more a{display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--ink);box-shadow:0 1px 2px rgba(16,24,40,.04);transition:box-shadow .3s}
-.more a:hover{box-shadow:0 8px 24px -12px rgba(16,24,40,.18)}
+@media (hover:hover){.more a:hover{box-shadow:0 8px 24px -12px rgba(16,24,40,.18)}}
 .more img{width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#f1f2f5}
 .more span{display:grid;gap:4px;padding:14px 16px 14px 0;font-size:14.5px;color:var(--mute)}.more b{font-size:18px;color:var(--ink)}.more small{font-size:13px;font-weight:600;color:var(--mute)}
 .box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:14.5px}

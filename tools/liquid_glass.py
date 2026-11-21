@@ -53,7 +53,7 @@ def pill_buttons(sel, primary_sel):
     """Nút dạng viên thuốc: nút thường là kính, nút chính là màu thương hiệu phẳng (chuẩn thành phần, docs/he-thiet-ke.md)."""
     return (f'{sel}{{border-radius:999px!important;background:var(--lg-fill);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);'
             f'border:1px solid var(--lg-stroke)!important;box-shadow:var(--lg-shadow-lo),var(--lg-inner);color:var(--lg-ink);font-family:var(--lg-font);font-weight:600;transition:transform .15s ease,box-shadow .2s ease}}\n'
-            f'{_each(sel, ":hover")}{{box-shadow:0 0 0 .5px rgba(15,23,42,.1),0 8px 22px -8px rgba(15,23,42,.25),var(--lg-inner)}}\n'
+            f'@media (hover:hover){{{_each(sel, ":hover")}{{box-shadow:0 0 0 .5px rgba(15,23,42,.1),0 8px 22px -8px rgba(15,23,42,.25),var(--lg-inner)}}}}\n'
             f'{_each(sel, ":active")}{{transform:scale(.97)}}\n'
             f'{primary_sel}{{background:var(--bg-brand,#1D1B16)!important;color:#fff!important;border-color:transparent!important;'
             'box-shadow:0 6px 16px -10px rgba(29,27,22,.65)!important}\n')

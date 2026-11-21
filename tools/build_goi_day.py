@@ -66,7 +66,7 @@ a{color:var(--acc)}
 .bar .crumb{color:var(--bg-ink2);font-size:15px;text-decoration:none;min-height:44px;display:flex;align-items:center}
 .bar .sp{flex:1}
 .btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:var(--bg-r-sm);border:0;background:var(--bg-surface);color:var(--bg-ink);font:500 15px var(--bg-font);text-decoration:none;cursor:pointer;box-shadow:0 0 0 1px var(--bg-hair2);white-space:nowrap}
-.btn:hover{box-shadow:0 0 0 1px var(--bg-ink3)}
+@media (hover:hover){.btn:hover{box-shadow:0 0 0 1px var(--bg-ink3)}}
 .btn.pri{background:var(--bg-brand);color:var(--bg-brand-ink);box-shadow:none}
 .btn svg{width:18px;height:18px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
@@ -81,7 +81,7 @@ h1{margin:10px 0 12px;font:500 clamp(34px,4.4vw,56px)/1.08 var(--bg-font);letter
 .tabs{position:sticky;top:60px;z-index:9;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 0;margin:0 0 8px;background:linear-gradient(var(--bg-page) 70%,transparent)}
 .tabs::-webkit-scrollbar{display:none}
 .tabs a{flex:none;display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:8px;color:var(--bg-ink2);font-weight:500;font-size:14.5px;text-decoration:none}
-.tabs a:hover{background:var(--bg-hair)}
+@media (hover:hover){.tabs a:hover{background:var(--bg-hair)}}
 section{padding:28px 0 12px}
 h2{margin:0 0 6px;font:500 30px/1.2 var(--bg-font);letter-spacing:-.015em}
 .sub{margin:0 0 20px;color:var(--bg-ink2)}
@@ -356,14 +356,14 @@ def index(packs):
 <style>{CSS.replace('../../', '../')}
 .list{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:8px 0 0}}
 .pk{{display:block;background:var(--bg-surface);border-radius:var(--bg-r-md);overflow:hidden;box-shadow:var(--bg-sh-1);color:var(--bg-ink);text-decoration:none;transition:transform .3s var(--bg-ease),box-shadow .3s var(--bg-ease)}}
-.pk:hover{{transform:translateY(-2px);box-shadow:var(--bg-sh-2)}}
+@media (hover:hover){{.pk:hover{{transform:translateY(-2px);box-shadow:var(--bg-sh-2)}}}}
 .pk img{{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}}
 .pk div{{padding:14px 18px 18px;display:grid;gap:4px}}
 .pk .eye{{font-size:13px}}.pk b{{font-size:18px;line-height:1.35}}.pk .d{{color:var(--bg-ink2);font-size:15px}}
 @media (max-width:900px){{.list{{grid-template-columns:1fr}}}}
 .tools{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:36px}}
 .tools a{{display:grid;gap:4px;padding:18px 20px;border-radius:var(--bg-r-md);background:transparent;box-shadow:var(--bg-sh-1);color:var(--bg-ink);text-decoration:none;transition:box-shadow .3s var(--bg-ease)}}
-.tools a:hover{{box-shadow:var(--bg-sh-2)}}.tools b{{font-size:17px}}.tools span{{color:var(--bg-ink2);font-size:15px}}
+@media (hover:hover){{.tools a:hover{{box-shadow:var(--bg-sh-2)}}}}.tools b{{font-size:17px}}.tools span{{color:var(--bg-ink2);font-size:15px}}
 @media (max-width:900px){{.tools{{grid-template-columns:1fr}}}}
 </style>
 </head>

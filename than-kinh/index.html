@@ -28,7 +28,7 @@ html[data-chieu]{--bg-ink:#000000;--bg-ink2:#141414;--bg-ink3:#262626;--bg-glass
 <meta property="og:image" content="https://nclamvn.github.io/bai-giang/design/the/than-kinh.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Neuron và xung thần kinh">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nclamvn.github.io/bai-giang/design/the/than-kinh.jpg">
 <!--BG-SHARE:end-->
-<!--BG-KHUNG:start--><script>(function(){if(window!==top||/[?&]doc=0\b/.test(location.search))return;window.BG_KHUNG={"title": "Neuron và xung thần kinh", "crumb": [{"t": "Sinh học 11", "href": "#bai-hoc"}], "subject": "Sinh học", "s": "sinh", "cover": "thu-vien/covers/than-kinh.webp", "next": {"title": "Cơ thể người 3D", "href": "co-the-nguoi/", "sub": "Cả cơ thể: hệ thần kinh và các hệ khác"}, "pack": "giao-vien/than-kinh/", "root": "../", "desc": "Bài 3D Sinh học 11: neuron, điện thế màng, dẫn truyền nhảy cóc qua eo Ranvier và synapse hoá học, phong cách điện ảnh.", "doc_title": "Neuron và xung thần kinh · Sáng Ăn Khoai"};document.write('<link rel="stylesheet" href="../design/house.css"><script src="../shell/dist/khung.min.js?v=4b3c358171"><\/script><plaintext style="display:none">')})()</script><!--BG-KHUNG:end-->
+<!--BG-KHUNG:start--><script>(function(){if(window!==top||/[?&]doc=0\b/.test(location.search))return;window.BG_KHUNG={"title": "Neuron và xung thần kinh", "crumb": [{"t": "Sinh học 11", "href": "#bai-hoc"}], "subject": "Sinh học", "s": "sinh", "cover": "thu-vien/covers/than-kinh.webp", "next": {"title": "Cơ thể người 3D", "href": "co-the-nguoi/", "sub": "Cả cơ thể: hệ thần kinh và các hệ khác"}, "pack": "giao-vien/than-kinh/", "root": "../", "desc": "Bài 3D Sinh học 11: neuron, điện thế màng, dẫn truyền nhảy cóc qua eo Ranvier và synapse hoá học, phong cách điện ảnh.", "doc_title": "Neuron và xung thần kinh · Sáng Ăn Khoai"};document.write('<link rel="stylesheet" href="../design/house.css"><script src="../shell/dist/khung.min.js?v=d98012986f"><\/script><plaintext style="display:none">')})()</script><!--BG-KHUNG:end-->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#050816">
 <title>Neuron và xung thần kinh · Sáng Ăn Khoai</title>
@@ -64,7 +64,7 @@ body.bgs-on #title,body.bgs-on #vm,body.bgs-on #tag{top:calc(var(--bg-bar,56px) 
 #ask{margin-top:10px;padding-top:10px;border-top:1px solid var(--nk-line)}
 #ask b{display:block;margin-bottom:6px;font:600 14px/1.45 var(--bg-font,system-ui);color:var(--nk-ink)}
 #ask button{display:block;width:100%;text-align:left;min-height:40px;margin:0 0 6px;padding:8px 12px;border:1px solid var(--bg-hair2,rgba(16,24,40,.18));border-radius:10px;background:#fff;color:var(--nk-ink);font:500 14px/1.4 var(--bg-font,system-ui);cursor:pointer}
-#ask button:hover:not(:disabled){border-color:var(--nk-ink3)}
+@media (hover:hover){#ask button:hover:not(:disabled){border-color:var(--nk-ink3)}}
 #ask.rev button.ok{border-color:var(--bg-ok,#1F7A4D);background:color-mix(in srgb,var(--bg-ok,#1F7A4D) 10%,#fff);font-weight:600}
 #ask.rev button.pick:not(.ok){border-color:var(--bg-bad,#B3261E);background:color-mix(in srgb,var(--bg-bad,#B3261E) 8%,#fff)}
 #ask .e{display:none;margin-top:4px;font:500 13px/1.5 var(--bg-font,system-ui);color:var(--nk-ink2)}
@@ -95,7 +95,7 @@ body.clean .hud,body.clean #fade{display:none!important}
 #fade{position:fixed;inset:0;z-index:4;background:#000;opacity:0;pointer-events:none}
 #play{position:fixed;z-index:6;left:50%;bottom:64px;transform:translateX(-50%);display:flex;gap:8px;pointer-events:auto}
 #play button{min-height:44px;padding:0 18px;white-space:nowrap;border-radius:999px;border:0;background:rgba(255,255,255,.94);color:var(--bg-ink,#1D1B16);font:600 14px var(--bg-font,system-ui);cursor:pointer;box-shadow:var(--bg-sh-1,0 6px 18px -10px rgba(16,24,40,.28)),0 0 0 .5px rgba(16,24,40,.08)}
-#play button:hover{box-shadow:var(--bg-sh-2,0 18px 44px -18px rgba(16,24,40,.34)),0 0 0 .5px rgba(16,24,40,.12)}
+@media (hover:hover){#play button:hover{box-shadow:var(--bg-sh-2,0 18px 44px -18px rgba(16,24,40,.34)),0 0 0 .5px rgba(16,24,40,.12)}}
 #play button[aria-expanded="true"]{background:var(--bg-ink,#1D1B16);color:#fff}
 body.film #play,body.film .bgs{display:none!important}
 /* nút xem giữa đáy cần chỗ: sơ đồ vị trí (phụ, trùng nội dung bảng Số đọc) chỉ hiện trên màn rộng */
@@ -108,7 +108,7 @@ body.film #play,body.film .bgs{display:none!important}
 body.bgs-on :is(button,.btn,select){font-family:var(--bg-font)}
 body.bgs-on .btn{font-weight:600;letter-spacing:0;text-transform:none}
 body.bgs-on :is(.btn.primary,.btn.pri,.btn.gold,.btn.cta){background:var(--bg-brand)!important;background-image:none!important;border-color:var(--bg-brand)!important;color:var(--bg-brand-ink)!important;box-shadow:none!important;text-shadow:none!important}
-body.bgs-on :is(.btn.primary,.btn.pri,.btn.gold,.btn.cta):hover:not(:disabled){filter:brightness(1.18)}
+@media (hover:hover){body.bgs-on :is(.btn.primary,.btn.pri,.btn.gold,.btn.cta):hover:not(:disabled){filter:brightness(1.18)}}
 body.bgs-on :is(.btn.on,.btn.dark,.btn[aria-pressed="true"],.chip.on,.chip[aria-pressed="true"],.seg button.on,.sw button.on){background:var(--bg-ink)!important;background-image:none!important;border-color:var(--bg-ink)!important;color:var(--bg-page)!important}
 body.bgs-on :is(input[type=range],input[type=checkbox],input[type=radio]){accent-color:var(--bg-brand)}
 body.bgs-on :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible{outline:2px solid var(--bg-focus)!important;outline-offset:2px}
@@ -144,7 +144,7 @@ body.bgs-on :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible
 
 <!--BG-SHELL:start-->
 <script>window.BG_SEQ={"slug": "than-kinh", "title": "Neuron và xung thần kinh", "crumb": [{"t": "Sinh học 11", "href": "#bai-hoc"}], "next": {"title": "Cơ thể người 3D", "href": "co-the-nguoi/", "sub": "Cả cơ thể: hệ thần kinh và các hệ khác"}, "cover": "thu-vien/covers/than-kinh.webp", "subject": "Sinh học", "s": "sinh", "pack": "giao-vien/than-kinh/", "plan": [{"t": "Mỗi neuron là một tế bào truyền tin", "m": [0, 12], "gv": "Phút 0–4: nêu tình huống chạm tay vào cốc nước nóng, rụt tay lại rất nhanh; hỏi tín hiệu đi bằng cách nào, cho học sinh ghi mục 1. Phút 4–12: cho cảnh chạy, rồi dừng hình chỉ lần lượt sợi nhánh, thân, sợi trục, bao myelin, eo Ranvier, chuỳ synapse. Hỏi câu trên màn chiếu.", "hs": "Ghi dự đoán mục 1; chú thích sơ đồ neuron ở mục 2."}, {"t": "Thân neuron tổng hợp tín hiệu", "m": [12, 21], "gv": "Chỉ bảng điện thế màng ở góc phải: nghỉ khoảng −70 mV, ngưỡng khoảng −55 mV, đỉnh khoảng +30 mV. Cho xem lại cảnh một lần. Bấm B, cho học sinh vẽ đồ thị 3 phút. Hỏi câu trên màn chiếu.", "hs": "Vẽ đồ thị điện thế ở mục 3."}, {"t": "Xung nhảy qua các eo Ranvier", "m": [21, 30], "gv": "Cho cảnh chạy, chỉ xung nhảy từ eo này sang eo khác. Hỏi câu trên màn chiếu. Hỏi thêm: nếu một đoạn sợi trục mất bao myelin, xung đi nhanh hơn hay chậm hơn? Vì sao?", "hs": "Trả lời miệng; kiểm lại chú thích D và E ở mục 2."}, {"t": "Chất dẫn truyền vượt khe synapse", "m": [30, 45], "gv": "Phút 30–36: cho cảnh chạy, chỉ các túi ở chuỳ, khe synapse, thụ thể ở màng sau; nói thêm Ca²⁺ đi vào chuỳ khi xung tới. Hỏi câu trên màn chiếu. Phút 36–40: cặp đôi làm mục 4, gọi một cặp đọc thứ tự. Phút 40–45: học sinh làm mục 5, rồi bấm Thử phá → Tiêm thuốc tê để cả lớp thấy xung dừng giữa sợi trục, không tới synapse; thu phiếu hoặc giao về nhà.", "hs": "Trả lời câu hỏi; làm mục 4, 5 và 6 của phiếu."}]};</script>
-<script src="../shell/dist/bg-shell.min.js?v=27d982119f"></script>
+<script src="../shell/dist/bg-shell.min.js?v=df9808a449"></script>
 <!--BG-SHELL:end-->
 <script type="importmap">
 {

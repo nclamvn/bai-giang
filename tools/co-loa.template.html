@@ -23,7 +23,7 @@ button{font:inherit;cursor:pointer}
 header.top{padding:14px 18px 16px}
 .crumb{display:flex;gap:6px;align-items:center;font-size:13px;margin-bottom:8px}
 .crumb a{text-decoration:none;color:var(--muted);font-weight:500}
-.crumb a:hover{color:var(--ink)}
+@media (hover:hover){.crumb a:hover{color:var(--ink)}}
 .crumb span{color:var(--hair)}
 h1{margin:2px 0 4px;font-size:30px;letter-spacing:-.02em;line-height:1.1}
 .sub{margin:0;color:var(--muted);font-size:13.5px}
@@ -62,7 +62,7 @@ h1{margin:2px 0 4px;font-size:30px;letter-spacing:-.02em;line-height:1.1}
 .facts td:first-child{color:var(--muted);padding-right:10px;width:44%}
 .facts td:last-child{font-weight:600;font-variant-numeric:tabular-nums}
 .ref{display:inline-block;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:rgba(178,106,26,.12);color:var(--accent2);font-size:13px;font-weight:700;line-height:20px;text-align:center;text-decoration:none;vertical-align:2px;margin-left:2px}
-.ref:hover{background:var(--accent);color:#fff}
+@media (hover:hover){.ref:hover{background:var(--accent);color:#fff}}
 .tag{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;padding:2px 8px;border-radius:999px;margin:0 4px 4px 0}
 .tag.do{background:rgba(44,122,75,.1);color:#226040}
 .tag.uoc{background:rgba(178,106,26,.12);color:#7A4510}

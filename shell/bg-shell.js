@@ -41,29 +41,33 @@
   .bgs-i{width:20px;height:20px;flex:none;display:block}
   .bgs-glass{background:var(--bg-glass);-webkit-backdrop-filter:var(--bg-blur);backdrop-filter:var(--bg-blur);box-shadow:var(--bg-sh-1)}
   .bgs :focus-visible{outline:2px solid var(--bg-focus);outline-offset:2px}
+  /* vệ sinh giao diện: nút lún nhẹ khi nhấn; bàn phím nhảy thẳng tới nội dung (docs/ve-sinh-giao-dien.md) */
+  :where(button,[role=button],summary):not(:disabled):active{scale:.97}
+  .bg-skip{position:fixed;left:12px;top:12px;z-index:2147483001;padding:10px 16px;border-radius:10px;background:var(--bg-ink,#141416);color:#fff;font:500 14px/1.2 var(--bg-font,system-ui);text-decoration:none;transform:translateY(-300%);transition:transform .16s cubic-bezier(.23,1,.32,1)}
+  .bg-skip:focus{transform:none}
   /* thanh đầu bài */
   body.bgs-embed .bgs-home,body.bgs-embed .bgs-sep{display:none!important}
   .bgs-bar{left:0;right:0;top:0;height:calc(var(--bg-bar) + env(safe-area-inset-top));padding:env(safe-area-inset-top) max(12px,env(safe-area-inset-right)) 0 max(12px,env(safe-area-inset-left));display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--bg-hair)}
   .bgs-home{display:flex;align-items:center;gap:9px;height:40px;padding:0 10px 0 4px;border-radius:var(--bg-r-sm);flex:none}
-  .bgs-home:hover{background:var(--bg-hair)}
+  @media (hover:hover){.bgs-home:hover{background:var(--bg-hair)}}
   .bgs-logo{width:30px;height:30px;flex:none;display:block;object-fit:contain}
   .bgs-home b{font-weight:700;font-size:var(--bg-fs-sm);letter-spacing:-.01em}
   .bgs-sep{width:1px;height:24px;background:var(--bg-hair2);flex:none;margin:0 4px}
   .bgs-crumb{min-width:0;flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;line-height:1.2}
   .bgs-crumb .s{font-size:var(--bg-fs-xs);color:var(--bg-ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .bgs-crumb .s a:hover{color:var(--bg-ink);text-decoration:underline;text-underline-offset:2px}
+  @media (hover:hover){.bgs-crumb .s a:hover{color:var(--bg-ink);text-decoration:underline;text-underline-offset:2px}}
   .bgs-crumb h1{margin:1px 0 0;font:700 var(--bg-fs-md)/1.2 var(--bg-font);letter-spacing:-.015em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .bgs-tools{display:flex;align-items:center;gap:6px;flex:none}
   .bgs-b{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:40px;min-width:40px;padding:0 12px;border-radius:var(--bg-r-sm);font-weight:600;white-space:nowrap;transition:background var(--bg-t-fast) var(--bg-ease),color var(--bg-t-fast)}
-  .bgs-b:hover{background:var(--bg-hair)}
+  @media (hover:hover){.bgs-b:hover{background:var(--bg-hair)}}
   .bgs-b[aria-pressed="true"]{background:var(--bg-ink);color:var(--bg-page)}
   .bgs-b.pri{background:var(--bg-brand);color:var(--bg-brand-ink);padding:0 16px 0 14px;margin-left:4px}
-  .bgs-b.pri:hover{filter:brightness(1.12)}
+  @media (hover:hover){.bgs-b.pri:hover{filter:brightness(1.12)}}
   .bgs-b.on{background:var(--bg-bad);color:#fff}
   .bgs-b.ic{padding:0;width:40px}
   .bgs-b .k{font:600 var(--bg-fs-xs) var(--bg-mono);font-variant-numeric:tabular-nums;opacity:.85}
   .bgs-prog{display:flex;align-items:center;gap:10px;height:40px;padding:0 12px;border-radius:var(--bg-r-sm);flex:none}
-  .bgs-prog:hover{background:var(--bg-hair)}
+  @media (hover:hover){.bgs-prog:hover{background:var(--bg-hair)}}
   .bgs-prog .t{font-weight:600;font-size:var(--bg-fs-xs);font-variant-numeric:tabular-nums;color:var(--bg-ink2);white-space:nowrap}
   .bgs-prog .r{display:flex;gap:3px}
   .bgs-prog .r i{display:block;width:6px;height:6px;border-radius:3px;background:var(--bg-hair2);transition:width var(--bg-t-mid) var(--bg-ease),background var(--bg-t-mid)}
@@ -74,7 +78,7 @@
   .bgs-pop.show{display:block;animation:bgs-in var(--bg-t-mid) var(--bg-ease)}
   @keyframes bgs-in{from{opacity:0;transform:translateY(-6px)}}
   .bgs-mi{display:flex!important;align-items:center;gap:12px;width:100%;min-height:44px;padding:8px 12px;border-radius:var(--bg-r-sm);text-align:left;font-weight:500}
-  .bgs-mi:hover,.bgs-mi:focus-visible{background:var(--bg-hair)}
+  @media (hover:hover){.bgs-mi:hover{background:var(--bg-hair)}}.bgs-mi:focus-visible{background:var(--bg-hair)}
   .bgs-mi .i2{margin-left:auto;color:var(--bg-ink3);font:500 var(--bg-fs-xs) var(--bg-mono)}
   .bgs-mi[aria-checked="true"] .i2{color:var(--bg-ok)}
   .bgs-mi .n{min-width:28px;font:600 var(--bg-fs-xs) var(--bg-mono);color:var(--bg-ink3);font-variant-numeric:tabular-nums}
@@ -498,7 +502,7 @@
       .nx b{color:var(--bg-ink)}
       ol.steps{list-style:none;margin:0;padding:0}
       ol.steps li{display:flex;gap:12px;align-items:center;min-height:44px;padding:8px 12px;border-radius:var(--bg-r-sm);cursor:pointer}
-      ol.steps li:hover{background:var(--bg-hair)}
+      @media (hover:hover){ol.steps li:hover{background:var(--bg-hair)}}
       ol.steps li.cur{background:var(--bg-ink);color:var(--bg-page)}
       ol.steps li b{min-width:26px;font:600 var(--bg-fs-xs) var(--bg-mono)}
       ol.steps li .q{margin-left:auto;font-size:var(--bg-fs-xs);opacity:.7}
@@ -679,6 +683,12 @@
     if (store.get('bg-chieu', '0') === '1' || new URLSearchParams(location.search).has('chieu')) H.setAttribute('data-chieu', '');
     setupPanels(L);
     document.body.classList.add('bgs-on');
+    if (!EMBED && !document.querySelector('.bg-skip')) { // phần tử đầu tiên khi bấm Tab; đích tìm lúc bấm vì nội dung bài dựng sau vỏ
+      const sk = document.createElement('a'); sk.className = 'bg-skip'; sk.href = '#noi-dung'; sk.textContent = 'Bỏ qua tới nội dung';
+      sk.addEventListener('click', (e) => { e.preventDefault(); const t = document.querySelector('main,[role=main],#noi-dung,#dk,#app,#viewport,#stage,#gl,canvas'); if (!t) return;
+        if (!t.hasAttribute('tabindex')) { t.tabIndex = -1; t.style.setProperty('outline', 'none', 'important'); } t.focus({preventScroll: true}); t.scrollIntoView({block: 'start'}); });
+      document.body.prepend(sk);
+    }
     buildBar(L);
     buildNav();
     nextCard = mk('bgs-next bgs-glass', ''); nextCard.setAttribute('role', 'complementary'); nextCard.setAttribute('aria-label', 'Bài tiếp theo');

@@ -10,6 +10,7 @@
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nclamvn.github.io/bai-giang/design/the/thiet-ke-mang.jpg">
 <!--BG-SHARE:end-->
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#FFFFFF">
 <title>Thiết kế và hiệu năng mạng</title>
 <meta name="description" content="Học phần Thiết kế và hiệu năng mạng (đại học) thành 22 tiết bài giảng 3D có giáo án 45 phút: độ trễ, hàng đợi, yêu cầu, thiết kế logic, thiết kế vật lý, kiểm thử và mạng 5G.">
 <link rel="stylesheet" href="../design/house.css"><link rel="icon" type="image/png" sizes="32x32" href="../design/logo/favicon-32.png"><link rel="apple-touch-icon" href="../design/logo/apple-touch-icon.png">
@@ -35,7 +36,7 @@ a{color:inherit}
 .card{display:flex;flex-direction:column}
 .card .img{display:block;position:relative;aspect-ratio:16/9;background:var(--bg-card);overflow:hidden;border-radius:14px;box-shadow:inset 0 0 0 1px var(--bg-line)}
 .card .img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
-.card .img:hover img{transform:scale(1.03)}
+@media (hover:hover){.card .img:hover img{transform:scale(1.03)}}
 .card .img b{position:absolute;left:12px;top:12px;background:#fff;color:var(--bg-ink);font:500 10.5px var(--bg-mono);letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:6px;box-shadow:0 0 0 1px var(--bg-line)}
 .card .body{padding:16px 2px 0;display:flex;flex-direction:column;gap:10px;flex:1}
 .card h2{margin:0;font:500 22px/1.25 var(--bg-font);letter-spacing:-.02em}
@@ -48,13 +49,13 @@ summary{cursor:pointer;font-weight:600;font-size:14px}
 details ol{margin:8px 0 0;padding-left:20px;font-size:13.5px}details li{margin:3px 0}
 .note{font-size:13px;color:var(--bg-ink3)}
 .go{margin-top:auto;display:inline-flex;align-self:flex-start;align-items:center;gap:8px;background:var(--ink);color:#fff;text-decoration:none;font:700 13px "JetBrains Mono",monospace;letter-spacing:1.5px;padding:10px 16px;border-radius:4px}
-.go:hover{background:var(--or)}
+@media (hover:hover){.go:hover{background:var(--or)}}
 h3.sec{font:500 10.5px var(--bg-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--bg-mut);margin:40px 0 14px;display:flex;align-items:center;gap:8px}
 h3.sec:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--bg-sig)}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 .more{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 .more a{display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--ink);box-shadow:0 1px 2px rgba(16,24,40,.04);transition:box-shadow .3s}
-.more a:hover{box-shadow:0 8px 24px -12px rgba(16,24,40,.18)}
+@media (hover:hover){.more a:hover{box-shadow:0 8px 24px -12px rgba(16,24,40,.18)}}
 .more img{width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#f1f2f5}
 .more span{display:grid;gap:4px;padding:14px 16px 14px 0;font-size:14.5px;color:var(--mute)}.more b{font-size:18px;color:var(--ink)}.more small{font-size:13px;font-weight:600;color:var(--mute)}
 .box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:14.5px}
@@ -76,9 +77,9 @@ table.ds{width:100%;border-collapse:collapse} .ds td{padding:12px 12px 12px 0;bo
 <script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
 <script id="bg-sw">(function(){try{if(!("serviceWorker"in navigator)||!/(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname))return;var r=new URL("../",location.href).href;if(/[?&]sw=0/.test(location.search)){navigator.serviceWorker.getRegistrations().then(function(a){a.forEach(function(x){x.unregister()})});return}addEventListener("load",function(){setTimeout(function(){navigator.serviceWorker.register(r+"sw.js",{scope:r}).catch(function(){})},3000)})}catch(e){}})();</script>
 </head>
-<body class="bg-hub">
+<body class="bg-hub"><a class="bg-skip" href="#noi-dung">Bỏ qua tới nội dung</a>
 <header class="sitebar"><div class="in"><a class="brand" href="../" aria-label="Sáng Ăn Khoai, trang chính"><img src="../design/logo/mark-128.webp" alt="" width="32" height="32"><span>Sáng Ăn Khoai</span></a><div class="crumbs"><span aria-hidden="true">/</span><b>Đại học</b><span aria-hidden="true">/</span><b>Thiết kế và hiệu năng mạng</b></div><nav aria-label="Mục chính"><a href="../#bai-hoc">Bài học</a><a href="../#lo-trinh">Lộ trình</a><a href="../thu-vien/">Thư viện</a><a href="../#cho-giao-vien">Cho giáo viên</a></nav></div></header>
-<div class="wrap">
+<div class="wrap" id="noi-dung" style="outline:none!important" tabindex="-1">
   <div class="bg-meta"><div class="bg-mono">TEL1459 · Đại học<br>Điện tử viễn thông · 22 tiết · 6 chương</div><div class="bg-mono r">Theo giáo trình của PGS.TS Hoàng Trọng Minh<br>Bài 3D chạy trực tiếp · giáo án 45 phút</div></div>
   <header class="bg-head"><div><h1>Thiết kế và hiệu năng mạng</h1>
     <div class="bg-legend"><span style="--c:var(--bg-sig)">Hoàn chỉnh · 5</span><span style="--c:var(--bg-amber)">Bản sơ bộ · 10</span><span>Đang soạn · 7</span></div></div>
@@ -86,7 +87,7 @@ table.ds{width:100%;border-collapse:collapse} .ds td{padding:12px 12px 12px 0;bo
       <div class="cta"><a class="bg-btn" href="dich-vu/">Mở tiết 1</a><a class="bg-btn ghost" href="#tiet">Xem 22 tiết</a></div></div>
   </header>
 </div>
-<a class="bg-band" href="dich-vu/" aria-label="Mở tiết 1"><img src="../thu-vien/covers/tk-dich-vu.webp" alt="Cảnh 3D tiết 1: Thiết kế mạng bắt đầu từ dịch vụ" style="aspect-ratio:16/6.4"><span class="bg-tag" style="left:50%;top:52%"><i>1</i>Tiết 1 · Thiết kế mạng bắt đầu từ dịch vụ</span></a>
+<a class="bg-band" href="dich-vu/" aria-label="Mở tiết 1"><img src="../thu-vien/covers/tk-dich-vu.webp" alt="Cảnh 3D tiết 1: Thiết kế mạng bắt đầu từ dịch vụ" style="aspect-ratio:16/6.4" width="960" height="640"><span class="bg-tag" style="left:50%;top:52%"><i>1</i>Tiết 1 · Thiết kế mạng bắt đầu từ dịch vụ</span></a>
 <div class="wrap">
   <div class="bg-stats" style="--n:4;margin-bottom:36px"><div><b>22<small>tiết</small></b><span>Mỗi tiết 45 phút</span></div><div><b>15</b><span>Tiết có bài 3D</span></div><div><b>5</b><span>Giáo án hoàn chỉnh</span></div><div><b>6<small>chương</small></b><span>Theo giáo trình</span></div></div>
 </div>
@@ -99,49 +100,49 @@ table.ds{width:100%;border-collapse:collapse} .ds td{padding:12px 12px 12px 0;bo
     <div class="how"><b>Kiểm chứng</b><ol><li>Mô phỏng khớp M/M/1 ở ρ 0,5, 0,8, 0,9 (sai lệch dưới 1 %), M/D/1, M/M/1/K (cả khi quá tải ρ = 1,3) và M/M/c (Erlang C)</li><li>Monte Carlo độ sẵn sàng khớp công thức nối tiếp 1.19 và song song 4.14</li><li>Bài tập có đáp số của giáo trình tính lại bằng máy mỗi lần dựng: ví dụ tr.43 (1 050 Mbit/s), BT 1.4, 2.5, 2.8, 3.3, 4.3, 4.5, 5.2</li><li>Mỗi số ngoài giáo trình có nguồn hoặc ghi rõ là giả định ngay cạnh con số</li></ol></div>
   </section>
   <div class="grid"><article class="card">
-  <a class="img" href="dich-vu/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-dich-vu.webp" alt="" loading="lazy"></a>
+  <a class="img" href="dich-vu/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-dich-vu.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 1 · mục 1.1–1.5</small>Thiết kế mạng bắt đầu từ dịch vụ</h2><p>Chu trình thiết kế và kiểm chứng; dịch vụ, QoS, SLA, metric; mạng như một hệ thống; vector yêu cầu và điều kiện nghiệm thu</p><div class="nut"><a class="bg-btn sm" href="dich-vu/">Vào bài</a><a class="bg-btn sm ghost" href="dich-vu/giao-an/">Giáo án</a></div></div>
 </article><article class="card">
-  <a class="img" href="goi-tin/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-goi-tin.webp" alt="" loading="lazy"></a>
+  <a class="img" href="goi-tin/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-goi-tin.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 2 · mục 1.5.2, 1.6.1</small>Gói tin qua ba chặng</h2><p>Mức sử dụng và dư địa; độ trễ đầu cuối bốn thành phần; trễ hàng đợi từ mô phỏng so với M/M/1; thời gian đáp ứng</p><div class="nut"><a class="bg-btn sm" href="goi-tin/">Vào bài</a><a class="bg-btn sm ghost" href="goi-tin/giao-an/">Giáo án</a></div></div>
 </article><article class="card">
-  <a class="img" href="hang-doi/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-hang-doi.webp" alt="" loading="lazy"></a>
+  <a class="img" href="hang-doi/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-hang-doi.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 3 · mục 1.6.2–1.6.4</small>Khi hàng đợi đầy</h2><p>Bộ đệm K gói: mất gói, biến thiên trễ, lỗi bit, thông lượng và goodput; bộ đệm lớn có tốt hơn?</p><div class="nut"><a class="bg-btn sm" href="hang-doi/">Vào bài</a><a class="bg-btn sm ghost" href="hang-doi/giao-an/">Giáo án</a></div></div>
 </article><article class="card">
-  <a class="img" href="san-sang/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-san-sang.webp" alt="" loading="lazy"></a>
+  <a class="img" href="san-sang/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-san-sang.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 4 · mục 1.6.5</small>Độ sẵn sàng, RTO và RPO</h2><p>MTBF, MTTR; hai đường lên chung một ống hay tách hai ngả; đồng hồ phục hồi bốn pha; công thức so với Monte Carlo</p><div class="nut"><a class="bg-btn sm" href="san-sang/">Vào bài</a><a class="bg-btn sm ghost" href="san-sang/giao-an/">Giáo án</a></div></div>
 </article><article class="card">
-  <a class="img" href="van-hanh/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-van-hanh.webp" alt="" loading="lazy"></a>
+  <a class="img" href="van-hanh/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-van-hanh.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 5 · mục 1.7–1.10</small>Vòng vận hành có kiểm chứng</h2><p>Ba hướng đánh giá; telemetry và sai lệch Δk; nền tảng 5G-Advanced và 6G; ràng buộc mới; độ phủ quan sát Γ</p><div class="nut"><a class="bg-btn sm" href="van-hanh/">Vào bài</a><a class="bg-btn sm ghost" href="van-hanh/giao-an/">Giáo án</a></div></div>
 </article><article class="card">
-  <a class="img" href="dem-tai/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-tai.webp" alt="" loading="lazy"></a>
+  <a class="img" href="dem-tai/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-tai.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 7 · mục 2.2.1, 2.2.4, 2.3</small>Đếm tải thật</h2><p>Hệ số đồng thời, tải dịch vụ, phân vị 95; ma trận lưu lượng; tốc độ hữu dụng; dung lượng liên kết</p><div class="nut"><a class="bg-btn sm" href="dem-tai/">Vào bài</a></div></div>
 </article><article class="card">
-  <a class="img" href="vlsm/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-vlsm.webp" alt="" loading="lazy"></a>
+  <a class="img" href="vlsm/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-vlsm.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 11 · mục 3.3, 3.4.1</small>Mô hình kiến trúc và chia địa chỉ VLSM</h2><p>Mô hình topo, luồng, chức năng; tiền tố theo tăng trưởng, căn biên, gộp tuyến</p><div class="nut"><a class="bg-btn sm" href="vlsm/">Vào bài</a></div></div>
 </article><article class="card">
-  <a class="img" href="dinh-tuyen/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-dinh-tuyen.webp" alt="" loading="lazy"></a>
+  <a class="img" href="dinh-tuyen/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-dinh-tuyen.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 12 · mục 3.4.2</small>Định tuyến, ECMP và hội tụ</h2><p>Chi phí đường đi, Dijkstra; ECMP chia đều hay băm; đổi metric; hội tụ bốn pha</p><div class="nut"><a class="bg-btn sm" href="dinh-tuyen/">Vào bài</a></div></div>
 </article><article class="card">
-  <a class="img" href="overlay/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-overlay.webp" alt="" loading="lazy"></a>
+  <a class="img" href="overlay/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-overlay.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 13 · mục 3.4.3, 3.5, 3.6</small>Underlay, overlay và thiết kế logic 5G</h2><p>Leaf-spine và VXLAN/EVPN; tenant; 5GS, slicing, MEC, O-RAN trong thiết kế logic; ma trận truy vết</p><div class="nut"><a class="bg-btn sm" href="overlay/">Vào bài</a></div></div>
 </article><article class="card">
-  <a class="img" href="toa-nha/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-toa-nha.webp" alt="" loading="lazy"></a>
+  <a class="img" href="toa-nha/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-toa-nha.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 14 · mục 4.1, 4.2.1–4.2.2, 4.2.5, 4.3, 4.4.4</small>Tòa nhà 8 tầng: tủ mạng, cáp và PoE</h2><p>Khảo sát; IDF mỗi tầng hay kéo về MDF; giới hạn 90 m; số cổng, Ω; PoE, UPS; sơ đồ và hồ sơ</p><div class="nut"><a class="bg-btn sm" href="toa-nha/">Vào bài</a></div></div>
 </article><article class="card">
-  <a class="img" href="quang/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-quang.webp" alt="" loading="lazy"></a>
+  <a class="img" href="quang/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-quang.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 15 · mục 4.2.3, 4.4.1–4.4.3</small>Môi trường truyền dẫn và ngân sách quang</h2><p>Cáp đồng, quang đa mode, đơn mode; công suất thu; dung lượng, trễ tuần tự, dự phòng</p><div class="nut"><a class="bg-btn sm" href="quang/">Vào bài</a></div></div>
 </article><article class="card">
-  <a class="img" href="wifi/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-wifi.webp" alt="" loading="lazy"></a>
+  <a class="img" href="wifi/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-wifi.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 16 · mục 4.2.4, 4.4.5–4.6</small>Wi-Fi, 5G và nghiệm thu vật lý</h2><p>Tốc độ PHY và thông lượng thật; QoS tại biên; hạ tầng 5G, fronthaul; nghiệm thu</p><div class="nut"><a class="bg-btn sm" href="wifi/">Vào bài</a></div></div>
 </article><article class="card">
-  <a class="img" href="phong-do/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-phong-do.webp" alt="" loading="lazy"></a>
+  <a class="img" href="phong-do/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-phong-do.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 17 · mục 5.1, 5.3, 5.5</small>Phòng đo</h2><p>Mô hình hoá; trạng thái và sự kiện; thống kê kết quả đo; kiểm thử chuẩn; kế hoạch thử; đọc kết quả theo chuỗi nguyên nhân</p><div class="nut"><a class="bg-btn sm" href="phong-do/">Vào bài</a></div></div>
 </article><article class="card">
-  <a class="img" href="qos/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-qos.webp" alt="" loading="lazy"></a>
+  <a class="img" href="qos/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-qos.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 18 · mục 5.2</small>Tối ưu mạng: hàng đợi và QoS</h2><p>Tối ưu theo nút nghẽn; multicast; trễ tuần tự hoá; DiffServ, DSCP, ECN; ưu tiên có giới hạn</p><div class="nut"><a class="bg-btn sm" href="qos/">Vào bài</a></div></div>
 </article><article class="card">
-  <a class="img" href="5g-dau-cuoi/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-5g.webp" alt="" loading="lazy"></a>
+  <a class="img" href="5g-dau-cuoi/" tabindex="-1" aria-hidden="true"><img src="../thu-vien/covers/tk-5g.webp" alt="" loading="lazy" width="960" height="640"></a>
   <div class="body"><h2 class="bg-h3"><small>Tiết 20 · mục 6.1, 6.3.3</small>Gói tin 5G đầu-cuối và vị trí UPF</h2><p>Khối kiến trúc 5GS; mặt phẳng điều khiển và người dùng; UPF ở biên, vùng hay trung tâm; ngân sách trễ</p><div class="nut"><a class="bg-btn sm" href="5g-dau-cuoi/">Vào bài</a></div></div>
 </article></div>
   <h3 class="sec" id="tiet">22 tiết theo sáu chương</h3>

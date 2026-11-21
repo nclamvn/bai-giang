@@ -229,7 +229,7 @@ h2{{margin:8px 0 0;font-size:22px}}
 .step .bd{{display:grid;gap:8px;align-content:start}}
 .step .meta{{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}}
 .step .meta .dur{{font-family:var(--f-mono)}}
-.step h3{{margin:0;font-size:19px;line-height:1.3}} .step h3 a{{color:inherit;text-decoration:none}} .step h3 a:hover{{text-decoration:underline;text-underline-offset:3px}}
+.step h3{{margin:0;font-size:19px;line-height:1.3}} .step h3 a{{color:inherit;text-decoration:none}} @media (hover:hover){{.step h3 a:hover{{text-decoration:underline;text-underline-offset:3px}}}}
 .step p{{margin:0}} .step .steps{{font-size:13.5px;color:var(--ink2)}}
 .ask{{background:var(--bg-page);padding:10px 14px;border-radius:12px;font-size:14.5px}}
 .ask b{{font-size:13px;font-weight:600;color:var(--bg-ink3);margin-right:8px}}

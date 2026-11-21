@@ -30,7 +30,7 @@ export function createLookup({url, models, onModel}) {
 .tc .ls input{margin:12px 12px 6px;padding:8px 10px;border:1px solid #e3e6ea;border-radius:8px;font:13px 'Be Vietnam Pro',system-ui,sans-serif}
 .tc .chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 8px}
 .tc .list{overflow:auto;flex:1;min-height:0}
-.tc .it{padding:7px 14px;border-top:1px solid #f1f2f4;cursor:pointer}.tc .it:hover{background:#f6f7f9}.tc .it.on{background:#fff4ec}
+.tc .it{padding:7px 14px;border-top:1px solid #f1f2f4;cursor:pointer}@media (hover:hover){.tc .it:hover{background:#f6f7f9}}.tc .it.on{background:#fff4ec}
 .tc .it i{font-style:italic}.tc .it span{display:block;color:#6b7280;font-size:11.5px}
 .tc .dt{overflow:auto;padding:16px 20px;min-height:0}
 .tc .dt h3{margin:0;font-size:20px;font-style:italic}.tc .dt .au{color:#6b7280;font-size:12px}

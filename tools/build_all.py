@@ -28,6 +28,7 @@ STEPS = [
     ('so-chuyen-dong', [[PY, 'tools/chuyen_dong.py']]),
     ('thu-vien', [[PY, 'tools/house_thu_vien.py']]),
     ('trang-muc', [[PY, 'tools/build_ls10.py'], [PY, 'tools/anh_nho.py'], [PY, 'tools/build_pages.py']]),
+    ('ve-sinh-ui', [[PY, 'tools/ve_sinh_ui.py']]),
     ('the-chia-se', [[PY, 'tools/the_chia_se.py', '--strict']]),
     ('chuyen-canh', [[PY, 'tools/chuyen_canh.py']]),
     ('bo-nho-dem', [[PY, 'tools/sw.py']]),

@@ -12,6 +12,7 @@
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nclamvn.github.io/bai-giang/design/the/te-bao-ar.jpg">
 <!--BG-SHARE:end-->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
 <title>Ribosome trên bàn</title>
 <meta name="description" content="Đặt ribosome thật (PDB 3J7R) lên bàn học bằng AR, phóng to 10 triệu lần.">
 <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js" integrity="sha384-Ftcjj/GNLxPvzNDftO/oryXB9aGxsGZY9JGqsXG0uUKgQDl9RfDgsx9NJ/4IVNPe" crossorigin="anonymous"></script>
@@ -92,7 +93,7 @@ body{background:var(--lg-wash)!important;background-attachment:fixed!important;c
 model-viewer{background:radial-gradient(circle at 50% 52%,#FFFFFF 0%,#EEF0F4 75%)!important}
 .card{background:var(--lg-fill);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);border:1px solid var(--lg-stroke);box-shadow:var(--lg-shadow),var(--lg-inner);border-radius:var(--lg-r)}
 .btn{border-radius:999px!important;background:var(--lg-fill);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);border:1px solid var(--lg-stroke)!important;box-shadow:var(--lg-shadow-lo),var(--lg-inner);color:var(--lg-ink);font-family:var(--lg-font);font-weight:600;transition:transform .15s ease,box-shadow .2s ease}
-.btn:hover{box-shadow:0 0 0 .5px rgba(15,23,42,.1),0 8px 22px -8px rgba(15,23,42,.25),var(--lg-inner)}
+@media (hover:hover){.btn:hover{box-shadow:0 0 0 .5px rgba(15,23,42,.1),0 8px 22px -8px rgba(15,23,42,.25),var(--lg-inner)}}
 .btn:active{transform:scale(.97)}
 .arbtn{background:linear-gradient(180deg,#D42150 0%,#B0123C 100%)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 8px 20px -8px #D42150,inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(0,0,0,.08)!important}
 

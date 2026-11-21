@@ -10,6 +10,7 @@
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nclamvn.github.io/bai-giang/design/the/giao-vien-co-loa.jpg">
 <!--BG-SHARE:end-->
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#FFFFFF">
 <title>Thành Cổ Loa: đọc văn minh Âu Lạc từ dấu tích · Gói dạy Lịch sử 10 · Sáng Ăn Khoai</title>
 <meta name="description" content="Gói dạy thử 45 phút cho bài 3D Thành Cổ Loa (Lịch sử 10): kịch bản theo phút, phiếu học tập in A4, đáp án, hướng dẫn giáo viên.">
 <link rel="icon" type="image/png" sizes="32x32" href="../../design/logo/favicon-32.png"><link rel="apple-touch-icon" href="../../design/logo/apple-touch-icon.png">
@@ -26,7 +27,7 @@ a{color:var(--acc)}
 .bar .crumb{color:var(--bg-ink2);font-size:15px;text-decoration:none;min-height:44px;display:flex;align-items:center}
 .bar .sp{flex:1}
 .btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:var(--bg-r-sm);border:0;background:var(--bg-surface);color:var(--bg-ink);font:500 15px var(--bg-font);text-decoration:none;cursor:pointer;box-shadow:0 0 0 1px var(--bg-hair2);white-space:nowrap}
-.btn:hover{box-shadow:0 0 0 1px var(--bg-ink3)}
+@media (hover:hover){.btn:hover{box-shadow:0 0 0 1px var(--bg-ink3)}}
 .btn.pri{background:var(--bg-brand);color:var(--bg-brand-ink);box-shadow:none}
 .btn svg{width:18px;height:18px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
@@ -41,7 +42,7 @@ h1{margin:10px 0 12px;font:500 clamp(34px,4.4vw,56px)/1.08 var(--bg-font);letter
 .tabs{position:sticky;top:60px;z-index:9;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 0;margin:0 0 8px;background:linear-gradient(var(--bg-page) 70%,transparent)}
 .tabs::-webkit-scrollbar{display:none}
 .tabs a{flex:none;display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:8px;color:var(--bg-ink2);font-weight:500;font-size:14.5px;text-decoration:none}
-.tabs a:hover{background:var(--bg-hair)}
+@media (hover:hover){.tabs a:hover{background:var(--bg-hair)}}
 section{padding:28px 0 12px}
 h2{margin:0 0 6px;font:500 30px/1.2 var(--bg-font);letter-spacing:-.015em}
 .sub{margin:0 0 20px;color:var(--bg-ink2)}
@@ -164,7 +165,7 @@ dl.ans dt{font-weight:700;color:var(--acc)}
 <script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
 <script id="bg-sw">(function(){try{if(!("serviceWorker"in navigator)||!/(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname))return;var r=new URL("../../",location.href).href;if(/[?&]sw=0/.test(location.search)){navigator.serviceWorker.getRegistrations().then(function(a){a.forEach(function(x){x.unregister()})});return}addEventListener("load",function(){setTimeout(function(){navigator.serviceWorker.register(r+"sw.js",{scope:r}).catch(function(){})},3000)})}catch(e){}})();</script>
 </head>
-<body>
+<body><a class="bg-skip" href="#noi-dung">Bỏ qua tới nội dung</a>
 <div class="bar">
   <a class="home" href="../../"><img src="../../design/logo/mark-96.webp" width="30" height="30" alt="" class="lg"><span>Sáng Ăn Khoai</span></a><span class="sep"></span><a class="crumb" href="../">Gói dạy thử</a>
   <span class="sp"></span>
@@ -172,7 +173,7 @@ dl.ans dt{font-weight:700;color:var(--acc)}
   <button class="btn" type="button" data-print="phieu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In phiếu</button>
   <a class="btn pri" href="../../lich-su-10/co-loa/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a>
 </div>
-<main class="wrap">
+<main class="wrap" id="noi-dung" style="outline:none!important" tabindex="-1">
   <div class="hero">
     <div>
       <div class="eye">Lịch sử 10 · 45 phút · Gói dạy thử</div>
@@ -180,7 +181,7 @@ dl.ans dt{font-weight:700;color:var(--acc)}
       <p class="lead">Kịch bản theo phút, phiếu học tập một trang A4 và đáp án cho bài 3D <a href="../../lich-su-10/co-loa/">Thành Cổ Loa</a>. Đọc 10 phút là dạy được. Phút dự kiến và việc của giáo viên từng bước cũng hiện trên màn hình giáo viên khi lên lớp.</p>
       <div class="badge">Bản thử, chờ giáo viên bộ môn duyệt</div>
     </div>
-    <div class="cover"><img src="../../thu-vien/covers/co-loa.webp" alt="Cảnh 3D của bài Thành Cổ Loa"><a class="btn pri" href="../../lich-su-10/co-loa/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a></div>
+    <div class="cover"><img src="../../thu-vien/covers/co-loa.webp" alt="Cảnh 3D của bài Thành Cổ Loa" width="1200" height="750"><a class="btn pri" href="../../lich-su-10/co-loa/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Mở bài 3D</a></div>
   </div>
   <nav class="tabs" aria-label="Các phần của gói dạy"><a href="#bat-dau">Bắt đầu nhanh</a><a href="#kich-ban">Kịch bản 45 phút</a><a href="#phieu">Phiếu học tập</a><a href="#dap-an">Đáp án</a><a href="#nguon">Yêu cầu cần đạt, nguồn</a></nav>
 
@@ -206,7 +207,7 @@ dl.ans dt{font-weight:700;color:var(--acc)}
     <h2 id="h-ph">Phiếu học tập</h2>
     <p class="sub">Một trang A4, in đen trắng được. Mỗi học sinh một tờ hoặc mỗi cặp một tờ. <button class="btn noprint" type="button" data-print="phieu" style="margin-left:6px;vertical-align:middle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>In phiếu</button></p>
     <div class="sheet-wrap"><div class="sheet-zoom"><div class="paper" lang="vi">
-  <header><div><div class="lg2"><img src="../../design/logo/mark-96.webp" alt="">Sáng Ăn Khoai · Lịch sử 10 · Phiếu học tập</div><h4>Thành Cổ Loa: đọc văn minh Âu Lạc từ dấu tích</h4></div>
+  <header><div><div class="lg2"><img src="../../design/logo/mark-96.webp" alt="" width="96" height="96">Sáng Ăn Khoai · Lịch sử 10 · Phiếu học tập</div><h4>Thành Cổ Loa: đọc văn minh Âu Lạc từ dấu tích</h4></div>
     <div class="who"><span>Họ tên</span><i></i><span>Lớp, nhóm</span><i></i></div></header>
   <div class="part"><div class="ph"><b>1</b><strong>Nếu em là thủ lĩnh</strong><em>đầu giờ, 2 phút</em></div><div class="q"><div class="qq"><span>Em chọn đặt kinh đô ở nơi thế nào? Nêu hai điều kiện và lí do.</span></div><div class="ln"></div><div class="ln"></div></div></div><div class="part"><div class="ph"><b>2</b><strong>Tư liệu nói gì?</strong><em>trong giờ</em></div><p>Ghi loại tư liệu (khảo cổ hay sử cũ, truyền thuyết) và điều nó cho biết về văn minh Âu Lạc: thuộc thành tựu nào?</p><table class="free"><colgroup><col style="width:72mm"><col style="width:24mm"><col></colgroup><tr><th>Tư liệu</th><th>Loại</th><th>Cho biết điều gì, thuộc thành tựu nào</th></tr><tr><td>Niên đại C14 của lũy thành Trung</td><td></td><td></td></tr><tr><td>Kho khoảng 10.000 mũi tên đồng ở Cầu Vực</td><td></td><td></td></tr><tr><td>Khuôn đá đúc mũi tên ở Đền Thượng</td><td></td><td></td></tr><tr><td>Trống đồng Mả Tre chứa nhiều lưỡi cày</td><td></td><td></td></tr><tr><td>Chuyện thành 9 vòng xoáy ốc và nỏ thần</td><td></td><td></td></tr></table></div><div class="part"><div class="ph"><b>3</b><strong>Nghĩ nhanh</strong><em>trong giờ</em></div><div class="q"><div class="qq"><b>a.</b><span>Vì sao việc đắp thành Cổ Loa được xem là dấu hiệu của một Nhà nước?</span></div><div class="ln"></div><div class="ln"></div></div><div class="q"><div class="qq"><b>b.</b><span>Vì sao không nên nói thành Cổ Loa “được xây xong năm 257 TCN”?</span></div><div class="ln"></div><div class="ln"></div></div></div><div class="part"><div class="ph"><b>4</b><strong>Vận dụng</strong><em>cuối giờ</em></div><div class="q"><div class="qq"><span>Viết 3–4 câu giới thiệu Cổ Loa cho khách tham quan. Có ít nhất một bằng chứng khảo cổ kèm số liệu, và ghi nguồn của bằng chứng đó.</span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div></div><div class="part"><div class="ph"><b>5</b><strong>Tự đánh giá</strong><em>cuối giờ</em></div><div class="ck"><i></i><span>Em phân biệt được bằng chứng khảo cổ với truyền thuyết.</span></div><div class="ck"><i></i><span>Em nêu được ít nhất ba thành tựu của văn minh Âu Lạc kèm bằng chứng.</span></div><div class="ck"><i></i><span>Em ghi nguồn khi dùng một con số.</span></div></div>
   <footer><span>Dùng cùng bài 3D “Thành Cổ Loa”</span><span>nclamvn.github.io/bai-giang</span></footer>

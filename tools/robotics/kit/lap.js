@@ -23,7 +23,7 @@ body.lap .mob.cap{display:none!important}
 .lapw .pg .tr i{display:block;height:100%;width:0;background:var(--bg-s-cong,#5B6472);transition:width .3s}
 .lapw .pg b{font-variant-numeric:tabular-nums;color:#1D1B16}
 .lapw .x{position:absolute;right:8px;top:8px;width:36px;height:36px;border:0;border-radius:10px;background:none;font-size:22px;line-height:1;color:#626773;cursor:pointer}
-.lapw .x:hover{background:#f1f2f5}
+@media (hover:hover){.lapw .x:hover{background:#f1f2f5}}
 .lapw .msg{margin:10px 16px 0;padding:10px 12px;border-radius:10px;font:500 14px/1.5 var(--bg-font,system-ui,sans-serif);background:#f3f4f6;color:#454A55}
 .lapw .msg b{display:block;color:#1D1B16;margin-bottom:2px}
 .lapw .msg ul{margin:4px 0 0;padding-left:18px}
@@ -35,7 +35,7 @@ body.lap .mob.cap{display:none!important}
 .lapw .msg .tl{display:block;margin-top:6px;font-size:13px;color:#626773}
 .lapw .ls{flex:1;min-height:0;overflow:auto;padding:10px 12px 4px;display:flex;flex-direction:column;gap:6px}
 .lapw .ls button{display:flex;align-items:center;gap:10px;min-height:40px;padding:6px 12px;border:1px solid rgba(16,24,40,.14);border-radius:10px;background:#fff;color:#1D1B16;font:600 14px/1.3 var(--bg-font,system-ui,sans-serif);text-align:left;cursor:pointer}
-.lapw .ls button:hover{border-color:#626773}
+@media (hover:hover){.lapw .ls button:hover{border-color:#626773}}
 .lapw .ls button .n{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:600 12px var(--bg-mono,monospace);background:#f1f2f5;color:#626773}
 .lapw .ls button.in{background:#f6f7f9;border-color:transparent;color:#626773;font-weight:500}
 .lapw .ls button.in .n{background:#1D1B16;color:#fff}

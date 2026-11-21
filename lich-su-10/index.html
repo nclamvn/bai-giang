@@ -57,7 +57,7 @@ html{background:var(--lg-wash),var(--lg-page);background-attachment:fixed}
 body{background:transparent!important}
 .glass{background:var(--lg-fill);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);border:1px solid var(--lg-stroke);box-shadow:var(--lg-shadow),var(--lg-inner);border-radius:var(--lg-r)}
 .btn{border-radius:999px!important;background:var(--lg-fill);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);border:1px solid var(--lg-stroke)!important;box-shadow:var(--lg-shadow-lo),var(--lg-inner);color:var(--lg-ink);font-family:var(--lg-font);font-weight:600;transition:transform .15s ease,box-shadow .2s ease}
-.btn:hover{box-shadow:0 0 0 .5px rgba(15,23,42,.1),0 8px 22px -8px rgba(15,23,42,.25),var(--lg-inner)}
+@media (hover:hover){.btn:hover{box-shadow:0 0 0 .5px rgba(15,23,42,.1),0 8px 22px -8px rgba(15,23,42,.25),var(--lg-inner)}}
 .btn:active{transform:scale(.97)}
 .btn.primary{background:var(--bg-brand,#1D1B16)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 6px 16px -10px rgba(29,27,22,.65)!important}
 
@@ -108,9 +108,9 @@ header.kv{display:block} header.kv h1{font-size:clamp(40px,6vw,84px);margin:0} h
 <script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
 <script id="bg-sw">(function(){try{if(!("serviceWorker"in navigator)||!/(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname))return;var r=new URL("../",location.href).href;if(/[?&]sw=0/.test(location.search)){navigator.serviceWorker.getRegistrations().then(function(a){a.forEach(function(x){x.unregister()})});return}addEventListener("load",function(){setTimeout(function(){navigator.serviceWorker.register(r+"sw.js",{scope:r}).catch(function(){})},3000)})}catch(e){}})();</script>
 </head>
-<body class="bg-hub">
+<body class="bg-hub"><a class="bg-skip" href="#noi-dung">Bỏ qua tới nội dung</a>
 <header class="sitebar"><div class="in"><a class="brand" href="../" aria-label="Sáng Ăn Khoai, trang chính"><img src="../design/logo/mark-128.webp" alt="" width="32" height="32"><span>Sáng Ăn Khoai</span></a><div class="crumbs"><span aria-hidden="true">/</span><a href="../#lo-trinh">Lộ trình</a><span aria-hidden="true">/</span><b>Lịch sử 10</b></div><nav aria-label="Mục chính"><a href="../#bai-hoc">Bài học</a><a href="../#lo-trinh">Lộ trình</a><a href="../thu-vien/">Thư viện</a><a href="../#cho-giao-vien">Cho giáo viên</a></nav></div></header>
-<div class="wrap">
+<div class="wrap" id="noi-dung" style="outline:none!important" tabindex="-1">
 <header class="kv">
   <div class="bg-meta" style="padding-top:8px"><div class="bg-mono">Lịch sử · lớp 10<br>GDPT 2018, sửa đổi 2025</div><div class="bg-mono r">Dùng chung ba bộ sách<br>Kết nối tri thức · Chân trời sáng tạo · Cánh diều</div></div>
   <div class="bg-head"><div><h1>Lịch sử 10 bằng mô hình 3D</h1>
@@ -120,7 +120,7 @@ header.kv{display:block} header.kv h1{font-size:clamp(40px,6vw,84px);margin:0} h
   <div class="bg-stats" style="--n:4"><div><b>7</b><span>Chủ đề và thực hành</span></div><div><b>66</b><span>Yêu cầu cần đạt</span></div><div><b>52</b><span>Yêu cầu chuyên đề</span></div><div><b>3</b><span>Bộ sách đối chiếu</span></div></div>
 </header>
 <a class="feat glass" href="co-loa/">
-  <img src="../thu-vien/covers/co-loa.webp" alt="Mô hình 3D ba vòng thành Cổ Loa trên đồng bằng">
+  <img src="../thu-vien/covers/co-loa.webp" alt="Mô hình 3D ba vòng thành Cổ Loa trên đồng bằng" width="1200" height="750">
   <div class="bd"><div class="lbl">Bài mẫu · Văn minh Văn Lang – Âu Lạc</div><h2>Thành Cổ Loa</h2>
   <p>Ba vòng thành đất dựng theo số đo khảo cổ trên đồng bằng ven sông Hoàng Giang. Kéo dòng thời gian từ thế kỷ IV TCN đến ngày nay, mở mặt cắt lũy đúng tỉ lệ, xem kho mũi tên, trống đồng, và đặt truyền thuyết cạnh bằng chứng.</p>
   <span class="bg-btn sm">Vào bài</span></div>

@@ -18,7 +18,7 @@ html,body{background:#ffffff;overflow:hidden;margin:0}
 #gl{position:absolute;left:0;top:0;width:${W}px!important;height:${H}px!important;touch-action:none;cursor:grab}
 #gl.drag{cursor:grabbing}
 .bt{pointer-events:auto;cursor:pointer}
-.bt:hover{filter:brightness(.96)}
+@media (hover:hover){.bt:hover{filter:brightness(.96)}}
 .hit{position:absolute;pointer-events:auto;cursor:ew-resize}
 .tourchip{position:absolute;transform:translateX(-50%);display:flex;align-items:center;gap:7px;height:24px;padding:0 12px;border:1px solid #e7e9ed;border-radius:4px;background:rgba(255,255,255,.95);color:#1D1B16;font:600 11px var(--bg-font,system-ui,sans-serif);letter-spacing:0;white-space:nowrap;cursor:pointer;pointer-events:auto}
 .tourchip i{display:block;width:6px;height:6px;border-radius:50%;background:#e3562a}
@@ -74,7 +74,7 @@ html[data-chieu] .mob.cap{background:#fff}html[data-chieu] .mob.cap .b{font-size
 body.cmp .lv-time{display:flex}
 .lv-time .lb{padding:0 6px 0 10px;color:#626773;font-weight:500}
 .lv-time button{height:32px;min-width:40px;padding:0 10px;border:0;border-radius:999px;background:transparent;color:#454A55;font:inherit;font-variant-numeric:tabular-nums;cursor:pointer}
-.lv-time button:hover{background:#f1f2f5}
+@media (hover:hover){.lv-time button:hover{background:#f1f2f5}}
 .lv-time button.on{background:#1D1B16;color:#fff}
 @media (pointer:coarse){.lv-time button{height:44px;min-width:44px}}
 @media (max-width:520px){.lv-time .lb{display:none}.lv-time button{min-width:44px;padding:0 6px}}
@@ -90,7 +90,7 @@ body.cmp .lv-time{display:flex}
 .lv-insp td{padding:5px 0;border-top:1px solid rgba(16,24,40,.08);color:#454A55;vertical-align:top}
 .lv-insp td+td{text-align:right;color:#1D1B16;font-weight:600;font-variant-numeric:tabular-nums;padding-left:12px}
 .lv-insp .x{position:absolute;right:8px;top:8px;width:36px;height:36px;border:0;border-radius:10px;background:none;font-size:22px;line-height:1;color:#626773;cursor:pointer}
-.lv-insp .x:hover{background:#f1f2f5}
+@media (hover:hover){.lv-insp .x:hover{background:#f1f2f5}}
 .lv-insp .act{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .lv-insp .act button{height:36px;padding:0 14px;border:1px solid rgba(16,24,40,.18);border-radius:999px;background:#fff;font:600 13.5px var(--bg-font,system-ui,sans-serif);color:#1D1B16;cursor:pointer}
 .lv-insp .act button.on{background:#1D1B16;color:#fff;border-color:#1D1B16}

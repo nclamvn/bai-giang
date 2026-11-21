@@ -17,7 +17,9 @@
 <link rel="stylesheet" href="../../design/house.css">
 <style>
 :root{--ink:#F4F1EA;--ink2:#B9B6AE;--mut:#8A8A8E;--line:rgba(244,241,234,.14);--amber:#D9A065;--sig:#E0456B;--blue:#6F9BD8;--bg:#020203;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;--sans:"Be Vietnam Pro",system-ui,sans-serif}
-*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}
+*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth;color-scheme:dark}
+:where(button):not(:disabled):active{scale:.97}
+.bg-skip{position:fixed;left:12px;top:12px;z-index:20;padding:10px 16px;border-radius:10px;background:var(--ink);color:#020203;font:500 14px/1.2 var(--sans);text-decoration:none;transform:translateY(-300%);transition:transform .16s cubic-bezier(.23,1,.32,1)}.bg-skip:focus{transform:none}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.62 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
 #gl{position:fixed;inset:0;width:100vw;height:100vh;height:100lvh;display:block;z-index:0}
@@ -32,11 +34,11 @@ section[data-act]{opacity:var(--o,1)}
 #chap span{font:500 12px var(--mono);letter-spacing:.4em;color:var(--sig)}#chap b{font:500 clamp(40px,8vw,110px)/1 var(--sans);letter-spacing:-.05em;color:var(--ink)}
 #prog{position:fixed;left:0;top:0;height:2px;width:100%;z-index:7;background:linear-gradient(90deg,var(--amber),var(--sig));transform-origin:0 50%;transform:scaleX(0)}
 .top{position:fixed;left:0;right:0;top:0;z-index:6;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px clamp(16px,4vw,40px);font:500 10.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mut);background:linear-gradient(rgba(8,8,10,.85),rgba(8,8,10,0))}
-.top .r{display:flex;align-items:center;gap:18px}.chia{font:inherit;letter-spacing:inherit;text-transform:uppercase;color:var(--ink);background:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .2s,color .2s}.chia:hover{border-color:var(--sig);color:var(--sig)}
-.top a{text-decoration:none}.top a:hover{color:var(--ink)}
+.top .r{display:flex;align-items:center;gap:18px}.chia{font:inherit;letter-spacing:inherit;text-transform:uppercase;color:var(--ink);background:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .2s,color .2s}@media (hover:hover){.chia:hover{border-color:var(--sig);color:var(--sig)}}
+.top a{text-decoration:none}@media (hover:hover){.top a:hover{color:var(--ink)}}
 #nav{position:fixed;right:clamp(10px,2vw,26px);top:50%;transform:translateY(-50%);z-index:6;display:flex;flex-direction:column;gap:10px;font:500 10px var(--mono);letter-spacing:.14em;text-transform:uppercase}
 #nav a{display:flex;gap:8px;justify-content:flex-end;align-items:center;text-decoration:none;color:transparent;transition:color .2s}#nav a span{color:var(--mut);order:2}#nav a:after{content:'';order:3;width:14px;height:1px;background:var(--mut)}
-#nav:hover a,#nav a.on{color:var(--ink2)}#nav a.on span{color:var(--sig)}#nav a.on:after{background:var(--sig);width:24px}
+@media (hover:hover){#nav:hover a{color:var(--ink2)}}#nav a.on{color:var(--ink2)}#nav a.on span{color:var(--sig)}#nav a.on:after{background:var(--sig);width:24px}
 main{position:relative;z-index:3;pointer-events:none}
 section{position:relative}
 .beat{min-height:100vh;display:flex;align-items:center;padding:12vh clamp(16px,6vw,96px);opacity:.0;transform:translateY(18px);transition:opacity .5s,transform .5s}.beat.in{opacity:1;transform:none}
@@ -84,7 +86,7 @@ html:not(.ok) .beat{opacity:1;transform:none}
 <script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
 <script id="bg-sw">(function(){try{if(!("serviceWorker"in navigator)||!/(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname))return;var r=new URL("../../",location.href).href;if(/[?&]sw=0/.test(location.search)){navigator.serviceWorker.getRegistrations().then(function(a){a.forEach(function(x){x.unregister()})});return}addEventListener("load",function(){setTimeout(function(){navigator.serviceWorker.register(r+"sw.js",{scope:r}).catch(function(){})},3000)})}catch(e){}})();</script>
 </head>
-<body>
+<body><a class="bg-skip" href="#mo">Bỏ qua tới nội dung</a>
 <canvas id="gl" aria-hidden="true"></canvas><div id="fade"></div><div id="chap" aria-hidden="true"></div><div id="labels" aria-hidden="true"></div><div id="prog" aria-hidden="true"></div>
 <header class="top"><a href="../../">Sáng Ăn Khoai</a><div class="r"><span>Giả thuyết Riemann · 1859 → 20/11/2026</span><button type="button" class="chia" data-chia>Chia sẻ</button></div></header>
 <nav id="nav" aria-label="Các cảnh"></nav>

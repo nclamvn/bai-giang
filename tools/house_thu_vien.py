@@ -114,6 +114,8 @@ def apply(path):
     p = pathlib.Path(path); s = drop_dark_dup(GFONT.sub('', unembed(p.read_text(encoding='utf-8'))))
     s = re.sub(r'<style id="bg-house">.*?</style>\n?', '', s, flags=re.S)
     s, n = minfont.fix(s)
+    # vệ sinh giao diện: #toast của bản gốc chỉ đổi opacity và transform khi hiện, nên nêu đúng hai thuộc tính thay cho 'all'
+    s = s.replace('transition:all .25s', 'transition:opacity .25s,transform .25s')
     s = s.replace('</head>', HOUSE + '</head>', 1)
     s = inject_shell.inject(s, 'thu-vien', inject_shell.key_of(p))
     p.write_text(s, encoding='utf-8')
