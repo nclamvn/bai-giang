@@ -114,8 +114,8 @@ const budSvg = ui.svg(1286, 146, 272, 140);
 ui.text(1286, 296, 'TRỄ ĐI VỀ'); const totBig = ui.text(1286, 310, '', 'mo', 'position:absolute;font-size:28px;font-weight:700');
 const totTxt = ui.text(1286, 348, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(1272, 404, 300, 200, 'MÁY CHỦ BIÊN · M/M/2', '05');
-const qChart = ui.chart(1286, 440, 272, 100, {min: 0, max: 0.05, colors: [C.ink], zero: false});
-const qTxt = ui.text(1286, 552, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const qChart = ui.chart(1286, 450, 272, 76, {min: 0, max: 0.05, colors: [C.ink], zero: false});
+const qTxt = ui.text(1286, 546, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(1272, 616, 300, 150, 'CHỌN VỊ TRÍ · 6.9', '06');
 const bestBig = ui.text(1286, 648, '', 'mo', 'position:absolute;font-size:22px;font-weight:700;width:272px');
 const bestTxt = ui.text(1286, 684, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
@@ -149,7 +149,7 @@ const sim = {
     radio.position.set(-8, 13, 0); const rr = (S.t * 1.4) % 1; radio.scale.setScalar(0.5 + rr * 6); radio.material.opacity = 0.6 * (1 - rr);
     ups.forEach((m, i) => { m.visible = i === S.vt; });
     // bảng 01
-    kq.forEach((k, i) => { vtRows[i].ten.textContent = `${VT[i].ten}`; vtRows[i].d.textContent = Number.isFinite(k.tong) ? F.fmtThoiGian(k.tong, 1) : 'quá tải'; vtRows[i].d.style.color = S.ok[i] ? OK : BAD; vtRows[i].sub.textContent = `${vn(VT[i].d / 1000, 0)} km · ${VT[i].hop} chặng · ${VT[i].may} máy · tải máy chủ ρ = ${vn(Math.min(k.rho, 9.99), 2)}`; });
+    kq.forEach((k, i) => { vtRows[i].ten.textContent = `${VT[i].ten}`; vtRows[i].d.textContent = Number.isFinite(k.tong) ? F.fmtThoiGian(k.tong, 1) : 'quá tải'; vtRows[i].d.style.color = S.ok[i] ? OK : BAD; vtRows[i].sub.textContent = `${vn(VT[i].d / 1000, 0)} km · ${VT[i].hop} chặng · ${VT[i].may} máy · tải ρ = ${vn(Math.min(k.rho, 9.99), 2)}`; });
     slN.set((S.nUE - 1) / 59, `${S.nUE} thiết bị`); slT.set(LOGC(S.tInf, 1e-3, 20e-3), F.fmtThoiGian(S.tInf, 1));
     // bảng 04
     let g = ''; const W = 272, tMax = Math.max(S.budget * 1.25, Math.min(0.08, Number.isFinite(cur.tong) ? cur.tong * 1.05 : 0.08)), sc = W / tMax;
@@ -162,7 +162,7 @@ const sim = {
     // bảng 05: trễ máy chủ biên theo số thiết bị (mô phỏng)
     const pts = S.curve.filter(([, w]) => Number.isFinite(w)), ymax = Math.max(0.01, ...pts.map(([, w]) => w)) * 1.1, n0 = S.curve[0][0], n1 = S.curve[S.curve.length - 1][0];
     qChart.lim.max = ymax;
-    qChart.set([S.curve.map(([, , l]) => (Number.isFinite(l) ? l : ymax * 2))], {cursor: Math.max(0, Math.min(1, (S.nUE - n0) / (n1 - n0))), extra: (Y, w) => pts.map(([n, v]) => `<circle cx="${((n - n0) / (n1 - n0)) * w}" cy="${Y(v)}" r="2.6" fill="${COL.app}"/>`).join('') + `<text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">${F.fmtThoiGian(ymax, 0)}</text><text x="0" y="112" font-family="JetBrains Mono" font-size="9" fill="#626773">${n0} thiết bị</text><text x="${w}" y="112" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">${n1}</text>`});
+    qChart.set([S.curve.map(([, , l]) => (Number.isFinite(l) ? l : ymax * 2))], {cursor: Math.max(0, Math.min(1, (S.nUE - n0) / (n1 - n0))), extra: (Y, w) => pts.map(([n, v]) => `<circle cx="${((n - n0) / (n1 - n0)) * w}" cy="${Y(v)}" r="2.6" fill="${COL.app}"/>`).join('') + `<text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">${F.fmtThoiGian(ymax, 0)}</text><text x="0" y="88" font-family="JetBrains Mono" font-size="9" fill="#626773">${n0} thiết bị</text><text x="${w}" y="88" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">${n1}</text>`});
     const e0 = kq[0];
     qTxt.innerHTML = `Chấm: mô phỏng · đường: Erlang C. Hai máy biên, mỗi yêu cầu ${F.fmtThoiGian(S.tInf, 1)}: ${S.nUE} thiết bị × 10 = ${S.nUE * 10} yêu cầu/giây, <b>ρ = ${vn(e0.rho, 2)}</b>. Gần 1 thì trễ chờ tăng vọt (ràng buộc C_p của 6.9).`;
     bestBig.textContent = S.best >= 0 ? VT[S.best].ten.split(' (')[0] : 'không vị trí nào';

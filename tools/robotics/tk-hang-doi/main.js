@@ -128,8 +128,8 @@ const slB = ui.slider('ber', 1286, 396, 272, 'BER', {lw: 92, vw: 74});
 const tgBars = ['THÔNG LƯỢNG T', 'GOODPUT G'].map((n, i) => ui.bar(1286, 424 + i * 20, 272, n, {lw: 92, vw: 70}));
 const t05 = ui.text(1286, 470, '', 'sm', NHO);
 ui.panel(1272, 602, 300, 164, 'BỘ ĐỆM LỚN HƠN CÓ TỐT HƠN?', '06');
-const kChart = ui.chart(1286, 636, 272, 64, {min: 0, max: 1, colors: [MAU.bad, MAU.prop], zero: false});
-const t06 = ui.text(1286, 712, '', 'sm', NHO);
+const kChart = ui.chart(1286, 644, 272, 56, {min: 0, max: 1, colors: [MAU.bad, MAU.prop], zero: false});
+const t06 = ui.text(1286, 718, '', 'sm', NHO);
 ui.buttons([['v_hero', 'TOÀN CẢNH'], ['v_rt', 'BỘ ĐỆM'], ['v_bang', 'BẢNG TRỄ'], ['qua_tai', 'QUÁ TẢI'], ['dem_lon', 'BỘ ĐỆM LỚN'], ['xoa', 'ĐẾM LẠI']], 360, 120, 860);
 ui.text(362, 664, 'TRẠNG THÁI');
 const modeEl = ui.add(`<div style="position:absolute;left:360px;top:678px;font:700 40px/1.1 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:-.8px;color:${C.ink}"></div>`);
@@ -207,7 +207,7 @@ const sim = {
     tgBars[0].set(kq.T / CW, F.fmtBps(kq.T, 1), MAU.prop); tgBars[1].set(kq.G / CW, F.fmtBps(kq.G, 1), MAU.ok);
     t05.innerHTML = `Gói ${vn(F.byte(S.L), 0)} bit, BER ${fmtE(S.ber)}: P<sub>gói lỗi</sub> = 1 − (1 − P<sub>b</sub>)<sup>L</sup> = ${vn(kq.pp * 100, kq.pp < 0.01 ? 3 : 1)} % (1.16). G trừ mất gói, gói lỗi và ${H_HDR} byte tiêu đề IPv4 + TCP mỗi gói (1.18). Liên kết bận không có nghĩa ứng dụng nhận đủ (câu hỏi 5).`;
     // bảng 06
-    const iK = S.K - 2; kChart.set([kq.dd.map((x) => x.P / Math.max(1e-9, kq.dd[0].P)), kq.dd.map((x) => x.W / kq.Wmax)], {cursor: iK / 62, extra: (Y, w) => `<text x="0" y="-4" font-family="JetBrains Mono" font-size="9" fill="${MAU.bad}">mất gói</text><text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${MAU.prop}">thời gian trong hệ</text><text x="0" y="76" font-family="JetBrains Mono" font-size="9" fill="#626773">K 2</text><text x="${w}" y="76" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">64</text>`});
+    const iK = S.K - 2; kChart.set([kq.dd.map((x) => x.P / Math.max(1e-9, kq.dd[0].P)), kq.dd.map((x) => x.W / kq.Wmax)], {cursor: iK / 62, extra: (Y, w) => `<text x="0" y="-4" font-family="JetBrains Mono" font-size="9" fill="${MAU.bad}">mất gói</text><text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${MAU.prop}">thời gian trong hệ</text><text x="0" y="68" font-family="JetBrains Mono" font-size="9" fill="#626773">K 2</text><text x="${w}" y="68" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">64</text>`});
     t06.innerHTML = `Ở K = ${S.K}: mất ${vn(kq.dd[iK].P * 100, 2)} %, trễ ${F.fmtThoiGian(kq.dd[iK].W, 2)}. ${S.rho > 1 ? 'Quá tải thì bộ đệm lớn chỉ làm gói chờ lâu hơn mà vẫn mất gần như cũ.' : 'Bộ đệm lớn giảm mất gói nhưng gói được nhận chờ lâu hơn.'}`;
     // chế độ
     const day = V.q.length >= S.K;

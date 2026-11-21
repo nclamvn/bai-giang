@@ -235,7 +235,8 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
   };
 
   // điều khiển của người xem
-  for (const [k, b] of Object.entries(ui.btn)) b.addEventListener('click', () => { takeOver(); pulse(k); if (k.startsWith('v_')) setView(k.slice(2)); else sim.act(k); });
+  for (const [k, b] of Object.entries(ui.btn)) { b.addEventListener('click', () => { takeOver(); pulse(k); if (k.startsWith('v_')) setView(k.slice(2)); else sim.act(k); });
+    b.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); b.click(); } }); }   // nút là div có role=button: bàn phím bấm bằng Enter hoặc phím cách
   for (const [k, s] of Object.entries(ui.sliders)) {
     const d = document.createElement('div'); d.className = 'hit';
     const host = DOC?.hostOf(s), ox = host ? host.ox : 0, oy = host ? host.oy : 0;

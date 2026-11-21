@@ -109,7 +109,7 @@ const SL = [['stride', 'SẢI CHÂN'], ['Tc', 'CHU KỲ'], ['head', 'HƯỚNG Đ
 const sl = Object.fromEntries(SL.map(([k, n], i) => [k, ui.slider(k, 42, 398 + i * 27, 272, n, {lw: 82, vw: 70})]));
 ui.text(42, 580, 'Khối lượng: giả định, chưa có số công bố.', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:8.5px');
 ui.panel(28, 606, 300, 160, 'GÓC KHỚP · IK TỪNG CHÂN', '03');
-ui.text(42, 640, 'CHÂN&nbsp;&nbsp;&nbsp;HÁNG γ&nbsp;&nbsp;ĐÙI α&nbsp;&nbsp;&nbsp;GỐI β&nbsp;&nbsp;&nbsp;PHA');
+ui.text(42, 640, 'Chân  Háng γ   Đùi α   Gối β   Pha', 'v', 'font-size:10.5px;font-weight:500;color:#626773;white-space:pre');
 const legRows = LEGS.map((L, i) => ui.text(42, 657 + i * 17, '', 'v', 'font-size:10.5px;font-weight:500'));
 ui.panel(1272, 112, 300, 236, 'ỔN ĐỊNH TĨNH', '04');
 ui.text(1286, 148, 'BIÊN ỔN ĐỊNH SSM (mm)'); const ssmTxt = ui.text(1286, 161, '', 'mo', 'position:absolute;font-size:24px;font-weight:700');

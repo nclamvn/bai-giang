@@ -38,6 +38,7 @@ const CSS = () => `
 .v{font:600 12px 'JetBrains Mono',monospace;white-space:nowrap}
 .bt{position:absolute;height:22px;padding:0 9px;display:flex;align-items:center;justify-content:center;border:1px solid ${C.faint};border-radius:4px;background:#fff;font:600 11px var(--bg-font,system-ui,sans-serif);letter-spacing:0;color:${C.ink};white-space:nowrap;transition:background .15s,color .15s}
 .bt.on{background:${C.ink};color:#fff;border-color:${C.ink}}
+.bt:focus-visible{outline:2px solid ${C.or};outline-offset:2px}
 .bt.acc{background:#1D1B16;color:#fff;border-color:#1D1B16}
 .call{position:absolute;white-space:nowrap;transition:opacity .25s}
 .call b{display:flex;align-items:center;gap:6px;font:600 11px var(--bg-font,system-ui,sans-serif);letter-spacing:0;color:${C.ink};background:rgba(255,255,255,.9);padding:1px 4px;border-radius:2px}
@@ -53,11 +54,15 @@ const CSS = () => `
 .alert{position:absolute;font:600 9.5px 'JetBrains Mono',monospace;letter-spacing:1.4px;color:#fff;background:${C.or};padding:3px 8px;border-radius:3px;white-space:nowrap;transition:opacity .2s}
 `;
 // nhãn trong dữ liệu viết hoa: đổi sang chữ thường kiểu câu, giữ từ viết tắt ASCII ngắn (TCP, DH, PID, MOVEJ) và số
-const ACR = new Set('ĐCT ĐCD TCP DH IK FK PID PD PI ISO ROS LDS IMU ESC PWM AMCL SLAM LIDAR MOVEJ MOVEL DOF RX RY RZ CPU GPU API EKF UR CW CCW BLDC AX OK DC USB SE TB GPS RPM MIT ABAD FR FL RR RL AA WAN LAN VLAN IP RTT MDF IDF POE UPS AP UE UPF MEC RAN NR LTE EPC NSA SBA SLA SLO KPI CU DU RU AMF SMF PCF DN URLLC EMBB MMTC NG ECMP QOS DSCP'.split(' '));
+const ACR = new Set('ĐCT ĐCD TCP DH IK FK PID PD PI ISO ROS LDS IMU ESC PWM AMCL SLAM LIDAR MOVEJ MOVEL DOF RX RY RZ CPU GPU API EKF UR CW CCW BLDC AX OK DC USB SE TB GPS RPM MIT ABAD FR FL RR RL AA WAN LAN VLAN IP RTT MDF IDF POE UPS AP UE UPF MEC RAN NR LTE EPC NSA SBA SLA SLO KPI CU DU RU AMF SMF PCF DN URLLC EMBB MMTC NG ECMP QOS DSCP ACK BER BFD BE CIDR DCF DS ECN EF FIB FIFO IEEE LMS MTBF MTTR MTU NVR OSPF PHY RFC RPO RTO SNMP SPF SSM UDP VLSM VNI VRF VTEP VXLAN WLAN NTU SMR BT PA KV CI II III IV VII NCKH GB MN ITUR TPHCM'.split(' '));
+// đơn vị và tên riêng có chữ hoa chữ thường xen kẽ: viết đúng dạng chuẩn thay vì hạ hết xuống chữ thường
+const DV = {HZ: 'Hz', KHZ: 'kHz', MHZ: 'MHz', GHZ: 'GHz', KPA: 'kPa', MPA: 'MPa', DB: 'dB', DBM: 'dBm', 'MBIT/S': 'Mbit/s', 'GBIT/S': 'Gbit/s', 'KBIT/S': 'kbit/s', KW: 'kW', KN: 'kN', GNB: 'gNB', IPSEC: 'IPsec', LIPO: 'LiPo'};
 export const sc = (t) => {
   const s = String(t ?? ''); if (/</.test(s)) return s; // HTML: giữ nguyên
   const up = (x) => x === x.toLocaleUpperCase('vi') && x !== x.toLocaleLowerCase('vi');
-  const w = s.split(/(\s+)/).map((x) => { if (!up(x)) return x; const core = x.replace(/[^A-Za-z0-9À-ỹđĐ]/g, ''); if (/\d/.test(core) || ACR.has(core) || /^[A-Z]$/.test(core)) return x; return x.toLocaleLowerCase('vi'); }).join('');
+  const w = s.split(/(\s+)/).map((x, i, ds) => { if (!up(x)) return x; const dv = x.replace(/^[^A-Za-z]+|[^A-Za-z]+$/g, ''); if (DV[dv]) return x.replace(dv, DV[dv]);
+    if (/^[MSH]$/.test(dv) && /^[≈~<>]?\d[\d.,]*$/.test(ds[i - 2] || '')) return x.toLowerCase();   /* một chữ M, S, H đứng sau con số là đơn vị (m, s, h), không phải kí hiệu biến */
+    const core = x.replace(/[^A-Za-z0-9À-ỹđĐ]/g, ''); if (/\d/.test(core) || ACR.has(core) || /^[A-Z]$/.test(core)) return x; return x.toLocaleLowerCase('vi'); }).join('');
   const i = w.search(/[A-Za-zÀ-ỹđĐ]/), j = s.search(/[A-Za-zÀ-ỹđĐ]/);
   return i < 0 || !up(s.charAt(j)) ? w : w.slice(0, i) + w.charAt(i).toLocaleUpperCase('vi') + w.slice(i + 1);
 };
@@ -103,7 +108,7 @@ export function createUI(app) {
   // thanh đo: nhãn trái, rãnh, số phải; set(k ∈ [0,1] hoặc [-1,1] nếu center, chữ, màu)
   ui.bar = (x, y, w, label, {lw = 52, vw = 64, center = false, mark = null} = {}) => {
     ui.text(x, y, label);
-    const tx = x + lw, tw = w - lw - vw;
+    const tx = x + lw, tw = w - lw - vw - 10;  // chừa 10 đơn vị: núm ở cuối thanh (bán kính 6) không chạm số bên phải
     add(`<div style="position:absolute;left:${tx}px;top:${y + 4}px;width:${tw}px;height:4px;background:${C.track};border-radius:2px"></div>`);
     if (center) add(`<div style="position:absolute;left:${tx + tw / 2}px;top:${y + 1}px;width:1px;height:10px;background:${C.faint}"></div>`);
     if (mark !== null) add(`<div style="position:absolute;left:${tx + tw * mark}px;top:${y + 1}px;width:1.5px;height:10px;background:${C.ink}"></div>`);
@@ -139,7 +144,7 @@ export function createUI(app) {
   };
   ui.svg = (x, y, w, h) => add(`<svg style="position:absolute;left:${x}px;top:${y}px;overflow:visible" width="${w}" height="${h}"></svg>`);
   ui.button = (key, x, y, w, label, cls = '') => {
-    btn[key] = add(`<div class="bt ${cls}" style="left:${x}px;top:${y}px;width:${w}px">${sc(label)}</div>`);
+    btn[key] = add(`<div class="bt ${cls}" role="button" tabindex="0" style="left:${x}px;top:${y}px;width:${w}px">${sc(label)}</div>`);
     ui.spots[key] = [x + w / 2, y + 11];
     return btn[key];
   };
@@ -153,7 +158,7 @@ export function createUI(app) {
     }
     return y + 29;
   };
-  ui.setOn = (key, on) => btn[key]?.classList.toggle('on', !!on);
+  ui.setOn = (key, on) => { const b = btn[key]; if (!b) return; b.classList.toggle('on', !!on); b.setAttribute('aria-pressed', String(!!on)); };
   // thanh trượt: live.js gắn vùng bấm theo ui.sliders
   ui.sliders = {};
   ui.slider = (key, x, y, w, label, {lw = 70, vw = 62} = {}) => {
@@ -163,7 +168,8 @@ export function createUI(app) {
     const f = add(`<div style="position:absolute;left:${tx}px;top:${y + 4}px;height:3px;background:${C.ink};border-radius:2px"></div>`);
     const k = add(`<div style="position:absolute;left:${tx}px;top:${y - 1}px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#fff;border:1.5px solid ${C.ink}"></div>`);
     const v = add(`<div class="v" style="position:absolute;right:${1600 - x - w}px;top:${y - 2}px;min-width:${vw - 4}px;text-align:right"></div>`);
-    const s = {x: tx, w: tw, y: y + 5, set(t, txt) { t = Math.max(0, Math.min(1, t)); f.style.width = `${t * tw}px`; k.style.left = `${tx + t * tw}px`; v.textContent = txt; s.t = t; }, t: 0};
+    // ox: độ dời của bảng chứa thanh trượt khi trang dọc (kit/doc.js) chuyển bảng vào thẻ; không có thì núm bị đặt theo toạ độ sân khấu, lệch khỏi thanh
+    const s = {x: tx, w: tw, y: y + 5, ox: 0, set(t, txt) { t = Math.max(0, Math.min(1, t)); f.style.width = `${t * tw}px`; k.style.left = `${tx - s.ox + t * tw}px`; if (txt !== undefined) v.textContent = txt; s.t = t; }, t: 0};
     ui.sliders[key] = s;
     return s;
   };

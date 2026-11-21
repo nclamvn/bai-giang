@@ -344,7 +344,7 @@ const sim = {
       const a0 = 0.75 * PI, a1 = a0 + 1.5 * PI * kk, pt = (a) => `${(cx + 15 * Math.cos(a)).toFixed(1)} ${(cy + 15 * Math.sin(a)).toFixed(1)}`;
       svg += `<path d="M${pt(a0)} A15 15 0 1 1 ${pt(a0 + 1.5 * PI)}" fill="none" stroke="${C.track}" stroke-width="3.5" stroke-linecap="round"/>`;
       if (kk > 0.004) svg += `<path d="M${pt(a0)} A15 15 0 ${a1 - a0 > PI ? 1 : 0} 1 ${pt(a1)}" fill="none" stroke="${C.ink}" stroke-width="3.5" stroke-linecap="round"/>`;
-      svg += `<text x="${cx}" y="${cy + 4}" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" font-weight="600" fill="${C.ink}">${vn(s * JF.D0 * 500, 0)}</text><text x="${cx}" y="${cy + 30}" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">${k * 45}° · ${vn((P / 8) * (1 + S.armSkew[k]), 1)} W</text>`;
+      svg += `<text x="${cx}" y="${cy + 4}" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" font-weight="600" fill="${C.ink}">${vn(s * JF.D0 * 500, 0)}</text><text x="${cx}" y="${cy + 30}" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">${k * 45}° ${vn((P / 8) * (1 + S.armSkew[k]), 1)} W</text>`;
     });
     armSvg.innerHTML = svg;
     armTxt.innerHTML = `Số giữa: mép chuông kéo vào (mm). Công suất phụt P = F·u = <b>${vn(P, 0)} W</b>, chia cho 8 cánh tay; lệch nhau khi rhopalia sửa nghiêng.`;

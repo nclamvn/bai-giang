@@ -101,7 +101,7 @@ body.film #play,body.film .bgs{display:none!important}
 /* nút xem giữa đáy cần chỗ: sơ đồ vị trí (phụ, trùng nội dung bảng Số đọc) chỉ hiện trên màn rộng */
 @media (max-width:1560px){#loc{display:none}}
 @media (max-width:900px){#bk{left:18px;right:auto;top:calc(var(--bg-bar,56px) + 180px);width:min(320px,calc(100vw - 36px));box-sizing:border-box}#loc,#scale{display:none}#read{display:none}#vm{width:220px}#vm .val{font-size:26px}#title h1{font-size:22px}#play{bottom:auto;top:calc(var(--bg-bar,56px) + 120px)}}
-@media (max-width:560px){#vm{display:none}#shot{bottom:calc(76px + env(safe-area-inset-bottom))}#title{padding:8px 12px}#title .brand{display:none}body.bgs-on #tag{left:18px;transform:none;top:calc(var(--bg-bar,56px) + 82px);max-width:calc(100vw - 36px);font-size:13px;line-height:1.4;letter-spacing:0;border-radius:12px;box-sizing:border-box}#play{left:18px;transform:none;top:calc(var(--bg-bar,56px) + 138px)}}
+@media (max-width:560px){#vm{display:none}#shot{bottom:calc(76px + env(safe-area-inset-bottom))}#title{padding:8px 12px}#title .brand{display:none}body.bgs-on #tag{left:18px;transform:none;top:calc(var(--bg-bar,56px) + 82px);max-width:calc(100vw - 36px);font-size:13px;line-height:1.4;letter-spacing:0;border-radius:12px;box-sizing:border-box}#play{left:18px;right:18px;flex-wrap:wrap;transform:none;top:calc(var(--bg-bar,56px) + 138px)}}
 @media (prefers-reduced-motion:reduce){#fade{transition:none}}
 </style>
 <!--BG-STD:start--><style id="bg-std">/* chuẩn thành phần Sáng Ăn Khoai: sinh bằng tools/design.py, không sửa tay */

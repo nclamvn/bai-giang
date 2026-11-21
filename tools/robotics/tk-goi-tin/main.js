@@ -138,8 +138,8 @@ const budSvg = ui.svg(1286, 146, 272, 150);
 ui.text(1286, 306, 'TRỄ ĐẦU CUỐI MỘT CHIỀU'); const totBig = ui.text(1286, 320, '', 'mo', 'position:absolute;font-size:28px;font-weight:700');
 const totTxt = ui.text(1286, 360, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(1272, 424, 300, 178, 'HÀNG ĐỢI WAN · MÔ PHỎNG VÀ M/M/1', '05');
-const qChart = ui.chart(1286, 460, 272, 92, {min: 0, max: 1, colors: [C.ink], zero: false});
-const qTxt = ui.text(1286, 560, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const qChart = ui.chart(1286, 468, 272, 78, {min: 0, max: 1, colors: [C.ink], zero: false});
+const qTxt = ui.text(1286, 564, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(1272, 614, 300, 152, 'DƯ ĐỊA LIÊN KẾT · 1.7, 1.9', '06');
 const slN = ui.slider('nen', 1286, 650, 272, 'DỮ LIỆU NỀN', {lw: 92, vw: 74});
 const slE = ui.slider('eta', 1286, 676, 272, 'η MỤC TIÊU', {lw: 92, vw: 74});
@@ -225,7 +225,7 @@ const sim = {
     // bảng 05
     const cv = S.curve, ymax = Math.max(cv.lt[Math.round((S.rho3 / 0.95) * 59)] * 1.6, cv.lt[50]) || 1e-3;
     qChart.lim.max = ymax;
-    qChart.set([cv.lt], {cursor: (S.rho3 - 0.02) / 0.93, extra: (Y, w) => cv.sim.map(([r, v]) => `<circle cx="${((r - 0.02) / 0.93) * w}" cy="${Math.max(0, Y(Math.min(v, ymax)))}" r="3" fill="${COL.queue}"/>`).join('') + `<text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">${F.fmtThoiGian(ymax, 1)}</text><text x="0" y="104" font-family="JetBrains Mono" font-size="9" fill="#626773">ρ 0</text><text x="${w}" y="104" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">0,95</text>`});
+    qChart.set([cv.lt], {cursor: (S.rho3 - 0.02) / 0.93, extra: (Y, w) => cv.sim.map(([r, v]) => `<circle cx="${((r - 0.02) / 0.93) * w}" cy="${Math.max(0, Y(Math.min(v, ymax)))}" r="3" fill="${COL.queue}"/>`).join('') + `<text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">${F.fmtThoiGian(ymax, 1)}</text><text x="0" y="90" font-family="JetBrains Mono" font-size="9" fill="#626773">ρ 0</text><text x="${w}" y="90" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">0,95</text>`});
     const h3 = kq.hop[2];
     qTxt.innerHTML = `Chấm: mô phỏng ${F.fmtThoiGian(h3.queue)} · đường: lý thuyết M/M/1 ${F.fmtThoiGian(h3.queueLT)} ở ρ = ${vn(S.rho3, 2)}. Trễ hàng đợi tăng vọt khi ρ tiến tới 1 (1.7).`;
     // bảng 06: BT 1.4, liên kết 1 Gbit/s mang thoại 80, video 300, nền chỉnh được

@@ -91,7 +91,7 @@ const t06 = ui.text(1286, 636, '', 'sm', NHO);
 ui.buttons([['v_hero', 'TOÀN CẢNH'], ['v_thuoc', 'THƯỚC ĐỊA CHỈ'], ['cau3', 'CÂU 3 · CHƯƠNG 3'], ['khac', 'PHÒNG BAN KHÁC CỠ'], ['flsm', 'MỌI SUBNET CÙNG CỠ'], ['gop', 'GỘP TUYẾN']], 360, 120, 860);
 ui.text(362, 664, 'ĐÃ DÙNG');
 const modeEl = ui.add(`<div style="position:absolute;left:360px;top:678px;font:700 40px/1.1 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:-.8px;color:${C.ink}"></div>`);
-const modeSub = ui.text(362, 728, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:11px;white-space:nowrap');
+const modeSub = ui.text(362, 728, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:11px;white-space:normal;width:560px;line-height:1.4');
 ui.cap = ui.caption(348, 778, 904, 106);
 const alert = ui.alert(800, 186);
 ui.callouts([{key: 'thuoc', title: 'KHÔNG GIAN 10.10.0.0/20', sub: '4 096 ĐỊA CHỈ'}, {key: 't0', title: 'TÒA 1', sub: ''}, {key: 't1', title: 'TÒA 2', sub: ''}, {key: 't2', title: 'TÒA 3', sub: ''}]);
@@ -154,7 +154,7 @@ const sim = {
     eBars[0].set(vl.d / vl.c, vn(vl.d / vl.c, 2), MAU.ok); eBars[1].set(vl.d / fl, vn(vl.d / fl, 2), '#8A8F98');
     t03.innerHTML = `η = H / H<sub>IPv4</sub>(p). ${S.khac ? `Cùng một cỡ cho mọi phòng ban thì phòng 12 thiết bị cũng ôm subnet của phòng 80: dùng ${vn(vl.c, 0)} so với ${vn(fl, 0)} địa chỉ.` : 'Các phòng ban bằng nhau thì VLSM và cùng cỡ cho cùng kết quả; bật Phòng ban khác cỡ để thấy khác biệt.'} η quá cao là hết chỗ lớn thêm.`;
     // bảng 04: khối mỗi tòa
-    { let g = ''; kq.toa.forEach((T, i) => { const y = 12 + i * 46; g += `<rect x="0" y="${y - 10}" width="10" height="10" fill="${MAU_TOA[i]}"/><text x="16" y="${y}" font-family="Be Vietnam Pro" font-size="11" font-weight="600" fill="${C.ink}">Tòa ${i + 1}</text><text x="272" y="${y}" text-anchor="end" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="${MAU_TOA[i]}">${ipStr(T.net)}/${T.pBlk}</text><text x="16" y="${y + 16}" font-family="JetBrains Mono" font-size="9.5" fill="#626773">${T.subs.length} subnet · ${vn(T.blk, 0)} địa chỉ · ${ipStr(T.net)} – ${ipStr(T.net + T.blk - 1)}</text>`; });
+    { let g = ''; kq.toa.forEach((T, i) => { const y = 12 + i * 46; g += `<rect x="0" y="${y - 10}" width="10" height="10" fill="${MAU_TOA[i]}"/><text x="16" y="${y}" font-family="Be Vietnam Pro" font-size="11" font-weight="600" fill="${C.ink}">Tòa ${i + 1}</text><text x="272" y="${y}" text-anchor="end" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="${MAU_TOA[i]}">${ipStr(T.net)}/${T.pBlk}</text><text x="16" y="${y + 16}" font-family="JetBrains Mono" font-size="9.5" fill="#626773">${T.subs.length} subnet · ${vn(T.blk, 0)} địa chỉ</text><text x="272" y="${y + 16}" text-anchor="end" font-family="JetBrains Mono" font-size="9.5" fill="#626773">tới ${ipStr(T.net + T.blk - 1)}</text>`; });
       g += `<text x="0" y="146" font-family="JetBrains Mono" font-size="9.5" fill="${kq.tran ? MAU.bad : '#626773'}">${kq.tran ? 'VƯỢT /20: cần không gian lớn hơn' : `còn trống ${vn(SPACE - kq.tong, 0)} / ${vn(SPACE, 0)} địa chỉ`}</text>`; kSvg.innerHTML = g; }
     t04.innerHTML = 'Mỗi tòa nhận một khối liền, căn biên đúng cỡ của nó; trong khối, subnet lớn cấp trước để mọi subnet đều căn biên. Còn chỗ cho liên kết điểm–điểm và vùng quản lý.';
     // bảng 05

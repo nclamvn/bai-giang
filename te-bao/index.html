@@ -133,6 +133,8 @@ body{color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;
 .btn.dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .btn:disabled{opacity:.5;cursor:default}
 .btn.sm{padding:4px 9px;font-size:13px}
+/* màn chạm: vùng chạm từ 44 px (docs/mot-he-ba-co-man-hinh.md, luật R2) */
+@media (pointer:coarse){.btn.sm,.legend li button,.procs li button,.sw2,input[type=range]{min-height:44px;min-width:44px}}
 .btn[aria-pressed="true"]{background:var(--gold-soft);border-color:var(--gold);color:var(--ink)}
 .seg button:focus-visible,.btn:focus-visible,select:focus-visible,input:focus-visible,.legend button:focus-visible,.parts button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 input[type=range]{accent-color:var(--crimson);width:140px}

@@ -303,7 +303,7 @@ const sim = {
       for (let L = 205; L <= 368; L += 4) d += `${L === 205 ? 'M' : 'L'}${XL(L).toFixed(1)} ${YF(biteOf(L)).toFixed(1)}`;
       let d2 = ''; for (let L = 205; L <= 368; L += 4) d2 += `${L === 205 ? 'M' : 'L'}${XL(L).toFixed(1)} ${YF(biteFit(L)).toFixed(1)}`;
       g += `<path d="${d2}" fill="none" stroke="${C.faint}" stroke-width="1.2" stroke-dasharray="3 3"/><path d="${d}" fill="none" stroke="${C.ink}" stroke-width="1.6"/><circle cx="${XL(368)}" cy="${YF(320)}" r="3.5" fill="none" stroke="${C.or}" stroke-width="1.5"/><text x="${XL(368) - 6}" y="${YF(320) - 6}" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${C.or}">đo: 320 N</text>`;
-      g += `<circle cx="${XL(S.TL)}" cy="${YF(Ftip())}" r="4" fill="${C.or}"/><text x="10" y="12" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">F (N) · đứt: hồi quy gốc · liền: neo qua 320 N</text>`; sizeSvg.innerHTML = g; }
+      g += `<circle cx="${XL(S.TL)}" cy="${YF(Ftip())}" r="4" fill="${C.or}"/><text x="264" y="88" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">F (N) · đứt: hồi quy gốc · liền: neo qua 320 N</text>`; sizeSvg.innerHTML = g; }
     const m = massOf(S.TL), Wt = m * 9.81;
     sRows[0][1].textContent = `${vn(m * 1000, 0)} g`; sRows[1][1].textContent = `${vn(Wt, 1)} N`; sRows[2][1].textContent = `${vn(Ftip(), 0)} N`; sRows[3][1].textContent = `${vn(Ftip() / Wt, 0)} lần`;
     // bảng 06: cơ khép hàm

@@ -115,6 +115,7 @@ h1{margin:2px 0 4px;font-size:30px;letter-spacing:-.02em;line-height:1.1}
 .chip[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:1px}
 .seg{border-radius:999px;overflow:hidden;background:rgba(118,118,128,.12);padding:2px;display:inline-flex;gap:2px}
 .seg button{border:0;border-radius:999px;background:transparent;padding:5px 12px;font-size:13px;font-weight:600;color:var(--ink)}
+@media (pointer:coarse){.seg button,.foot .btn{min-height:44px;min-width:44px}}
 .seg button[aria-pressed="true"]{background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.14),0 0 0 .5px rgba(15,23,42,.06)}
 .timeline{position:absolute;left:16px;right:404px;bottom:16px;padding:10px 14px 12px;z-index:5}
 .tl-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}

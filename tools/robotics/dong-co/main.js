@@ -51,10 +51,10 @@ ui.panel(1272, 274, 300, 222, 'ĐỒ THỊ p–V · CÔNG CHỈ THỊ', '05');
 const pv = ui.svg(1286, 306, 272, 112);
 const pvRows = [0, 1, 2, 3].map((i) => [ui.text(1286, 426 + i * 17, '', 'sm', 'font-size:10px'), ui.text(1420, 426 + i * 17, '', 'v', 'width:138px;text-align:right;font-size:11px')]);
 // 06 cơ cấu và hệ thống
-ui.panel(1272, 506, 300, 158, 'CƠ CẤU VÀ HỆ THỐNG', '06');
+ui.panel(1272, 506, 300, 152, 'CƠ CẤU VÀ HỆ THỐNG', '06');
 ui.buttons([['sys_crank', 'TRỤC KHUỶU – THANH TRUYỀN'], ['sys_valve', 'PHÂN PHỐI KHÍ'], ['sys_fuel', 'NHIÊN LIỆU, KHÔNG KHÍ'], ['sys_ign', 'ĐÁNH LỬA'], ['sys_cool', 'LÀM MÁT'], ['sys_lube', 'BÔI TRƠN'], ['sys_start', 'KHỞI ĐỘNG']], 1286, 540, 272);
 // 07 điều khiển, thử phá
-ui.panel(1272, 674, 300, 92, 'ĐIỀU KHIỂN · THỬ PHÁ', '07');
+ui.panel(1272, 668, 300, 98, 'ĐIỀU KHIỂN · THỬ PHÁ', '07');
 const sRpm = ui.slider('rpm', 1286, 704, 272, 'TAY GA', {lw: 74, vw: 92});
 const sEps = ui.slider('eps', 1286, 726, 272, 'TỈ SỐ NÉN', {lw: 74, vw: 92});
 const sSlow = ui.slider('slow', 1286, 748, 272, 'TUA CHẬM', {lw: 74, vw: 92});

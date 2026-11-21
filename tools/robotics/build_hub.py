@@ -122,7 +122,8 @@ h3.sec:before{content:"";width:6px;height:6px;border-radius:50%;background:var(-
 table.keys{border-collapse:collapse;width:100%;font-size:14px}
 table.keys td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:top}
 table.keys td:first-child{font:600 13px "JetBrains Mono",monospace;color:var(--bg-ink2)}
-@media (max-width:900px){.intro,.grid,.cols,.more{grid-template-columns:1fr}.more a{grid-template-columns:120px 1fr}.top h1{font-size:24px}.top .code{padding:0 16px}.wrap{padding:20px 16px 48px}}
+@media (max-width:900px){.intro,.cols,.more{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.more a{grid-template-columns:120px 1fr}.top h1{font-size:24px}.top .code{padding:0 16px}.wrap{padding:20px 16px 48px}}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
 '''
 
 

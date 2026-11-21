@@ -67,8 +67,8 @@ const jsv = ui.svg(1286, 562, 272, 78);
 ui.text(1286, 646, 'Thanh: góc lúc này · vạch: lớn nhất nhịp trước · robot minh hoạ', 'sm', 'font-size:9px');
 // 07 điều khiển
 ui.panel(1272, 676, 300, 90, 'THỬ PHÁ · TUA CHẬM', '07');
-const sLam = ui.slider('lam', 1286, 708, 272, 'BƯỚC SÓNG λ', {lw: 80, vw: 70});
-const sSlow = ui.slider('slow', 1286, 736, 272, 'TUA CHẬM', {lw: 80, vw: 96});
+const sLam = ui.slider('lam', 1286, 712, 272, 'BƯỚC SÓNG λ', {lw: 80, vw: 70});
+const sSlow = ui.slider('slow', 1286, 740, 272, 'TUA CHẬM', {lw: 80, vw: 96});
 ui.buttons([['v_hero', 'TOÀN CẢNH'], ['v_side', 'BÊN'], ['v_top', 'TRÊN'], ['v_below', 'DƯỚI'], ['v_tail', 'CẬN ĐUÔI']], 360, 120, 600);
 ui.buttons([['skin', 'DA CÁ'], ['glass', 'NHÌN XUYÊN'], ['frame', 'KHUNG ROBOT'], ['trail', 'VẾT ĐUÔI'], ['flow', 'DÒNG NƯỚC'], ['labels', 'NHÃN']], 360, 744, 900);
 ui.cap = ui.caption(348, 772, 904, 126);

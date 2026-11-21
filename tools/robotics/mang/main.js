@@ -98,7 +98,7 @@ document.head.insertAdjacentHTML('beforeend', `<style>.mang-mob{display:none;pos
 const shown = (id) => (S.gallery ? true : S.compare ? CORE.has(id) : id === S.sel);
 
 // ---------------- bảng: khung bể ở giữa, ngoài khung là nền trắng của nhà
-ui.add(`<div style="position:absolute;left:344px;top:100px;width:912px;height:668px;border-radius:18px;box-shadow:0 0 0 2400px #fff,inset 0 0 0 .5px rgba(16,24,40,.12);pointer-events:none"></div>`);
+ui.add(`<div data-doc="bo" style="position:absolute;left:344px;top:100px;width:912px;height:668px;border-radius:18px;box-shadow:0 0 0 2400px #fff,inset 0 0 0 .5px rgba(16,24,40,.12);pointer-events:none"></div>`);
 ui.header({code: 'Mang', kicker: 'SINH HỌC 11 · HÔ HẤP VÀ TRAO ĐỔI KHÍ Ở ĐỘNG VẬT · CÁ XƯƠNG', title: 'Cá thở bằng mang', sub: 'BƠM HAI PHA · ÉP DÒNG · NGƯỢC DÒNG', hub: HUB_URL,
   right: [['≈ 1/38', 'Ô XI NƯỚC SO VỚI KHÍ'], ['≈ 75 %', 'Ô XI MANG LẤY ĐƯỢC'], ['35–82 cm/s', 'CHUYỂN SANG ÉP DÒNG'], ['1327 mm²/g', 'MANG CÁ NGỪ']]});
 const BEATS = ['Nước nghèo ô xi', 'Bơm hai pha', 'Ép dòng', 'Cá ngừ', 'Cá chai', 'Ngược dòng', 'Diện tích mang', 'Nước ấm', '20 loài', 'Phim'];
@@ -135,10 +135,10 @@ ui.panel(1272, 592, 300, 174, 'THÁO TỪNG BỘ PHẬN', '06');
 ui.buttons([['v_hero', 'TOÀN CẢNH'], ['v_side', 'BÊN'], ['v_head', 'ĐẦU'], ['v_top', 'TRÊN'], ['v_compare', 'BỐN LOÀI'], ['v_gallery', '20 LOÀI'], ['lookup', 'TRA CỨU LOÀI'], ['labels', 'NHÃN']], 360, 116, 800);
 ui.text(362, 152, 'DÁNG', 'sm', 'color:rgba(255,255,255,.7);font-weight:600');
 ui.buttons([...MOT.map(([k, l]) => ['m_' + k, l]), ['low', 'LƯỚI NHẸ']], 404, 148, 840);
-const nameEl = ui.add(`<div style="position:absolute;left:364px;top:182px;font:600 13px/1.3 'Be Vietnam Pro',system-ui,sans-serif;color:#fff;white-space:nowrap"></div>`);
-const bigK = ui.add(`<div style="position:absolute;left:364px;top:664px;font:600 11px 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:.6px;color:rgba(255,255,255,.72)">NƯỚC QUA MANG · 1 KG</div>`);
-const bigV = ui.add(`<div style="position:absolute;left:362px;top:680px;font:700 38px/1.1 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:-.8px;color:#fff;font-variant-numeric:tabular-nums"></div>`);
-const bigS = ui.add(`<div style="position:absolute;left:364px;top:728px;font:500 11px 'JetBrains Mono',monospace;color:rgba(255,255,255,.75);white-space:nowrap"></div>`);
+const nameEl = ui.add(`<div data-r="ov" data-chu="1" style="position:absolute;left:364px;top:182px;font:600 13px/1.3 'Be Vietnam Pro',system-ui,sans-serif;color:#fff;white-space:nowrap"></div>`);
+const bigK = ui.add(`<div data-r="ov" data-chu="1" style="position:absolute;left:364px;top:664px;font:600 11px 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:.6px;color:rgba(255,255,255,.72)">NƯỚC QUA MANG · 1 KG</div>`);
+const bigV = ui.add(`<div data-r="ov" data-chu="1" style="position:absolute;left:362px;top:680px;font:700 38px/1.1 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:-.8px;color:#fff;font-variant-numeric:tabular-nums"></div>`);
+const bigS = ui.add(`<div data-r="ov" data-chu="1" style="position:absolute;left:364px;top:728px;font:500 11px 'JetBrains Mono',monospace;color:rgba(255,255,255,.75);white-space:nowrap"></div>`);
 ui.cap = ui.caption(348, 778, 904, 106);
 { const set = ui.cap.set; ui.cap.set = (c, i, n) => { setBeat(i); set(c, i, n); }; }
 const alert = ui.alert(800, 186);

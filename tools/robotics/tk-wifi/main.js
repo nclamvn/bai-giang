@@ -66,8 +66,8 @@ const tBars = ['TỐC ĐỘ PHY', 'MỘT MÁY', `CẢ PHÒNG`].map((n, i) => ui.
 ui.text(42, 650, 'C_EFF / C_PHY'); const eBig = ui.text(42, 664, '', 'mo', 'position:absolute;font-size:24px;font-weight:700');
 const t03 = ui.text(42, 700, '', 'sm', NHO);
 ui.panel(1272, 112, 300, 260, 'THÊM MÁY, THÊM VA CHẠM', '04');
-const vChart = ui.chart(1286, 148, 272, 90, {min: 0, max: 1, colors: [MAU.bad, MAU.prop], zero: false});
-const t04 = ui.text(1286, 252, '', 'sm', NHO);
+const vChart = ui.chart(1286, 156, 272, 82, {min: 0, max: 1, colors: [MAU.bad, MAU.prop], zero: false});
+const t04 = ui.text(1286, 256, '', 'sm', NHO);
 ui.panel(1272, 384, 300, 196, 'MỖI NGƯỜI CÒN BAO NHIÊU', '05');
 ui.text(1286, 420, 'THÔNG LƯỢNG MỖI MÁY'); const mBig = ui.text(1286, 434, '', 'mo', 'position:absolute;font-size:24px;font-weight:700');
 const t05 = ui.text(1286, 470, '', 'sm', NHO);
@@ -126,7 +126,7 @@ const sim = {
     t03.innerHTML = `${S.gop === 1 ? 'Không gộp khung: mỗi 1 500 byte phải trả nguyên preamble, khoảng chờ và ACK, nên PHY càng nhanh tỉ lệ càng thấp.' : `Gộp ${S.gop} khung một lần: chi phí cố định chia cho nhiều dữ liệu hơn.`} Đây là β<sub>mac</sub> và tỉ số thời gian trong (4.6).`;
     // bảng 04: va chạm và thông lượng theo số máy
     const xs = kq.theoN, maxT = Math.max(...xs.map(([, v]) => v.thongLuong));
-    vChart.set([xs.map(([, v]) => v.pVaCham), xs.map(([, v]) => v.thongLuong / maxT)], {cursor: Math.max(0, xs.findIndex(([n]) => n >= S.N)) / (xs.length - 1), extra: (Y, w) => `<text x="0" y="-4" font-family="JetBrains Mono" font-size="9" fill="${MAU.bad}">tỉ lệ va chạm</text><text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${MAU.prop}">thông lượng cả phòng</text><text x="0" y="102" font-family="JetBrains Mono" font-size="9" fill="#626773">1 máy</text><text x="${w}" y="102" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">40 máy</text>`});
+    vChart.set([xs.map(([, v]) => v.pVaCham), xs.map(([, v]) => v.thongLuong / maxT)], {cursor: Math.max(0, xs.findIndex(([n]) => n >= S.N)) / (xs.length - 1), extra: (Y, w) => `<text x="0" y="-4" font-family="JetBrains Mono" font-size="9" fill="${MAU.bad}">tỉ lệ va chạm</text><text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${MAU.prop}">thông lượng cả phòng</text><text x="0" y="94" font-family="JetBrains Mono" font-size="9" fill="#626773">1 máy</text><text x="${w}" y="94" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">40 máy</text>`});
     t04.innerHTML = `${S.N} máy: ${vn(r.pVaCham * 100, 0)} % lần phát bị va chạm. Thêm máy thì nhiều lần hai máy cùng đếm về 0, kênh bận mà không chở được gì; cửa sổ đếm lùi nhân đôi để giãn ra, đổi lại là thêm thời gian chờ.`;
     // bảng 05
     mBig.textContent = F.fmtBps(kq.moiNguoi, 1);

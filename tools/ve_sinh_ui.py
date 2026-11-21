@@ -25,6 +25,8 @@ KIỂM:
   K8  có liên kết bỏ qua tới nội dung (tĩnh, hoặc do vỏ bài hay khung thêm)
   K9  trang nền tối (theme-color tối) khai color-scheme
   K10 không gắn onclick lên <div> hay <span>
+  K11 tới K13 (lớp dùng chung) cỡ chữ, bo góc, điểm gãy thuộc thang trong design/tokens.json
+  K14 (lớp dùng chung) chuyển tiếp không dùng ease-in và không dài quá 600 ms
 
 Miễn trừ có ghi lí do ở MIEN bên dưới; thêm miễn trừ thì phải ghi lí do.
 Mỗi lần chạy, công cụ tự thử trước: một trang mẫu đạt cả 10 luật và 10 bản mỗi bản phạm đúng một luật (tu_thu). Luật nào không cắn thì dừng.
@@ -259,11 +261,29 @@ def thang_do(s, sua=False):
     return s, lech
 
 
+KHAI_CD = re.compile(r'(?<![-\w])transition\s*:\s*([^;{}"\'`]*)')
+
+
+def chuyen_dong(s):
+    """K14: chuyển tiếp của giao diện không dùng ease-in (khởi đầu chậm, cảm giác ì) và không dài quá 600 ms."""
+    lech = []
+    for m in KHAI_CD.finditer(s):
+        v = m.group(1)
+        if re.search(r'\bease-in\b(?!-)', v): lech.append('ease-in')
+        for n, dv in re.findall(r'(?<![\w.])(\d*\.?\d+)(ms|s)\b', v):
+            t = float(n) * (1 if dv == 'ms' else 1000)
+            if t > 600: lech.append(f'{t:g} ms')
+    return lech
+
+
 def kiem_thang(loi):
     for rel in LOP_CHUNG:
         p = ROOT / rel
         if not p.is_file(): continue
-        _, lech = thang_do(p.read_text(encoding='utf-8'))
+        nguon = p.read_text(encoding='utf-8')
+        _, lech = thang_do(nguon)
+        cd = chuyen_dong(nguon)
+        if cd: loi.append(f'K14 {rel}: {len(cd)} chuyển tiếp sai luật ({", ".join(sorted(set(cd))[:6])})')
         for k in ('K11', 'K12', 'K13'):
             ds = sorted({f'{v:g}→{g:g}' for kk, v, g in lech if kk == k})
             if ds: loi.append(f'{k} {rel}: {sum(1 for x in lech if x[0] == k)} số ngoài thang ({", ".join(ds[:8])})')
@@ -290,6 +310,7 @@ def tu_thu():
     da, lech = thang_do(t, sua=True)
     if sorted((k, v) for k, v, _ in lech) != [('K11', 13.5), ('K11', 22.0), ('K12', 6.0), ('K13', 820.0)] or thang_do(da)[1] or 'font-size:9px' not in da or '/1.5' not in da:
         sai.append(f'K11 đến K13 không cắn đúng: {lech} → {da}')
+    if chuyen_dong('.a{transition:opacity .2s var(--bg-ease),transform 240ms ease-out}') or sorted(chuyen_dong('.a{transition:opacity .9s ease-in}')) != ['900 ms', 'ease-in']: sai.append('K14 không cắn đúng')
     if sai: sys.exit('vệ sinh giao diện: phép kiểm hỏng\n  ' + '\n  '.join(sai))
 
 
@@ -321,7 +342,7 @@ def main():
         print(f'vệ sinh giao diện: {len(loi)} lỗi'); print('\n'.join('  ' + x for x in loi[:60]))
         if len(loi) > 60: print(f'  … và {len(loi) - 60} lỗi nữa')
         sys.exit(1)
-    print(f'vệ sinh giao diện: {len(ps)} trang, {len(ts)} tệp CSS và JS đạt 13 luật' + (f' (vừa sửa {da_sua} trang)' if da_sua else ''))
+    print(f'vệ sinh giao diện: {len(ps)} trang, {len(ts)} tệp CSS và JS đạt 14 luật' + (f' (vừa sửa {da_sua} trang)' if da_sua else ''))
 
 
 if __name__ == '__main__':

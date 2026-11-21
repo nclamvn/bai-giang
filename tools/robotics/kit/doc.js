@@ -24,7 +24,7 @@ body.doc{background:#fff}
 .dk-say .e:empty{display:none}
 .dk-nav{display:flex;align-items:center;gap:8px;margin-top:16px;flex-wrap:wrap}
 .dk-nav button{height:34px;min-width:34px;padding:0 12px;border:1px solid #E2E2E0;border-radius:8px;background:#fff;font:500 13px var(--bg-font,system-ui,sans-serif);color:var(--ink);cursor:pointer}
-@media (pointer:coarse){.dk-nav button,#dk .bt{min-height:44px;min-width:44px}}
+@media (pointer:coarse){.dk-nav button,#dk .bt:not(.gi){min-height:44px;min-width:44px}}
 @media (hover:hover){.dk-nav button:hover{border-color:#C9C9C6}}.dk-nav button.on{background:#20252F;border-color:#20252F;color:#fff}
 .dk-nav .n{font:500 12px var(--mono);letter-spacing:.06em;color:var(--mut);padding:0 4px}
 .dk-stage{position:relative;max-width:1600px;margin:clamp(6px,1vw,14px) auto 0;overflow:hidden}
@@ -46,10 +46,14 @@ body.doc .mob{display:none!important}
 .dk-stats .bar{height:2px;margin-top:9px;border-radius:4px;background:var(--amber);width:22px;opacity:.75;transition:width .4s}.dk-stats .on .bar{opacity:1}
 .dk-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:20px 0 4px}
 .dk-tools .seg{display:inline-flex;flex-wrap:wrap;gap:2px;padding:3px;border:1px solid #E6E6E3;border-radius:10px;background:#fff}
-body.doc #dk .bt{position:static!important;width:auto!important;height:34px;padding:0 13px;border:1px solid #E2E2E0;border-radius:8px;background:#fff;font:500 13px var(--bg-font,system-ui,sans-serif)!important;color:var(--ink);transition:background .15s,border-color .15s}
+body.doc #dk .bt:not(.gi){position:static!important;width:auto!important;height:34px;padding:0 13px;border:1px solid #E2E2E0;border-radius:8px;background:#fff;font:500 13px var(--bg-font,system-ui,sans-serif)!important;color:var(--ink);transition:background .15s,border-color .15s}
 body.doc #dk .seg .bt{border-color:transparent;height:30px;border-radius:8px}
-@media (hover:hover){body.doc #dk .bt:hover{border-color:#C9C9C6;filter:none}}body.doc #dk .bt.on{background:#20252F;border-color:#20252F;color:#fff}
+@media (hover:hover){body.doc #dk .bt:not(.gi):hover{border-color:#C9C9C6;filter:none}}body.doc #dk .bt.on{background:#20252F;border-color:#20252F;color:#fff}
 body.doc #dk .bt.flash{box-shadow:0 0 0 3px rgba(204,42,83,.22)}
+.dk-card .dk-bts{position:absolute;display:flex;flex-wrap:wrap;gap:calc(6px/var(--s,1));pointer-events:auto}
+body.doc #dk .dk-bts .bt:not(.gi){height:calc(32px/var(--s,1));padding:0 calc(12px/var(--s,1));border-width:calc(1px/var(--s,1));border-radius:calc(8px/var(--s,1));font-size:calc(13px/var(--s,1))!important}
+@media (pointer:coarse){body.doc #dk .dk-bts{gap:calc(8px/var(--s,1))}body.doc #dk .dk-bts .bt{min-height:calc(44px/var(--s,1));min-width:calc(44px/var(--s,1))}
+body.doc #dk .bt.gi:after{content:'';position:absolute;inset:-5px -3px}}
 .dk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:16px 0 0;align-items:start}
 .dk-card{position:relative;background:var(--card);border:1px solid var(--hair);border-radius:14px;overflow:hidden}
 .dk-card .in{position:absolute;left:0;top:0;transform-origin:0 0}
@@ -66,7 +70,7 @@ body.doc .dk-card .cp{background:transparent!important;box-shadow:none!important
 .dk-foot .r{color:#3A3A3E}
 @media (max-width:1100px){.dk-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dk-steps{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(var(--r3),auto)}}
 @media (max-width:900px){.dk-head{grid-template-columns:1fr}.dk-steps{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(var(--r2),auto)}}
-@media (max-width:640px){.dk-saym .dk-say{padding-top:18px}.dk-grid{grid-template-columns:1fr}.dk-steps{grid-template-columns:1fr;grid-auto-flow:row;grid-template-rows:none}.dk-meta .r{display:none}
+@media (max-width:640px){#dk{--g:14px}.dk-saym .dk-say{padding-top:18px}.dk-grid{grid-template-columns:1fr}.dk-steps{grid-template-columns:1fr;grid-auto-flow:row;grid-template-rows:none}.dk-meta .r{display:none}
   .dk-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.dk-stats>div:nth-child(odd){border-left:0;padding-left:0}.dk-stats>div:nth-child(n+3){border-top:1px solid var(--hair)}}
 html[data-chieu] #dk .dk-say .b{font-size:20px;color:#000}html[data-chieu] #dk .dk-say h2{font-size:30px}
 `;
@@ -110,8 +114,9 @@ export function makeDoc({ui, app, captions, W = 1600, H = 900, onStep, onTour}) 
   for (const n of kids) {
     // đầu bảng, lời giảng và dải tên các bước (div chứa [data-b]) đã có bản riêng trong trang dọc (dk-head, dk-say, dk-steps)
     if (n.dataset.r === 'hd' || n.dataset.r === 'cap' || n.querySelector?.(':scope>[data-b]')) { n.remove(); continue; }
+    if (n.dataset.doc === 'bo') { n.remove(); continue; }   // khung che của cảnh ở chế độ lên lớp: trang đọc không dùng
     if (isOv(n) || btns.has(n)) continue;
-    if (n.classList.contains('cp')) panels.push({n, x: n.offsetLeft, y: n.offsetTop, w: n.offsetWidth, h: n.offsetHeight, items: []});
+    if (n.classList.contains('cp')) panels.push({n, x: n.offsetLeft, y: n.offsetTop, w: n.offsetWidth, h: n.offsetHeight, pnh0: n.offsetHeight, items: []});
     else rest.push(n);
   }
   // khung bảng có thể nhỏ hơn nội dung (ở cảnh, phần tràn vẫn hiện): nới theo phần tử con
@@ -130,6 +135,10 @@ export function makeDoc({ui, app, captions, W = 1600, H = 900, onStep, onTour}) 
     if (g && f.r.y < g.y + g.h + 70) { const x1 = Math.min(g.x, f.r.x), y1 = Math.min(g.y, f.r.y), x2 = Math.max(g.x + g.w, f.r.x + f.r.w), y2 = Math.max(g.y + g.h, f.r.y + f.r.h); Object.assign(g, {x: x1, y: y1, w: x2 - x1, h: y2 - y1}); g.items.push(f.n); }
     else groups.push({x: f.r.x, y: f.r.y, w: f.r.w, h: f.r.h, items: [f.n]});
   }
+  // nút nằm trong một bảng ở cảnh thì ở lại thẻ của bảng đó, để nhóm nút còn tên bảng và lời chú đi kèm (nút góc nhìn v_ luôn về hàng công cụ)
+  for (const q of panels) q.bts = Object.entries(ui.btn).filter(([k]) => !k.startsWith('v_')).map(([, b]) => ({b, r: {x: parseFloat(b.style.left) || 0, y: parseFloat(b.style.top) || 0, w: parseFloat(b.style.width) || 0, h: 22}}))   /* toạ độ ở cảnh lấy từ style: trong trang đọc nút đã bị CSS của hàng công cụ đổi kiểu */
+   
+    .filter(({r}) => { const cx = r.x + r.w / 2, cy = r.y + r.h / 2; return (r.w || r.h) && cx >= q.x && cx <= q.x + q.w && cy >= q.y && cy <= q.y + q.h; }).sort((a, b) => (a.r.y - b.r.y) || (a.r.x - b.r.x));
   panels.forEach(grow);
   // nhãn lẻ (tên nhóm nút đã dời xuống hàng công cụ) không thành thẻ
   for (let i = groups.length - 1; i >= 0; i--) { const g = groups[i]; if (g.w < 170 && g.h < 48) { g.items.forEach((n) => n.remove()); groups.splice(i, 1); } }
@@ -138,16 +147,29 @@ export function makeDoc({ui, app, captions, W = 1600, H = 900, onStep, onTour}) 
   for (const p of [...panels, ...groups].sort((a, b) => (a.free - b.free) || (a.x - b.x) || (a.y - b.y))) {
     const card = document.createElement('div'); card.className = 'dk-card' + (p.free ? ' free' : '');
     const inn = document.createElement('div'); inn.className = 'in ui'; Object.assign(inn.style, {width: `${p.w}px`, height: `${p.h}px`, pointerEvents: 'none'});
+    if (p.free && p.w > 620) { card.style.gridColumn = '1 / -1'; card.style.order = '-1'; }   // dải rộng của cảnh (dải giai đoạn dựng): chiếm cả hàng, đứng đầu lưới
+    const khac = [];   // khung của các phần tử không phải nút, để biết cụm nút có đứng chung hàng với thứ khác không
     for (const n of [p.n, ...p.items].filter(Boolean)) {
-      const r = n === p.n ? {x: p.x, y: p.y} : rectOf(n);
+      const r = n === p.n ? {x: p.x, y: p.y} : rectOf(n); if (n !== p.n && (r.w || r.h)) khac.push(r);
       // phần tử neo bằng right: giữ neo phải, tính lại theo mép phải của bảng
       if (n.style.right) { n.style.right = `${p.x + p.w - (r.x + r.w)}px`; }
       else if (n.style.left || n.tagName === 'svg') n.style.left = `${parseFloat(n.style.left || r.x) - p.x}px`;
       if (n.style.top || n.tagName === 'svg') n.style.top = `${parseFloat(n.style.top || r.y) - p.y}px`;
       inn.appendChild(n);
     }
+    // cụm nút: các nút cách nhau dưới 12 đơn vị theo chiều dọc. Cụm đứng riêng một dải thì thành hàng chip cỡ thật (chạm được),
+    // phần bên dưới dời theo chiều cao mới (reflow). Cụm chung hàng với chữ số (nút làm nhãn hàng) thì giữ đúng toạ độ ở cảnh.
+    const grp = [], cum = [];
+    for (const o of p.bts || []) { const g = cum.at(-1); if (g && o.r.y <= g.y2 + 12) { g.ds.push(o); g.y2 = Math.max(g.y2, o.r.y + o.r.h); g.x1 = Math.min(g.x1, o.r.x); } else cum.push({ds: [o], y1: o.r.y, y2: o.r.y + o.r.h, x1: o.r.x}); }
+    for (const g of cum) {
+      if (khac.some((r) => r.y < g.y2 - 3 && r.y + r.h > g.y1 + 3)) { for (const {b, r} of g.ds) { b.style.left = `${r.x - p.x}px`; b.style.top = `${r.y - p.y}px`; b.classList.add('gi'); inn.appendChild(b); } continue; }
+      const box = document.createElement('div'); box.className = 'dk-bts'; const l = Math.max(10, g.x1 - p.x);
+      Object.assign(box.style, {left: `${l}px`, top: `${g.y1 - p.y}px`, width: `${p.w - l - Math.min(l, 16)}px`});
+      for (const {b} of g.ds) box.appendChild(b);
+      inn.appendChild(box); grp.push({el: box, y1: g.y1 - p.y, H0: g.y2 - g.y1});
+    }
     card.appendChild(inn); grid.appendChild(card);
-    cards.push({card, inn, x: p.x, y: p.y, w: p.w, h: p.h, w0: p.w, h0: p.h, s: 1});
+    cards.push({card, inn, rong: !!(p.free && p.w > 620), b0: p.n ? {x: p.x, y: p.y, w: p.n.offsetWidth, h: p.pnh0} : {x: p.x, y: p.y, w: p.w, h: p.h}, pn: p.n, pnh: p.n ? p.n.offsetHeight : 0, grp, D: 0, x: p.x, y: p.y, w: p.w, h: p.h, w0: p.w, h0: p.h, hb: p.h, s: 1});
   }
   // nút: góc nhìn thành nhóm phân đoạn, còn lại thành hàng chip
   const tools = $('.dk-tools'), seg = document.createElement('div'); seg.className = 'seg';
@@ -175,22 +197,38 @@ export function makeDoc({ui, app, captions, W = 1600, H = 900, onStep, onTour}) 
       app.style.transform = `translate(${(w - W * scale) / 2}px, ${(h - H * scale) / 2}px) scale(${scale})`; stage.style.height = `${h}px`;
     }
     const hideCalls = scale < 0.5; ui.root.querySelectorAll('.call,.tourchip').forEach((n) => { n.style.visibility = hideCalls ? 'hidden' : ''; });
-    ui.root.querySelectorAll('[data-r=ov]').forEach((n) => { if (n.tagName === 'svg') n.style.visibility = hideCalls ? 'hidden' : ''; });
+    ui.root.querySelectorAll('[data-r=ov]').forEach((n) => { if (n.tagName === 'svg' || n.dataset.chu) n.style.visibility = hideCalls ? 'hidden' : ''; });
     for (const c of cards) place(c);
     // điện thoại: lời giảng đứng ngay dưới cảnh để vừa xem vừa đọc
     const say = $('.dk-say'), want = innerWidth < 700 ? $('.dk-saym') : $('.dk-head');
     if (say.parentNode !== want) want.appendChild(say);
     return scale;
   };
-  // Bảng vẽ theo đơn vị thiết kế rồi co theo bề rộng thẻ. Giữ hệ số co trong [SMIN, SMAX]: dưới SMIN chữ xuống dưới 12 px nên cho thẻ cuộn ngang,
-  // trên SMAX chữ to quá cỡ nên giới hạn bề rộng thẻ (docs/mot-he-ba-co-man-hinh.md, luật R3).
-  const SMIN = 0.96, SMAX = 1.25;
-  const place = (c) => { c.card.style.maxWidth = `${Math.ceil(c.w * SMAX)}px`; const s0 = c.card.clientWidth / c.w; c.s = Math.min(SMAX, Math.max(SMIN, s0));
+  // Bảng vẽ theo đơn vị thiết kế rồi co theo bề rộng thẻ. Giữ hệ số co trong [SMIN, SMAX]: dưới SMIN chữ quá nhỏ nên cho thẻ cuộn ngang,
+  // trên SMAX chữ to quá cỡ nên giới hạn bề rộng thẻ. Đã thử nâng riêng cỡ chữ nhỏ trong thẻ lên 11,5 đơn vị: chữ dài ra bị cắt và đè lên biểu đồ,
+  // vì mỗi bảng được xếp tay theo cỡ chữ gốc; nên chỉ dùng phép co đều (docs/mot-he-ba-co-man-hinh.md, mục R3k).
+  const SMIN = 0.9, SMAX = 1.25;
+  // hàng chip trong thẻ có cỡ thật trên màn hình (chia cho hệ số co), nên chiều cao tính theo đơn vị thiết kế đổi theo bề rộng thẻ:
+  // dời mọi phần tử nằm dưới cụm nút theo phần chênh, rồi sửa chiều cao bảng và thẻ. Toạ độ gốc giữ ở data-t0 nên chạy lại bao nhiêu lần cũng được.
+  const reflow = (c) => {
+    if (!c.grp.length) return; let D = 0;
+    for (const g of c.grp) { g.d = g.el.offsetHeight - g.H0; D += g.d; }
+    for (const n of c.inn.children) {
+      if (n === c.pn) continue;
+      if (n.dataset.t0 === undefined) { if (!n.style.top) continue; n.dataset.t0 = parseFloat(n.style.top); }
+      const t0 = +n.dataset.t0; let sh = 0; for (const g of c.grp) if (n !== g.el && t0 >= g.y1 + g.H0 - 2) sh += g.d;
+      n.style.top = `${t0 + sh}px`;
+    }
+    if (D !== c.D) { if (c.pn) c.pn.style.height = `${c.pnh + D}px`; c.h0 = c.hb + D; c.h = Math.max(c.h0, c.h + D - c.D); c.D = D; c.inn.style.height = `${c.h}px`; }
+  };
+  const place = (c) => { const smax = c.rong ? 1.4 : SMAX; c.card.style.maxWidth = `${Math.ceil(c.w * smax)}px`; const s0 = c.card.clientWidth / c.w; c.s = Math.min(smax, Math.max(SMIN, s0));
+    c.card.style.setProperty('--s', c.s); reflow(c);
     c.inn.style.transform = `scale(${c.s})`; c.card.style.height = `${c.h * c.s}px`; c.card.style.overflowX = s0 < SMIN - 0.005 ? 'auto' : ''; };
   // chữ trong bảng do draw() điền sau: đo lại phần nội dung, nới thẻ khi chữ dài ra
   const refit = () => {
     for (const c of cards) {
       if (!c.s) continue;
+      reflow(c);   // vùng bấm của thanh trượt được thêm sau khi dựng thẻ: dời theo cho khớp
       const R = c.inn.getBoundingClientRect(); let mx = 0, my = 0;
       for (const n of c.inn.children) { const r = n.getBoundingClientRect(); if (!r.width && !r.height) continue; mx = Math.max(mx, (r.right - R.left) / c.s); my = Math.max(my, (r.bottom - R.top) / c.s); }
       const w = Math.min(Math.max(c.w0, Math.ceil(mx + 12)), c.w0 * 1.35), h = Math.min(Math.max(c.h0, Math.ceil(my + 14)), c.h0 * 1.8);
@@ -218,7 +256,10 @@ export function makeDoc({ui, app, captions, W = 1600, H = 900, onStep, onTour}) 
     if (a === 'prev') onStep(Math.max(0, cur - 1)); else if (a === 'next') onStep(Math.min(captions.length - 1, cur + 1));
     else if (a === 'tour') onTour(); else if (a === 'full') (stage.requestFullscreen || stage.webkitRequestFullscreen)?.call(stage);
   });
-  const hostOf = (s) => { const c = cards.find((q) => s.x >= q.x && s.x <= q.x + q.w && s.y >= q.y && s.y <= q.y + q.h); return c ? {el: c.inn, ox: c.x, oy: c.y, s: () => c.s} : null; };
+  // tìm thẻ theo khung gốc của bảng ở cảnh (b0), không theo chiều cao thẻ: thẻ cao lên khi hàng chip xuống dòng, lấn sang toạ độ của bảng bên dưới
+  const hostOf = (s) => { const trong = (q, b) => s.x >= b.x && s.x <= b.x + b.w && s.y >= b.y && s.y <= b.y + b.h; const c = cards.find((q) => trong(q, q.b0)) || cards.find((q) => trong(q, {x: q.x, y: q.y, w: q.w0, h: q.hb})); return c ? {el: c.inn, ox: c.x, oy: c.y, s: () => c.s} : null; };
+  // núm thanh trượt được set() đặt lại mỗi khung hình: báo cho nó độ dời của thẻ đang chứa
+  for (const sl of Object.values(ui.sliders || {})) { const h = hostOf(sl); if (h) { sl.ox = h.ox; sl.set(sl.t); } }
   const flash = (k) => { const b = ui.btn[k]; if (!b) return; b.classList.add('flash'); setTimeout(() => b.classList.remove('flash'), 650); };
   document.addEventListener('fullscreenchange', () => dispatchEvent(new Event('resize')));
   if (window.ResizeObserver) new ResizeObserver(() => dispatchEvent(new Event('resize'))).observe(stage);

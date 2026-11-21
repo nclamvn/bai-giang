@@ -1,6 +1,6 @@
 # Vệ sinh giao diện: các luật kiểm bằng máy
 
-Cập nhật 21/11/2026. Công cụ: `tools/ve_sinh_ui.py` (bước `ve-sinh-ui` trong `tools/build_all.py`, nên CI chạy mỗi lần đẩy mã).
+Cập nhật 22/11/2026. Công cụ: `tools/ve_sinh_ui.py` (bước `ve-sinh-ui` trong `tools/build_all.py`, nên CI chạy mỗi lần đẩy mã).
 
 ## 1. Nguồn
 
@@ -19,7 +19,7 @@ Ba nguồn còn lại không dùng:
 
 Không chép mã hay văn bản từ các kho này. Luật được viết lại thành phép kiểm của dự án.
 
-## 2. Mười luật
+## 2. Mười bốn luật
 
 | Mã | Luật | Vì sao |
 |---|---|---|
@@ -36,19 +36,20 @@ Không chép mã hay văn bản từ các kho này. Luật được viết lại
 | K11 | Cỡ chữ của lớp dùng chung thuộc thang trong token | Một thang chữ cho cả site |
 | K12 | Bo góc của lớp dùng chung thuộc thang trong token | Như trên |
 | K13 | Điểm gãy của lớp dùng chung là 640, 900 hoặc 1100 px | Ba cỡ màn hình, không mỗi tệp một kiểu |
+| K14 | Chuyển tiếp của lớp dùng chung không dùng `ease-in` và không dài quá 600 ms | Khởi đầu chậm tạo cảm giác ì; giao diện phải đáp ngay |
 
-K11 tới K13 thêm ở milestone "Một hệ, ba cỡ màn hình" (`docs/mot-he-ba-co-man-hinh.md`), kiểm trên tệp nguồn của lớp dùng chung. Mười luật đầu áp cho mọi trang HTML đang phát hành và các tệp CSS, JS của dự án (không tính `tools/`, `tests/`, `offline/`, thư viện ngoài).
+K11 tới K14 thêm ở milestone "Một hệ, ba cỡ màn hình" (`docs/mot-he-ba-co-man-hinh.md`), kiểm trên tệp nguồn của lớp dùng chung. Mười luật đầu áp cho mọi trang HTML đang phát hành và các tệp CSS, JS của dự án (không tính `tools/`, `tests/`, `offline/`, thư viện ngoài).
 
 ## 3. Công cụ làm gì
 
 `python3 tools/ve_sinh_ui.py` chạy ba việc theo thứ tự:
 
-1. **Tự thử.** Một trang mẫu đạt cả mười luật đầu, rồi mười bản mỗi bản phạm đúng một luật; thêm một mẫu CSS phạm K11 tới K13. Luật nào không cắn thì công cụ dừng.
+1. **Tự thử.** Một trang mẫu đạt cả mười luật đầu, rồi mười bản mỗi bản phạm đúng một luật; thêm một mẫu CSS phạm K11 tới K13 và một mẫu phạm K14. Luật nào không cắn thì công cụ dừng.
 2. **Sửa** ba thứ sửa được bằng máy trên trang đã dựng:
    - thêm `width`, `height` cho `<img>` theo kích thước thật của tệp (đọc thẳng đầu tệp WebP, PNG, JPEG, GIF, SVG, không cần thư viện ngoài);
    - thêm `theme-color` cho trang nạp `house.css` mà còn thiếu;
    - thêm liên kết bỏ qua cho trang nạp `house.css` mà không có vỏ bài; đích là `<main>` hoặc khối `.wrap` đầu tiên.
-3. **Kiểm** mười ba luật; còn lỗi thì thoát mã 1 và in từng lỗi.
+3. **Kiểm** mười bốn luật; còn lỗi thì thoát mã 1 và in từng lỗi.
 
 `--kiem` chỉ kiểm, không ghi tệp.
 
@@ -77,7 +78,8 @@ Thêm miễn trừ thì phải ghi lí do vào cùng chỗ.
 
 ## 5. Chưa làm
 
-- Các luật của Emil về thời lượng (dưới 300 ms), đường cong `ease-out` và thoát nhanh hơn vào chưa thành phép kiểm; mới rà bằng mắt, chưa thấy `ease-in` trong các lớp dùng chung.
+- K14 mới chặn hai điều thô nhất (`ease-in`, quá 600 ms). Các luật tinh hơn của Emil (phần lớn dưới 300 ms, thoát nhanh hơn vào) chưa thành phép kiểm. K14 không xét `animation` và chuyển động vẽ bằng JS của cảnh 3D.
 - Vùng chạm 44 px, phần tử đè nhau, tràn ở 320 px nay do `tests/kiem_bo_cuc.py` đo trong trình duyệt (`docs/mot-he-ba-co-man-hinh.md`).
 - `overscroll-behavior` cho các bảng nổi chưa xét.
+- Nút trong bảng của bài kit là `<div role="button" tabindex="0">` có xử lí Enter và phím cách, chưa phải `<button>` thật: đổi thẻ đụng tới cách đặt toạ độ của 31 bài. K10 chỉ bắt thuộc tính `onclick` viết trong HTML nên không thấy trường hợp này.
 - Phép kiểm K2 dò theo mẫu chữ và ngoặc nhọn, không phải bộ phân tích CSS đầy đủ.

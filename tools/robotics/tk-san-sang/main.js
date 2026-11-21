@@ -95,7 +95,7 @@ function tinh() {
 
 // ---------------- bảng
 ui.header({code: 'T4', kicker: 'THIẾT KẾ VÀ HIỆU NĂNG MẠNG · TIẾT 4 · MỤC 1.6.5, 2.5 · DỰ PHÒNG VÀ PHỤC HỒI', title: 'Độ sẵn sàng, RTO và RPO', sub: 'HAI ĐƯỜNG LÊN · MỘT ỐNG HAY HAI NGẢ', hub: HUB_URL + 'thiet-ke-mang/',
-  right: [['2', 'ĐƯỜNG LÊN'], ['1.19 · 2.19', 'PHƯƠNG TRÌNH'], ['400 NĂM', 'MONTE CARLO']]});
+  right: [['2', 'ĐƯỜNG LÊN'], ['1.19 · 2.19', 'PHƯƠNG TRÌNH'], ['400 NĂM', 'Monte Carlo']]});
 ui.panel(28, 112, 300, 176, 'PHƯƠNG ÁN · HAI ĐƯỜNG LÊN', '01');
 const t01a = ui.text(42, 148, '', 'v', 'font-size:12px;font-weight:600;width:272px;white-space:normal');
 const pathBars = ['ĐƯỜNG A', 'ĐƯỜNG B', 'DỊCH VỤ'].map((n, i) => ui.bar(42, 192 + i * 20, 272, n, {lw: 76, vw: 86}));
@@ -107,7 +107,7 @@ const slC = ui.slider('catNam', 42, 392, 272, 'ỐNG BỊ CẮT', {lw: 92, vw: 7
 const slO = ui.slider('mttrO', 42, 420, 272, 'SỬA ỐNG', {lw: 92, vw: 74});
 const t02 = ui.text(42, 446, '', 'sm', NHO);
 ui.panel(28, 498, 300, 268, 'ĐỘ SẴN SÀNG · 1.19, 4.14', '03');
-const aBars = ['CÔNG THỨC', 'MONTE CARLO', 'MỘT ĐƯỜNG'].map((n, i) => ui.bar(42, 534 + i * 20, 272, n, {lw: 86, vw: 80}));
+const aBars = ['CÔNG THỨC', 'Monte Carlo', 'MỘT ĐƯỜNG'].map((n, i) => ui.bar(42, 534 + i * 20, 272, n, {lw: 86, vw: 80}));
 ui.text(42, 600, 'NGỪNG DỊCH VỤ MỖI NĂM'); const aBig = ui.text(42, 614, '', 'mo', 'position:absolute;font-size:24px;font-weight:700');
 const t03 = ui.text(42, 650, '', 'sm', NHO);
 
