@@ -1,0 +1,119 @@
+{
+ "nguon": {
+  "bai": "https://x.com/Promixyz/status/2124100468548796805",
+  "tac_gia": "Promix (@Promixyz)",
+  "doc_ngay": "2026-11-21",
+  "tom_tat": "Lộ trình hoạt hình Blender theo lối Zero to Hero: 12 nghiên cứu chuyển động, mỗi nghiên cứu một kĩ thuật, một công cụ (kho GitHub), một dự án đáng làm xong. Bài ghi rõ: video chỉ minh hoạ kĩ thuật, các kho là công cụ hỗ trợ chứ không phải tệp dự án trong video; cần xem README từng kho để biết bản Blender tương thích.",
+  "cach_doc": "Bài đọc bằng trình duyệt của tác giả kho. 11 kho được sao nông (depth 1) rồi đọc README, tệp giấy phép và bl_info hoặc blender_manifest.toml; kho FLIP Fluids chỉ đọc README và ba tệp giấy phép. Chưa cài hay chạy add-on nào."
+ },
+ "ky_thuat": [
+  {
+   "so": 1, "id": "ik", "ky_thuat": "Inverse Kinematics", "ten": "Động học ngược",
+   "cong_cu": {"ten": "FK IK Converter", "repo": "AlexRynas/FK_IK_Converter", "commit": "a8b0de4234", "commit_ngay": "2025-09-04", "giay_phep": null, "giay_phep_ghi_chu": "Không có tệp giấy phép. README chỉ ghi: dùng cho học tập và sản xuất, ghi công tác giả khi phát hành lại.", "blender": "2.8+ (README: thử tới 4.0+)", "ghi_chu": "Dựng điều khiển IK và cực cho khung người, chuyển FK sang IK và ngược lại mà giữ nguyên tư thế."},
+   "y": "Cho vị trí đầu mút, tính ngược ra các góc khớp. Chuyển qua lại giữa FK và IK phải giữ nguyên tư thế, nếu không khung giật ở khung hình chuyển.",
+   "web": "Kit robotics đã giải IK bằng mã (tay máy, chân sáu chân). Bài mới: IK giải tích hai khâu (định lí cosin) cho tay và chân; nhiều khâu thì CCD. Không cần Blender.",
+   "bai": ["robotics/ur5e (đã có)", "robotics/hexapod (đã có)", "vat-li-10/nhen-thuy-luc (đã có)"],
+   "kiem": "Sai số đầu mút nhỏ hơn ngưỡng; mọi góc khớp trong giới hạn; chuyển FK và IK tại cùng một tư thế thì lệch dưới 1 mm.",
+   "muc": "vua", "tt": "da-co-tuong-duong"
+  },
+  {
+   "so": 2, "id": "driver", "ky_thuat": "Drivers & Linkages", "ten": "Dẫn động và cơ cấu liên kết",
+   "cong_cu": {"ten": "EasyDriver", "repo": "NeoEmberArt/EasyDriver", "commit": "7656a0932e", "commit_ngay": "2026-07-20", "giay_phep": "MIT", "giay_phep_ghi_chu": "Tệp LICENSE.", "blender": "3.0+ (bl_info)", "ghi_chu": "Ghi hai tư thế đầu và cuối, tự nhận trục đổi nhiều nhất rồi tạo driver nối một phép biến đổi với tư thế, giá trị, shape key."},
+   "y": "Một tham số điều khiển nhiều bộ phận qua một hàm ánh xạ (từ khoảng nguồn sang khoảng đích). Cả cỗ máy chỉ còn một bậc tự do để người học kéo.",
+   "web": "Đúng mô hình thanh trượt của kit: ui.slider đổi một tham số, hàm draw() suy ra mọi tư thế. Cơ cấu tay quay con trượt, bốn khâu bản lề giải bằng hình học, không nội suy khung hình.",
+   "bai": ["cong-nghe/dong-co-4-ki (đã có: góc trục khuỷu dẫn pit tông, xu páp)", "vat-li-11/dong-ho-co (đã có)", "bài mới: cơ cấu bốn khâu, cần gạt nước"],
+   "kiem": "Chiều dài mỗi thanh không đổi trên cả vòng quay (sai số ràng buộc khép kín); không bộ phận nào xuyên nhau.",
+   "muc": "vua", "tt": "da-co-tuong-duong"
+  },
+  {
+   "so": 3, "id": "timing", "ky_thuat": "Timing & Spacing", "ten": "Nhịp và khoảng cách",
+   "cong_cu": {"ten": "AnimationRetimer", "repo": "evilmushroom/AnimationRetimer", "commit": "22a182931c", "commit_ngay": "2025-10-04", "giay_phep": "GPL-3.0", "giay_phep_ghi_chu": "Tệp LICENSE.", "blender": "3.6+ (bl_info)", "ghi_chu": "Đặt mốc trên dòng thời gian, kéo mốc để giãn hay nén từng đoạn; chỉ áp cho hoạt hình khoá, không áp cho mô phỏng đã nướng."},
+   "y": "Tách hình khỏi nhịp: giữ nguyên các tư thế, chỉ đổi ánh xạ thời gian theo từng đoạn giữa các mốc. Ánh xạ là hàm tuyến tính từng khúc, đơn điệu tăng.",
+   "web": "Một hàm retime(t, mốc gốc, mốc mới) đặt trước AnimationMixer.setTime hay trước draw(). Dùng để làm chậm đúng đoạn cần giảng (va chạm, đổi pha) mà không sửa tệp GLB.",
+   "bai": ["vat-li-10/may-di-bo (làm chậm pha đổi chân)", "thu-vien/impulse-step (làm chậm lúc va chạm)", "mọi bài có beat giảng một khoảnh khắc ngắn"],
+   "kiem": "Ánh xạ đơn điệu tăng; đầu và cuối đoạn không đổi; không hai mốc trùng nhau.",
+   "muc": "cao", "tt": "chua-thu"
+  },
+  {
+   "so": 4, "id": "vai", "ky_thuat": "Cloth Dynamics", "ten": "Động lực học vải",
+   "cong_cu": {"ten": "ClothDrop Reborn", "repo": "hartface/ClothDrop-Reborn", "commit": "35fd25020c", "commit_ngay": "2026-07-13", "giay_phep": "GPL-3.0-or-later", "giay_phep_ghi_chu": "Tệp LICENSE và blender_manifest.toml.", "blender": "4.2+ (manifest)", "ghi_chu": "Vẽ hoặc chọn một tấm phẳng, thả cho rủ lên vật bên dưới, tự dựng mô phỏng và nướng."},
+   "y": "Lưới chất điểm nối bằng lò xo, chịu trọng lực và va chạm. Kết quả rủ là trạng thái cân bằng, có thể nướng thành hình tĩnh.",
+   "web": "Hai đường. A: mô phỏng nhỏ ngay trong trang (Verlet hay PBD, vài trăm điểm) khi bài dạy chính định luật Hooke. B: nướng trong Blender rồi xuất hình tĩnh hoặc morph target khi vải chỉ là đạo cụ.",
+   "bai": ["bài mới Vật lí 10: lực đàn hồi, lưới lò xo", "đạo cụ: màn, cờ, bạt trong các cảnh"],
+   "kiem": "Đường A: năng lượng không tăng khi không có lực ngoài, bước thời gian ổn định. Đường B: số đỉnh và cỡ tệp trong ngưỡng của kiem_glb.py.",
+   "muc": "thap", "tt": "chua-thu"
+  },
+  {
+   "so": 5, "id": "chat-long", "ky_thuat": "Fluid Simulation", "ten": "Mô phỏng chất lỏng",
+   "cong_cu": {"ten": "FLIP Fluids", "repo": "rlguy/Blender-FLIP-Fluids", "commit": null, "commit_ngay": null, "giay_phep": "GPL-3.0 (add-on), MIT (bộ máy), Standard Royalty Free (một phần nội dung)", "giay_phep_ghi_chu": "README và ba tệp giấy phép. Mã nguồn có trên GitHub, bản dựng sẵn được bán ở chợ add-on; có bản demo miễn phí. Bài gốc cũng nhắc xem hướng dẫn dựng và giấy phép trước khi cài.", "blender": "4.5 tới 5.3 (README)", "ghi_chu": "Hệ mô phỏng chất lỏng FLIP đầy đủ, phải tự biên dịch nếu không mua."},
+   "y": "Hạt mang vận tốc, lưới giải áp suất. Kết quả là một chuỗi lưới theo khung hình, rất nặng.",
+   "web": "Không đưa chuỗi lưới chất lỏng lên web (mỗi khung một lưới). Bài về chất lỏng dùng hạt và shader tính ngay trong trang, hoặc công thức giải tích (Bernoulli, Torricelli). Chỉ dùng FLIP khi cần một ảnh hay đoạn phim tĩnh.",
+   "bai": ["thu-vien/river-step, water-cycle-step (đã có, không cần FLIP)", "bài mới: bình thông nhau, vòi phun Torricelli"],
+   "kiem": "Bảo toàn thể tích trong mô phỏng hạt; tầm phun khớp công thức.",
+   "muc": "thap", "tt": "chua-thu"
+  },
+  {
+   "so": 6, "id": "buoc-di", "ky_thuat": "Walk Cycles", "ten": "Chu kì bước đi",
+   "cong_cu": {"ten": "AutoWalker", "repo": "metedmts/AutoWalker", "commit": "f4d94b6881", "commit_ngay": "2025-06-10", "giay_phep": "MIT", "giay_phep_ghi_chu": "Tệp LICENSE và README ghi MIT, nhưng blender_manifest.toml ghi SPDX:GPL-3.0-or-later. Hai chỗ lệch nhau; nếu dùng mã thì hỏi tác giả, còn viết lại từ ý thì không vướng.", "blender": "3.6+ (bl_info và manifest)", "ghi_chu": "Từ chu kì đi tại chỗ, lấy vị trí xương bàn chân so với xương gốc theo từng khung, suy ra quãng tiến của thân rồi ghi khoá cho thân hoặc một vật đích."},
+   "y": "Chân chống đứng yên trên đất, nên độ lùi của bàn chân chống so với thân ở mỗi khung chính là độ tiến của thân ở khung đó. Vận tốc thân vì thế không đều trong một chu kì.",
+   "web": "Bài may-di-bo đang cho thân tiến đều với V = bước/(1 − tỉ lệ vung) và đo được chân trượt khoảng 9 cm. Áp ý này: tính x_thân(t) từ chân đang chống ở từng khung (trộn mượt lúc đổi chân), chân trượt về gần 0 và có thêm đồ thị v(t) để dạy.",
+   "bai": ["vat-li-10/may-di-bo (cải tiến trực tiếp)", "robotics/quadruped, hexapod, nhen (cùng phép đo trượt chân)"],
+   "kiem": "Phép đo trượt chân sẵn có (window.MAY.SLIP): trượt lớn nhất giảm rõ so với 9 cm; quãng tiến một chu kì vẫn bằng 9,09 m.",
+   "muc": "cao", "tt": "chua-thu"
+  },
+  {
+   "so": 7, "id": "shape-key", "ky_thuat": "Shape Keys", "ten": "Khoá hình (morph)",
+   "cong_cu": {"ten": "ShKeeper", "repo": "AgitoReiKen/ShKeeper", "commit": "4657846809", "commit_ngay": "2024-08-18", "giay_phep": "GPL-3.0", "giay_phep_ghi_chu": "Tệp LICENSE.", "blender": "4.1+ (bl_info)", "ghi_chu": "Áp mọi modifier mà giữ shape key, nướng hoạt hình shape key thành khoá, bật tắt driver của shape key."},
+   "y": "Một lưới, nhiều hình đích cùng số đỉnh; hình hiện tại là tổ hợp tuyến tính. Modifier chưa áp thì hình xuất ra khác hình trong Blender, mà áp modifier thường làm mất shape key.",
+   "web": "glTF mang shape key dưới dạng morph target, three.js đọc sẵn (morphTargetInfluences). Trước khi xuất phải áp modifier mà giữ shape key, và nướng driver thành khoá vì glTF không mang driver.",
+   "bai": ["co-the-nguoi (tim co bóp, cơ co)", "te-bao (màng biến dạng, thực bào)", "thu-vien/plasmolysis-step"],
+   "kiem": "Thêm vào kiem.json: tên và số morph target mỗi lưới; sau khi nén bằng gltf-transform số này không đổi.",
+   "muc": "vua", "tt": "chua-thu"
+  },
+  {
+   "so": 8, "id": "vat-ran", "ky_thuat": "Rigid Bodies", "ten": "Vật rắn",
+   "cong_cu": {"ten": "Bullet Constraints Builder", "repo": "KaiKostack/bullet-constraints-builder", "commit": "c691545bb9", "commit_ngay": "2026-11-21", "giay_phep": "GPL-2.0", "giay_phep_ghi_chu": "Tệp LICENSE.", "blender": "bl_info ghi 2.78; kho còn được cập nhật (commit 21/11/2026) nhưng bản Blender thật sự chạy được chưa kiểm", "ghi_chu": "Công cụ nghiên cứu (dự án Inachus của EU): nối các cấu kiện bằng ràng buộc có ngưỡng gãy tính từ vật liệu, để mô phỏng công trình sập."},
+   "y": "Vật rắn nối nhau bằng ràng buộc có ngưỡng chịu lực; vượt ngưỡng thì liên kết gãy. Mô phỏng xong thì nướng thành khoá vị trí và góc quay.",
+   "web": "Cảnh ít vật: tính ngay trong trang bằng công thức (va chạm, bảo toàn động lượng). Cảnh nhiều vật: nướng trong Blender thành khoá rồi xuất GLB, trang chỉ phát lại. Công cụ này quá nặng cho bài phổ thông; chỉ đáng xem nếu làm bài về kết cấu chịu động đất.",
+   "bai": ["thu-vien/impulse-step (đã có)", "bài mới: con lắc Newton, máy bi lăn"],
+   "kiem": "Động lượng và năng lượng trước và sau va chạm khớp trong sai số; bản nướng không có vật xuyên nhau.",
+   "muc": "thap", "tt": "chua-thu"
+  },
+  {
+   "so": 9, "id": "geo-nodes", "ky_thuat": "Geometry Nodes", "ten": "Hình học thủ tục",
+   "cong_cu": {"ten": "Johnny Matthews node assets", "repo": "johnnygizmo/node_assets", "commit": "229661d29e", "commit_ngay": "2022-11-22", "giay_phep": "CC0-1.0", "giay_phep_ghi_chu": "Tệp LICENSE.", "blender": "README: làm trên bản dựng hằng ngày thời 2022; chưa kiểm với bản hiện nay", "ghi_chu": "22 tệp .blend chứa nhóm node để mở ra xem và sửa: mảng 3D, mảng tròn, lưới lục giác, dây xích, dây ba tao, đường dây võng, ván lát, gạch."},
+   "y": "Hình sinh ra từ quy tắc và tham số, không nặn tay. Đổi tham số là đổi cả hình.",
+   "web": "Dự án đã theo lối mô hình là mã, nên hình thủ tục viết thẳng bằng three.js (InstancedMesh, hàm sinh). Kho này dùng như sổ mẫu ý tưởng (xích, dây võng, lát gạch). Nếu vẫn dựng trong Blender thì phải hiện thực hoá instance và áp modifier trước khi xuất.",
+   "bai": ["băng chuyền, dây xích, dây cáp trong các bài robotics và cơ khí", "bài mới Toán: lát mặt phẳng, dây võng (catenary)"],
+   "kiem": "Số instance và số tam giác trong ngưỡng hiệu năng của bài.",
+   "muc": "thap", "tt": "da-co-tuong-duong"
+  },
+  {
+   "so": 10, "id": "gap", "ky_thuat": "Deformation", "ten": "Gấp và mở mặt",
+   "cong_cu": {"ten": "Origamify", "repo": "aconz2/blender-addon-origamify", "commit": "664767145c", "commit_ngay": "2021-04-18", "giay_phep": "Unlicense", "giay_phep_ghi_chu": "Tệp UNLICENSE (thuộc công cộng).", "blender": "2.80+ (bl_info)", "ghi_chu": "Biến một lưới thành cây cha con, mỗi mặt một vật, trục X cục bộ nằm trên cạnh chung với mặt cha; có lệnh mở phẳng, gấp lại, ghi khoá. Tác giả ghi rõ hình khai triển không bảo đảm không tự đè."},
+   "y": "Chọn một mặt gốc, dựng cây khung trên đồ thị kề của các mặt. Mỗi mặt là một nút quay quanh cạnh chung với mặt cha. Mở phẳng là đặt góc quay sao cho mặt đồng phẳng với mặt cha; gấp lại là trả về góc nhị diện gốc.",
+   "web": "Viết lại được trọn vẹn bằng three.js, không cần Blender: mỗi mặt là một Group có trục quay đặt trên cạnh chung, một thanh trượt chạy từ gấp tới mở. Đây là ý dùng được ngay nhất cho một bài mới.",
+   "bai": ["bài mới Toán: hình khai triển của lập phương, lăng trụ, chóp, khối đa diện đều; diện tích xung quanh", "bài mới Sinh: cuộn gấp phiến beta (minh hoạ)"],
+   "kiem": "Mở phẳng: mọi mặt đồng phẳng và không mặt nào đè lên mặt khác. Gấp lại: mọi đỉnh trùng vị trí gốc trong sai số. Tổng diện tích không đổi.",
+   "muc": "cao", "tt": "chua-thu"
+  },
+  {
+   "so": 11, "id": "rang-buoc", "ky_thuat": "Constraints", "ten": "Ràng buộc và khung xuất",
+   "cong_cu": {"ten": "Auto Copy Transforms DEF", "repo": "PieroFra/auto-copy-transforms-def", "commit": "052d0bf4a3", "commit_ngay": "2026-11-16", "giay_phep": "GPL-3.0-or-later", "giay_phep_ghi_chu": "Tệp LICENSE và manifest.", "blender": "4.2+ (manifest), bản 1.3.2", "ghi_chu": "Tự tạo ràng buộc Copy Transforms từ xương nguồn (MCH_) sang xương đích (DEF_, ORG_) theo quy tắc tên; có xem trước, có sổ JSON ghi các ràng buộc đã sinh, dọn không đụng ràng buộc làm tay; có kiểm thử CI."},
+   "y": "Tách hai khung: khung điều khiển (phức tạp, chỉ sống trong Blender) và khung biến dạng DEF (phẳng, sạch). Xương DEF chép chuyển động từ xương điều khiển; chỉ khung DEF được nướng và xuất.",
+   "web": "Áp cho mọi mô hình có xương sắp đưa lên web: chỉ xuất xương DEF, nướng ràng buộc thành khoá. Tệp nhẹ hơn và không phụ thuộc ràng buộc mà glTF không mang. Lối ghi sổ JSON và không đụng phần làm tay trùng với cách làm SOT của dự án.",
+   "bai": ["mọi bài có GLB mang xương (hiện có may-di-bo: 104 xương)", "bài về bánh răng, truyền động: ràng buộc viết bằng mã (tỉ số truyền)"],
+   "kiem": "Thêm vào kiem.json: danh sách xương được phép (tiền tố DEF hoặc tên bài cần); không còn xương điều khiển trong tệp xuất.",
+   "muc": "vua", "tt": "chua-thu"
+  },
+  {
+   "so": 12, "id": "lap", "ky_thuat": "Looping Motion", "ten": "Chuyển động lặp",
+   "cong_cu": {"ten": "Smooth Animation Loops", "repo": "RootKiller/blender-smooth-anim-loops-addon", "commit": "e8c84ac42f", "commit_ngay": "2018-09-29", "giay_phep": null, "giay_phep_ghi_chu": "Không có tệp giấy phép, không dòng nào về giấy phép: không chép mã.", "blender": "bl_info ghi 2.78; mã dùng API trước 2.80 (scene.objects.active) nên nhiều khả năng không chạy trên Blender hiện nay (suy từ mã, chưa chạy thử)", "ghi_chu": "Trong trình sửa đường cong: kéo khoá cuối về bằng khoá đầu, các khoá lân cận dịch theo trọng số giảm dần."},
+   "y": "Vòng lặp mượt cần hai điều ở mối nối: giá trị cuối bằng giá trị đầu, và độ dốc cuối bằng độ dốc đầu. Cách sửa: lấy độ lệch đầu cuối rồi phân bổ ngược về trước với trọng số giảm dần.",
+   "web": "Viết thành một phép kiểm cho mọi chuyển động lặp (đi, quay, đập, dao động): đo độ lệch vị trí và vận tốc ở mối nối. Lệch thì sửa bằng cách phân bổ độ lệch trên một cửa sổ cuối chu kì, làm ngay lúc nạp hoặc trong bước dựng.",
+   "bai": ["vat-li-10/may-di-bo (chu kì đi 132 khung)", "vat-li-11/dong-ho-co, cong-nghe/dong-co-4-ki (chu kì viết bằng hàm tuần hoàn: mối nối đúng sẵn)", "các bài cá bơi, sứa"],
+   "kiem": "Tại mối nối: lệch vị trí dưới ngưỡng (ví dụ 1 mm hoặc 0,1°), lệch vận tốc dưới ngưỡng.",
+   "muc": "cao", "tt": "chua-thu"
+  }
+ ]
+}

@@ -25,6 +25,7 @@ STEPS = [
     ('goi-day', [[PY, 'tools/build_goi_day.py']]),
     ('robotics', [['node', 'build.mjs', '__cwd__tools/robotics'], [PY, 'tools/robotics/build_hub.py'], [PY, 'tools/build_giao_an_mang.py'], [PY, 'tools/build_thiet_ke_mang.py']]),
     ('riemann', [['node', 'tools/riemann/build.mjs']]),
+    ('so-chuyen-dong', [[PY, 'tools/chuyen_dong.py']]),
     ('thu-vien', [[PY, 'tools/house_thu_vien.py']]),
     ('trang-muc', [[PY, 'tools/build_ls10.py'], [PY, 'tools/anh_nho.py'], [PY, 'tools/build_pages.py']]),
     ('the-chia-se', [[PY, 'tools/the_chia_se.py', '--strict']]),
