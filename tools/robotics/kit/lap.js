@@ -17,12 +17,12 @@ body.lap .lapw{display:flex}
 body.lap .mob.cap{display:none!important}
 .lapw .hd{padding:14px 16px 10px;border-bottom:1px solid rgba(16,24,40,.08);position:relative}
 .lapw .k{font:600 13px/1.3 var(--bg-font,system-ui,sans-serif);color:#5B6472}
-.lapw h3{margin:2px 40px 8px 0;font:700 19px/1.25 var(--bg-font,system-ui,sans-serif);letter-spacing:-.01em}
+.lapw h3{margin:2px 40px 8px 0;font:700 20px/1.25 var(--bg-font,system-ui,sans-serif);letter-spacing:-.01em}
 .lapw .pg{display:flex;align-items:center;gap:10px;font:500 13px var(--bg-font,system-ui,sans-serif);color:#454A55}
-.lapw .pg .tr{flex:1;height:4px;border-radius:2px;background:#e9ebef;overflow:hidden}
+.lapw .pg .tr{flex:1;height:4px;border-radius:4px;background:#e9ebef;overflow:hidden}
 .lapw .pg .tr i{display:block;height:100%;width:0;background:var(--bg-s-cong,#5B6472);transition:width .3s}
 .lapw .pg b{font-variant-numeric:tabular-nums;color:#1D1B16}
-.lapw .x{position:absolute;right:8px;top:8px;width:36px;height:36px;border:0;border-radius:10px;background:none;font-size:22px;line-height:1;color:#626773;cursor:pointer}
+.lapw .x{position:absolute;right:8px;top:8px;width:36px;height:36px;border:0;border-radius:10px;background:none;font-size:24px;line-height:1;color:#626773;cursor:pointer}
 @media (hover:hover){.lapw .x:hover{background:#f1f2f5}}
 .lapw .msg{margin:10px 16px 0;padding:10px 12px;border-radius:10px;font:500 14px/1.5 var(--bg-font,system-ui,sans-serif);background:#f3f4f6;color:#454A55}
 .lapw .msg b{display:block;color:#1D1B16;margin-bottom:2px}
@@ -43,11 +43,11 @@ body.lap .mob.cap{display:none!important}
 .lapw .ls button.hint{border-color:#1D1B16;box-shadow:0 0 0 2px rgba(29,27,22,.18)}
 .lapw .ls .sep{font:600 13px var(--bg-font,system-ui,sans-serif);color:#626773;margin:6px 2px 0}
 .lapw .ft{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px 12px;border-top:1px solid rgba(16,24,40,.08)}
-.lapw .ft button{height:36px;padding:0 14px;border:1px solid rgba(16,24,40,.18);border-radius:999px;background:#fff;color:#1D1B16;font:600 13.5px var(--bg-font,system-ui,sans-serif);cursor:pointer}
+.lapw .ft button{height:36px;padding:0 14px;border:1px solid rgba(16,24,40,.18);border-radius:999px;background:#fff;color:#1D1B16;font:600 14px var(--bg-font,system-ui,sans-serif);cursor:pointer}
 .lapw .ft button.pri{background:#1D1B16;border-color:#1D1B16;color:#fff}
 .lapw .ft button:disabled{opacity:.45;cursor:default}
 @media (pointer:coarse){.lapw .ls button{min-height:44px}.lapw .ft button{height:44px}.lapw .x{width:44px;height:44px}}
-@media (max-width:700px),(orientation:landscape) and (max-height:520px){
+@media (max-width:640px),(orientation:landscape) and (max-height:520px){
   .lapw{left:8px;right:8px;width:auto;top:auto;bottom:calc(8px + env(safe-area-inset-bottom));max-height:48svh}
   body.bgs-nav-on .lapw{bottom:calc(76px + env(safe-area-inset-bottom));max-height:42svh}
 }

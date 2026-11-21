@@ -42,3 +42,7 @@ jobs:
           python -m http.server 8777 >/dev/null 2>&1 &
           sleep 2
           python tests/smoke.py 8777
+      - name: Bố cục ở năm bề rộng (tràn ngang, vùng chạm, cỡ chữ, chữ bị cắt, đè nhau, tương phản)
+        run: |
+          curl -s -o /dev/null http://localhost:8777/ || (python -m http.server 8777 >/dev/null 2>&1 & sleep 2)
+          python tests/kiem_bo_cuc.py 8777

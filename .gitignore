@@ -21,3 +21,4 @@ tools/robotics/dong-co/film/*.wav
 .art_robo/
 test-results/
 .DS_Store
+tests/.kiem_bo_cuc.json

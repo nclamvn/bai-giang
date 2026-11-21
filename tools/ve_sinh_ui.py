@@ -29,7 +29,7 @@ KIỂM:
 Miễn trừ có ghi lí do ở MIEN bên dưới; thêm miễn trừ thì phải ghi lí do.
 Mỗi lần chạy, công cụ tự thử trước: một trang mẫu đạt cả 10 luật và 10 bản mỗi bản phạm đúng một luật (tu_thu). Luật nào không cắn thì dừng.
 """
-import re, struct, sys
+import json, re, struct, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -201,6 +201,74 @@ def kiem_trang(rel, s, loi):
     if not mien(rel, 'K10') and re.search(r'<(?:div|span)\b[^>]*\sonclick=', s): loi.append(f'K10 {rel}: onclick trên div hoặc span (dùng <button> hoặc <a>)')
 
 
+# ---------------------------------------------------------------- thang đo (K11, K12, K13)
+# Lớp dùng chung: nguồn CSS viết bằng px thật. Không gồm kit/ui.js, kit/live.js (bảng 1600 × 900 theo đơn vị thiết kế, co theo cảnh),
+# bài riêng (Tế Bào, Ty Thể, Cổ Loa, Neuron, Riemann) và CSS mô phỏng gốc của thư viện.
+LOP_CHUNG = ('tools/design.py', 'tools/trang-chinh.css', 'tools/trang-chu.css', 'tools/liquid_glass.py', 'tools/house_thu_vien.py', 'tools/bai-giang.template.html',
+             'tools/thu-vien.template.html', 'tools/build_pages.py', 'tools/build_ls10.py', 'tools/build_goi_day.py', 'tools/build_giao_an_mang.py', 'tools/build_thiet_ke_mang.py',
+             'tools/build_mau.py', 'tools/robotics/build_hub.py', 'tools/xuat_tel1459.py', 'shell/bg-shell.js', 'shell/khung.js', 'tools/robotics/kit/doc.js', 'tools/robotics/kit/lap.js',
+             'tools/robotics/kit/tach.js')
+_T = json.loads((ROOT / 'design/tokens.json').read_text(encoding='utf-8'))
+THANG_CHU = tuple(sorted(_T['size'].values()))          # cỡ chữ; trên bậc lớn nhất là cỡ hiển thị, không ràng
+THANG_BO = tuple(sorted(_T['radius'].values()))
+THANG_GAY = tuple(sorted(_T['break'].values()))
+KHAI_CHU = re.compile(r'(?<![-\w])font(?:-size)?\s*:\s*([^;{}"\'`]*)')
+KHAI_BO = re.compile(r'(?<![-\w])border(?:-[a-z]+){0,2}-radius\s*:\s*([^;{}"\'`]*)')
+KHAI_GAY = re.compile(r'\((max|min)-width:\s*(\d+(?:\.\d+)?)px\)')
+PX = re.compile(r'(?<![/\w.])(\d+(?:\.\d+)?)px')
+
+
+def vung_in(s):
+    """các đoạn nằm trong @media print (cỡ chữ bản in theo trang A4, không theo thang màn hình)"""
+    out = []
+    for m in re.finditer(r'@media\s+print\s*\{', s):
+        d, j = 1, m.end()
+        while j < len(s) and d:
+            d += (s[j] == '{') - (s[j] == '}'); j += 1
+        out.append((m.start(), j))
+    return out
+
+
+def gan(v, thang):
+    """bậc gần nhất; đứng giữa hai bậc thì lấy bậc lớn (chữ to dễ đọc hơn)"""
+    return min(thang, key=lambda t: (abs(t - v), -t))
+
+
+def thang_do(s, sua=False):
+    """Trả (văn bản, danh sách lệch). sua=True: đưa số về bậc gần nhất."""
+    lech, vi = [], vung_in(s)
+    trong_in = lambda i: any(a <= i < b for a, b in vi)
+    def khai(m, thang, ten, tran=None):
+        if trong_in(m.start()): return m.group(0)
+        def so(n):
+            v = float(n.group(1))
+            if v == 0 or (tran and v > tran): return n.group(0)
+            g = gan(v, thang)
+            if g == v: return n.group(0)
+            lech.append((ten, v, g)); return f'{g}px' if sua else n.group(0)
+        return m.group(0)[:m.start(1) - m.start()] + PX.sub(so, m.group(1))
+    s = KHAI_CHU.sub(lambda m: khai(m, THANG_CHU, 'K11', THANG_CHU[-1]), s)
+    s = KHAI_BO.sub(lambda m: khai(m, THANG_BO, 'K12'), s)
+    def gay(m):
+        if trong_in(m.start()): return m.group(0)
+        v = float(m.group(2)); thang = THANG_GAY if m.group(1) == 'max' else tuple(t + 1 for t in THANG_GAY)
+        g = gan(v, thang)
+        if g == v: return m.group(0)
+        lech.append(('K13', v, g)); return f'({m.group(1)}-width:{g}px)' if sua else m.group(0)
+    s = KHAI_GAY.sub(gay, s)
+    return s, lech
+
+
+def kiem_thang(loi):
+    for rel in LOP_CHUNG:
+        p = ROOT / rel
+        if not p.is_file(): continue
+        _, lech = thang_do(p.read_text(encoding='utf-8'))
+        for k in ('K11', 'K12', 'K13'):
+            ds = sorted({f'{v:g}→{g:g}' for kk, v, g in lech if kk == k})
+            if ds: loi.append(f'{k} {rel}: {sum(1 for x in lech if x[0] == k)} số ngoài thang ({", ".join(ds[:8])})')
+
+
 def tu_thu():
     """Mỗi luật phải tự chứng minh nó cắn: một trang mẫu đạt cả 10 luật, rồi 10 bản mỗi bản phạm đúng một luật."""
     ok = ('<!doctype html><html lang="vi"><head><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#FFFFFF">'
@@ -218,11 +286,23 @@ def tu_thu():
     k3 = ok.replace('<link rel="stylesheet" href="design/house.css">', '').replace('.a{color:red}', '.a{outline:none}')
     if chay(k3) != ['K3']: sai.append(f'K3 không cắn đúng: {chay(k3)}')
     if chay(ok.replace('(hover:hover){.a:hover{color:blue}}', '(hover: hover) and (pointer: fine){.a:hover{color:blue}.b:hover{color:red}}')) != []: sai.append('K2 báo nhầm luật đã nằm trong @media (hover: hover)')
+    t = '.a{font:500 13.5px/1.5 x;border-radius:6px}@media (max-width:820px){.a{font-size:clamp(22px,2vw,84px)}}@media print{.a{font-size:9px}}'
+    da, lech = thang_do(t, sua=True)
+    if sorted((k, v) for k, v, _ in lech) != [('K11', 13.5), ('K11', 22.0), ('K12', 6.0), ('K13', 820.0)] or thang_do(da)[1] or 'font-size:9px' not in da or '/1.5' not in da:
+        sai.append(f'K11 đến K13 không cắn đúng: {lech} → {da}')
     if sai: sys.exit('vệ sinh giao diện: phép kiểm hỏng\n  ' + '\n  '.join(sai))
 
 
 def main():
     tu_thu()
+    if '--dua-ve-thang' in sys.argv:  # chạy một lần khi đổi thang: sửa nguồn của lớp dùng chung, in bảng đổi
+        for rel in LOP_CHUNG:
+            p = ROOT / rel
+            if not p.is_file(): continue
+            s = p.read_text(encoding='utf-8'); t, lech = thang_do(s, sua=True)
+            if t != s: p.write_text(t, encoding='utf-8')
+            if lech: print(f'{len(lech):3d} số  {rel}')
+        return
     chi_kiem = '--kiem' in sys.argv
     ps, da_sua = trang(), 0
     if not chi_kiem:
@@ -236,11 +316,12 @@ def main():
     for rel, _, s in ps: kiem_trang(rel, s, loi)
     ts = tai_san()
     for rel, s in ts: kiem_css(rel, s, loi)
+    kiem_thang(loi)
     if loi:
         print(f'vệ sinh giao diện: {len(loi)} lỗi'); print('\n'.join('  ' + x for x in loi[:60]))
         if len(loi) > 60: print(f'  … và {len(loi) - 60} lỗi nữa')
         sys.exit(1)
-    print(f'vệ sinh giao diện: {len(ps)} trang, {len(ts)} tệp CSS và JS đạt 10 luật' + (f' (vừa sửa {da_sua} trang)' if da_sua else ''))
+    print(f'vệ sinh giao diện: {len(ps)} trang, {len(ts)} tệp CSS và JS đạt 13 luật' + (f' (vừa sửa {da_sua} trang)' if da_sua else ''))
 
 
 if __name__ == '__main__':

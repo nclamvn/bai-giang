@@ -24,7 +24,7 @@ const ALL = {out: 1.6, turn: 5.4, back: 4.2, home: 1.0, deg: 330};
 
 const CSS = `
 .cut-lab{position:absolute;left:0;top:0;pointer-events:none;z-index:6;display:none;padding:6px 10px 7px;border-radius:10px;background:rgba(255,255,255,.96);box-shadow:0 10px 26px -16px rgba(16,24,40,.45),0 0 0 .5px rgba(16,24,40,.1);font:600 12px/1.25 var(--bg-font,'Be Vietnam Pro',var(--bg-font,system-ui,sans-serif));color:#1D1B16;white-space:nowrap}
-.cut-lab small{display:block;font:500 11px/1.3 var(--bg-mono,'JetBrains Mono',monospace);color:#626773;margin-top:2px}
+.cut-lab small{display:block;font:500 12px/1.3 var(--bg-mono,'JetBrains Mono',monospace);color:#626773;margin-top:2px}
 .cut-svg{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:5}
 .cutbar{position:fixed;z-index:21;left:16px;top:calc(var(--bg-bar,0px) + 64px + env(safe-area-inset-top));max-width:calc(100vw - 404px);display:none;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
 .cutbar::-webkit-scrollbar{display:none}
@@ -35,8 +35,8 @@ body.cmp .cutbar{display:flex}
 .cutbar .lb{flex:none;align-self:center;padding:0 4px 0 2px;font:600 13px var(--bg-font,system-ui,sans-serif);color:#626773}
 @media (pointer:coarse){.cutbar button{height:44px}}
 @media (orientation:landscape) and (max-height:520px){.cutbar{left:max(8px,env(safe-area-inset-left));top:calc(var(--bg-bar,48px) + 72px + env(safe-area-inset-top));max-width:calc(50vw - 28px)}}
-@media (max-width:700px){.cutbar{left:8px;right:8px;max-width:none;top:calc(var(--bg-bar,48px) + 72px + env(safe-area-inset-top))}body.cut-on .lv-insp{top:calc(var(--bg-bar,48px) + 128px + env(safe-area-inset-top))}}
-html[data-chieu] .cut-lab{font-size:16px}html[data-chieu] .cut-lab small{font-size:14px}
+@media (max-width:640px){.cutbar{left:8px;right:8px;max-width:none;top:calc(var(--bg-bar,48px) + 72px + env(safe-area-inset-top))}body.cut-on .lv-insp{top:calc(var(--bg-bar,48px) + 128px + env(safe-area-inset-top))}}
+html[data-chieu] .cut-lab{font-size:17px}html[data-chieu] .cut-lab small{font-size:14px}
 `;
 
 export function createCutaway({st, ui, parts, explode = () => {}, turn = () => {}, beat = 2.6, title = 'Tháo từng bộ phận'}) {

@@ -25,11 +25,11 @@ a{color:inherit}
 .top .code{background:var(--or);color:#fff;display:grid;place-content:center;padding:0 26px;font:700 20px "JetBrains Mono",monospace;letter-spacing:1px;text-decoration:none}
 .top .code small{display:block;font-size:13px;letter-spacing:2px;margin-top:2px;opacity:.9}
 .top .t{padding:18px 24px}
-.top h1{margin:2px 0 0;font-size:32px;letter-spacing:-.02em;line-height:1.1}
+.top h1{margin:2px 0 0;font-size:34px;letter-spacing:-.02em;line-height:1.1}
 .top h1 span{color:var(--or);font-weight:400}
 .wrap{max-width:1180px;margin:0 auto;padding:28px 24px 64px}
 .intro{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:start;margin-bottom:30px}
-.intro p{margin:0 0 10px;font-size:16px}
+.intro p{margin:0 0 10px;font-size:17px}
 .how{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
 .how ol{margin:8px 0 0;padding-left:20px}.how li{margin:4px 0}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 28px}
@@ -37,40 +37,40 @@ a{color:inherit}
 .card .img{display:block;position:relative;aspect-ratio:16/9;background:var(--bg-card);overflow:hidden;border-radius:14px;box-shadow:inset 0 0 0 1px var(--bg-line)}
 .card .img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
 @media (hover:hover){.card .img:hover img{transform:scale(1.03)}}
-.card .img b{position:absolute;left:12px;top:12px;background:#fff;color:var(--bg-ink);font:500 10.5px var(--bg-mono);letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:6px;box-shadow:0 0 0 1px var(--bg-line)}
+.card .img b{position:absolute;left:12px;top:12px;background:#fff;color:var(--bg-ink);font:500 12px var(--bg-mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:8px;box-shadow:0 0 0 1px var(--bg-line)}
 .card .body{padding:16px 2px 0;display:flex;flex-direction:column;gap:10px;flex:1}
-.card h2{margin:0;font:500 22px/1.25 var(--bg-font);letter-spacing:-.02em}
-.card h2 small{display:block;font:500 10.5px/1.6 var(--bg-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--bg-mut);margin-bottom:6px}
+.card h2{margin:0;font:500 24px/1.25 var(--bg-font);letter-spacing:-.02em}
+.card h2 small{display:block;font:500 12px/1.6 var(--bg-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--bg-mut);margin-bottom:6px}
 .card p{margin:0}
 .card ul{margin:0;padding-left:18px}.card li{margin:2px 0}
-.nums{font:12.5px/1.6 var(--bg-mono);color:var(--bg-ink2);background:var(--bg-card);border:1px solid var(--bg-line);border-radius:10px;padding:8px 12px}
+.nums{font:13px/1.6 var(--bg-mono);color:var(--bg-ink2);background:var(--bg-card);border:1px solid var(--bg-line);border-radius:10px;padding:8px 12px}
 details{border-top:1px solid var(--line);padding-top:8px}
 summary{cursor:pointer;font-weight:600;font-size:14px}
-details ol{margin:8px 0 0;padding-left:20px;font-size:13.5px}details li{margin:3px 0}
+details ol{margin:8px 0 0;padding-left:20px;font-size:14px}details li{margin:3px 0}
 .note{font-size:13px;color:var(--bg-ink3)}
 .go{margin-top:auto;display:inline-flex;align-self:flex-start;align-items:center;gap:8px;background:var(--ink);color:#fff;text-decoration:none;font:700 13px "JetBrains Mono",monospace;letter-spacing:1.5px;padding:10px 16px;border-radius:4px}
 @media (hover:hover){.go:hover{background:var(--or)}}
-h3.sec{font:500 10.5px var(--bg-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--bg-mut);margin:40px 0 14px;display:flex;align-items:center;gap:8px}
+h3.sec{font:500 12px var(--bg-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--bg-mut);margin:40px 0 14px;display:flex;align-items:center;gap:8px}
 h3.sec:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--bg-sig)}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
 .more{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 .more a{display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--ink);box-shadow:0 1px 2px rgba(16,24,40,.04);transition:box-shadow .3s}
 @media (hover:hover){.more a:hover{box-shadow:0 8px 24px -12px rgba(16,24,40,.18)}}
 .more img{width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#f1f2f5}
-.more span{display:grid;gap:4px;padding:14px 16px 14px 0;font-size:14.5px;color:var(--mute)}.more b{font-size:18px;color:var(--ink)}.more small{font-size:13px;font-weight:600;color:var(--mute)}
-.box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:14.5px}
+.more span{display:grid;gap:4px;padding:14px 16px 14px 0;font-size:15px;color:var(--mute)}.more b{font-size:17px;color:var(--ink)}.more small{font-size:13px;font-weight:600;color:var(--mute)}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:15px;min-width:0;overflow-wrap:anywhere}
 .box p{margin:0 0 8px}.box p:last-child{margin:0}
-table.keys{border-collapse:collapse;width:100%;font-size:13.5px}
+table.keys{border-collapse:collapse;width:100%;font-size:14px}
 table.keys td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:top}
-table.keys td:first-child{font:600 13px "JetBrains Mono",monospace;white-space:nowrap;color:var(--bg-ink2)}
-@media (max-width:860px){.intro,.grid,.cols,.more{grid-template-columns:1fr}.more a{grid-template-columns:120px 1fr}.top h1{font-size:25px}.top .code{padding:0 16px}.wrap{padding:20px 16px 48px}}
+table.keys td:first-child{font:600 13px "JetBrains Mono",monospace;color:var(--bg-ink2)}
+@media (max-width:900px){.intro,.grid,.cols,.more{grid-template-columns:1fr}.more a{grid-template-columns:120px 1fr}.top h1{font-size:24px}.top .code{padding:0 16px}.wrap{padding:20px 16px 48px}}
 body{font-family:var(--bg-font)}
 .top{display:block;padding-top:48px;padding-bottom:8px;border:0;background:none} .top h1{margin:8px 0 12px} .top .bg-lead{margin:0}
 .card .body{gap:12px} .card .body>.bg-btn{margin-top:auto;align-self:flex-start}
 h3.sec{font:500 clamp(24px,2.8vw,34px)/1.18 var(--bg-font);letter-spacing:-.03em;margin:72px 0 24px;color:var(--bg-ink);text-transform:none} h3.sec:before{display:none}
 table.ds{width:100%;border-collapse:collapse} .ds td{padding:12px 12px 12px 0;border-top:1px solid var(--line);vertical-align:top}
-.ds tr.ch td{font:500 21px/1.3 var(--bg-font);padding-top:32px;border-top:0} .ds .mono{width:52px;color:var(--mute)} .ds .mut{color:var(--mute)}
-.ds a{font-weight:600} .ds .mu{width:120px;color:var(--mute);font-size:14px} .ds .pt{font-size:12.5px;font-family:var(--bg-mono,monospace)} .card .nut{display:flex;gap:8px;margin-top:auto} @media (max-width:640px){.ds .mut,.ds .mu{display:none}}
+.ds tr.ch td{font:500 20px/1.3 var(--bg-font);padding-top:32px;border-top:0} .ds .mono{width:52px;color:var(--mute)} .ds .mut{color:var(--mute)}
+.ds a{font-weight:600} .ds .mu{width:120px;color:var(--mute);font-size:14px} .ds .pt{font-size:13px;font-family:var(--bg-mono,monospace)} .card .nut{display:flex;gap:8px;margin-top:auto} @media (max-width:640px){.ds .mut,.ds .mu{display:none}}
 .nguon{color:var(--mute);font-size:14px;max-width:760px}
 </style>
 <style id="bg-vt">@view-transition{navigation:auto}#bgs-load{view-transition-name:bg-bia}::view-transition-group(bg-bia){animation-duration:.42s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}::view-transition-old(root),::view-transition-new(root){animation-duration:.24s}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>

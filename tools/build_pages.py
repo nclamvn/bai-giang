@@ -187,9 +187,9 @@ def chu_de(links, lesson_href):
     src = GD['nguon']['Sinh học'][0]
     LG_CSS = LG.root('''
   --paper:var(--bg-page); --panel:var(--bg-surface); --ink:var(--bg-ink); --ink2:var(--bg-ink2); --muted:var(--bg-ink3); --line:rgba(15,23,42,.08); --f-body:var(--lg-font); --f-mono:var(--lg-font); --r:22px;
-''') + LG.BODY + 'html{background:var(--lg-page)} header h1{letter-spacing:-.025em} .lbl{font-weight:600;letter-spacing:.07em} .kpi b{font-variant-numeric:tabular-nums}\n' \
+''') + LG.BODY + 'html{background:var(--lg-page)} header h1{letter-spacing:-.025em} .lbl{font-weight:600;letter-spacing:.06em} .kpi b{font-variant-numeric:tabular-nums}\n' \
         + LG.glass('.kpi div,.step', 'var(--lg-r)') + LG.glass('table', 'var(--lg-r)') + LG.pill_buttons('.btn,.chip', '.btn.pri') \
-        + '.chip[aria-pressed="true"]{background:var(--bg-ink)!important;color:#fff!important}.ask{border-left:0;border-radius:12px;background:var(--bg-page)} th{background:rgba(255,255,255,.5)} .step .vis img{border-radius:16px}\n'
+        + '.chip[aria-pressed="true"]{background:var(--bg-ink)!important;color:#fff!important}.ask{border-left:0;border-radius:14px;background:var(--bg-page)} th{background:rgba(255,255,255,.5)} .step .vis img{border-radius:14px}\n'
     return f'''<!doctype html>
 <html lang="vi" data-theme="light">
 <head>
@@ -207,17 +207,17 @@ def chu_de(links, lesson_href):
 a{{color:var(--bg-ink)}}
 .wrap{{max-width:1180px;margin:0 auto;padding:24px 16px 56px;display:grid;gap:22px}}
 .lbl{{font-size:13px;font-weight:600;color:var(--muted)}}
-header h1{{margin:4px 0 6px;font-size:clamp(26px,3.4vw,38px);line-height:1.15;letter-spacing:-.01em}}
+header h1{{margin:4px 0 6px;font-size:clamp(24px,3.4vw,40px);line-height:1.15;letter-spacing:-.01em}}
 header h1 em{{font-style:normal;color:var(--crimson)}}
 header p{{margin:0;max-width:78ch;color:var(--ink2)}}
 .nav{{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}}
-.btn{{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;white-space:nowrap}}
+.btn{{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;white-space:nowrap}}
 .btn.pri{{background:var(--crimson);border-color:var(--crimson);color:#fff}}
 .kpi{{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}}
 .kpi div{{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}}
-.kpi b{{display:block;font-family:var(--f-mono);font-size:26px;line-height:1.1}}
+.kpi b{{display:block;font-family:var(--f-mono);font-size:24px;line-height:1.1}}
 .kpi .ok b{{color:var(--ok)}} .kpi .rel b{{color:var(--gold)}}
-h2{{margin:8px 0 0;font-size:22px}}
+h2{{margin:8px 0 0;font-size:24px}}
 .route{{display:grid;gap:14px;counter-reset:s}}
 .step{{display:grid;grid-template-columns:44px 220px minmax(0,1fr);gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px}}
 .cov{{margin:12px 0 0!important;font-size:var(--bg-fs-xs);font-weight:600;color:var(--bg-ink3)!important}}
@@ -229,14 +229,14 @@ h2{{margin:8px 0 0;font-size:22px}}
 .step .bd{{display:grid;gap:8px;align-content:start}}
 .step .meta{{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}}
 .step .meta .dur{{font-family:var(--f-mono)}}
-.step h3{{margin:0;font-size:19px;line-height:1.3}} .step h3 a{{color:inherit;text-decoration:none}} @media (hover:hover){{.step h3 a:hover{{text-decoration:underline;text-underline-offset:3px}}}}
-.step p{{margin:0}} .step .steps{{font-size:13.5px;color:var(--ink2)}}
-.ask{{background:var(--bg-page);padding:10px 14px;border-radius:12px;font-size:14.5px}}
+.step h3{{margin:0;font-size:20px;line-height:1.3}} .step h3 a{{color:inherit;text-decoration:none}} @media (hover:hover){{.step h3 a:hover{{text-decoration:underline;text-underline-offset:3px}}}}
+.step p{{margin:0}} .step .steps{{font-size:14px;color:var(--ink2)}}
+.ask{{background:var(--bg-page);padding:10px 14px;border-radius:14px;font-size:15px}}
 .ask b{{font-size:13px;font-weight:600;color:var(--bg-ink3);margin-right:8px}}
 .ycd ul{{margin:4px 0 0;padding-left:18px;display:grid;gap:4px;font-size:14px}}
 .ycd .mu,td .mu{{display:block;font-size:13px;color:var(--muted)}}
-.ycd details summary{{cursor:pointer;font-size:13.5px;color:var(--crimson);font-weight:600;margin-top:6px}}
-.gc{{font-size:13.5px;color:var(--ink2);margin-top:6px!important}}
+.ycd details summary{{cursor:pointer;font-size:14px;color:var(--crimson);font-weight:600;margin-top:6px}}
+.gc{{font-size:14px;color:var(--ink2);margin-top:6px!important}}
 .step .btn{{justify-self:start}}
 table{{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;font-size:14px}}
 th,td{{text-align:left;vertical-align:top;padding:9px 12px;border-top:1px solid var(--line)}}
@@ -252,8 +252,8 @@ footer{{font-size:13px;line-height:1.55;color:var(--lg-muted);border-top:1px sol
 {LG.PAPER_CSS}
 :root{{--muted:var(--bg-ink3);--ink2:var(--bg-ink2);--f-body:var(--bg-font);--f-mono:var(--bg-mono)}}
 .wrap{{padding-top:0}} header.kv{{display:block}} header.kv h1{{font-size:clamp(40px,6vw,84px)}} header.kv p{{max-width:62ch}}
-@media (max-width:640px){{.wrap{{padding:max(12px,env(safe-area-inset-top)) 14px calc(36px + env(safe-area-inset-bottom));gap:16px}} header h1{{font-size:28px}} header p{{font-size:15px}} .nav .btn{{font-size:14px;padding:0 14px;min-height:44px}} .kpi{{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}} .kpi div{{padding:10px 12px}} .kpi b{{font-size:22px}} .step{{padding:12px;gap:10px;border-radius:20px}} .step h3{{font-size:17.5px}} .ycd ul{{font-size:13.5px}} table{{font-size:13px}} th,td{{padding:8px 10px}}}}
-@media (max-width:820px){{.step{{grid-template-columns:1fr}} .step .no{{display:none}} td:first-child{{display:none}} td:last-child{{width:32%}}}}
+@media (max-width:640px){{.wrap{{padding:max(12px,env(safe-area-inset-top)) 14px calc(36px + env(safe-area-inset-bottom));gap:16px}} header h1{{font-size:30px}} header p{{font-size:15px}} .nav .btn{{font-size:14px;padding:0 14px;min-height:44px}} .kpi{{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}} .kpi div{{padding:10px 12px}} .kpi b{{font-size:24px}} .step{{padding:12px;gap:10px;border-radius:14px}} .step h3{{font-size:17px}} .ycd ul{{font-size:14px}} table{{font-size:13px}} th,td{{padding:8px 10px}}}}
+@media (max-width:900px){{.step{{grid-template-columns:1fr}} .step .no{{display:none}} td:first-child{{display:none}} td:last-child{{width:32%}}}}
 </style>
 </head>
 <body class="bg-hub">

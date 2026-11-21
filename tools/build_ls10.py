@@ -115,18 +115,18 @@ a{{color:var(--accent2)}}
 .wrap{{max-width:1080px;margin:0 auto;padding:28px 18px 60px;display:grid;gap:20px}}
 .lbl{{font-size:13px;font-weight:600;color:var(--muted)}}
 .crumb a{{text-decoration:none;color:var(--muted);font-weight:500;font-size:14px}}
-h1{{margin:6px 0 8px;font-size:clamp(30px,4.2vw,44px);letter-spacing:-.025em;line-height:1.08}}
+h1{{margin:6px 0 8px;font-size:clamp(30px,4.2vw,48px);letter-spacing:-.025em;line-height:1.08}}
 h1 em{{font-style:normal;color:var(--accent)}}
 header p{{margin:0;max-width:74ch;color:var(--ink2)}}
 .feat{{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);overflow:hidden;text-decoration:none;color:inherit}}
 .feat img{{width:100%;height:100%;object-fit:cover;display:block;min-height:240px}}
 .feat .bd{{padding:22px 24px;display:grid;gap:10px;align-content:center}}
-.feat h2{{margin:0;font-size:26px;letter-spacing:-.02em}}
+.feat h2{{margin:0;font-size:24px;letter-spacing:-.02em}}
 .feat p{{margin:0;color:var(--ink2)}}
 .feat .btn{{justify-self:start;text-decoration:none;padding:9px 16px}}
 .kpi{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}}
 .kpi div{{padding:12px 14px}}
-.kpi b{{display:block;font-size:26px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}}
+.kpi b{{display:block;font-size:24px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}}
 h2.sec{{margin:28px 0 0}} .feat .bg-btn,.muc .bg-btn{{justify-self:start;margin-top:6px}}
 .cd{{padding:18px 20px;display:grid;gap:10px}}
 .ch{{display:flex;gap:14px;align-items:center}}
@@ -134,11 +134,11 @@ h2.sec{{margin:28px 0 0}} .feat .bg-btn,.muc .bg-btn{{justify-self:start;margin-
 .ch h3{{margin:0;font:500 24px/1.2 var(--bg-font);letter-spacing:-.012em}}
 .muc{{border-top:1px solid var(--line);padding:10px 0 4px;display:grid;gap:5px}}
 .muc .mh{{display:flex;justify-content:space-between;gap:10px;align-items:baseline}}
-.muc h4{{margin:0;font-size:15.5px}}
+.muc h4{{margin:0;font-size:15px}}
 .muc .canh{{font-size:14px;color:var(--ink2)}}
 .muc details summary{{cursor:pointer;font-size:13px;font-weight:600;color:var(--accent2)}}
 .muc ul{{margin:4px 0 2px;padding-left:20px;font-size:14px}}
-.muc .btn{{justify-self:start;text-decoration:none;margin:4px 0 6px;padding:7px 14px;font-size:13.5px}}
+.muc .btn{{justify-self:start;text-decoration:none;margin:4px 0 6px;padding:7px 14px;font-size:14px}}
 .muc.co{{background:var(--bg-page);border-radius:14px;padding:12px 14px;border-top-color:transparent}}
 .st{{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;white-space:nowrap}}.st::before{{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}}
 .st.co{{color:var(--bg-ok)}} .st.tl{{color:var(--bg-ink3)}}
@@ -149,7 +149,7 @@ h2.sec{{margin:28px 0 0}} .feat .bg-btn,.muc .bg-btn{{justify-self:start;margin-
 .cdx{{padding:14px 18px}} .cdx summary{{cursor:pointer}} .small{{font-size:13px;color:var(--muted)}}
 footer{{font-size:13px;color:var(--muted);border-top:1px solid var(--lg-hair);padding-top:18px;display:grid;gap:8px}}
 footer ul{{margin:0;padding-left:18px}} footer a{{color:inherit}}
-@media (max-width:760px){{.wrap{{padding:16px 12px 40px;gap:14px}} .feat{{grid-template-columns:1fr}} .feat img{{min-height:0;aspect-ratio:16/10}} .kpi{{grid-template-columns:1fr;gap:8px}} .kpi div{{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 14px}} .kpi b{{font-size:18px;text-align:right}} .bsg{{grid-template-columns:1fr}} .cd{{padding:14px}} .ch h3{{font-size:18px}}}}
+@media (max-width:640px){{.wrap{{padding:16px 12px 40px;gap:14px}} .feat{{grid-template-columns:1fr}} .feat img{{min-height:0;aspect-ratio:16/10}} .kpi{{grid-template-columns:1fr;gap:8px}} .kpi div{{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 14px}} .kpi b{{font-size:17px;text-align:right}} .bsg{{grid-template-columns:1fr}} .cd{{padding:14px}} .ch h3{{font-size:17px}}}}
 header.kv{{display:block}} header.kv h1{{font-size:clamp(40px,6vw,84px);margin:0}} header.kv p{{max-width:62ch}}
 </style>
 </head>

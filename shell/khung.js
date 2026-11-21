@@ -20,10 +20,10 @@
   body.bg-khung *{box-sizing:border-box}
   .bg-khung .sitebar .crumbs{overflow:hidden}.bg-khung .sitebar .crumbs .sep{color:#C9C9C6}
   .bg-khung .kh-say .k{margin-bottom:8px}.bg-khung .kh-say p{max-width:62ch}
-  .bg-khung .kh-say .e{margin-top:14px;display:inline-block;font:500 12.5px/1.5 var(--bg-mono);background:#F4F4F0;border-radius:6px;padding:7px 11px;color:var(--bg-ink)}
+  .bg-khung .kh-say .e{margin-top:14px;display:inline-block;font:500 13px/1.5 var(--bg-mono);background:#F4F4F0;border-radius:8px;padding:7px 11px;color:var(--bg-ink)}
   .bg-khung .kh-say .e:empty{display:none}
   .kh-nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:22px}
-  .kh-nav button,.kh-nav a{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;min-width:36px;padding:0 13px;border-radius:8px;border:1px solid #E2E2E0;background:#fff;color:var(--bg-ink);font:500 13.5px var(--bg-font);text-decoration:none;cursor:pointer}
+  .kh-nav button,.kh-nav a{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;min-width:36px;padding:0 13px;border-radius:8px;border:1px solid #E2E2E0;background:#fff;color:var(--bg-ink);font:500 14px var(--bg-font);text-decoration:none;cursor:pointer}@media (pointer:coarse){.kh-nav button,.kh-nav a{min-height:44px;min-width:44px}}
   @media (hover:hover){.kh-nav button:hover,.kh-nav a:hover{border-color:#C9C9C6}}.kh-nav .pri{background:var(--bg-ink);border-color:var(--bg-ink);color:#fff}
   .kh-nav .n{font:500 12px var(--bg-mono);color:var(--bg-mut);padding:0 6px;letter-spacing:.06em}
   .kh-stage{position:relative;max-width:1600px;margin:clamp(4px,1vw,12px) auto 0;background:#fff}
@@ -31,14 +31,14 @@
   .kh-stage:before,.kh-stage:after{content:'';position:absolute;left:0;right:0;height:18px;z-index:2;pointer-events:none}
   .kh-stage:before{top:0;background:linear-gradient(#fff,rgba(255,255,255,0))}.kh-stage:after{bottom:0;background:linear-gradient(rgba(255,255,255,0),#fff)}
   .kh-stage .cv{position:absolute;inset:0;background:#E9EAEE center/cover no-repeat;transition:opacity .6s var(--bg-ease)}.kh-stage.ok .cv{opacity:0;pointer-events:none}
-  .bg-khung .bg-stats{margin-top:4px}body.bg-khung .bg-stats>*:first-child span{color:var(--bg-mut)}body.bg-khung .bg-stats>*:first-child span:before{background:#B5B5B8}body.bg-khung .bg-stats .on span{color:var(--bg-ink)}body.bg-khung .bg-stats .on span:before{background:var(--bg-sig)}.bg-khung .bg-stats .on b small{font-size:.42em}
+  .bg-khung .bg-stats{margin-top:4px}body.bg-khung .bg-stats>*:first-child span{color:var(--bg-mut)}body.bg-khung .bg-stats>*:first-child span:before{background:#B5B5B8}body.bg-khung .bg-stats .on span{color:var(--bg-ink)}body.bg-khung .bg-stats .on span:before{background:var(--bg-sig)}.bg-khung .bg-stats .on b small{font-size:12px}
   body.bg-khung .bg-stats>.on:after{width:var(--p,22px);transition:width .4s}
   .kh-steps{padding:clamp(32px,4vw,52px) 0 8px!important;grid-auto-flow:column;grid-template-rows:repeat(var(--r4),auto)}
-  .kh-steps li{cursor:pointer}.kh-steps li:before{color:#C2C2C6!important}
-  .kh-steps.run li b{color:#9A9A9E}.kh-steps.run li p{color:#B5B5B8}
+  .kh-steps li{cursor:pointer}.kh-steps li:before{color:#6E6E72!important}
+  .kh-steps.run li b{color:#6E6E72}.kh-steps.run li p{color:#6E6E72}
   @media (hover:hover){.kh-steps li:hover b{color:var(--bg-ink2)}}.kh-steps li.on:before{color:var(--bg-sig)!important}.kh-steps li.on b{color:var(--bg-ink)!important}.kh-steps li.on p{color:var(--bg-ink2)!important}
   .kh-more{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding-top:clamp(28px,4vw,44px)}
-  .kh-more a{display:block;text-decoration:none;color:inherit}@media (hover:hover){.kh-more a:hover{border-color:#C9C9C6}}.kh-more b{display:block;font:500 18px/1.35 var(--bg-font);letter-spacing:-.015em}.kh-more p{margin:6px 0 0;color:var(--bg-ink2);font-size:14px}
+  .kh-more a{display:block;text-decoration:none;color:inherit}@media (hover:hover){.kh-more a:hover{border-color:#C9C9C6}}.kh-more b{display:block;font:500 17px/1.35 var(--bg-font);letter-spacing:-.015em}.kh-more p{margin:6px 0 0;color:var(--bg-ink2);font-size:14px}
   .bg-khung .bg-foot{margin-top:clamp(36px,5vw,56px)}
   @media (max-width:1100px){.kh-steps{grid-template-rows:repeat(var(--r2),auto)}}
   @media (max-width:640px){.kh-steps{grid-auto-flow:row;grid-template-rows:none}.kh-more{grid-template-columns:1fr}.bg-khung .sitebar .crumbs a,.bg-khung .sitebar .crumbs .sep{display:none}}

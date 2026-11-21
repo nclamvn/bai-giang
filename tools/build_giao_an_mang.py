@@ -25,13 +25,13 @@ VERSION = 'Bản 1 · 16/11/2026'
 UP = '../../../'  # thiet-ke-mang/<bai>/giao-an/ → gốc site
 CSS = CSS_GOI.replace('../../', UP) + r"""
 .vd{border-top:1px solid var(--line,#ECECEA);padding:16px 0}.vd:first-child{border-top:0;padding-top:0}
-.vd h4{margin:0 0 6px;font-size:16px}.vd .de{margin:0 0 10px}.vd .giai{background:#FBFBF8;border-radius:10px;padding:12px 14px;font-size:15px;line-height:1.6}
+.vd h4{margin:0 0 6px;font-size:17px}.vd .de{margin:0 0 10px}.vd .giai{background:#FBFBF8;border-radius:10px;padding:12px 14px;font-size:15px;line-height:1.6}
 .qz{border-top:1px solid var(--line,#ECECEA);padding:12px 0}.qz:first-child{border-top:0}.qz p{margin:0 0 6px;font-weight:600}
-.qz ol{margin:0 0 6px 18px;padding:0}.qz details{font-size:14.5px;color:#4A4A4F}.qz summary{cursor:pointer;color:var(--acc)}
-.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0 0}.meta div{background:#FBFBF8;border-radius:10px;padding:10px 12px;font-size:13.5px}
-.meta b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#76767A;margin-bottom:2px}
+.qz ol{margin:0 0 6px 18px;padding:0}.qz details{font-size:15px;color:#4A4A4F}.qz summary{cursor:pointer;color:var(--acc)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0 0}.meta div{background:#FBFBF8;border-radius:10px;padding:10px 12px;font-size:14px}
+.meta b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#6E6E72;margin-bottom:2px}
 .tt li{margin:4px 0}
-.paper .bt{margin:0 0 3.2mm}.paper .bt .qq{display:flex;gap:2mm}.paper .bt .src{color:#76767A;font-size:8.5pt}
+.paper .bt{margin:0 0 3.2mm}.paper .bt .qq{display:flex;gap:2mm}.paper .bt .src{color:#6E6E72;font-size:8.5pt}
 """
 LOGO = LOGO_GOI.replace('../../', UP)
 

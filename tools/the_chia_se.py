@@ -19,7 +19,7 @@ from chuoi_bai import SEQ, BY  # noqa: E402
 SITE = 'https://nclamvn.github.io/bai-giang/'
 OUT = ROOT / 'design/the'
 TPL_VER = '1'
-SKIP_DIRS = ('tools/', 'offline/', '.art_robo/', 'node_modules/', 'co-the-nguoi/app/', 'co-the-nguoi/dental/')
+SKIP_DIRS = ('tools/', 'offline/', '.art_robo/', 'node_modules/', 'co-the-nguoi/app/', 'co-the-nguoi/dental/', 'design/')
 E = lambda s: html.escape(str(s), quote=True)
 
 # trang không phải bài: ảnh bìa và nhãn đặt tay

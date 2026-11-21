@@ -1,4 +1,4 @@
-# Vệ sinh giao diện: mười luật kiểm bằng máy
+# Vệ sinh giao diện: các luật kiểm bằng máy
 
 Cập nhật 21/11/2026. Công cụ: `tools/ve_sinh_ui.py` (bước `ve-sinh-ui` trong `tools/build_all.py`, nên CI chạy mỗi lần đẩy mã).
 
@@ -33,19 +33,22 @@ Không chép mã hay văn bản từ các kho này. Luật được viết lại
 | K8 | Có liên kết "Bỏ qua tới nội dung" | Bàn phím không phải đi qua cả thanh điều hướng |
 | K9 | Trang nền tối khai `color-scheme` | Thanh cuộn và ô nhập gốc theo nền tối |
 | K10 | Không gắn `onclick` lên `<div>`, `<span>` | Nút phải là `<button>`, liên kết phải là `<a>` |
+| K11 | Cỡ chữ của lớp dùng chung thuộc thang trong token | Một thang chữ cho cả site |
+| K12 | Bo góc của lớp dùng chung thuộc thang trong token | Như trên |
+| K13 | Điểm gãy của lớp dùng chung là 640, 900 hoặc 1100 px | Ba cỡ màn hình, không mỗi tệp một kiểu |
 
-Luật áp cho mọi trang HTML đang phát hành và các tệp CSS, JS của dự án (không tính `tools/`, `tests/`, `offline/`, thư viện ngoài).
+K11 tới K13 thêm ở milestone "Một hệ, ba cỡ màn hình" (`docs/mot-he-ba-co-man-hinh.md`), kiểm trên tệp nguồn của lớp dùng chung. Mười luật đầu áp cho mọi trang HTML đang phát hành và các tệp CSS, JS của dự án (không tính `tools/`, `tests/`, `offline/`, thư viện ngoài).
 
 ## 3. Công cụ làm gì
 
 `python3 tools/ve_sinh_ui.py` chạy ba việc theo thứ tự:
 
-1. **Tự thử.** Một trang mẫu đạt cả mười luật, rồi mười bản mỗi bản phạm đúng một luật. Luật nào không cắn thì công cụ dừng.
+1. **Tự thử.** Một trang mẫu đạt cả mười luật đầu, rồi mười bản mỗi bản phạm đúng một luật; thêm một mẫu CSS phạm K11 tới K13. Luật nào không cắn thì công cụ dừng.
 2. **Sửa** ba thứ sửa được bằng máy trên trang đã dựng:
    - thêm `width`, `height` cho `<img>` theo kích thước thật của tệp (đọc thẳng đầu tệp WebP, PNG, JPEG, GIF, SVG, không cần thư viện ngoài);
    - thêm `theme-color` cho trang nạp `house.css` mà còn thiếu;
    - thêm liên kết bỏ qua cho trang nạp `house.css` mà không có vỏ bài; đích là `<main>` hoặc khối `.wrap` đầu tiên.
-3. **Kiểm** mười luật; còn lỗi thì thoát mã 1 và in từng lỗi.
+3. **Kiểm** mười ba luật; còn lỗi thì thoát mã 1 và in từng lỗi.
 
 `--kiem` chỉ kiểm, không ghi tệp.
 

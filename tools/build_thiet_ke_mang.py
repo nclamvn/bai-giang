@@ -84,8 +84,8 @@ def build(root='../'):
 .card .body{{gap:12px}} .card .body>.bg-btn{{margin-top:auto;align-self:flex-start}}
 h3.sec{{font:500 clamp(24px,2.8vw,34px)/1.18 var(--bg-font);letter-spacing:-.03em;margin:72px 0 24px;color:var(--bg-ink);text-transform:none}} h3.sec:before{{display:none}}
 table.ds{{width:100%;border-collapse:collapse}} .ds td{{padding:12px 12px 12px 0;border-top:1px solid var(--line);vertical-align:top}}
-.ds tr.ch td{{font:500 21px/1.3 var(--bg-font);padding-top:32px;border-top:0}} .ds .mono{{width:52px;color:var(--mute)}} .ds .mut{{color:var(--mute)}}
-.ds a{{font-weight:600}} .ds .mu{{width:120px;color:var(--mute);font-size:14px}} .ds .pt{{font-size:12.5px;font-family:var(--bg-mono,monospace)}} .card .nut{{display:flex;gap:8px;margin-top:auto}} @media (max-width:640px){{.ds .mut,.ds .mu{{display:none}}}}
+.ds tr.ch td{{font:500 20px/1.3 var(--bg-font);padding-top:32px;border-top:0}} .ds .mono{{width:52px;color:var(--mute)}} .ds .mut{{color:var(--mute)}}
+.ds a{{font-weight:600}} .ds .mu{{width:120px;color:var(--mute);font-size:14px}} .ds .pt{{font-size:13px;font-family:var(--bg-mono,monospace)}} .card .nut{{display:flex;gap:8px;margin-top:auto}} @media (max-width:640px){{.ds .mut,.ds .mu{{display:none}}}}
 .nguon{{color:var(--mute);font-size:14px;max-width:760px}}
 </style>
 </head>

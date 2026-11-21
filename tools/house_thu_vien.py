@@ -38,7 +38,7 @@ body.bgs-on footer#foot .cur{font:600 14px var(--bg-mono);color:var(--bg-ink2)}
 .bg-credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .bg-credit p{margin:0 0 6px}
 /* điện thoại, máy tính bảng dựng: thanh dưới của vỏ thay chân trang; tấm trượt nằm trên thanh dưới */
-@media (max-width:700px),(orientation:portrait) and (max-width:1100px){
+@media (max-width:640px),(orientation:portrait) and (max-width:1100px){
   body.bgs-on #eqb{top:calc(var(--bg-bar) + env(safe-area-inset-top) + 8px)!important}
   body.bgs-nav-on footer#foot{display:none!important}
   body.bgs-nav-on aside#left,body.bgs-nav-on aside#right{bottom:calc(76px + env(safe-area-inset-bottom))!important}
@@ -48,10 +48,10 @@ body.bgs-on footer#foot .cur{font:600 14px var(--bg-mono);color:var(--bg-ink2)}
   /* thanh ba nút đè lên nhãn 3D: nền đặc để nhãn phía sau không lộ qua */
   #mtabs{background:rgba(243,239,230,.98)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:0 6px 18px -8px rgba(16,24,40,.28),0 0 0 .5px rgba(16,24,40,.08)!important}
 }
-@media (max-width:700px),(orientation:portrait) and (max-width:1100px){body.bgs-on #eqb{transform:translateX(-50%)!important;width:min(380px,calc(100vw - 24px))!important}}
+@media (max-width:640px),(orientation:portrait) and (max-width:1100px){body.bgs-on #eqb{transform:translateX(-50%)!important;width:min(380px,calc(100vw - 24px))!important}}
 /* điện thoại: chữ nhỏ nhất 14 px (minfont viết các cỡ ngưỡng thành var(--bg-fs-min)) */
-@media (max-width:700px){html:root{--bg-fs-min:14px;--fs-xs:14px;--fs-b:15px;--fs-t:15px}}
-@media (max-width:700px){
+@media (max-width:640px){html:root{--bg-fs-min:14px;--fs-xs:14px;--fs-b:15px;--fs-t:15px}}
+@media (max-width:640px){
   body.bgs-on #eqb{cursor:pointer;padding-bottom:10px!important}
   body.bgs-on #eqb:not(.bg-open) .bt,body.bgs-on #eqb:not(.bg-open) .btags,body.bgs-on #eqb:not(.bg-open) .bcal{display:none!important}
   body.bgs-on #eqb:not(.bg-open) .beq{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -60,7 +60,7 @@ body.bgs-on footer#foot .cur{font:600 14px var(--bg-mono);color:var(--bg-ink2)}
 }
 /* màn cảm ứng: vùng bấm từ 44 px */
 @media (pointer:coarse){aside#left button,aside#right button,#mtabs button,footer#foot button,aside .chip{min-height:44px!important}aside .seg button{min-height:40px}}
-@media (orientation:portrait) and (min-width:701px) and (max-width:1100px){body.bgs-nav-on #mtabs{bottom:calc(84px + 38svh + env(safe-area-inset-bottom))!important}}
+@media (orientation:portrait) and (min-width:641px) and (max-width:1100px){body.bgs-nav-on #mtabs{bottom:calc(84px + 38svh + env(safe-area-inset-bottom))!important}}
 @media (orientation:portrait) and (min-width:641px) and (max-width:1100px){body.bgs-on .bgs-desk{display:none!important}}
 @media (orientation:landscape) and (max-height:520px){
   body.bgs-on aside#left,body.bgs-on aside#right{top:calc(var(--bg-bar) + env(safe-area-inset-top) + 8px)!important}
@@ -75,7 +75,7 @@ aside .btn{white-space:normal!important;padding:6px 10px!important;line-height:1
 .kpi{padding-block:6px!important}
 .subs .sub,.sub .cal{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere}
 .chartwrap .ch b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-@media (max-width:700px){.at,.lab{max-width:46vw;white-space:normal!important;overflow-wrap:anywhere}.lab .n{white-space:normal!important}}
+@media (max-width:640px){.at,.lab{max-width:46vw;white-space:normal!important;overflow-wrap:anywhere}.lab .n{white-space:normal!important}}
 #eqb .btags span,#eqb .tg,.btags .tg,.tagrow .tg{white-space:normal!important;overflow-wrap:anywhere;min-width:0;max-width:100%}
 /* máy tính: hàng thẻ trong hộp phương trình trùng với thẻ ở bảng Bước này; khi bảng đang mở thì ẩn để cảnh 3D rộng hơn */
 @media (min-width:1101px){body.bgs-on:has(aside#left:not(.collapsed)) #eqb .btags{display:none!important}}
