@@ -32,6 +32,7 @@ section[data-act]{opacity:var(--o,1)}
 #chap span{font:500 12px var(--mono);letter-spacing:.4em;color:var(--sig)}#chap b{font:500 clamp(40px,8vw,110px)/1 var(--sans);letter-spacing:-.05em;color:var(--ink)}
 #prog{position:fixed;left:0;top:0;height:2px;width:100%;z-index:7;background:linear-gradient(90deg,var(--amber),var(--sig));transform-origin:0 50%;transform:scaleX(0)}
 .top{position:fixed;left:0;right:0;top:0;z-index:6;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px clamp(16px,4vw,40px);font:500 10.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mut);background:linear-gradient(rgba(8,8,10,.85),rgba(8,8,10,0))}
+.top .r{display:flex;align-items:center;gap:18px}.chia{font:inherit;letter-spacing:inherit;text-transform:uppercase;color:var(--ink);background:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .2s,color .2s}.chia:hover{border-color:var(--sig);color:var(--sig)}
 .top a{text-decoration:none}.top a:hover{color:var(--ink)}
 #nav{position:fixed;right:clamp(10px,2vw,26px);top:50%;transform:translateY(-50%);z-index:6;display:flex;flex-direction:column;gap:10px;font:500 10px var(--mono);letter-spacing:.14em;text-transform:uppercase}
 #nav a{display:flex;gap:8px;justify-content:flex-end;align-items:center;text-decoration:none;color:transparent;transition:color .2s}#nav a span{color:var(--mut);order:2}#nav a:after{content:'';order:3;width:14px;height:1px;background:var(--mut)}
@@ -46,6 +47,7 @@ section{position:relative}
 .k{font:500 10.5px/1.7 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:10px;display:flex;align-items:center;gap:8px}.k i{width:7px;height:7px;border-radius:50%;background:var(--sig);flex:none}
 h1{margin:0;font:500 clamp(46px,9vw,128px)/.95 var(--sans);letter-spacing:-.055em;background:linear-gradient(100deg,#F4F1EA 30%,#D9A065 50%,#F4F1EA 70%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 7s ease-in-out infinite,up 1.4s cubic-bezier(.2,.8,.2,1) both}
 @keyframes sh{0%,100%{background-position:100% 0}50%{background-position:0 0}}@keyframes up{from{opacity:0;transform:translateY(26px);letter-spacing:-.02em}to{opacity:1;transform:none}}
+.lede{text-shadow:0 0 6px #020203,0 0 18px #020203,0 0 32px #020203}
 .lede,.scroll{animation:up 1.4s .35s cubic-bezier(.2,.8,.2,1) both}.scroll{animation-delay:.8s}
 h2{margin:0 0 12px;font:500 clamp(26px,3.4vw,44px)/1.08 var(--sans);letter-spacing:-.035em;text-wrap:balance}
 h3{margin:0 0 6px;font:500 22px/1.2 var(--sans);letter-spacing:-.02em}
@@ -84,7 +86,7 @@ html:not(.ok) .beat{opacity:1;transform:none}
 </head>
 <body>
 <canvas id="gl" aria-hidden="true"></canvas><div id="fade"></div><div id="chap" aria-hidden="true"></div><div id="labels" aria-hidden="true"></div><div id="prog" aria-hidden="true"></div>
-<header class="top"><a href="../../">Sáng Ăn Khoai</a><span>Giả thuyết Riemann · 1859 → 20/11/2026</span></header>
+<header class="top"><a href="../../">Sáng Ăn Khoai</a><div class="r"><span>Giả thuyết Riemann · 1859 → 20/11/2026</span><button type="button" class="chia" data-chia>Chia sẻ</button></div></header>
 <nav id="nav" aria-label="Các cảnh"></nav>
 
 <div class="hud" id="hud1" data-act="1"><div class="panel pe"><span id="a1v">0 cặp không điểm</span><input id="a1n" type="range" min="0" max="200" value="0" aria-label="Số cặp không điểm đưa vào công thức tường minh"><span id="a1e"></span><button id="a1auto">Tự chạy</button></div></div>
@@ -144,9 +146,9 @@ html:not(.ok) .beat{opacity:1;transform:none}
     <div class="panel" style="--c:#D9A065"><div class="k"><i style="background:#D9A065"></i>Đã qua máy, chờ người</div><h3>Tuyên bố ngày 20/11/2026</h3><ul><li>Phát biểu trong kho đúng là định nghĩa RiemannHypothesis của Mathlib; bản tổng quát chỉ cho hàm L Dirichlet.</li><li>Chưa có bản người đọc được, chưa bình duyệt. Tác giả nói chưa nắm hết phần dạng tự đẳng cấu hạng cao.</li><li>Một số phép kiểm còn đang chạy lúc 22:05 UTC ngày 20/11.</li><li>Bản thảo thuần người của Masullo chưa viết trong Lean, mới công khai vài giờ.</li></ul></div>
     <div class="panel" style="--c:#E0456B"><div class="k"><i></i>Còn mở</div><h3>Những gì chưa ai trả lời</h3><ul><li>Viện Clay vẫn ghi bài toán là chưa giải. Luật: công bố có bình duyệt, chờ ít nhất hai năm, được chấp nhận rộng rãi. Sớm nhất là cuối 2028.</li><li>Vì sao nó đúng? Một chứng minh 17 triệu dòng chưa cho câu trả lời con người dùng được.</li><li>Công bố một ngày sau khi Anthropic lên sàn; tác giả bác cách hiểu rằng thời điểm có chủ ý.</li><li>Ai là tác giả của một định lí mà người đứng tên chưa hiểu hết?</li></ul></div>
   </div>
-  <div class="wide"><div class="k"><i></i>Phương pháp và nguồn</div><h2>Dữ liệu của trang</h2><p style="max-width:80ch">Không điểm và địa hình |ζ| tính bằng mpmath (<code>tools/riemann/tinh_zeta.py</code>). Mỗi mốc trong sổ <code>tools/riemann/du-lieu.json</code> có trạng thái (định lí, phỏng đoán, kiểm bằng máy, tuyên bố, đã qua Lean) và nguồn. Các sự kiện năm 2026 lấy từ ghi chú gốc, trang kiểm của MIT và tin của AP, AFP, TechCrunch, Scientific American trong hai ngày 20–21/11/2026; trang sẽ lỗi thời khi việc kiểm chứng tiến thêm. Thang 0–10 ở cảnh hai nhánh là định tính. <span id="dem"></span>.</p><ul id="nguon"></ul></div>
+  <div class="wide"><div class="k"><i></i>Phương pháp và nguồn</div><h2>Dữ liệu của trang</h2><p style="max-width:80ch">Không điểm và địa hình |ζ| tính bằng mpmath (<code>tools/riemann/tinh_zeta.py</code>). Mỗi mốc trong sổ <code>tools/riemann/du-lieu.json</code> có trạng thái (định lí, phỏng đoán, kiểm bằng máy, tuyên bố, đã qua Lean) và nguồn. Các sự kiện năm 2026 lấy từ ghi chú gốc, trang kiểm của MIT và tin của AP, AFP, TechCrunch, Scientific American trong hai ngày 20–21/11/2026; trang sẽ lỗi thời khi việc kiểm chứng tiến thêm. Thang 0–10 ở cảnh hai nhánh là định tính. <span id="dem"></span>.</p><p><button type="button" class="chia" data-chia style="font:500 11px var(--mono);letter-spacing:.16em;padding:11px 20px">Chia sẻ trang này</button></p><ul id="nguon"></ul></div>
   <div class="foot"><span>Sáng Ăn Khoai · three.js r186 · dựng bằng mã</span><span><a href="../../">Về trang chủ</a></span></div>
 </div>
-<script type="module" src="app.js?v=c3e9057344"></script>
+<script type="module" src="app.js?v=0e807343d8"></script>
 </body>
 </html>

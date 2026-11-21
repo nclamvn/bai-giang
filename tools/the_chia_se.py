@@ -33,6 +33,8 @@ EXTRA = {
     'giao-vien/index.html': {'cover': 'mosaic-gv', 'eye': 'Cho giáo viên · Gói dạy thử 45 phút'},
     'kiem-may/index.html': {'cover': None, 'eye': 'Cho giáo viên · Dụng cụ lên lớp'},
     'dieu-khien/index.html': {'cover': None, 'eye': 'Cho giáo viên · Dụng cụ lên lớp'},
+    # trang nền tối: chữ đặt thẳng lên ảnh, không thẻ trắng
+    'toan/riemann/index.html': {'cover': 'toan/riemann/bia.webp', 'eye': 'Toán · Phim tương tác 3D', 'dark': True},
     'te-bao/ar.html': {'cover': 'thu-vien/covers/te-bao.webp', 'eye': 'Sinh học 10 · Thực tế tăng cường'},
 }
 
@@ -78,7 +80,7 @@ def info(rel, s):
         head = title.split(' · ')[0]
     if rel == 'index.html': head = 'Sáng Ăn Khoai'
     slug = 'index' if rel == 'index.html' else re.sub(r'(/index)?\.html$', '', rel).replace('/', '-')
-    return {'rel': rel, 'title': title, 'desc': desc, 'own': own, 'head': head, 'eye': eye, 'cover': cover, 'img': f'design/the/{slug}.jpg'}
+    return {'rel': rel, 'title': title, 'desc': desc, 'own': own, 'head': head, 'eye': eye, 'cover': cover, 'img': f'design/the/{slug}.jpg', 'dark': bool(EXTRA.get(rel, {}).get('dark'))}
 
 
 def url_of(rel):
@@ -113,6 +115,16 @@ def card_html(i):
     else:
         bg = '<div class="plain"></div><img class="big" src="/design/logo/sang-an-khoai.webp">'
     big = len(i['head']) <= 34
+    if i.get('dark'):
+        return f'''<!doctype html><html lang="vi"><head><meta charset="utf-8"><link rel="stylesheet" href="/design/house.css"><style>
+*{{margin:0;box-sizing:border-box}}html,body{{width:1200px;height:630px;overflow:hidden;background:#020203}}
+.bg{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
+.sh{{position:absolute;inset:0;background:linear-gradient(160deg,rgba(2,2,3,.82),rgba(2,2,3,0) 55%)}}
+.tx{{position:absolute;left:56px;top:46px;max-width:860px;font-family:'Be Vietnam Pro',system-ui,sans-serif;color:#F4F1EA}}
+.br{{display:flex;align-items:center;gap:12px;font:500 20px 'Be Vietnam Pro';color:#B9B6AE}}.br img{{width:36px;height:36px;border-radius:9px}}
+.eye{{margin-top:22px;font:500 17px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#D9A065}}
+h1{{margin-top:10px;font:500 54px/1.08 'Be Vietnam Pro';letter-spacing:-.035em;text-wrap:balance}}
+</style></head><body><img class="bg" src="/{i["cover"]}"><div class="sh"></div><div class="tx"><div class="br"><img src="/design/logo/mark-96.webp">Sáng Ăn Khoai</div><div class="eye">{E(i["eye"])}</div><h1>{E(i["head"])}</h1></div></body></html>'''
     return f'''<!doctype html><html lang="vi"><head><meta charset="utf-8"><link rel="stylesheet" href="/design/house.css"><style>
 *{{margin:0;box-sizing:border-box}}html,body{{width:1200px;height:630px;overflow:hidden;background:#F4F4F6}}
 .bg{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
@@ -127,7 +139,7 @@ h1{{margin-top:6px;font:700 {'60' if big else '48'}px/1.12 'Be Vietnam Pro';lett
 
 
 def key(i):
-    h = hashlib.sha256((TPL_VER + i['head'] + '|' + i['eye'] + '|' + str(i['cover'])).encode())
+    h = hashlib.sha256((TPL_VER + i['head'] + '|' + i['eye'] + '|' + str(i['cover']) + ('|toi1' if i.get('dark') else '')).encode())
     if i['cover'] and not i['cover'].startswith('mosaic'):
         h.update((ROOT / i['cover']).read_bytes())
     return h.hexdigest()[:16]

@@ -45,7 +45,7 @@ let ACT = -1;
 function resize() { const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false); composer.setSize(w, h); camera.aspect = w / h; camera.fov = w < h ? 58 : 40;
   vo(); }
 // màn hình dọc: dời khung nhìn theo từng cảnh để hình không nằm dưới bảng số và thẻ lời
-function vo() { const w = innerWidth, h = innerHeight; if (w < h) camera.setViewOffset(w, h, 0, h * [0, 0.08, 0.1, 0.15, -0.16, 0.02, 0][Math.max(0, ACT)], w, h); else camera.clearViewOffset(); camera.updateProjectionMatrix(); }
+function vo() { const w = innerWidth, h = innerHeight; if (w < h) camera.setViewOffset(w, h, 0, h * [-0.27, 0.08, 0.1, 0.15, -0.16, 0.02, 0][Math.max(0, ACT)], w, h); else camera.clearViewOffset(); camera.updateProjectionMatrix(); }
 addEventListener('resize', resize); resize();
 
 const glow = (c, o = 1) => new THREE.MeshBasicMaterial({color: c, transparent: true, opacity: o});
@@ -327,5 +327,10 @@ const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList
 // bảng nguồn và các con số ở phần kết
 $('#nguon').innerHTML = Object.values(D.nguon).map(([n, h]) => `<li><a href="${h}" target="_blank" rel="noopener">${n}</a></li>`).join('');
 $('#dem').textContent = `${D.moc.length} mốc, ${D.noi.length} liên hệ, ${Object.keys(D.nguon).length} nguồn, ${zeros.length} không điểm, ${Z.ns * Z.nt} điểm lưới |ζ|`;
+// nút chia sẻ: bảng chia sẻ của máy nếu có, không thì chép liên kết
+$$('[data-chia]').forEach((b) => b.addEventListener('click', async () => { const url = 'https://nclamvn.github.io/bai-giang/toan/riemann/', t0 = b.textContent;
+  try { if (navigator.share) { await navigator.share({title: document.title, url}); return; } await navigator.clipboard.writeText(url); b.textContent = 'Đã chép liên kết'; }
+  catch (e) { if (e && e.name === 'AbortError') return; b.textContent = url.replace('https://', ''); }
+  setTimeout(() => { b.textContent = t0; }, 2200); }));
 document.documentElement.classList.add('ok'); frame();
 window.RH = {D, Z, psi, psiN, get act() { return ACT; }};
