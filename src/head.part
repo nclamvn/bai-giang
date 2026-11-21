@@ -198,7 +198,7 @@ kbd{font-family:var(--f-mono);font-size:13px;border:1px solid var(--hair);border
 .flowLegend i{display:inline-block;width:10px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
 .foot{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between}
 @media (max-width:560px){.illus{display:none}.mode-chip .k{display:none}.mode-chip .v{font-size:13px}.hud{font-size:13px;padding:5px 7px;top:auto;bottom:12px}.hud .hx{display:none}.pin .t{display:none}.callout{width:min(240px,78%)}.caption{font-size:13px;bottom:46px}.kpis dd{font-size:16px}}
-@media (prefers-reduced-motion: reduce){*{transition:none!important}#ticker{animation:none;padding-left:0}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}#ticker{animation:none;padding-left:0;display:inline}.tk-track{text-overflow:ellipsis;mask-image:none}}
 .btn.gold{background:#E8B04B;border-color:#E8B04B;color:#241703;font-weight:600}
 @media (hover:hover){.btn.gold:hover{background:#F0C266}}
 .btn.gold:disabled{opacity:.6;cursor:progress}
@@ -365,6 +365,7 @@ html{background:var(--lg-page)}
 .drawer-tab{background:rgba(255,255,255,.78)!important;-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur)}
 .homecrumb{display:inline-block;font:600 13px var(--lg-font);color:var(--lg-muted);text-decoration:none;margin-bottom:2px;letter-spacing:.01em}
 @media (hover:hover){.homecrumb:hover{color:var(--crimson)}}
+@media (pointer:coarse){.homecrumb{display:inline-flex;align-items:center;min-height:44px}}
 /* ===== Bản 13: điện thoại ===== */
 @media (max-width:560px){
   body{padding-inline:max(10px,env(safe-area-inset-left)) max(10px,env(safe-area-inset-right))!important;padding-block:max(8px,env(safe-area-inset-top)) calc(20px + env(safe-area-inset-bottom))!important}
@@ -398,21 +399,22 @@ html{background:var(--lg-page)}
 @media (max-width:380px){.kpis dd{font-size:13.5px!important}.tt h1{font-size:18px!important}}
 /* ===== Bản 14: vỏ v2 (thanh đầu bài chung), cảnh trước, hệ chữ chung ===== */
 :root,:root[data-theme]{--lg-font:var(--bg-font);--f-body:var(--bg-font);--f-mono:var(--bg-font);--muted:var(--bg-ink3);--lg-muted:var(--bg-ink3);--stage-muted:var(--bg-ink3);--ink:var(--bg-ink);--lg-ink:var(--bg-ink);--crimson:#B8143F}
-body.bgs-on .topbar,body.bgs-on .ticker,body.bgs-on .drawer-tab,body.bgs-on #lessonBtn,body.bgs-on #fsBtn{display:none!important}
+/* .bgs-pre (trên <html>, vỏ đặt ngay khi tệp vỏ chạy) giữ cùng bố cục với .bgs-on từ khung hình đầu: không nháy thanh đầu cũ, không nhảy bố cục khi vỏ gắn xong */
+:is(.bgs-on,.bgs-pre) :is(.topbar,.ticker,.drawer-tab,#lessonBtn,#fsBtn){display:none!important}
 body:not(.debug) #hud,body:not(.debug) #benchBtn,body:not(.debug) #benchCard,body:not(.debug) .stage .status{display:none!important}
 /* nhãn viết thường đầu câu, đậm 600 (chuẩn thành phần chung) */
 .lbl,.eyebrow,dt,.pcard h2,.status dt,.mode-chip .k,.callout .ce,.caption b,.tk-l,.lesson .lk,.tt p,.sec h3,.badge,.chip,.lesson .ask b{font-weight:600}
 .card,.pcard{line-height:1.6}
 .small,.src,.why{line-height:1.6}
 @media (min-width:1041px){
-  body.bgs-on{padding-top:calc(var(--bg-bar) + 8px)!important}
-  body.bgs-on .stage{height:calc(100vh - var(--bg-bar) - 16px);height:calc(100dvh - var(--bg-bar) - 16px)}
-  body.bgs-on .main{grid-template-columns:minmax(0,1fr) 380px;transition:none}
-  body.bgs-on .main.wide{grid-template-columns:minmax(0,1fr) 0px}
+  body.bgs-on,.bgs-pre body{padding-top:calc(var(--bg-bar) + 8px)!important}
+  :is(.bgs-on,.bgs-pre) .stage{height:calc(100vh - var(--bg-bar) - 16px);height:calc(100dvh - var(--bg-bar) - 16px)}
+  :is(.bgs-on,.bgs-pre) .main{grid-template-columns:minmax(0,1fr) 380px;transition:none}
+  :is(.bgs-on,.bgs-pre) .main.wide{grid-template-columns:minmax(0,1fr) 0px}
 }
 @media (max-width:1040px){
-  body.bgs-on{padding-top:calc(var(--bg-bar) + env(safe-area-inset-top) + 8px)!important}
-  body.bgs-on #viewport{height:calc(100svh - var(--bg-bar) - env(safe-area-inset-top) - 24px)!important;min-height:320px}
+  body.bgs-on,.bgs-pre body{padding-top:calc(var(--bg-bar) + env(safe-area-inset-top) + 8px)!important}
+  :is(.bgs-on,.bgs-pre) #viewport{height:calc(100svh - var(--bg-bar) - env(safe-area-inset-top) - 24px)!important;min-height:320px}
   body.bgs-on.bgs-nav-on #viewport{height:calc(100svh - var(--bg-bar) - env(safe-area-inset-top) - 92px - env(safe-area-inset-bottom))!important}
   body.bgs-on.bgs-nav-on{padding-bottom:calc(84px + env(safe-area-inset-bottom))!important}
   body.bgs-on .main.wide aside{display:none}

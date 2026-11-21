@@ -14,6 +14,9 @@
   'use strict';
   if (window.BGShell && window.BGShell.version) return;
   const VERSION = '2.2.0';
+  // Bài có thanh đầu riêng (bản dự phòng khi vỏ không tải được) ẩn thanh đó ngay từ khung hình đầu theo lớp bgs-pre,
+  // để không nháy thanh cũ rồi mới đổi sang vỏ. Quá 8 giây mà bài chưa gắn vỏ thì trả lại thanh dự phòng.
+  const PRE = document.documentElement; PRE.classList.add('bgs-pre'); const preT = setTimeout(() => PRE.classList.remove('bgs-pre'), 8000);
   const SITE = 'https://nclamvn.github.io/bai-giang/';
   const REMOTE_URL = SITE + 'dieu-khien/';
   const PEERJS = 'https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js';
@@ -682,7 +685,7 @@
     injectStyle();
     if (store.get('bg-chieu', '0') === '1' || new URLSearchParams(location.search).has('chieu')) H.setAttribute('data-chieu', '');
     setupPanels(L);
-    document.body.classList.add('bgs-on');
+    document.body.classList.add('bgs-on'); clearTimeout(preT); PRE.classList.remove('bgs-pre');
     if (!EMBED && !document.querySelector('.bg-skip')) { // phần tử đầu tiên khi bấm Tab; đích tìm lúc bấm vì nội dung bài dựng sau vỏ
       const sk = document.createElement('a'); sk.className = 'bg-skip'; sk.href = '#noi-dung'; sk.textContent = 'Bỏ qua tới nội dung';
       sk.addEventListener('click', (e) => { e.preventDefault(); const t = document.querySelector('main,[role=main],#noi-dung,#dk,#app,#viewport,#stage,#gl,canvas'); if (!t) return;

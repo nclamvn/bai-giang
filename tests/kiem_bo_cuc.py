@@ -136,6 +136,12 @@ async def main():
                 if ho == 'trong' and w in BO_TRONG and '--du' not in sys.argv: kq[f'{ten}@{w}'] = None; continue
                 try:
                     await pg.goto(f'http://localhost:{cong}/{url}', wait_until='domcontentloaded', timeout=40000)
+                    if ho != 'tinh':
+                        # màn tải (#bgs-load) che cả trang tới khi cảnh sẵn sàng. Đo lúc nó còn đó là đo giao diện dự phòng nằm bên dưới,
+                        # thứ người dùng không thấy; máy chậm (CI) thì dính, máy nhanh thì không, nên phải chờ cho tất định.
+                        # Bài nạp tệp vỏ (window.BGShell) thì chờ tới khi vỏ gắn xong (body.bgs-on), để luôn đo cùng một trạng thái.
+                        try: await pg.wait_for_function("!document.getElementById('bgs-load') && (!window.BGShell || document.body.classList.contains('bgs-on'))", timeout=45000)
+                        except Exception: print(f'  chú ý {ten}@{w}: bài chưa tải xong sau 45 giây, vẫn đo', flush=True)
                     await pg.wait_for_timeout(700 if ho == 'tinh' else 2600)
                     try: await pg.evaluate('Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 4000))])')  # đo sau khi phông tự lưu đã về
                     except Exception: pass
