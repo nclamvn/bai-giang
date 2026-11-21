@@ -78,6 +78,6 @@ Thêm miễn trừ thì phải ghi lí do vào cùng chỗ.
 ## 5. Chưa làm
 
 - Các luật của Emil về thời lượng (dưới 300 ms), đường cong `ease-out` và thoát nhanh hơn vào chưa thành phép kiểm; mới rà bằng mắt, chưa thấy `ease-in` trong các lớp dùng chung.
-- Chưa kiểm vùng chạm 44 px, phần tử đè nhau, tràn ở 320 px (cần trình duyệt, nên thuộc về `tests/smoke.py`).
+- Vùng chạm 44 px, phần tử đè nhau, tràn ở 320 px nay do `tests/kiem_bo_cuc.py` đo trong trình duyệt (`docs/mot-he-ba-co-man-hinh.md`).
 - `overscroll-behavior` cho các bảng nổi chưa xét.
 - Phép kiểm K2 dò theo mẫu chữ và ngoặc nhọn, không phải bộ phân tích CSS đầy đủ.
