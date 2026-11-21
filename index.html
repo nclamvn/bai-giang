@@ -109,6 +109,11 @@ body.bg-home .sh2 .chips{display:flex;flex-wrap:wrap;gap:6px}
 /* dải cảnh: thẻ tên bài đặt cạnh động cơ */
 body.bg-home .feat img{object-fit:contain;aspect-ratio:16/8;background:#fff}
 body.bg-home .feat .bg-tag{left:57%;top:56%}
+/* thẻ nổi bật ngay dưới dải chỉ số: trang Riemann (nền tối như chính trang đó) */
+.rh{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 24px;align-items:end;margin-top:16px;padding:22px 24px;border-radius:14px;background:#08080A;color:#F4F1EA;text-decoration:none}
+.rh .bg-mono{grid-column:1/-1;color:#D9A065!important}.rh b{font:500 clamp(20px,2.4vw,30px)/1.15 var(--bg-font);letter-spacing:-.03em}.rh .d{grid-column:1;color:#B9B6AE;font-size:14.5px;line-height:1.55;max-width:70ch}
+.rh .go{grid-row:2/4;grid-column:2;font:500 11px var(--bg-mono);letter-spacing:.14em;text-transform:uppercase;color:#E0456B}.rh:hover b{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+@media (max-width:640px){.rh{grid-template-columns:1fr}.rh .go{grid-row:auto;grid-column:1}}
 /* bài giảng: mục lục đánh số, mỗi bài một dòng */
 .list{border-bottom:1px solid var(--bg-line);counter-reset:b}
 .bai{display:grid;grid-template-columns:36px 88px minmax(0,2fr) minmax(0,3fr) 168px;gap:8px 28px;align-items:center;padding:16px 0;border-top:1px solid var(--bg-line);text-decoration:none;counter-increment:b;transition:background-color var(--bg-t-mid)}
@@ -192,6 +197,7 @@ body.bg-home .foot ul{font:400 13px/1.6 var(--bg-font);letter-spacing:0}
   <span class="bg-tag"><i>1</i>Động cơ xăng 4 kì · Công nghệ Lớp 11</span></a>
 <div class="wrap">
   <div class="bg-stats" style="--n:4"><a href="#bai-hoc"><b>18<small>bài</small></b><span>Bài giảng 3D</span></a><a href="#thi-nghiem"><b>54<small>bài</small></b><span>Thí nghiệm theo bước</span></a><a href="#lo-trinh"><b>4</b><span>Lộ trình chương trình</span></a><a href="#cho-giao-vien"><b>45<small>phút</small></b><span>Gói dạy trọn tiết</span></a></div>
+  <a class="rh" href="toan/riemann/"><span class="bg-mono">Mới · phim tương tác · 21/11/2026</span><b>Giả thuyết Riemann: 167 năm công phá và ngày 20/11/2026</b><span class="d">Địa hình hàm zeta tính thật, mạng lưới 35 mốc có nguồn, hai nhánh trí tuệ người và AI, và tuyên bố chứng minh của Levent Alpöge cùng Claude.</span><span class="go">Xem →</span></a>
 
   <section id="bai-hoc" aria-labelledby="h-bai">
     <div class="sh2"><h2 id="h-bai" class="h2">Bài giảng</h2></div>

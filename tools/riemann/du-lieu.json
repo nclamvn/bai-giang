@@ -1,0 +1,999 @@
+{
+ "ghi_chu": "Sổ dữ liệu của trang toan/riemann. Mỗi mốc có trạng thái (tt) và nguồn. tt: dinh-ly = đã chứng minh và được công nhận; gia-thuyet = phỏng đoán; tinh-toan = kiểm bằng máy tính; y-tuong = chương trình, ý tưởng; tuyen-bo = tuyên bố chưa qua bình duyệt; hinh-thuc = đã qua kiểm hình thức (Lean) nhưng chưa có bản người đọc được. Cột 'tam' là thang định tính 0–10 do trang đặt để vẽ hai nhánh, không phải số đo.",
+ "nguon": {
+  "clay": [
+   "Viện Toán Clay, bài toán Thiên niên kỉ: giả thuyết Riemann",
+   "https://www.claymath.org/millennium/riemann-hypothesis/"
+  ],
+  "bombieri": [
+   "E. Bombieri, mô tả chính thức bài toán (Clay)",
+   "https://www.claymath.org/wp-content/uploads/2022/05/riemann.pdf"
+  ],
+  "conrey": [
+   "J. B. Conrey, The Riemann Hypothesis, Notices of the AMS 50 (2003)",
+   "https://www.ams.org/notices/200303/fea-conrey-web.pdf"
+  ],
+  "wiki": [
+   "Wikipedia, Riemann hypothesis (bảng kiểm số, tỉ lệ không điểm, các mốc 2026), đọc 21/11/2026",
+   "https://en.wikipedia.org/wiki/Riemann_hypothesis"
+  ],
+  "przz": [
+   "Pratt, Robles, Zaharescu, Zeindler, More than five-twelfths of the zeros of ζ are on the critical line (2020)",
+   "https://arxiv.org/abs/1802.10521"
+  ],
+  "pt": [
+   "Platt, Trudgian, The Riemann hypothesis is true up to 3·10¹² (2021)",
+   "https://arxiv.org/abs/2004.09765"
+  ],
+  "rt": [
+   "Rodgers, Tao, The de Bruijn–Newman constant is non-negative (2020)",
+   "https://arxiv.org/abs/1801.05914"
+  ],
+  "a67": [
+   "Anthropic, bài nghiên cứu về tỉ lệ không điểm 67,2 % (10/8/2026)",
+   "https://www.anthropic.com/research/riemann-zeta"
+  ],
+  "tc8": [
+   "TechCrunch, 11/8/2026: mô hình chưa phát hành của Anthropic và giả thuyết Riemann",
+   "https://techcrunch.com/2026/08/11/an-unreleased-anthropic-model-made-progress-on-one-of-maths-biggest-unsolved-problems/"
+  ],
+  "sciam8": [
+   "Scientific American, 8/2026: AI chưa giải bài toán hóc búa nhất",
+   "https://scientificamerican.com/article/no-ai-didnt-just-solve-the-thorniest-problem-in-math"
+  ],
+  "note": [
+   "L. Alpöge, ghi chú bốn trang (20/11/2026)",
+   "https://alpo.ge/remark.pdf"
+  ],
+  "drew": [
+   "A. Sutherland (MIT), trang kiểm bản Lean, cập nhật 20/11/2026 22:05 UTC",
+   "https://math.mit.edu/~drew/grh/"
+  ],
+  "ap": [
+   "AP qua Boston Globe, 21/11/2026",
+   "https://www.bostonglobe.com/2026/11/21/nation/anthropic-worker-solve-math-problems-ai-riemann-hypothesis/"
+  ],
+  "afp": [
+   "AFP qua TheJournal.ie, 21/11/2026",
+   "https://www.thejournal.ie/riemann-hypothesis-proved-by-ai-7233391-Nov2026/"
+  ],
+  "tc11": [
+   "TechCrunch, 20/11/2026: AI tuyên bố giải, một người cũng vậy",
+   "https://techcrunch.com/2026/11/20/ai-claimed-a-solution-to-the-167-year-old-riemann-hypothesis-and-a-human-did-too/"
+  ],
+  "ie": [
+   "Interesting Engineering, 20/11/2026",
+   "https://interestingengineering.com/ai-robotics/anthropic-167-year-old-riemann-hypothesis-claude"
+  ],
+  "fello": [
+   "Fello AI, 20/11/2026: đo kho Lean, dòng thời gian trong ngày",
+   "https://felloai.com/riemann-hypothesis-solved/"
+  ],
+  "dc": [
+   "DataCamp, 20/11/2026: hai chứng minh trong một ngày",
+   "https://www.datacamp.com/blog/ai-solved-riemann-hypothesis"
+  ],
+  "nature21": [
+   "Davies và cộng sự, Advancing mathematics by guiding human intuition with AI, Nature 600 (2021)",
+   "https://www.nature.com/articles/s41586-021-04086-x"
+  ],
+  "funsearch": [
+   "Romera-Paredes và cộng sự, Mathematical discoveries from program search with large language models, Nature 625 (2023)",
+   "https://www.nature.com/articles/s41586-023-06924-6"
+  ],
+  "imo24": [
+   "Google DeepMind, AlphaProof và AlphaGeometry 2 đạt mức huy chương bạc IMO (7/2024)",
+   "https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/"
+  ],
+  "imo25": [
+   "Google DeepMind, Gemini Deep Think đạt mức huy chương vàng IMO (7/2025)",
+   "https://deepmind.google/discover/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/"
+  ],
+  "lt": [
+   "Wikipedia, Logic Theorist",
+   "https://en.wikipedia.org/wiki/Logic_Theorist"
+  ],
+  "4c": [
+   "Wikipedia, Four color theorem",
+   "https://en.wikipedia.org/wiki/Four_color_theorem"
+  ],
+  "robbins": [
+   "W. McCune, Solution of the Robbins Problem, J. Automated Reasoning 19 (1997)",
+   "https://doi.org/10.1023/A:1005843212881"
+  ]
+ },
+ "moc": [
+  {
+   "id": "euclid",
+   "nam": -300,
+   "nhanh": "so",
+   "nguoi": "Euclid",
+   "ten": "Số nguyên tố là vô hạn",
+   "y": "Giả sử chỉ có hữu hạn số nguyên tố, nhân tất cả lại rồi cộng 1 thì được một số không chia hết cho số nào trong đó. Bài toán về số nguyên tố bắt đầu từ đây.",
+   "tt": "dinh-ly",
+   "tam": 0.6,
+   "src": [
+    "conrey"
+   ]
+  },
+  {
+   "id": "euler",
+   "nam": 1737,
+   "nhanh": "gt",
+   "nguoi": "Leonhard Euler",
+   "ten": "Tích Euler",
+   "y": "Tổng 1/nˢ trên mọi số tự nhiên bằng tích 1/(1 − p⁻ˢ) trên mọi số nguyên tố. Lần đầu giải tích nói được về số nguyên tố.",
+   "tt": "dinh-ly",
+   "tam": 1.6,
+   "src": [
+    "conrey",
+    "bombieri"
+   ]
+  },
+  {
+   "id": "gauss",
+   "nam": 1792,
+   "nhanh": "so",
+   "nguoi": "Carl Friedrich Gauss",
+   "ten": "Mật độ 1/ln x",
+   "y": "Đếm bảng số nguyên tố năm 15 tuổi, Gauss đoán quanh x cứ khoảng ln x số thì có một số nguyên tố, nên π(x) gần bằng Li(x).",
+   "tt": "gia-thuyet",
+   "tam": 2.1,
+   "src": [
+    "conrey"
+   ]
+  },
+  {
+   "id": "dirichlet",
+   "nam": 1837,
+   "nhanh": "gt",
+   "nguoi": "Peter Gustav Lejeune Dirichlet",
+   "ten": "Hàm L",
+   "y": "Dùng chuỗi L(s, χ) để chứng minh mọi cấp số cộng a + nq (a, q nguyên tố cùng nhau) chứa vô hạn số nguyên tố. Giả thuyết Riemann tổng quát nói về không điểm của chính các hàm này.",
+   "tt": "dinh-ly",
+   "tam": 2.6,
+   "src": [
+    "conrey"
+   ]
+  },
+  {
+   "id": "chebyshev",
+   "nam": 1850,
+   "nhanh": "so",
+   "nguoi": "Pafnuty Chebyshev",
+   "ten": "Kẹp π(x) giữa hai hằng số",
+   "y": "Chứng minh π(x) nằm giữa hai bội của x/ln x và đưa vào hàm ψ(x), tổng ln p trên các luỹ thừa nguyên tố, thứ mà công thức tường minh của Riemann tính được.",
+   "tt": "dinh-ly",
+   "tam": 3.0,
+   "src": [
+    "conrey"
+   ]
+  },
+  {
+   "id": "riemann",
+   "nam": 1859,
+   "nhanh": "gt",
+   "nguoi": "Bernhard Riemann",
+   "ten": "Bài báo tám trang",
+   "y": "Kéo ζ(s) ra toàn mặt phẳng phức, tìm phương trình hàm, viết π(x) thành tổng trên các không điểm của ζ, và ghi chú rằng rất có thể mọi không điểm không tầm thường đều có phần thực ½.",
+   "tt": "gia-thuyet",
+   "tam": 4.2,
+   "src": [
+    "clay",
+    "bombieri"
+   ]
+  },
+  {
+   "id": "pnt",
+   "nam": 1896,
+   "nhanh": "gt",
+   "nguoi": "Hadamard · de la Vallée Poussin",
+   "ten": "Định lí số nguyên tố",
+   "y": "Chứng minh ζ không có không điểm trên đường Re s = 1, đủ để suy ra π(x) ~ x/ln x. Vùng không có không điểm đầu tiên: bức tường thành lùi lại một chút.",
+   "tt": "dinh-ly",
+   "tam": 5.0,
+   "src": [
+    "conrey",
+    "bombieri"
+   ]
+  },
+  {
+   "id": "hilbert",
+   "nam": 1900,
+   "nhanh": "gt",
+   "nguoi": "David Hilbert",
+   "ten": "Bài toán thứ 8",
+   "y": "Đưa giả thuyết Riemann vào danh sách 23 bài toán của thế kỉ ở Đại hội Toán học Paris.",
+   "tt": "y-tuong",
+   "tam": 5.1,
+   "src": [
+    "conrey"
+   ]
+  },
+  {
+   "id": "koch",
+   "nam": 1901,
+   "nhanh": "gt",
+   "nguoi": "Helge von Koch",
+   "ten": "Sai số cỡ √x",
+   "y": "Giả thuyết Riemann tương đương với việc π(x) lệch khỏi Li(x) không quá cỡ √x · ln x: số nguyên tố ngẫu nhiên vừa đủ, không hơn.",
+   "tt": "dinh-ly",
+   "tam": 5.2,
+   "src": [
+    "conrey"
+   ]
+  },
+  {
+   "id": "gram",
+   "nam": 1903,
+   "nhanh": "may",
+   "nguoi": "Jørgen Gram",
+   "ten": "15 không điểm đầu",
+   "y": "Tính tay 15 không điểm đầu tiên, tất cả nằm trên đường ½.",
+   "tt": "tinh-toan",
+   "tam": 5.2,
+   "so": 15,
+   "src": [
+    "wiki"
+   ]
+  },
+  {
+   "id": "hardy",
+   "nam": 1914,
+   "nhanh": "gt",
+   "nguoi": "G. H. Hardy",
+   "ten": "Vô hạn không điểm trên đường",
+   "y": "Chứng minh có vô hạn không điểm nằm đúng trên đường ½. Vô hạn, nhưng chưa biết là bao nhiêu phần.",
+   "tt": "dinh-ly",
+   "tam": 5.6,
+   "tile": 0,
+   "src": [
+    "wiki",
+    "conrey"
+   ]
+  },
+  {
+   "id": "polya",
+   "nam": 1914,
+   "nhanh": "vl",
+   "nguoi": "Hilbert · Pólya",
+   "ten": "Không điểm là phổ?",
+   "y": "Ý tưởng truyền miệng: nếu các không điểm là trị riêng của một toán tử tự liên hợp thì chúng buộc phải thẳng hàng. Chưa ai tìm ra toán tử ấy.",
+   "tt": "y-tuong",
+   "tam": 5.6,
+   "src": [
+    "wiki",
+    "conrey"
+   ]
+  },
+  {
+   "id": "artin",
+   "nam": 1924,
+   "nhanh": "hh",
+   "nguoi": "Emil Artin",
+   "ten": "Zeta của đường cong",
+   "y": "Định nghĩa hàm zeta cho đường cong trên trường hữu hạn và đoán một bản sao của giả thuyết Riemann ở đó. Mở mặt trận hình học.",
+   "tt": "gia-thuyet",
+   "tam": 5.8,
+   "src": [
+    "wiki",
+    "bombieri"
+   ]
+  },
+  {
+   "id": "siegel",
+   "nam": 1932,
+   "nhanh": "may",
+   "nguoi": "Carl Ludwig Siegel",
+   "ten": "Công thức Riemann–Siegel",
+   "y": "Đọc bản nháp để lại của Riemann và tìm ra công thức ông dùng để tính không điểm, vẫn là lõi của mọi phép kiểm số về sau.",
+   "tt": "dinh-ly",
+   "tam": 5.9,
+   "src": [
+    "wiki"
+   ]
+  },
+  {
+   "id": "hasse",
+   "nam": 1933,
+   "nhanh": "hh",
+   "nguoi": "Helmut Hasse",
+   "ten": "Đường cong elliptic",
+   "y": "Chứng minh bản sao của giả thuyết cho đường cong giống 1 trên trường hữu hạn.",
+   "tt": "dinh-ly",
+   "tam": 6.1,
+   "src": [
+    "wiki"
+   ]
+  },
+  {
+   "id": "selberg",
+   "nam": 1942,
+   "nhanh": "gt",
+   "nguoi": "Atle Selberg",
+   "ten": "Một tỉ lệ dương",
+   "y": "Chứng minh một tỉ lệ dương các không điểm nằm trên đường ½. Con số rất nhỏ, nhưng lần đầu là một phần chứ không chỉ vô hạn.",
+   "tt": "dinh-ly",
+   "tam": 6.3,
+   "tile": 0.01,
+   "src": [
+    "wiki",
+    "conrey"
+   ]
+  },
+  {
+   "id": "weil",
+   "nam": 1948,
+   "nhanh": "hh",
+   "nguoi": "André Weil",
+   "ten": "Mọi đường cong",
+   "y": "Chứng minh giả thuyết Riemann cho mọi đường cong trên trường hữu hạn, và nêu tiêu chuẩn dương: giả thuyết gốc tương đương với một dạng toàn phương không âm.",
+   "tt": "dinh-ly",
+   "tam": 6.8,
+   "src": [
+    "wiki",
+    "bombieri"
+   ]
+  },
+  {
+   "id": "turing",
+   "nam": 1953,
+   "nhanh": "may",
+   "nguoi": "Alan Turing",
+   "ten": "Máy tính vào cuộc",
+   "y": "Dùng máy Manchester Mark 1 kiểm 1 104 không điểm, lần đầu dùng máy tính số, và để lại phương pháp chứng minh không sót không điểm nào.",
+   "tt": "tinh-toan",
+   "tam": 6.8,
+   "so": 1104,
+   "src": [
+    "wiki"
+   ]
+  },
+  {
+   "id": "stepanov",
+   "nam": 1969,
+   "nhanh": "hh",
+   "nguoi": "Sergei Stepanov",
+   "ten": "Chứng minh sơ cấp",
+   "y": "Chứng minh lại định lí của Weil bằng cách dựng một đa thức triệt tiêu bội cao tại các điểm cần đếm. Ghi chú 2026 của Alpöge nói lập luận của ông và Claude đi xuống từ chính phương pháp này.",
+   "tt": "dinh-ly",
+   "tam": 7.0,
+   "src": [
+    "note",
+    "bombieri"
+   ]
+  },
+  {
+   "id": "montgomery",
+   "nam": 1973,
+   "nhanh": "vl",
+   "nguoi": "Hugh Montgomery · Freeman Dyson",
+   "ten": "Không điểm như mức năng lượng",
+   "y": "Khoảng cách giữa các không điểm tuân cùng quy luật với trị riêng của ma trận Hermite ngẫu nhiên, thứ vật lí hạt nhân dùng cho mức năng lượng. Dyson nhận ra công thức trong một buổi trà ở Princeton.",
+   "tt": "gia-thuyet",
+   "tam": 7.1,
+   "src": [
+    "wiki",
+    "conrey"
+   ]
+  },
+  {
+   "id": "deligne",
+   "nam": 1974,
+   "nhanh": "hh",
+   "nguoi": "Pierre Deligne",
+   "ten": "Giả thuyết Weil",
+   "y": "Chứng minh bản sao của giả thuyết Riemann cho mọi đa tạp trên trường hữu hạn. Mặt trận hình học thắng trọn; chưa ai chuyển được chiến thắng ấy về số nguyên.",
+   "tt": "dinh-ly",
+   "tam": 7.3,
+   "src": [
+    "wiki",
+    "bombieri"
+   ]
+  },
+  {
+   "id": "levinson",
+   "nam": 1974,
+   "nhanh": "gt",
+   "nguoi": "Norman Levinson",
+   "ten": "Hơn một phần ba",
+   "y": "Ít nhất 1/3 số không điểm nằm trên đường ½.",
+   "tt": "dinh-ly",
+   "tam": 7.3,
+   "tile": 0.3333,
+   "src": [
+    "wiki",
+    "conrey"
+   ]
+  },
+  {
+   "id": "brent",
+   "nam": 1979,
+   "nhanh": "may",
+   "nguoi": "Richard Brent",
+   "ten": "81 triệu không điểm",
+   "y": "Kiểm 81 000 001 không điểm đầu tiên.",
+   "tt": "tinh-toan",
+   "tam": 7.3,
+   "so": 81000001,
+   "src": [
+    "wiki"
+   ]
+  },
+  {
+   "id": "odlyzko",
+   "nam": 1987,
+   "nhanh": "may",
+   "nguoi": "Andrew Odlyzko",
+   "ten": "Thống kê ở độ cao 10¹²",
+   "y": "Tính các không điểm quanh độ cao 10¹² và thấy khoảng cách của chúng khớp với phỏng đoán ma trận ngẫu nhiên của Montgomery.",
+   "tt": "tinh-toan",
+   "tam": 7.4,
+   "src": [
+    "wiki"
+   ]
+  },
+  {
+   "id": "conrey89",
+   "nam": 1989,
+   "nhanh": "gt",
+   "nguoi": "Brian Conrey",
+   "ten": "Hơn hai phần năm",
+   "y": "Ít nhất 2/5 số không điểm nằm trên đường ½. Con số đứng gần như yên suốt ba mươi năm sau đó.",
+   "tt": "dinh-ly",
+   "tam": 7.6,
+   "tile": 0.4,
+   "src": [
+    "wiki",
+    "conrey"
+   ]
+  },
+  {
+   "id": "clay",
+   "nam": 2000,
+   "nhanh": "gt",
+   "nguoi": "Viện Toán Clay",
+   "ten": "Một triệu đô la",
+   "y": "Bảy bài toán Thiên niên kỉ, mỗi bài một triệu đô la. Luật: công bố ở nơi có bình duyệt, chờ ít nhất hai năm, được cộng đồng chấp nhận.",
+   "tt": "y-tuong",
+   "tam": 7.7,
+   "src": [
+    "clay"
+   ]
+  },
+  {
+   "id": "gourdon",
+   "nam": 2004,
+   "nhanh": "may",
+   "nguoi": "Xavier Gourdon · Patrick Demichel",
+   "ten": "10¹³ không điểm",
+   "y": "Mười nghìn tỉ không điểm đầu tiên, không một ngoại lệ.",
+   "tt": "tinh-toan",
+   "tam": 7.7,
+   "so": 10000000000000.0,
+   "src": [
+    "wiki"
+   ]
+  },
+  {
+   "id": "lean",
+   "nam": 2013,
+   "nhanh": "may",
+   "nguoi": "Leonardo de Moura và cộng đồng Mathlib",
+   "ten": "Lean",
+   "y": "Một ngôn ngữ để viết chứng minh cho máy kiểm từng bước từ ba tiên đề. Mathlib, thư viện toán chung, có sẵn định nghĩa RiemannHypothesis mà bản chứng minh 2026 nhắm tới.",
+   "tt": "y-tuong",
+   "tam": 7.8,
+   "src": [
+    "drew"
+   ]
+  },
+  {
+   "id": "rt",
+   "nam": 2020,
+   "nhanh": "gt",
+   "nguoi": "Brad Rodgers · Terence Tao",
+   "ten": "Hằng số de Bruijn–Newman ≥ 0",
+   "y": "Giả thuyết Riemann tương đương Λ ≤ 0; Rodgers và Tao chứng minh Λ ≥ 0. Nếu đúng thì giả thuyết chỉ vừa đủ đúng.",
+   "tt": "dinh-ly",
+   "tam": 7.9,
+   "src": [
+    "rt",
+    "wiki"
+   ]
+  },
+  {
+   "id": "przz",
+   "nam": 2020,
+   "nhanh": "gt",
+   "nguoi": "Pratt · Robles · Zaharescu · Zeindler",
+   "ten": "Hơn 5/12",
+   "y": "Ít nhất 5/12 (41,6 %) số không điểm nằm trên đường ½. Ba mươi năm cho 1,6 điểm phần trăm.",
+   "tt": "dinh-ly",
+   "tam": 8.0,
+   "tile": 0.4167,
+   "src": [
+    "przz",
+    "wiki"
+   ]
+  },
+  {
+   "id": "pt",
+   "nam": 2021,
+   "nhanh": "may",
+   "nguoi": "David Platt · Tim Trudgian",
+   "ten": "Đúng tới độ cao 3·10¹²",
+   "y": "Chứng minh chặt chẽ rằng mọi không điểm có phần ảo tới 3·10¹² đều nằm trên đường ½ (khoảng 1,2·10¹³ không điểm).",
+   "tt": "tinh-toan",
+   "tam": 8.0,
+   "so": 12363000000000.0,
+   "src": [
+    "pt",
+    "wiki"
+   ]
+  },
+  {
+   "id": "c67",
+   "nam": 2026.61,
+   "ngay": "10/8/2026",
+   "nhanh": "ai",
+   "nguoi": "Claude (bản nghiên cứu chưa phát hành) · Alpöge, Furman kiểm",
+   "ten": "67,2 %",
+   "y": "Được nhắc thử sức thật với giả thuyết, Claude thất bại với khoảng 650 ý tưởng rồi rẽ sang bài toán tỉ lệ: ghép kết quả của Aryan, của Baluyot–Goldston–Suriajaya–Turnage-Butterbaugh với một bài của Bombieri năm 2000 quanh dạng toàn phương Weil, nâng cận dưới từ 41,6 % lên 67,2 %. Khoảng 60 tác tử con, 31 triệu token, có bản Lean. Chưa phải giả thuyết Riemann.",
+   "tt": "hinh-thuc",
+   "tam": 9.0,
+   "tile": 0.672,
+   "src": [
+    "a67",
+    "tc8",
+    "sciam8"
+   ]
+  },
+  {
+   "id": "quasi",
+   "nam": 2026.75,
+   "ngay": "9–10/2026",
+   "nhanh": "ai",
+   "nguoi": "OpenAI",
+   "ten": "Tựa giả thuyết Riemann",
+   "y": "Hai bản thảo tuyên bố mọi không điểm nằm trong dải phần thực từ 1/8 tới 7/8 (đã kiểm bằng Lean), rồi từ 1/12 tới 11/12. Dải tới hạn lần đầu bị thu hẹp.",
+   "tt": "tuyen-bo",
+   "tam": 9.4,
+   "src": [
+    "wiki"
+   ]
+  },
+  {
+   "id": "rh26",
+   "nam": 2026.887,
+   "ngay": "20/11/2026",
+   "nhanh": "ai",
+   "nguoi": "Levent Alpöge · Claude",
+   "ten": "Tuyên bố chứng minh",
+   "y": "Ghi chú bốn trang và một kho Lean 17,4 triệu dòng: giả thuyết Riemann và bản tổng quát cho hàm L Dirichlet. Lập luận đi xuống từ phương pháp Stepanov, qua tổng von Mangoldt, công thức Guinand–Weil và một chuỗi dài nâng theta trên các nhóm unita. Trong một ngày, nhiều bộ kiểm độc lập chấp nhận kho Lean. Chưa có bản người đọc được; Clay chưa công nhận.",
+   "tt": "hinh-thuc",
+   "tam": 10,
+   "tile": 1,
+   "src": [
+    "note",
+    "drew",
+    "ap",
+    "afp",
+    "tc11"
+   ]
+  },
+  {
+   "id": "masullo",
+   "nam": 2026.889,
+   "ngay": "20/11/2026",
+   "nhanh": "gt",
+   "nguoi": "Alessandro Masullo (Stanford)",
+   "ten": "Bản chứng minh thuần người",
+   "y": "Vài giờ sau, Ravi Vakil công bố bản thảo của nghiên cứu viên Alessandro Masullo: giả thuyết Riemann tổng quát, không dùng AI, kết quả mười hai năm làm việc, đã được Brian Conrad đọc kĩ nhiều tháng. Chưa viết trong Lean, chưa được kiểm độc lập.",
+   "tt": "tuyen-bo",
+   "tam": 10,
+   "src": [
+    "tc11",
+    "dc",
+    "afp"
+   ]
+  }
+ ],
+ "noi": [
+  [
+   "euclid",
+   "euler"
+  ],
+  [
+   "euler",
+   "riemann"
+  ],
+  [
+   "gauss",
+   "riemann"
+  ],
+  [
+   "dirichlet",
+   "riemann"
+  ],
+  [
+   "chebyshev",
+   "riemann"
+  ],
+  [
+   "gauss",
+   "pnt"
+  ],
+  [
+   "riemann",
+   "pnt"
+  ],
+  [
+   "riemann",
+   "hilbert"
+  ],
+  [
+   "riemann",
+   "koch"
+  ],
+  [
+   "riemann",
+   "gram"
+  ],
+  [
+   "riemann",
+   "siegel"
+  ],
+  [
+   "riemann",
+   "hardy"
+  ],
+  [
+   "hardy",
+   "selberg"
+  ],
+  [
+   "selberg",
+   "levinson"
+  ],
+  [
+   "levinson",
+   "conrey89"
+  ],
+  [
+   "conrey89",
+   "przz"
+  ],
+  [
+   "przz",
+   "c67"
+  ],
+  [
+   "hilbert",
+   "polya"
+  ],
+  [
+   "polya",
+   "montgomery"
+  ],
+  [
+   "montgomery",
+   "odlyzko"
+  ],
+  [
+   "montgomery",
+   "c67"
+  ],
+  [
+   "riemann",
+   "artin"
+  ],
+  [
+   "artin",
+   "hasse"
+  ],
+  [
+   "hasse",
+   "weil"
+  ],
+  [
+   "weil",
+   "stepanov"
+  ],
+  [
+   "weil",
+   "deligne"
+  ],
+  [
+   "weil",
+   "c67"
+  ],
+  [
+   "stepanov",
+   "rh26"
+  ],
+  [
+   "gram",
+   "turing"
+  ],
+  [
+   "siegel",
+   "turing"
+  ],
+  [
+   "turing",
+   "brent"
+  ],
+  [
+   "brent",
+   "odlyzko"
+  ],
+  [
+   "odlyzko",
+   "gourdon"
+  ],
+  [
+   "gourdon",
+   "pt"
+  ],
+  [
+   "turing",
+   "lean"
+  ],
+  [
+   "lean",
+   "c67"
+  ],
+  [
+   "lean",
+   "rh26"
+  ],
+  [
+   "c67",
+   "rh26"
+  ],
+  [
+   "dirichlet",
+   "rh26"
+  ],
+  [
+   "clay",
+   "rh26"
+  ],
+  [
+   "rt",
+   "przz"
+  ],
+  [
+   "quasi",
+   "rh26"
+  ],
+  [
+   "deligne",
+   "masullo"
+  ],
+  [
+   "dirichlet",
+   "masullo"
+  ],
+  [
+   "pnt",
+   "hardy"
+  ]
+ ],
+ "ai": [
+  {
+   "nam": 1956,
+   "ten": "Logic Theorist chứng minh 38 định lí của Principia Mathematica",
+   "tam": 0.8,
+   "src": [
+    "lt"
+   ]
+  },
+  {
+   "nam": 1976,
+   "ten": "Định lí bốn màu: người chứng minh, máy kiểm 1 936 trường hợp",
+   "tam": 1.4,
+   "src": [
+    "4c"
+   ]
+  },
+  {
+   "nam": 1996,
+   "ten": "EQP tự chứng minh giả thuyết Robbins, mở từ 1933",
+   "tam": 2.2,
+   "src": [
+    "robbins"
+   ]
+  },
+  {
+   "nam": 2021,
+   "ten": "DeepMind: AI gợi trực giác cho lí thuyết nút và biểu diễn",
+   "tam": 3.4,
+   "src": [
+    "nature21"
+   ]
+  },
+  {
+   "nam": 2023.9,
+   "ten": "FunSearch: mô hình ngôn ngữ tìm cấu trúc mới cho bài toán cap set",
+   "tam": 4.4,
+   "src": [
+    "funsearch"
+   ]
+  },
+  {
+   "nam": 2024.55,
+   "ten": "AlphaProof: mức huy chương bạc Olympic Toán quốc tế",
+   "tam": 5.6,
+   "src": [
+    "imo24"
+   ]
+  },
+  {
+   "nam": 2025.55,
+   "ten": "Mức huy chương vàng Olympic Toán quốc tế",
+   "tam": 6.8,
+   "src": [
+    "imo25"
+   ]
+  },
+  {
+   "nam": 2026.05,
+   "ten": "Các mô hình giải nhiều bài toán mở của Erdős",
+   "tam": 7.8,
+   "src": [
+    "tc8"
+   ]
+  },
+  {
+   "nam": 2026.58,
+   "ten": "Claude tìm phản ví dụ cho giả thuyết Jacobi",
+   "tam": 8.6,
+   "src": [
+    "tc8",
+    "fello"
+   ]
+  },
+  {
+   "nam": 2026.61,
+   "ten": "67,2 % không điểm trên đường tới hạn",
+   "tam": 9.0,
+   "src": [
+    "a67"
+   ]
+  },
+  {
+   "nam": 2026.69,
+   "ten": "OpenAI tuyên bố giải bài toán Navier–Stokes",
+   "tam": 9.5,
+   "src": [
+    "afp"
+   ]
+  },
+  {
+   "nam": 2026.887,
+   "ten": "Tuyên bố chứng minh giả thuyết Riemann",
+   "tam": 10,
+   "src": [
+    "note"
+   ]
+  }
+ ],
+ "buoc41": [
+  [
+   "6/10",
+   "Định thức Stepanov"
+  ],
+  [
+   "6/10",
+   "Tháp Iwasawa, phỏng theo nguyên lí chuồng bồ câu trên trường hữu hạn"
+  ],
+  [
+   "6/10",
+   "Bất đẳng thức độ dốc Bost"
+  ],
+  [
+   "6/10",
+   "Tính không âm của W qua một định thức: Stepanov với bội một"
+  ],
+  [
+   "8/10",
+   "Áp W vào hàm chỉ thị trên (0, 1], được cận lớn hơn 1 − η"
+  ],
+  [
+   "9/10",
+   "Một đại lượng kiểu đạo hàm triệt tiêu trên đường cong CM tại các số nguyên tố trơ"
+  ],
+  [
+   "14/10",
+   "Định thức chứa chu kì Gan–Gross–Prasad, giá trị 0 hoặc 1"
+  ],
+  [
+   "14/10",
+   "Công thức vết tương đối; Cauchy–Schwarz đưa về chuẩn của chuỗi Poincaré"
+  ],
+  [
+   "19/10",
+   "Viết qᴺ = Mᵏ + R; tìm tính tự đẳng cấu qua hàm theta trên phủ sáu lớp của GL₅"
+  ],
+  [
+   "19/10",
+   "Chọn tháp Iwasawa (tác giả ghi: có lẽ không cần)"
+  ],
+  [
+   "20/10",
+   "Đổi sang tổng von Mangoldt có trọng số; dấu lấy từ công thức Guinand–Weil"
+  ],
+  [
+   "15/11",
+   "Chuỗi nâng theta giữa các nhóm unita xác định hoàn toàn; mỗi lần nâng thêm một bội; độ dài chuỗi m ≈ √X (Claude đề xuất)"
+  ],
+  [
+   "15/11",
+   "Chuẩn và mức của các nâng; triệt tiêu số hạng bậc m bằng Chowla–Selberg, Weyl, Siegel"
+  ],
+  [
+   "15/11",
+   "Cận dưới đủ mạnh cho tính chia hết của nâng m lần"
+  ],
+  [
+   "15/11",
+   "Seesaw: chu kì của nâng lặp là chu kì Bessel (Rallis)"
+  ],
+  [
+   "15/11",
+   "Giá của mỗi lần nâng"
+  ],
+  [
+   "15/11",
+   "Dán cấu trúc nguyên qua các đặc trưng Hecke để có thêm phép lấy trung bình"
+  ],
+  [
+   "15/11",
+   "Một dạng yếu của giả thuyết Vandiver cho các lớp H¹"
+  ],
+  [
+   "15/11",
+   "Đối thể tích, chỉ số chuỗi theta, đồng dư giữa các nâng"
+  ],
+  [
+   "16/11",
+   "GRH"
+  ]
+ ],
+ "kiem": [
+  [
+   "Biên dịch 175 187 mô-đun (Lean 4.33.1, Mathlib 4.33.1)",
+   "0 lỗi"
+  ],
+  [
+   "Tiên đề của năm định lí",
+   "propext, Classical.choice, Quot.sound"
+  ],
+  [
+   "Phát lại bằng nhân Lean (leanchecker)",
+   "175 187 / 175 187"
+  ],
+  [
+   "nanoda (nhân viết bằng Rust)",
+   "chấp nhận · 27 phút 42 giây, 80 luồng"
+  ],
+  [
+   "con-leche",
+   "1 468 418 khai báo"
+  ],
+  [
+   "lean4lean, từng mô-đun",
+   "175 187 / 175 187"
+  ],
+  [
+   "Phát biểu",
+   "RiemannHypothesis của Mathlib"
+  ],
+  [
+   "Nhân Lean mặc định và chế độ kĩ, lake comparator",
+   "còn đang chạy lúc 22:05 UTC"
+  ]
+ ]
+}

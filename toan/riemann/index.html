@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<!--BG-SHARE:start-->
+<meta property="og:type" content="website"><meta property="og:site_name" content="Sáng Ăn Khoai"><meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Giả thuyết Riemann: 167 năm công phá và ngày 20/11/2026 · Sáng Ăn Khoai"><meta property="og:description" content="Phim tương tác 3D về giả thuyết Riemann: số nguyên tố, địa hình hàm zeta tính thật, mạng lưới 35 mốc từ Euclid tới Lean, hai nhánh trí tuệ người và AI, và tuyên bố chứng minh ngày 20/11/2026 của Levent Alpöge cùng Claude. Mỗi mốc có nguồn và trạng thái.">
+<meta property="og:url" content="https://nclamvn.github.io/bai-giang/toan/riemann/"><link rel="canonical" href="https://nclamvn.github.io/bai-giang/toan/riemann/">
+<meta property="og:image" content="https://nclamvn.github.io/bai-giang/design/the/toan-riemann.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Giả thuyết Riemann: 167 năm công phá và ngày 20/11/2026">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nclamvn.github.io/bai-giang/design/the/toan-riemann.jpg">
+<!--BG-SHARE:end-->
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Giả thuyết Riemann: 167 năm công phá và ngày 20/11/2026 · Sáng Ăn Khoai</title>
+<meta name="description" content="Phim tương tác 3D về giả thuyết Riemann: số nguyên tố, địa hình hàm zeta tính thật, mạng lưới 35 mốc từ Euclid tới Lean, hai nhánh trí tuệ người và AI, và tuyên bố chứng minh ngày 20/11/2026 của Levent Alpöge cùng Claude. Mỗi mốc có nguồn và trạng thái.">
+<meta name="theme-color" content="#020203">
+<link rel="icon" href="../../design/logo/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../design/house.css">
+<style>
+:root{--ink:#F4F1EA;--ink2:#B9B6AE;--mut:#8A8A8E;--line:rgba(244,241,234,.14);--amber:#D9A065;--sig:#E0456B;--blue:#6F9BD8;--bg:#020203;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;--sans:"Be Vietnam Pro",system-ui,sans-serif}
+*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.62 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+#gl{position:fixed;inset:0;width:100vw;height:100vh;height:100lvh;display:block;z-index:0}
+#fade{position:fixed;inset:0;background:var(--bg);z-index:1;pointer-events:none;opacity:1;transition:opacity .12s linear}
+#labels{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.lb{position:absolute;left:0;top:0;opacity:0;transition:opacity .25s;white-space:nowrap;font:500 11px/1.3 var(--mono);letter-spacing:.08em;color:var(--ink2);margin:-8px 0 0 8px;text-shadow:0 0 8px #000,0 0 2px #000}
+.lb.num{margin:0 0 0 -6px;color:var(--amber);font-size:12px}.lb.am{color:var(--amber)}.lb.sg{color:var(--sig)}.lb.bl{color:var(--blue)}
+.lb.node{font:400 12px/1.35 var(--sans);letter-spacing:0;color:var(--mut);margin:-34px 0 0 -4px}.lb.node b{display:block;font:500 10px var(--mono);letter-spacing:.12em;color:var(--mut)}
+.lb.node.on{color:var(--ink)}.lb.node.on b{color:var(--amber)}.lb.node.ai b{color:var(--sig)}.lb.node.ai{margin-top:6px}
+.top{position:fixed;left:0;right:0;top:0;z-index:6;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px clamp(16px,4vw,40px);font:500 10.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mut);background:linear-gradient(rgba(8,8,10,.85),rgba(8,8,10,0))}
+.top a{text-decoration:none}.top a:hover{color:var(--ink)}
+#nav{position:fixed;right:clamp(10px,2vw,26px);top:50%;transform:translateY(-50%);z-index:6;display:flex;flex-direction:column;gap:10px;font:500 10px var(--mono);letter-spacing:.14em;text-transform:uppercase}
+#nav a{display:flex;gap:8px;justify-content:flex-end;align-items:center;text-decoration:none;color:transparent;transition:color .2s}#nav a span{color:var(--mut);order:2}#nav a:after{content:'';order:3;width:14px;height:1px;background:var(--mut)}
+#nav:hover a,#nav a.on{color:var(--ink2)}#nav a.on span{color:var(--sig)}#nav a.on:after{background:var(--sig);width:24px}
+main{position:relative;z-index:3;pointer-events:none}
+section{position:relative}
+.beat{min-height:100vh;display:flex;align-items:center;padding:12vh clamp(16px,6vw,96px);opacity:.0;transform:translateY(18px);transition:opacity .5s,transform .5s}.beat.in{opacity:1;transform:none}
+.beat.r{justify-content:flex-end}.beat.c{justify-content:center;text-align:center}.beat.b{align-items:flex-end}.beat.t{align-items:flex-start}
+.card{max-width:520px;pointer-events:auto;padding:22px 24px;background:rgba(10,10,13,.72);border:1px solid var(--line);border-radius:14px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.card.bare{background:none;border:0;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0;max-width:880px}
+.k{font:500 10.5px/1.7 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:10px;display:flex;align-items:center;gap:8px}.k i{width:7px;height:7px;border-radius:50%;background:var(--sig);flex:none}
+h1{margin:0;font:500 clamp(46px,9vw,128px)/.95 var(--sans);letter-spacing:-.055em}
+h2{margin:0 0 12px;font:500 clamp(26px,3.4vw,44px)/1.08 var(--sans);letter-spacing:-.035em;text-wrap:balance}
+h3{margin:0 0 6px;font:500 22px/1.2 var(--sans);letter-spacing:-.02em}
+p{margin:0 0 12px;color:var(--ink2)}p:last-child{margin-bottom:0}p b,li b{color:var(--ink);font-weight:500}
+.f{font:500 13px/1.6 var(--mono);color:var(--amber);background:rgba(217,160,101,.08);border:1px solid rgba(217,160,101,.2);border-radius:8px;padding:8px 12px;margin:12px 0;overflow-x:auto;white-space:nowrap}
+.lede{font-size:clamp(17px,1.6vw,21px);max-width:60ch;margin:22px auto 0;color:var(--ink2)}
+.scroll{margin-top:38px;font:500 10.5px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.hud{position:fixed;z-index:5;opacity:0;pointer-events:none;transition:opacity .4s}.hud.on{opacity:1}.hud.on .pe{pointer-events:auto}
+.panel{background:rgba(10,10,13,.78);border:1px solid var(--line);border-radius:14px;padding:16px 18px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.meter{display:grid;gap:4px;margin-top:12px}.meter:first-child{margin-top:0}.meter .l{font:500 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}.meter .v{font:500 24px/1.1 var(--sans);letter-spacing:-.02em}
+.bar{height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--sig);transition:width .5s}.bar.am i{background:var(--amber)}
+#hud1{left:clamp(16px,6vw,96px);right:clamp(16px,6vw,96px);bottom:22px;display:flex;justify-content:center}#hud1 .panel{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;font:500 12px var(--mono);letter-spacing:.06em;color:var(--ink2)}
+#hud1 input{width:min(340px,60vw);accent-color:#D9A065}#hud1 button,#hud3 button{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:none;border:1px solid var(--line);border-radius:8px;padding:7px 11px;cursor:pointer}
+#hud3{inset:0}#hud3 .yr{position:absolute;left:clamp(16px,4vw,40px);top:64px;font:500 clamp(40px,7vw,92px)/1 var(--sans);letter-spacing:-.05em}
+#a3card{position:absolute;left:clamp(16px,4vw,40px);bottom:24px;width:min(470px,calc(100vw - 32px))}#a3card .who{font:500 12px var(--mono);letter-spacing:.06em;color:var(--amber);margin-bottom:10px}#a3card p{font-size:15px;line-height:1.55}
+.src{margin-top:10px;font:400 11.5px/1.5 var(--sans);color:var(--mut)}.src a{color:var(--ink2)}
+#hud3 .side{position:absolute;right:clamp(64px,8vw,120px);top:64px;width:250px}.lanes{display:grid;gap:5px;margin-top:14px;font:500 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}.lanes span{display:flex;align-items:center;gap:8px}.lanes i{width:7px;height:7px;border-radius:50%}
+#hud4{left:clamp(16px,4vw,40px);top:64px;width:min(300px,calc(100vw - 32px))}#hud4 .yr{font:500 clamp(34px,5vw,64px)/1 var(--sans);letter-spacing:-.05em;margin-bottom:14px}
+#hud5{inset:0}#hud5 .l{position:absolute;left:clamp(16px,4vw,40px);bottom:24px;width:min(430px,calc(100vw - 32px))}#hud5 .r{position:absolute;right:clamp(64px,8vw,120px);top:64px;width:min(420px,calc(100vw - 32px))}
+#a5list,#a5k{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px;font-size:14px;line-height:1.45;color:var(--mut)}#a5list b{display:inline-block;width:52px;font:500 11px var(--mono);color:var(--mut)}#a5list li.on{color:var(--ink)}#a5list li.on b{color:var(--sig)}
+#a5k li{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:12px;font-size:12.5px;line-height:1.4;border-top:1px solid var(--line);padding-top:7px}#a5k b{font:500 11px var(--mono);color:#8FD3A0;text-align:right}#a5k li.wait b{color:var(--amber)}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}.three div{border-top:1px solid var(--line);padding-top:8px}.three b{display:block;font:500 20px/1.1 var(--sans);letter-spacing:-.02em;color:var(--ink)}.three span{font:500 9.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.end{position:relative;z-index:4;pointer-events:auto;background:linear-gradient(rgba(8,8,10,0),rgba(8,8,10,.94) 12%);padding:18vh clamp(16px,6vw,96px) 60px}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:1180px;margin:0 auto}.cols .panel h3{font-size:18px}.cols ul{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:9px;font-size:14.5px;line-height:1.5;color:var(--ink2)}.cols li{padding-left:14px;position:relative}.cols li:before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--c,var(--mut))}
+.wide{max-width:1180px;margin:44px auto 0}.wide h2{font-size:clamp(22px,2.4vw,30px)}#nguon{columns:2;column-gap:32px;margin:14px 0 0;padding:0;list-style:none;font-size:13.5px;line-height:1.5;color:var(--mut)}#nguon li{break-inside:avoid;margin-bottom:8px}
+.foot{max-width:1180px;margin:44px auto 0;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;font:500 10.5px/1.7 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+html:not(.ok) .beat{opacity:1;transform:none}
+@media (max-width:900px){#nav{display:none}.top span{display:none}#hud3 .side{right:16px;top:auto;bottom:calc(24px + 46vh);width:190px;display:none}.cols{grid-template-columns:1fr}#nguon{columns:1}#hud5 .r{right:16px;top:60px}#hud5 .l{bottom:16px}.card{padding:18px}
+#a3card{max-height:46vh;overflow:auto}#a3card p{font-size:14px}#hud3 .yr,#hud4 .yr{top:52px}body{font-size:16px}.beat{padding:10vh 16px}}
+@media (max-width:900px) and (max-height:760px){#hud5 .r .three{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.beat{transition:none}}
+</style>
+<style id="bg-vt">@view-transition{navigation:auto}#bgs-load{view-transition-name:bg-bia}::view-transition-group(bg-bia){animation-duration:.42s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}::view-transition-old(root),::view-transition-new(root){animation-duration:.24s}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
+<script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
+<script id="bg-sw">(function(){try{if(!("serviceWorker"in navigator)||!/(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname))return;var r=new URL("../../",location.href).href;if(/[?&]sw=0/.test(location.search)){navigator.serviceWorker.getRegistrations().then(function(a){a.forEach(function(x){x.unregister()})});return}addEventListener("load",function(){setTimeout(function(){navigator.serviceWorker.register(r+"sw.js",{scope:r}).catch(function(){})},3000)})}catch(e){}})();</script>
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas><div id="fade"></div><div id="labels" aria-hidden="true"></div>
+<header class="top"><a href="../../">Sáng Ăn Khoai</a><span>Giả thuyết Riemann · 1859 → 20/11/2026</span></header>
+<nav id="nav" aria-label="Các cảnh"></nav>
+
+<div class="hud" id="hud1" data-act="1"><div class="panel pe"><span id="a1v">0 cặp không điểm</span><input id="a1n" type="range" min="0" max="200" value="0" aria-label="Số cặp không điểm đưa vào công thức tường minh"><span id="a1e"></span><button id="a1auto">Tự chạy</button></div></div>
+<div class="hud" id="hud3" data-act="3"><div class="yr" id="a3y"></div>
+  <div class="side panel"><div class="meter"><span class="l">Không điểm đã chứng minh nằm trên đường ½</span><span class="v" id="a3t"></span><div class="bar"><i id="a3tb"></i></div></div>
+    <div class="meter"><span class="l">Không điểm đầu tiên đã kiểm bằng máy</span><span class="v" id="a3s"></span><div class="bar am"><i id="a3sb"></i></div></div>
+    <div class="lanes"><span><i style="background:#f4f1ea"></i>Số học</span><span><i style="background:#d9a065"></i>Giải tích</span><span><i style="background:#6f9bd8"></i>Hình học</span><span><i style="background:#7fb58a"></i>Tính toán và máy</span><span><i style="background:#a58ad6"></i>Vật lí</span><span><i style="background:#cc2a53"></i>AI và người</span></div></div>
+  <div class="panel pe" id="a3card"></div></div>
+<div class="hud" id="hud4" data-act="4"><div class="yr" id="a4y"></div><div class="panel"><div class="meter"><span class="l">Nhánh người · tiến sâu vào bài toán</span><span class="v" id="a4h"></span><div class="bar am"><i id="a4hb"></i></div></div>
+  <div class="meter"><span class="l">Nhánh AI · tầm bài toán làm được</span><span class="v" id="a4a"></span><div class="bar"><i id="a4ab"></i></div></div>
+  <p style="font-size:12px;line-height:1.5;margin-top:12px;color:var(--mut)">Thang 0–10 là thang định tính do trang đặt để vẽ, không phải số đo. 10 = bài toán Thiên niên kỉ.</p></div></div>
+<div class="hud" id="hud5" data-act="5"><div class="r panel"><div class="k"><i></i>Kho Lean công bố 20/11</div><div class="three"><div><b id="a5l">0</b><span>dòng Lean</span></div><div><b id="a5f">0</b><span>tệp</span></div><div><b id="a5m">0</b><span>MB</span></div></div><ul id="a5k"></ul></div>
+  <div class="l panel"><div class="k"><i></i>Dòng thời gian trong ghi chú · <span id="a5n">00 / 20</span></div><ul id="a5list"></ul></div></div>
+
+<main>
+<section id="mo" data-act="0" data-t="Mở đầu" style="height:230vh">
+  <div class="beat c in"><div class="card bare"><div class="k" style="justify-content:center"><i></i>Phim tương tác · dữ liệu cập nhật 21/11/2026</div><h1>Giả thuyết Riemann</h1>
+    <p class="lede">Một câu ghi chú năm 1859 về vị trí các không điểm của một hàm số. 167 năm, năm mặt trận, hơn mười nghìn tỉ không điểm đã kiểm. Ngày 20/11/2026, một nhà toán học và một AI tuyên bố đã đi hết con đường.</p><div class="scroll">Cuộn xuống ↓</div></div></div>
+  <div class="beat"><div class="card"><div class="k"><i></i>00 · Vật liệu</div><h2>Số nguyên tố không theo một quy luật nào dễ thấy</h2><p>2, 3, 5, 7, 11, 13… Euclid chứng minh dãy này không bao giờ hết. Nhưng số tiếp theo nằm ở đâu thì không công thức đơn giản nào nói được: có lúc hai số đứng sát nhau, có lúc cách nhau cả quãng dài.</p><p>Toàn bộ câu chuyện là một câu hỏi: <b>sự lộn xộn ấy có mức độ không?</b></p></div></div>
+</section>
+
+<section id="nguyen-to" data-act="1" data-t="Âm nhạc" style="height:430vh">
+  <div class="beat t"><div class="card"><div class="k"><i></i>01 · Bậc thang</div><h2>Đếm số nguyên tố thành một bậc thang</h2><p>Đường trắng là ψ(x): mỗi lần gặp một số nguyên tố p (hay luỹ thừa của nó), bậc thang nhảy lên ln p. Gauss và Chebyshev thấy bậc thang bám sát đường thẳng y = x. Định lí số nguyên tố (1896) xác nhận điều đó.</p></div></div>
+  <div class="beat t r"><div class="card"><div class="k"><i></i>Công thức tường minh · Riemann 1859</div><h2>Mỗi không điểm là một nốt nhạc</h2><p>Riemann tìm ra phần còn thiếu: bậc thang bằng đường thẳng trừ đi một tổng các sóng, <b>mỗi không điểm của hàm zeta cho đúng một sóng</b>.</p><div class="f">ψ(x) = x − Σ<sub>ρ</sub> x<sup>ρ</sup>/ρ − ln 2π − ½ ln(1 − x⁻²)</div><p>Đường màu hổ phách tính trực tiếp từ công thức này với các không điểm thật. Thêm sóng vào, nó tự gập thành bậc thang.</p></div></div>
+  <div class="beat t"><div class="card"><div class="k"><i></i>Tự tay thử</div><h2>Kéo thanh trượt phía dưới</h2><p>Với 200 cặp không điểm, đường cong đã dựng lại từng bậc ở đúng vị trí từng số nguyên tố. Phần thực của không điểm quyết định biên độ sóng: x<sup>ρ</sup> lớn cỡ x<sup>Re ρ</sup>.</p><p><b>Giả thuyết Riemann nói mọi sóng có cùng biên độ √x</b>, tức là số nguyên tố lộn xộn ít nhất có thể. Một không điểm lệch khỏi đường ½ sẽ là một nốt to bất thường trong bản nhạc.</p></div></div>
+</section>
+
+<section id="zeta" data-act="2" data-t="Địa hình" style="height:430vh">
+  <div class="beat"><div class="card"><div class="k"><i></i>02 · Hàm zeta</div><h2>Địa hình của |ζ(s)|</h2><p>Đây là độ lớn của ζ(σ + it) trên dải −1 ≤ σ ≤ 2, tính thật bằng mpmath tại 31 409 điểm (độ cao theo thang logarit). Ngọn tháp ở gần là cực tại s = 1, chính là chuỗi điều hoà phân kì.</p></div></div>
+  <div class="beat r"><div class="card"><div class="k"><i></i>Không điểm</div><h2>Những cái giếng thẳng hàng</h2><p>Mỗi tia đỏ là một không điểm: chỗ địa hình chạm đáy. Không điểm đầu tiên ở độ cao 14,1347, rồi 21,0220, rồi 25,0109… Trong dải 0 &lt; σ &lt; 1 chúng được phép nằm bất cứ đâu.</p><p>Vậy mà cái nào tính ra cũng nằm đúng trên một đường: <b>Re s = ½</b>.</p></div></div>
+  <div class="beat"><div class="card"><div class="k"><i></i>Giả thuyết</div><h2>Rất có thể tất cả đều như vậy</h2><p>Riemann viết rằng điều này rất có khả năng đúng, rằng ông đã thử chứng minh nhanh mà chưa được, rồi gác lại vì không cần cho mục đích trước mắt. Ông không quay lại nữa.</p><div class="f">ζ(ρ) = 0, 0 &lt; Re ρ &lt; 1 ⇒ Re ρ = ½</div><p>Từ đây, bài toán là một pháo đài: dải tới hạn rộng 1 đơn vị, và nhiệm vụ là chứng minh không có gì ẩn nấp ngoài đường giữa.</p></div></div>
+</section>
+
+<section id="cong-pha" data-act="3" data-t="Công phá" style="height:1150vh">
+  <div class="beat t r"><div class="card"><div class="k"><i></i>03 · Mạng lưới</div><h2>Năm mặt trận, một cánh cổng</h2><p>Mỗi cột sáng là một mốc, mỗi cung nối là một ý tưởng truyền từ người này sang người khác. Năm làn: số học, giải tích, hình học, tính toán, vật lí. Cuộn để đi dọc thời gian; bấm vào một cột để ghim thẻ của nó.</p><p>Vòng tròn cuối đường lấp đầy theo tỉ lệ không điểm <b>đã chứng minh</b> nằm trên đường ½.</p></div></div>
+</section>
+
+<section id="hai-nhanh" data-act="4" data-t="Hai nhánh" style="height:520vh">
+  <div class="beat b r"><div class="card"><div class="k"><i></i>04 · Nhánh thứ nhất</div><h2>Trí tuệ người: 162 năm, từng bậc một</h2><p>Đường hổ phách là độ sâu loài người tiến vào bài toán, tính từ bài báo của Riemann. Mỗi hạt là một mốc ở cảnh trước. Từ 2/5 của Conrey (1989) tới 5/12 (2020) mất ba mươi mốt năm cho 1,6 điểm phần trăm.</p></div></div>
+  <div class="beat b r"><div class="card"><div class="k"><i></i>Nhánh thứ hai</div><h2>AI: nằm sát đáy bảy mươi năm, rồi dựng đứng</h2><p>Đường đỏ là tầm bài toán máy tự làm được. 1956: chứng minh lại định lí trong sách giáo khoa logic. 2024: mức huy chương bạc Olympic. 2025: vàng. Đầu 2026: các bài toán mở của Erdős. Tháng 8/2026: 67,2 %.</p><p>Trục thời gian đã phải giãn ra từ 2010, nếu không nửa sau chỉ còn là một vạch thẳng đứng.</p></div></div>
+  <div class="beat b r"><div class="card"><div class="k"><i></i>Điểm gặp</div><h2>Hai nhánh chạm nhau ở cùng một bài toán</h2><p>Không nhánh nào tự tới. Chiến lược, phép so sánh với trường hàm, lựa chọn đi theo Stepanov là của người. Chuỗi nâng theta dài √X và 17 triệu dòng kiểm chứng là của máy. Người đứng tên nói thẳng rằng ở đoạn cuối Claude đã bỏ xa mình.</p></div></div>
+</section>
+
+<section id="bon-mot-ngay" data-act="5" data-t="41 ngày" style="height:560vh">
+  <div class="beat t"><div class="card"><div class="k"><i></i>05 · 6/10 → 16/11/2026</div><h2>Bốn mươi mốt ngày</h2><p>Ghi chú bốn trang của Levent Alpöge kèm một dòng thời gian 20 bước do Claude lắp lại. Bắt đầu bằng định thức Stepanov ngày 6/10. Tám bước dồn vào một ngày 15/11. Bước cuối, ngày 16/11, chỉ ghi ba chữ: GRH.</p><p>Vòng xoắn xanh bên ngoài là con đường thứ hai được công bố cùng ngày: mười hai năm của Alessandro Masullo, không dùng AI.</p></div></div>
+  <div class="beat t"><div class="card"><div class="k"><i></i>Hình thức hoá</div><h2>Không có bài báo. Chỉ có mã.</h2><p>Bản viết bằng lời, theo tác giả, dài hơn 250 nghìn trang nên ông không công bố. Thứ được đưa ra là kho Lean: mỗi bước suy luận viết thành mã để một chương trình nhỏ kiểm từ ba tiên đề chuẩn.</p><p>Chiều 20/11, Andrew Sutherland (MIT) và cộng đồng Lean dựng lại kho. Kết quả ở bảng bên phải.</p></div></div>
+</section>
+
+<section id="ket" data-act="6" data-t="Sau cổng" style="height:160vh">
+  <div class="beat c"><div class="card bare"><div class="k" style="justify-content:center"><i></i>06 · Sau cánh cổng</div><h2 style="font-size:clamp(30px,5vw,68px)">Máy đã kiểm xong. Người chưa hiểu xong.</h2><p class="lede">Khi được hỏi liệu ông có hiểu chứng minh của chính mình không, tác giả trả lời: chưa. Đó là phần còn lại của bài toán.</p></div></div>
+</section>
+</main>
+
+<div class="end">
+  <div class="cols">
+    <div class="panel" style="--c:#8FD3A0"><div class="k"><i style="background:#8FD3A0"></i>Đã chắc</div><h3>Những gì không còn tranh cãi</h3><ul><li>Định lí số nguyên tố (1896), giả thuyết Riemann cho đường cong và đa tạp trên trường hữu hạn (Weil 1948, Deligne 1974).</li><li>Ít nhất 5/12 số không điểm nằm trên đường ½ (2020).</li><li>Mọi không điểm tới độ cao 3·10¹² nằm trên đường ½ (2021).</li><li>Kho Lean ngày 20/11 biên dịch không lỗi, chỉ dùng ba tiên đề chuẩn, được nhiều bộ kiểm độc lập chấp nhận.</li></ul></div>
+    <div class="panel" style="--c:#D9A065"><div class="k"><i style="background:#D9A065"></i>Đã qua máy, chờ người</div><h3>Tuyên bố ngày 20/11/2026</h3><ul><li>Phát biểu trong kho đúng là định nghĩa RiemannHypothesis của Mathlib; bản tổng quát chỉ cho hàm L Dirichlet.</li><li>Chưa có bản người đọc được, chưa bình duyệt. Tác giả nói chưa nắm hết phần dạng tự đẳng cấu hạng cao.</li><li>Một số phép kiểm còn đang chạy lúc 22:05 UTC ngày 20/11.</li><li>Bản thảo thuần người của Masullo chưa viết trong Lean, mới công khai vài giờ.</li></ul></div>
+    <div class="panel" style="--c:#E0456B"><div class="k"><i></i>Còn mở</div><h3>Những gì chưa ai trả lời</h3><ul><li>Viện Clay vẫn ghi bài toán là chưa giải. Luật: công bố có bình duyệt, chờ ít nhất hai năm, được chấp nhận rộng rãi. Sớm nhất là cuối 2028.</li><li>Vì sao nó đúng? Một chứng minh 17 triệu dòng chưa cho câu trả lời con người dùng được.</li><li>Công bố một ngày sau khi Anthropic lên sàn; tác giả bác cách hiểu rằng thời điểm có chủ ý.</li><li>Ai là tác giả của một định lí mà người đứng tên chưa hiểu hết?</li></ul></div>
+  </div>
+  <div class="wide"><div class="k"><i></i>Phương pháp và nguồn</div><h2>Dữ liệu của trang</h2><p style="max-width:80ch">Không điểm và địa hình |ζ| tính bằng mpmath (<code>tools/riemann/tinh_zeta.py</code>). Mỗi mốc trong sổ <code>tools/riemann/du-lieu.json</code> có trạng thái (định lí, phỏng đoán, kiểm bằng máy, tuyên bố, đã qua Lean) và nguồn. Các sự kiện năm 2026 lấy từ ghi chú gốc, trang kiểm của MIT và tin của AP, AFP, TechCrunch, Scientific American trong hai ngày 20–21/11/2026; trang sẽ lỗi thời khi việc kiểm chứng tiến thêm. Thang 0–10 ở cảnh hai nhánh là định tính. <span id="dem"></span>.</p><ul id="nguon"></ul></div>
+  <div class="foot"><span>Sáng Ăn Khoai · three.js r186 · dựng bằng mã</span><span><a href="../../">Về trang chủ</a></span></div>
+</div>
+<script type="module" src="app.js?v=39425da65e"></script>
+</body>
+</html>

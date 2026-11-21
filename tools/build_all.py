@@ -5,7 +5,7 @@
   python3 tools/build_all.py --check    dựng rồi báo lỗi nếu tệp đã dựng trong git lệch với nguồn (CI dùng)
   python3 tools/build_all.py --skip=robotics,thu-vien
 
-Thứ tự: token và phông → bài Tế Bào (ghép src/) → Ty Thể, Cổ Loa, Cơ thể người, Neuron → gói dạy thử → robotics → 54 bài thư viện → trang mục → thẻ chia sẻ (khối og ở đầu mọi trang; ảnh vẽ bằng the_chia_se.py --render)
+Thứ tự: token và phông → bài Tế Bào (ghép src/) → Ty Thể, Cổ Loa, Cơ thể người, Neuron → gói dạy thử → robotics → trang Riemann (toan/riemann) → 54 bài thư viện → trang mục → thẻ chia sẻ (khối og ở đầu mọi trang; ảnh vẽ bằng the_chia_se.py --render)
 → bộ nhớ đệm theo mã băm (tools/sw.py: sw-manifest.json, sw.js, khối đăng ký ở mọi trang; luôn chạy cuối).
 Mọi bước chạy lại bao nhiêu lần cũng được. Ty Thể là bài viết tay một tệp: ty-the/index.html vừa là nguồn vừa là đầu ra;
 chỉ các khối nhúng (vỏ, import map) được thay.
@@ -24,6 +24,7 @@ STEPS = [
     ('than-kinh', [[PY, 'tools/build_than_kinh.py']]),
     ('goi-day', [[PY, 'tools/build_goi_day.py']]),
     ('robotics', [['node', 'build.mjs', '__cwd__tools/robotics'], [PY, 'tools/robotics/build_hub.py'], [PY, 'tools/build_giao_an_mang.py'], [PY, 'tools/build_thiet_ke_mang.py']]),
+    ('riemann', [['node', 'tools/riemann/build.mjs']]),
     ('thu-vien', [[PY, 'tools/house_thu_vien.py']]),
     ('trang-muc', [[PY, 'tools/build_ls10.py'], [PY, 'tools/anh_nho.py'], [PY, 'tools/build_pages.py']]),
     ('the-chia-se', [[PY, 'tools/the_chia_se.py', '--strict']]),
