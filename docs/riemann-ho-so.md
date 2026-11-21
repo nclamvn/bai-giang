@@ -84,6 +84,16 @@ Phần kết chia ba cột: đã chắc; đã qua máy, chờ người; còn m�
 ## 3. Kiến trúc
 
 - Một canvas three.js r186 cố định (EffectComposer, UnrealBloom, ACES). Bảy nhóm cảnh, cảnh hiện theo vị trí cuộn. Mỗi cảnh nhận tiến độ u ∈ [0, 1] của đoạn cuộn và tự đặt máy quay. Giữa hai cảnh mờ qua đen.
+- Lớp hình ảnh (đợt trau chuốt 21/11/2026):
+  - nét chính vẽ bằng `Line2` (nét dày), mọi đám điểm dùng chấm tròn mềm cộng sáng;
+  - lớp phim cuối chuỗi hậu kì: tối bốn góc, tách màu nhẹ ở rìa, hạt nhiễu mịn;
+  - địa hình zeta có đường đồng mức phát sáng, đáy giếng ửng đỏ, một vệt quét chạy theo máy quay (viết trong `onBeforeCompile`);
+  - cảnh công phá có hạt sáng chạy dọc các cung đã thông, vòng chân cột, lưới sàn; cổng toả sóng khi đầy;
+  - cảnh hai nhánh có màn sáng dưới hai dải và sóng ở điểm gặp; cảnh 41 ngày có dòng hạt bay lên và cột sáng; cảnh cuối là đường hầm vòng;
+  - tiến độ cuộn được làm mượt theo thời gian thật (không phụ thuộc tần số màn hình), máy quay lệch nhẹ theo chuột trên máy bàn;
+  - giữa hai cảnh có thẻ chương (số và tên cảnh); lời dẫn, bảng số và nhãn cùng mờ theo; trên cùng có thanh tiến độ;
+  - màn hình dọc dời khung nhìn theo từng cảnh (`vo()`), để hình không nằm dưới bảng số.
+  - `prefers-reduced-motion`: tắt làm mượt, tắt thị sai, tắt hiệu ứng chữ tiêu đề.
 - Lời dẫn là HTML thật (đọc được khi không có WebGL). Nhãn 3D là HTML chiếu theo điểm.
 - Tương tác: thanh trượt số không điểm; bấm cột mốc để ghim thẻ; mục lục cảnh bên phải.
 - `node tools/riemann/build.mjs` gói `main.js` và hai tệp JSON thành `toan/riemann/app.js`. Bước `riemann` trong `tools/build_all.py`; trang có trong `tests/smoke.py`.
