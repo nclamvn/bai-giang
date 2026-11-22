@@ -42,7 +42,20 @@ jobs:
           python -m http.server 8777 >/dev/null 2>&1 &
           sleep 2
           python tests/smoke.py 8777
-      - name: Bố cục ở năm bề rộng (tràn ngang, vùng chạm, cỡ chữ, chữ bị cắt, đè nhau, tương phản)
+  # Cổng bố cục chạy song song với job trên: sáu bề rộng cộng các trạng thái sau khi bấm mất khoảng 20 phút,
+  # gộp chung thì vượt giới hạn 30 phút của một job. Tệp đã dựng nằm sẵn trong kho nên không cần bước dựng.
+  bo-cuc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Bố cục ở sáu bề rộng (tràn ngang, vùng chạm, cỡ chữ, chữ bị cắt, đè nhau, tương phản, núm thanh trượt)
         run: |
-          curl -s -o /dev/null http://localhost:8777/ || (python -m http.server 8777 >/dev/null 2>&1 & sleep 2)
+          pip install playwright
+          python -m playwright install --with-deps chromium
+          python -m http.server 8777 >/dev/null 2>&1 &
+          sleep 2
           python tests/kiem_bo_cuc.py 8777
