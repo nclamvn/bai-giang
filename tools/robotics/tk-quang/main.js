@@ -136,7 +136,7 @@ const sim = {
     t01.innerHTML = `Sợi đơn mode ngoài trời ${vn(TIA.alpha, 1)} dB/km, cặp đầu nối ${vn(TIA.Lc, 2)} dB, mối hàn 0,3 dB: mức tối đa cho phép theo TIA-568.3-D${ban ? ', <b>đầu nối bẩn tăng gấp đôi</b> (giả định)' : ''}. Biên M dành cho lão hoá, sửa chữa thêm mối hàn, nhiệt độ.`;
     // bảng 02
     { const parts = [['sợi αL', kq.soi, '#e8c547'], ['đầu nối', kq.dau, '#5b6170'], ['mối hàn', kq.han, '#8A8F98'], ['biên M', S.M, MAU.warn]], tot = parts.reduce((a, b) => a + b[1], 0); let x = 0, g = '';
-      parts.forEach(([n, v, c]) => { const w = (v / Math.max(tot, 0.01)) * 272; if (w > 0.5) g += `<rect x="${x}" y="0" width="${w - 1}" height="16" fill="${c}"/>`; if (w > 40) g += `<text x="${x + 3}" y="28" font-family="JetBrains Mono" font-size="9" fill="${C.ink}">${n} ${vn(v, 1)}</text>`; x += w; });
+      parts.forEach(([n, v, c]) => { const w = (v / Math.max(tot, 0.01)) * 272; if (w > 0.5) g += `<rect x="${x}" y="0" width="${w - 1}" height="16" fill="${c}"/>`; if (w > 40) g += `<text x="${x + 3}" y="28" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${n} ${vn(v, 1)}</text>`; x += w; });
       lossSvg.innerHTML = g; }
     pBig.textContent = `${vn(kq.prx, 1)} dBm`; pBig.style.color = kq.du >= 0 ? MAU.ok : MAU.bad;
     t02.innerHTML = `${vn(kq.m.ptx, 1)} − (${vn(kq.soi, 1)} + ${vn(kq.dau, 2)} + ${vn(kq.han, 1)} + ${vn(S.M, 1)}) = ${vn(kq.prx, 1)} dBm. ${kq.du >= 0 ? `<b>Đạt</b>: còn ${vn(kq.du, 1)} dB trên độ nhạy sau khi đã trừ biên.` : `<b>Không đạt</b>: thiếu ${vn(-kq.du, 1)} dB so với độ nhạy.`}`;
@@ -146,8 +146,8 @@ const sim = {
     // bảng 04: bậc thang dạng phẳng
     { const W = 272, Hh = 120, top = Math.max(kq.m.ptx, kq.m.max) + 1, bot = Math.min(kq.prx, kq.m.nhay) - 3, Y = (v) => ((top - v) / (top - bot)) * Hh; let g = `<rect x="0" y="0" width="${W}" height="${Hh}" fill="${C.chart}" stroke="${C.line}"/>`, dd = '';
       for (let i = 0; i <= 200; i++) { const u2 = i / 200; dd += `${i ? 'L' : 'M'}${(u2 * W).toFixed(1)} ${Y(kq.muc(u2)).toFixed(1)}`; }
-      g += `<path d="${dd}" fill="none" stroke="#c99a12" stroke-width="2"/><line x1="0" x2="${W}" y1="${Y(kq.m.nhay)}" y2="${Y(kq.m.nhay)}" stroke="${MAU.bad}" stroke-dasharray="4 3"/><text x="${W - 2}" y="${Y(kq.m.nhay) - 3}" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${MAU.bad}">độ nhạy ${vn(kq.m.nhay, 0)}</text>`;
-      g += `<line x1="0" x2="${W}" y1="${Y(kq.m.nhay + S.M)}" y2="${Y(kq.m.nhay + S.M)}" stroke="${MAU.warn}" stroke-dasharray="2 3"/><text x="2" y="${Hh + 14}" font-family="JetBrains Mono" font-size="9" fill="#626773">tòa A · ${vn(kq.m.ptx, 0)} dBm</text><text x="${W}" y="${Hh + 14}" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">tòa B · ${vn(kq.muc(1), 1)} dBm</text>`;
+      g += `<path d="${dd}" fill="none" stroke="#c99a12" stroke-width="2"/><line x1="0" x2="${W}" y1="${Y(kq.m.nhay)}" y2="${Y(kq.m.nhay)}" stroke="${MAU.bad}" stroke-dasharray="4 3"/><text x="${W - 2}" y="${Y(kq.m.nhay) - 3}" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${MAU.bad}">độ nhạy ${vn(kq.m.nhay, 0)}</text>`;
+      g += `<line x1="0" x2="${W}" y1="${Y(kq.m.nhay + S.M)}" y2="${Y(kq.m.nhay + S.M)}" stroke="${MAU.warn}" stroke-dasharray="2 3"/><text x="2" y="${Hh + 14}" font-family="JetBrains Mono" font-size="10.5" fill="#626773">tòa A · ${vn(kq.m.ptx, 0)} dBm</text><text x="${W}" y="${Hh + 14}" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="#626773">tòa B · ${vn(kq.muc(1), 1)} dBm</text>`;
       bSvg.innerHTML = g; }
     t04.innerHTML = 'Công suất giảm đều theo chiều dài sợi và tụt một bậc ở mỗi đầu nối, mỗi mối hàn. Vạch vàng chấm là độ nhạy cộng biên M: tuyến phải kết thúc trên vạch này.';
     // bảng 05

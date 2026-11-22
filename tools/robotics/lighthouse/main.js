@@ -82,7 +82,7 @@ const fmtM = (kg) => (kg > 1500 ? `≈ ${vn(kg / 1000, 1)} t` : kg > 0 ? `≈ ${
 // ---------------- bảng
 ui.header({code: 'Sanibel', kicker: 'HẢI ĐĂNG KHUNG SẮT · Florida · 1884 · thấu kính Fresnel bậc 3', title: 'Hải đăng khung sắt', sub: 'LẮP DỰNG · MÔ MEN LẬT · CHỚP ĐÈN · TẦM NHÌN', hub: HUB_URL,
   right: [['30 m', 'THÁP CAO'], ['31 m', 'TÂM ĐÈN TRÊN MẶT BIỂN'], ['Fl(2) W 10s', 'ĐẶC TÍNH ĐÈN, 1933'], ['13 hải lí', 'TẦM']]});
-const strip = ui.add(`<div style="position:absolute;left:348px;top:82px;width:904px;display:flex;gap:4px;pointer-events:auto">${STAGES.map((n, i) => `<button type="button" data-s="${i}" style="flex:1;min-width:0;padding:3px 0 5px;border:0;border-bottom:2px solid ${C.line};background:none;text-align:left;font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer"><span style="font:500 10px 'JetBrains Mono',monospace;color:${C.faint};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${n}</button>`).join('')}</div>`);
+const strip = ui.add(`<div style="position:absolute;left:348px;top:82px;width:904px;display:flex;gap:4px;pointer-events:auto">${STAGES.map((n, i) => `<button type="button" data-s="${i}" style="flex:1;min-width:0;padding:3px 0 5px;border:0;border-bottom:2px solid ${C.line};background:none;text-align:left;font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer"><span style="font:500 10.5px 'JetBrains Mono',monospace;color:${C.mute};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${n}</button>`).join('')}</div>`);
 strip.addEventListener('click', (e) => { const b = e.target.closest('[data-s]'); if (!b) return; LIVE.takeOver(); sim.act('stage' + b.dataset.s); });
 ui.panel(28, 112, 300, 214, 'KHUNG TÊN BẢN VẼ', '01');
 const TB = [['Công trình', 'Sanibel Island Light'], ['Thắp lần đầu', '20/8/1884'], ['Kiểu', 'chóp vuông khung sắt'], ['Móng', 'cọc sắt'], ['Đèn', 'Fresnel bậc 3 · f 500 mm'], ['Bước', ''], ['Giai đoạn', '']];
@@ -93,23 +93,23 @@ const gantt = ui.svg(42, 404, 272, 120);
 ui.panel(28, 546, 300, 220, 'CẤU KIỆN ĐANG CẨU', '03');
 const AC = ['Cấu kiện', 'Bước', 'Số lượng · vật liệu', 'Khối lượng ước', 'Tải móc cẩu', 'Liên kết', 'Lắp vào'];
 const acV = AC.map((a, i) => { ui.text(42, 580 + i * 20, a); return ui.text(150, 578 + i * 20, '', 'v', 'width:164px;text-align:right;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'); });
-const acNote = ui.text(42, 724, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const acNote = ui.text(42, 724, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 
 ui.panel(1272, 112, 300, 230, 'ĐÈN · Fl(2) W 10s', '04');
 ui.buttons([['light', 'BẬT ĐÈN']], 1286, 146, 272);
 const flashSvg = ui.svg(1286, 178, 272, 40);
 const eyeSl = ui.slider('eye', 1286, 238, 272, 'MẮT NGƯỜI XEM', {lw: 92, vw: 70});
 const rangeSvg = ui.svg(1286, 256, 272, 42);
-const rangeTxt = ui.text(1286, 302, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const rangeTxt = ui.text(1286, 302, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(1272, 354, 300, 256, 'GIÓ NGANG · LỰC TRONG CHÂN', '05');
 const windSl = ui.slider('v', 1286, 392, 272, 'GIÓ', {lw: 60, vw: 92});
 ui.text(1286, 416, 'TỔNG LỰC GIÓ (kN)'); const fW = ui.text(1286, 429, '', 'mo', 'position:absolute;font-size:22px;font-weight:700');
 ui.text(1430, 416, 'MÔ MEN LẬT (kN·m)'); const fM = ui.text(1430, 429, '', 'mo', 'position:absolute;font-size:22px;font-weight:700');
 const legBars = ['CHÂN 1', 'CHÂN 2', 'CHÂN 3', 'CHÂN 4'].map((n, i) => ui.bar(1286, 470 + i * 19, 272, n, {lw: 52, vw: 82, center: true}));
-const wTxt = ui.text(1286, 548, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const wTxt = ui.text(1286, 548, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(1272, 622, 300, 144, 'HIỂN THỊ · NHẬT KÝ', '06');
 ui.buttons([['sect', 'MẶT CẮT A-A'], ['paint', 'SƠN'], ['labels', 'NHÃN'], ['xray', 'X-QUANG']], 1286, 654, 272);
-const logRows = [0, 1, 2].map((k) => ui.text(1286, 716 + k * 13, '', 'v', 'font-size:10px;font-weight:500;width:272px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'));
+const logRows = [0, 1, 2].map((k) => ui.text(1286, 716 + k * 13, '', 'v', 'font-size:10.5px;font-weight:500;width:272px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'));
 ui.buttons([['v_hero', 'TOÀN CẢNH'], ['v_front', 'CHÍNH DIỆN'], ['v_lamp', 'PHÒNG ĐÈN'], ['v_sect', 'NHÌN MẶT CẮT']], 360, 120, 600);
 ui.text(362, 664, 'CHẾ ĐỘ');
 const modeEl = ui.add(`<div style="position:absolute;left:360px;top:678px;font:700 40px/1.1 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:-.8px;color:${C.ink}"></div>`);
@@ -187,7 +187,7 @@ const sim = {
     tbV[5].textContent = `${String(S.k).padStart(3, '0')} / ${String(N_OPS).padStart(3, '0')}`; tbV[6].textContent = STAGES[show.stage];
     let gs = ''; STAGES.forEach((nm, sI) => {
       const ids = OPS.map((x, j) => [x, j]).filter(([x]) => x.stage === sI), a = ids[0][1], b = ids[ids.length - 1][1] + 1, x0 = 92 + (a / N_OPS) * 180, w = Math.max(3, ((b - a) / N_OPS) * 180), fill = Math.max(0, Math.min(1, (S.k - a) / (b - a)));
-      gs += `<text x="0" y="${sI * 15 + 10}" font-family="Be Vietnam Pro" font-size="9.5" font-weight="600" fill="${fill > 0 && fill < 1 ? C.ink : C.mute}">${String(sI + 1).padStart(2, '0')} ${nm.split(' ·')[0]}</text><rect x="${x0}" y="${sI * 15 + 2}" width="${w}" height="10" fill="${C.chart}" stroke="${C.line}"/><rect x="${x0}" y="${sI * 15 + 2}" width="${w * fill}" height="10" fill="${fill >= 1 ? C.ink : C.or}"/>`;
+      gs += `<text x="0" y="${sI * 15 + 10}" font-family="Be Vietnam Pro" font-size="10.5" font-weight="600" fill="${fill > 0 && fill < 1 ? C.ink : C.mute}">${String(sI + 1).padStart(2, '0')} ${nm.split(' ·')[0]}</text><rect x="${x0}" y="${sI * 15 + 2}" width="${w}" height="10" fill="${C.chart}" stroke="${C.line}"/><rect x="${x0}" y="${sI * 15 + 2}" width="${w * fill}" height="10" fill="${fill >= 1 ? C.ink : C.or}"/>`;
     });
     gs += `<line x1="${92 + (S.k / N_OPS) * 180}" x2="${92 + (S.k / N_OPS) * 180}" y1="0" y2="120" stroke="${C.or}" stroke-width="1.5"/>`;
     gantt.innerHTML = gs;
@@ -196,7 +196,7 @@ const sim = {
     // bảng 04: dải 10 giây của đặc tính đèn, tầm nhìn
     let fs = `<rect x="0" y="6" width="272" height="20" fill="${C.chart}" stroke="${C.line}"/>`;
     for (let i = 0; i < 272; i++) { const v = flash((i / 272) * LH.period); if (v > 0.02) fs += `<rect x="${i}" y="${26 - 20 * v}" width="1" height="${20 * v}" fill="${C.or}"/>`; }
-    const cx = ((S.t % LH.period) / LH.period) * 272; fs += `<line x1="${cx}" x2="${cx}" y1="2" y2="30" stroke="${C.ink}" stroke-width="1.2"/><text x="0" y="40" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">0 s</text><text x="272" y="40" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">10 s · lặp lại</text>`;
+    const cx = ((S.t % LH.period) / LH.period) * 272; fs += `<line x1="${cx}" x2="${cx}" y1="2" y2="30" stroke="${C.ink}" stroke-width="1.2"/><text x="0" y="40" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">0 s</text><text x="272" y="40" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">10 s · lặp lại</text>`;
     flashSvg.innerHTML = fs;
     eyeSl.set((S.eye - 1) / 29, `${vn(S.eye, 0)} m`);
     const dG = geoRange(LH.focal, S.eye), dU = Math.min(dG, LH.nominal);

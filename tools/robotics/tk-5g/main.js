@@ -105,20 +105,20 @@ ui.panel(28, 360, 300, 200, 'DỊCH VỤ VÀ TẢI', '02');
 ui.buttons([['urllc', 'URLLC · ĐIỀU KHIỂN'], ['embb', 'EMBB · VIDEO']], 42, 394, 272);
 const slN = ui.slider('nUE', 42, 438, 272, 'SỐ THIẾT BỊ', {lw: 96, vw: 64});
 const slT = ui.slider('tInf', 42, 468, 272, 'XỬ LÝ MỖI YÊU CẦU', {lw: 120, vw: 50});
-ui.text(42, 494, 'Mỗi thiết bị gửi 10 yêu cầu/giây. Site biên 2 máy, vùng 4, trung tâm 16 (giả định).', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+ui.text(42, 494, 'Mỗi thiết bị gửi 10 yêu cầu/giây. Site biên 2 máy, vùng 4, trung tâm 16 (giả định).', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(28, 572, 300, 194, 'GIẢ ĐỊNH CỦA BÀI', '03');
-ui.text(42, 606, 'Trễ vô tuyến một chiều = yêu cầu tối thiểu IMT-2020 (ITU-R M.2410): URLLC 1 ms, eMBB 4 ms. Cáp quang 2·10⁸ m/s, đường cáp dài 1,3 lần đường chim bay. Mỗi chặng truyền dẫn 50 µs, UPF 50 µs. Biên 2 km, vùng 80 km, trung tâm 1 140 km (cỡ Hà Nội tới TP.HCM đường chim bay).', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.5');
+ui.text(42, 606, 'Trễ vô tuyến một chiều = yêu cầu tối thiểu IMT-2020 (ITU-R M.2410): URLLC 1 ms, eMBB 4 ms. Cáp quang 2·10⁸ m/s, đường cáp dài 1,3 lần đường chim bay. Mỗi chặng truyền dẫn 50 µs, UPF 50 µs. Biên 2 km, vùng 80 km, trung tâm 1 140 km (cỡ Hà Nội tới TP.HCM đường chim bay).', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:272px;line-height:1.5');
 
 ui.panel(1272, 112, 300, 280, 'NGÂN SÁCH TRỄ ĐI VỀ · BT 6.4', '04');
 const budSvg = ui.svg(1286, 146, 272, 140);
 ui.text(1286, 296, 'TRỄ ĐI VỀ'); const totBig = ui.text(1286, 310, '', 'mo', 'position:absolute;font-size:28px;font-weight:700');
-const totTxt = ui.text(1286, 348, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const totTxt = ui.text(1286, 348, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(1272, 404, 300, 200, 'MÁY CHỦ BIÊN · M/M/2', '05');
 const qChart = ui.chart(1286, 450, 272, 76, {min: 0, max: 0.05, colors: [C.ink], zero: false});
-const qTxt = ui.text(1286, 546, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const qTxt = ui.text(1286, 546, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(1272, 616, 300, 150, 'CHỌN VỊ TRÍ · 6.9', '06');
 const bestBig = ui.text(1286, 648, '', 'mo', 'position:absolute;font-size:22px;font-weight:700;width:272px');
-const bestTxt = ui.text(1286, 684, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const bestTxt = ui.text(1286, 684, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.buttons([['v_hero', 'TOÀN CẢNH'], ['v_ran', 'TRẠM GỐC'], ['v_edge', 'SITE BIÊN'], ['v_far', 'VÙNG VÀ TRUNG TÂM']], 360, 120, 860);
 ui.text(362, 664, 'UPF ĐẶT Ở');
 const modeEl = ui.add(`<div style="position:absolute;left:360px;top:678px;font:700 40px/1.1 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:-.8px;color:${C.ink}"></div>`);
@@ -154,15 +154,15 @@ const sim = {
     // bảng 04
     let g = ''; const W = 272, tMax = Math.max(S.budget * 1.25, Math.min(0.08, Number.isFinite(cur.tong) ? cur.tong * 1.05 : 0.08)), sc = W / tMax;
     let x = 0; for (const k of ['ran', 'tn', 'upf', 'dn', 'app']) { const v = cur.d[k]; const w = Math.min(W - x, (Number.isFinite(v) ? v : tMax) * sc); if (w > 0.2) g += `<rect x="${x}" y="8" width="${w}" height="16" fill="${COL[k]}"/>`; x += w; }
-    g += `<rect x="0" y="8" width="${W}" height="16" fill="none" stroke="${C.line}"/><line x1="${S.budget * sc}" x2="${S.budget * sc}" y1="2" y2="30" stroke="${C.ink}" stroke-width="1.5"/><text x="${S.budget * sc}" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="${C.ink}">20 ms</text>`;
-    ['ran', 'tn', 'upf', 'dn', 'app'].forEach((k, j) => { const y = 54 + j * 17; g += `<rect x="0" y="${y}" width="9" height="9" fill="${COL[k]}"/><text x="14" y="${y + 8}" font-family="Be Vietnam Pro" font-size="10" fill="${C.ink}">${TEN[k]}</text><text x="${W}" y="${y + 8}" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="${C.ink}">${F.fmtThoiGian(cur.d[k], 2)}</text>`; });
+    g += `<rect x="0" y="8" width="${W}" height="16" fill="none" stroke="${C.line}"/><line x1="${S.budget * sc}" x2="${S.budget * sc}" y1="2" y2="30" stroke="${C.ink}" stroke-width="1.5"/><text x="${S.budget * sc}" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">20 ms</text>`;
+    ['ran', 'tn', 'upf', 'dn', 'app'].forEach((k, j) => { const y = 54 + j * 17; g += `<rect x="0" y="${y}" width="9" height="9" fill="${COL[k]}"/><text x="14" y="${y + 8}" font-family="Be Vietnam Pro" font-size="10.5" fill="${C.ink}">${TEN[k]}</text><text x="${W}" y="${y + 8}" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${F.fmtThoiGian(cur.d[k], 2)}</text>`; });
     budSvg.innerHTML = g;
     totBig.textContent = Number.isFinite(cur.tong) ? F.fmtThoiGian(cur.tong, 1) : 'quá tải'; totBig.style.color = S.ok[S.vt] ? OK : BAD;
     totTxt.innerHTML = Number.isFinite(cur.tong) ? `${cur.tong <= S.budget ? '<b>Đạt</b>' : '<b>Không đạt</b>'} ngân sách 20 ms của dịch vụ điều khiển (BT 6.4). Vô tuyến và UPF đi hai lượt, máy chủ một lượt (6.8, 5.24).` : 'Máy chủ nhận yêu cầu nhanh hơn khả năng xử lý: hàng đợi dài vô hạn.';
     // bảng 05: trễ máy chủ biên theo số thiết bị (mô phỏng)
     const pts = S.curve.filter(([, w]) => Number.isFinite(w)), ymax = Math.max(0.01, ...pts.map(([, w]) => w)) * 1.1, n0 = S.curve[0][0], n1 = S.curve[S.curve.length - 1][0];
     qChart.lim.max = ymax;
-    qChart.set([S.curve.map(([, , l]) => (Number.isFinite(l) ? l : ymax * 2))], {cursor: Math.max(0, Math.min(1, (S.nUE - n0) / (n1 - n0))), extra: (Y, w) => pts.map(([n, v]) => `<circle cx="${((n - n0) / (n1 - n0)) * w}" cy="${Y(v)}" r="2.6" fill="${COL.app}"/>`).join('') + `<text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">${F.fmtThoiGian(ymax, 0)}</text><text x="0" y="88" font-family="JetBrains Mono" font-size="9" fill="#626773">${n0} thiết bị</text><text x="${w}" y="88" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">${n1}</text>`});
+    qChart.set([S.curve.map(([, , l]) => (Number.isFinite(l) ? l : ymax * 2))], {cursor: Math.max(0, Math.min(1, (S.nUE - n0) / (n1 - n0))), extra: (Y, w) => pts.map(([n, v]) => `<circle cx="${((n - n0) / (n1 - n0)) * w}" cy="${Y(v)}" r="2.6" fill="${COL.app}"/>`).join('') + `<text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="#626773">${F.fmtThoiGian(ymax, 0)}</text><text x="0" y="88" font-family="JetBrains Mono" font-size="10.5" fill="#626773">${n0} thiết bị</text><text x="${w}" y="88" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="#626773">${n1}</text>`});
     const e0 = kq[0];
     qTxt.innerHTML = `Chấm: mô phỏng · đường: Erlang C. Hai máy biên, mỗi yêu cầu ${F.fmtThoiGian(S.tInf, 1)}: ${S.nUE} thiết bị × 10 = ${S.nUE * 10} yêu cầu/giây, <b>ρ = ${vn(e0.rho, 2)}</b>. Gần 1 thì trễ chờ tăng vọt (ràng buộc C_p của 6.9).`;
     bestBig.textContent = S.best >= 0 ? VT[S.best].ten.split(' (')[0] : 'không vị trí nào';

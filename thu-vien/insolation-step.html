@@ -173,7 +173,9 @@ body.bgs-on footer#foot .cur{font:600 14px var(--bg-mono);color:var(--bg-ink2)}
   body.bgs-on #eqb.bg-open::after{content:"Chạm để thu gọn"}
 }
 /* màn cảm ứng: vùng bấm từ 44 px */
-@media (pointer:coarse){aside#left button,aside#right button,#mtabs button,footer#foot button,aside .chip{min-height:44px!important}aside .seg button{min-height:40px}}
+@media (pointer:coarse){aside#left button:not(.sw button),aside#right button:not(.sw button),#mtabs button,footer#foot button,aside .chip{min-height:44px!important}aside .seg button{min-height:40px}
+  .sw button{box-sizing:content-box;padding:12.5px 5px!important;margin:-12.5px -5px!important;background-clip:content-box!important}.sw button::after{top:14.5px!important;left:7px!important}.sw{min-height:44px}
+  .trk input{top:-13px!important;bottom:auto!important;height:44px!important}}
 @media (orientation:portrait) and (min-width:641px) and (max-width:1100px){body.bgs-nav-on #mtabs{bottom:calc(84px + 38svh + env(safe-area-inset-bottom))!important}}
 @media (orientation:portrait) and (min-width:641px) and (max-width:1100px){body.bgs-on .bgs-desk{display:none!important}}
 @media (orientation:landscape) and (max-height:520px){

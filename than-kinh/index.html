@@ -69,7 +69,7 @@ body.bgs-on #title,body.bgs-on #vm,body.bgs-on #tag{top:calc(var(--bg-bar,56px) 
 #ask.rev button.pick:not(.ok){border-color:var(--bg-bad,#B3261E);background:color-mix(in srgb,var(--bg-bad,#B3261E) 8%,#fff)}
 #ask .e{display:none;margin-top:4px;font:500 13px/1.5 var(--bg-font,system-ui);color:var(--nk-ink2)}
 #ask.rev .e{display:block}
-@media (pointer:coarse){#ask button,#play button{min-height:44px}#bk .ck{min-height:44px}}
+@media (pointer:coarse){#ask button,#play button{min-height:44px}}
 body.clean .hud,body.clean #fade{display:none!important}
 #read{right:18px;bottom:18px;width:300px}
 #bk{right:18px;top:calc(var(--bg-bar,0px) + 232px);width:300px;pointer-events:auto;font:500 14px/1.45 var(--bg-font,system-ui);color:var(--nk-ink);z-index:7}
@@ -79,6 +79,7 @@ body.clean .hud,body.clean #fade{display:none!important}
 #bk .sl b{float:right;color:var(--nk-gold);font:600 14px var(--bg-mono,monospace)}
 #bk input[type=range]{display:block;width:100%;margin-top:6px;accent-color:var(--bg-brand,#1D1B16);min-height:28px}
 #bk .ck{display:flex;align-items:center;gap:10px;min-height:40px;cursor:pointer}
+@media (pointer:coarse){#bk .ck{min-height:44px}}
 #bk .ck input{width:20px;height:20px;accent-color:var(--bg-brand,#1D1B16)}
 #bk .say{margin:6px 0 2px;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--bg-s-sinh,#C2184A) 8%,#fff);color:var(--nk-ink);font-size:13px}
 #bk .src{margin-top:6px;font-size:13px;color:var(--nk-ink3)}

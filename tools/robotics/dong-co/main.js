@@ -30,13 +30,13 @@ ui.panel(28, 112, 300, 292, 'CHU TRÌNH 4 KÌ · 720° TRỤC KHUỶU', '01');
 const wheel = ui.svg(42, 146, 130, 130);
 const kName = ui.text(184, 150, '', 'v', 'font-size:15px;font-weight:700;white-space:normal;width:132px;line-height:1.25;font-family:var(--bg-font,system-ui,sans-serif)');
 const bigAng = ui.text(184, 200, '', 'mo', 'position:absolute;font-size:30px;font-weight:700;letter-spacing:-1px');
-ui.text(184, 240, 'Góc trục khuỷu trong chu trình', 'sm', 'font-size:9.5px;white-space:normal;width:130px');
+ui.text(184, 240, 'Góc trục khuỷu trong chu trình', 'sm', 'font-size:10.5px;white-space:normal;width:130px');
 const kRows = [['Góc trục cam', 'cam'], ['Vòng quay thứ', 'rev'], ['Pít-tông cách ĐCT', 'pos'], ['Xupap nạp', 'in'], ['Xupap thải', 'ex'], ['Bugi', 'sp']].map(([t], i) => { ui.text(42, 290 + i * 18, t, 'sm', 'font-size:10.5px'); return ui.text(150, 290 + i * 18, '', 'v', 'width:164px;text-align:right'); });
 const xRows = kRows.slice(3);
 // 02 xupap
 ui.panel(28, 416, 300, 122, 'ĐỘ NÂNG XUPAP THEO GÓC (mm)', '02');
 const valveChart = ui.chart(42, 448, 272, 58, {min: 0, max: E.lift * 1000 * 1.1, colors: ['#3c79a8', '#8b8278'], zero: false});
-ui.text(42, 514, 'Nạp (xanh) · thải (xám) · độ nâng 5,5 mm là giá trị minh hoạ', 'sm', 'font-size:8.5px');
+ui.text(42, 514, 'Nạp xanh · thải xám · độ nâng 5,5 mm là minh hoạ', 'sm', 'font-size:10.5px');
 // 03 thông số
 ui.panel(28, 550, 300, 216, 'THÔNG SỐ KĨ THUẬT', '03');
 const spec = [];
@@ -45,11 +45,11 @@ for (let i = 0; i < 9; i++) { spec.push([ui.text(42, 582 + i * 19, '', 'sm', 'fo
 ui.panel(1272, 112, 300, 152, 'ÁP SUẤT TRONG XI LANH (bar)', '04');
 const pChart = ui.chart(1286, 146, 272, 84, {min: 0, max: 80, colors: [C.or], zero: false});
 const pNow = ui.text(1286, 236, '', 'v', 'width:272px;text-align:right');
-ui.text(1286, 236, '0 → 720° · MÔ HÌNH GẦN ĐÚNG', 'sm', 'font-size:8.5px');
+ui.text(1286, 236, '0 → 720° · MÔ HÌNH GẦN ĐÚNG', 'sm', 'font-size:10.5px');
 // 05 p–V
 ui.panel(1272, 274, 300, 222, 'ĐỒ THỊ p–V · CÔNG CHỈ THỊ', '05');
 const pv = ui.svg(1286, 306, 272, 112);
-const pvRows = [0, 1, 2, 3].map((i) => [ui.text(1286, 426 + i * 17, '', 'sm', 'font-size:10px'), ui.text(1420, 426 + i * 17, '', 'v', 'width:138px;text-align:right;font-size:11px')]);
+const pvRows = [0, 1, 2, 3].map((i) => [ui.text(1286, 426 + i * 17, '', 'sm', 'font-size:10.5px'), ui.text(1420, 426 + i * 17, '', 'v', 'width:138px;text-align:right;font-size:11px')]);
 // 06 cơ cấu và hệ thống
 ui.panel(1272, 506, 300, 152, 'CƠ CẤU VÀ HỆ THỐNG', '06');
 ui.buttons([['sys_crank', 'TRỤC KHUỶU – THANH TRUYỀN'], ['sys_valve', 'PHÂN PHỐI KHÍ'], ['sys_fuel', 'NHIÊN LIỆU, KHÔNG KHÍ'], ['sys_ign', 'ĐÁNH LỬA'], ['sys_cool', 'LÀM MÁT'], ['sys_lube', 'BÔI TRƠN'], ['sys_start', 'KHỞI ĐỘNG']], 1286, 540, 272);
@@ -95,7 +95,7 @@ const drawWheel = (ps) => {
   });
   const a = (ps / 720) * 2 * Math.PI - Math.PI / 2;
   g += `<line x1="${c}" y1="${c}" x2="${(c + 60 * Math.cos(a)).toFixed(1)}" y2="${(c + 60 * Math.sin(a)).toFixed(1)}" stroke="${C.ink}" stroke-width="2.2" stroke-linecap="round"/><circle cx="${c}" cy="${c}" r="4" fill="${C.ink}"/>`;
-  g += `<text x="${c}" y="${c + 20}" text-anchor="middle" font-size="9.5" fill="#626773" font-family="JetBrains Mono,monospace">${Math.round(ps)}°</text>`;
+  g += `<text x="${c}" y="${c + 20}" text-anchor="middle" font-size="10.5" fill="#626773" font-family="JetBrains Mono,monospace">${Math.round(ps)}°</text>`;
   wheel.innerHTML = g;
 };
 
@@ -234,7 +234,7 @@ const sim = {
     const cx = 8 + v * (PV.w - 16), cy = PV.h - 6 - (Math.min(p, 80) / 80) * (PV.h - 12);
     pv.innerHTML = `<rect x="0" y="0" width="${PV.w}" height="${PV.h}" fill="${C.chart}" stroke="${C.line}"/><path d="${S.pvPath}Z" fill="${C.or}" fill-opacity=".1" stroke="${C.or}" stroke-width="1.5"/>`
       + `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="4" fill="${STROKES[k].c}" stroke="#fff" stroke-width="1.5"/>`
-      + `<text x="${PV.w - 6}" y="${PV.h - 9}" text-anchor="end" font-size="9" fill="#626773" font-family="Be Vietnam Pro,sans-serif">V → Vtp</text><text x="${PV.w - 6}" y="13" text-anchor="end" font-size="9" fill="#626773" font-family="Be Vietnam Pro,sans-serif">p (bar) · cao nhất ${vn(Math.max(...S.pvPts.map((q) => q[1])), 0)} bar</text>`;
+      + `<text x="${PV.w - 6}" y="${PV.h - 20}" text-anchor="end" font-size="10.5" fill="#626773" font-family="Be Vietnam Pro,sans-serif">V → Vtp</text><text x="${PV.w - 6}" y="13" text-anchor="end" font-size="10.5" fill="#626773" font-family="Be Vietnam Pro,sans-serif">p (bar) · cao nhất ${vn(Math.max(...S.pvPts.map((q) => q[1])), 0)} bar</text>`;
     const rowsPV = [['W = ∮ p·dV (một chu trình)', `${vn(S.W, 0)} J`], ['p TB chỉ thị = W / Vct', `${vn(S.imep, 1)} bar`], ['Công suất chỉ thị W·n / 120', S.stalled ? '0 kW' : `${vn((S.W * S.rpm) / 120 / 1000, 2)} kW`], ['Hiệu suất lí thuyết (Otto)', `${vn(otto(S.eps) * 100, 1)} %`]];
     rowsPV.forEach(([a, b], i) => { pvRows[i][0].textContent = a; pvRows[i][1].textContent = b; });
     // nút

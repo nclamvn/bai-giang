@@ -188,7 +188,7 @@ const sim = {
     slR.set((S.rho - RHO[0]) / (RHO[1] - RHO[0]), `ρ = ${vn(S.rho, 2)}`); slK.set((S.K - KK[0]) / (KK[1] - KK[0]), `${S.K} gói`); slL.set((S.L - LL[0]) / (LL[1] - LL[0]), `${vn(S.L, 0)} byte`);
     t01.innerHTML = `Tải đưa vào ρ = λ/μ có thể vượt 1: nguồn không biết cổng đang đầy. Bộ đệm K gói gồm cả gói đang phát. Gói ${vn(S.L, 0)} byte trên 100 Mbit/s: μ = ${vn(kq.mu, 0)} gói/s.`;
     // bảng 02
-    qChart.lim.max = Math.max(4, S.K); qChart.set([V.hist], {extra: (Y, w) => `<line x1="0" x2="${w}" y1="${Y(S.K)}" y2="${Y(S.K)}" stroke="${MAU.bad}" stroke-dasharray="3 3"/><text x="${w}" y="${Y(S.K) - 3}" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${MAU.bad}">K = ${S.K}</text>`});
+    qChart.lim.max = Math.max(4, S.K); qChart.set([V.hist], {extra: (Y, w) => `<line x1="0" x2="${w}" y1="${Y(S.K)}" y2="${Y(S.K)}" stroke="${MAU.bad}" stroke-dasharray="3 3"/><text x="${w}" y="${Y(S.K) - 3}" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${MAU.bad}">K = ${S.K}</text>`});
     t02.innerHTML = `Số gói trong ống theo thời gian (cảnh chạy chậm, μ = ${vn(MUV, 1)} gói/s ở 1×). ${S.rho > 1 ? 'Tải vượt 1: hàng chạm vạch K và ở lì đó, gói đến sau bị bỏ.' : 'Hàng dao động ngẫu nhiên; mỗi lần chạm vạch K là có gói bị bỏ.'}`;
     // bảng 03
     const pm = kq.s.mat, pt = kq.lt.P, pv = V.ntx ? F.tiLeMat(V.ntx, V.ntx - V.nmat) : 0, pmx = Math.max(0.05, pm, pt) * 1.15;
@@ -198,7 +198,7 @@ const sim = {
     // bảng 04: dải trễ của 60 gói liên tiếp từ mô phỏng thật, đường ngang là trễ trung bình
     const mau = kq.s.mau.slice(0, 60), mx = Math.max(...mau), W = 272; let g = `<rect x="0" y="0" width="${W}" height="80" fill="${C.chart}" stroke="${C.line}"/>`;
     mau.forEach((v, i) => { const x = 4 + (i / 59) * (W - 8), y = 76 - (v / mx) * 70; if (i) { const v0 = mau[i - 1], y0 = 76 - (v0 / mx) * 70; g += `<line x1="${x - (W - 8) / 59}" y1="${y0}" x2="${x}" y2="${y}" stroke="${C.line}" stroke-width=".8"/>`; } g += `<circle cx="${x}" cy="${y}" r="2.2" fill="${MAU.prop}"/>`; });
-    const yW = 76 - (kq.s.W / mx) * 70; g += `<line x1="0" x2="${W}" y1="${yW}" y2="${yW}" stroke="${C.ink}" stroke-dasharray="3 3"/><text x="${W - 2}" y="${yW - 3}" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${C.ink}">TB ${F.fmtThoiGian(kq.s.W, 2)}</text>`;
+    const yW = 76 - (kq.s.W / mx) * 70; g += `<line x1="0" x2="${W}" y1="${yW}" y2="${yW}" stroke="${C.ink}" stroke-dasharray="3 3"/><text x="${W - 2}" y="${yW - 3}" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">TB ${F.fmtThoiGian(kq.s.W, 2)}</text>`;
     jSvg.innerHTML = g;
     jBig.textContent = F.fmtThoiGian(kq.s.jitter, 2);
     t04.innerHTML = `J = trung bình |D<sub>i</sub> − D<sub>i−1</sub>| trên ${kq.s.n.toLocaleString('vi-VN')} gói liên tiếp (1.14). Trễ trung bình ${F.fmtThoiGian(kq.s.W, 2)} (M/M/1/K: ${F.fmtThoiGian(kq.lt.W, 2)}). Jitter tăng theo tải dù trễ trung bình còn trong ngưỡng: thoại và video hội nghị nhạy với cái này.`;
@@ -207,7 +207,7 @@ const sim = {
     tgBars[0].set(kq.T / CW, F.fmtBps(kq.T, 1), MAU.prop); tgBars[1].set(kq.G / CW, F.fmtBps(kq.G, 1), MAU.ok);
     t05.innerHTML = `Gói ${vn(F.byte(S.L), 0)} bit, BER ${fmtE(S.ber)}: P<sub>gói lỗi</sub> = 1 − (1 − P<sub>b</sub>)<sup>L</sup> = ${vn(kq.pp * 100, kq.pp < 0.01 ? 3 : 1)} % (1.16). G trừ mất gói, gói lỗi và ${H_HDR} byte tiêu đề IPv4 + TCP mỗi gói (1.18). Liên kết bận không có nghĩa ứng dụng nhận đủ (câu hỏi 5).`;
     // bảng 06
-    const iK = S.K - 2; kChart.set([kq.dd.map((x) => x.P / Math.max(1e-9, kq.dd[0].P)), kq.dd.map((x) => x.W / kq.Wmax)], {cursor: iK / 62, extra: (Y, w) => `<text x="0" y="-4" font-family="JetBrains Mono" font-size="9" fill="${MAU.bad}">mất gói</text><text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${MAU.prop}">thời gian trong hệ</text><text x="0" y="68" font-family="JetBrains Mono" font-size="9" fill="#626773">K 2</text><text x="${w}" y="68" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">64</text>`});
+    const iK = S.K - 2; kChart.set([kq.dd.map((x) => x.P / Math.max(1e-9, kq.dd[0].P)), kq.dd.map((x) => x.W / kq.Wmax)], {cursor: iK / 62, extra: (Y, w) => `<text x="0" y="-4" font-family="JetBrains Mono" font-size="10.5" fill="${MAU.bad}">mất gói</text><text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${MAU.prop}">thời gian trong hệ</text><text x="0" y="68" font-family="JetBrains Mono" font-size="10.5" fill="#626773">K 2</text><text x="${w}" y="68" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="#626773">64</text>`});
     t06.innerHTML = `Ở K = ${S.K}: mất ${vn(kq.dd[iK].P * 100, 2)} %, trễ ${F.fmtThoiGian(kq.dd[iK].W, 2)}. ${S.rho > 1 ? 'Quá tải thì bộ đệm lớn chỉ làm gói chờ lâu hơn mà vẫn mất gần như cũ.' : 'Bộ đệm lớn giảm mất gói nhưng gói được nhận chờ lâu hơn.'}`;
     // chế độ
     const day = V.q.length >= S.K;

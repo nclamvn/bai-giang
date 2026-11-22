@@ -165,13 +165,13 @@ const say = (txt) => { if (S.log[0] === txt) return; S.log.unshift(txt); S.log.l
 ui.header({code: 'VL-M', kicker: 'MÁY ĐI BỘ 30 M · BỐN CHÂN, HAI TAY · XI LANH THUỶ LỰC Ở MỌI KHỚP · MÔ HÌNH ANYMACHINE (MIT)', title: 'Máy đi bộ 30 m', sub: 'TỐC ĐỘ · TÍNH TƯƠNG ĐỐI · TRỌNG TÂM · MẶT CHÂN ĐẾ · MÔ MEN', hub: HUB_URL,
   right: [['30 m', 'CHIỀU CAO'], ['6,0 m', 'BƯỚC CHÂN'], [`${vn(V, 2)} m/s`, 'TỐC ĐỘ'], ['104', 'XƯƠNG']]});
 const BEATS = ['Toàn thân', 'Chân', 'Dáng đi', 'Mấy chân', 'Chân đế', 'Lắc thân', 'Hai chân', 'Tương đối', 'Tốc độ', 'Trượt', 'Mô men', 'p·A', 'Kiểm máy'];
-const beatEl = ui.add(`<div style="position:absolute;left:348px;top:84px;width:904px;display:flex;gap:3px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;min-width:0;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 10.5px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="font:500 9.5px 'JetBrains Mono',monospace;color:${C.faint};margin-right:4px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
+const beatEl = ui.add(`<div style="position:absolute;left:348px;top:84px;width:904px;display:flex;gap:3px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;min-width:0;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 10.5px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="font:500 10.5px 'JetBrains Mono',monospace;color:${C.faint};margin-right:4px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
 const setBeat = (i) => beatEl.querySelectorAll('[data-b]').forEach((n) => { const on = +n.dataset.b === i; n.style.borderBottomColor = on ? C.or : C.line; n.style.color = on ? C.ink : C.mute; });
 
 ui.panel(28, 112, 300, 236, 'DÁNG ĐI BỐN NHỊP', '01');
 const gaitSvg = ui.svg(42, 146, 272, 62);
 const gRows = ['THỨ TỰ CHÂN', 'TRÊN KHÔNG', 'SỐ CHÂN CHẠM ĐẤT', 'TRUNG BÌNH'].map((n, k) => [ui.text(42, 222 + k * 20, n), ui.text(186, 220 + k * 20, '', 'v', 'width:128px;text-align:right')]);
-const gTxt = ui.text(42, 304, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10px;white-space:normal;width:272px;line-height:1.45');
+const gTxt = ui.text(42, 304, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(28, 360, 300, 228, 'ĐIỀU KHIỂN', '02');
 ui.buttons([['walk', 'ĐI'], ['reach', 'CÚI VỚI TAY'], ['head', 'QUAY ĐẦU'], ['pause', 'DỪNG'], ['sway', 'LẮC THÂN'], ['ground', 'HỆ ĐẤT']], 42, 394, 272);
 const SL = [['tt', 'THỜI ĐIỂM'], ['m', 'KHỐI LƯỢNG'], ['p', 'ÁP SUẤT DẦU']];
@@ -183,13 +183,13 @@ const tRows = ['CHÂN ĐỠ', 'BIÊN', 'TRỌNG TÂM'].map((n, k) => [ui.text(19
 
 ui.panel(1272, 112, 300, 210, 'CHUYỂN ĐỘNG · HAI HỆ QUY CHIẾU', '04');
 const vRows = ['HỆ QUY CHIẾU', 'THÂN SO VỚI ĐẤT', 'CHÂN CHỐNG SO VỚI THÂN', 'CHÂN CHỐNG SO VỚI ĐẤT', 'QUÃNG ĐƯỜNG / CHU KÌ'].map((n, k) => [ui.text(1286, 146 + k * 20, n), ui.text(1430, 144 + k * 20, '', 'v', 'width:128px;text-align:right')]);
-const vTxt = ui.text(1286, 252, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10px;white-space:normal;width:272px;line-height:1.45');
+const vTxt = ui.text(1286, 252, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(1272, 334, 300, 246, 'KHỚP GỐI TRƯỚC TRÁI · M = F·d', '05');
 const kRows = ['CHÂN', 'LỰC ĐỠ N = mg / n', 'TAY ĐÒN CỦA N (r)', 'MÔ MEN M = N·r', 'TAY ĐÒN XI LANH (d)', 'LỰC XI LANH F = M / d', 'ĐƯỜNG KÍNH PÍT TÔNG', 'ĐƯỜNG KÍNH VẼ TRÊN MÔ HÌNH'].map((n, k) => [ui.text(1286, 368 + k * 20, n), ui.text(1440, 366 + k * 20, '', 'v', 'width:118px;text-align:right')]);
-const kTxt = ui.text(1286, 532, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10px;white-space:normal;width:272px;line-height:1.45');
+const kTxt = ui.text(1286, 532, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(1272, 592, 300, 174, 'KIỂM MÁY · NHƯ ANYMACHINE', '06');
 const chkSvg = ui.svg(1286, 624, 272, 84);
-const chkTxt = ui.text(1286, 714, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10px;white-space:normal;width:272px;line-height:1.45');
+const chkTxt = ui.text(1286, 714, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.buttons([['v_hero', 'TOÀN CẢNH'], ['v_side', 'BÊN'], ['v_top', 'TRÊN'], ['v_knee', 'KHỚP GỐI'], ['v_man', 'NGƯỜI 1,75 M'], ['labels', 'NHÃN']], 360, 120, 640);
 ui.text(362, 664, 'TRẠNG THÁI');
 const modeEl = ui.add(`<div style="position:absolute;left:360px;top:678px;font:700 40px/1.1 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:-.8px;color:${C.ink}"></div>`);
@@ -257,7 +257,7 @@ const sim = {
     // bảng 01: biểu đồ bước 4 chân, vạch = thời điểm trong chu kì
     const ph = S.act === 'walk' ? S.tt / DUR.walk : null;
     { let s = ''; const W = 236, ord = ['RL', 'FL', 'RR', 'FR'], vnL = {RL: 'SAU T', FL: 'TRƯỚC T', RR: 'SAU P', FR: 'TRƯỚC P'};
-      ord.forEach((L, i) => { const y = i * 15; s += `<text x="0" y="${y + 10}" font-family="JetBrains Mono" font-size="8" fill="${C.mute}">${vnL[L]}</text><rect x="36" y="${y}" width="${W}" height="11" fill="${C.ink}"/>`;
+      ord.forEach((L, i) => { const y = i * 15; s += `<text x="0" y="${y + 10}" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">${vnL[L]}</text><rect x="36" y="${y}" width="${W}" height="11" fill="${C.ink}"/>`;
         // khoảng trên không lấy từ chính lấy mẫu (chân không chạm đất)
         let k0 = null; for (let k = 0; k <= N; k++) { const air = k < N && !PRE[k].on.includes(L); if (air && k0 === null) k0 = k; if (!air && k0 !== null) { s += `<rect x="${36 + (k0 / N) * W}" y="${y}" width="${((k - k0) / N) * W}" height="11" fill="#d5d8de"/>`; k0 = null; } } });
       if (ph !== null) s += `<line x1="${36 + ph * W}" x2="${36 + ph * W}" y1="0" y2="60" stroke="${C.or}" stroke-width="2"/>`;
@@ -273,7 +273,7 @@ const sim = {
       for (const L of LEGS) { const q = P2(c.feet[L]); s += `<circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="4" fill="${c.on.includes(L) ? C.ink : '#fff'}" stroke="${C.ink}" stroke-width="1.2"/>`; }
       const q1 = P2([c.g.x, c.g.z]); s += `<circle cx="${q1[0].toFixed(1)}" cy="${q1[1].toFixed(1)}" r="4.5" fill="#CC2A53"/>`;
       if (!S.sway) { const q2 = P2([c.g2.x, c.g2.z]); s += `<circle cx="${q2[0].toFixed(1)}" cy="${q2[1].toFixed(1)}" r="4.5" fill="none" stroke="#76767A" stroke-width="1.6"/>`; }
-      s += `<text x="4" y="11" font-family="JetBrains Mono" font-size="8" fill="${C.mute}">↑ ĐI</text>`;
+      s += `<text x="4" y="11" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">↑ ĐI</text>`;
       topSvg.innerHTML = s; }
     tRows[0][1].textContent = `${nOn} · ${c.on.map((L) => ({FL: 'TT', FR: 'TP', RL: 'ST', RR: 'SP'}[L])).join(' ')}`;
     tRows[1][1].textContent = nOn >= 3 ? `${mm >= 0 ? 'trong' : 'ngoài'} ${vn(Math.abs(mm), 2)} m` : `lệch ${vn(-mm, 2)} m`;
@@ -292,9 +292,9 @@ const sim = {
     // bảng 06: chiều dài xi lanh trong cửa sổ [max(Lc, Lr), Lc + Lr]; trượt chân
     { let s = ''; const rows = [['HÁNG', AM.act.hip, fl.hip.L], ['GỐI', AM.act.knee, fl.knee.L], ['CỔ CHÂN', AM.act.ankle, fl.ankle.L], ['KHUỶU', AM.act.elbow, c.elbow]];
       rows.forEach(([n, a, L], i) => { const lo = Math.max(a.Lc, a.Lr), hi = a.Lc + a.Lr, y = i * 20, X = (v) => 70 + ((v - 1) / 4.5) * 200, ok = L >= lo - 0.01 && L <= hi + 0.01;
-        s += `<text x="0" y="${y + 10}" font-family="JetBrains Mono" font-size="8.5" fill="${C.mute}">${n}</text><rect x="${X(lo)}" y="${y + 3}" width="${X(hi) - X(lo)}" height="8" fill="#e9ebef"/>`;
+        s += `<text x="0" y="${y + 10}" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">${n}</text><rect x="${X(lo)}" y="${y + 3}" width="${X(hi) - X(lo)}" height="8" fill="#e9ebef"/>`;
         s += `<rect x="${X(a.s[0])}" y="${y + 3}" width="${X(a.s[1]) - X(a.s[0])}" height="8" fill="#d5d8de"/><line x1="${X(L)}" x2="${X(L)}" y1="${y}" y2="${y + 14}" stroke="${ok ? C.ink : '#c4271c'}" stroke-width="2.5"/>`;
-        s += `<text x="272" y="${y + 10}" text-anchor="end" font-family="JetBrains Mono" font-size="8.5" fill="${C.ink}">${vn(L, 2)}</text>`; });
+        s += `<text x="272" y="${y + 10}" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${vn(L, 2)}</text>`; });
       chkSvg.innerHTML = s; }
     chkTxt.innerHTML = `Vạch: chiều dài xi lanh lúc này (m), nền sẫm: hành trình lấy mẫu, nền nhạt: cần còn trong ống. Chân chống trượt trên đất nhiều nhất <b>${vn(SLIPMAX * 100, 0)} cm</b> mỗi pha (${vn((SLIPMAX / AM.walk.stride) * 100, 1)} % quãng 6,0 m).`;
     for (const k of ['walk', 'reach', 'head', 'pause', 'sway', 'ground', 'labels']) ui.setOn(k, sim.isOn(k));

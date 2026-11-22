@@ -31,7 +31,7 @@ from pathlib import Path
 from playwright.async_api import async_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
-RONG = [(320, 640), (390, 844), (768, 1024), (1024, 768), (1440, 900)]
+RONG = [(320, 640), (360, 800), (390, 844), (768, 1024), (1024, 768), (1440, 900)]   # 360 px: bề rộng phổ biến nhất của điện thoại Android
 # (tên, đường dẫn, họ). Họ 'tinh': trang tĩnh. Họ 'bai': bài 3D, chờ lâu hơn. Họ 'trong': giao diện bên trong bài, đo ở ba bề rộng (thêm --du để đo đủ năm).
 TRANG = [
     ('home', '', 'tinh'), ('hub-tkm', 'thiet-ke-mang/', 'tinh'), ('hub-robo', 'robotics/', 'tinh'), ('hub-ls10', 'lich-su-10/', 'tinh'),
@@ -42,7 +42,32 @@ TRANG = [
     ('te-bao', 'te-bao/?doc=0', 'trong'), ('ty-the', 'ty-the/?doc=0', 'trong'), ('co-loa', 'lich-su-10/co-loa/?doc=0', 'trong'), ('neuron', 'than-kinh/?doc=0', 'trong'),
     ('thu-vien-bai', 'thu-vien/impulse-step.html?doc=0', 'trong'), ('kit-len-lop', 'thiet-ke-mang/goi-tin/?doc=0', 'trong'), ('co-the', 'co-the-nguoi/', 'trong'), ('dieu-khien', 'dieu-khien/', 'tinh'),
 ]
-BO_TRONG = (320, 1024)   # họ 'trong' (giao diện bên trong bài) chỉ đo ở 390, 768, 1440 để CI không dài thêm quá
+BO_TRONG = (320, 360, 1024)   # họ 'trong' (giao diện bên trong bài) chỉ đo ở 390, 768, 1440 để CI không dài thêm quá
+
+def bam(*chon):
+    """JS bấm phần tử đang hiện đầu tiên khớp một trong các bộ chọn; mục dạng 'chữ:…' khớp nút theo chữ. Trả về false nếu không thấy gì để bấm."""
+    return """(() => { document.querySelectorAll('dialog[open]').forEach((d) => d.close());   /* hộp thoại của kịch bản trước */
+      const hien = (x) => { const r = x.getBoundingClientRect(); return r.width > 4 && r.height > 4 && getComputedStyle(x).visibility !== 'hidden'; };
+      for (const s of %s) { const e = s.startsWith('chữ:') ? [...document.querySelectorAll('button,[role=button],a')].find((x) => hien(x) && [(x.textContent || '').trim(), x.getAttribute('aria-label') || ''].some((t) => t.startsWith(s.slice(4))))
+        : [...document.querySelectorAll(s)].find(hien); if (e) { e.click(); return true; } } return false; })()""" % json.dumps(list(chon), ensure_ascii=False)
+
+def bam_sau(mo, *chon):
+    """Như bam(), nhưng nếu chưa thấy gì để bấm thì bấm `mo` trước (mở bảng đang thu gọn), chờ 0,8 giây rồi tìm lại."""
+    return "(async () => { if (%s) return true; %s; await new Promise((r) => setTimeout(r, 800)); return %s; })()" % (bam(*chon), bam(mo), bam(*chon))
+
+BUOC = bam('.bgs-tools .bgs-prog', '.bgs .bgs-b.nx')   # vào chế độ học theo bước: nút trên thanh đầu (máy bàn) hoặc nút "Bước sau" ở thanh dưới (điện thoại)
+THEM = bam('.bgs-tools .bgs-b.ic')                      # mở trình đơn "Thêm" của vỏ bài
+# Trạng thái sau khi bấm, đo thêm ngay trên trang đang mở. Thứ tự có nghĩa: hộp thoại và trình đơn che trang để sau cùng.
+KICH_BAN = {
+    'te-bao': [('chon', bam_sau('chữ:Thông tin', '.legend li button')), ('buoc', BUOC), ('them', THEM)],
+    'ty-the': [('buoc', BUOC), ('them', THEM)],
+    'co-loa': [('ghim', bam('#pins .pin')), ('hop', bam('.foot .btn')), ('buoc', BUOC)],
+    'neuron': [('pha', bam('#bBk')), ('buoc', BUOC)],
+    'thu-vien-bai': [('ketluan', bam('.acts .btn.pri')), ('dieukhien', bam('chữ:Điều khiển'))],
+    'kit-len-lop': [('bangso', bam('chữ:Bảng số')), ('buoc', BUOC)],
+    'bai-kit': [('buoc3', "(() => { const n = document.querySelector('.dk-nav [data-a=next]'); if (!n) return false; n.click(); n.click(); return true; })()"), ('them', THEM)],
+    'bai-khung': [('buoc', bam('chữ:Bước sau'))],
+}
 CONG = ('R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7')   # luật làm cổng; luật ngoài danh sách chỉ báo cáo
 
 JS = r"""
@@ -58,7 +83,10 @@ JS = r"""
   const sw = document.documentElement.scrollWidth;
   if (sw > vw + 1) { const tr = all.filter((e) => { const r = e.getBoundingClientRect(); return r.right > vw + 1 && r.width < vw * 1.5 && getComputedStyle(e).position !== 'fixed'; }).sort((a, b) => b.getBoundingClientRect().right - a.getBoundingClientRect().right).slice(0, 2); out.R1.push('trang rộng ' + sw + ' px trên khung ' + vw + ': ' + tr.map(ten).join(' | ')); }
   // phần tử bấm được
-  const bam = all.filter((e) => e.matches('a[href],button,input:not([type=hidden]),select,textarea,summary,[role=button],[role=tab]') && !e.disabled);
+  // phần tử bị khung cuộn (overflow) của tổ tiên cắt mất tâm thì không bấm được ở trạng thái này: bỏ qua
+  const bi_cat = (e) => { const r = e.getBoundingClientRect(), cx = (r.left + r.right) / 2, cy = (r.top + r.bottom) / 2;
+    for (let p = e.parentElement; p && p !== document.body; p = p.parentElement) { const c = getComputedStyle(p); if (/(auto|scroll|hidden|clip)/.test(c.overflowX + c.overflowY)) { const q = p.getBoundingClientRect(); if (cx < q.left || cx > q.right || cy < q.top || cy > q.bottom) return true; } } return false; };
+  const bam = all.filter((e) => e.matches('a[href],button,input:not([type=hidden]),select,textarea,summary,[role=button],[role=tab]') && !e.disabled && !bi_cat(e));
   const trong_cau = (e) => { if (e.tagName !== 'A') return false; const d = getComputedStyle(e).display; if (d === 'inline') return true;
     // dấu chú thích kiểu inline-block nằm giữa câu văn cũng là liên kết dạng chữ
     return d === 'inline-block' && [...e.parentElement.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim().length > 3); };
@@ -66,17 +94,20 @@ JS = r"""
       // nhãn bọc ô chọn, hoặc phần tử cha là vùng bấm thật đủ lớn thì tính theo cha
       const cha = e.closest('label') || (e.parentElement && e.parentElement.matches('a,button,label,summary') ? e.parentElement : null); const q = cha ? cha.getBoundingClientRect() : null;
       // nút của bảng bài kit vẽ theo đơn vị thiết kế (nút trên cảnh ở chế độ lên lớp, nút làm nhãn hàng trong thẻ): chỉ báo cáo, như R3k
-      if (!(q && q.width >= 43.5 && q.height >= 43.5)) out[e.matches('#app .bt,.bt.gi') ? 'R2k' : 'R2'].push(ten(e) + ' ' + Math.round(r.width) + '×' + Math.round(r.height)); } }
+      if (!(q && q.width >= 43.5 && q.height >= 43.5)) out[e.matches('#app .bt') ? 'R2k' : 'R2'].push(ten(e) + ' ' + Math.round(r.width) + '×' + Math.round(r.height)); } }
   // chữ: phần tử có nút văn bản trực tiếp
   const co_chu = all.filter((e) => [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim().length > 1));
-  const he_so = (e) => { const r = e.getBoundingClientRect(); return e.offsetWidth ? r.width / e.offsetWidth : 1; };
+  // hệ số co thật của chữ: phần tử HTML so khung hiển thị với khung bố cục; phần tử SVG (không có offsetWidth) lấy từ ma trận ra màn hình,
+  // đã gồm viewBox và mọi phép co của tổ tiên
+  const he_so = (e) => { if (e.offsetWidth) { let q = e; while (q.offsetWidth < 80 && q.parentElement && q.parentElement.offsetWidth) q = q.parentElement;   /* offsetWidth làm tròn tới px: phần tử hẹp cho tỉ số lệch vài phần trăm, nên lấy ở tổ tiên đủ rộng */
+      return q.getBoundingClientRect().width / q.offsetWidth; } if (e.getScreenCTM) { const m = e.getScreenCTM(); if (m) return Math.sqrt(Math.abs(m.a * m.d - m.b * m.c)) || 1; } return 1; };
   const mau = (s) => { const m = s.match(/rgba?\(([^)]+)\)/); if (!m) return null; const p = m[1].split(/[,\s\/]+/).filter(Boolean).map(Number); return {r: p[0], g: p[1], b: p[2], a: p.length > 3 ? p[3] : 1}; };
   const sang = (c) => { const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }; return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b); };
   const nen = (e) => { let lop = []; for (let p = e; p; p = p.parentElement) { const c = getComputedStyle(p); if (c.backgroundImage && c.backgroundImage !== 'none') return null; if (+c.opacity < 1 && p !== e) return null; const m = mau(c.backgroundColor); if (m && m.a > 0) { lop.push(m); if (m.a >= 0.999) break; } if (p.tagName === 'BODY' || p.tagName === 'HTML') { if (!lop.length || lop[lop.length - 1].a < 0.999) lop.push({r: 255, g: 255, b: 255, a: 1}); break; } if (/(fixed|absolute|sticky)/.test(c.position) && !(m && m.a >= 0.999)) return null; }
     let o = lop.pop(); while (lop.length) { const t = lop.pop(); o = {r: t.r * t.a + o.r * (1 - t.a), g: t.g * t.a + o.g * (1 - t.a), b: t.b * t.a + o.b * (1 - t.a), a: 1}; } return o; };
   for (const e of co_chu) { const c = getComputedStyle(e), fs = parseFloat(c.fontSize), th = fs * he_so(e);
     { const q = e.getBoundingClientRect(); if (q.width <= 2 || q.height <= 2 || c.clip !== 'auto' || c.clipPath !== 'none') continue; }  // phần chỉ dành cho trình đọc màn hình
-    if (th < 11.5 && e.tagName !== 'SUB' && e.tagName !== 'SUP') (e.closest('.dk-card .in,#app,.ui') ? out.R3k : out.R3).push(ten(e) + ' ' + th.toFixed(1) + ' px');
+    if (th < 11.5 && e.tagName !== 'SUB' && e.tagName !== 'SUP') (e.closest('.dk-card .in,#app,.ui') && (W < 360 || !document.body.classList.contains('doc')) ? out.R3k : out.R3).push(ten(e) + ' ' + th.toFixed(1) + ' px');
     { const r = e.getBoundingClientRect(); let cat = 0, cham = false;
       if (/(hidden|clip)/.test(c.overflowX) && e.scrollWidth > e.clientWidth + 1) { cat = e.scrollWidth - e.clientWidth; cham = c.textOverflow === 'ellipsis' && !/flex|grid/.test(c.display); }
       else for (let p = e.parentElement, i = 0; p && i < 4; p = p.parentElement, i++) { const pc = getComputedStyle(p); if (/(hidden|clip)/.test(pc.overflowX)) { const q = p.getBoundingClientRect(); const d = Math.max(r.right - q.right, q.left - r.left); if (d > 2) { cat = Math.round(d); cham = pc.textOverflow === 'ellipsis' && !/flex|grid/.test(pc.display) && getComputedStyle(e).display === 'inline'; } break; } if (/(auto|scroll)/.test(pc.overflowX)) break; }
@@ -85,11 +116,16 @@ JS = r"""
     if (bg && fg && fg.a >= 0.999 && !c.backgroundClip.includes('text') && c.webkitTextFillColor !== 'transparent') { const a = sang(fg), b = sang(bg), ti = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05); const lon = fs >= 24 || (fs >= 18.66 && +c.fontWeight >= 700);
       if (ti < (lon ? 3 : 4.5) - 0.01) out.R6.push(ten(e) + ' ' + ti.toFixed(2) + ':1 (' + c.color.replace(/\s/g, '') + ' trên rgb(' + Math.round(bg.r) + ',' + Math.round(bg.g) + ',' + Math.round(bg.b) + '))'); } }
   // R5: hai phần tử bấm được chồng lên nhau (không phải cha con)
-  const rs = bam.map((e) => [e, e.getBoundingClientRect()]);
+  // khung nhìn thấy được: khung của phần tử cắt theo mọi khung cuộn của tổ tiên (phần bị cắt không bấm được)
+  const thay = (e) => { const r = e.getBoundingClientRect(); let l = r.left, t = r.top, rr = r.right, b = r.bottom;
+    for (let p = e.parentElement; p && p !== document.body; p = p.parentElement) { const c = getComputedStyle(p); if (/(auto|scroll|hidden|clip)/.test(c.overflowX + c.overflowY)) { const q = p.getBoundingClientRect(); l = Math.max(l, q.left); t = Math.max(t, q.top); rr = Math.min(rr, q.right); b = Math.min(b, q.bottom); } }
+    return {left: l, top: t, right: rr, bottom: b, width: Math.max(0, rr - l), height: Math.max(0, b - t)}; };
+  const rs = bam.map((e) => [e, thay(e)]);
   for (let i = 0; i < rs.length; i++) for (let j = i + 1; j < rs.length; j++) { const [a, ra] = rs[i], [b, rb] = rs[j]; if (a.contains(b) || b.contains(a)) continue;
     const w = Math.min(ra.right, rb.right) - Math.max(ra.left, rb.left), h = Math.min(ra.bottom, rb.bottom) - Math.max(ra.top, rb.top);
     if (a.getClientRects().length > 1 || b.getClientRects().length > 1) continue;
-    if (a.matches('.pin,[class*=marker],.hs') && b.matches('.pin,[class*=marker],.hs')) continue;  // điểm đánh dấu trên cảnh 3D: chồng nhau theo góc nhìn, không phải lỗi bố cục  // liên kết trong dòng bị ngắt: khung bao không phải vùng bấm thật
+    if (a.matches('.pin,[class*=marker],.hs') && b.matches('.pin,[class*=marker],.hs')) continue;
+    { const lop = (e) => !!e.closest('dialog[open],[aria-modal=true]'); if (lop(a) !== lop(b)) continue; }   // hộp thoại phủ lên trang: phần bên dưới không bấm được lúc đó  // điểm đánh dấu trên cảnh 3D: chồng nhau theo góc nhìn, không phải lỗi bố cục  // liên kết trong dòng bị ngắt: khung bao không phải vùng bấm thật
     if (w > 4 && h > 4 && w * h > 0.25 * Math.min(ra.width * ra.height, rb.width * rb.height)) { const fa = getComputedStyle(a).position === 'fixed' || a.closest('[style*="position:fixed"],.bgs,.top,header'), fb = getComputedStyle(b).position === 'fixed' || b.closest('[style*="position:fixed"],.bgs,.top,header'); if (!!fa !== !!fb) continue; out.R5.push(ten(a) + ' ⨯ ' + ten(b)); } }
   // R7: núm của thanh trượt trong thẻ bài kit phải nằm trên thanh (vùng bấm .hit) và trong thẻ
   for (const h of document.querySelectorAll('.dk-card .hit')) { const hr = h.getBoundingClientRect(), card = h.closest('.dk-card'), cr = card.getBoundingClientRect();
@@ -152,14 +188,23 @@ async def main():
                     r = {'LOI': [str(e)[:120]]}
                 kq[f'{ten}@{w}'] = r
                 for k, v in r.items(): tong[k] = tong.get(k, 0) + len(v)
+                # các trạng thái sau khi bấm: bấm ngay trên trang đang mở (không tải lại), chờ giao diện yên rồi đo lại
+                for nhan, js in KICH_BAN.get(ten, []) if 'LOI' not in r else []:
+                    try:
+                        co = await pg.evaluate(js); await pg.wait_for_timeout(1300)
+                        r2 = await pg.evaluate(JS, [w < 1100, w]) if co else {'LOI': ['kịch bản không tìm thấy nút để bấm']}
+                    except Exception as e:
+                        r2 = {'LOI': [str(e)[:120]]}
+                    kq[f'{ten}+{nhan}@{w}'] = r2
+                    for k, v in r2.items(): tong[k] = tong.get(k, 0) + len(v)
             await ctx.close()
         await b.close()
     (ROOT / 'tests' / '.kiem_bo_cuc.json').write_text(json.dumps(kq, ensure_ascii=False, indent=1), encoding='utf-8')
-    print('trang'.ljust(13) + ''.join(str(w).rjust(22) for w, _ in RONG))
-    for ten, _, _ in trang:
-        o = ten.ljust(13)
+    print('trang'.ljust(18) + ''.join(str(w).rjust(17) for w, _ in RONG))
+    for ten in [x for t in trang for x in [t[0]] + [f'{t[0]}+{n}' for n, _ in KICH_BAN.get(t[0], [])]]:
+        o = ten.ljust(18)
         for w, _ in RONG:
-            r = kq[f'{ten}@{w}']; o += ('·' if r is None else ' '.join(f'{k}:{len(v)}' for k, v in r.items() if v) or 'đạt').rjust(22)
+            r = kq.get(f'{ten}@{w}'); o += ('·' if r is None else ' '.join(f'{k}:{len(v)}' for k, v in r.items() if v) or 'đạt').rjust(17)
         print(o)
     print('tổng: ' + ', '.join(f'{k} {v}' for k, v in tong.items()))
     xau = sum(v for k, v in tong.items() if k in CONG or k == 'LOI')

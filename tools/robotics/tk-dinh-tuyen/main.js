@@ -157,7 +157,7 @@ const sim = {
     t01.innerHTML = `C(P) = Σ c<sub>e</sub>. Mọi liên kết mặc định chi phí 10. Đổi metric là đổi hàm mục tiêu của giao thức định tuyến: một con số nhỏ có thể làm nhiều luồng đổi đường cùng lúc.`;
     // bảng 02
     { let g = ''; const ps = kq.p1.slice(0, 5); ps.forEach((p, i) => { const y = 14 + i * 19, ten = ['S1', ...p.map((h) => NODE[h.v].ten)].join(' → '), c = p.reduce((a, h) => a + S.cost[h.k], 0); g += `<text x="0" y="${y}" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${ten}</text><text x="272" y="${y}" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" font-weight="700" fill="${MAU.prop}">${c}</text>`; });
-      if (kq.p1.length > 5) g += `<text x="0" y="${14 + 5 * 19}" font-family="JetBrains Mono" font-size="9.5" fill="#626773">… và ${kq.p1.length - 5} đường nữa</text>`; pSvg.innerHTML = g; }
+      if (kq.p1.length > 5) g += `<text x="0" y="${14 + 5 * 19}" font-family="JetBrains Mono" font-size="10.5" fill="#626773">… và ${kq.p1.length - 5} đường nữa</text>`; pSvg.innerHTML = g; }
     t02.innerHTML = `${kq.p1.length} đường cùng chi phí nhỏ nhất ${kq.R.d[ID.S1]}. ${S.ecmp ? `ECMP dùng cả ${kq.p1.length}.` : 'Tắt ECMP: chỉ một đường được dùng, các đường còn lại ngồi không.'}`;
     // bảng 03
     slN.set(LOGC(S.n, 1, 256), vn(S.n, 0));

@@ -93,7 +93,7 @@ ui.header({code: 'QUADRUPED', kicker: 'ROBOT BỐN CHÂN · 12 ĐỘNG CƠ KHỚ
   right: [['9 kg', 'KHỐI LƯỢNG'], ['12', 'ĐỘNG CƠ KHỚP'], ['1 : 6', 'HỘP SỐ HÀNH TINH'], ['2,45 m/s', 'TỐC ĐỘ ĐÃ ĐẠT']]});
 // dải nhịp bài giảng
 const BEATS = ['Động cơ', 'Đứng', 'Hộp số', 'Đi bước', 'Đi kiệu', 'Một chân', 'Tách rời', 'Bật nhảy', 'Lắp ráp'];
-const beatEl = ui.add(`<div style="position:absolute;left:348px;top:84px;width:904px;display:flex;gap:4px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap"><span style="font:500 10px 'JetBrains Mono',monospace;color:${C.faint};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
+const beatEl = ui.add(`<div style="position:absolute;left:348px;top:84px;width:904px;display:flex;gap:4px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap"><span style="font:500 10.5px 'JetBrains Mono',monospace;color:${C.faint};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
 const setBeat = (i) => beatEl.querySelectorAll('[data-b]').forEach((n) => { const on = +n.dataset.b === i; n.style.borderBottomColor = on ? C.or : C.line; n.style.color = on ? C.ink : C.mute; });
 
 ui.panel(28, 112, 300, 256, 'DÁNG ĐI · BỐN CHÂN', '01');
@@ -106,7 +106,7 @@ const sl = Object.fromEntries(SL.map(([k, n], i) => [k, ui.slider(k, 42, 416 + i
 ui.panel(28, 570, 300, 196, '12 ĐỘNG CƠ KHỚP · MÔ MEN', '03');
 ui.text(42, 604, 'CHÂN'); JK.forEach((j, k) => ui.text(96 + k * 76, 604, j));
 const dialSvg = ui.svg(42, 620, 272, 106);
-const tqTxt = ui.text(42, 730, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const tqTxt = ui.text(42, 730, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 
 ui.panel(1272, 112, 300, 256, 'LỰC ĐỠ · CÂN BẰNG', '04');
 ui.text(1286, 148, 'TỔNG LỰC ĐỠ (N)'); const fTot = ui.text(1286, 161, '', 'mo', 'position:absolute;font-size:24px;font-weight:700');
@@ -116,11 +116,11 @@ const fChart = ui.chart(1286, 286, 272, 50, {min: 0, max: 320, colors: [C.or, C.
 ui.text(1286, 342, 'CAM: CẶP TRƯỚC · NÉT ĐỨT: CẶP SAU · 6 GIÂY');
 ui.panel(1272, 380, 300, 232, 'SÁU HỆ THỐNG · TỪNG BỘ PHẬN', '05');
 const SYS = [['dau', 'ĐẦU CẢM BIẾN'], ['abad', 'ĐỘNG CƠ KHỚP'], ['chanFR', 'CHÂN PHẢI TRƯỚC'], ['vo', 'VỎ VÀ KHUNG'], ['pin', 'PIN 24 V'], ['maytinh', 'MÁY TÍNH']];
-const sysRows = SYS.map(([id, n], i) => { ui.button('iso_' + id, 1286, 412 + i * 29, 136, n); return [ui.text(1428, 416 + i * 29, '', 'v', 'width:78px;text-align:right;font-size:11px'), ui.text(1512, 414 + i * 29, '', 'v', 'width:48px;text-align:center;font-size:10px;font-weight:600;border-radius:999px;padding:2px 0')]; });
+const sysRows = SYS.map(([id, n], i) => { ui.button('iso_' + id, 1286, 412 + i * 29, 136, n); return [ui.text(1428, 416 + i * 29, '', 'v', 'width:78px;text-align:right;font-size:11px'), ui.text(1512, 414 + i * 29, '', 'v', 'width:48px;text-align:center;font-size:10.5px;font-weight:600;border-radius:999px;padding:2px 0')]; });
 ui.text(1286, 590, 'BẤM ĐỂ CÔ LẬP MỘT HỆ VÀ SOI CHI TIẾT');
 ui.panel(1272, 624, 300, 142, 'HIỂN THỊ · NHẬT KÝ', '06');
 ui.buttons([['poly', 'ĐA GIÁC'], ['force', 'LỰC ĐỠ'], ['labels', 'NHÃN'], ['xray', 'X-QUANG'], ['explode', 'TÁCH RỜI']], 1286, 654, 272);
-const logRows = [0, 1, 2].map((k) => ui.text(1286, 716 + k * 13, '', 'v', 'font-size:10px;font-weight:500;width:272px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'));
+const logRows = [0, 1, 2].map((k) => ui.text(1286, 716 + k * 13, '', 'v', 'font-size:10.5px;font-weight:500;width:272px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'));
 ui.buttons([['v_hero', 'TOÀN CẢNH'], ['v_side', 'BÊN'], ['v_top', 'TRÊN'], ['v_leg', 'MỘT CHÂN']], 360, 120, 600);
 // chế độ vận hành: chữ lớn ở góc trái cảnh
 ui.text(362, 664, 'CHẾ ĐỘ VẬN HÀNH');
@@ -325,7 +325,7 @@ const sim = {
     let svg = '';
     LEGS.forEach((L, i) => {
       const y = i * 17 + 2;
-      svg += `<text x="0" y="${y + 10}" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">${L.name}</text><rect x="28" y="${y}" width="244" height="13" fill="${C.chart}" stroke="${C.line}"/>`;
+      svg += `<text x="0" y="${y + 10}" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">${L.name}</text><rect x="28" y="${y}" width="244" height="13" fill="${C.chart}" stroke="${C.line}"/>`;
       if (S.leap) { svg += `<rect x="29" y="${y + 1}" width="242" height="11" fill="${out[i].stance ? C.ink : '#c9ccd2'}"/>`; return; }
       const o = g.off[L.name], a0 = (((g.beta - o) % 1) + 1) % 1; // chân bước khi pha ∈ [β − off, 1 − off)
       svg += `<rect x="29" y="${y + 1}" width="242" height="11" fill="${C.ink}"/>`;
@@ -344,12 +344,12 @@ const sim = {
     const arc = (cx, cy, r, k) => { const a0 = 0.75 * Math.PI, a1 = a0 + 1.5 * Math.PI * Math.min(1, k), p = (a) => `${(cx + r * Math.cos(a)).toFixed(1)} ${(cy + r * Math.sin(a)).toFixed(1)}`; return `M${p(a0)} A${r} ${r} 0 ${a1 - a0 > Math.PI ? 1 : 0} 1 ${p(a1)}`; };
     out.forEach((o, i) => {
       const y = i * 26 + 12;
-      ds += `<text x="0" y="${y + 4}" font-family="JetBrains Mono" font-size="9.5" fill="${C.mute}">${o.L.name}</text>`;
+      ds += `<text x="0" y="${y + 4}" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">${o.L.name}</text>`;
       o.tau.forEach((t, j) => {
         const k = Math.abs(t) / TAU[j], cx = 66 + j * 76, hot = k > 0.8; loadSum += k; heat += motorOf(t, j).P;
         ds += `<path d="${arc(cx, y, 9, 1)}" fill="none" stroke="${C.track}" stroke-width="3" stroke-linecap="round"/>`;
         if (k > 0.004) ds += `<path d="${arc(cx, y, 9, k)}" fill="none" stroke="${hot ? '#c4271c' : C.ink}" stroke-width="3" stroke-linecap="round"/>`;
-        ds += `<text x="${cx + 15}" y="${y + 4}" font-family="JetBrains Mono" font-size="10" font-weight="600" fill="${hot ? '#c4271c' : C.ink}">${vn(Math.abs(t), 1)}</text>`;
+        ds += `<text x="${cx + 15}" y="${y + 4}" font-family="JetBrains Mono" font-size="10.5" font-weight="600" fill="${hot ? '#c4271c' : C.ink}">${vn(Math.abs(t), 1)}</text>`;
       });
     });
     dialSvg.innerHTML = ds;
@@ -372,7 +372,7 @@ const sim = {
       [S.leap ? 'bật nhảy' : GAITS[S.gait].vn.toLocaleLowerCase('vi'), S.nStance === 2 || S.leapPh === 'fly' ? pill('động', live) : S.ssm != null && S.ssm < 0 ? pill('lệch', warn) : pill('vững', ok)],
     ];
     sysRows.forEach(([a, b], i) => { a.textContent = rowsV[i][0]; b.innerHTML = rowsV[i][1]; ui.setOn('iso_' + SYS[i][0], S.iso === SYS[i][0]); });
-    logRows.forEach((r, i) => { const l = S.log[i]; r.innerHTML = l ? `<span style="color:${C.faint}">${l[0]}</span>&nbsp;&nbsp;${l[1]}` : ''; r.style.opacity = 1 - i * 0.25; });
+    logRows.forEach((r, i) => { const l = S.log[i]; r.innerHTML = l ? `<span style="color:${C.mute}">${l[0]}</span>&nbsp;&nbsp;${l[1]}` : ''; r.style.opacity = 1 - i * 0.25; });
     // chế độ vận hành
     const MODE = {crouch: 'Khom', push: 'Đẩy', fly: 'Bay', land: 'Tiếp đất', rest: 'Đứng lại'};
     modeEl.textContent = S.asm ? 'Lắp ráp' : S.ex > 0.5 ? 'Tách rời' : S.leap ? MODE[S.leapPh] : !S.run && S.gait !== 'stand' ? 'Dừng' : GAITS[S.gait].vn;

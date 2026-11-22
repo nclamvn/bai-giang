@@ -230,9 +230,9 @@ ui.panel(28, 112, 300, 206, 'BÁNH XE · ĐỘNG HỌC VI SAI', '01');
 const vTxt = ui.text(42, 146, '', 'mo', 'position:absolute;font-size:17px;font-weight:700');
 const wb = ['TRÁI', 'PHẢI'].map((n, i) => ui.bar(42, 180 + i * 22, 272, n, {lw: 40, vw: 100, center: true}));
 const tickTxt = ui.text(42, 226, '', 'v', 'font-size:10.5px;font-weight:500');
-ui.text(42, 250, 'v = r·(ωR + ωL)/2 · ω = r·(ωR − ωL)/L', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px');
-ui.text(42, 266, `r 33 mm · L 160 mm · XL430: 61 vòng/ph @12 V`, 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px');
-ui.text(42, 282, `→ trần bánh ${fx(WHEEL_MAX * TB.r, 3)} m/s (công bố 0,22 m/s)`, 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px');
+ui.text(42, 250, 'v = r·(ωR + ωL)/2 · ω = r·(ωR − ωL)/L', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px');
+ui.text(42, 266, `r 33 mm · L 160 mm · XL430: 61 vòng/ph @12 V`, 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px');
+ui.text(42, 282, `→ trần bánh ${fx(WHEEL_MAX * TB.r, 3)} m/s (công bố 0,22 m/s)`, 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px');
 ui.panel(28, 330, 300, 214, 'ODOMETRY · TỰ ĐOÁN VỊ TRÍ', '02');
 const odoTxt = ui.text(42, 364, '', 'v', 'font-size:10.5px;font-weight:500;line-height:1.7');
 const errLbl = ui.text(42, 404, '');
@@ -243,15 +243,15 @@ ui.panel(28, 556, 300, 210, 'BÁM ĐƯỜNG · PURE PURSUIT', '03');
 const sV = ui.slider('vset', 42, 592, 272, 'TỐC ĐỘ', {lw: 96, vw: 54});
 const sLd = ui.slider('ld', 42, 618, 272, 'NHÌN TRƯỚC Ld', {lw: 96, vw: 54});
 const ppTxt = ui.text(42, 644, '', 'v', 'font-size:10.5px;font-weight:500;line-height:1.7');
-ui.text(42, 690, 'κ = 2·y_L / Ld² · ω = v·κ', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px');
-ui.text(42, 708, 'Bám theo tư thế ước lượng: tắt định vị thì robot không biết mình đã trôi.', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9px;white-space:normal;width:272px;line-height:1.5');
+ui.text(42, 690, 'κ = 2·y_L / Ld² · ω = v·κ', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px');
+ui.text(42, 708, 'Bám theo tư thế ước lượng: tắt định vị thì robot không biết mình đã trôi.', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:272px;line-height:1.5');
 ui.panel(1272, 112, 300, 268, 'LIDAR LDS-02 · 360 TIA · 5 Hz', '04');
 const radar = ui.svg(1286, 146, 272, 200);
-const lidTxt = ui.text(1286, 352, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px');
+const lidTxt = ui.text(1286, 352, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px');
 ui.panel(1272, 392, 300, 210, 'BẢN ĐỒ LƯỚI CHIẾM CHỖ', '05');
 const mini = ui.add(`<canvas width="${grid.W}" height="${grid.H}" style="position:absolute;left:1286px;top:426px;width:186px;height:${Math.round((186 * grid.H) / grid.W)}px;image-rendering:pixelated;border:1px solid ${C.line};background:${C.chart}"></canvas>`);
 ui.buttons([['mapodom', 'THEO ODOM'], ['maptrue', 'THEO TƯ THẾ THẬT'], ['mapclear', 'XOÁ']], 1286, 572, 272);
-const mapTxt = ui.text(1482, 428, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:8.6px;white-space:normal;width:84px;line-height:1.45');
+const mapTxt = ui.text(1482, 428, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:76px;line-height:1.45');
 ui.panel(1272, 614, 300, 152, 'LỆNH · HIỂN THỊ', '06');
 ui.buttons([['auto', 'TỰ CHẠY'], ['tele', 'LÁI TAY'], ['stop', 'DỪNG'], ['asm', 'LẮP RÁP']], 1286, 644, 272);
 ui.buttons([['amcl', 'ĐỊNH VỊ LIÊN TỤC'], ['reloc', 'ĐẶT LẠI ODOM']], 1286, 672, 272);
@@ -276,7 +276,7 @@ const cutMove = () => { const e = CEX; MV.lidar(Math.max(CK.lidar, e, CK.rpi, CK
 const firstMesh = (g) => { let r = g; g.traverse((m) => { if (r === g && m.isMesh) r = m; }); return r; };
 const cut = createCutaway({st, ui, parts: [
   {key: 'lidar', label: 'LIDAR', open: (k) => { CK.lidar = k; }, at: () => cwp(firstMesh(U_.lidar)), cam: {az: 30, el: 40, d: 0.9}},
-  {key: 'rpi', label: 'RASPBERRY PI', open: (k) => { CK.rpi = k; }, at: () => cwp(firstMesh(U_.rpi)), cam: {az: 120, el: 50, d: 0.8}},
+  {key: 'rpi', label: 'Raspberry Pi', open: (k) => { CK.rpi = k; }, at: () => cwp(firstMesh(U_.rpi)), cam: {az: 120, el: 50, d: 0.8}},
   {key: 'opencr', label: 'MẠCH OpenCR', open: (k) => { CK.opencr = k; }, at: () => cwp(firstMesh(U_.opencr)), cam: {az: -60, el: 24, d: 0.8}},
   {key: 'pin', label: 'PIN LiPo', open: (k) => { CK.pin = k; }, at: () => cwp(firstMesh(U_.pin)), cam: {az: 170, el: 18, d: 0.8}},
   {key: 'banh', label: 'BÁNH VÀ SERVO', open: (k) => { CK.banh = k; }, at: () => cwp(firstMesh(U_.banhP)), cam: {az: -10, el: 6, d: 0.7}},
@@ -399,7 +399,7 @@ Object.assign(sim, {
     const cx = 136, cy = 100, sc = 100 / 2.5;
     let g = `<rect x="0" y="0" width="272" height="200" fill="${C.chart}" stroke="${C.line}"/>`;
     for (const r of [0.5, 1, 1.5, 2, 2.5]) g += `<circle cx="${cx}" cy="${cy}" r="${r * sc}" fill="none" stroke="${C.line}"/>`;
-    g += `<text x="${cx + 2.5 * sc * 0.72}" y="${cy - 2.5 * sc * 0.72}" font-family="JetBrains Mono" font-size="8" fill="${C.mute}">2,5 m</text>`;
+    g += `<text x="${cx + 2.5 * sc * 0.72}" y="${cy - 2.5 * sc * 0.72}" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">2,5 m</text>`;
     let pts = '', mn = Infinity, mnk = 0, valid = 0;
     for (let k = 0; k < 360; k++) { const r = S.scan[k]; if (!(r > 0) || !Number.isFinite(r)) continue; valid++; if (r < mn) { mn = r; mnk = k; } if (r > 2.5) continue; const a = (k * Math.PI) / 180; pts += `<circle cx="${(cx - Math.sin(a) * r * sc).toFixed(1)}" cy="${(cy - Math.cos(a) * r * sc).toFixed(1)}" r="1.3" fill="${C.or}"/>`; }
     g += pts + `<path d="M${cx} ${cy - 7}L${cx - 5} ${cy + 5}L${cx + 5} ${cy + 5}Z" fill="${C.ink}"/>`;

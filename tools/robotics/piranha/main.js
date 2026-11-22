@@ -156,7 +156,7 @@ const toothIdx = () => { let best = 0; TEETH.forEach((d, i) => { if (Math.abs(d 
 ui.header({code: 'S. rh', kicker: 'CÁ PIRANHA ROBOT · HÀM LÀ ĐÒN BẨY · THEO PIRANHA ĐEN Serrasalmus rhombeus', title: 'Cá piranha', sub: 'MÔ MEN LỰC · ĐÒN BẨY · LỢI THẾ CƠ HỌC', hub: HUB_URL,
   right: [['368 mm', 'DÀI TOÀN THÂN'], ['1,12 kg', 'KHỐI LƯỢNG'], ['320 N', 'LỰC CẮN ĐO ĐƯỢC'], ['> 30 ×', 'TRỌNG LƯỢNG']]});
 const BEATS = ['Toàn thân', 'Đòn bẩy', 'Dọc hàm', 'Cơ khép', 'Theo cỡ', 'Mắt', 'Hông, đuôi', 'So sánh', 'Phim'];
-const beatEl = ui.add(`<div style="position:absolute;left:348px;top:84px;width:904px;display:flex;gap:4px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap"><span style="font:500 10px 'JetBrains Mono',monospace;color:${C.faint};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
+const beatEl = ui.add(`<div style="position:absolute;left:348px;top:84px;width:904px;display:flex;gap:4px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap"><span style="font:500 10.5px 'JetBrains Mono',monospace;color:${C.faint};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
 const setBeat = (i) => beatEl.querySelectorAll('[data-b]').forEach((n) => { const on = +n.dataset.b === i; n.style.borderBottomColor = on ? C.or : C.line; n.style.color = on ? C.ink : C.mute; });
 
 ui.panel(28, 112, 300, 268, 'HÀM DƯỚI · ĐÒN BẨY', '01');
@@ -168,7 +168,7 @@ const sl = {d: ui.slider('d', 42, 474, 272, 'VỊ TRÍ CẮN', {lw: 92, vw: 74})
 ui.text(42, 534, 'TRÁI: RĂNG ĐẦU MÚT · PHẢI: RĂNG TRONG CÙNG');
 ui.panel(28, 584, 300, 182, 'LỰC CẮN DỌC HÀM · 7 RĂNG', '03');
 const toothSvg = ui.svg(42, 616, 272, 110);
-const toothTxt = ui.text(42, 734, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const toothTxt = ui.text(42, 734, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 
 ui.panel(1272, 112, 300, 256, 'CỠ CÁ · LỰC CẮN', '04');
 const sizeSvg = ui.svg(1286, 146, 272, 96);
@@ -197,7 +197,7 @@ const cut = createCutaway({st, ui, parts: [
   {key: 'duoi', label: 'CUỐNG ĐUÔI', open: (k) => { OPEN.duoi = k; }, at: () => wp(duoi, -12, 0, 0), sub: () => 'ba khớp lồng nhau', cam: {az: -132, el: 14, d: 0.46}, card: () => cardOf('duoi')},
 ], explode: (k) => { EX = k; }, turn: (d) => { turn.rotation.y = d * D2R; }});
 cut.pills(1286, 412, 272);
-ui.text(1286, 530, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10px;white-space:normal;width:272px;line-height:1.45').innerHTML = 'Bấm một bộ phận: nó tách ra trong 1 giây, vẫn chạy trong lúc treo, máy quay tới gần từ phía riêng.';
+ui.text(1286, 530, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45').innerHTML = 'Bấm một bộ phận: nó tách ra trong 1 giây, vẫn chạy trong lúc treo, máy quay tới gần từ phía riêng.';
 
 // ---------------- mô phỏng
 const disp = S.disp;
@@ -285,25 +285,25 @@ const sim = {
     const fm = Fm(), fb = Fbite(), X = (d) => 250 - (d / 50) * 230;
     { const xh = X(0), xi = X(PR.Lin), xb = X(S.d), xt = X(PR.jaw); let g = `<rect x="0" y="0" width="272" height="104" fill="${C.chart}" stroke="${C.line}"/>`;
       g += `<line x1="${xh}" y1="62" x2="${xt}" y2="62" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>`;
-      g += `<path d="M${xh - 8} 82 L${xh} 64 L${xh + 8} 82 Z" fill="${C.mute}"/><text x="${xh}" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">khớp</text>`;
-      g += `<line x1="${xi}" y1="14" x2="${xi}" y2="56" stroke="${C.ink}" stroke-width="2"/><path d="M${xi - 5} 48 L${xi} 58 L${xi + 5} 48 Z" fill="${C.ink}"/><text x="${xi + 6}" y="22" font-family="JetBrains Mono" font-size="9" fill="${C.ink}">F cơ ${vn(fm, 0)} N</text>`;
+      g += `<path d="M${xh - 8} 82 L${xh} 64 L${xh + 8} 82 Z" fill="${C.mute}"/><text x="${xh}" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">khớp</text>`;
+      g += `<line x1="${xi}" y1="14" x2="${xi}" y2="56" stroke="${C.ink}" stroke-width="2"/><path d="M${xi - 5} 48 L${xi} 58 L${xi + 5} 48 Z" fill="${C.ink}"/><text x="${xi + 6}" y="22" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">F cơ ${vn(fm, 0)} N</text>`;
       const al = Math.min(48, 12 + fb / 14); g += `<line x1="${xb}" y1="${68 + al}" x2="${xb}" y2="68" stroke="${C.or}" stroke-width="3"/><path d="M${xb - 6} 76 L${xb} 66 L${xb + 6} 76 Z" fill="${C.or}"/>`;
-      g += `<text x="${xb + (xb < 140 ? 8 : -6)}" y="${Math.min(100, 72 + al)}" text-anchor="${xb < 140 ? 'start' : 'end'}" font-family="JetBrains Mono" font-size="9" fill="${C.or}">F cắn ${vn(fb, 0)} N</text>`;
-      g += `<line x1="${xh}" y1="40" x2="${xi}" y2="40" stroke="${C.mute}" stroke-dasharray="2 2"/><text x="${(xh + xi) / 2}" y="36" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">L_in</text>`;
+      g += `<text x="${xb + (xb < 140 ? 8 : -6)}" y="${Math.min(100, 72 + al)}" text-anchor="${xb < 140 ? 'start' : 'end'}" font-family="JetBrains Mono" font-size="10.5" fill="${C.or}">F cắn ${vn(fb, 0)} N</text>`;
+      g += `<line x1="${xh}" y1="40" x2="${xi}" y2="40" stroke="${C.mute}" stroke-dasharray="2 2"/><text x="${(xh + xi) / 2}" y="36" text-anchor="middle" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">L_in</text>`;
       levSvg.innerHTML = g; }
     lRows[0][1].textContent = `${vn(fm, 0)} N`; lRows[1][1].textContent = `${vn(PR.Lin, 1)} mm`; lRows[2][1].textContent = `${vn(S.d, 1)} mm`; lRows[3][1].textContent = vn(MA(), 2); lRows[4][1].textContent = `${vn(fb, 0)} N`;
     sl.d.set((S.d - TEETH[0]) / (TEETH[6] - TEETH[0]), `răng ${ti + 1}`); sl.TL.set((S.TL - 205) / (PR.TL - 205), `${vn(S.TL, 0)} mm`);
     // bảng 03: lực cắn ở từng răng
     { let g = `<rect x="0" y="0" width="272" height="96" fill="${C.chart}" stroke="${C.line}"/>`; const mx = biteAt(muscleOf(biteOf(PR.TL)), TEETH[6]) * 1.05;
-      TEETH.forEach((d, i) => { const f = biteAt(fm, d), h = (f / mx) * 88, x = 10 + i * 37; g += `<rect x="${x}" y="${(94 - h).toFixed(1)}" width="26" height="${h.toFixed(1)}" fill="${i === ti ? C.or : C.ink}"/><text x="${x + 13}" y="108" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">${i + 1}</text><text x="${x + 13}" y="${(90 - h).toFixed(1)}" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="${C.ink}">${vn(f, 0)}</text>`; });
+      TEETH.forEach((d, i) => { const f = biteAt(fm, d), h = (f / mx) * 88, x = 10 + i * 37; g += `<rect x="${x}" y="${(94 - h).toFixed(1)}" width="26" height="${h.toFixed(1)}" fill="${i === ti ? C.or : C.ink}"/><text x="${x + 13}" y="108" text-anchor="middle" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">${i + 1}</text><text x="${x + 13}" y="${(90 - h).toFixed(1)}" text-anchor="middle" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${vn(f, 0)}</text>`; });
       toothSvg.innerHTML = g; }
     toothTxt.innerHTML = `Cùng một lực cơ, răng càng gần khớp cắn càng mạnh: F = F_cơ·L_in/d. Răng đầu mút neo theo con đo được 320 N; răng 4 và 7 tính từ lợi thế cơ học 1,0 và 1,5.`;
     // bảng 04: hồi quy lực cắn theo chiều dài
     { let g = `<rect x="0" y="0" width="272" height="96" fill="${C.chart}" stroke="${C.line}"/>`; const XL = (L) => 10 + ((L - 200) / 175) * 252, YF = (f) => 90 - (f / 350) * 84; let d = '';
       for (let L = 205; L <= 368; L += 4) d += `${L === 205 ? 'M' : 'L'}${XL(L).toFixed(1)} ${YF(biteOf(L)).toFixed(1)}`;
       let d2 = ''; for (let L = 205; L <= 368; L += 4) d2 += `${L === 205 ? 'M' : 'L'}${XL(L).toFixed(1)} ${YF(biteFit(L)).toFixed(1)}`;
-      g += `<path d="${d2}" fill="none" stroke="${C.faint}" stroke-width="1.2" stroke-dasharray="3 3"/><path d="${d}" fill="none" stroke="${C.ink}" stroke-width="1.6"/><circle cx="${XL(368)}" cy="${YF(320)}" r="3.5" fill="none" stroke="${C.or}" stroke-width="1.5"/><text x="${XL(368) - 6}" y="${YF(320) - 6}" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${C.or}">đo: 320 N</text>`;
-      g += `<circle cx="${XL(S.TL)}" cy="${YF(Ftip())}" r="4" fill="${C.or}"/><text x="264" y="88" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">F (N) · đứt: hồi quy gốc · liền: neo qua 320 N</text>`; sizeSvg.innerHTML = g; }
+      g += `<path d="${d2}" fill="none" stroke="${C.faint}" stroke-width="1.2" stroke-dasharray="3 3"/><path d="${d}" fill="none" stroke="${C.ink}" stroke-width="1.6"/><circle cx="${XL(368)}" cy="${YF(320)}" r="3.5" fill="none" stroke="${C.or}" stroke-width="1.5"/><text x="${XL(368) - 6}" y="${YF(320) - 6}" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${C.or}">đo: 320 N</text>`;
+      g += `<circle cx="${XL(S.TL)}" cy="${YF(Ftip())}" r="4" fill="${C.or}"/><text x="264" y="88" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">F (N) · đứt: hồi quy · liền: neo 320 N</text>`; sizeSvg.innerHTML = g; }
     const m = massOf(S.TL), Wt = m * 9.81;
     sRows[0][1].textContent = `${vn(m * 1000, 0)} g`; sRows[1][1].textContent = `${vn(Wt, 1)} N`; sRows[2][1].textContent = `${vn(Ftip(), 0)} N`; sRows[3][1].textContent = `${vn(Ftip() / Wt, 0)} lần`;
     // bảng 06: cơ khép hàm

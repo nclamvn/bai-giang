@@ -102,13 +102,13 @@ ui.add(`<div data-doc="bo" style="position:absolute;left:344px;top:100px;width:9
 ui.header({code: 'Mang', kicker: 'SINH HỌC 11 · HÔ HẤP VÀ TRAO ĐỔI KHÍ Ở ĐỘNG VẬT · CÁ XƯƠNG', title: 'Cá thở bằng mang', sub: 'BƠM HAI PHA · ÉP DÒNG · NGƯỢC DÒNG', hub: HUB_URL,
   right: [['≈ 1/38', 'Ô XI NƯỚC SO VỚI KHÍ'], ['≈ 75 %', 'Ô XI MANG LẤY ĐƯỢC'], ['35–82 cm/s', 'CHUYỂN SANG ÉP DÒNG'], ['1327 mm²/g', 'MANG CÁ NGỪ']]});
 const BEATS = ['Nước nghèo ô xi', 'Bơm hai pha', 'Ép dòng', 'Cá ngừ', 'Cá chai', 'Ngược dòng', 'Diện tích mang', 'Nước ấm', '20 loài', 'Phim'];
-const beatEl = ui.add(`<div style="position:absolute;left:348px;top:80px;width:904px;display:flex;gap:4px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap"><span style="font:500 10px 'JetBrains Mono',monospace;color:${C.faint};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
+const beatEl = ui.add(`<div style="position:absolute;left:348px;top:80px;width:904px;display:flex;gap:4px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap"><span style="font:500 10.5px 'JetBrains Mono',monospace;color:${C.faint};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
 const setBeat = (i) => beatEl.querySelectorAll('[data-b]').forEach((n) => { const on = +n.dataset.b === i; n.style.borderBottomColor = on ? C.or : C.line; n.style.color = on ? C.ink : C.mute; });
 
 ui.panel(28, 112, 300, 262, 'CÁCH THỞ · THEO TỐC ĐỘ', '01');
 const modeTxt = ui.add(`<div style="position:absolute;left:42px;top:142px;font:700 17px/1.15 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:-.2px;color:${C.ink};width:272px"></div>`);
 const ramSvg = ui.svg(42, 172, 272, 96);
-const rRows = ['TỐC ĐỘ BƠI', 'PHẦN ÉP DÒNG', 'NHỊP ĐUÔI (BAINBRIDGE)', 'KIỂU CỦA LOÀI'].map((n, k) => [ui.text(42, 282 + k * 20, n), ui.text(150, 280 + k * 20, '', 'v', 'width:164px;text-align:right')]);
+const rRows = ['TỐC ĐỘ BƠI', 'PHẦN ÉP DÒNG', 'NHỊP ĐUÔI (Bainbridge)', 'KIỂU CỦA LOÀI'].map((n, k) => [ui.text(42, 282 + k * 20, n), ui.text(150, 280 + k * 20, '', 'v', 'width:164px;text-align:right')]);
 ui.panel(28, 386, 300, 206, 'ĐIỀU KHIỂN', '02');
 const pick = ui.add(`<select aria-label="Chọn loài cá" style="position:absolute;left:42px;top:416px;width:272px;height:28px;pointer-events:auto;box-sizing:border-box;padding:0 8px;border:1px solid #e3e6ea;border-radius:8px;background:#fff;color:#1D1B16;font:600 12px 'Be Vietnam Pro',system-ui,sans-serif">
   <optgroup label="Có số đo mang">${FISHES.map((f) => `<option value="${f.id}">${f.vi} · ${f.sci}</option>`).join('')}</optgroup>
@@ -122,23 +122,23 @@ ui.text(42, 566, 'NƯỚC BIỂN 35 ‰ · CÁ 1 KG · CỠ VẼ 40 CM · 20 LO�
 ui.panel(28, 604, 300, 162, 'MÁU VÀ NƯỚC TRONG PHIẾN MANG', '03');
 const ccSvg = ui.svg(42, 634, 272, 84);
 ui.buttons([['cc', 'CÙNG CHIỀU']], 42, 730, 120);
-const ccTxt = ui.text(150, 733, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10px;white-space:normal;width:164px;line-height:1.35');
+const ccTxt = ui.text(150, 733, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:164px;line-height:1.35');
 
 ui.panel(1272, 112, 300, 270, 'Ô XI TRONG NƯỚC BIỂN', '04');
 const oRows = ['Ô XI BÃO HOÀ', 'TRONG KHÔNG KHÍ (20 °C)', 'KHÔNG KHÍ NHIỀU GẤP', 'TIÊU HAO Ô XI LÚC NGHỈ', 'NƯỚC QUA MANG'].map((n, k) => [ui.text(1286, 146 + k * 20, n), ui.text(1430, 144 + k * 20, '', 'v', 'width:128px;text-align:right')]);
 const needSvg = ui.svg(1286, 254, 272, 100);
-const needCap = ui.text(1286, 360, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px');
+const needCap = ui.text(1286, 360, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px');
 ui.panel(1272, 394, 300, 186, 'DIỆN TÍCH MANG · CÁ 1 KG', '05');
 const areaSvg = ui.svg(1286, 426, 272, 112);
-ui.text(1286, 544, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.4').innerHTML = 'Hàng rào nước–máu: họ cá thu ngừ 0,5–1,2 µm, cá khác 2–11 µm (Wegner 2010). Cá cóc tính từ 560,7·W^0,79 (Hughes và Gray 1972).';
+ui.text(1286, 544, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:272px;line-height:1.4').innerHTML = 'Hàng rào nước–máu: họ cá thu ngừ 0,5–1,2 µm, cá khác 2–11 µm (Wegner 2010). Cá cóc tính từ 560,7·W^0,79 (Hughes và Gray 1972).';
 ui.panel(1272, 592, 300, 174, 'THÁO TỪNG BỘ PHẬN', '06');
 ui.buttons([['v_hero', 'TOÀN CẢNH'], ['v_side', 'BÊN'], ['v_head', 'ĐẦU'], ['v_top', 'TRÊN'], ['v_compare', 'BỐN LOÀI'], ['v_gallery', '20 LOÀI'], ['lookup', 'TRA CỨU LOÀI'], ['labels', 'NHÃN']], 360, 116, 800);
 ui.text(362, 152, 'DÁNG', 'sm', 'color:rgba(255,255,255,.7);font-weight:600');
 ui.buttons([...MOT.map(([k, l]) => ['m_' + k, l]), ['low', 'LƯỚI NHẸ']], 404, 148, 840);
-const nameEl = ui.add(`<div data-r="ov" data-chu="1" style="position:absolute;left:364px;top:182px;font:600 13px/1.3 'Be Vietnam Pro',system-ui,sans-serif;color:#fff;white-space:nowrap"></div>`);
-const bigK = ui.add(`<div data-r="ov" data-chu="1" style="position:absolute;left:364px;top:664px;font:600 11px 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:.6px;color:rgba(255,255,255,.72)">NƯỚC QUA MANG · 1 KG</div>`);
+const nameEl = ui.add(`<div data-r="ov" data-chu="1" style="position:absolute;left:364px;top:182px;font:600 13px/1.3 'Be Vietnam Pro',system-ui,sans-serif;font-size:max(13px,var(--cb,13px));color:#fff;white-space:nowrap"></div>`);
+const bigK = ui.add(`<div data-r="ov" data-chu="1" style="position:absolute;left:364px;bottom:222px;font:600 11px 'Be Vietnam Pro',system-ui,sans-serif;font-size:max(11px,var(--cb,11px));letter-spacing:.6px;color:rgba(255,255,255,.72)">NƯỚC QUA MANG · 1 KG</div>`);
 const bigV = ui.add(`<div data-r="ov" data-chu="1" style="position:absolute;left:362px;top:680px;font:700 38px/1.1 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:-.8px;color:#fff;font-variant-numeric:tabular-nums"></div>`);
-const bigS = ui.add(`<div data-r="ov" data-chu="1" style="position:absolute;left:364px;top:728px;font:500 11px 'JetBrains Mono',monospace;color:rgba(255,255,255,.75);white-space:nowrap"></div>`);
+const bigS = ui.add(`<div data-r="ov" data-chu="1" style="position:absolute;left:364px;top:728px;font:500 11px 'JetBrains Mono',monospace;font-size:max(11px,var(--cb,11px));color:rgba(255,255,255,.75);white-space:nowrap"></div>`);
 ui.cap = ui.caption(348, 778, 904, 106);
 { const set = ui.cap.set; ui.cap.set = (c, i, n) => { setBeat(i); set(c, i, n); }; }
 const alert = ui.alert(800, 186);
@@ -161,7 +161,7 @@ const cut = createCutaway({st, ui, parts: [
   {key: 'duoi', label: 'VÂY ĐUÔI', open: (k) => { OPEN.duoi = k; }, at: () => wpt('duoi'), sub: () => `${vn(tailHz(speedOf(info()) + 0.6 * OPEN.duoi), 1)} lần vẫy mỗi giây`, cam: {az: -122, el: 14, d: 0.56}, card: () => cardOf('duoi')},
 ], explode: (k) => { EX = k; }, turn: (d) => { turn.rotation.y = d * D2R; }});
 cut.pills(1286, 626, 272);
-ui.text(1286, 728, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10px;white-space:normal;width:272px;line-height:1.45').innerHTML = 'Bấm một bộ phận: nó mở hết cỡ trong 1 giây, cá vẫn bơi, máy quay tới gần từ phía riêng.';
+ui.text(1286, 728, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45').innerHTML = 'Bấm một bộ phận: nó mở hết cỡ trong 1 giây, cá vẫn bơi, máy quay tới gần từ phía riêng.';
 
 // ---------------- mô phỏng
 const disp = S.disp;
@@ -266,8 +266,8 @@ const sim = {
       g += `<rect x="${X(RAM.lo)}" y="10" width="${X(RAM.hi) - X(RAM.lo)}" height="76" fill="${C.or}" opacity="0.08"/><line x1="${X(RAM.mid)}" y1="10" x2="${X(RAM.mid)}" y2="86" stroke="${C.or}" stroke-dasharray="2 2"/>`;
       let d = ''; for (let u = 0; u <= 1.0001; u += 0.02) d += `${u ? 'L' : 'M'}${X(u).toFixed(1)} ${Yr(ramShare(f, u)).toFixed(1)}`;
       g += `<path d="${d}" fill="none" stroke="${C.ink}" stroke-width="1.6"/><circle cx="${X(U)}" cy="${Yr(F.ram)}" r="4" fill="${C.or}"/>`;
-      g += `<text x="${X(RAM.lo)}" y="94" font-family="JetBrains Mono" font-size="8.5" fill="${C.mute}" text-anchor="middle">35</text><text x="${X(RAM.mid)}" y="8" font-family="JetBrains Mono" font-size="8.5" fill="${C.or}" text-anchor="middle">≈ 65 cm/s</text><text x="${X(RAM.hi)}" y="94" font-family="JetBrains Mono" font-size="8.5" fill="${C.mute}" text-anchor="middle">82</text>`;
-      g += `<text x="6" y="20" font-family="JetBrains Mono" font-size="8.5" fill="${C.mute}">ép dòng</text><text x="6" y="82" font-family="JetBrains Mono" font-size="8.5" fill="${C.mute}">bơm</text>`;
+      g += `<text x="${X(RAM.lo)}" y="94" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}" text-anchor="middle">35</text><text x="${X(RAM.mid)}" y="8" font-family="JetBrains Mono" font-size="10.5" fill="${C.or}" text-anchor="middle">≈ 65 cm/s</text><text x="${X(RAM.hi)}" y="94" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}" text-anchor="middle">82</text>`;
+      g += `<text x="6" y="20" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">ép dòng</text><text x="6" y="82" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">bơm</text>`;
       ramSvg.innerHTML = g; }
     rRows[0][1].textContent = `${vn(U * 100, 0)} cm/s · ${vn(U / Lm, 1)} thân/s`; rRows[1][1].textContent = `${vn(F.ram * 100, 0)} %`;
     rRows[2][1].textContent = U > 0.02 ? `${vn(tailHz(U), 1)} lần/s` : 'đứng yên'; rRows[3][1].textContent = f.ram === 'bat-buoc' ? 'luôn ép dòng' : f.ram === 'khong' ? 'luôn bơm' : f.ram ? 'chuyển theo tốc độ' : 'chưa có số đo'; if (f.ramSuy) rRows[3][1].textContent = (f.ram === 'khong' ? 'luôn bơm' : 'đổi theo tốc độ') + ' (suy)';
@@ -277,8 +277,8 @@ const sim = {
       let dw = '', db = ''; for (let i = 0; i <= 40; i++) { const x = i / 40, p = profile(x, S.counter); dw += `${i ? 'L' : 'M'}${X(x).toFixed(1)} ${Y(p.w).toFixed(1)}`; db += `${i ? 'L' : 'M'}${X(x).toFixed(1)} ${Y(p.b).toFixed(1)}`; }
       g += `<path d="${dw}" fill="none" stroke="${C.blue}" stroke-width="1.8"/><path d="${db}" fill="none" stroke="${C.or}" stroke-width="1.8"/>`;
       const ah = (x, y, dir, c) => `<path d="M${X(x)} ${y} l${-6 * dir} -3.5 l0 7 Z" fill="${c}"/>`;
-      g += ah(0.97, 10, 1, C.blue) + `<text x="${X(0.02)}" y="13" font-family="JetBrains Mono" font-size="8.5" fill="${C.blue}">nước →</text>`;
-      g += S.counter ? ah(0.03, 80, -1, C.or) + `<text x="${X(0.98)}" y="82" text-anchor="end" font-family="JetBrains Mono" font-size="8.5" fill="${C.or}">← máu</text>` : ah(0.97, 80, 1, C.or) + `<text x="${X(0.02)}" y="82" font-family="JetBrains Mono" font-size="8.5" fill="${C.or}">máu →</text>`;
+      g += ah(0.97, 10, 1, C.blue) + `<text x="${X(0.93)}" y="13" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${C.blue}">nước →</text>`;
+      g += S.counter ? ah(0.03, 80, -1, C.or) + `<text x="${X(0.07)}" y="80" font-family="JetBrains Mono" font-size="10.5" fill="${C.or}">← máu</text>` : ah(0.97, 80, 1, C.or) + `<text x="${X(0.93)}" y="80" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${C.or}">máu →</text>`;
       ccSvg.innerHTML = g; }
     const eff = S.counter ? effCounter() : effCo();
     ccTxt.innerHTML = `${S.counter ? 'Ngược dòng' : 'Cùng chiều'}: máu ra mang lấy được <b style="color:${C.or}">${vn(eff * 100, 0)} %</b> ô xi của nước vào. Mô hình NTU = ${NTU} (giả định).`;
@@ -288,16 +288,16 @@ const sim = {
     oRows[3][1].textContent = smr ? `${vn(smr, 0)} mg/kg/h` : 'chưa có số đo'; oRows[4][1].textContent = need ? `${vn(need, 2)} L/phút` : `× ${vn(needRatio(S.T), 2)} so 20 °C`;
     { const X = (t) => 8 + ((t - 10) / 20) * 256; const ref = ALL.filter((x) => x.smr); const mx = waterPerMin(286, 30) * 1.08, Y = (v) => 90 - (v / mx) * 80;
       let g = `<rect x="0" y="0" width="272" height="100" fill="${C.chart}" stroke="${C.line}"/>`;
-      for (const x of ref) { let d = ''; for (let t = 10; t <= 30.01; t += 1) d += `${t === 10 ? 'M' : 'L'}${X(t).toFixed(1)} ${Y(waterPerMin(x.smr, t, x.smrT)).toFixed(1)}`; g += `<path d="${d}" fill="none" stroke="${x.id === f.id ? C.or : C.ink}" stroke-width="${x.id === f.id ? 2 : 1.2}" opacity="${x.id === f.id ? 1 : 0.55}"/><text x="${X(30) - 2}" y="${Y(waterPerMin(x.smr, 30, x.smrT)) - 4}" text-anchor="end" font-family="JetBrains Mono" font-size="8.5" fill="${x.id === f.id ? C.or : C.mute}">${x.id === f.id || x.id === 'kihada' ? x.smrShort : ''}</text>`; }
+      for (const x of ref) { let d = ''; for (let t = 10; t <= 30.01; t += 1) d += `${t === 10 ? 'M' : 'L'}${X(t).toFixed(1)} ${Y(waterPerMin(x.smr, t, x.smrT)).toFixed(1)}`; g += `<path d="${d}" fill="none" stroke="${x.id === f.id ? C.or : C.ink}" stroke-width="${x.id === f.id ? 2 : 1.2}" opacity="${x.id === f.id ? 1 : 0.55}"/><text x="${X(30) - 2}" y="${Y(waterPerMin(x.smr, 30, x.smrT)) - 4}" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${x.id === f.id ? C.or : C.mute}">${x.id === f.id || x.id === 'kihada' ? x.smrShort : ''}</text>`; }
       g += `<line x1="${X(S.T)}" y1="8" x2="${X(S.T)}" y2="92" stroke="${C.mute}" stroke-dasharray="2 2"/>`;
-      g += `<text x="6" y="12" font-family="JetBrains Mono" font-size="8.5" fill="${C.mute}">L/phút cho 1 kg</text><text x="${X(10)}" y="99" font-family="JetBrains Mono" font-size="8" fill="${C.mute}">10 °C</text><text x="${X(30)}" y="99" text-anchor="end" font-family="JetBrains Mono" font-size="8" fill="${C.mute}">30 °C</text>`;
+      g += `<text x="6" y="12" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">L/phút cho 1 kg</text><text x="${X(10)}" y="99" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">10 °C</text><text x="${X(30)}" y="99" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">30 °C</text>`;
       needSvg.innerHTML = g; }
     needCap.textContent = 'nước = SMR ÷ (ô xi × 75 %) · SMR ×2 mỗi 10 °C';
     // bảng 05: diện tích mang
     { const bars = [['cá ngừ vằn', SKIPJACK, false], ['cá ngừ vây vàng', 1327, f.id === 'kihada'], ['cá saba', 1110, f.id === 'saba'], ['cá cóc (đáy)', toadArea(1000), false]];
       let g = `<rect x="0" y="0" width="272" height="112" fill="${C.chart}" stroke="${C.line}"/>`;
-      bars.forEach(([n, v, on], i) => { const y = 10 + i * 25, w = (v / 1900) * 150; g += `<text x="6" y="${y + 12}" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">${n}</text><rect x="100" y="${y + 2}" width="${w.toFixed(1)}" height="14" fill="${on ? C.or : C.ink}"/><text x="${104 + w}" y="${y + 13}" font-family="JetBrains Mono" font-size="9" fill="${C.ink}">${vn(v, 0)}</text>`; });
-      g += `<text x="266" y="108" text-anchor="end" font-family="JetBrains Mono" font-size="8.5" fill="${C.mute}">mm² mỗi gam cơ thể</text>`; areaSvg.innerHTML = g; }
+      bars.forEach(([n, v, on], i) => { const y = 10 + i * 25, w = (v / 1900) * 150; g += `<text x="6" y="${y + 12}" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">${n}</text><rect x="100" y="${y + 2}" width="${w.toFixed(1)}" height="14" fill="${on ? C.or : C.ink}"/><text x="${104 + w}" y="${y + 13}" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${vn(v, 0)}</text>`; });
+      g += `<text x="266" y="108" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">mm² mỗi gam cơ thể</text>`; areaSvg.innerHTML = g; }
     // số lớn
     for (const e of [bigK, bigV, bigS]) e.style.display = S.gallery ? 'none' : '';
     bigV.textContent = need ? `${vn(need, 2)} L/phút` : `× ${vn(needRatio(S.T), 2)}`;

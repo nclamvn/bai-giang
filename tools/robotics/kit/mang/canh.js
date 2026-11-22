@@ -54,4 +54,4 @@ export function boCanh(root) {
 export const LOGC = (x, a, b) => Math.log(x / a) / Math.log(b / a);
 export const unlog = (t, a, b) => a * Math.pow(b / a, t);
 // khung chữ nhỏ dưới mỗi bảng (giữ đồng nhất kiểu chữ)
-export const NHO = 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45';
+export const NHO = 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45';

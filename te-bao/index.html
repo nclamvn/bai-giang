@@ -134,7 +134,8 @@ body{color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;
 .btn:disabled{opacity:.5;cursor:default}
 .btn.sm{padding:4px 9px;font-size:13px}
 /* màn chạm: vùng chạm từ 44 px (docs/mot-he-ba-co-man-hinh.md, luật R2) */
-@media (pointer:coarse){.btn.sm,.legend li button,.procs li button,.sw2,input[type=range]{min-height:44px;min-width:44px}}
+@media (pointer:coarse){.btn.sm,.legend li button,.procs li button,#infoCard .parts li button,.sw2,input[type=range]{min-height:44px;min-width:44px}
+  .callout .cx{min-width:44px;min-height:44px;right:0;top:0}.crumb button{min-height:44px;padding:0 4px}.lesson .lf .btn{min-height:44px}}
 .btn[aria-pressed="true"]{background:var(--gold-soft);border-color:var(--gold);color:var(--ink)}
 .seg button:focus-visible,.btn:focus-visible,select:focus-visible,input:focus-visible,.legend button:focus-visible,.parts button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 input[type=range]{accent-color:var(--crimson);width:140px}
@@ -230,6 +231,8 @@ a.btn{text-decoration:none;display:inline-block}
 .lesson .lh{display:flex;align-items:center;gap:8px}
 .lesson .lk{font-family:var(--f-mono);font-size:13px;color:#BE1740;font-weight:600}
 .lesson .lx{margin-left:auto;background:none;border:0;font-size:18px;line-height:1;cursor:pointer;color:inherit;opacity:.6;padding:2px 6px}
+@media (pointer:coarse){.lesson .lx{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin-top:-10px;margin-bottom:-10px}
+  .pin{padding:9px;margin:-9px}}
 .lesson h3{margin:0;font-size:18px;line-height:1.25}
 .lesson p{margin:0;font-size:14px;line-height:1.5}
 .lesson .ask{border-left:3px solid #E8B04B;padding:4px 0 4px 10px;background:rgba(232,176,75,.1);border-radius:0 6px 6px 0}
@@ -249,8 +252,8 @@ a.btn{text-decoration:none;display:inline-block}
 .lesson .fb.wait{background:rgba(232,176,75,.14);color:#6B4705}
 .lesson .lf{display:flex;align-items:center;gap:8px;margin-top:2px}
 .lesson .dots{display:flex;gap:4px;flex:1;justify-content:center;flex-wrap:wrap}
-.lesson .dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:rgba(190,23,64,.2);cursor:pointer}
-.lesson .dots button[aria-current="true"]{background:#BE1740;transform:scale(1.25)}
+.lesson .dots i{width:9px;height:9px;border-radius:50%;background:rgba(190,23,64,.2)}
+.lesson .dots i.on{background:#BE1740;transform:scale(1.25)}
 .lesson .lf .btn{padding:6px 12px;font-size:13px}
 .lesson .lf .btn:disabled{opacity:.45;cursor:not-allowed}
 #viewport.lessoning .callout,#viewport.lessoning .lead,#viewport.lessoning .caption,#viewport.lessoning .hud{display:none!important}
@@ -503,7 +506,7 @@ html[data-chieu]{--bg-ink:#000000;--bg-ink2:#141414;--bg-ink3:#262626;--bg-glass
           <h3 id="lsT"></h3><p id="lsB"></p><p class="ask" id="lsA"></p>
           <details id="lsND" hidden><summary>Gợi ý cho giáo viên</summary><p class="note" id="lsN"></p></details>
           <div class="lq" id="lsQ"></div>
-          <div class="lf"><button type="button" class="btn" id="lsPrev">‹ Trước</button><div class="dots" id="lsDots"></div><button type="button" class="btn primary" id="lsNext">Tiếp ›</button></div>
+          <div class="lf"><button type="button" class="btn" id="lsPrev">‹ Trước</button><div class="dots" id="lsDots" aria-hidden="true"></div><button type="button" class="btn primary" id="lsNext">Tiếp ›</button></div>
         </section>
         <div class="ov glass tline" id="tline" hidden></div>
         <button type="button" class="drawer-tab" id="drawerTab" aria-controls="aside" aria-expanded="true" title="Ẩn bảng thông tin (phím I)">›</button>
@@ -2018,7 +2021,7 @@ function molUpdate() {
   const atomsOn = MOL.inMol && dh < 0.075; if (MOL.atoms) MOL.atoms.visible = atomsOn; hideHeroU.value = atomsOn ? 1 : 0; MOL.atomsOn = atomsOn;
   if (MOL.noteIn !== MOL.inMol) { MOL.noteIn = MOL.inMol; $('illusNote').textContent = MOL.inMol ? 'Đúng kích thước thật: toạ độ nguyên tử từ PDB 3J7R. Màu, lipid, polysome và chuyển động là minh hoạ.' : 'Ribosome, protein màng và lớp lipid vẽ phóng to; chuyển động đã tăng tốc để dễ thấy.'; }
   const tg = $('heroTag');
-  if (MOL.ready && visible && !sel && !dive && !tour && !bench && dh > 1.6) { const q = toScreen(MOL.bead.position); if (q.ok) { tg.hidden = false; tg.style.transform = `translate(${Math.min(host.clientWidth - 200, q.x + 10)}px, ${q.y - 34}px)`; } else tg.hidden = true; } else tg.hidden = true;
+  if (MOL.ready && $('loading').hidden && $('lesson').hidden && visible && !sel && !dive && !tour && !bench && dh > 1.6) { const q = toScreen(MOL.bead.position);   /* chờ chữ Đang dựng tế bào tắt rồi mới hiện ghim */ if (q.ok) { tg.hidden = false; tg.style.transform = `translate(${Math.min(host.clientWidth - 200, q.x + 10)}px, ${q.y - 34}px)`; } else tg.hidden = true; } else tg.hidden = true;
 }
 
 // Phóng liền mạch từ toàn cảnh xuống nguyên tử
@@ -2101,7 +2104,7 @@ function startLesson() {
   if (bench) return; if (tour) endTour(); if (dive) endDive(false); stopFollow();
   lesson = { i: 0, qi: 0, score: 0, first: true, done: false, lastKey: null, poll: null, compact: false };
   host.classList.add('lessoning'); $('lesson').hidden = false; $('lessonBtn').textContent = 'Kết thúc tiết học';
-  $('lsDots').innerHTML = LESSON.steps.map((s, k) => `<button type="button" aria-label="Bước ${k + 1}: ${s.t}"></button>`).join('');
+  $('lsDots').innerHTML = LESSON.steps.map(() => '<i></i>').join('');   // chấm tiến trình chỉ để nhìn; chuyển bước bằng nút Trước, Tiếp hoặc danh sách bước của vỏ
   goStep(0);
 }
 function lessonOffset() { const card = $('lesson'), W = host.clientWidth, H = host.clientHeight; const dx = lesson && W > 760 && !card.hidden ? Math.round((card.offsetWidth + 12) / 2) : 0; if (dx) camera.setViewOffset(W, H, -dx, 0, W, H); else camera.clearViewOffset(); }
@@ -2132,7 +2135,7 @@ function renderLesson() {
     lb.hidden = false; lb.textContent = s.b; la.hidden = false; la.innerHTML = `<b>Hỏi cả lớp</b>${s.a}`;
     nd.hidden = !s.n; if (s.n) { $('lsN').textContent = s.n; nd.open = false; }
   } else { la.hidden = true; nd.hidden = true; renderQuiz(); }
-  document.querySelectorAll('#lsDots button').forEach((b, k) => b.setAttribute('aria-current', String(k === lesson.i)));
+  document.querySelectorAll('#lsDots i').forEach((b, k) => b.classList.toggle('on', k === lesson.i));
   $('lsPrev').disabled = lesson.i === 0;
   $('lsNext').textContent = lesson.i === n - 1 ? 'Kết thúc' : 'Tiếp ›';
   $('lesson').classList.toggle('compact', lesson.compact); $('lsMin').textContent = lesson.compact ? '+' : '–';
@@ -2173,7 +2176,6 @@ $('lsX').addEventListener('click', (e) => { e.stopPropagation(); endLesson(); })
 $('lsMin').addEventListener('click', (e) => { e.stopPropagation(); if (lesson) { lesson.compact = !lesson.compact; renderLesson(); } });
 $('lsPrev').addEventListener('click', (e) => { e.stopPropagation(); if (lesson) goStep(lesson.i - 1); });
 $('lsNext').addEventListener('click', (e) => { e.stopPropagation(); if (!lesson) return; if (lesson.i === LESSON.steps.length - 1) endLesson(); else goStep(lesson.i + 1); });
-$('lsDots').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b || !lesson) return; goStep([...b.parentNode.children].indexOf(b)); });
 $('lesson').addEventListener('pointerdown', (e) => e.stopPropagation());
 addEventListener('keydown', (e) => {
   if (!lesson || e.target.closest('input,select,textarea') || e.ctrlKey || e.metaKey || e.altKey) return;

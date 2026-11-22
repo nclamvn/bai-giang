@@ -43,14 +43,14 @@ const sU = ui.slider('U', 42, 350, 272, 'TỐC ĐỘ U', {lw: 74, vw: 74});
 // 02 tần số theo tốc độ
 ui.panel(28, 386, 300, 196, 'TẦN SỐ VẪY ĐUÔI THEO TỐC ĐỘ', '02');
 const chart = ui.svg(42, 418, 272, 122);
-ui.text(42, 548, 'U = 1,24·f + 0,20 · hồi quy đo trên con cái 197 cm · R² = 0,55', 'sm', 'font-size:9px');
-ui.text(42, 562, 'Chấm đen: số đo · chấm cam: hiện tại · Waller và cs. 2023', 'sm', 'font-size:9px');
+ui.text(42, 548, 'U = 1,24·f + 0,20 · đo trên con cái 197 cm · R² = 0,55', 'sm', 'font-size:10.5px');
+ui.text(42, 562, 'Đen: số đo · cam: hiện tại · Waller và cs. 2023', 'sm', 'font-size:10.5px');
 // 03 lực cản
 ui.panel(28, 594, 300, 172, 'LỰC CẢN CỦA NƯỚC · VẬT LÍ 10', '03');
 const R3 = ['Lực cản so với lúc tuần tra', 'Công suất thắng lực cản', 'Tốc độ so với lúc tuần tra'].map((t, i) => { ui.text(42, 628 + i * 19, t, 'sm', 'font-size:10.5px'); return ui.text(200, 628 + i * 19, '', 'v', 'width:114px;text-align:right;font-size:12.5px'); });
 const dragBar = ui.svg(42, 690, 272, 22);
-ui.text(42, 720, 'Mô hình F ≈ ½·ρ·C·S·v², công suất P = F·v', 'sm', 'font-size:9.5px');
-ui.text(42, 736, 'Lần bứt tốc 5,02 m/s đo được kéo dài 14 giây', 'sm', 'font-size:9.5px');
+ui.text(42, 720, 'Mô hình F ≈ ½·ρ·C·S·v², công suất P = F·v', 'sm', 'font-size:10.5px');
+ui.text(42, 736, 'Lần bứt tốc 5,02 m/s đo được kéo dài 14 giây', 'sm', 'font-size:10.5px');
 // 04 sóng thân nhìn từ trên
 ui.panel(1272, 112, 300, 250, 'SÓNG THÂN · NHÌN TỪ TRÊN, ĐÚNG TỈ LỆ', '04');
 const topv = ui.svg(1286, 144, 272, 122);
@@ -64,7 +64,7 @@ const sA = ui.slider('amp', 1286, 500, 272, 'BIÊN ĐỘ A/L', {lw: 80, vw: 70})
 // 06 khớp servo
 ui.panel(1272, 532, 300, 134, '8 KHỚP SERVO · GÓC TỨC THỜI', '06');
 const jsv = ui.svg(1286, 562, 272, 78);
-ui.text(1286, 646, 'Thanh: góc lúc này · vạch: lớn nhất nhịp trước · robot minh hoạ', 'sm', 'font-size:9px');
+ui.text(1286, 646, 'Thanh: góc lúc này · vạch: đỉnh nhịp trước · minh hoạ', 'sm', 'font-size:10.5px');
 // 07 điều khiển
 ui.panel(1272, 676, 300, 90, 'THỬ PHÁ · TUA CHẬM', '07');
 const sLam = ui.slider('lam', 1286, 712, 272, 'BƯỚC SÓNG λ', {lw: 80, vw: 70});
@@ -98,13 +98,13 @@ const CH = {w: 272, h: 122, u: 5.5, f: 4.5};
 const cx = (U) => 22 + (U / CH.u) * (CH.w - 30), cy = (f) => CH.h - 16 - (f / CH.f) * (CH.h - 24);
 const drawChart = (U, f) => {
   let g = `<rect x="0" y="0" width="${CH.w}" height="${CH.h}" fill="${C.chart}" stroke="${C.line}"/>`;
-  for (let u = 1; u <= 5; u++) g += `<line x1="${cx(u)}" x2="${cx(u)}" y1="6" y2="${CH.h - 16}" stroke="${C.line}" stroke-width=".6"/><text x="${cx(u)}" y="${CH.h - 4}" text-anchor="middle" font-size="8.5" fill="#626773" font-family="JetBrains Mono,monospace">${u}</text>`;
-  for (let k = 1; k <= 4; k++) g += `<line x1="22" x2="${CH.w - 8}" y1="${cy(k)}" y2="${cy(k)}" stroke="${C.line}" stroke-width=".6"/><text x="16" y="${cy(k) + 3}" text-anchor="end" font-size="8.5" fill="#626773" font-family="JetBrains Mono,monospace">${k}</text>`;
-  g += `<text x="${CH.w - 8}" y="${CH.h - 18}" text-anchor="end" font-size="8.5" fill="#626773" font-family="Be Vietnam Pro,sans-serif">U (m/s)</text><text x="26" y="13" font-size="8.5" fill="#626773" font-family="Be Vietnam Pro,sans-serif">f (Hz)</text>`;
+  for (let u = 1; u <= 5; u++) g += `<line x1="${cx(u)}" x2="${cx(u)}" y1="6" y2="${CH.h - 16}" stroke="${C.line}" stroke-width=".6"/><text x="${cx(u)}" y="${CH.h - 4}" text-anchor="middle" font-size="10.5" fill="#626773" font-family="JetBrains Mono,monospace">${u}</text>`;
+  for (let k = 1; k <= 4; k++) g += `<line x1="22" x2="${CH.w - 8}" y1="${cy(k)}" y2="${cy(k)}" stroke="${C.line}" stroke-width=".6"/><text x="16" y="${cy(k) + 3}" text-anchor="end" font-size="10.5" fill="#626773" font-family="JetBrains Mono,monospace">${k}</text>`;
+  g += `<text x="${CH.w - 8}" y="${CH.h - 18}" text-anchor="end" font-size="10.5" fill="#626773" font-family="Be Vietnam Pro,sans-serif">U (m/s)</text><text x="26" y="13" font-size="10.5" fill="#626773" font-family="Be Vietnam Pro,sans-serif">f (Hz)</text>`;
   g += `<line x1="${cx(REG.b)}" y1="${cy(0)}" x2="${cx(CH.u)}" y2="${cy(fOf(CH.u))}" stroke="${C.ink}" stroke-width="1.3"/>`;
   // số đo: tuần tra (thanh lệch chuẩn), bứt tốc
   g += `<line x1="${cx(CRUISE.U)}" x2="${cx(CRUISE.U)}" y1="${cy(CRUISE.f - CRUISE.fsd)}" y2="${cy(CRUISE.f + CRUISE.fsd)}" stroke="#1D1B16" stroke-width="1"/>`;
-  for (const [p, t, dx] of [[CRUISE, 'tuần tra 0,51 Hz', 8], [BURST, 'bứt tốc 3,65 Hz', -8]]) g += `<circle cx="${cx(p.U)}" cy="${cy(p.f)}" r="3.6" fill="#1D1B16"/><text x="${cx(p.U) + dx}" y="${cy(p.f) + (dx > 0 ? 12 : 13)}" text-anchor="${dx > 0 ? 'start' : 'end'}" font-size="8.5" fill="#1D1B16" font-family="Be Vietnam Pro,sans-serif">${t}</text>`;
+  for (const [p, t, dx] of [[CRUISE, 'tuần tra 0,51 Hz', 8], [BURST, 'bứt tốc 3,65 Hz', -8]]) g += `<circle cx="${cx(p.U)}" cy="${cy(p.f)}" r="3.6" fill="#1D1B16"/><text x="${cx(p.U) + dx}" y="${cy(p.f) + (dx > 0 ? 12 : -7)}" text-anchor="${dx > 0 ? 'start' : 'end'}" font-size="10.5" fill="#1D1B16" font-family="Be Vietnam Pro,sans-serif">${t}</text>`;
   g += `<circle cx="${cx(U)}" cy="${cy(f)}" r="5" fill="${C.or}" stroke="#fff" stroke-width="1.6"/>`;
   chart.innerHTML = g;
 };
@@ -124,16 +124,16 @@ const drawTop = (phi, A, lam) => {
   for (const s of [0.4, 0.475, 0.55, 0.625, 0.7, 0.775, 0.85, 0.925]) g += `<circle cx="${tvx(s).toFixed(1)}" cy="${tvy(lat(s, phi, A, lam)).toFixed(1)}" r="2.4" fill="${C.or}"/>`;
   // thước bước sóng và biên độ
   const lx = Math.min(lam, 1);
-  g += `<line x1="${tvx(0)}" x2="${tvx(lx)}" y1="${TV.h - 12}" y2="${TV.h - 12}" stroke="#1D1B16" stroke-width=".9"/><text x="${(tvx(0) + tvx(lx)) / 2}" y="${TV.h - 3}" text-anchor="middle" font-size="8.5" fill="#1D1B16" font-family="Be Vietnam Pro,sans-serif">${lam <= 1 ? 'λ' : 'λ dài hơn thân'}</text>`;
-  g += `<line x1="9" x2="9" y1="${tvy(A / 2)}" y2="${tvy(-A / 2)}" stroke="${C.or}" stroke-width="1.4"/><text x="14" y="${tvy(A / 2) + 3}" font-size="8.5" fill="${C.or}" font-family="Be Vietnam Pro,sans-serif">A</text>`;
-  g += `<text x="${TV.w - 6}" y="12" text-anchor="end" font-size="8.5" fill="#626773" font-family="Be Vietnam Pro,sans-serif">mũi →</text>`;
+  g += `<line x1="${tvx(0)}" x2="${tvx(lx)}" y1="${TV.h - 12}" y2="${TV.h - 12}" stroke="#1D1B16" stroke-width=".9"/><text x="${(tvx(0) + tvx(lx)) / 2}" y="${TV.h - 3}" text-anchor="middle" font-size="10.5" fill="#1D1B16" font-family="Be Vietnam Pro,sans-serif">${lam <= 1 ? 'λ' : 'λ dài hơn thân'}</text>`;
+  g += `<line x1="9" x2="9" y1="${tvy(A / 2)}" y2="${tvy(-A / 2)}" stroke="${C.or}" stroke-width="1.4"/><text x="14" y="${tvy(A / 2) + 3}" font-size="10.5" fill="${C.or}" font-family="Be Vietnam Pro,sans-serif">A</text>`;
+  g += `<text x="${TV.w - 6}" y="12" text-anchor="end" font-size="10.5" fill="#626773" font-family="Be Vietnam Pro,sans-serif">mũi →</text>`;
   topv.innerHTML = g;
 };
 const drawGauge = (St) => {
   const W = 272, x = (v) => 6 + (Math.min(v, 0.6) / 0.6) * (W - 12);
   let g = `<rect x="6" y="10" width="${W - 12}" height="8" rx="4" fill="${C.track}"/><rect x="${x(ST_BAND[0])}" y="10" width="${x(ST_BAND[1]) - x(ST_BAND[0])}" height="8" fill="#2fa36b" fill-opacity=".35"/>`;
-  for (const v of [0, 0.2, 0.4, 0.6]) g += `<text x="${x(v)}" y="32" text-anchor="middle" font-size="8.5" fill="#626773" font-family="JetBrains Mono,monospace">${vn(v, 1)}</text>`;
-  g += `<text x="${(x(0.2) + x(0.4)) / 2}" y="7" text-anchor="middle" font-size="8" fill="#1f7a4f" font-family="Be Vietnam Pro,sans-serif">hiệu suất cao · Taylor và cs. 2003</text>`;
+  for (const v of [0, 0.2, 0.4, 0.6]) g += `<text x="${x(v)}" y="32" text-anchor="middle" font-size="10.5" fill="#626773" font-family="JetBrains Mono,monospace">${vn(v, 1)}</text>`;
+  g += `<text x="${(x(0.2) + x(0.4)) / 2}" y="7" text-anchor="middle" font-size="10.5" fill="#1f7a4f" font-family="Be Vietnam Pro,sans-serif">hiệu suất cao · Taylor và cs. 2003</text>`;
   g += `<path d="M${x(St)} 21 l-5 7 h10z" fill="${C.ink}"/><line x1="${x(St)}" x2="${x(St)}" y1="7" y2="21" stroke="${C.ink}" stroke-width="1.6"/>`;
   gauge.innerHTML = g;
 };
@@ -144,14 +144,14 @@ const drawJoints = () => {
     const x = 10 + i * 33, d = Math.max(-20, Math.min(20, a * D2)), h = d * k, pk = Math.min(20, S.peak[i]) * k;
     g += `<rect x="${x}" y="${Math.min(mid, mid - h)}" width="18" height="${Math.abs(h) + 0.5}" rx="2" fill="${C.or}"/>`;
     g += `<line x1="${x - 2}" x2="${x + 20}" y1="${mid - pk}" y2="${mid - pk}" stroke="${C.ink}" stroke-width="1"/><line x1="${x - 2}" x2="${x + 20}" y1="${mid + pk}" y2="${mid + pk}" stroke="${C.ink}" stroke-width="1"/>`;
-    g += `<text x="${x + 9}" y="${H}" text-anchor="middle" font-size="8.5" fill="#626773" font-family="JetBrains Mono,monospace">${i + 1}</text>`;
+    g += `<text x="${x + 9}" y="${H}" text-anchor="middle" font-size="10.5" fill="#626773" font-family="JetBrains Mono,monospace">${i + 1}</text>`;
   });
   jsv.innerHTML = g;
 };
 const drawDrag = (r) => {
   const W = 272, x = (v) => (Math.log10(Math.max(1, v)) / Math.log10(200)) * W;
   let g = `<rect x="0" y="6" width="${W}" height="8" rx="4" fill="${C.track}"/><rect x="0" y="6" width="${Math.max(4, x(r))}" height="8" rx="4" fill="${C.or}"/>`;
-  for (const v of [1, 10, 100]) g += `<text x="${Math.min(W - 10, x(v) + 2)}" y="22" font-size="8" fill="#626773" font-family="JetBrains Mono,monospace">×${v}</text>`;
+  for (const v of [1, 10, 100]) g += `<text x="${Math.min(W - 10, x(v) + 2)}" y="22" font-size="10.5" fill="#626773" font-family="JetBrains Mono,monospace">×${v}</text>`;
   dragBar.innerHTML = g;
 };
 

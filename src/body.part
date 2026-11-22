@@ -42,7 +42,7 @@
           <h3 id="lsT"></h3><p id="lsB"></p><p class="ask" id="lsA"></p>
           <details id="lsND" hidden><summary>Gợi ý cho giáo viên</summary><p class="note" id="lsN"></p></details>
           <div class="lq" id="lsQ"></div>
-          <div class="lf"><button type="button" class="btn" id="lsPrev">‹ Trước</button><div class="dots" id="lsDots"></div><button type="button" class="btn primary" id="lsNext">Tiếp ›</button></div>
+          <div class="lf"><button type="button" class="btn" id="lsPrev">‹ Trước</button><div class="dots" id="lsDots" aria-hidden="true"></div><button type="button" class="btn primary" id="lsNext">Tiếp ›</button></div>
         </section>
         <div class="ov glass tline" id="tline" hidden></div>
         <button type="button" class="drawer-tab" id="drawerTab" aria-controls="aside" aria-expanded="true" title="Ẩn bảng thông tin (phím I)">›</button>

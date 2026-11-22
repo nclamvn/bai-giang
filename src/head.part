@@ -123,7 +123,8 @@ body{color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;
 .btn:disabled{opacity:.5;cursor:default}
 .btn.sm{padding:4px 9px;font-size:13px}
 /* màn chạm: vùng chạm từ 44 px (docs/mot-he-ba-co-man-hinh.md, luật R2) */
-@media (pointer:coarse){.btn.sm,.legend li button,.procs li button,.sw2,input[type=range]{min-height:44px;min-width:44px}}
+@media (pointer:coarse){.btn.sm,.legend li button,.procs li button,#infoCard .parts li button,.sw2,input[type=range]{min-height:44px;min-width:44px}
+  .callout .cx{min-width:44px;min-height:44px;right:0;top:0}.crumb button{min-height:44px;padding:0 4px}.lesson .lf .btn{min-height:44px}}
 .btn[aria-pressed="true"]{background:var(--gold-soft);border-color:var(--gold);color:var(--ink)}
 .seg button:focus-visible,.btn:focus-visible,select:focus-visible,input:focus-visible,.legend button:focus-visible,.parts button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 input[type=range]{accent-color:var(--crimson);width:140px}
@@ -219,6 +220,8 @@ a.btn{text-decoration:none;display:inline-block}
 .lesson .lh{display:flex;align-items:center;gap:8px}
 .lesson .lk{font-family:var(--f-mono);font-size:13px;color:#BE1740;font-weight:600}
 .lesson .lx{margin-left:auto;background:none;border:0;font-size:18px;line-height:1;cursor:pointer;color:inherit;opacity:.6;padding:2px 6px}
+@media (pointer:coarse){.lesson .lx{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin-top:-10px;margin-bottom:-10px}
+  .pin{padding:9px;margin:-9px}}
 .lesson h3{margin:0;font-size:18px;line-height:1.25}
 .lesson p{margin:0;font-size:14px;line-height:1.5}
 .lesson .ask{border-left:3px solid #E8B04B;padding:4px 0 4px 10px;background:rgba(232,176,75,.1);border-radius:0 6px 6px 0}
@@ -238,8 +241,8 @@ a.btn{text-decoration:none;display:inline-block}
 .lesson .fb.wait{background:rgba(232,176,75,.14);color:#6B4705}
 .lesson .lf{display:flex;align-items:center;gap:8px;margin-top:2px}
 .lesson .dots{display:flex;gap:4px;flex:1;justify-content:center;flex-wrap:wrap}
-.lesson .dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:rgba(190,23,64,.2);cursor:pointer}
-.lesson .dots button[aria-current="true"]{background:#BE1740;transform:scale(1.25)}
+.lesson .dots i{width:9px;height:9px;border-radius:50%;background:rgba(190,23,64,.2)}
+.lesson .dots i.on{background:#BE1740;transform:scale(1.25)}
 .lesson .lf .btn{padding:6px 12px;font-size:13px}
 .lesson .lf .btn:disabled{opacity:.45;cursor:not-allowed}
 #viewport.lessoning .callout,#viewport.lessoning .lead,#viewport.lessoning .caption,#viewport.lessoning .hud{display:none!important}

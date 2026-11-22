@@ -215,7 +215,7 @@ const tick = (hi) => { if (!S.snd || !AC || LIVE.rate > 2) return; const t = AC.
 ui.header({code: '6497', kicker: 'ĐỒNG HỒ CƠ LÊN DÂY TAY · ETA 6497-1 · Ø 36,60 MM', title: 'Đồng hồ cơ', sub: 'DAO ĐỘNG ĐIỀU HOÀ · BỘ THOÁT · TỈ SỐ TRUYỀN', hub: HUB_URL,
   right: [['2,5 Hz', 'BÁNH LẮC'], ['18.000', 'DAO ĐỘNG/GIỜ'], ['17', 'CHÂN KÍNH'], ['46 h', 'TRỮ CÓT']]});
 const BEATS = ['Toàn máy', 'Bánh lắc', 'Bộ thoát', 'Bánh răng', 'Hộp cót', 'Đẳng thời', 'Chỉnh giờ', 'Mặt số', 'Phim'];
-const beatEl = ui.add(`<div style="position:absolute;left:348px;top:84px;width:904px;display:flex;gap:4px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap"><span style="font:500 10px 'JetBrains Mono',monospace;color:${C.faint};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
+const beatEl = ui.add(`<div style="position:absolute;left:348px;top:84px;width:904px;display:flex;gap:4px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap"><span style="font:500 10.5px 'JetBrains Mono',monospace;color:${C.faint};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
 const setBeat = (i) => beatEl.querySelectorAll('[data-b]').forEach((n) => { const on = +n.dataset.b === i; n.style.borderBottomColor = on ? C.or : C.line; n.style.color = on ? C.ink : C.mute; });
 
 ui.panel(28, 112, 300, 236, 'BÁNH LẮC · DAO ĐỘNG', '01');
@@ -226,7 +226,7 @@ ui.panel(28, 360, 300, 200, 'ĐIỀU CHỈNH', '02');
 ui.buttons([['wind', 'LÊN DÂY'], ['imp', 'BỘ THOÁT'], ['sound', 'ÂM THANH']], 42, 394, 272);
 const SL = [['hours', 'DÂY CÓT CÒN'], ['reg', 'TAY CHỈNH'], ['inert', 'VÍT VÀNH']];
 const sl = Object.fromEntries(SL.map(([k, n], i) => [k, ui.slider(k, 42, 440 + i * 30, 272, n, {lw: 92, vw: 74})]));
-const regTxt = ui.text(42, 530, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const regTxt = ui.text(42, 530, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(28, 572, 300, 194, 'MÁY ĐO NHỊP', '03');
 ui.text(42, 606, 'SAI SỐ (GIÂY/NGÀY)'); const rateEl = ui.text(42, 619, '', 'mo', 'position:absolute;font-size:24px;font-weight:700');
 ui.text(186, 606, 'BIÊN ĐỘ · LỆCH NHỊP'); const ampEl = ui.text(186, 621, '', 'v', 'font-size:15px;font-weight:700');
@@ -237,12 +237,12 @@ ui.panel(1272, 112, 300, 256, 'CHUỖI BÁNH RĂNG · TỈ SỐ', '04');
 ui.text(1286, 146, 'BÁNH'); ui.text(1416, 146, 'RĂNG : LÁ'); ui.text(1500, 146, 'VÒNG/GIỜ');
 const trRows = TRAIN.map((w, i) => { ui.text(1286, 166 + i * 24, w.vn, 'v', 'font-size:12px;font-weight:600'); const r = ui.text(1416, 166 + i * 24, `${w.z}${w.mesh ? ` : ${w.mesh}` : ''}`, 'v', 'font-size:12px'); return [r, ui.text(1500, 166 + i * 24, '', 'v', 'width:58px;text-align:right;font-size:12px')]; });
 const trSvg = ui.svg(1286, 290, 272, 30);
-ui.text(1286, 332, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10px;white-space:normal;width:272px;line-height:1.45').innerHTML = `Bánh thoát ${TRAIN.at(-1).rph} vòng/giờ × ${W.escTeeth} răng × 2 nhịp = <b>${vphOfTrain().toLocaleString('vi-VN')} nhịp/giờ</b>`;
+ui.text(1286, 332, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45').innerHTML = `Bánh thoát ${TRAIN.at(-1).rph} vòng/giờ × ${W.escTeeth} răng × 2 nhịp = <b>${vphOfTrain().toLocaleString('vi-VN')} nhịp/giờ</b>`;
 ui.panel(1272, 380, 300, 212, 'THÁO TỪNG BỘ PHẬN', '05');
 const cutY = 412;
 ui.panel(1272, 604, 300, 162, 'HIỂN THỊ · NHẬT KÝ', '06');
 ui.buttons([['labels', 'NHÃN'], ['xray', 'X-QUANG']], 1286, 634, 272);
-const logRows = [0, 1, 2].map((k) => ui.text(1286, 690 + k * 15, '', 'v', 'font-size:10px;font-weight:500;width:272px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'));
+const logRows = [0, 1, 2].map((k) => ui.text(1286, 690 + k * 15, '', 'v', 'font-size:10.5px;font-weight:500;width:272px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'));
 ui.buttons([['v_hero', 'TOÀN CẢNH'], ['v_top', 'TRÊN'], ['v_side', 'BÊN'], ['v_bal', 'BÁNH LẮC']], 360, 120, 600);
 ui.text(362, 664, 'GIỜ TRÊN MẶT SỐ');
 const modeEl = ui.add(`<div style="position:absolute;left:360px;top:678px;font:700 40px/1.1 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:-.8px;color:${C.ink};font-variant-numeric:tabular-nums"></div>`);
@@ -272,7 +272,7 @@ const cut = createCutaway({st, ui, parts: [
     card: () => cardOf('mat')},
 ], explode: (k) => { EX = k; }, turn: (d) => { turn.rotation.y = d * D2R; }});
 cut.pills(1286, cutY, 272);
-ui.text(1286, 540, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10px;white-space:normal;width:272px;line-height:1.45').innerHTML = 'Bấm một bộ phận: nó tách ra trong 1 giây, vẫn chạy trong lúc treo, máy quay tới gần từ phía riêng. Bấm lại để lắp vào.';
+ui.text(1286, 540, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45').innerHTML = 'Bấm một bộ phận: nó tách ra trong 1 giây, vẫn chạy trong lúc treo, máy quay tới gần từ phía riêng. Bấm lại để lắp vào.';
 
 // ---------------- mô phỏng
 const disp = S.disp;
@@ -381,7 +381,7 @@ const sim = {
     { let g = ''; TRAIN.forEach((w, i) => { const x = 18 + i * 59, a = [-center / 6, center, third, four, -S.esc][i] * D2R; g += `<circle cx="${x}" cy="14" r="11" fill="none" stroke="${C.line}" stroke-width="2"/><line x1="${x}" y1="14" x2="${(x + 10 * Math.sin(a)).toFixed(1)}" y2="${(14 - 10 * Math.cos(a)).toFixed(1)}" stroke="${i === 4 ? C.or : C.ink}" stroke-width="2"/>`; }); trSvg.innerHTML = g; }
     // bảng 06 và chữ lớn
     for (const kk of Object.keys(disp)) ui.setOn(kk, disp[kk]); ui.setOn('imp', B.imp); ui.setOn('sound', S.snd); ui.setOn('wind', !!S.winding);
-    logRows.forEach((r, i) => { const l = S.log[i]; r.innerHTML = l ? `<span style="color:${C.faint}">${l[0]}</span>&nbsp;&nbsp;${l[1]}` : ''; r.style.opacity = 1 - i * 0.25; });
+    logRows.forEach((r, i) => { const l = S.log[i]; r.innerHTML = l ? `<span style="color:${C.mute}">${l[0]}</span>&nbsp;&nbsp;${l[1]}` : ''; r.style.opacity = 1 - i * 0.25; });
     modeEl.textContent = clockText();
     modeSub.textContent = `${B.imp ? (B.hours > 0 ? 'đang chạy' : 'hết cót · dừng') : 'tháo bộ thoát · dao động tắt dần'} · ${fx(1 / per, 3)} Hz · biên độ ${vn(B.amp / D2R, 0)}° · sai số ${rate >= 0 ? '+' : '−'}${vn(Math.abs(rate), 1)} s/ngày`;
     alert.set(B.hours <= 0 && B.imp ? 'HẾT CÓT · BẤM LÊN DÂY' : Math.abs(rate) > 60 ? 'SAI SỐ LỚN · KÉO TAY CHỈNH VỀ GIỮA' : '');

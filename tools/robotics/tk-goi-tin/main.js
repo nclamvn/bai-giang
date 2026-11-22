@@ -126,25 +126,25 @@ const slL = ui.slider('L', 42, 392, 272, 'CỠ GÓI', {lw: 92, vw: 74});
 const slC = ui.slider('C3', 42, 424, 272, 'TỐC ĐỘ WAN', {lw: 92, vw: 74});
 const slD = ui.slider('d3', 42, 456, 272, 'ĐỘ DÀI WAN', {lw: 92, vw: 74});
 const slR = ui.slider('rho3', 42, 488, 272, 'TẢI NỀN WAN', {lw: 92, vw: 74});
-ui.text(42, 516, 'Chặng 1, 2 giữ cố định. Thời gian xử lý mỗi nút là giả định.', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;width:272px');
+ui.text(42, 516, 'Chặng 1, 2 giữ cố định. Thời gian xử lý mỗi nút là giả định.', 'sm', 'text-transform:none;font-size:10.5px;width:272px;white-space:normal;line-height:1.4');
 ui.panel(28, 564, 300, 202, 'THỜI GIAN ĐÁP ỨNG · 1.12', '03');
 const slSv = ui.slider('tSv', 42, 600, 272, 'MÁY CHỦ XỬ LÝ', {lw: 92, vw: 74});
 const respBars = ['MẠNG ĐI VỀ', 'MÁY CHỦ'].map((n, i) => ui.bar(42, 628 + i * 20, 272, n, {lw: 76, vw: 70}));
 ui.text(42, 672, 'THỜI GIAN ĐÁP ỨNG'); const respBig = ui.text(42, 686, '', 'mo', 'position:absolute;font-size:24px;font-weight:700');
-const respTxt = ui.text(42, 722, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const respTxt = ui.text(42, 722, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 
 ui.panel(1272, 112, 300, 300, 'NGÂN SÁCH TRỄ · 1.10', '04');
 const budSvg = ui.svg(1286, 146, 272, 150);
 ui.text(1286, 306, 'TRỄ ĐẦU CUỐI MỘT CHIỀU'); const totBig = ui.text(1286, 320, '', 'mo', 'position:absolute;font-size:28px;font-weight:700');
-const totTxt = ui.text(1286, 360, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const totTxt = ui.text(1286, 360, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(1272, 424, 300, 178, 'HÀNG ĐỢI WAN · MÔ PHỎNG VÀ M/M/1', '05');
 const qChart = ui.chart(1286, 468, 272, 78, {min: 0, max: 1, colors: [C.ink], zero: false});
-const qTxt = ui.text(1286, 564, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const qTxt = ui.text(1286, 564, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(1272, 614, 300, 152, 'DƯ ĐỊA LIÊN KẾT · 1.7, 1.9', '06');
 const slN = ui.slider('nen', 1286, 650, 272, 'DỮ LIỆU NỀN', {lw: 92, vw: 74});
 const slE = ui.slider('eta', 1286, 676, 272, 'η MỤC TIÊU', {lw: 92, vw: 74});
 const dSvg = ui.svg(1286, 696, 272, 30);
-const dTxt = ui.text(1286, 732, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const dTxt = ui.text(1286, 732, '', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.buttons([['v_hero', 'TOÀN CẢNH'], ['v_lop', 'LỚP HỌC'], ['v_wan', 'ĐƯỜNG WAN'], ['v_dc', 'TRUNG TÂM DỮ LIỆU'], ['go', 'GỬI GÓI TIN'], ['bt14', 'BT 1.4']], 360, 120, 860);
 ui.text(362, 664, 'PHA');
 const modeEl = ui.add(`<div style="position:absolute;left:360px;top:678px;font:700 40px/1.1 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:-.8px;color:${C.ink}"></div>`);
@@ -213,11 +213,11 @@ const sim = {
     // bảng 04: thanh xếp chồng từng chặng
     const tot = kq.tong.tong; let g = ''; const W = 272;
     kq.hop.forEach((h, i) => {
-      const y = i * 34; g += `<text x="0" y="${y + 10}" font-family="Be Vietnam Pro" font-size="10" font-weight="600" fill="${C.ink}">Chặng ${i + 1}</text><text x="${W}" y="${y + 10}" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="${C.ink}">${F.fmtThoiGian(h.prop + h.tx + h.queue + h.proc)}</text>`;
+      const y = i * 34; g += `<text x="0" y="${y + 10}" font-family="Be Vietnam Pro" font-size="10.5" font-weight="600" fill="${C.ink}">Chặng ${i + 1}</text><text x="${W}" y="${y + 10}" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${F.fmtThoiGian(h.prop + h.tx + h.queue + h.proc)}</text>`;
       let x = 0; for (const k of ['prop', 'tx', 'queue', 'proc']) { const w = (h[k] / tot) * W; if (w > 0.2) g += `<rect x="${x}" y="${y + 15}" width="${w}" height="9" fill="${COL[k]}"/>`; x += w; }
       g += `<rect x="0" y="${y + 15}" width="${W}" height="9" fill="none" stroke="${C.line}"/>`;
     });
-    ['prop', 'tx', 'queue', 'proc'].forEach((k, j) => { const x = j * 68; g += `<rect x="${x}" y="110" width="9" height="9" fill="${COL[k]}"/><text x="${x + 13}" y="118" font-family="Be Vietnam Pro" font-size="9.5" fill="${C.ink}">${TEN[k]}</text><text x="${x + 13}" y="132" font-family="JetBrains Mono" font-size="9.5" fill="#626773">${F.fmtThoiGian(kq.tong[k], 2)}</text>`; });
+    ['prop', 'tx', 'queue', 'proc'].forEach((k, j) => { const x = j * 68; g += `<rect x="${x}" y="110" width="9" height="9" fill="${COL[k]}"/><text x="${x + 13}" y="118" font-family="Be Vietnam Pro" font-size="10.5" fill="${C.ink}">${TEN[k]}</text><text x="${x + 13}" y="132" font-family="JetBrains Mono" font-size="10.5" fill="#626773">${F.fmtThoiGian(kq.tong[k], 2)}</text>`; });
     budSvg.innerHTML = g;
     totBig.textContent = F.fmtThoiGian(tot, 2);
     const big = ['prop', 'tx', 'queue', 'proc'].sort((a, b) => kq.tong[b] - kq.tong[a])[0];
@@ -225,14 +225,14 @@ const sim = {
     // bảng 05
     const cv = S.curve, ymax = Math.max(cv.lt[Math.round((S.rho3 / 0.95) * 59)] * 1.6, cv.lt[50]) || 1e-3;
     qChart.lim.max = ymax;
-    qChart.set([cv.lt], {cursor: (S.rho3 - 0.02) / 0.93, extra: (Y, w) => cv.sim.map(([r, v]) => `<circle cx="${((r - 0.02) / 0.93) * w}" cy="${Math.max(0, Y(Math.min(v, ymax)))}" r="3" fill="${COL.queue}"/>`).join('') + `<text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">${F.fmtThoiGian(ymax, 1)}</text><text x="0" y="90" font-family="JetBrains Mono" font-size="9" fill="#626773">ρ 0</text><text x="${w}" y="90" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">0,95</text>`});
+    qChart.set([cv.lt], {cursor: (S.rho3 - 0.02) / 0.93, extra: (Y, w) => cv.sim.map(([r, v]) => `<circle cx="${((r - 0.02) / 0.93) * w}" cy="${Math.max(0, Y(Math.min(v, ymax)))}" r="3" fill="${COL.queue}"/>`).join('') + `<text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="#626773">${F.fmtThoiGian(ymax, 1)}</text><text x="0" y="90" font-family="JetBrains Mono" font-size="10.5" fill="#626773">ρ 0</text><text x="${w}" y="90" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="#626773">0,95</text>`});
     const h3 = kq.hop[2];
     qTxt.innerHTML = `Chấm: mô phỏng ${F.fmtThoiGian(h3.queue)} · đường: lý thuyết M/M/1 ${F.fmtThoiGian(h3.queueLT)} ở ρ = ${vn(S.rho3, 2)}. Trễ hàng đợi tăng vọt khi ρ tiến tới 1 (1.7).`;
     // bảng 06: BT 1.4, liên kết 1 Gbit/s mang thoại 80, video 300, nền chỉnh được
     slN.set(S.nen / 600, `${vn(S.nen, 0)} Mbit/s`); slE.set((S.eta - 0.5) / 0.45, vn(S.eta, 2));
     const parts = [[80, '#3B6EA8', 'thoại'], [300, '#E3562A', 'video'], [S.nen, '#8A8F98', 'nền']], sum = 80 + 300 + S.nen, rho = F.mucSuDung(sum * 1e6, 1e9), du = F.duDia(sum * 1e6, 1e9, S.eta) / 1e6;
     let dg = '', x = 0; for (const [v, c] of parts) { const w = Math.min(272 - x, (v / 1000) * 272); dg += `<rect x="${x}" y="4" width="${Math.max(0, w)}" height="14" fill="${c}"/>`; x += w; }
-    dg += `<rect x="0" y="4" width="272" height="14" fill="none" stroke="${C.line}"/><line x1="${S.eta * 272}" x2="${S.eta * 272}" y1="0" y2="22" stroke="${C.ink}" stroke-width="1.5"/><text x="${S.eta * 272}" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="${C.ink}">η</text>`;
+    dg += `<rect x="0" y="4" width="272" height="14" fill="none" stroke="${C.line}"/><line x1="${S.eta * 272}" x2="${S.eta * 272}" y1="0" y2="22" stroke="${C.ink}" stroke-width="1.5"/><text x="${S.eta * 272}" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">η</text>`;
     dSvg.innerHTML = dg;
     dTxt.innerHTML = `80 + 300 + ${vn(S.nen, 0)} = ${vn(sum, 0)} Mbit/s trên 1 Gbit/s: <b>ρ = ${vn(rho, 2)}</b>. Dư địa tới η·C: <b>${du >= 0 ? vn(du, 0) + ' Mbit/s' : 'vượt ' + vn(-du, 0) + ' Mbit/s'}</b>${Math.abs(du) < 0.5 ? ' (BT 1.4: vừa chạm ngưỡng, không còn chỗ cho lưu lượng bùng nổ)' : ''}.`;
     // chế độ

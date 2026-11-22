@@ -103,11 +103,11 @@ ui.header({code: 'HEXAPOD', kicker: 'ROBOT ĐI BỘ · 18 BẬC TỰ DO · 18 SE
 ui.panel(28, 112, 300, 238, 'DÁNG ĐI', '01');
 ui.buttons([['tripod', 'TRIPOD'], ['tetrapod', 'TETRAPOD'], ['wave', 'WAVE'], ['stop', 'DỪNG']], 42, 146, 272);
 const gaitSvg = ui.svg(42, 182, 272, 120);
-const gaitTxt = ui.text(42, 296, '', 'sm', 'text-transform:none;letter-spacing:.4px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const gaitTxt = ui.text(42, 296, '', 'sm', 'text-transform:none;letter-spacing:.4px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(28, 362, 300, 232, 'ĐIỀU KHIỂN', '02');
 const SL = [['stride', 'SẢI CHÂN'], ['Tc', 'CHU KỲ'], ['head', 'HƯỚNG ĐI'], ['turn', 'XOAY'], ['h', 'CAO THÂN'], ['lift', 'NHẤC CHÂN'], ['mass', 'KHỐI LƯỢNG']];
 const sl = Object.fromEntries(SL.map(([k, n], i) => [k, ui.slider(k, 42, 398 + i * 27, 272, n, {lw: 82, vw: 70})]));
-ui.text(42, 580, 'Khối lượng: giả định, chưa có số công bố.', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:8.5px');
+ui.text(42, 580, 'Khối lượng: giả định, chưa có số công bố.', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px');
 ui.panel(28, 606, 300, 160, 'GÓC KHỚP · IK TỪNG CHÂN', '03');
 ui.text(42, 640, 'Chân  Háng γ   Đùi α   Gối β   Pha', 'v', 'font-size:10.5px;font-weight:500;color:#626773;white-space:pre');
 const legRows = LEGS.map((L, i) => ui.text(42, 657 + i * 17, '', 'v', 'font-size:10.5px;font-weight:500'));
@@ -116,7 +116,7 @@ ui.text(1286, 148, 'BIÊN ỔN ĐỊNH SSM (mm)'); const ssmTxt = ui.text(1286, 
 ui.text(1430, 148, 'THEO CHIỀU ĐI (mm)'); const lsmTxt = ui.text(1430, 161, '', 'mo', 'position:absolute;font-size:24px;font-weight:700');
 const ssmChart = ui.chart(1286, 202, 272, 70, {min: 0, max: 0.25, colors: [C.or, C.ink], dash: [0, '3 3']});
 ui.text(1286, 280, 'CAM: SSM · NÉT ĐỨT: THEO CHIỀU ĐI · 6 GIÂY');
-const nTxt = ui.text(1286, 298, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const nTxt = ui.text(1286, 298, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 ui.panel(1272, 360, 300, 186, 'MÔ MEN SERVO ĐÙI · ƯỚC LƯỢNG TĨNH', '05');
 const tb = LEGS.map((L, i) => ui.bar(1286, 396 + i * 20, 272, L.name, {lw: 30, vw: 96, mark: 0.75}));
 ui.text(1286, 520, 'τ ≈ m·g / n_chống × tay đòn · vạch 1,5 N·m', 'sm', 'text-transform:none;letter-spacing:.3px');
@@ -253,7 +253,7 @@ const sim = {
     let svg = '';
     LEGS.forEach((L, i) => {
       const y = i * 17 + 2, o = g.off[L.name];
-      svg += `<text x="0" y="${y + 10}" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">${L.name}</text>`;
+      svg += `<text x="0" y="${y + 10}" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">${L.name}</text>`;
       svg += `<rect x="28" y="${y}" width="244" height="13" fill="${C.chart}" stroke="${C.line}"/>`;
       // pha chống: p ∈ [0, β) với p = phase + off
       const segs = []; const a0 = (1 - o) % 1, a1 = a0 + g.beta;

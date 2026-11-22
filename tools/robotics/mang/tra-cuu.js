@@ -41,7 +41,7 @@ export function createLookup({url, models, onModel}) {
 .tc table{border-collapse:collapse;width:100%;font-size:12px}.tc td,.tc th{padding:4px 6px;border-bottom:1px solid #f1f2f4;text-align:left;vertical-align:top}.tc th{color:#6b7280;font-weight:600}
 .tc .num{font-variant-numeric:tabular-nums;text-align:right}.tc .odd{color:#b45309}
 .tc .note{color:#6b7280;font-size:11.5px;margin-top:10px}
-.tc .cc{color:#15803d;font-weight:700;font-size:10px;margin-left:3px}.tc .tcv{color:#b45309;white-space:nowrap}.tc .tcv small{color:#6b7280;font-weight:400}.tc tr.goc td:first-child{box-shadow:inset 3px 0 #15803d}.tc .gnote{font-size:12px;margin:6px 0 0;padding-left:16px}.tc .gnote li{margin:3px 0}.tc .gx{color:#6b7280;font-size:11px}
+.tc .cc{color:#15803d;font-weight:700;font-size:10.5px;margin-left:3px}.tc .tcv{color:#b45309;white-space:nowrap}.tc .tcv small{color:#6b7280;font-weight:400}.tc tr.goc td:first-child{box-shadow:inset 3px 0 #15803d}.tc .gnote{font-size:12px;margin:6px 0 0;padding-left:16px}.tc .gnote li{margin:3px 0}.tc .gx{color:#6b7280;font-size:11px}
 @media (max-width:760px){.tc{inset:50px 0 82px;border-radius:0} /* chừa thanh đầu và thanh bước của khung bài */.tc.on{grid-template-columns:1fr;grid-template-rows:auto 38vh 1fr}.tc header{grid-column:1;flex-wrap:wrap;gap:4px 12px;padding:10px 14px}.tc header small{order:3;flex:1 1 100%;font-size:11px}.tc .ls{border-right:0;border-bottom:1px solid #e8eaee}.tc .tcv{white-space:normal}.tc .dt{padding:12px 12px}}
 </style>
 <header><b>Tra cứu loài</b><small data-k="count">đang tải dữ liệu FishBase…</small><button data-k="close" aria-label="Đóng">Đóng</button></header>
@@ -78,12 +78,12 @@ export function createLookup({url, models, onModel}) {
     const W = 300, H = 170, L = 36, B = 22, X = (v) => L + ((xlog ? Math.log10(v) - Math.log10(x0) : v - x0) / (xlog ? Math.log10(x1) - Math.log10(x0) : x1 - x0)) * (W - L - 6), Y = (v) => H - B - ((Math.log10(v) - Math.log10(y0)) / (Math.log10(y1) - Math.log10(y0))) * (H - B - 6);
     const ok = (p) => p[0] != null && p[1] > 0 && (!xlog || p[0] > 0);
     let g = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img"><rect x="${L}" y="6" width="${W - L - 6}" height="${H - B - 6}" fill="#f8f9fb"/>`;
-    for (let e = Math.ceil(Math.log10(y0)); e <= Math.log10(y1); e++) g += `<line x1="${L}" x2="${W - 6}" y1="${Y(10 ** e)}" y2="${Y(10 ** e)}" stroke="#e6e8ec"/><text x="${L - 4}" y="${Y(10 ** e) + 3}" text-anchor="end" font-size="8.5" fill="#6b7280">${tick(10 ** e)}</text>`;
+    for (let e = Math.ceil(Math.log10(y0)); e <= Math.log10(y1); e++) g += `<line x1="${L}" x2="${W - 6}" y1="${Y(10 ** e)}" y2="${Y(10 ** e)}" stroke="#e6e8ec"/><text x="${L - 4}" y="${Y(10 ** e) + 3}" text-anchor="end" font-size="10.5" fill="#6b7280">${tick(10 ** e)}</text>`;
     const xt = xlog ? [...Array(Math.round(Math.log10(x1 / x0)) + 1)].map((_, i) => x0 * 10 ** i) : [0, 10, 20, 30, 40].filter((v) => v >= x0 && v <= x1);
-    for (const v of xt) g += `<text x="${X(v)}" y="${H - 8}" text-anchor="middle" font-size="8.5" fill="#6b7280">${xlog ? tick(v) : fmt(v)}</text>`;
+    for (const v of xt) g += `<text x="${X(v)}" y="${H - 8}" text-anchor="middle" font-size="10.5" fill="#6b7280">${xlog ? tick(v) : fmt(v)}</text>`;
     g += pts.filter(ok).map((p) => `<circle cx="${X(Math.min(x1, Math.max(x0, p[0]))).toFixed(1)}" cy="${Y(Math.min(y1, Math.max(y0, p[1]))).toFixed(1)}" r="1.6" fill="#9aa3af" opacity=".45"/>`).join('');
     g += on.filter(ok).map((p) => `<circle cx="${X(Math.min(x1, Math.max(x0, p[0]))).toFixed(1)}" cy="${Y(Math.min(y1, Math.max(y0, p[1]))).toFixed(1)}" r="3.6" fill="#E8590C" stroke="#fff" stroke-width="1"/>`).join('');
-    return g + `<text x="${W - 6}" y="${H - 1}" text-anchor="end" font-size="8.5" fill="#4b5563">${xl}</text><text x="2" y="12" font-size="8.5" fill="#4b5563">${yl}</text></svg>`;
+    return g + `<text x="${W - 6}" y="${H - 1}" text-anchor="end" font-size="10.5" fill="#4b5563">${xl}</text><text x="2" y="12" font-size="10.5" fill="#4b5563">${yl}</text></svg>`;
   }
 
   function renderDetail() {

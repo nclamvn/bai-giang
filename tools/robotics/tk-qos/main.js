@@ -85,7 +85,7 @@ ui.panel(28, 324, 300, 236, 'TRỄ HÀNG ĐỢI TỪNG LỚP', '02');
 const wRows = LOP.map((l, c) => ui.bar(42, 360 + c * 22, 272, l.ten.toUpperCase(), {lw: 60, vw: 84}));
 const t02 = ui.text(42, 430, '', 'sm', NHO);
 ui.panel(28, 572, 300, 194, 'MẤT GÓI VÀ THÔNG LƯỢNG · 5.16', '03');
-const mRows = LOP.map((l, c) => ui.bar(42, 608 + c * 22, 272, l.ten.toUpperCase(), {lw: 60, vw: 110}));
+const mRows = LOP.map((l, c) => ui.bar(42, 608 + c * 22, 272, l.ten.toUpperCase(), {lw: 46, vw: 150}));
 const t03 = ui.text(42, 678, '', 'sm', NHO);
 ui.panel(1272, 112, 300, 226, 'TRƯỜNG DS VÀ ECN', '04');
 const hSvg = ui.svg(1286, 146, 272, 70);
@@ -154,7 +154,7 @@ const sim = {
     t03.innerHTML = 'Mất gói gồm gói rơi khi hàng đầy (tail drop, bộ đệm 200 gói) và gói bị policer cắt ở biên. P<sub>drop,c</sub> phụ thuộc độ dài hàng của lớp đó và ngưỡng của nó (5.16).';
     // bảng 04: byte DS + ECN
     { let g = ''; for (let i = 0; i < 8; i++) { const on = i < 6 ? (ds >> (5 - i)) & 1 : 0; g += `<rect x="${i * 34}" y="0" width="31" height="26" fill="${i < 6 ? (on ? LOP[S.sel].mau : C.chart) : '#e6eaee'}" stroke="${C.line}"/><text x="${i * 34 + 15.5}" y="18" text-anchor="middle" font-family="JetBrains Mono" font-size="12" font-weight="700" fill="${on ? '#fff' : C.ink}">${on}</text>`; }
-      g += `<text x="0" y="44" font-family="JetBrains Mono" font-size="9.5" fill="#626773">DSCP (6 bit) = ${ds} · ${LOP[S.sel].ma}</text><text x="272" y="44" text-anchor="end" font-family="JetBrains Mono" font-size="9.5" fill="#626773">ECN</text><text x="0" y="62" font-family="JetBrains Mono" font-size="9.5" fill="#626773">Trước kia: 3 bit ưu tiên + cờ ToS</text>`; hSvg.innerHTML = g; }
+      g += `<text x="0" y="44" font-family="JetBrains Mono" font-size="10.5" fill="#626773">DSCP (6 bit) = ${ds} · ${LOP[S.sel].ma}</text><text x="272" y="44" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="#626773">ECN</text><text x="0" y="62" font-family="JetBrains Mono" font-size="10.5" fill="#626773">Trước kia: 3 bit ưu tiên + cờ ToS</text>`; hSvg.innerHTML = g; }
     t04.innerHTML = `Biên mạng đánh dấu; mỗi chặng chỉ đọc 6 bit này để chọn hàng, không cần giữ trạng thái từng luồng (DiffServ). Hai bit cuối là ECN: router báo nghẽn bằng cách đặt cờ thay vì bỏ gói. EF = 46 (RFC 3246), AF41 = 34 (RFC 2597).`;
     // bảng 05
     const dmx = Math.max(...kq.dser) * 1.1; LOP.forEach((l, c) => dRows[c].set(kq.dser[c] / dmx, F.fmtThoiGian(kq.dser[c], 2), l.mau));

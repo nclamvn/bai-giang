@@ -142,7 +142,7 @@ const dvRows = DV.map((d, i) => {
   ui.add(`<div style="position:absolute;left:42px;top:${y + 3}px;width:9px;height:9px;border-radius:2px;background:${d.mau}"></div>`);
   const BV = "font-family:'Be Vietnam Pro',system-ui,sans-serif;";
   return {ten: ui.text(56, y, d.ten, 'v', BV + 'font-size:11.5px;font-weight:600;width:170px;white-space:nowrap'), kq: ui.text(214, y, '', 'v', BV + 'font-size:10.5px;font-weight:700;width:100px;text-align:right;white-space:nowrap'),
-    sub: ui.text(42, y + 16, '', 'v', BV + 'font-size:10px;color:#626773;width:272px;white-space:nowrap'), g: ui.bar(42, y + 30, 272, 'GOODPUT', {lw: 60, vw: 92})};
+    sub: ui.text(42, y + 16, '', 'v', BV + 'font-size:10.5px;color:#626773;width:272px;white-space:nowrap'), g: ui.bar(42, y + 30, 272, 'GOODPUT', {lw: 60, vw: 92})};
 });
 ui.panel(28, 356, 300, 210, 'QUYẾT ĐỊNH THIẾT KẾ X_NET · 1.1', '02');
 const xSvg = ui.svg(42, 390, 272, 96);
@@ -183,8 +183,8 @@ const fA = (a) => `${vn(a * 100, 3)} %`;
 const fMs = (s) => (s < 1e-3 ? `${vn(s * 1e6, 0)} µs` : `${vn(s * 1e3, s < 0.01 ? 2 : 1)} ms`);
 const DAT = '#2F8F5B', HONG = '#B3261E';
 const dau = (ok) => (ok == null ? `<tspan fill="#9aa0a6">–</tspan>` : ok ? `<tspan fill="${DAT}">✓</tspan>` : `<tspan fill="${HONG}">✗</tspan>`);
-const T = (x, y, s, o = '') => `<text x="${x}" y="${y}" font-family="Be Vietnam Pro" font-size="10" fill="${C.ink}" ${o}>${s}</text>`;
-const TM = (x, y, s, o = '') => `<text x="${x}" y="${y}" font-family="JetBrains Mono" font-size="9.5" fill="${C.ink}" ${o}>${s}</text>`;
+const T = (x, y, s, o = '') => `<text x="${x}" y="${y}" font-family="Be Vietnam Pro" font-size="10.5" fill="${C.ink}" ${o}>${s}</text>`;
+const TM = (x, y, s, o = '') => `<text x="${x}" y="${y}" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}" ${o}>${s}</text>`;
 const trec = (d) => (d.qua !== 'wan' ? null : S.x.kep ? 1 : 2 * 3600); // đổi sang đường dự phòng ≈ 1 s (giả định); một đường: chờ sửa MTTR 2 h
 const fT = (t) => (t == null ? '—' : t < 60 ? `${vn(t, 0)} s` : t < 3600 ? `${vn(t / 60, 0)} phút` : `${vn(t / 3600, 0)} h`);
 
@@ -257,12 +257,14 @@ const sim = {
     // bảng 03
     const dong = [...PHUONG_AN.map((p) => ({ten: p.ten, e: danhGia({...p.x, tang: x.tang})})), {ten: 'Đang chọn', e, cur: true}].map((r) => ({...r, m: mucTieu(r.e)}));
     const best = Math.min(...dong.slice(0, 3).map((r) => r.m.J));
-    let g3 = ['PHƯƠNG ÁN', 'D', 'MẤT', 'C_op', 'A', 'J'].map((h, j) => TM([0, 134, 174, 204, 232, 272][j], 10, h, `fill="#626773" font-size="8.5" ${j ? 'text-anchor="end"' : ''}`)).join('');
+    // ở cỡ chữ 10,5 cột tên phải hẹp lại cho năm cột số khỏi chạm nhau: tên phương án trong bảng viết gọn
+    const GON = {'Mua băng thông': 'Mua thêm'};
+    let g3 = ['PHƯƠNG ÁN', 'D', 'MẤT', 'C_op', 'A', 'J'].map((h, j) => TM([0, 122, 172, 204, 232, 272][j], 10, h, `fill="#626773" font-size="10.5" ${j ? 'text-anchor="end"' : ''}`)).join('');
     dong.forEach((r, i) => {
       const y = 30 + i * 21 + (r.cur ? 6 : 0), dam = r.cur || r.m.J === best ? 'font-weight="700"' : '';
       if (r.cur) g3 += `<line x1="0" x2="272" y1="${y - 14}" y2="${y - 14}" stroke="${C.line}"/>`;
-      g3 += T(0, y, (r.e.datHet ? '<tspan fill="' + DAT + '">● </tspan>' : '<tspan fill="' + HONG + '">● </tspan>') + r.ten, dam + ' font-size="9.5"');
-      g3 += TM(134, y, fMs(r.e.kq.lh.v.D), 'text-anchor="end"') + TM(174, y, fP(Math.max(r.e.kq.lh.v.P, r.e.kq.sl.v.P)), 'text-anchor="end"') + TM(204, y, vn(r.e.cop, 2), 'text-anchor="end"') + TM(232, y, vn(r.m.A, 1), 'text-anchor="end"') + TM(272, y, vn(r.m.J, 2), `text-anchor="end" ${dam}`);
+      g3 += T(0, y, (r.e.datHet ? '<tspan fill="' + DAT + '">● </tspan>' : '<tspan fill="' + HONG + '">● </tspan>') + (GON[r.ten] || r.ten), dam + ' font-size="10.5"');
+      g3 += TM(122, y, fMs(r.e.kq.lh.v.D), 'text-anchor="end"') + TM(172, y, fP(Math.max(r.e.kq.lh.v.P, r.e.kq.sl.v.P)), 'text-anchor="end"') + TM(204, y, vn(r.e.cop, 2), 'text-anchor="end"') + TM(232, y, vn(r.m.A, 1), 'text-anchor="end"') + TM(272, y, vn(r.m.J, 2), `text-anchor="end" ${dam}`);
     });
     jSvg.innerHTML = g3;
     jTxt.innerHTML = `● đạt hết (1.8) · ● chưa. J = D/10 ms + mất (%) + C<sub>op</sub> − số chữ số 9 của A; α = 1, chi phí theo đơn vị là giả định của bài. J nhỏ hơn là tốt hơn.`;
@@ -273,17 +275,17 @@ const sim = {
     const R = [['B_min', 'tối thiểu', `${vn(r.Bmin * (d.k === 'lh' ? x.tang : 1), 0)} Mbit/s`, `${vn(k.v.G, 0)}`, k.ok.G], ['B_max', 'tốc độ đỉnh', `${vn(r.Bmax, 0)} Mbit/s`, 'định cỡ', null],
       ['D_max', 'trễ', r.Dmax == null ? 'không quy định' : fMs(r.Dmax), fMs(k.v.D), r.Dmax == null ? null : k.ok.D], ['J_max', 'biến thiên trễ', r.Jmax == null ? 'không quy định' : fMs(r.Jmax), fMs(k.v.J), r.Jmax == null ? null : k.ok.J],
       ['P_max', 'mất gói', fP(r.Pmax), fP(k.v.P), k.ok.P], ['A_min', 'sẵn sàng', fA(r.Amin), fA(k.v.A), k.ok.A], ['T_rec', 'phục hồi', fT(r.Trec), fT(tr), tr == null ? null : tr <= r.Trec]];
-    let g4 = TM(0, 10, 'THÀNH PHẦN', 'fill="#626773" font-size="8.5"') + TM(196, 10, 'YÊU CẦU', 'fill="#626773" font-size="8.5" text-anchor="end"') + TM(252, 10, 'ĐO', 'fill="#626773" font-size="8.5" text-anchor="end"');
+    let g4 = TM(0, 10, 'THÀNH PHẦN', 'fill="#626773" font-size="10.5"') + TM(196, 10, 'YÊU CẦU', 'fill="#626773" font-size="10.5" text-anchor="end"') + TM(252, 10, 'ĐO', 'fill="#626773" font-size="10.5" text-anchor="end"');
     R.forEach(([sym, ten, yc, do_, ok], i) => {
       const y = 32 + i * 24;
-      g4 += TM(0, y, sym.replace('_', ''), 'font-weight="700"') + T(40, y, ten, 'fill="#626773" font-size="9"') + TM(196, y, yc, 'text-anchor="end"') + TM(252, y, do_, 'text-anchor="end"') + T(272, y, dau(ok), 'text-anchor="end" font-size="12" font-weight="700"');
+      g4 += TM(0, y, sym.replace('_', ''), 'font-weight="700"') + T(40, y, ten, 'fill="#626773" font-size="10.5"') + TM(196, y, yc, 'text-anchor="end"') + TM(252, y, do_, 'text-anchor="end"') + T(272, y, dau(ok), 'text-anchor="end" font-size="12" font-weight="700"');
       g4 += `<line x1="0" x2="272" y1="${y + 8}" y2="${y + 8}" stroke="${C.line}"/>`;
     });
     rSvg.innerHTML = g4;
     rTxt.innerHTML = `Trễ, biến thiên trễ, mất gói theo lớp ${d.y1541} của ITU-T Y.1541; băng thông, sẵn sàng, phục hồi là giả định của bài. Ô không quy định thì không có tiêu chí kiểm ở ô đó.`;
     // bảng 05: ma trận (1.8)
     const COT = [['D', 'D ≤ Dmax'], ['J', 'J ≤ Jmax'], ['P', 'P ≤ Pmax'], ['G', 'G ≥ Gmin'], ['A', 'A ≥ Amin']];
-    let g5 = COT.map(([c], j) => TM(104 + j * 26, 10, c, 'fill="#626773" text-anchor="middle"')).join('') + TM(272, 10, 'KẾT LUẬN', 'fill="#626773" font-size="8.5" text-anchor="end"');
+    let g5 = COT.map(([c], j) => TM(104 + j * 26, 10, c, 'fill="#626773" text-anchor="middle"')).join('') + TM(272, 10, 'KẾT LUẬN', 'fill="#626773" font-size="10.5" text-anchor="end"');
     DV.forEach((dv, i) => {
       const y = 34 + i * 22, kk = e.kq[dv.k];
       g5 += `<rect x="0" y="${y - 8}" width="8" height="8" rx="2" fill="${dv.mau}"/>` + T(13, y, dv.ten.replace(' trực tuyến', '').replace(' giám sát', '').replace(' ra đám mây', ''), S.sel === i ? 'font-weight="700"' : '');

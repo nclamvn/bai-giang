@@ -139,11 +139,11 @@ const tcpR = ui.text(1286, 192, '', 'v', 'font-size:10.5px;font-weight:500');
 ui.text(1286, 214, 'CHỈ SỐ THAO TÁC w = |det J|');
 const wTxt = ui.text(1500, 211, '', 'v', 'width:58px;text-align:right');
 const wChart = ui.chart(1286, 232, 272, 54, {min: 0, max: 0.1, colors: [C.or]});
-ui.text(1286, 294, 'GẦN 0 = GẦN ĐIỂM KỲ DỊ · 6 GIÂY GẦN NHẤT', 'sm', 'font-size:8px');
+ui.text(1286, 294, 'GẦN 0 = GẦN ĐIỂM KỲ DỊ · 6 GIÂY GẦN NHẤT', 'sm', 'font-size:10.5px');
 // 05 IK
 ui.panel(1272, 334, 300, 150, 'ĐỘNG HỌC NGHỊCH · 8 NGHIỆM', '05');
 for (let i = 0; i < 8; i++) ui.button('s' + i, 1286 + (i % 4) * 68, 368 + Math.floor(i / 4) * 30, 62, `S${i + 1}`);
-const solTxt = ui.text(1286, 432, '', 'sm', 'white-space:normal;width:272px;line-height:1.5;text-transform:none;letter-spacing:.4px;font-size:9.5px');
+const solTxt = ui.text(1286, 432, '', 'sm', 'white-space:normal;width:272px;line-height:1.5;text-transform:none;letter-spacing:.4px;font-size:10.5px');
 // 06 chương trình
 ui.panel(1272, 496, 300, 172, 'CHƯƠNG TRÌNH', '06');
 ui.buttons([['movej', 'MOVEJ'], ['movel', 'MOVEL'], ['pick', 'GẮP – ĐẶT'], ['sing', 'KỲ DỊ'], ['home', 'VỀ GỐC']], 1286, 530, 272);

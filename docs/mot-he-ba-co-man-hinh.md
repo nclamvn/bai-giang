@@ -39,7 +39,7 @@ Khi đổi thang: sửa token rồi chạy `python3 tools/ve_sinh_ui.py --dua-ve
 
 ### Kiểm trong trình duyệt: `tests/kiem_bo_cuc.py`, luật R1 tới R7
 
-Chạy trong CI sau bước mở thử trang. Đo ở 320, 390, 768, 1024 và 1440 px; bốn bề rộng đầu giả lập màn chạm.
+Chạy trong CI sau bước mở thử trang. Đo ở 320, 360, 390, 768, 1024 và 1440 px; năm bề rộng đầu giả lập màn chạm. 360 px là bề rộng phổ biến nhất của điện thoại Android.
 
 | Mã | Luật |
 |---|---|
@@ -51,11 +51,15 @@ Chạy trong CI sau bước mở thử trang. Đo ở 320, 390, 768, 1024 và 14
 | R6 | Tương phản chữ đạt AA trên nền đặc xác định được |
 | R7 | Trong thẻ của bài kit, núm thanh trượt nằm trên thanh và trong thẻ |
 
-Hai luật chỉ báo cáo, không chặn: R3k (chữ dưới 12 px trong bảng bài kit) và R2k (nút dưới 44 px trong bảng bài kit: nút trên cảnh ở chế độ lên lớp và nút làm nhãn hàng trong thẻ). Lí do ở mục 5.
+Hai luật chỉ báo cáo, không chặn: R3k (chữ dưới 12 px trong bảng bài kit, chỉ còn tính ở 320 px và ở chế độ lên lớp) và R2k (nút trên cảnh ở chế độ lên lớp). Từ 360 px trở lên, chữ và nút trong thẻ của trang đọc thuộc cổng R2, R3 như mọi trang khác. Lí do ở mục 5.
+
+Phần tử bị khung cuộn của tổ tiên cắt mất tâm không được tính ở R2, R5: ở trạng thái đó nó không bấm được. Chữ trong SVG lấy hệ số co từ ma trận ra màn hình, gồm cả viewBox.
+
+**Trạng thái sau khi bấm.** Với bảy giao diện bên trong bài và hai bài đại diện, công cụ bấm tiếp trên trang đang mở rồi đo lại: chọn một bào quan, mở chế độ học theo bước, mở trình đơn của vỏ, bấm một ghim, mở hộp thoại, bấm thử phá, mở bảng điều khiển. Danh sách ở `KICH_BAN`; kịch bản không tìm thấy nút để bấm thì báo lỗi, để kịch bản không lặng lẽ hết tác dụng khi giao diện đổi.
 
 Mỗi lần chạy, công cụ tự thử trước trên một trang mẫu phạm đúng bảy luật; luật nào không cắn thì dừng.
 
-Trang đo, 23 trang:
+Trang đo, 23 trang (cộng 17 trạng thái sau khi bấm):
 
 - 12 trang tĩnh: trang chủ, bốn trang mục, gói dạy, giáo án, thư viện, kiểm máy, trang mẫu, điều khiển từ xa;
 - bốn bài đại diện ở chế độ đọc: hai bài kit (một bài nhiều thanh trượt, một bài có nút trong thẻ), bài có khung, Riemann;
@@ -108,11 +112,42 @@ Sau khi cổng đo chạy ổn, rà tiếp phần cổng chưa nhìn tới.
 
 Số đo sau đợt này, 23 trang: R1 tới R7 đều 0; R3k 264, R2k 24 (chỉ báo cáo). Bảy giao diện bên trong bài đo thêm một lần đủ năm bề rộng: đạt. Phép dò chữ đè và chữ tràn trên thẻ của cả 31 bài kit ở 1440 px (bước 1 và bước 3): 0 chữ tràn; 4 chỗ báo đè ở hai bài là hai khung chữ chồng mép, chữ không chạm nhau (đã xem ảnh). Số trang A4 của năm bản in không đổi (6, 6, 6, 9, 11).
 
-## 5. Còn lại
+## 5. Đợt hoàn thiện thứ hai, 22/11/2026
 
-- **R3k, chỉ báo cáo:** chữ trong bảng của bài kit còn dưới 12 px ở một số chỗ (ghi chú 9,5 đơn vị thiết kế viết ngay trong từng bài). Trên hai bài đại diện, phép đo đếm được 107 và 156 phần tử cộng cả năm bề rộng; bài thứ nhất: 53 ở 320 px, 9 ở 390 px, 25 ở 768 px, 10 ở 1024 px và 10 ở 1440 px. Muốn hết phải sửa bố cục bảng của từng bài trong 31 bài kit; nâng cỡ chữ hàng loạt đã thử và làm vỡ bảng (mục 4).
-- **R2k, chỉ báo cáo:** nút làm nhãn hàng trong thẻ cao khoảng 29 px trên điện thoại (6 nút ở bài sứa), vùng bấm nới thêm 5 px mỗi phía. Đạt mức 24 px của WCAG 2.2 AA, chưa đạt 44 px của dự án, vì hàng cách nhau 36 đơn vị thiết kế. Nút trên cảnh ở chế độ lên lớp cũng thuộc nhóm này: chế độ đó dành cho màn chiếu và máy bàn.
-- **Các bài riêng** đã vào danh sách đo, nhưng mới đo trạng thái lúc mở bài; các bảng chỉ hiện sau khi bấm (bảng thông tin bào quan, bảng thí nghiệm) chưa đo.
-- **Máy thật:** mọi số trên đây đo bằng trình duyệt giả lập. Cổng cuối của milestone là xem trên một điện thoại, một tablet, một laptop.
-- Phần rà bằng mắt (thứ bậc thị giác, trang trí vô nghĩa) mới làm trên ảnh chụp của bảy trang, chưa làm đủ mọi trang.
+Mục tiêu: hết các mục "còn lại" đo được bằng máy.
+
+**Chữ trong bảng bài kit.** Đo lại cho đúng trước khi sửa: phép đo cũ tính sai hệ số co của chữ trong SVG (lấy hệ số 1) và của phần tử hẹp (làm tròn bề rộng tới px), nên đếm thừa. Sau đó ba việc:
+
+- Sàn cỡ chữ 10,5 đơn vị thiết kế cho mọi bảng: 185 dòng trong 31 bài và kit, các cỡ 8 tới 10 đơn vị nâng lên 10,5. Khác lần thử trước (nâng riêng trong thẻ, lên 11,5) ở chỗ sửa ngay trong nguồn của bài, nên bố cục của bảng được xem lại cùng lúc.
+- Lưới thẻ không để thẻ hẹp dưới 332 px: hẹp hơn thì bớt cột, không thu chữ. 332 px cho hệ số co 1,107, chữ 10,5 đơn vị thành 11,6 px. Bảng rộng 300 đơn vị; trước đây khung bảng bị tính thêm 12 đơn vị vào bề rộng thẻ, nay bỏ, nên chữ lớn thêm 4 %.
+- Nhãn trên cảnh (tên bộ phận, dòng "Bài giảng đang tự chạy", cảnh báo) lấy cỡ theo hệ số co của cảnh để không dưới 11,6 px; cảnh co dưới 0,75 thì nhãn chỉ còn tên.
+
+Kết quả trên trang đọc của cả 31 bài: từ 360 px trở lên, 0 chữ dưới 11,5 px, 0 nút dưới 44 px trên màn chạm. Ở 320 px còn 17 tới 44 phần tử mỗi bài dưới 11,5 px (thẻ 292 px, hệ số co 0,97); xem mục 6.
+
+**Nút làm nhãn hàng** (bảng "Sáu hệ thống" của sứa, robot bốn chân) cao 44 px trên màn chạm. Các hàng giãn ra cho khỏi chạm nhau, chữ số cùng hàng đi theo hàng của mình, phần bên dưới dời theo. Ô chọn loài cá cũng vậy.
+
+**Rà bằng mắt cả 31 bài ở 768 px, rồi ở 390 px** (ảnh lưới thẻ trên màn chạm) và sửa những gì thấy:
+
+- dải giai đoạn dựng (Hải đăng, Chùa gỗ) thành hàng nút cỡ thật, tự xuống dòng; trước đó nút 22 px, chữ 9,9 px;
+- dòng tổng kết dưới cảnh (VLSM) thành thẻ chữ chảy tự nhiên theo bề rộng thẻ;
+- thanh có tâm (cân bằng lực ở sứa, robot bốn chân) cùng lỗi toạ độ với núm thanh trượt lần trước: phần tô trôi khỏi thẻ ở cột phải;
+- Crazyflie (chữ tràn hộp sơ đồ PID), sứa (nhãn tám đồng hồ dính nhau), nhện (biểu đồ bước dính chữ), động cơ (nhãn trục đè đường cong), cá mang (nhãn mũi tên đè đường), mako (nhãn điểm đo đè đường hồi quy), piranha, máy ảnh, VXLAN (ô đầu khung quá hẹp cho tên và số), QoS, overlay (số dài đè thanh), vòng khép kín (ô hẹp), dịch vụ (bảng J(x) chật cột);
+- chữ phụ xám nhạt `#d5d8de` (1,4:1) ở số thứ tự giai đoạn và giờ nhật ký đổi sang chữ phụ đạt AA; nền cảnh báo cam `#E3562A` dưới chữ trắng (3,7:1) đổi sang `#C2410C` (5,2:1);
+- `sc()`: RF, RM, LF, LM, LR giữ nguyên; Ethernet, Internet đúng dạng; nhãn mở đầu bằng con số ("200 BYTE") không viết hoa chữ sau.
+
+**Bảng hiện sau khi bấm.** Đo được nhờ kịch bản bấm (mục 2) và sửa những gì nó bắt được:
+
+- Tế Bào, Ty Thể: nút đóng và thu gọn của bảng lên lớp 18 tới 24 px, nay 44 px trên màn chạm; ghim bào quan 26 px, nay vùng bấm 44 px (hình tròn vẫn 26 px); chấm tiến trình 9 px là nút bấm được, nay là chấm để nhìn (chuyển bước bằng nút Trước, Tiếp và danh sách bước của vỏ); ghim "Ribosome thật" không còn đè nút Tiếp của bảng lên lớp.
+- Neuron: ô chọn trong bảng thử phá 40 px vì luật chạm đứng trước luật gốc và bị đè; nay 44 px.
+- Bài thư viện: công tắc bị kéo thành viên thuốc dựng đứng 34 × 44 px (luật chạm áp nhầm); nay giữ hình 34 × 19, vùng bấm 44 × 44 nhờ phần đệm trong suốt. Thanh trượt cao 44 px.
+
+**Tế Bào lúc đang tải:** ghim "Ribosome thật" chỉ hiện sau khi chữ "Đang dựng tế bào" tắt.
+
+## 6. Còn lại
+
+- **320 px, chỉ báo cáo (R3k):** chữ trong thẻ bài kit còn 9,8 tới 11,4 px. Thẻ 292 px không chứa đủ bảng 300 đơn vị ở hệ số 1,1. Muốn đạt phải dựng lại bố cục từng bảng cho bề rộng 260 đơn vị; điện thoại 320 px nay hiếm (iPhone SE thế hệ đầu), nên để báo cáo.
+- **Chế độ lên lớp, chỉ báo cáo (R2k, R3k):** cảnh 1600 × 900 co theo màn hình; chế độ này dành cho màn chiếu và máy bàn. Trên điện thoại vỏ bài có nút "Bảng số" mở trang đọc.
+- **Máy thật:** mọi số trên đây đo bằng trình duyệt giả lập. Cổng cuối là xem trên một điện thoại, một tablet, một laptop.
+- **Rà bằng mắt:** đủ 31 bài kit ở 1440, 768 và 390 px; các bài riêng mới xem trạng thái lúc mở và vài trạng thái sau khi bấm.
 - K14 mới chặn `ease-in` và chuyển tiếp quá 600 ms; chưa buộc mọi chuyển tiếp dùng token thời lượng và đường cong trong `tokens.json`.
+- Nút trong bảng bài kit là `<div role="button">`, chưa phải `<button>` thật (xem `docs/ve-sinh-giao-dien.md`).

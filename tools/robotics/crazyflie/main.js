@@ -91,17 +91,17 @@ ui.header({code: 'CF2.1', kicker: 'MÁY BAY BỐN CÁNH · NANO QUADROTOR DÙNG 
   right: [['29 g', 'KHỐI LƯỢNG CẤT CÁNH'], ['92 mm', 'ĐỘNG CƠ – ĐỘNG CƠ'], ['500 Hz', 'VÒNG GÓC']]});
 ui.panel(28, 112, 300, 204, 'ĐỘNG CƠ · PWM → LỰC ĐẨY', '01');
 const mb = MOTORS.map((m, i) => ui.bar(42, 148 + i * 22, 272, `M${i + 1}`, {lw: 26, vw: 116}));
-const thrTxt = ui.text(42, 244, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px;white-space:normal;width:272px;line-height:1.5');
-ui.text(42, 268, 'f(c) = 2,13·10⁻¹¹c² + 1,03·10⁻⁶c + 5,48·10⁻⁴ N', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9px');
+const thrTxt = ui.text(42, 244, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.5');
+ui.text(42, 268, 'f(c) = 2,13·10⁻¹¹c² + 1,03·10⁻⁶c + 5,48·10⁻⁴ N', 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px');
 ui.panel(28, 328, 300, 252, 'PID XẾP TẦNG · FIRMWARE', '02');
 const casc = ui.svg(42, 362, 272, 206);
 ui.panel(28, 592, 300, 174, 'HỆ SỐ VÀ NHIỄU', '03');
 const sKa = ui.slider('katt', 42, 628, 272, 'GAIN GÓC ×', {lw: 92, vw: 54});
 const sKr = ui.slider('krate', 42, 656, 272, 'GAIN TỐC ĐỘ ×', {lw: 92, vw: 54});
 const sWind = ui.slider('wind', 42, 684, 272, 'GIÓ NGANG', {lw: 92, vw: 54});
-ui.text(42, 708, `m = 28,0 g · Ixx = 1,66·10⁻⁵ · Izz = 2,93·10⁻⁵ kg·m²`, 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9px');
-ui.text(42, 724, `τ động cơ ≈ 65 ms · con quay: nhiễu 0,4 °/s, trễ 2 ms`, 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9px');
-ui.text(42, 740, `Tay đòn 46 mm · cấu hình X · bộ trộn legacy`, 'sm', 'text-transform:none;letter-spacing:.2px;font-size:9px');
+ui.text(42, 708, `m = 28,0 g · Ixx = 1,66·10⁻⁵ · Izz = 2,93·10⁻⁵ kg·m²`, 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px');
+ui.text(42, 724, `τ động cơ ≈ 65 ms · con quay: nhiễu 0,4 °/s, trễ 2 ms`, 'sm', 'text-transform:none;font-size:10.5px');
+ui.text(42, 740, `Tay đòn 46 mm · cấu hình X · bộ trộn legacy`, 'sm', 'text-transform:none;letter-spacing:.2px;font-size:10.5px');
 ui.panel(1272, 112, 300, 222, 'GÓC LĂN · ĐÁP ỨNG', '04');
 ui.text(1286, 146, 'GÓC LĂN φ (°) · ĐỨT: ĐẶT · CAM: ĐO');
 const cRoll = ui.chart(1286, 162, 272, 62, {min: -30, max: 30, colors: [C.ink, C.or], dash: ['3 3', 0]});
@@ -205,19 +205,19 @@ const sim = {
     thrTxt.innerHTML = `Lực đẩy <b>${fx((ftot / P.g) * 1000, 1)} g</b> · nặng ${fx(P.m * 1000, 1)} g · T/W ${fx(ftot / W, 2)}`;
     // bảng 02: sơ đồ xếp tầng, vòng đang chạy tô cam
     const on = (m) => (m ? C.or : C.faint), modePos = S.mode === 'pos' || S.mode === 'land';
-    const box = (x, y, w, t1, t2, act) => `<rect x="${x}" y="${y}" width="${w}" height="34" rx="3" fill="${act ? '#fdf1ec' : C.chart}" stroke="${on(act)}"/><text x="${x + 6}" y="${y + 14}" font-family="JetBrains Mono" font-size="9" font-weight="600" fill="${C.ink}">${t1}</text><text x="${x + 6}" y="${y + 27}" font-family="JetBrains Mono" font-size="8" fill="${C.mute}">${t2}</text>`;
-    const g = (k, a) => GAINS[a][k].slice(0, 3).map((v) => fx(v * (a === 'att' ? S.kAtt : a === 'rate' ? S.kRate : 1), v < 10 ? 2 : 0)).join(' / ');
+    const box = (x, y, w, t1, t2, act) => `<rect x="${x}" y="${y}" width="${w}" height="34" rx="3" fill="${act ? '#fdf1ec' : C.chart}" stroke="${on(act)}"/><text x="${x + 6}" y="${y + 14}" font-family="JetBrains Mono" font-size="10.5" font-weight="600" fill="${C.ink}">${t1}</text><text x="${x + 6}" y="${y + 27}" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">${t2}</text>`;
+    const g = (k, a) => GAINS[a][k].slice(0, 3).map((v) => fx(v * (a === 'att' ? S.kAtt : a === 'rate' ? S.kRate : 1), v < 10 ? 2 : 0)).join('/');
     let svg = '';
     svg += box(0, 0, 130, 'VỊ TRÍ · 100 Hz', `kp ${GAINS.pos.x[0]} · z: ${GAINS.pos.z[0]}/${GAINS.pos.z[1]}`, modePos);
     svg += box(142, 0, 130, 'VẬN TỐC · 100 Hz', `kp ${GAINS.vel.x[0]} · trần ±20°`, modePos);
     svg += box(0, 52, 130, 'GÓC · 500 Hz', `φθ ${g('roll', 'att')}`, S.mode !== 'off');
     svg += box(142, 52, 130, 'TỐC ĐỘ GÓC · 500 Hz', `pq ${g('roll', 'rate')}`, S.mode !== 'off');
-    svg += box(0, 104, 130, 'BỘ TRỘN', 'm = T ∓ r/2 ± p/2 ± y', S.mode !== 'off');
-    svg += box(142, 104, 130, '4 ĐỘNG CƠ · PWM', 'f = f(c) · trễ 65 ms', S.mode !== 'off');
+    svg += box(0, 104, 130, 'BỘ TRỘN', 'T ∓ r/2 ± p/2 ± y', S.mode !== 'off');
+    svg += box(142, 104, 130, '4 ĐỘNG CƠ · PWM', 'f(c) · trễ 65 ms', S.mode !== 'off');
     const arr = (x1, y1, x2, y2) => `<path d="M${x1} ${y1}L${x2} ${y2}" stroke="${C.ink}" stroke-width="1" marker-end="url(#ah)"/>`;
     svg = `<defs><marker id="ah" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="${C.ink}"/></marker></defs>` + svg + arr(130, 17, 141, 17) + arr(207, 34, 70, 51) + arr(130, 69, 141, 69) + arr(207, 86, 70, 103) + arr(130, 121, 141, 121);
-    svg += `<text x="0" y="160" font-family="JetBrains Mono" font-size="8.6" fill="${C.ink}">Ra từng tầng: v đặt (m/s) → góc đặt (°)</text><text x="0" y="174" font-family="JetBrains Mono" font-size="8.6" fill="${C.ink}">→ tốc độ góc đặt (°/s) → lệnh int16 → PWM.</text>`;
-    svg += `<text x="0" y="192" font-family="JetBrains Mono" font-size="8.6" fill="${C.or}">Lăn, tốc độ góc: P ${fx(S.pid.rr.p, 0)} · I ${fx(S.pid.rr.ii || 0, 0)} · D ${fx(S.pid.rr.dd, 0)}</text>`;
+    svg += `<text x="0" y="160" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">Ra từng tầng: v đặt (m/s) → góc đặt (°)</text><text x="0" y="174" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">→ tốc độ góc đặt (°/s) → lệnh int16 → PWM.</text>`;
+    svg += `<text x="0" y="192" font-family="JetBrains Mono" font-size="10.5" fill="${C.or}">Lăn, tốc độ góc: P ${fx(S.pid.rr.p, 0)} · I ${fx(S.pid.rr.ii || 0, 0)} · D ${fx(S.pid.rr.dd, 0)}</text>`;
     casc.innerHTML = svg;
     sKa.set((S.kAtt - 0.25) / 7.75, `× ${fx(S.kAtt, 2)}`); sKr.set((S.kRate - 0.25) / 3.75, `× ${fx(S.kRate, 2)}`); sWind.set(S.wind[1] / 1.5, `${fx(S.wind[1], 2)} m/s`);
     // bảng 04, 05

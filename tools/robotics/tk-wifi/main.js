@@ -118,7 +118,7 @@ const sim = {
     // bảng 02
     const r = kq.r; { const parts = [['dữ liệu', r.fData, MAU.ok], ['điều khiển', r.fCtrl, MAU.warn], ['tranh chấp', r.fCont, MAU.bad]]; let x = 0, g = '';
       parts.forEach(([n, v, c]) => { const w = v * 272; g += `<rect x="${x}" y="0" width="${Math.max(0, w - 1)}" height="18" fill="${c}"/>`; x += w; });
-      parts.forEach(([n, v, c], i) => { g += `<rect x="${i * 92}" y="28" width="9" height="9" fill="${c}"/><text x="${i * 92 + 13}" y="36" font-family="Be Vietnam Pro" font-size="10" fill="${C.ink}">${n}</text><text x="${i * 92 + 13}" y="52" font-family="JetBrains Mono" font-size="10" fill="${C.ink}">${vn(v * 100, 0)} %</text>`; }); kSvg.innerHTML = g; }
+      parts.forEach(([n, v, c], i) => { g += `<rect x="${i * 92}" y="28" width="9" height="9" fill="${c}"/><text x="${i * 92 + 13}" y="36" font-family="Be Vietnam Pro" font-size="10.5" fill="${C.ink}">${n}</text><text x="${i * 92 + 13}" y="52" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${vn(v * 100, 0)} %</text>`; }); kSvg.innerHTML = g; }
     t02.innerHTML = `T<sub>data</sub> chỉ là phần bit dữ liệu thực sự bay trong không khí. T<sub>ctrl</sub> gồm preamble, khoảng SIFS/DIFS và ACK; T<sub>cont</sub> là các slot đếm lùi và thời gian mất vào va chạm. Khung ${vn(r.tData * 1e6, 0)} µs, ACK ${vn(r.tAck * 1e6, 0)} µs.`;
     // bảng 03
     tBars[0].set(1, F.fmtBps(S.Cphy, 0), '#8A8F98'); tBars[1].set(kq.r1.thongLuong / S.Cphy, F.fmtBps(kq.r1.thongLuong, 0), MAU.prop); tBars[2].set(r.thongLuong / S.Cphy, F.fmtBps(r.thongLuong, 0), MAU.ok);
@@ -126,7 +126,7 @@ const sim = {
     t03.innerHTML = `${S.gop === 1 ? 'Không gộp khung: mỗi 1 500 byte phải trả nguyên preamble, khoảng chờ và ACK, nên PHY càng nhanh tỉ lệ càng thấp.' : `Gộp ${S.gop} khung một lần: chi phí cố định chia cho nhiều dữ liệu hơn.`} Đây là β<sub>mac</sub> và tỉ số thời gian trong (4.6).`;
     // bảng 04: va chạm và thông lượng theo số máy
     const xs = kq.theoN, maxT = Math.max(...xs.map(([, v]) => v.thongLuong));
-    vChart.set([xs.map(([, v]) => v.pVaCham), xs.map(([, v]) => v.thongLuong / maxT)], {cursor: Math.max(0, xs.findIndex(([n]) => n >= S.N)) / (xs.length - 1), extra: (Y, w) => `<text x="0" y="-4" font-family="JetBrains Mono" font-size="9" fill="${MAU.bad}">tỉ lệ va chạm</text><text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${MAU.prop}">thông lượng cả phòng</text><text x="0" y="94" font-family="JetBrains Mono" font-size="9" fill="#626773">1 máy</text><text x="${w}" y="94" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">40 máy</text>`});
+    vChart.set([xs.map(([, v]) => v.pVaCham), xs.map(([, v]) => v.thongLuong / maxT)], {cursor: Math.max(0, xs.findIndex(([n]) => n >= S.N)) / (xs.length - 1), extra: (Y, w) => `<text x="0" y="-4" font-family="JetBrains Mono" font-size="10.5" fill="${MAU.bad}">tỉ lệ va chạm</text><text x="${w}" y="-4" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${MAU.prop}">thông lượng cả phòng</text><text x="0" y="94" font-family="JetBrains Mono" font-size="10.5" fill="#626773">1 máy</text><text x="${w}" y="94" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="#626773">40 máy</text>`});
     t04.innerHTML = `${S.N} máy: ${vn(r.pVaCham * 100, 0)} % lần phát bị va chạm. Thêm máy thì nhiều lần hai máy cùng đếm về 0, kênh bận mà không chở được gì; cửa sổ đếm lùi nhân đôi để giãn ra, đổi lại là thêm thời gian chờ.`;
     // bảng 05
     mBig.textContent = F.fmtBps(kq.moiNguoi, 1);

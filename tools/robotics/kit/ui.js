@@ -43,7 +43,7 @@ const CSS = () => `
 .call{position:absolute;white-space:nowrap;transition:opacity .25s}
 .call b{display:flex;align-items:center;gap:6px;font:600 11px var(--bg-font,system-ui,sans-serif);letter-spacing:0;color:${C.ink};background:rgba(255,255,255,.9);padding:1px 4px;border-radius:2px}
 .call b i{display:block;width:6px;height:6px;background:${C.or}}
-.call span{display:block;font:500 10px 'JetBrains Mono',monospace;letter-spacing:0;color:#626773;margin-top:1px;padding-left:16px}
+.call span{display:block;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:0;color:#626773;margin-top:1px;padding-left:16px}
 .cur{position:absolute;left:0;top:0;z-index:50;filter:drop-shadow(0 1px 2px rgba(0,0,0,.3))}
 .ring{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1.5px solid ${C.or};opacity:0;z-index:49}
 .cap{position:absolute;transition:opacity .35s}
@@ -51,12 +51,12 @@ const CSS = () => `
 .cap .t{font-size:15px;font-weight:700;margin:3px 0 5px;letter-spacing:-.1px}
 .cap .b{font-size:12.5px;line-height:1.45;color:#454A55}
 .cap .e{font:600 11.5px 'JetBrains Mono',monospace;color:${C.ink};background:#f3f4f6;border-radius:3px;padding:4px 7px;margin-top:6px;display:inline-block}
-.alert{position:absolute;font:600 9.5px 'JetBrains Mono',monospace;letter-spacing:1.4px;color:#fff;background:${C.or};padding:3px 8px;border-radius:3px;white-space:nowrap;transition:opacity .2s}
+.alert{position:absolute;font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:1.4px;color:#fff;background:#C2410C;padding:3px 8px;border-radius:3px;white-space:nowrap;transition:opacity .2s}
 `;
 // nhãn trong dữ liệu viết hoa: đổi sang chữ thường kiểu câu, giữ từ viết tắt ASCII ngắn (TCP, DH, PID, MOVEJ) và số
-const ACR = new Set('ĐCT ĐCD TCP DH IK FK PID PD PI ISO ROS LDS IMU ESC PWM AMCL SLAM LIDAR MOVEJ MOVEL DOF RX RY RZ CPU GPU API EKF UR CW CCW BLDC AX OK DC USB SE TB GPS RPM MIT ABAD FR FL RR RL AA WAN LAN VLAN IP RTT MDF IDF POE UPS AP UE UPF MEC RAN NR LTE EPC NSA SBA SLA SLO KPI CU DU RU AMF SMF PCF DN URLLC EMBB MMTC NG ECMP QOS DSCP ACK BER BFD BE CIDR DCF DS ECN EF FIB FIFO IEEE LMS MTBF MTTR MTU NVR OSPF PHY RFC RPO RTO SNMP SPF SSM UDP VLSM VNI VRF VTEP VXLAN WLAN NTU SMR BT PA KV CI II III IV VII NCKH GB MN ITUR TPHCM'.split(' '));
+const ACR = new Set('ĐCT ĐCD TCP DH IK FK PID PD PI ISO ROS LDS IMU ESC PWM AMCL SLAM LIDAR MOVEJ MOVEL DOF RX RY RZ CPU GPU API EKF UR CW CCW BLDC AX OK DC USB SE TB GPS RPM MIT ABAD FR FL RR RL AA WAN LAN VLAN IP RTT MDF IDF POE UPS AP UE UPF MEC RAN NR LTE EPC NSA SBA SLA SLO KPI CU DU RU AMF SMF PCF DN URLLC EMBB MMTC NG ECMP QOS DSCP ACK BER BFD BE CIDR DCF DS ECN EF FIB FIFO IEEE LMS MTBF MTTR MTU NVR OSPF PHY RFC RPO RTO SNMP SPF SSM UDP VLSM VNI VRF VTEP VXLAN WLAN NTU SMR BT PA KV CI II III IV VII NCKH GB MN ITUR TPHCM RF RM LF LM LR'.split(' '));
 // đơn vị và tên riêng có chữ hoa chữ thường xen kẽ: viết đúng dạng chuẩn thay vì hạ hết xuống chữ thường
-const DV = {HZ: 'Hz', KHZ: 'kHz', MHZ: 'MHz', GHZ: 'GHz', KPA: 'kPa', MPA: 'MPa', DB: 'dB', DBM: 'dBm', 'MBIT/S': 'Mbit/s', 'GBIT/S': 'Gbit/s', 'KBIT/S': 'kbit/s', KW: 'kW', KN: 'kN', GNB: 'gNB', IPSEC: 'IPsec', LIPO: 'LiPo'};
+const DV = {HZ: 'Hz', KHZ: 'kHz', MHZ: 'MHz', GHZ: 'GHz', KPA: 'kPa', MPA: 'MPa', DB: 'dB', DBM: 'dBm', 'MBIT/S': 'Mbit/s', 'GBIT/S': 'Gbit/s', 'KBIT/S': 'kbit/s', KW: 'kW', KN: 'kN', GNB: 'gNB', IPSEC: 'IPsec', LIPO: 'LiPo', ETHERNET: 'Ethernet', INTERNET: 'Internet'};
 export const sc = (t) => {
   const s = String(t ?? ''); if (/</.test(s)) return s; // HTML: giữ nguyên
   const up = (x) => x === x.toLocaleUpperCase('vi') && x !== x.toLocaleLowerCase('vi');
@@ -64,7 +64,8 @@ export const sc = (t) => {
     if (/^[MSH]$/.test(dv) && /^[≈~<>]?\d[\d.,]*$/.test(ds[i - 2] || '')) return x.toLowerCase();   /* một chữ M, S, H đứng sau con số là đơn vị (m, s, h), không phải kí hiệu biến */
     const core = x.replace(/[^A-Za-z0-9À-ỹđĐ]/g, ''); if (/\d/.test(core) || ACR.has(core) || /^[A-Z]$/.test(core)) return x; return x.toLocaleLowerCase('vi'); }).join('');
   const i = w.search(/[A-Za-zÀ-ỹđĐ]/), j = s.search(/[A-Za-zÀ-ỹđĐ]/);
-  return i < 0 || !up(s.charAt(j)) ? w : w.slice(0, i) + w.charAt(i).toLocaleUpperCase('vi') + w.slice(i + 1);
+  // nhãn mở đầu bằng con số ("3 LẦN", "200 BYTE") thì chữ theo sau viết thường
+  return i < 0 || !up(s.charAt(j)) || /\d/.test(w.slice(0, i)) ? w : w.slice(0, i) + w.charAt(i).toLocaleUpperCase('vi') + w.slice(i + 1);
 };
 const el = (h) => { const d = document.createElement('div'); d.innerHTML = h.trim(); return d.firstElementChild; };
 const fx = (v, n = 2) => (Number.isFinite(v) ? v.toFixed(n) : '—');
@@ -114,12 +115,14 @@ export function createUI(app) {
     if (mark !== null) add(`<div style="position:absolute;left:${tx + tw * mark}px;top:${y + 1}px;width:1.5px;height:10px;background:${C.ink}"></div>`);
     const f = add(`<div style="position:absolute;left:${tx}px;top:${y + 4}px;height:4px;background:${C.or};border-radius:2px"></div>`);
     const v = add(`<div class="v" style="position:absolute;right:${1600 - x - w}px;top:${y - 2}px;min-width:${vw - 4}px;text-align:right"></div>`);
-    return {set(k, txt, col) {
+    // ox: gốc của thẻ chứa thanh ở trang đọc (doc.js đặt). Thanh có tâm ghi lại left mỗi lần cập nhật, thiếu ox thì phần tô trôi khỏi thẻ.
+    const b = {x: tx, y, ox: 0, set(k, txt, col) {
       k = Math.max(center ? -1 : 0, Math.min(1, k));
-      if (center) { const a = tw / 2, l = k < 0 ? a + a * k : a; f.style.left = `${tx + l}px`; f.style.width = `${Math.abs(k) * a}px`; }
+      if (center) { const a = tw / 2, l = k < 0 ? a + a * k : a; f.style.left = `${tx - b.ox + l}px`; f.style.width = `${Math.abs(k) * a}px`; }
       else f.style.width = `${k * tw}px`;
       f.style.background = col || C.or; v.textContent = txt;
     }};
+    (ui.bars = ui.bars || []).push(b); return b;
   };
   // biểu đồ: các chuỗi số trong khoảng [min,max]; set(arrays, {cursor, band})
   ui.chart = (x, y, w, h, {min = -1, max = 1, colors = [C.or, C.ink], dash = [], zero = true, labels = []} = {}) => {

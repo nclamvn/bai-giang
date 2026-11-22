@@ -122,7 +122,7 @@ const fmtT = (t) => (t >= 1 ? `${t} s` : `1/${Math.round(1 / t)} s`);
 ui.header({code: 'EF 50', kicker: 'MÁY ẢNH CẮT LỚP · ỐNG KÍNH CANON EF 50MM F/1.8 STM · CẢM BIẾN 36 × 24 MM', title: 'Máy ảnh', sub: 'THẤU KÍNH HỘI TỤ · ẢNH THẬT · KHẨU ĐỘ · LẤY NÉT', hub: HUB_URL,
   right: [['50 mm', 'TIÊU CỰ'], ['6 / 5', 'THẤU KÍNH / NHÓM'], ['f/1.8', 'KHẨU LỚN NHẤT'], ['0,21×', 'PHÓNG ĐẠI LỚN NHẤT']]});
 const BEATS = ['Toàn máy', 'Ba tia', 'Lấy nét', 'Gần nhất', 'Khẩu độ', 'Độ nét sâu', 'Chụp', 'Góc nhìn', 'Phim'];
-const beatEl = ui.add(`<div style="position:absolute;left:348px;top:84px;width:904px;display:flex;gap:4px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap"><span style="font:500 10px 'JetBrains Mono',monospace;color:${C.faint};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
+const beatEl = ui.add(`<div style="position:absolute;left:348px;top:84px;width:904px;display:flex;gap:4px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap"><span style="font:500 10.5px 'JetBrains Mono',monospace;color:${C.faint};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
 const setBeat = (i) => beatEl.querySelectorAll('[data-b]').forEach((n) => { const on = +n.dataset.b === i; n.style.borderBottomColor = on ? C.or : C.line; n.style.color = on ? C.ink : C.mute; });
 ui.panel(28, 112, 300, 268, 'THẤU KÍNH HỘI TỤ · 1/f = 1/d + 1/d′', '01');
 const raySvg = ui.svg(42, 146, 272, 104);
@@ -132,7 +132,7 @@ ui.buttons([['shoot', 'CHỤP'], ['af', 'LẤY NÉT TỰ ĐỘNG'], ['rays', 'TI
 const sl = {obj: ui.slider('obj', 42, 474, 272, 'VẬT CÁCH MÁY', {lw: 92, vw: 74}), focus: ui.slider('focus', 42, 500, 272, 'VÒNG LẤY NÉT', {lw: 92, vw: 74}), N: ui.slider('N', 42, 526, 272, 'KHẨU ĐỘ', {lw: 92, vw: 74}), sh: ui.slider('sh', 42, 552, 272, 'MÀN TRẬP', {lw: 92, vw: 74})};
 ui.panel(28, 604, 300, 162, 'ẢNH VỪA CHỤP', '03');
 const prev = ui.add(`<canvas width="384" height="256" style="position:absolute;left:42px;top:634px;width:180px;height:120px;border-radius:4px;background:#ddd"></canvas>`);
-const prevTxt = ui.text(232, 636, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10px;white-space:normal;width:84px;line-height:1.45');
+const prevTxt = ui.text(232, 636, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:84px;line-height:1.45');
 ui.panel(1272, 112, 300, 256, 'GÓC NHÌN · CẢM BIẾN 36 × 24', '04');
 const aovSvg = ui.svg(1286, 146, 272, 90);
 const aRows = ['NGANG · TÍNH / HÃNG', 'DỌC · TÍNH / HÃNG', 'CHÉO · TÍNH / HÃNG', 'NGÀM TỚI CẢM BIẾN'].map((n, k) => [ui.text(1286, 252 + k * 20, n), ui.text(1440, 250 + k * 20, '', 'v', 'width:118px;text-align:right')]);
@@ -160,7 +160,7 @@ const cut = createCutaway({st, ui, parts: [
   {key: 'cam', label: 'CẢM BIẾN', open: (k) => { OPEN.cam = k; }, at: () => wp(camG), sub: () => `36 × 24 mm · ảnh ${vn(Math.abs(optics().m) * TIP_Y, 1)} mm`, cam: {az: -28, el: 16, d: 0.24}, card: () => cardOf('cam')},
 ], explode: (k) => { EX = k; }, turn: (d) => { turn.rotation.y = d * D2R; }});
 cut.pills(1286, 412, 272);
-ui.text(1286, 530, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10px;white-space:normal;width:272px;line-height:1.45').innerHTML = 'Bấm một bộ phận: nó tách ra trong 1 giây, vẫn chạy trong lúc treo, máy quay tới gần từ phía riêng.';
+ui.text(1286, 530, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45').innerHTML = 'Bấm một bộ phận: nó tách ra trong 1 giây, vẫn chạy trong lúc treo, máy quay tới gần từ phía riêng.';
 
 // ---------------- mô phỏng
 const disp = S.disp;
@@ -243,18 +243,18 @@ const sim = {
     // bảng 01: sơ đồ tia
     { const sx = (x) => 260 - (x / (S.obj + 60)) * 230, sy = (y) => 60 - y * 0.28; let g = `<rect x="0" y="0" width="272" height="104" fill="${C.chart}" stroke="${C.line}"/><line x1="0" x2="272" y1="${sy(0)}" y2="${sy(0)}" stroke="${C.faint}"/>`;
       const lx = sx(lensX), f = CAM.f; g += `<line x1="${lx}" x2="${lx}" y1="8" y2="96" stroke="${C.ink}" stroke-width="2"/><path d="M${lx - 5} 14 L${lx} 6 L${lx + 5} 14 M${lx - 5} 90 L${lx} 98 L${lx + 5} 90" stroke="${C.ink}" fill="none"/>`;
-      g += `<line x1="${sx(0)}" x2="${sx(0)}" y1="${sy(12) }" y2="${sy(-12)}" stroke="${C.ink}" stroke-width="3"/><text x="${lx - 9}" y="100" text-anchor="end" font-family="JetBrains Mono" font-size="8.5" fill="${C.mute}">cảm biến →</text>`;
+      g += `<line x1="${sx(0)}" x2="${sx(0)}" y1="${sy(12) }" y2="${sy(-12)}" stroke="${C.ink}" stroke-width="3"/><text x="${lx - 9}" y="100" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">cảm biến →</text>`;
       for (const xf of [lensX + f, lensX - f]) g += `<circle cx="${sx(xf)}" cy="${sy(0)}" r="2.2" fill="${C.ink}"/>`;
       const ox = sx(S.obj); g += `<line x1="${ox}" x2="${ox}" y1="${sy(0)}" y2="${sy(yP)}" stroke="${C.ink}" stroke-width="2"/><path d="M${ox - 4} ${sy(yP) + 6} L${ox} ${sy(yP)} L${ox + 4} ${sy(yP) + 6}" stroke="${C.ink}" fill="none"/>`;
       for (const p of paths) g += `<polyline points="${p.map((v) => `${sx(v.x).toFixed(1)},${sy(v.y - AX).toFixed(1)}`).join(' ')}" fill="none" stroke="${C.or}" stroke-width="1.2"/>`;
-      g += `<line x1="${sx(xQ)}" x2="${sx(xQ)}" y1="${sy(0)}" y2="${sy(yQ)}" stroke="${C.or}" stroke-width="2"/><text x="6" y="12" font-family="JetBrains Mono" font-size="8.5" fill="${C.mute}">trục ngang co giãn · F, F′ chấm đen</text>`;
+      g += `<line x1="${sx(xQ)}" x2="${sx(xQ)}" y1="${sy(0)}" y2="${sy(yQ)}" stroke="${C.or}" stroke-width="2"/><text x="6" y="12" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">trục ngang co giãn · F, F′ chấm đen</text>`;
       raySvg.innerHTML = g; }
     const focused = Math.abs(o.ip - o.dp) < 0.05;
     oRows[0][1].textContent = `${vn(o.dObj / 1000, 3)} m`; oRows[1][1].textContent = `${vn(o.ip, 2)} mm`; oRows[2][1].textContent = `${vn(o.dp, 2)} mm`; oRows[3][1].textContent = `${vn(o.m, 3)} ×`; oRows[4][1].textContent = 'thật, ngược, nhỏ';
     sl.obj.set((S.obj - 350) / 2400, `${vn(S.obj / 1000, 2)} m`); sl.focus.set((S.focus - 350) / 2400, `${vn(S.focus / 1000, 2)} m`); sl.N.set(NS.indexOf(S.N) / (NS.length - 1), `f/${vn(S.N, 1)}`); sl.sh.set(SPEEDS.indexOf(S.shutter) / (SPEEDS.length - 1), fmtT(S.shutter));
     // bảng 04: góc nhìn
     { const a = aovOf(CAM.sw, o.dp); let g = `<clipPath id="aov-khung"><rect x="0.5" y="0.5" width="271" height="89"/></clipPath><rect x="0" y="0" width="272" height="90" fill="${C.chart}" stroke="${C.line}"/>`; const cx = 30, cy = 45, R = 220;
-      void 0; g += `<path d="M${cx} ${cy} L${cx + R * Math.cos((a / 2) * D2R)} ${cy - R * Math.sin((a / 2) * D2R)} L${cx + R * Math.cos((a / 2) * D2R)} ${cy + R * Math.sin((a / 2) * D2R)} Z" fill="${C.or}" opacity=".12" stroke="${C.or}" clip-path="url(#aov-khung)"/><rect x="${cx - 14}" y="${cy - 9}" width="14" height="18" fill="${C.ink}"/><text x="${cx + 32}" y="${cy + 4}" font-family="JetBrains Mono" font-size="10" fill="${C.ink}">${vn(a, 1)}° ngang lúc này · vô cực 39,6°</text>`; aovSvg.innerHTML = g; }
+      void 0; g += `<path d="M${cx} ${cy} L${cx + R * Math.cos((a / 2) * D2R)} ${cy - R * Math.sin((a / 2) * D2R)} L${cx + R * Math.cos((a / 2) * D2R)} ${cy + R * Math.sin((a / 2) * D2R)} Z" fill="${C.or}" opacity=".12" stroke="${C.or}" clip-path="url(#aov-khung)"/><rect x="${cx - 14}" y="${cy - 9}" width="14" height="18" fill="${C.ink}"/><text x="${cx + 32}" y="${cy + 4}" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${vn(a, 1)}° lúc này · vô cực 39,6°</text>`; aovSvg.innerHTML = g; }
     aRows[0][1].textContent = `${vn(aovOf(CAM.sw), 1)}° / 40°`; aRows[1][1].textContent = `${vn(aovOf(CAM.sh), 1)}° / 27°`; aRows[2][1].textContent = `${vn(aovOf(Math.hypot(CAM.sw, CAM.sh)), 1)}° / 46°`; aRows[3][1].textContent = '44,0 mm';
     // bảng 06
     kRows[0][1].textContent = `${vn(pupil(S.N), 1)} mm`; kRows[1][1].textContent = `× ${vn(exposure(S.N, S.shutter), 2)}`; kRows[2][1].textContent = `${vn(blur(o.dObj, o.dp, S.N), 3)} mm`; kRows[3][1].textContent = `${vn(blur(3000 - o.dp, o.dp, S.N), 2)} mm`; kRows[4][1].textContent = '7';

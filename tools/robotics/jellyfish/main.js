@@ -88,7 +88,7 @@ const Mt = JF.m + JF.ma;
 ui.header({code: 'CYRO', kicker: 'ROBOT MỀM DƯỚI NƯỚC · 8 CÁNH TAY CO CHUÔNG · THEO Cyro (Virginia Tech)', title: 'Sứa robot', sub: 'PHẢN LỰC · ĐỘNG LƯỢNG · LỰC CẢN · TẾ BÀO GAI', hub: HUB_URL,
   right: [['1,7 m', 'KÍCH THƯỚC'], ['77 kg', 'KHỐI LƯỢNG'], ['5 nhịp', 'LÊN 2,4 M'], ['700 ns', 'TẾ BÀO GAI PHÓNG']]});
 const BEATS = ['Bơi', 'Phản lực', 'Co và giãn', 'Lực cản', 'Rhopalia', 'Lơ lửng', 'Tách rời', 'Tế bào gai', 'Lắp ráp'];
-const beatEl = ui.add(`<div style="position:absolute;left:348px;top:84px;width:904px;display:flex;gap:4px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap"><span style="font:500 10px 'JetBrains Mono',monospace;color:${C.faint};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
+const beatEl = ui.add(`<div style="position:absolute;left:348px;top:84px;width:904px;display:flex;gap:4px">${BEATS.map((b, i) => `<div data-b="${i}" style="flex:1;padding:3px 0 5px;border-bottom:2px solid ${C.line};font:600 11px/1.2 'Be Vietnam Pro',system-ui,sans-serif;color:${C.mute};white-space:nowrap"><span style="font:500 10.5px 'JetBrains Mono',monospace;color:${C.faint};margin-right:5px">${String(i + 1).padStart(2, '0')}</span>${b}</div>`).join('')}</div>`);
 const setBeat = (i) => beatEl.querySelectorAll('[data-b]').forEach((n) => { const on = +n.dataset.b === i; n.style.borderBottomColor = on ? C.or : C.line; n.style.color = on ? C.ink : C.mute; });
 
 ui.panel(28, 112, 300, 256, 'NHỊP CO CHUÔNG', '01');
@@ -101,7 +101,7 @@ const SL = [['T', 'CHU KỲ NHỊP'], ['duty', 'PHẦN CO δ'], ['a', 'BIÊN Đ�
 const sl = Object.fromEntries(SL.map(([k, n], i) => [k, ui.slider(k, 42, 416 + i * 27, 272, n, {lw: 92, vw: 70})]));
 ui.panel(28, 570, 300, 196, 'TÁM CÁNH TAY CO · VÒNG CO', '03');
 const armSvg = ui.svg(42, 604, 272, 120);
-const armTxt = ui.text(42, 730, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:9.5px;white-space:normal;width:272px;line-height:1.45');
+const armTxt = ui.text(42, 730, '', 'sm', 'text-transform:none;letter-spacing:.3px;font-size:10.5px;white-space:normal;width:272px;line-height:1.45');
 
 ui.panel(1272, 112, 300, 256, 'LỰC · VẬN TỐC · ĐỘ SÂU', '04');
 ui.text(1286, 148, 'LỰC PHỤT (N)'); const fNow = ui.text(1286, 161, '', 'mo', 'position:absolute;font-size:24px;font-weight:700');
@@ -111,11 +111,11 @@ const dChart = ui.chart(1286, 286, 272, 50, {min: 0, max: JF.tank, colors: [C.in
 const dTxt = ui.text(1286, 342, '', 'sm');
 ui.panel(1272, 380, 300, 232, 'SÁU HỆ THỐNG · TỪNG BỘ PHẬN', '05');
 const SYS = [['rhop', 'RHOPALIA'], ['mieng', 'TAY MIỆNG'], ['tua', 'CHÙM TUA'], ['chuong', 'CHUÔNG'], ['vong', 'VÒNG CO'], ['loi', 'LÕI ĐIỆN TỬ']];
-const sysRows = SYS.map(([id, n], i) => { ui.button('iso_' + id, 1286, 412 + i * 29, 136, n); return [ui.text(1428, 416 + i * 29, '', 'v', 'width:78px;text-align:right;font-size:11px'), ui.text(1512, 414 + i * 29, '', 'v', 'width:48px;text-align:center;font-size:10px;font-weight:600;border-radius:999px;padding:2px 0')]; });
+const sysRows = SYS.map(([id, n], i) => { ui.button('iso_' + id, 1286, 412 + i * 29, 136, n); return [ui.text(1428, 416 + i * 29, '', 'v', 'width:78px;text-align:right;font-size:11px'), ui.text(1512, 414 + i * 29, '', 'v', 'width:48px;text-align:center;font-size:10.5px;font-weight:600;border-radius:999px;padding:2px 0')]; });
 ui.text(1286, 590, 'BẤM ĐỂ CÔ LẬP MỘT HỆ VÀ SOI CHI TIẾT');
 ui.panel(1272, 624, 300, 142, 'HIỂN THỊ · NHẬT KÝ', '06');
 ui.buttons([['flow', 'DÒNG NƯỚC'], ['rhopon', 'RHOPALIA'], ['labels', 'NHÃN'], ['xray', 'X-QUANG'], ['explode', 'TÁCH RỜI']], 1286, 654, 272);
-const logRows = [0, 1, 2].map((k) => ui.text(1286, 716 + k * 13, '', 'v', 'font-size:10px;font-weight:500;width:272px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'));
+const logRows = [0, 1, 2].map((k) => ui.text(1286, 716 + k * 13, '', 'v', 'font-size:10.5px;font-weight:500;width:272px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'));
 ui.buttons([['v_hero', 'TOÀN CẢNH'], ['v_side', 'NGANG'], ['v_top', 'TỪ TRÊN'], ['v_close', 'CHUÔNG']], 360, 120, 600);
 ui.text(362, 664, 'CHẾ ĐỘ VẬN HÀNH');
 const modeEl = ui.add(`<div style="position:absolute;left:360px;top:678px;font:700 40px/1.1 'Be Vietnam Pro',system-ui,sans-serif;letter-spacing:-.8px;color:${C.ink}"></div>`);
@@ -344,10 +344,10 @@ const sim = {
       const a0 = 0.75 * PI, a1 = a0 + 1.5 * PI * kk, pt = (a) => `${(cx + 15 * Math.cos(a)).toFixed(1)} ${(cy + 15 * Math.sin(a)).toFixed(1)}`;
       svg += `<path d="M${pt(a0)} A15 15 0 1 1 ${pt(a0 + 1.5 * PI)}" fill="none" stroke="${C.track}" stroke-width="3.5" stroke-linecap="round"/>`;
       if (kk > 0.004) svg += `<path d="M${pt(a0)} A15 15 0 ${a1 - a0 > PI ? 1 : 0} 1 ${pt(a1)}" fill="none" stroke="${C.ink}" stroke-width="3.5" stroke-linecap="round"/>`;
-      svg += `<text x="${cx}" y="${cy + 4}" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" font-weight="600" fill="${C.ink}">${vn(s * JF.D0 * 500, 0)}</text><text x="${cx}" y="${cy + 30}" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="${C.mute}">${k * 45}° ${vn((P / 8) * (1 + S.armSkew[k]), 1)} W</text>`;
+      svg += `<text x="${cx}" y="${cy + 4}" text-anchor="middle" font-family="JetBrains Mono" font-size="10.5" font-weight="600" fill="${C.ink}">${vn(s * JF.D0 * 500, 0)}</text><text x="${cx}" y="${cy + 30}" text-anchor="middle" font-family="JetBrains Mono" font-size="10.5" fill="${C.mute}">${k * 45}° · ${vn((P / 8) * (1 + S.armSkew[k]), 1)}</text>`;
     });
     armSvg.innerHTML = svg;
-    armTxt.innerHTML = `Số giữa: mép chuông kéo vào (mm). Công suất phụt P = F·u = <b>${vn(P, 0)} W</b>, chia cho 8 cánh tay; lệch nhau khi rhopalia sửa nghiêng.`;
+    armTxt.innerHTML = `Số giữa: mép chuông kéo vào (mm). Số dưới: góc cánh tay và phần công suất của nó (W). Công suất phụt P = F·u = <b>${vn(P, 0)} W</b> chia cho 8 cánh tay; lệch nhau khi rhopalia sửa nghiêng.`;
     // bảng 04
     fNow.textContent = vn(S.F, 0); vNow.textContent = vn(S.vz * 100, 1);
     const bars = [S.F, S.Fd, S.B, S.Fnet];
@@ -366,7 +366,7 @@ const sim = {
       [`${vn(Math.max(0, depth), 1)} m`, pill(S.mode === 'hover' ? 'giữ sâu' : 'ổn', ok)],
     ];
     sysRows.forEach(([a, bEl], i) => { a.textContent = rowsV[i][0]; bEl.innerHTML = rowsV[i][1]; ui.setOn('iso_' + SYS[i][0], S.iso === SYS[i][0]); });
-    logRows.forEach((r, i) => { const l = S.log[i]; r.innerHTML = l ? `<span style="color:${C.faint}">${l[0]}</span>&nbsp;&nbsp;${l[1]}` : ''; r.style.opacity = 1 - i * 0.25; });
+    logRows.forEach((r, i) => { const l = S.log[i]; r.innerHTML = l ? `<span style="color:${C.mute}">${l[0]}</span>&nbsp;&nbsp;${l[1]}` : ''; r.style.opacity = 1 - i * 0.25; });
     const MODE = {swim: 'Bơi lên', hover: 'Lơ lửng', rest: 'Nghỉ'};
     modeEl.textContent = S.asm ? 'Lắp ráp' : S.ex > 0.5 ? 'Tách rời' : S.gaiT < 1.2 ? 'Phóng gai' : MODE[S.mode];
     modeSub.textContent = `8 cánh tay · nhịp ${fx(S.T, 1)} s · co ${vn(S.duty * 100, 0)} % chu kỳ · biên độ ${vn(S.aCur * 100, 0)} % · sâu ${vn(Math.max(0, depth), 2)} m · ${vn(S.vz * 100, 1)} cm/s`;

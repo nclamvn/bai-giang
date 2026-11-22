@@ -1403,7 +1403,7 @@ function molUpdate() {
   const atomsOn = MOL.inMol && dh < 0.075; if (MOL.atoms) MOL.atoms.visible = atomsOn; hideHeroU.value = atomsOn ? 1 : 0; MOL.atomsOn = atomsOn;
   if (MOL.noteIn !== MOL.inMol) { MOL.noteIn = MOL.inMol; $('illusNote').textContent = MOL.inMol ? 'Đúng kích thước thật: toạ độ nguyên tử từ PDB 3J7R. Màu, lipid, polysome và chuyển động là minh hoạ.' : 'Ribosome, protein màng và lớp lipid vẽ phóng to; chuyển động đã tăng tốc để dễ thấy.'; }
   const tg = $('heroTag');
-  if (MOL.ready && visible && !sel && !dive && !tour && !bench && dh > 1.6) { const q = toScreen(MOL.bead.position); if (q.ok) { tg.hidden = false; tg.style.transform = `translate(${Math.min(host.clientWidth - 200, q.x + 10)}px, ${q.y - 34}px)`; } else tg.hidden = true; } else tg.hidden = true;
+  if (MOL.ready && $('loading').hidden && $('lesson').hidden && visible && !sel && !dive && !tour && !bench && dh > 1.6) { const q = toScreen(MOL.bead.position);   /* chờ chữ Đang dựng tế bào tắt rồi mới hiện ghim */ if (q.ok) { tg.hidden = false; tg.style.transform = `translate(${Math.min(host.clientWidth - 200, q.x + 10)}px, ${q.y - 34}px)`; } else tg.hidden = true; } else tg.hidden = true;
 }
 
 // Phóng liền mạch từ toàn cảnh xuống nguyên tử
@@ -1486,7 +1486,7 @@ function startLesson() {
   if (bench) return; if (tour) endTour(); if (dive) endDive(false); stopFollow();
   lesson = { i: 0, qi: 0, score: 0, first: true, done: false, lastKey: null, poll: null, compact: false };
   host.classList.add('lessoning'); $('lesson').hidden = false; $('lessonBtn').textContent = 'Kết thúc tiết học';
-  $('lsDots').innerHTML = LESSON.steps.map((s, k) => `<button type="button" aria-label="Bước ${k + 1}: ${s.t}"></button>`).join('');
+  $('lsDots').innerHTML = LESSON.steps.map(() => '<i></i>').join('');   // chấm tiến trình chỉ để nhìn; chuyển bước bằng nút Trước, Tiếp hoặc danh sách bước của vỏ
   goStep(0);
 }
 function lessonOffset() { const card = $('lesson'), W = host.clientWidth, H = host.clientHeight; const dx = lesson && W > 760 && !card.hidden ? Math.round((card.offsetWidth + 12) / 2) : 0; if (dx) camera.setViewOffset(W, H, -dx, 0, W, H); else camera.clearViewOffset(); }
@@ -1517,7 +1517,7 @@ function renderLesson() {
     lb.hidden = false; lb.textContent = s.b; la.hidden = false; la.innerHTML = `<b>Hỏi cả lớp</b>${s.a}`;
     nd.hidden = !s.n; if (s.n) { $('lsN').textContent = s.n; nd.open = false; }
   } else { la.hidden = true; nd.hidden = true; renderQuiz(); }
-  document.querySelectorAll('#lsDots button').forEach((b, k) => b.setAttribute('aria-current', String(k === lesson.i)));
+  document.querySelectorAll('#lsDots i').forEach((b, k) => b.classList.toggle('on', k === lesson.i));
   $('lsPrev').disabled = lesson.i === 0;
   $('lsNext').textContent = lesson.i === n - 1 ? 'Kết thúc' : 'Tiếp ›';
   $('lesson').classList.toggle('compact', lesson.compact); $('lsMin').textContent = lesson.compact ? '+' : '–';
@@ -1558,7 +1558,6 @@ $('lsX').addEventListener('click', (e) => { e.stopPropagation(); endLesson(); })
 $('lsMin').addEventListener('click', (e) => { e.stopPropagation(); if (lesson) { lesson.compact = !lesson.compact; renderLesson(); } });
 $('lsPrev').addEventListener('click', (e) => { e.stopPropagation(); if (lesson) goStep(lesson.i - 1); });
 $('lsNext').addEventListener('click', (e) => { e.stopPropagation(); if (!lesson) return; if (lesson.i === LESSON.steps.length - 1) endLesson(); else goStep(lesson.i + 1); });
-$('lsDots').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b || !lesson) return; goStep([...b.parentNode.children].indexOf(b)); });
 $('lesson').addEventListener('pointerdown', (e) => e.stopPropagation());
 addEventListener('keydown', (e) => {
   if (!lesson || e.target.closest('input,select,textarea') || e.ctrlKey || e.metaKey || e.altKey) return;

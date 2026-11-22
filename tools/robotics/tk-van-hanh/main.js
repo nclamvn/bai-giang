@@ -158,8 +158,8 @@ const sim = {
     t02.innerHTML = `Δ<sub>k</sub> = ‖y<sub>k</sub> − y*<sub>k</sub>‖ (1.21) chỉ tính được trên <b>số đo</b>, không phải trên tải thật. ${y > Y_SAO && d <= 0 ? '<b>Lúc này liên kết đang quá ngưỡng mà số đo chưa biết.</b>' : d > 0 ? 'Số đo vượt ngưỡng: hệ thống cảnh báo.' : 'Số đo dưới ngưỡng.'}`;
     // bảng 03
     { const W = 272, X = (i) => (i / (N - 1)) * W; let g = `<rect x="0" y="0" width="${W}" height="40" fill="${C.chart}" stroke="${C.line}"/>`;
-      BURST.forEach(([a, b], k) => { const dd = kq.det[k]; g += `<rect x="${X(a)}" y="6" width="${Math.max(3, X(b) - X(a))}" height="28" fill="${dd.thay ? MAU.ok : MAU.bad}"/><text x="${X(a) + 2}" y="54" font-family="JetBrains Mono" font-size="9" fill="${C.ink}">${dd.thay ? '+' + F.fmtThoiGian(dd.tre, 0) : 'lỡ'}</text>`; });
-      g += `<text x="0" y="68" font-family="JetBrains Mono" font-size="9" fill="#626773">0</text><text x="${W}" y="68" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#626773">60 phút</text>`; bSvg.innerHTML = g; }
+      BURST.forEach(([a, b], k) => { const dd = kq.det[k]; g += `<rect x="${X(a)}" y="6" width="${Math.max(3, X(b) - X(a))}" height="28" fill="${dd.thay ? MAU.ok : MAU.bad}"/><text x="${X(a) + 2}" y="54" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${dd.thay ? '+' + F.fmtThoiGian(dd.tre, 0) : 'lỡ'}</text>`; });
+      g += `<text x="0" y="68" font-family="JetBrains Mono" font-size="10.5" fill="#626773">0</text><text x="${W}" y="68" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="#626773">60 phút</text>`; bSvg.innerHTML = g; }
     bBig.textContent = `${kq.nThay} / ${BURST.length}`; bBig.style.color = kq.nThay === BURST.length ? MAU.ok : MAU.bad;
     t03.innerHTML = `Bốn đợt bùng nổ dài 20–60 s lên gần 100 %. ${kq.nThay ? `Phát hiện trung bình sau ${F.fmtThoiGian(kq.treTB, 0)} kể từ lúc đợt bắt đầu.` : ''} ${kq.nThay < BURST.length ? 'Đợt bị lỡ vẫn làm rơi gói và tăng jitter (tiết 3), chỉ là không ai thấy.' : ''}`;
     // bảng 04
@@ -171,7 +171,7 @@ const sim = {
     t05.innerHTML = `${N_TB} thiết bị × 2 kB mỗi lần gửi (giả định) chia chu kỳ ${F.fmtThoiGian(kq.tau, 0)}. Chu kỳ ngắn hơn 300 lần thì dữ liệu thu thập nhiều hơn 300 lần: phải tính cả đường truyền về, lưu trữ và xử lý.`;
     // bảng 06: đo → so → quyết → làm
     { const st4 = [['ĐO', kq.tau], ['SO Δk', 1], ['QUYẾT', 30], ['LÀM', 60]], tot = st4.reduce((a, b) => a + b[1], 0); let g = '', x = 0; const cols = [MAU.prop, MAU.warn, MAU.tx, MAU.ok];
-      st4.forEach(([n2, v], i) => { const w = Math.max(30, (v / tot) * 272 * 0.8); g += `<rect x="${x}" y="0" width="${w - 3}" height="18" fill="${cols[i]}"/><text x="${x + 4}" y="13" font-family="JetBrains Mono" font-size="9" fill="#fff">${n2}</text><text x="${x}" y="32" font-family="JetBrains Mono" font-size="9" fill="${C.ink}">${F.fmtThoiGian(v, 0)}</text>`; x += w; });
+      st4.forEach(([n2, v], i) => { const w = Math.min(140, Math.max(44, (v / tot) * 272 * 0.6));   /* ô hẹp nhất 44 đơn vị cho vừa chữ 10,5; ô đo không quá 140 để cả bốn ô nằm trong 272 */ g += `<rect x="${x}" y="0" width="${w - 3}" height="18" fill="${cols[i]}"/><text x="${x + 4}" y="13" font-family="JetBrains Mono" font-size="10.5" fill="#fff">${n2}</text><text x="${x}" y="32" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${F.fmtThoiGian(v, 0)}</text>`; x += w; });
       vSvg.innerHTML = g; t06.innerHTML = `Vòng khép kín không nhanh hơn khâu đo: ${F.fmtThoiGian(kq.tau + 91, 0)} mỗi vòng (so, quyết, làm 1 s, 30 s, 60 s là giả định).`; }
     // chế độ
     modeEl.textContent = d > 0 ? 'Cảnh báo' : y > Y_SAO ? 'Quá ngưỡng, chưa thấy' : 'Bình thường'; modeEl.style.color = d > 0 ? MAU.bad : y > Y_SAO ? MAU.warn : C.ink;

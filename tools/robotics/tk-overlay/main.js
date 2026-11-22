@@ -75,13 +75,13 @@ const tSvg = ui.svg(42, 358, 272, 120);
 const t02 = ui.text(42, 486, '', 'sm', NHO);
 ui.panel(28, 572, 300, 194, 'ĐÓNG GÓI VXLAN', '03');
 const slM = ui.slider('mtu', 42, 608, 272, 'MTU UNDERLAY', {lw: 92, vw: 70});
-const hSvg = ui.svg(42, 636, 272, 40);
-const t03 = ui.text(42, 684, '', 'sm', NHO);
+const hSvg = ui.svg(42, 636, 272, 48);
+const t03 = ui.text(42, 690, '', 'sm', NHO);
 ui.panel(1272, 112, 300, 196, 'KHÔNG GIAN ĐỊNH DANH', '04');
 const idBars = ['VLAN 12 BIT', 'VNI 24 BIT'].map((n, i) => ui.bar(1286, 148 + i * 22, 272, n, {lw: 86, vw: 96}));
 const t04 = ui.text(1286, 200, '', 'sm', NHO);
 ui.panel(1272, 320, 300, 230, 'MIỀN LỖI · HỎNG MỘT SPINE', '05');
-const capBars = TEN.map((t, i) => ui.bar(1286, 356 + i * 22, 272, t.ten.toUpperCase(), {lw: 86, vw: 96}));
+const capBars = TEN.map((t, i) => ui.bar(1286, 356 + i * 22, 272, t.ten.toUpperCase(), {lw: 74, vw: 132}));
 const t05 = ui.text(1286, 428, '', 'sm', NHO);
 ui.panel(1272, 562, 300, 204, 'KIỂM CÔ LẬP · 3.12', '06');
 const pSvg = ui.svg(1286, 596, 272, 100);
@@ -137,26 +137,27 @@ const sim = {
     oBig.textContent = `Ω = ${vn(kq.om, 1)}`; oBig.style.color = kq.om > 3 ? MAU.bad : C.ink;
     t01.innerHTML = `48 cổng 25 Gbit/s xuống máy chủ chia cho ${kq.sp} × 100 Gbit/s lên spine (4.8, giả định). Underlay chỉ lo nối mọi leaf với nhau bằng IP và ECMP qua các spine, không biết gì về tenant.`;
     // bảng 02: bảng tenant
-    { let g = ['VRF', 'VNI', 'RT', 'SLA'].map((c, i) => `<text x="${[0, 70, 128, 196][i]}" y="10" font-family="Be Vietnam Pro" font-size="9.5" fill="#626773">${c}</text>`).join('');
-      TEN.forEach((t, i) => { const y = 30 + i * 30; g += `<rect x="0" y="${y - 12}" width="4" height="16" fill="${t.mau}"/><text x="8" y="${y}" font-family="JetBrains Mono" font-size="10" font-weight="700" fill="${C.ink}">${t.vrf}</text><text x="70" y="${y}" font-family="JetBrains Mono" font-size="10" fill="${C.ink}">${t.vni}</text><text x="128" y="${y}" font-family="JetBrains Mono" font-size="10" fill="${C.ink}">${t.rt}</text><text x="196" y="${y}" font-family="Be Vietnam Pro" font-size="9.5" fill="${C.ink}">${t.sla}</text>`; });
+    { let g = ['VRF', 'VNI', 'RT', 'SLA'].map((c, i) => `<text x="${[0, 70, 128, 196][i]}" y="10" font-family="Be Vietnam Pro" font-size="10.5" fill="#626773">${c}</text>`).join('');
+      TEN.forEach((t, i) => { const y = 30 + i * 30; g += `<rect x="0" y="${y - 12}" width="4" height="16" fill="${t.mau}"/><text x="8" y="${y}" font-family="JetBrains Mono" font-size="10.5" font-weight="700" fill="${C.ink}">${t.vrf}</text><text x="70" y="${y}" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${t.vni}</text><text x="128" y="${y}" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${t.rt}</text><text x="196" y="${y}" font-family="Be Vietnam Pro" font-size="10.5" fill="${C.ink}">${t.sla}</text>`; });
       tSvg.innerHTML = g; }
     t02.innerHTML = 'Một tenant không chỉ là một VLAN: là bộ VRF, VNI, route target, chính sách và SLA phải khớp nhau trên mọi leaf (3.20). EVPN dùng BGP để phát các bộ này giữa các VTEP (RFC 7432, 8365).';
     // bảng 03: tiêu đề đóng gói
     slM.set((S.mtu - 1500) / 7500, `${vn(S.mtu, 0)} byte`);
-    { const parts = [['Eth', VX.eth, '#8A8F98'], ['IP', VX.ip, '#626773'], ['UDP', VX.udp, '#9aa0a6'], ['VXLAN', VX.vxlan, MAU.warn], ['khung gốc 1 500 + 14', 1514, TEN[f.ti].mau]], tot = parts.reduce((a, b) => a + b[1], 0); let x = 0, g = '';
-      parts.forEach(([n, v, c], i) => { const w = i < 4 ? 34 : 272 - 4 * 34; g += `<rect x="${x}" y="0" width="${w - 2}" height="20" fill="${c}"/><text x="${x + 3}" y="14" font-family="JetBrains Mono" font-size="9" fill="#fff">${n}${i < 4 ? ' ' + v : ''}</text>`; x += w; }); void tot;
-      g += `<text x="0" y="34" font-family="JetBrains Mono" font-size="9.5" fill="${kq.vua ? '#626773' : MAU.bad}">gói IP ngoài ${kq.can} byte ${kq.vua ? '≤' : '>'} MTU ${S.mtu}</text>`; hSvg.innerHTML = g; }
+    { const parts = [['Eth', VX.eth, '#6f747d', 38], ['IP', VX.ip, '#626773', 30], ['UDP', VX.udp, '#6f747d', 38], ['VXLAN', VX.vxlan, MAU.warn, 50], ['khung gốc', '1 500 + 14', TEN[f.ti].mau, 116]], tot = parts.reduce((a, b) => a + b[1], 0); let x = 0, g = '';
+      // hàng trên: tên từng phần đầu khung; hàng dưới: số byte của phần đó (chữ 10,5 không còn chui vừa một ô 34 đơn vị cả tên lẫn số)
+      parts.forEach(([n, v, c, w]) => { g += `<rect x="${x}" y="0" width="${w - 2}" height="20" fill="${c}"/><text x="${x + 4}" y="14" font-family="JetBrains Mono" font-size="10.5" fill="#fff">${n}</text><text x="${x + 4}" y="32" font-family="JetBrains Mono" font-size="10.5" fill="#626773">${v}</text>`; x += w; }); void tot;
+      g += `<text x="0" y="46" font-family="JetBrains Mono" font-size="10.5" fill="${kq.vua ? '#626773' : MAU.bad}">gói IP ngoài ${kq.can} byte ${kq.vua ? '≤' : '>'} MTU ${S.mtu}</text>`; hSvg.innerHTML = g; }
     t03.innerHTML = `Mỗi khung thêm ${OH} byte: η<sub>tunnel</sub> = 1 500 / ${1500 + OH} = ${vn(kq.eta, 3)} (2.8). ${kq.vua ? 'MTU underlay đủ lớn.' : '<b>MTU underlay 1 500 không chứa nổi gói đã đóng gói</b>: gói đầy cỡ bị bỏ ở leaf, trong khi ping nhỏ vẫn qua. Lỗi kinh điển khi dựng overlay.'}`;
     // bảng 04
     idBars[0].set(Math.log2(4094) / 24, '4 094', '#8A8F98'); idBars[1].set(1, '16 777 216', MAU.prop);
     t04.innerHTML = 'VLAN có 12 bit, trừ hai giá trị dành riêng còn 4 094. VNI của VXLAN có 24 bit: hơn 16 triệu phân đoạn (RFC 7348), đủ cho trung tâm dữ liệu nhiều tenant. Thanh vẽ theo số bit.';
     // bảng 05: hỏng một spine thì mọi tenant mất cùng một phần dung lượng
     const full = S.nSpine * 100e9, con = kq.sp * 100e9;
-    TEN.forEach((t, i) => capBars[i].set(con / Math.max(full, 1), `${F.fmtBps(con / 3, 0)} mỗi tenant`, S.hong >= 0 ? MAU.warn : t.mau));
+    TEN.forEach((t, i) => capBars[i].set(con / Math.max(full, 1), `${F.fmtBps(con / 3, 0)} / tenant`, S.hong >= 0 ? MAU.warn : t.mau));
     t05.innerHTML = S.hong >= 0 ? `Một spine hỏng: dung lượng lên của mọi leaf còn ${kq.sp}/${S.nSpine}, Ω lên ${vn(kq.om, 1)}. <b>Cả ba tenant cùng chịu</b>, vì chúng chung một underlay. Lỗi underlay là lỗi của mọi overlay trên nó.` : 'Bấm Hỏng spine 1. Thêm spine thì mỗi spine hỏng chỉ mất 1/N dung lượng: leaf-spine mở rộng ngang và chia nhỏ miền lỗi.';
     // bảng 06: ma trận cô lập
-    { let g = ''; TEN.forEach((t, j) => { g += `<text x="${96 + j * 58 + 26}" y="10" text-anchor="middle" font-family="Be Vietnam Pro" font-size="9.5" fill="#626773">${t.ten}</text>`; });
-      TEN.forEach((t, i) => { const y = 18 + i * 26; g += `<text x="0" y="${y + 15}" font-family="Be Vietnam Pro" font-size="10" font-weight="600" fill="${t.mau}">${t.ten}</text>`; TEN.forEach((_, j) => { const ok = POL[i][j]; g += `<rect x="${96 + j * 58}" y="${y}" width="52" height="22" fill="${ok ? '#e5f4e4' : '#fbebeb'}" stroke="${C.line}"/><text x="${96 + j * 58 + 26}" y="${y + 15}" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="${ok ? MAU.ok : MAU.bad}">${ok ? '✓' : '✗'}</text>`; }); });
+    { let g = ''; TEN.forEach((t, j) => { g += `<text x="${96 + j * 58 + 26}" y="10" text-anchor="middle" font-family="Be Vietnam Pro" font-size="10.5" fill="#626773">${t.ten}</text>`; });
+      TEN.forEach((t, i) => { const y = 18 + i * 26; g += `<text x="0" y="${y + 15}" font-family="Be Vietnam Pro" font-size="10.5" font-weight="600" fill="${t.mau}">${t.ten}</text>`; TEN.forEach((_, j) => { const ok = POL[i][j]; g += `<rect x="${96 + j * 58}" y="${y}" width="52" height="22" fill="${ok ? '#e5f4e4' : '#fbebeb'}" stroke="${C.line}"/><text x="${96 + j * 58 + 26}" y="${y + 15}" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="${ok ? MAU.ok : MAU.bad}">${ok ? '✓' : '✗'}</text>`; }); });
       pSvg.innerHTML = g; }
     t06.innerHTML = 'A<sub>ij</sub> = 1 nếu vùng i được nói với vùng j. Câu 10: mỗi ô là một ca kiểm thử, gồm cả ca phải bị chặn. Khách chỉ ra Internet, không chạm tới hai tenant còn lại.';
     // chế độ

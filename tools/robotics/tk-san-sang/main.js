@@ -215,13 +215,13 @@ const sim = {
     { const W = 272, span = 168, X = (h) => (h / span) * W; let g = `<rect x="0" y="10" width="${W}" height="12" fill="${C.chart}" stroke="${C.line}"/>`;
       for (let h = 0; h <= span; h += S.bk) g += `<line x1="${X(h)}" x2="${X(h)}" y1="6" y2="26" stroke="${C.ink}" stroke-width="1.2"/>`;
       const hong = 0.8 * span, cuoi = Math.floor(hong / S.bk) * S.bk;
-      g += `<rect x="${X(cuoi)}" y="10" width="${Math.max(1, X(hong) - X(cuoi))}" height="12" fill="${MAU.bad}" opacity=".55"/><path d="M${X(hong)} 2 l4 -2 l0 30" stroke="${MAU.bad}" fill="none"/><text x="0" y="34" font-family="JetBrains Mono" font-size="9" fill="#626773">7 ngày</text><text x="${W}" y="34" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="${MAU.bad}">router hỏng</text>`;
+      g += `<rect x="${X(cuoi)}" y="10" width="${Math.max(1, X(hong) - X(cuoi))}" height="12" fill="${MAU.bad}" opacity=".55"/><path d="M${X(hong)} 2 l4 -2 l0 30" stroke="${MAU.bad}" fill="none"/><text x="0" y="34" font-family="JetBrains Mono" font-size="10.5" fill="#626773">7 ngày</text><text x="${W}" y="34" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${MAU.bad}">router hỏng</text>`;
       rpoSvg.innerHTML = g; }
     t05.innerHTML = `Vạch đen là các bản sao lưu cấu hình; phần đỏ là thay đổi chưa kịp lưu, mất khi khôi phục. Tệ nhất mất trọn một chu kỳ: ${S.bk <= S.rpo ? '<b>đạt RPO</b>' : '<b>vượt RPO</b>'} (chu kỳ ${F.fmtThoiGian(S.bk * H, 0)} so với ${F.fmtThoiGian(S.rpo * H, 0)}).`;
     // bảng 06
     { const th = kq.mc.theo, items = [['Router (chung)', th.chung, '#5b6170'], ['Cả hai đường', th['cả hai đường'], MAU.bad], ['Chuyển đường', th['chuyển mạch'], MAU.warn]], tot = Math.max(1e-9, items.reduce((a, b) => a + b[1], 0));
       let g = '', x = 0; for (const [, v, c] of items) { const w = (v / tot) * 272; g += `<rect x="${x}" y="0" width="${w}" height="14" fill="${c}"/>`; x += w; }
-      items.forEach(([n, v, c], i) => { const y = 30 + i * 14; g += `<rect x="0" y="${y - 8}" width="9" height="9" fill="${c}"/><text x="14" y="${y}" font-family="Be Vietnam Pro" font-size="10" fill="${C.ink}">${n}</text><text x="272" y="${y}" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="${C.ink}">${vn(v, v < 1 ? 2 : 0)} phút/năm</text>`; });
+      items.forEach(([n, v, c], i) => { const y = 30 + i * 14; g += `<rect x="0" y="${y - 8}" width="9" height="9" fill="${c}"/><text x="14" y="${y}" font-family="Be Vietnam Pro" font-size="10.5" fill="${C.ink}">${n}</text><text x="272" y="${y}" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${C.ink}">${vn(v, v < 1 ? 2 : 0)} phút/năm</text>`; });
       ngSvg.innerHTML = g;
       t06.innerHTML = th['chuyển mạch'] > th['cả hai đường'] ? 'Thời gian chuyển đường chiếm nhiều nhất: phát hiện nhanh hơn (BFD) có lợi hơn thêm đường.' : S.mode === 'chung' ? 'Ống chung cắt cả hai đường là nguyên nhân lớn nhất.' : 'Phần lớn còn lại nằm ở router đơn: muốn hơn nữa phải nhân đôi router.'; }
     // chế độ
