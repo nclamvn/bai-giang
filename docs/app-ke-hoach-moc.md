@@ -30,7 +30,7 @@ App vì thế là một vỏ ngoài mới theo hướng sân khấu, dùng lại
 | M1 · Vỏ app web (xong) | `app/`: Thư viện, Bài học sân khấu, Đã tải. Chế độ `?app=1` trong vỏ bài ẩn thanh của vỏ. Danh mục sinh từ nguồn duy nhất. Cài được như PWA | `build_all --check` sạch, cổng bố cục ở 6 bề rộng, mở thử được bài riêng, bài kit và bài thư viện trong app, CI xanh | Claude |
 | M2 · Cầu nối từng bài (xong) | Bài báo vị trí nhãn trên màn hình cho app vẽ nhãn kính. Ẩn bảng riêng của bài trong chế độ app, hoặc chuyển bảng sang app | Mọi bài báo bước đúng trong app, kiểm bằng mắt từng nhóm bài | Claude |
 | M3 · Gói ngoại tuyến (xong) | Tải trọn một bài (trang và tài nguyên) bằng một nút. Đo dung lượng thật từng gói để điền thay ô trống | Bật chế độ máy bay, mở lại được mọi bài đã tải | Claude, kiểm trên máy thật: người dùng |
-| M4 · Android | Capacitor 8, dựng APK trong GitHub Actions | Cài và chạy trên ít nhất 2 máy Android thật | Claude dựng, người dùng cài thử |
+| M4 · Android (dựng xong, chờ máy thật) | Capacitor 8, dựng APK trong GitHub Actions | Cài và chạy trên ít nhất 2 máy Android thật | Claude dựng, người dùng cài thử |
 | M5 · iPhone và iPad | Capacitor iOS, dựng trên máy chạy macOS (runner GitHub hoặc máy Mac) | Chạy qua TestFlight trên iPhone và iPad thật | Cần tài khoản Apple Developer của người dùng |
 | M6 · Lớp học | Chế độ chiếu cảnh tối và cảnh sáng, điều khiển từ điện thoại giáo viên (dùng lại kết nối PeerJS đã có) | Dạy thử một tiết thật | Claude, người dùng dạy thử |
 | M7 · Phát hành | Trang cửa hàng, chính sách riêng tư, giảm rủi ro guideline 4.2 | Được duyệt trên Google Play và App Store | Người dùng nộp, Claude soạn hồ sơ |
@@ -101,9 +101,26 @@ Trong bài, chế độ app có sẵn (shell/bg-shell.js 2.4.0):
 - Kết quả trên máy dựng: đạt ở 9 bài (Neuron, Gói tin qua ba chặng, Sứa robot, Enzyme, Cổ Loa, Ty Thể, Cá thở bằng mang, Tế Bào, Cơ thể người). Lần đầu Cơ thể người lộ ra ảnh bìa bài khác hỏng ở Thư viện khi mất mạng; đã đưa ảnh bìa vào phần chung. CI chạy thêm Neuron và Enzyme mỗi lần đẩy.
 - Chưa kiểm trên điện thoại, tablet thật (bật chế độ máy bay thật).
 
+## M4 đã làm (app Android)
+
+- `native/`: dự án Capacitor 8.6.2 (`@capacitor/app` 8.1.2 cho nút Back). Gói `io.github.nclamvn.sangankhoai` (tạm, chốt khi phát hành), Android 7.0 trở lên (minSdk 24, compileSdk 36). Nền tối `#0E0C1A`, biểu tượng và màn khởi động tối, tràn viền; SystemBars của Capacitor đưa vùng an toàn vào CSS.
+- `tools/build_native.py` dựng `native/www` (không nằm trong git) từ `app/goi.json`: phần chung và gói của 89 bài, 319 tệp, 80,2 MB. Cơ thể người (90 MB) không đóng vào app, mở từ site khi có mạng, Thư viện gắn nhãn CẦN MẠNG (`app/ban-dia.json`). Trang HTML bỏ khối đăng ký sw.js vì mọi tệp đã nằm sẵn trên máy.
+- `app/app.js` khi chạy trong app: nạp `capacitor.js`; nút Back của máy đóng bài, về Thư viện, ở Thư viện thì thu app xuống; giữ màn hình sáng khi đang học (plugin `ManHinh` viết riêng, `ManHinhPlugin.java`); màn Đã tải liệt kê bài có sẵn và bài cần mạng. Bài mở từ site nhận nguồn khung chứa qua tham số `o` (vỏ bài chỉ chấp nhận `https://localhost`, `capacitor://localhost`).
+- Kích thước APK: 42,9 MB (42.957.336 byte, ngày 23/11/2026), trong khoảng ước lượng 40 đến 60 MB của kế hoạch.
+- `.github/workflows/android.yml`: mỗi lần đẩy thay đổi ở app, vỏ bài hay `native/` lên main thì dựng APK, cài lên máy ảo Android 14 (Pixel 6), chạy `tests/kiem_android.py`, rồi đăng APK lên bản phát hành thử `android-thu`. Bản thử ký bằng khoá debug công khai trong kho, không dùng để phát hành.
+- `tests/kiem_android.py`: D1 Thư viện hiện, D2 bấm ảnh lớn mở bài và lớp chữ của app hiện bước, D3 nút Back về Thư viện, D4 bật chế độ máy bay, tắt hẳn app, mở lại, bài vẫn mở, D5 không văng app. Ảnh chụp, logcat và lời của trang (`logcat-app.txt`) nằm trong gói tải về của mỗi lần chạy.
+- Kết quả trên máy ảo (WebView 113, Android 14): đạt cả năm bước.
+- Lỗi tìm ra nhờ máy ảo, đã sửa:
+  - Gọi tràn viền trước khi BridgeActivity đổi theme để lại thanh tiêu đề mang ảnh khởi động bị kéo dẹt.
+  - Máy chủ nội bộ của Capacitor trả trang gốc cho địa chỉ thư mục (`/ten-bai/`), nên bài không nạp; app nay mở thẳng `index.html`.
+  - Trên WebView 113, nhãn của thanh bước tràn chồng lên nhau; nút bước nay tự cắt phần tràn.
+- Rủi ro còn mở: trên máy ảo, cảnh 3D của Neuron đen vì chương trình đổ bóng WebGL2 của three.js không liên kết được ("uniform buffer not large enough") trên GPU giả lập bằng phần mềm. Cùng bài chạy đúng trên Chromium của máy dựng, nên nhiều khả năng là giới hạn của máy ảo, nhưng máy thật đời cũ (WebView cũ, GPU yếu) có thể gặp tương tự. Phải xem trên máy thật.
+- Cổng của M4 chưa qua: cần người dùng cài APK lên ít nhất 2 máy Android thật. Cần ghi: tên máy, phiên bản Android, cảnh 3D có hiện không (Neuron, Tế Bào, một bài kit), độ mượt, chế độ máy bay.
+
 ## Nhật ký
 
 - M0 xong: chốt hướng sân khấu.
 - M1 xong phần dựng và cổng trên máy dựng. Chưa kiểm trên điện thoại, tablet thật.
 - M2 xong phần dựng và cổng trên máy dựng: mọi bài chạy gọn trong app, không lặp chữ, không bị lớp kính che.
 - M3 xong phần dựng và cổng trên máy dựng: tải trọn từng bài bằng một nút, mở lại được khi mất mạng.
+- M4 xong phần dựng: APK 42,9 MB dựng và chạy thử trên máy ảo trong CI, bản thử ở github.com/nclamvn/bai-giang/releases/tag/android-thu. Chờ cài thử trên 2 máy thật.
