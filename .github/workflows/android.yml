@@ -44,10 +44,13 @@ jobs:
           sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
           SDK="$ANDROID_HOME/cmdline-tools/latest/bin"
           export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"
+          export ANDROID_AVD_HOME="$HOME/.android/avd" && mkdir -p "$ANDROID_AVD_HOME"
           yes | "$SDK/sdkmanager" --licenses > /dev/null
           "$SDK/sdkmanager" "system-images;android-34;google_apis;x86_64" "emulator" > /dev/null
           echo no | "$SDK/avdmanager" create avd -n thu -k "system-images;android-34;google_apis;x86_64" -d pixel_6
-          "$ANDROID_HOME/emulator/emulator" -avd thu -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -no-snapshot &
+          emulator -list-avds
+          emulator -avd thu -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -no-snapshot > emulator.log 2>&1 &
+          echo $! > emulator.pid
           python3 tests/kiem_android.py sang-an-khoai.apk
       - uses: actions/upload-artifact@v5
         if: always()
@@ -56,6 +59,7 @@ jobs:
           path: |
             sang-an-khoai.apk
             kiem-android/
+            emulator.log
           if-no-files-found: ignore
       - name: Đăng bản thử android-thu
         env:

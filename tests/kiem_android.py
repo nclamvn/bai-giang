@@ -18,16 +18,26 @@ OUT = 'kiem-android'
 
 
 def adb(*a, check=False, timeout=120):
-    r = subprocess.run(['adb', *a], capture_output=True, text=True, timeout=timeout)
+    try: r = subprocess.run(['adb', *a], capture_output=True, text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        if check: raise
+        return ''
     if check and r.returncode: raise RuntimeError(' '.join(a) + ': ' + r.stderr.strip())
     return r.stdout
 
 
+def con_song():
+    """Máy ảo do CI chạy nền (emulator.pid) còn sống không; không có tệp pid (máy thật) thì coi là còn."""
+    try: pid = int(open('emulator.pid').read().strip())
+    except (OSError, ValueError): return True
+    return os.path.exists(f'/proc/{pid}')
+
+
 def cho_may(han=900):
-    adb('wait-for-device', timeout=han)
     t0 = time.time()
     while time.time() - t0 < han:
-        if adb('shell', 'getprop', 'sys.boot_completed').strip() == '1': time.sleep(10); return
+        if not con_song(): raise RuntimeError('máy ảo đã tắt, xem emulator.log')
+        if adb('shell', 'getprop', 'sys.boot_completed', timeout=30).strip() == '1': time.sleep(10); return
         time.sleep(5)
     raise RuntimeError('máy ảo chưa khởi động xong')
 
