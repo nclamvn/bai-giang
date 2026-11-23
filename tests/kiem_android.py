@@ -95,7 +95,9 @@ def main():
     log = adb('logcat', '-d', '-b', 'crash', timeout=60)
     if PKG in log and 'FATAL EXCEPTION' in log: loi.append('D5 văng app'); print('LỖI  D5 văng app\n' + log[-2000:])
     else: print('đạt  D5 không văng app')
-    with open(f'{OUT}/logcat.txt', 'w') as f: f.write(adb('logcat', '-d', timeout=60)[-200000:])
+    with open(f'{OUT}/logcat.txt', 'w') as f: f.write(adb('logcat', '-d', timeout=60))
+    with open(f'{OUT}/logcat-app.txt', 'w') as f:  # lời của trang web trong app (console) và lỗi Capacitor
+        f.write(adb('logcat', '-d', '-s', 'Capacitor:*', 'Capacitor/Console:*', 'chromium:*', timeout=60))
     print('tổng:', 'đạt' if not loi else 'lỗi ở ' + ', '.join(loi))
     sys.exit(1 if loi else 0)
 

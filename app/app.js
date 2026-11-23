@@ -237,7 +237,8 @@
     const r = load(); resume = r && r.slug === b.slug && r.i > 0 ? r.i : -1;
     $('cap').hidden = true; $('next-l').hidden = true; $('pnl').hidden = true; $('stage').classList.remove('pnl-mo');
     nutTai(b);
-    const xa = remoteOf(b), u = new URL(xa || b.href, location.href); u.searchParams.set('app', '1');
+    // trong app Android, máy chủ nội bộ của Capacitor trả trang gốc cho địa chỉ thư mục (/ten-bai/): mở thẳng index.html
+    const xa = remoteOf(b), u = new URL(xa || (NATIVE ? new URL(fileOf(b.href), SITE).href : b.href), location.href); u.searchParams.set('app', '1');
     if (xa) { u.searchParams.set('o', location.origin); if (navigator.onLine === false) baoTin('Bài này mở từ site, cần có mạng.', 5000); }
     giuSang(true);
     $('canh').src = u.href;
