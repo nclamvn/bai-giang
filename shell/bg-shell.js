@@ -144,6 +144,8 @@
   #bgs-load.out{opacity:0;pointer-events:none}
   body.bgs-app .bgs-bar,body.bgs-app .bgs-nav,body.bgs-app .bgs-hint,body.bgs-app .bgs-next,body.bgs-app .bgs-toast{display:none!important}
   body.bgs-app [data-app="an"]{display:none!important}
+  /* điện thoại: trình đơn mở thành tấm dưới đáy, phủ lên thanh dưới; ẩn thanh dưới để không có hai lớp nút chồng nhau */
+  @media (max-width:640px),(max-height:520px){body.bgs-popon .bgs-nav{visibility:hidden}}
   /* chế độ nhẹ: máy yếu (khung hình chậm kéo dài) thì bỏ làm mờ nền sau bảng, bảng đục hơn; cảnh 3D giữ nguyên */
   html:root[data-bg-lite]{--bg-glass:rgba(255,255,255,.97)!important;--bg-glass-strong:#fff!important;--bg-blur:none!important;--lg-blur:none!important;--glass-blur:none!important;--lg-fill:linear-gradient(180deg,rgba(255,255,255,.97),rgba(255,255,255,.94))!important;--lg-fill-strong:linear-gradient(180deg,#fff,rgba(255,255,255,.97))!important;--glass:rgba(255,255,255,.97)!important;--glass-2:rgba(255,255,255,.96)!important;--glass-bar:rgba(255,255,255,.97)!important}
   html[data-bg-lite] *,html[data-bg-lite] *::before,html[data-bg-lite] *::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
@@ -277,12 +279,12 @@
   }
   function togglePop(p, anchor, fill) {
     const open = !p.classList.contains('show'); closePops(); if (!open) return;
-    fill(); p.classList.add('show');
+    fill(); p.classList.add('show'); document.body.classList.add('bgs-popon');
     if (!isPhone()) { const r = anchor.getBoundingClientRect(); p.style.top = (r.bottom + 6) + 'px'; p.style.right = Math.max(8, innerWidth - r.right) + 'px'; p.style.left = 'auto'; }
     anchor.setAttribute('aria-expanded', 'true');
     const f = p.querySelector('.cur,[data-a]'); if (f) f.focus({ preventScroll: true });
   }
-  function closePops() { for (const p of [menu, stepsPop]) if (p) p.classList.remove('show'); if (bar) bar.querySelectorAll('[aria-expanded]').forEach((b) => b.setAttribute('aria-expanded', 'false')); }
+  function closePops() { document.body.classList.remove('bgs-popon'); for (const p of [menu, stepsPop]) if (p) p.classList.remove('show'); if (bar) bar.querySelectorAll('[aria-expanded]').forEach((b) => b.setAttribute('aria-expanded', 'false')); }
   function renderMenu() {
     const L = S.L, chieu = document.documentElement.hasAttribute('data-chieu'), phone = isPhone();
     const hasSteps = L.steps && L.steps.length;
