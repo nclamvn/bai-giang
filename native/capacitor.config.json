@@ -1,0 +1,22 @@
+{
+  "appId": "io.github.nclamvn.sangankhoai",
+  "appName": "Sáng Ăn Khoai",
+  "webDir": "www",
+  "backgroundColor": "#0E0C1A",
+  "android": {
+    "backgroundColor": "#0E0C1A",
+    "allowMixedContent": false,
+    "captureInput": false,
+    "webContentsDebuggingEnabled": false
+  },
+  "server": {
+    "androidScheme": "https",
+    "hostname": "localhost"
+  },
+  "plugins": {
+    "SystemBars": {
+      "insetsHandling": "css",
+      "style": "DARK"
+    }
+  }
+}

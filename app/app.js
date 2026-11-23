@@ -5,6 +5,8 @@
  * {t:'go', i} | {t:'next'} | {t:'prev'}. Liên kết trong bài sang trang khác của site đến app dưới dạng {t:'nav', href}.
  * Gói ngoại tuyến (M3): goi.json (tools/goi_bai.py) liệt kê tệp và số byte thật của từng bài; sw.js tải nốt tệp còn thiếu,
  * đếm tệp còn thiếu, xoá tệp ({t:'goi'|'luu'|'xoa', files}).
+ * App Android (M4, native/, Capacitor): bài nằm sẵn trong app (tools/build_native.py), bài nặng ở app/ban-dia.json mở từ site;
+ * nút Back của máy đóng bài, về Thư viện; màn hình giữ sáng khi đang học (plugin ManHinh viết trong native/android).
  * Không phụ thuộc thư viện ngoài, không đo đếm người dùng. Mã MIT, repo nclamvn/bai-giang. */
 (function () {
   'use strict';
@@ -22,6 +24,24 @@
   const fileOf = (href) => { let p = new URL(href, location.href).pathname.slice(SITE.pathname.length); if (p === '' || p.endsWith('/')) p += 'index.html'; return decodeURIComponent(p); };
 
   let CAT = null, BY = new Map(), BYFILE = new Map();
+  // app Android: native bridge của Capacitor có sẵn window.Capacitor; lõi Capacitor (capacitor.js, chỉ có trong app) cấp registerPlugin
+  const NATIVE = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+  let BANDIA = null, P = {};
+  const remoteOf = (b) => BANDIA && BANDIA.ngoai.includes(b.slug) ? BANDIA.remote + fileOf(b.href).replace(/index\.html$/, '') : null;
+  async function moNative() {
+    try { BANDIA = await (await fetch('ban-dia.json')).json(); } catch (e) { BANDIA = { remote: '', ngoai: [] }; }
+    await new Promise((ok) => { const s = document.createElement('script'); s.src = 'capacitor.js'; s.onload = s.onerror = ok; document.head.appendChild(s); });
+    const C = window.Capacitor;
+    if (C && C.registerPlugin) { P.App = C.registerPlugin('App'); P.ManHinh = C.registerPlugin('ManHinh'); }
+    // nút Back của máy: đóng bảng chữ hay bài, về Thư viện; ở Thư viện thì thu app xuống
+    if (P.App) P.App.addListener('backButton', () => {
+      if (!$('stage').hidden) location.hash = '#/thu-vien';
+      else if (!$('v-da-tai').hidden) location.hash = '#/thu-vien';
+      else P.App.minimizeApp().catch(() => P.App.exitApp());
+    });
+    document.documentElement.classList.add('native');
+  }
+  const giuSang = (bat) => { if (P.ManHinh) P.ManHinh.giuSang({ bat }).catch(() => {}); };
   let cur = null, st = null, resume = -1, stateTimer = 0, filterS = '', query = '';
   const cached = new Set();
 
@@ -30,6 +50,7 @@
     try { CAT = await (await fetch('danh-muc.json')).json(); } catch (e) { CAT = null; }
     if (!CAT) { document.querySelector('main').innerHTML = '<p class="empty" style="padding:24px">Không tải được danh mục bài. Kiểm tra mạng rồi mở lại app.</p>'; return; }
     for (const b of CAT.bai) { BY.set(b.slug, b); BYFILE.set(fileOf(b.href), b); }
+    if (NATIVE) await moNative();
     await scanCache();
     buildLib(); wire(); route();
     addEventListener('hashchange', route);
@@ -68,7 +89,7 @@
     const mk = (s, ten) => `<button class="chip" type="button" data-s="${esc(s)}" aria-pressed="${s === filterS}">${esc(ten)}</button>`;
     chips.innerHTML = mk('', 'Tất cả') + CAT.mon.map((m) => mk(m.s, m.ten)).join('');
     $('grid').innerHTML = CAT.bai.map((b) => `<li data-s="${esc(b.s)}" data-q="${esc(fold(b.title + ' ' + b.nhom + ' ' + b.mon))}"><a class="card" href="#/bai/${esc(b.slug)}">
-      <span class="ph"><img src="${esc(b.cover)}" alt="" loading="lazy" decoding="async">${daTai().has(b.slug) ? '<span class="badge glass">ĐÃ TẢI</span>' : ''}</span>
+      <span class="ph"><img src="${esc(b.cover)}" alt="" loading="lazy" decoding="async">${NATIVE ? (remoteOf(b) ? '<span class="badge glass can-mang">CẦN MẠNG</span>' : '') : daTai().has(b.slug) ? '<span class="badge glass">ĐÃ TẢI</span>' : ''}</span>
       <span class="tt">${esc(b.title)}</span><span class="sub">${esc(b.nhom)}</span></a></li>`).join('');
   }
   function filter() {
@@ -142,6 +163,7 @@
   const ICON_XOA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>';
   async function renderDl() {
     netLine();
+    if (NATIVE) return renderDlNative();
     await scanCache(); await goiData();
     const s = daTai(), co = [], mo = [];
     for (const b of CAT.bai) {
@@ -177,6 +199,18 @@
       : ben ? 'Trình duyệt đã cho giữ bền bài đã tải: không tự xoá khi máy đầy.'
       : 'Trình duyệt có thể tự xoá bài đã tải khi máy đầy bộ nhớ. Bài nào thiếu tệp sẽ báo ở đây.';
   }
+  // app Android: bài nằm sẵn trong app, không cần tải; chỉ liệt kê bài mở từ site
+  async function renderDlNative() {
+    const ngoai = CAT.bai.filter((b) => remoteOf(b)), co = CAT.bai.length - ngoai.length;
+    $('dl-empty').hidden = true; $('h-mo').hidden = $('rows-mo').hidden = ngoai.length === 0; $('h-mo').textContent = 'Cần mạng';
+    $('rows').innerHTML = `<li><span class="tt">${co} bài có sẵn trong app</span></li>`;
+    $('rows').firstElementChild.insertAdjacentHTML('beforeend', '<span class="sub">Học được cả khi mất mạng, không cần tải thêm.</span>');
+    $('rows-mo').innerHTML = ngoai.map((b) => `<li data-slug="${esc(b.slug)}"><a href="#/bai/${esc(b.slug)}"><img src="${esc(b.cover)}" alt="" loading="lazy">
+      <span><span class="tt">${esc(b.title)}</span><br><span class="sub">Bài nặng, mở từ site khi có mạng</span></span></a></li>`).join('');
+    let e = null; try { e = navigator.storage && navigator.storage.estimate ? await navigator.storage.estimate() : null; } catch (err) { e = null; }
+    $('use').textContent = e && e.usage != null ? mb(e.usage) : 'không đo được';
+    $('ben').textContent = 'Bài trong app nằm trong tệp cài, không bị xoá khi máy đầy bộ nhớ.';
+  }
   function netLine() {
     const on = navigator.onLine !== false;
     $('net').classList.toggle('off', !on);
@@ -203,7 +237,9 @@
     const r = load(); resume = r && r.slug === b.slug && r.i > 0 ? r.i : -1;
     $('cap').hidden = true; $('next-l').hidden = true; $('pnl').hidden = true; $('stage').classList.remove('pnl-mo');
     nutTai(b);
-    const u = new URL(b.href, location.href); u.searchParams.set('app', '1');
+    const xa = remoteOf(b), u = new URL(xa || b.href, location.href); u.searchParams.set('app', '1');
+    if (xa) { u.searchParams.set('o', location.origin); if (navigator.onLine === false) baoTin('Bài này mở từ site, cần có mạng.', 5000); }
+    giuSang(true);
     $('canh').src = u.href;
     clearTimeout(stateTimer);
     // bài không báo trạng thái (không gắn vỏ hoặc vỏ cũ): vẫn xem được cảnh, chỉ có nút đóng
@@ -212,7 +248,7 @@
   function closeLesson() {
     if ($('stage').hidden) return;
     $('stage').hidden = true; document.body.classList.remove('mo-bai');
-    $('canh').src = 'about:blank'; cur = null; st = null; clearTimeout(stateTimer);
+    $('canh').src = 'about:blank'; cur = null; st = null; clearTimeout(stateTimer); giuSang(false);
     $('stage').classList.remove('sach'); $('an').setAttribute('aria-pressed', 'false'); $('st-msg').hidden = true;
   }
   // nút tải ở góc trên sân khấu: chưa tải (mũi tên), đang tải (phần trăm), đã tải (dấu tích)
@@ -248,7 +284,8 @@
     if (cur === b) { await nutTai(b); baoTin(!r ? 'Chưa tải được. Thử lại khi mạng ổn.' : r.con ? `Còn ${r.con} tệp chưa tải được. Bấm tải lại khi mạng ổn.` : 'Đã tải xong: học được khi mất mạng.', 4000); }
     buildLib(); filter();
   }
-  const send = (m) => { const w = $('canh').contentWindow; if (w) try { w.postMessage(m, ORIGIN); } catch (e) { /* khung đã đóng */ } };
+  // gửi lệnh vào khung bài; bài mở từ site (app Android) có nguồn khác trang app
+  const send = (m) => { const f = $('canh'), w = f.contentWindow; let o = ORIGIN; try { o = new URL(f.src).origin; } catch (e) { /* giữ nguồn của app */ } if (w) try { w.postMessage(m, o === 'null' ? '*' : o); } catch (e) { /* khung đã đóng */ } };
 
   function onState(d) {
     const L = d.lesson; if (!L || !cur) return;
@@ -350,8 +387,11 @@
       const d = e.data;
       if (d.t === 'state') onState(d);
       else if (d.t === 'nav' && typeof d.href === 'string') {
-        const u = new URL(d.href, location.href); if (u.origin !== location.origin) return;
-        const b = BYFILE.get(fileOf(u.href));
+        const u = new URL(d.href, location.href), rb = BANDIA && BANDIA.remote ? new URL(BANDIA.remote) : null;
+        let b = null;
+        if (u.origin === location.origin) b = BYFILE.get(fileOf(u.href));
+        else if (rb && u.origin === rb.origin && u.pathname.startsWith(rb.pathname)) b = BYFILE.get(fileOf(new URL('../' + u.pathname.slice(rb.pathname.length), location.href).href));
+        else return;
         if (b) location.hash = '#/bai/' + b.slug; else location.assign(u.href);
       }
     });

@@ -194,7 +194,9 @@
   const APP = EMBED && /[?&]app=1\b/.test(location.search);
   // lớp trên <html> ngay từ đầu: bài đặt bố cục chế độ app từ khung hình đầu, không nhảy khi vỏ gắn xong
   if (APP) document.documentElement.classList.add('bgs-app-html');
-  const toParent = (m) => { if (EMBED) { try { window.parent.postMessage(m, location.origin === 'null' ? '*' : location.origin); } catch (e) { /* bỏ qua */ } } };
+  // app Android (Capacitor, https://localhost) mở bài nặng thẳng từ site: trang app khác nguồn với bài, app báo nguồn của mình qua ?o=
+  const PARENT = (() => { const o = new URLSearchParams(location.search).get('o'); return o && /^(https?|capacitor):\/\/localhost(:\d+)?$/.test(o) ? o : (location.origin === 'null' ? '*' : location.origin); })();
+  const toParent = (m) => { if (EMBED) { try { window.parent.postMessage(m, PARENT); } catch (e) { /* bỏ qua */ } } };
   function broadcast() { if (S.relayout) S.relayout(); const m = snapshot(); for (const l of S.links) { try { l.send(m); } catch (e) { S.links.delete(l); } } toParent(m); render(); }
   function say(msg) { toast.textContent = msg; toast.classList.add('show'); clearTimeout(say.t); say.t = setTimeout(() => toast.classList.remove('show'), 2400); }
   function announce(msg) { if (live) { live.textContent = ''; setTimeout(() => { live.textContent = msg; }, 30); } }

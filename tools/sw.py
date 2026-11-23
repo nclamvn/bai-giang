@@ -21,7 +21,7 @@ import hashlib, json, pathlib, re, subprocess, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 # không phục vụ cho người học (mã nguồn, công cụ, kiểm thử, tài liệu kho)
-SKIP = re.compile(r'^(tools/|tests/|src/|docs/|\.github/|offline/|LICENSE$|README|build\.sh$|\.nojekyll$|\.gitignore$|sw\.js$|sw-manifest\.json$|sw-manifest/)'
+SKIP = re.compile(r'^(tools/|tests/|src/|docs/|native/|\.github/|offline/|LICENSE$|README|build\.sh$|\.nojekyll$|\.gitignore$|sw\.js$|sw-manifest\.json$|sw-manifest/)'
                   r'|__pycache__|\.py$|\.md$|\.tsv$|\.mjs$|/_viet-hoa/')
 SPLIT = 300
 MARK = re.compile(r'<script id="bg-sw">.*?</script>\n?', re.S)

@@ -35,7 +35,7 @@ import json, re, struct, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-BO_QUA = ('tools/', 'tests/', 'offline/', 'docs/', 'src/', '.art_robo/', 'node_modules/')
+BO_QUA = ('tools/', 'tests/', 'offline/', 'docs/', 'src/', '.art_robo/', 'node_modules/', 'native/')   # native/: bản sao trang cho app Android (tools/build_native.py)
 SKIP_LINK = '<a class="bg-skip" href="#{id}">Bỏ qua tới nội dung</a>'
 # đường dẫn (tiền tố) → các luật được miễn và lí do
 MIEN = {
