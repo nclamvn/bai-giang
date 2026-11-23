@@ -94,13 +94,16 @@ Trong bài, chế độ app có sẵn (shell/bg-shell.js 2.4.0):
 
 - `tools/goi_bai.py`: gói của từng bài tính lúc dựng, không gõ tay. Dò đệ quy từ trang bài qua HTML (src, href, importmap), JS (import, import(), new URL, chuỗi đường dẫn tới tài nguyên), CSS (url); bài dạng thư mục thêm mọi tệp của thư mục (trừ thư mục bài lồng bên trong); phần chung là phông và lõi app. Liên kết sang trang khác (bài sau, mục lục) không tính vào gói.
 - `app/goi.json` (sinh bởi `tools/build_app.py`, bước ngay trước bộ nhớ đệm trong `build_all.py`): danh sách tệp và số byte thật trên đĩa.
-- Dung lượng thật một gói (gồm phần chung 0,57 MB): 54 bài thư viện 1,6 đến 1,9 MB; 31 bài kit 1,4 đến 12,1 MB (Cá thở bằng mang 12,1, Máy đi bộ 7,8); Neuron 1,8; Cổ Loa 2,0; Ty Thể 2,3; Tế Bào 7,9; Cơ thể người 90,6 MB (2.800 tệp mô hình giải phẫu).
+- Dung lượng thật (23/11/2026). Phần chung tải một lần cho mọi bài: 2,76 MB (phông, lõi app, ảnh bìa 90 bài). Phần riêng từng bài: 54 bài thư viện 1,0 đến 1,2 MB; 31 bài kit 0,8 đến 11,4 MB (Cá thở bằng mang 11,4, Máy đi bộ 7,2); Neuron 1,2; Cổ Loa 1,3; Ty Thể 1,7; Tế Bào 7,4; Cơ thể người 90,0 MB (2.800 tệp mô hình giải phẫu).
 - `sw.js` (`tools/sw.py`): nhận danh sách tệp: `{t:'goi', files}` trả số tệp còn thiếu và tên tệp; `{t:'luu', files}` tải nốt, báo tiến độ, chỉ lưu tệp đúng mã băm; `{t:'xoa', files}` xoá khỏi máy. Cách cũ theo thư mục bài vẫn giữ cho trình đơn của vỏ bài.
 - App: nút tải ở góc trên sân khấu (mũi tên, phần trăm khi đang tải, dấu tích khi xong), gói trên 30 MB phải bấm hai lần; xin trình duyệt giữ bền bộ nhớ (`navigator.storage.persist`). Màn Đã tải: bài đã tải trọn (dung lượng, nút xoá; xoá chỉ bỏ tệp không bài đã tải nào khác cần), bài mới mở một phần (nút Tải trọn), dung lượng app đang dùng, trình duyệt có giữ bền hay không, bài nào bị trình duyệt dọn bớt tệp thì báo thiếu. Thẻ thư viện gắn nhãn ĐÃ TẢI.
 - `tests/kiem_ngoai_tuyen.py`: tải bài khi có mạng, cắt mạng cả trình duyệt, mở lại app, mở bài, đi hết các bước; đạt khi bài báo trạng thái và không có yêu cầu nào tới site bị hỏng.
+- Kết quả trên máy dựng: đạt ở 9 bài (Neuron, Gói tin qua ba chặng, Sứa robot, Enzyme, Cổ Loa, Ty Thể, Cá thở bằng mang, Tế Bào, Cơ thể người). Lần đầu Cơ thể người lộ ra ảnh bìa bài khác hỏng ở Thư viện khi mất mạng; đã đưa ảnh bìa vào phần chung. CI chạy thêm Neuron và Enzyme mỗi lần đẩy.
+- Chưa kiểm trên điện thoại, tablet thật (bật chế độ máy bay thật).
 
 ## Nhật ký
 
 - M0 xong: chốt hướng sân khấu.
 - M1 xong phần dựng và cổng trên máy dựng. Chưa kiểm trên điện thoại, tablet thật.
 - M2 xong phần dựng và cổng trên máy dựng: mọi bài chạy gọn trong app, không lặp chữ, không bị lớp kính che.
+- M3 xong phần dựng và cổng trên máy dựng: tải trọn từng bài bằng một nút, mở lại được khi mất mạng.
