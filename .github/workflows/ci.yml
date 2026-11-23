@@ -42,6 +42,8 @@ jobs:
           python -m http.server 8777 >/dev/null 2>&1 &
           sleep 2
           python tests/smoke.py 8777
+          # gói ngoại tuyến của app: tải bài, cắt mạng, mở lại (hai bài nhẹ: một bài riêng, một bài thư viện)
+          python tests/kiem_ngoai_tuyen.py 8777 --bai than-kinh,enzyme-step
   # Cổng bố cục chạy song song với job trên: sáu bề rộng cộng các trạng thái sau khi bấm mất khoảng 20 phút,
   # gộp chung thì vượt giới hạn 30 phút của một job. Tệp đã dựng nằm sẵn trong kho nên không cần bước dựng.
   bo-cuc:

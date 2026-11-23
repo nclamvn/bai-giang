@@ -29,10 +29,11 @@ STEPS = [
     ('thu-vien', [[PY, 'tools/house_thu_vien.py']]),
     ('trang-muc', [[PY, 'tools/build_ls10.py'], [PY, 'tools/anh_nho.py'], [PY, 'tools/build_pages.py']]),
     ('trang-mau', [[PY, 'tools/build_mau.py']]),
-    ('app', [[PY, 'tools/build_app.py']]),
     ('ve-sinh-ui', [[PY, 'tools/ve_sinh_ui.py']]),
     ('the-chia-se', [[PY, 'tools/the_chia_se.py', '--strict']]),
     ('chuyen-canh', [[PY, 'tools/chuyen_canh.py']]),
+    # sau mọi bước sửa trang (thẻ chia sẻ, chuyển cảnh): số byte trong gói ngoại tuyến app/goi.json là số byte cuối cùng
+    ('app', [[PY, 'tools/build_app.py']]),
     ('bo-nho-dem', [[PY, 'tools/sw.py']]),
 ]
 

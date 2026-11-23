@@ -29,7 +29,7 @@ App vì thế là một vỏ ngoài mới theo hướng sân khấu, dùng lại
 | M0 · Chốt concept | Hướng sân khấu, 9 màn concept | Người dùng chốt | Xong |
 | M1 · Vỏ app web (xong) | `app/`: Thư viện, Bài học sân khấu, Đã tải. Chế độ `?app=1` trong vỏ bài ẩn thanh của vỏ. Danh mục sinh từ nguồn duy nhất. Cài được như PWA | `build_all --check` sạch, cổng bố cục ở 6 bề rộng, mở thử được bài riêng, bài kit và bài thư viện trong app, CI xanh | Claude |
 | M2 · Cầu nối từng bài (xong) | Bài báo vị trí nhãn trên màn hình cho app vẽ nhãn kính. Ẩn bảng riêng của bài trong chế độ app, hoặc chuyển bảng sang app | Mọi bài báo bước đúng trong app, kiểm bằng mắt từng nhóm bài | Claude |
-| M3 · Gói ngoại tuyến | Tải trọn một bài (trang và tài nguyên) bằng một nút. Đo dung lượng thật từng gói để điền thay ô trống | Bật chế độ máy bay, mở lại được mọi bài đã tải | Claude, kiểm trên máy thật: người dùng |
+| M3 · Gói ngoại tuyến (xong) | Tải trọn một bài (trang và tài nguyên) bằng một nút. Đo dung lượng thật từng gói để điền thay ô trống | Bật chế độ máy bay, mở lại được mọi bài đã tải | Claude, kiểm trên máy thật: người dùng |
 | M4 · Android | Capacitor 8, dựng APK trong GitHub Actions | Cài và chạy trên ít nhất 2 máy Android thật | Claude dựng, người dùng cài thử |
 | M5 · iPhone và iPad | Capacitor iOS, dựng trên máy chạy macOS (runner GitHub hoặc máy Mac) | Chạy qua TestFlight trên iPhone và iPad thật | Cần tài khoản Apple Developer của người dùng |
 | M6 · Lớp học | Chế độ chiếu cảnh tối và cảnh sáng, điều khiển từ điện thoại giáo viên (dùng lại kết nối PeerJS đã có) | Dạy thử một tiết thật | Claude, người dùng dạy thử |
@@ -89,6 +89,15 @@ Trong bài, chế độ app có sẵn (shell/bg-shell.js 2.4.0):
 - `tests/kiem_app.py`: mở từng bài qua app ở 390 × 844 và 1180 × 820, đo A1 (bài báo trạng thái), A2 (chữ của bài lặp lời bước của app), A3 (phần tử có chữ hoặc bấm được của bài nằm dưới lớp kính của app). Chạy trước khi đẩy thay đổi ở vỏ bài, bộ kit, khuôn thư viện hay vỏ app.
 - Kết quả trên máy dựng (23/11/2026): 90/90 bài đạt cả A1, A2, A3 ở điện thoại 390 × 844. Tablet 1180 × 820 vẽ bằng phần mềm chậm (vài phút mỗi bài) nên đo mẫu: 5 bài riêng, 6 bài kit, 3 bài thư viện, tất cả đạt. Cổng bố cục đạt với ba trang app.
 - Chưa kiểm trên điện thoại, tablet thật.
+
+## M3 đã làm (gói ngoại tuyến)
+
+- `tools/goi_bai.py`: gói của từng bài tính lúc dựng, không gõ tay. Dò đệ quy từ trang bài qua HTML (src, href, importmap), JS (import, import(), new URL, chuỗi đường dẫn tới tài nguyên), CSS (url); bài dạng thư mục thêm mọi tệp của thư mục (trừ thư mục bài lồng bên trong); phần chung là phông và lõi app. Liên kết sang trang khác (bài sau, mục lục) không tính vào gói.
+- `app/goi.json` (sinh bởi `tools/build_app.py`, bước ngay trước bộ nhớ đệm trong `build_all.py`): danh sách tệp và số byte thật trên đĩa.
+- Dung lượng thật một gói (gồm phần chung 0,57 MB): 54 bài thư viện 1,6 đến 1,9 MB; 31 bài kit 1,4 đến 12,1 MB (Cá thở bằng mang 12,1, Máy đi bộ 7,8); Neuron 1,8; Cổ Loa 2,0; Ty Thể 2,3; Tế Bào 7,9; Cơ thể người 90,6 MB (2.800 tệp mô hình giải phẫu).
+- `sw.js` (`tools/sw.py`): nhận danh sách tệp: `{t:'goi', files}` trả số tệp còn thiếu và tên tệp; `{t:'luu', files}` tải nốt, báo tiến độ, chỉ lưu tệp đúng mã băm; `{t:'xoa', files}` xoá khỏi máy. Cách cũ theo thư mục bài vẫn giữ cho trình đơn của vỏ bài.
+- App: nút tải ở góc trên sân khấu (mũi tên, phần trăm khi đang tải, dấu tích khi xong), gói trên 30 MB phải bấm hai lần; xin trình duyệt giữ bền bộ nhớ (`navigator.storage.persist`). Màn Đã tải: bài đã tải trọn (dung lượng, nút xoá; xoá chỉ bỏ tệp không bài đã tải nào khác cần), bài mới mở một phần (nút Tải trọn), dung lượng app đang dùng, trình duyệt có giữ bền hay không, bài nào bị trình duyệt dọn bớt tệp thì báo thiếu. Thẻ thư viện gắn nhãn ĐÃ TẢI.
+- `tests/kiem_ngoai_tuyen.py`: tải bài khi có mạng, cắt mạng cả trình duyệt, mở lại app, mở bài, đi hết các bước; đạt khi bài báo trạng thái và không có yêu cầu nào tới site bị hỏng.
 
 ## Nhật ký
 

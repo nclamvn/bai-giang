@@ -168,18 +168,34 @@ async function pack(m, dir) {
   if (d) { await hashOf(m, dir + 'index.html'); all = subs.get(m.d[d]) || {}; }
   return Object.keys(all).filter((k) => k.startsWith(dir) && !inner.some((o) => k.startsWith(o))).map((k) => [k, all[k]]);
 }
+// gói theo danh sách tệp (vỏ app, app/goi.json): tệp không có trong danh sách mã băm thì bỏ qua
+async function listOf(m, files) {
+  if (!m) return null; const out = [];
+  for (const k of files.slice(0, 6000)) { if (typeof k !== 'string') continue; const h = await hashOf(m, k); if (h) out.push([k, h]); }
+  return out;
+}
 // trang nhờ tải trước (bài sau): chỉ tệp có trong danh sách và chưa lưu đúng mã băm
 self.addEventListener('message', (e) => {
   const d = e.data || {}, port = e.ports && e.ports[0];
-  if ((d.t === 'goi' || d.t === 'luu') && port && typeof d.dir === 'string') {
-    // goi: bài này có bao nhiêu tệp, bao nhiêu byte, còn thiếu mấy tệp trên máy. luu: tải nốt các tệp còn thiếu, báo tiến độ.
+  if (d.t === 'xoa' && port && Array.isArray(d.files)) {
+    // xoá các tệp này khỏi máy (mọi bản đã lưu); app chỉ gửi tệp không bài đã tải nào khác cần
+    e.waitUntil((async () => {
+      const want = new Set(d.files.filter((x) => typeof x === 'string')), c = await caches.open(CACHE); let n = 0;
+      for (const req of await c.keys()) { const u = new URL(req.url); if (u.href.startsWith(SCOPE) && want.has(keyOf(u))) { await c.delete(req); n++; } }
+      port.postMessage({ xoa: n });
+    })());
+    return;
+  }
+  if ((d.t === 'goi' || d.t === 'luu') && port && (typeof d.dir === 'string' || Array.isArray(d.files))) {
+    // goi: bài này có bao nhiêu tệp, bao nhiêu byte, còn thiếu mấy tệp trên máy (theo thư mục bài, hoặc theo danh sách tệp
+    // d.files của vỏ app: trả thêm tên các tệp còn thiếu). luu: tải nốt các tệp còn thiếu, báo tiến độ.
     e.waitUntil((async () => {
       try {
-        const m = await manifest(), list = await pack(m, d.dir);
+        const m = await manifest(), list = d.files ? await listOf(m, d.files) : await pack(m, d.dir);
         if (!list) { port.postMessage({ n: 0 }); return; }
         const c = await caches.open(CACHE); const miss = [];
         for (const [k, h] of list) if (!(await c.match(slot(k, h)))) miss.push([k, h]);
-        if (d.t === 'goi') { port.postMessage({ n: list.length, bytes: m.g[d.dir][1], con: miss.length }); return; }
+        if (d.t === 'goi') { port.postMessage(d.files ? { n: list.length, con: miss.length, thieu: miss.map((x) => x[0]) } : { n: list.length, bytes: m.g[d.dir][1], con: miss.length }); return; }
         let done = list.length - miss.length, loi = 0;
         for (let i = 0; i < miss.length; i += 4) {
           await Promise.all(miss.slice(i, i + 4).map(async ([k, h]) => {

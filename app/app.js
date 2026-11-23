@@ -3,6 +3,8 @@
  * Bài chạy trong iframe name="bgs-canh" với ?app=1: vỏ bài (shell/bg-shell.js) ẩn thanh của nó, gửi trạng thái
  * {t:'state', lesson:{title, steps:[{t, note, ask}], next}, i} bằng postMessage; app vẽ chữ, thanh bước, nút và gửi lại
  * {t:'go', i} | {t:'next'} | {t:'prev'}. Liên kết trong bài sang trang khác của site đến app dưới dạng {t:'nav', href}.
+ * Gói ngoại tuyến (M3): goi.json (tools/goi_bai.py) liệt kê tệp và số byte thật của từng bài; sw.js tải nốt tệp còn thiếu,
+ * đếm tệp còn thiếu, xoá tệp ({t:'goi'|'luu'|'xoa', files}).
  * Không phụ thuộc thư viện ngoài, không đo đếm người dùng. Mã MIT, repo nclamvn/bai-giang. */
 (function () {
   'use strict';
@@ -66,7 +68,7 @@
     const mk = (s, ten) => `<button class="chip" type="button" data-s="${esc(s)}" aria-pressed="${s === filterS}">${esc(ten)}</button>`;
     chips.innerHTML = mk('', 'Tất cả') + CAT.mon.map((m) => mk(m.s, m.ten)).join('');
     $('grid').innerHTML = CAT.bai.map((b) => `<li data-s="${esc(b.s)}" data-q="${esc(fold(b.title + ' ' + b.nhom + ' ' + b.mon))}"><a class="card" href="#/bai/${esc(b.slug)}">
-      <span class="ph"><img src="${esc(b.cover)}" alt="" loading="lazy" decoding="async">${isCached(b) ? '<span class="badge glass">CÓ TRÊN MÁY</span>' : ''}</span>
+      <span class="ph"><img src="${esc(b.cover)}" alt="" loading="lazy" decoding="async">${daTai().has(b.slug) ? '<span class="badge glass">ĐÃ TẢI</span>' : ''}</span>
       <span class="tt">${esc(b.title)}</span><span class="sub">${esc(b.nhom)}</span></a></li>`).join('');
   }
   function filter() {
@@ -88,24 +90,105 @@
     if (hasProg) { $('hero-fill').style.width = Math.round(((r.i + 1) / r.n) * 100) + '%'; $('hero-n').textContent = `Bước ${r.i + 1} / ${r.n}`; }
   }
 
+  /* ---------- gói ngoại tuyến ---------- */
+  const DL = 'sak-app-da-tai';   // bài đã tải trọn trên máy này (đánh dấu nhanh cho thư viện; màn Đã tải hỏi sw.js để xác minh)
+  const daTai = () => { try { return new Set(JSON.parse(localStorage.getItem(DL)) || []); } catch (e) { return new Set(); } };
+  const ghiDaTai = (s) => { try { localStorage.setItem(DL, JSON.stringify([...s])); } catch (e) { /* bỏ qua */ } };
+  let GOI = null, SIZE = null;
+  const dangTai = new Map();      // slug → {done, n}
+  async function goiData() {
+    if (GOI) return GOI;
+    try { GOI = await (await fetch('goi.json')).json(); SIZE = new Map(GOI.tep); } catch (e) { GOI = null; }
+    return GOI;
+  }
+  const tepOf = (slug) => [...new Set([...GOI.chung, ...(GOI.bai[slug] || [])])].map((i) => GOI.tep[i][0]);
+  const byteOf = (paths) => paths.reduce((a, p) => a + (SIZE.get(p) || 0), 0);
+  const mb = (b) => b < 104858 ? 'dưới 0,1 MB' : (b / 1048576).toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + ' MB';
+  const swc = () => navigator.serviceWorker && navigator.serviceWorker.controller;
+  // hỏi sw.js; 'luu' gọi on() mỗi lần có tiến độ và xong khi có {xong}
+  function askSw(t, files, on) {
+    return new Promise((ok, no) => {
+      const c = swc(); if (!c) return no(new Error('sw'));
+      const ch = new MessageChannel(), tm = setTimeout(() => no(new Error('sw im lặng')), t === 'luu' ? 30 * 60000 : 20000);
+      ch.port1.onmessage = (e) => { const d = e.data || {}; if (on) on(d); if (t !== 'luu' || d.xong) { clearTimeout(tm); ok(d); } };
+      c.postMessage({ t, files }, [ch.port2]);
+    });
+  }
+  // tình trạng gói của một bài: {n, con, thieu, byte (cả gói), conByte (phần còn thiếu)}
+  async function tinhTrang(slug) {
+    if (!(await goiData()) || !swc()) return null;
+    const files = tepOf(slug), r = await askSw('goi', files);
+    return { n: r.n, con: r.con, byte: byteOf(files), conByte: byteOf(r.thieu || []) };
+  }
+  async function taiBai(slug, onTienDo) {
+    const files = tepOf(slug);
+    try { if (navigator.storage && navigator.storage.persist) await navigator.storage.persist(); } catch (e) { /* trình duyệt không cho */ }
+    dangTai.set(slug, { done: 0, n: files.length });
+    try {
+      const r = await askSw('luu', files, (d) => { if (d.n) { dangTai.set(slug, { done: d.done || 0, n: d.n }); if (onTienDo) onTienDo(d); } });
+      const kt = await tinhTrang(slug), s = daTai();
+      if (kt && kt.con === 0) s.add(slug); else s.delete(slug);
+      ghiDaTai(s); return { ...r, con: kt ? kt.con : r.loi };
+    } finally { dangTai.delete(slug); }
+  }
+  async function xoaBai(slug) {
+    await goiData(); const s = daTai(); s.delete(slug);
+    const giu = new Set(); for (const k of s) for (const p of tepOf(k)) giu.add(p);
+    const bo = (GOI.bai[slug] || []).map((i) => GOI.tep[i][0]).filter((p) => !giu.has(p));
+    await askSw('xoa', bo); ghiDaTai(s);
+  }
+
   /* ---------- Đã tải ---------- */
+  const ICON_XOA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>';
   async function renderDl() {
     netLine();
-    await scanCache();
-    const have = CAT.bai.filter(isCached);
-    $('rows').innerHTML = have.map((b) => `<li><a href="#/bai/${esc(b.slug)}"><img src="${esc(b.cover)}" alt="" loading="lazy">
-      <span><span class="tt">${esc(b.title)}</span><br><span class="sub">${esc(b.nhom)}</span></span><span class="ok">CÓ TRÊN MÁY</span></a></li>`).join('');
-    $('dl-empty').hidden = have.length > 0;
+    await scanCache(); await goiData();
+    const s = daTai(), co = [], mo = [];
+    for (const b of CAT.bai) {
+      if (s.has(b.slug) || dangTai.has(b.slug)) co.push(b); else if (isCached(b)) mo.push(b);
+    }
+    const row = (b, sub, act) => `<li data-slug="${esc(b.slug)}"><a href="#/bai/${esc(b.slug)}"><img src="${esc(b.cover)}" alt="" loading="lazy">
+      <span><span class="tt">${esc(b.title)}</span><br><span class="sub">${sub}</span></span></a>${act}</li>`;
+    // dung lượng riêng của bài (không tính phần chung: phông, lõi app, ảnh bìa, tải một lần cho mọi bài)
+    const size = (b) => GOI ? mb(byteOf((GOI.bai[b.slug] || []).map((i) => GOI.tep[i][0]))) : '';
+    $('rows').innerHTML = co.map((b) => row(b, dangTai.has(b.slug) ? 'Đang tải…' : 'Đã tải · bài ' + size(b),
+      `<button type="button" class="act xoa" data-xoa="${esc(b.slug)}" aria-label="Xoá ${esc(b.title)} khỏi máy">${ICON_XOA}</button>`)).join('');
+    // bài đã mở, hoặc vỏ bài tải trước khi máy rảnh (bài sau): có một phần trên máy, chưa chắc mở được khi mất mạng
+    const off = navigator.onLine === false;
+    $('rows-mo').innerHTML = mo.map((b) => row(b, 'Một phần · bài ' + size(b),
+      `<button type="button" class="act" data-tai="${esc(b.slug)}" aria-label="Tải trọn ${esc(b.title)}"${off ? ' disabled' : ''}>${off ? 'Cần mạng' : 'Tải trọn'}</button>`)).join('');
+    $('dl-empty').hidden = co.length + mo.length > 0;
+    $('h-mo').hidden = $('rows-mo').hidden = mo.length === 0;
+    // xác minh từng bài đã đánh dấu: còn đủ tệp trên máy không (trình duyệt có thể dọn bộ nhớ khi máy đầy)
+    if (swc() && GOI) for (const b of co) {
+      if (dangTai.has(b.slug)) continue;
+      tinhTrang(b.slug).then((k) => {
+        const li = $('rows').querySelector(`li[data-slug="${b.slug}"] .sub`); if (!li || !k) return;
+        if (k.con) li.textContent = `Thiếu ${k.con} tệp · còn ${mb(k.conByte)}`;
+      }).catch(() => {});
+    }
     $('use').textContent = 'đang đo';
     try {
       const e = navigator.storage && navigator.storage.estimate ? await navigator.storage.estimate() : null;
-      $('use').textContent = e && e.usage != null ? (e.usage / 1048576).toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + ' MB' : 'trình duyệt không cho đo';
+      $('use').textContent = e && e.usage != null ? mb(e.usage) : 'trình duyệt không cho đo';
     } catch (err) { $('use').textContent = 'trình duyệt không cho đo'; }
+    let ben = null; try { ben = navigator.storage && navigator.storage.persisted ? await navigator.storage.persisted() : null; } catch (e) { ben = null; }
+    $('ben').textContent = !swc() ? 'Bộ nhớ ngoại tuyến chưa sẵn sàng trên trình duyệt này. Mở lại app khi có mạng.'
+      : ben ? 'Trình duyệt đã cho giữ bền bài đã tải: không tự xoá khi máy đầy.'
+      : 'Trình duyệt có thể tự xoá bài đã tải khi máy đầy bộ nhớ. Bài nào thiếu tệp sẽ báo ở đây.';
   }
   function netLine() {
     const on = navigator.onLine !== false;
     $('net').classList.toggle('off', !on);
-    $('net').textContent = on ? 'Đang có mạng. Mở bài nào là bài đó được lưu để học khi mất mạng.' : 'Đang ngoại tuyến. Các bài dưới đây vẫn mở được.';
+    $('net').textContent = on ? 'Đang có mạng.' : 'Đang ngoại tuyến. Mở được các bài đã tải.';
+  }
+  async function onDlClick(e) {
+    const x = e.target.closest('[data-xoa],[data-tai]'); if (!x) return;
+    x.disabled = true;
+    if (x.dataset.xoa) { await xoaBai(x.dataset.xoa).catch(() => {}); buildLib(); filter(); renderDl(); return; }
+    const slug = x.dataset.tai;
+    await taiBai(slug, (d) => { x.textContent = d.n ? Math.round(((d.done || 0) / d.n) * 100) + '%' : '…'; }).catch(() => {});
+    buildLib(); filter(); renderDl();
   }
 
   /* ---------- sân khấu bài học ---------- */
@@ -119,6 +202,7 @@
     cur = b; st = null;
     const r = load(); resume = r && r.slug === b.slug && r.i > 0 ? r.i : -1;
     $('cap').hidden = true; $('next-l').hidden = true; $('pnl').hidden = true; $('stage').classList.remove('pnl-mo');
+    nutTai(b);
     const u = new URL(b.href, location.href); u.searchParams.set('app', '1');
     $('canh').src = u.href;
     clearTimeout(stateTimer);
@@ -129,7 +213,40 @@
     if ($('stage').hidden) return;
     $('stage').hidden = true; document.body.classList.remove('mo-bai');
     $('canh').src = 'about:blank'; cur = null; st = null; clearTimeout(stateTimer);
-    $('stage').classList.remove('sach'); $('an').setAttribute('aria-pressed', 'false');
+    $('stage').classList.remove('sach'); $('an').setAttribute('aria-pressed', 'false'); $('st-msg').hidden = true;
+  }
+  // nút tải ở góc trên sân khấu: chưa tải (mũi tên), đang tải (phần trăm), đã tải (dấu tích)
+  let xacNhan = '';
+  async function nutTai(b) {
+    const btn = $('tai'); btn.classList.remove('xong', 'dang'); xacNhan = '';
+    if (!swc() || !(await goiData()) || !GOI.bai[b.slug]) { btn.hidden = true; return; }
+    btn.hidden = false;
+    const veDang = () => { const d = dangTai.get(b.slug); btn.classList.add('dang'); btn.querySelector('.pt').textContent = d && d.n ? Math.round((d.done / d.n) * 100) + '%' : '…'; btn.setAttribute('aria-label', 'Đang tải bài về máy'); };
+    if (dangTai.has(b.slug)) return veDang();
+    const k = await tinhTrang(b.slug).catch(() => null); if (cur !== b) return;
+    const xong = k && k.con === 0;
+    btn.classList.toggle('xong', !!xong);
+    btn.setAttribute('aria-label', xong ? 'Đã tải bài về máy, học được khi mất mạng' : `Tải bài về máy (${k ? mb(k.conByte) : ''})`);
+    btn.dataset.con = k ? k.conByte : 0;
+  }
+  function baoTin(msg, ms) {
+    const m = $('st-msg'); m.textContent = msg; m.hidden = false;
+    clearTimeout(baoTin.t); if (ms) baoTin.t = setTimeout(() => { m.hidden = true; }, ms);
+  }
+  async function bamTai() {
+    const b = cur; if (!b) return;
+    const btn = $('tai');
+    if (btn.classList.contains('xong')) return baoTin('Bài đã tải về máy: học được khi mất mạng. Xoá ở màn Đã tải.', 3500);
+    if (dangTai.has(b.slug)) return;
+    if (navigator.onLine === false) return baoTin('Đang mất mạng: chưa tải được. Thử lại khi có mạng.', 3500);
+    const con = +btn.dataset.con || 0;
+    // gói lớn (trên 30 MB, ví dụ Cơ thể người): bấm lần nữa để chắc chắn
+    if (con > 30 * 1048576 && xacNhan !== b.slug) { xacNhan = b.slug; return baoTin(`Bài này cần tải ${mb(con)}. Bấm nút tải lần nữa để bắt đầu.`, 6000); }
+    xacNhan = '';
+    baoTin('Đang tải bài về máy…');
+    const r = await taiBai(b.slug, () => { if (cur === b) { const d = dangTai.get(b.slug); btn.classList.add('dang'); btn.querySelector('.pt').textContent = d && d.n ? Math.round((d.done / d.n) * 100) + '%' : '…'; } }).catch(() => null);
+    if (cur === b) { await nutTai(b); baoTin(!r ? 'Chưa tải được. Thử lại khi mạng ổn.' : r.con ? `Còn ${r.con} tệp chưa tải được. Bấm tải lại khi mạng ổn.` : 'Đã tải xong: học được khi mất mạng.', 4000); }
+    buildLib(); filter();
   }
   const send = (m) => { const w = $('canh').contentWindow; if (w) try { w.postMessage(m, ORIGIN); } catch (e) { /* khung đã đóng */ } };
 
@@ -210,6 +327,8 @@
     send({ t: 'vung', v });
   }
   function wire() {
+    $('tai').addEventListener('click', bamTai);
+    $('rows').addEventListener('click', onDlClick); $('rows-mo').addEventListener('click', onDlClick);
     $('pnl').addEventListener('click', (e) => { const b = e.target.closest('button[data-n]'); if (b) send({ t: 'pnl', n: +b.dataset.n }); });
     addEventListener('resize', () => { clearTimeout(sendVung.t); sendVung.t = setTimeout(sendVung, 120); });
     $('chips').addEventListener('click', (e) => { const c = e.target.closest('.chip'); if (!c) return; filterS = c.dataset.s; filter(); });
@@ -242,8 +361,10 @@
       else if (e.key === 'ArrowRight') send({ t: 'next' });
       else if (e.key === 'ArrowLeft') send({ t: 'prev' });
     });
-    addEventListener('online', () => { if (!$('v-da-tai').hidden) netLine(); });
-    addEventListener('offline', () => { if (!$('v-da-tai').hidden) netLine(); });
+    addEventListener('online', () => { if (!$('v-da-tai').hidden) renderDl(); });
+    // lần đầu vào app, sw.js nhận quyền điều khiển sau khi trang tải xong: lúc đó mới hiện nút tải
+    if (navigator.serviceWorker) navigator.serviceWorker.addEventListener('controllerchange', () => { if (cur) nutTai(cur); if (!$('v-da-tai').hidden) renderDl(); });
+    addEventListener('offline', () => { if (!$('v-da-tai').hidden) renderDl(); });
   }
 
   boot();

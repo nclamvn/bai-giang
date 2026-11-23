@@ -61,10 +61,12 @@
       <h1 id="h-dl">Đã tải</h1>
       <p class="net" id="net" role="status"></p>
       <ul class="rows" id="rows"></ul>
-      <p class="empty" id="dl-empty" hidden>Chưa có bài nào lưu trên máy. Mở một bài khi có mạng, bài đó được lưu để học lại khi mất mạng.</p>
+      <p class="empty" id="dl-empty" hidden>Chưa có bài nào trên máy. Mở một bài khi có mạng rồi bấm nút tải ở góc trên để học được cả khi mất mạng.</p>
+      <h2 class="dl-h" id="h-mo" hidden>Có một phần trên máy</h2>
+      <ul class="rows" id="rows-mo" hidden></ul>
       <div class="dl-foot">
         <div class="use"><span>Dung lượng app đang dùng</span><b id="use">đang đo</b></div>
-        <p class="note">Bài đã mở khi có mạng được lưu trên máy để học lại khi mất mạng.</p>
+        <p class="note" id="ben"></p>
       </div>
     </div>
   </section>
@@ -78,8 +80,10 @@
   <header class="st-top">
     <button class="ib glass" id="dong" type="button" aria-label="Đóng bài, về Thư viện"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     <div class="st-title"><span class="k" id="st-k"></span><span class="t" id="st-t"></span></div>
+    <button class="ib glass tai" id="tai" type="button" aria-label="Tải bài về máy" hidden><svg class="i-tai" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><svg class="i-xong" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="pt" aria-hidden="true"></span></button>
     <button class="ib glass" id="an" type="button" aria-pressed="false" aria-label="Ẩn chữ để xem cảnh"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
   </header>
+  <p class="st-msg glass" id="st-msg" role="status" hidden></p>
   <div class="st-pnl" id="pnl" role="group" aria-label="Bảng của bài" hidden></div>
   <aside class="cap glass-p" id="cap" aria-live="polite" hidden>
     <span class="k" id="cap-k"></span>
