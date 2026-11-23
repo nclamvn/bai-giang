@@ -13,7 +13,9 @@ public class MainActivity extends BridgeActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         registerPlugin(ManHinhPlugin.class);
-        EdgeToEdge.enable(this);
+        // super.onCreate (BridgeActivity) đổi sang theme không thanh tiêu đề rồi mới dựng khung cửa sổ.
+        // Gọi EdgeToEdge trước đó sẽ dựng khung theo theme khởi động, để lại thanh tiêu đề mang ảnh splash bị kéo dẹt.
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
     }
 }
