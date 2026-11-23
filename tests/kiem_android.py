@@ -69,6 +69,23 @@ def bam(x, mau, cuoi=False):
     a, b, c, d = (int(m['a']), int(m['b']), int(m['c']), int(m['d'])); adb('shell', 'input', 'tap', str((a + c) // 2), str((b + d) // 2))
 
 
+def truoc_mat():
+    """App có đang ở tiền cảnh không (cửa sổ có tiêu điểm thuộc gói)."""
+    return PKG in adb('shell', 'dumpsys', 'window', 'displays', timeout=30).split('mCurrentFocus', 1)[-1][:300]
+
+
+def mo_bai():
+    """Từ Thư viện, bấm nút ở ảnh lớn; nếu app không ở tiền cảnh (máy ảo đôi khi đẩy app ra sau) thì mở lại một lần."""
+    for lan in range(2):
+        if not truoc_mat():
+            print('  app không ở tiền cảnh, mở lại'); adb('shell', 'monkey', '-p', PKG, '-c', 'android.intent.category.LAUNCHER', '1')
+            cho_chu(r'Thư viện', 120)
+        try: return bam(cay(), r'Bắt đầu|Học tiếp', cuoi=True)
+        except RuntimeError:
+            if lan: raise
+            time.sleep(5)
+
+
 def mo_app():
     adb('shell', 'am', 'force-stop', PKG); time.sleep(2)
     adb('shell', 'monkey', '-p', PKG, '-c', 'android.intent.category.LAUNCHER', '1')
@@ -85,10 +102,10 @@ def main():
     print(adb('install', '-r', apk, check=True, timeout=300).strip().splitlines()[-1])
     buoc = [
         ('D1 Thư viện hiện', lambda: (mo_app(), cho_chu(r'Thư viện', 180), chup('d1-thu-vien'))),
-        ('D2 mở bài', lambda: (bam(cay(), r'Bắt đầu|Học tiếp', cuoi=True), cho_chu(r'Bước \d+ / \d+|bấm Bắt đầu', 180), time.sleep(8), chup('d2-bai'))),
+        ('D2 mở bài', lambda: (mo_bai(), cho_chu(r'Bước \d+ / \d+|bấm Bắt đầu', 180), time.sleep(8), chup('d2-bai'))),
         ('D3 nút Back về Thư viện', lambda: (adb('shell', 'input', 'keyevent', '4'), cho_chu(r'Tìm bài', 60), chup('d3-back'))),
         ('D4 chế độ máy bay', lambda: (adb('shell', 'cmd', 'connectivity', 'airplane-mode', 'enable'), time.sleep(3), mo_app(),
-                                      cho_chu(r'Thư viện', 180), bam(cay(), r'Bắt đầu|Học tiếp', cuoi=True), cho_chu(r'Bước \d+ / \d+|bấm Bắt đầu', 180),
+                                      cho_chu(r'Thư viện', 180), mo_bai(), cho_chu(r'Bước \d+ / \d+|bấm Bắt đầu', 180),
                                       time.sleep(5), chup('d4-may-bay'), adb('shell', 'cmd', 'connectivity', 'airplane-mode', 'disable'))),
     ]
     for ten, f in buoc:
