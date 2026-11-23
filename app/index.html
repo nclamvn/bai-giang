@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<!--BG-SHARE:start-->
+<meta property="og:type" content="website"><meta property="og:site_name" content="Sáng Ăn Khoai"><meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Sáng Ăn Khoai"><meta property="og:description" content="Bài giảng 3D tương tác tiếng Việt. Cảnh 3D tràn màn hình, học theo từng bước, học được khi mất mạng.">
+<meta property="og:url" content="https://nclamvn.github.io/bai-giang/app/"><link rel="canonical" href="https://nclamvn.github.io/bai-giang/app/">
+<meta property="og:image" content="https://nclamvn.github.io/bai-giang/design/the/app.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Sáng Ăn Khoai">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nclamvn.github.io/bai-giang/design/the/app.jpg">
+<!--BG-SHARE:end-->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sáng Ăn Khoai</title>
+<meta name="description" content="Bài giảng 3D tương tác tiếng Việt. Cảnh 3D tràn màn hình, học theo từng bước, học được khi mất mạng.">
+<meta name="theme-color" content="#0E0C1A">
+<meta name="color-scheme" content="dark">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="../design/logo/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../design/logo/apple-touch-icon.png">
+<link rel="stylesheet" href="app.css">
+<style id="bg-vt">@view-transition{navigation:auto}#bgs-load{view-transition-name:bg-bia}::view-transition-group(bg-bia){animation-duration:.42s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}::view-transition-old(root),::view-transition-new(root){animation-duration:.24s}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
+<script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
+<script id="bg-sw">(function(){try{if(!("serviceWorker"in navigator)||!/(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname))return;var r=new URL("../",location.href).href;if(/[?&]sw=0/.test(location.search)){navigator.serviceWorker.getRegistrations().then(function(a){a.forEach(function(x){x.unregister()})});return}addEventListener("load",function(){setTimeout(function(){navigator.serviceWorker.register(r+"sw.js",{scope:r}).catch(function(){})},3000)})}catch(e){}})();</script>
+</head>
+<body>
+<a class="bg-skip" href="#noi-dung">Bỏ qua tới nội dung</a>
+
+<nav class="tab glass" id="tab" aria-label="Điều hướng chính" style="position:fixed">
+  <a href="#/hoc-tiep" data-v="hoc-tiep"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor" stroke="none"/></svg><span>Học tiếp</span></a>
+  <a href="#/thu-vien" data-v="thu-vien"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg><span>Thư viện</span></a>
+  <a href="#/da-tai" data-v="da-tai"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>Đã tải</span></a>
+</nav>
+
+<main id="noi-dung">
+  <!-- Thư viện -->
+  <section class="view lib" id="v-thu-vien" aria-labelledby="h-lib" hidden>
+    <a class="hero" id="hero" href="#/thu-vien">
+      <img id="hero-img" alt="" width="960" height="600" decoding="async">
+      <span class="hero-txt">
+        <span class="k" id="hero-k">Bài nổi bật</span>
+        <span class="t" id="hero-t"></span>
+        <span class="hero-prog" id="hero-prog" hidden><span class="bar"><i id="hero-fill"></i></span><span class="n" id="hero-n"></span></span>
+        <span class="btn-w" id="hero-btn">Bắt đầu</span>
+      </span>
+    </a>
+    <div class="lib-in">
+      <div class="lib-head">
+        <h1 id="h-lib">Thư viện</h1>
+        <label class="search glass"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="sr">Tìm bài học</span><input id="q" type="search" placeholder="Tìm bài, ví dụ: neuron" autocomplete="off"></label>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Lọc theo môn"></div>
+      <p class="empty" id="lib-empty" hidden>Không có bài nào khớp.</p>
+      <ul class="grid" id="grid"></ul>
+    </div>
+  </section>
+
+  <!-- Đã tải -->
+  <section class="view dl" id="v-da-tai" aria-labelledby="h-dl" hidden>
+    <div class="dl-in">
+      <span class="k">Trên máy này</span>
+      <h1 id="h-dl">Đã tải</h1>
+      <p class="net" id="net" role="status"></p>
+      <ul class="rows" id="rows"></ul>
+      <p class="empty" id="dl-empty" hidden>Chưa có bài nào lưu trên máy. Mở một bài khi có mạng, bài đó được lưu để học lại khi mất mạng.</p>
+      <div class="dl-foot">
+        <div class="use"><span>Dung lượng app đang dùng</span><b id="use">đang đo</b></div>
+        <p class="note">Bài đã mở khi có mạng được lưu trên máy để học lại khi mất mạng.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Sân khấu bài học -->
+<section class="stage" id="stage" aria-label="Bài học" hidden>
+  <iframe id="canh" name="bgs-canh" title="Cảnh 3D của bài" allow="fullscreen; xr-spatial-tracking; autoplay"></iframe>
+  <div class="scrim-t" aria-hidden="true"></div>
+  <div class="scrim-b" aria-hidden="true"></div>
+  <header class="st-top">
+    <button class="ib glass" id="dong" type="button" aria-label="Đóng bài, về Thư viện"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="st-title"><span class="k" id="st-k"></span><span class="t" id="st-t"></span></div>
+    <button class="ib glass" id="an" type="button" aria-pressed="false" aria-label="Ẩn chữ để xem cảnh"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+  </header>
+  <aside class="cap glass-p" id="cap" aria-live="polite" hidden>
+    <span class="k" id="cap-k"></span>
+    <h2 id="cap-h"></h2>
+    <p id="cap-p"></p>
+    <button class="more" id="cap-more" type="button" aria-expanded="false" hidden>Đọc thêm</button>
+    <p class="ask" id="cap-ask" hidden></p>
+    <div class="steps" id="steps" role="group" aria-label="Các bước của bài"></div>
+    <div class="ctl">
+      <button class="ib ghost" id="truoc" type="button" aria-label="Bước trước"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button class="go" id="sau" type="button">Bước tiếp</button>
+    </div>
+  </aside>
+  <a class="next-l glass" id="next-l" hidden></a>
+</section>
+
+<script src="app.js" defer></script>
+</body>
+</html>

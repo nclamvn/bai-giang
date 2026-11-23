@@ -1,0 +1,17 @@
+{
+  "name": "Sáng Ăn Khoai",
+  "short_name": "Sáng Ăn Khoai",
+  "description": "Bài giảng 3D tương tác tiếng Việt: Sinh học, Vật lí, Lịch sử, Robotics, Mạng.",
+  "lang": "vi",
+  "start_url": "./#/thu-vien",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0E0C1A",
+  "theme_color": "#0E0C1A",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -7,13 +7,15 @@
  *     (cửa sổ thứ hai) và điều khiển bằng điện thoại (WebRTC qua PeerJS, chỉ tải khi bấm, cần mạng).
  *   - Chế độ Máy chiếu: tương phản cao, chữ lớn hơn; nhớ trên máy. Bài thứ tự, "Bài tiếp theo" cuối bài.
  *   - Trợ năng: nhãn cho mọi nút, vùng báo bước cho trình đọc màn hình, giảm chuyển động theo cài đặt máy.
+ * Vỏ app (app/): bài trong khung bgs-canh mở ?app=1 thì vỏ ẩn thanh của mình, chỉ báo trạng thái, nhận lệnh bước;
+ *   phần tử của bài mang data-app="an" (tên bài, lời của bước trùng chữ app hiện) cũng ẩn. Bài nhận layout.apply({app}).
  * Gắn bài: BGShell.mount({ id, title, subject, crumb, next, steps:[{t, note, ask, sr}], go(i), end(), panels, credit, … })
  * Bài tự chuyển bước thì báo: BGShell.update(i). Xem docs/he-thiet-ke.md. Mã MIT, repo nclamvn/bai-giang.
  */
 (function () {
   'use strict';
   if (window.BGShell && window.BGShell.version) return;
-  const VERSION = '2.2.0';
+  const VERSION = '2.3.0';
   // Bài có thanh đầu riêng (bản dự phòng khi vỏ không tải được) ẩn thanh đó ngay từ khung hình đầu theo lớp bgs-pre,
   // để không nháy thanh cũ rồi mới đổi sang vỏ. Quá 8 giây mà bài chưa gắn vỏ thì trả lại thanh dự phòng.
   const PRE = document.documentElement; PRE.classList.add('bgs-pre'); const preT = setTimeout(() => PRE.classList.remove('bgs-pre'), 8000);
@@ -140,6 +142,8 @@
   /* màn tải (khung do inject_shell.py đặt sẵn trong HTML) */
   #bgs-load{transition:opacity var(--bg-t-slow) var(--bg-ease)}
   #bgs-load.out{opacity:0;pointer-events:none}
+  body.bgs-app .bgs-bar,body.bgs-app .bgs-nav,body.bgs-app .bgs-hint,body.bgs-app .bgs-next,body.bgs-app .bgs-toast{display:none!important}
+  body.bgs-app [data-app="an"]{display:none!important}
   /* chế độ nhẹ: máy yếu (khung hình chậm kéo dài) thì bỏ làm mờ nền sau bảng, bảng đục hơn; cảnh 3D giữ nguyên */
   html:root[data-bg-lite]{--bg-glass:rgba(255,255,255,.97)!important;--bg-glass-strong:#fff!important;--bg-blur:none!important;--lg-blur:none!important;--glass-blur:none!important;--lg-fill:linear-gradient(180deg,rgba(255,255,255,.97),rgba(255,255,255,.94))!important;--lg-fill-strong:linear-gradient(180deg,#fff,rgba(255,255,255,.97))!important;--glass:rgba(255,255,255,.97)!important;--glass-2:rgba(255,255,255,.96)!important;--glass-bar:rgba(255,255,255,.97)!important}
   html[data-bg-lite] *,html[data-bg-lite] *::before,html[data-bg-lite] *::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
@@ -176,6 +180,8 @@
   }
   // khung tài liệu (shell/khung.js): bài chạy trong khung cảnh của trang dọc, báo trạng thái cho trang ngoài
   const EMBED = window.name === 'bgs-canh' && window.parent !== window;
+  // vỏ app (app/): khung cảnh mở ?app=1 thì app vẽ toàn bộ giao diện; vỏ chỉ báo trạng thái và nhận lệnh
+  const APP = EMBED && /[?&]app=1\b/.test(location.search);
   const toParent = (m) => { if (EMBED) { try { window.parent.postMessage(m, location.origin === 'null' ? '*' : location.origin); } catch (e) { /* bỏ qua */ } } };
   function broadcast() { if (S.relayout) S.relayout(); const m = snapshot(); for (const l of S.links) { try { l.send(m); } catch (e) { S.links.delete(l); } } toParent(m); render(); }
   function say(msg) { toast.textContent = msg; toast.classList.add('show'); clearTimeout(say.t); say.t = setTimeout(() => toast.classList.remove('show'), 2400); }
@@ -339,7 +345,8 @@
     });
   }
   // desktop: true = bảng chỉ là ngăn kéo trên màn rộng; trên điện thoại bảng nằm trong trang (cuộn tới), luôn hiện
-  const effOpen = (p) => (p.desktop && isPhone() ? true : p.open);
+  // vỏ app: bảng của bài đóng hết, app hiện chữ của bước ở lớp kính riêng
+  const effOpen = (p) => (APP ? false : p.desktop && isPhone() ? true : p.open);
   function applyPanels(initial) {
     for (const p of S.panels) {
       const o = effOpen(p);
@@ -702,7 +709,7 @@
     live = el('div', 'bgs-sr'); live.setAttribute('aria-live', 'polite'); document.body.appendChild(live);
     const relayout = () => {
       document.body.classList.toggle('bgs-phone', isPhone());
-      if (L.layout && typeof L.layout.apply === 'function') { try { L.layout.apply({ phone: isPhone(), on: S.on }); } catch (e) { console.error(e); } }
+      if (L.layout && typeof L.layout.apply === 'function') { try { L.layout.apply({ phone: isPhone(), on: S.on, app: APP }); } catch (e) { console.error(e); } }
     };
     S.relayout = relayout; addEventListener('resize', () => { relayout(); applyPanels(false); render(); closePops(); });
     applyPanels(true); relayout();
@@ -715,7 +722,13 @@
     if (q.has('lenlop') && L.steps && L.steps.length) start();
     if (EMBED) {
       // liên kết của bài và của vỏ mở ở trang ngoài; trang ngoài điều khiển bước qua postMessage
-      const b = document.createElement('base'); b.target = '_top'; document.head.prepend(b);
+      if (APP) {
+        // liên kết sang trang khác của site: nhờ app mở, không rời app
+        document.body.classList.add('bgs-app');
+        document.addEventListener('click', (e) => { const a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
+          const u = new URL(a.href, location.href); if (u.origin !== location.origin || (u.pathname === location.pathname && u.hash)) return;
+          e.preventDefault(); toParent({ t: 'nav', href: u.href }); }, true);
+      } else { const b = document.createElement('base'); b.target = '_top'; document.head.prepend(b); }
       document.body.classList.add('bgs-embed');
       addEventListener('message', (e) => { if (e.source !== window.parent || !e.data) return; const d = e.data;
         if (d.t === 'go') go(d.i, true); else if (d.t === 'next') next(true); else if (d.t === 'prev') prev(true); else if (d.t === 'start') start(); else if (d.t === 'stop') stop(); });

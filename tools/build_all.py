@@ -6,7 +6,7 @@
   python3 tools/build_all.py --skip=robotics,thu-vien
 
 Thứ tự: token và phông → bài Tế Bào (ghép src/) → Ty Thể, Cổ Loa, Cơ thể người, Neuron → gói dạy thử → robotics → trang Riemann (toan/riemann) → 54 bài thư viện → trang mục → thẻ chia sẻ (khối og ở đầu mọi trang; ảnh vẽ bằng the_chia_se.py --render)
-→ bộ nhớ đệm theo mã băm (tools/sw.py: sw-manifest.json, sw.js, khối đăng ký ở mọi trang; luôn chạy cuối).
+→ danh mục vỏ app (tools/build_app.py: app/danh-muc.json) → bộ nhớ đệm theo mã băm (tools/sw.py: sw-manifest.json, sw.js, khối đăng ký ở mọi trang; luôn chạy cuối).
 Mọi bước chạy lại bao nhiêu lần cũng được. Ty Thể là bài viết tay một tệp: ty-the/index.html vừa là nguồn vừa là đầu ra;
 chỉ các khối nhúng (vỏ, import map) được thay.
 Bản offline không dựng ở đây: xem .github/workflows/offline-release.yml (đẩy thẻ offline-* để phát hành).
@@ -29,6 +29,7 @@ STEPS = [
     ('thu-vien', [[PY, 'tools/house_thu_vien.py']]),
     ('trang-muc', [[PY, 'tools/build_ls10.py'], [PY, 'tools/anh_nho.py'], [PY, 'tools/build_pages.py']]),
     ('trang-mau', [[PY, 'tools/build_mau.py']]),
+    ('app', [[PY, 'tools/build_app.py']]),
     ('ve-sinh-ui', [[PY, 'tools/ve_sinh_ui.py']]),
     ('the-chia-se', [[PY, 'tools/the_chia_se.py', '--strict']]),
     ('chuyen-canh', [[PY, 'tools/chuyen_canh.py']]),

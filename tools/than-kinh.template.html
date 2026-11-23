@@ -82,15 +82,15 @@ body.film #play,body.film .bgs{display:none!important}
 <body>
 <div id="stage" role="img" aria-label="Neuron 3D: thân neuron, sợi nhánh, sợi trục có bao myelin và synapse. Xung thần kinh nhảy qua các eo Ranvier."></div>
 <div id="fade" aria-hidden="true"></div>
-<div class="hud top box" id="title"><div class="brand">Sinh học 11</div><h1>Neuron</h1><div class="sub">Cấu trúc · Tín hiệu · Kết nối</div></div>
-<div class="hud top" id="tag"><span id="live"></span><span id="tagT">Cảnh 1/4 · minh hoạ, màu và tỉ lệ phỏng dựng</span></div>
-<div class="hud top box" id="vm"><div class="row"><span class="k">Điện thế màng · eo 4</span><span class="k" id="vmState">nghỉ</span></div>
+<div class="hud top box" id="title" data-app="an"><div class="brand">Sinh học 11</div><h1>Neuron</h1><div class="sub">Cấu trúc · Tín hiệu · Kết nối</div></div>
+<div class="hud top" id="tag" data-app="an"><span id="live"></span><span id="tagT">Cảnh 1/4 · minh hoạ, màu và tỉ lệ phỏng dựng</span></div>
+<div class="hud top box" id="vm" data-app="an"><div class="row"><span class="k">Điện thế màng · eo 4</span><span class="k" id="vmState">nghỉ</span></div>
   <div class="row"><span class="val" id="vmVal">−70<small>mV</small></span><span class="k">tua chậm</span></div>
   <canvas id="vmC" width="600" height="140" aria-hidden="true"></canvas>
   <div class="lg"><span>ngưỡng −55</span><span>nghỉ −70</span><span>đỉnh +30</span></div></div>
-<div class="hud box" id="shot" aria-live="polite"><div class="k"><b id="shotN">Cảnh 1/4</b> · <span id="shotK">Mạng neuron</span></div><h2 id="shotH"></h2><p id="shotP"></p><div class="src" id="shotS"></div><div id="ask" hidden></div></div>
-<div class="hud box" id="loc"><div class="k">Vị trí trên neuron</div><svg viewBox="0 0 210 58" aria-hidden="true"><path d="M10 34 C 30 20, 40 46, 52 30 L 160 34 C 175 35, 182 26, 196 22 M 160 34 C 176 40, 184 44, 198 46" fill="none" stroke="#9AA0AC" stroke-width="2"/><circle cx="30" cy="31" r="9" fill="#EEF0F3" stroke="#9AA0AC"/><circle id="locDot" cx="30" cy="31" r="4.5" fill="#C2184A"/></svg></div>
-<div class="hud box" id="read"><div class="k" style="margin-bottom:4px">Số đọc</div>
+<div class="hud box" id="shot" aria-live="polite" data-app="an"><div class="k"><b id="shotN">Cảnh 1/4</b> · <span id="shotK">Mạng neuron</span></div><h2 id="shotH"></h2><p id="shotP"></p><div class="src" id="shotS"></div><div id="ask" hidden></div></div>
+<div class="hud box" id="loc" data-app="an"><div class="k">Vị trí trên neuron</div><svg viewBox="0 0 210 58" aria-hidden="true"><path d="M10 34 C 30 20, 40 46, 52 30 L 160 34 C 175 35, 182 26, 196 22 M 160 34 C 176 40, 184 44, 198 46" fill="none" stroke="#9AA0AC" stroke-width="2"/><circle cx="30" cy="31" r="9" fill="#EEF0F3" stroke="#9AA0AC"/><circle id="locDot" cx="30" cy="31" r="4.5" fill="#C2184A"/></svg></div>
+<div class="hud box" id="read" data-app="an"><div class="k" style="margin-bottom:4px">Số đọc</div>
   <div class="r"><span>Kênh Na⁺</span><b id="rNa">đóng</b></div>
   <div class="r"><span>Kênh K⁺</span><b id="rK">đóng</b></div>
   <div class="r"><span>Xung đang ở</span><b id="rPos">thân neuron</b></div>

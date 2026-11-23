@@ -37,6 +37,8 @@ TRANG = [
     ('home', '', 'tinh'), ('hub-tkm', 'thiet-ke-mang/', 'tinh'), ('hub-robo', 'robotics/', 'tinh'), ('hub-ls10', 'lich-su-10/', 'tinh'),
     ('chu-de', 'chu-de/sinh-hoc-te-bao/', 'tinh'), ('giao-vien', 'giao-vien/', 'tinh'), ('goi-day', 'giao-vien/te-bao/', 'tinh'),
     ('giao-an', 'thiet-ke-mang/goi-tin/giao-an/', 'tinh'), ('thu-vien', 'thu-vien/', 'tinh'), ('kiem-may', 'kiem-may/', 'tinh'), ('mau', 'design/mau/', 'tinh'),
+    # vỏ app (app/, docs/app-ke-hoach-moc.md): Thư viện, Đã tải và sân khấu bài học có bài thật trong khung
+    ('app-thu-vien', 'app/#/thu-vien', 'tinh'), ('app-da-tai', 'app/#/da-tai', 'tinh'), ('app-bai', 'app/#/bai/than-kinh', 'bai'),
     ('bai-kit', 'thiet-ke-mang/goi-tin/', 'bai'), ('bai-kit-nut', 'robotics/jellyfish/', 'bai'), ('bai-khung', 'thu-vien/impulse-step.html', 'bai'), ('riemann', 'toan/riemann/', 'bai'),
     # giao diện bên trong bài (mở thẳng, không qua khung): vỏ bài và bảng điều khiển riêng của từng bài
     ('te-bao', 'te-bao/?doc=0', 'trong'), ('ty-the', 'ty-the/?doc=0', 'trong'), ('co-loa', 'lich-su-10/co-loa/?doc=0', 'trong'), ('neuron', 'than-kinh/?doc=0', 'trong'),
@@ -160,7 +162,7 @@ async def main():
     bao = '--bao' in sys.argv
     chon = sys.argv[sys.argv.index('--trang') + 1].split(',') if '--trang' in sys.argv else None
     if chon: a = [x for x in a if x != sys.argv[sys.argv.index('--trang') + 1]]; cong = a[0] if a else '8777'
-    trang = [t for t in TRANG if (not chon or t[0] in chon) and (ROOT / t[1].split('?')[0]).exists()]
+    trang = [t for t in TRANG if (not chon or t[0] in chon) and (ROOT / t[1].split('?')[0].split('#')[0]).exists()]
     kq, tong = {}, {r: 0 for r in ('R1', 'R2', 'R2k', 'R3', 'R3k', 'R4', 'R5', 'R6', 'R7')}
     async with async_playwright() as p:
         b = await p.chromium.launch(args=['--use-gl=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'])
