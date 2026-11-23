@@ -43,6 +43,7 @@ jobs:
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
           SDK="$ANDROID_HOME/cmdline-tools/latest/bin"
+          export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"
           yes | "$SDK/sdkmanager" --licenses > /dev/null
           "$SDK/sdkmanager" "system-images;android-34;google_apis;x86_64" "emulator" > /dev/null
           echo no | "$SDK/avdmanager" create avd -n thu -k "system-images;android-34;google_apis;x86_64" -d pixel_6
