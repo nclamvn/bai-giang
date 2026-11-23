@@ -129,8 +129,8 @@ main{padding-bottom:calc(100px + var(--sb))}
 .kq{display:block;margin-top:10px;font-size:14px;line-height:1.5;color:var(--mo2)}
 .steps{display:flex;gap:4px;margin-top:6px}
 .steps button{flex:1;min-width:0;height:44px;padding:0;border:0;background:transparent;display:flex;flex-direction:column;justify-content:center;gap:6px;text-align:left}
-.steps .bar{flex:none;width:100%}
-.steps .lb{font-size:12px;color:var(--mo);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.steps .bar{display:block;flex:none;width:100%}
+.steps .lb{display:block;font-size:12px;color:var(--mo);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .steps button[aria-current="step"] .lb{color:#fff;font-weight:600}
 .steps.nhieu .lb{display:none}
 .steps .seg{flex:1;min-width:0;display:flex;align-items:center;height:20px}

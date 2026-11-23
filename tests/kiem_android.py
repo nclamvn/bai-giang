@@ -18,7 +18,7 @@ OUT = 'kiem-android'
 
 
 def adb(*a, check=False, timeout=120):
-    try: r = subprocess.run(['adb', *a], capture_output=True, text=True, timeout=timeout)
+    try: r = subprocess.run(['adb', *a], capture_output=True, text=True, errors='replace', timeout=timeout)
     except subprocess.TimeoutExpired:
         if check: raise
         return ''
@@ -56,7 +56,7 @@ def cho_chu(mau, han=120):
     t0 = time.time(); x = ''
     while time.time() - t0 < han:
         x = cay()
-        if re.search(mau, x): return x
+        if re.search(mau, x, re.I): return x
         time.sleep(4)
     raise RuntimeError(f'không thấy "{mau}" sau {han} giây')
 
@@ -80,6 +80,8 @@ def main():
     loi = []
     cho_may()
     adb('logcat', '-c')
+    wv = re.search(r'versionName=(\S+)', adb('shell', 'dumpsys', 'package', 'com.google.android.webview'))
+    print('WebView', wv.group(1) if wv else 'không rõ', '· Android', adb('shell', 'getprop', 'ro.build.version.release').strip())
     print(adb('install', '-r', apk, check=True, timeout=300).strip().splitlines()[-1])
     buoc = [
         ('D1 Thư viện hiện', lambda: (mo_app(), cho_chu(r'Thư viện', 180), chup('d1-thu-vien'))),
