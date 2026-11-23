@@ -14,7 +14,7 @@ Cảnh 3D (canvas), nhãn trên cảnh (.lab, .pin, .call, nhãn có aria-hidden
 Cần máy chủ tĩnh ở gốc repo và Playwright. Không phải cổng của CI (90 bài × 2 cỡ màn chạy lâu); chạy trước khi đẩy thay đổi
 ở vỏ bài, bộ kit, khuôn thư viện hay vỏ app. Thoát mã 1 nếu có lỗi.
 """
-import asyncio, json, re, sys
+import asyncio, json, sys
 from pathlib import Path
 from playwright.async_api import async_playwright
 
