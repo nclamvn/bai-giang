@@ -9,13 +9,15 @@
  *   - Trợ năng: nhãn cho mọi nút, vùng báo bước cho trình đọc màn hình, giảm chuyển động theo cài đặt máy.
  * Vỏ app (app/): bài trong khung bgs-canh mở ?app=1 thì vỏ ẩn thanh của mình, chỉ báo trạng thái, nhận lệnh bước;
  *   phần tử của bài mang data-app="an" (tên bài, lời của bước trùng chữ app hiện) cũng ẩn. Bài nhận layout.apply({app}).
+ *   App mở bảng của bài bằng {t:'pnl', n}; app báo vùng lớp kính chiếm bằng {t:'vung', v:{t, r, b, l}}: vỏ đặt biến CSS
+ *   --app-t/r/b/l trên <html>, BGShell.vung, sự kiện 'bgs-vung'.
  * Gắn bài: BGShell.mount({ id, title, subject, crumb, next, steps:[{t, note, ask, sr}], go(i), end(), panels, credit, … })
  * Bài tự chuyển bước thì báo: BGShell.update(i). Xem docs/he-thiet-ke.md. Mã MIT, repo nclamvn/bai-giang.
  */
 (function () {
   'use strict';
   if (window.BGShell && window.BGShell.version) return;
-  const VERSION = '2.3.0';
+  const VERSION = '2.4.0';
   // Bài có thanh đầu riêng (bản dự phòng khi vỏ không tải được) ẩn thanh đó ngay từ khung hình đầu theo lớp bgs-pre,
   // để không nháy thanh cũ rồi mới đổi sang vỏ. Quá 8 giây mà bài chưa gắn vỏ thì trả lại thanh dự phòng.
   const PRE = document.documentElement; PRE.classList.add('bgs-pre'); const preT = setTimeout(() => PRE.classList.remove('bgs-pre'), 8000);
@@ -144,6 +146,11 @@
   #bgs-load.out{opacity:0;pointer-events:none}
   body.bgs-app .bgs-bar,body.bgs-app .bgs-nav,body.bgs-app .bgs-hint,body.bgs-app .bgs-next,body.bgs-app .bgs-toast{display:none!important}
   body.bgs-app [data-app="an"]{display:none!important}
+  /* chế độ app: khoảng chừa cho thanh đầu bài của vỏ thành khoảng dưới tên bài của app (bài đã đặt bảng theo --bg-bar) */
+  html.bgs-app-html{--bg-bar:max(0px,calc(var(--app-t,64px) - 8px))}
+  /* nhóm điều khiển của bài đánh dấu data-app-bang="Tên": thành bảng app mở bằng nút, nổi dưới tên bài của app */
+  html.bgs-app-html [data-app-bang]{display:none!important}
+  html.bgs-app-html [data-app-bang].bgs-app-mo{display:flex!important;flex-wrap:wrap;align-items:center;gap:8px;position:fixed!important;z-index:60;left:12px!important;right:auto!important;top:var(--app-t,64px)!important;bottom:auto!important;width:min(560px,calc(100vw - 24px))!important;max-height:calc(100% - var(--app-t,64px) - 12px);overflow:auto;margin:0!important;padding:12px!important;border-radius:14px!important;background:rgba(255,255,255,.97)!important;box-shadow:0 18px 44px -18px rgba(16,24,40,.4),0 0 0 .5px rgba(16,24,40,.1)!important;transform:none!important}
   /* điện thoại: trình đơn mở thành tấm dưới đáy, phủ lên thanh dưới; ẩn thanh dưới để không có hai lớp nút chồng nhau */
   @media (max-width:640px),(max-height:520px){body.bgs-popon .bgs-nav{visibility:hidden}}
   /* chế độ nhẹ: máy yếu (khung hình chậm kéo dài) thì bỏ làm mờ nền sau bảng, bảng đục hơn; cảnh 3D giữ nguyên */
@@ -178,12 +185,15 @@
   function snapshot() {
     const L = S.L;
     return { t: 'state', v: VERSION, lesson: L ? { id: L.id, title: L.title, subject: L.subject || '', variant: S.variant, accent: L.accent || '', objectives: L.objectives || [], next: L.next || null, pack: L.pack || '', steps: (L.steps || []).map((s, k) => ({ t: s.t, note: s.note || '', ask: s.ask || null, plan: L.plan && L.plan[k] && L.plan[k].t === s.t ? L.plan[k] : null })) } : null,
-      i: S.i, on: S.on, black: S.black, elapsed: S.on ? Date.now() - S.t0 : 0 };
+      i: S.i, on: S.on, black: S.black, elapsed: S.on ? Date.now() - S.t0 : 0,
+      panels: (S.panels || []).map((p) => ({ label: p.label, open: !!effOpen(p) })) };
   }
   // khung tài liệu (shell/khung.js): bài chạy trong khung cảnh của trang dọc, báo trạng thái cho trang ngoài
   const EMBED = window.name === 'bgs-canh' && window.parent !== window;
   // vỏ app (app/): khung cảnh mở ?app=1 thì app vẽ toàn bộ giao diện; vỏ chỉ báo trạng thái và nhận lệnh
   const APP = EMBED && /[?&]app=1\b/.test(location.search);
+  // lớp trên <html> ngay từ đầu: bài đặt bố cục chế độ app từ khung hình đầu, không nhảy khi vỏ gắn xong
+  if (APP) document.documentElement.classList.add('bgs-app-html');
   const toParent = (m) => { if (EMBED) { try { window.parent.postMessage(m, location.origin === 'null' ? '*' : location.origin); } catch (e) { /* bỏ qua */ } } };
   function broadcast() { if (S.relayout) S.relayout(); const m = snapshot(); for (const l of S.links) { try { l.send(m); } catch (e) { S.links.delete(l); } } toParent(m); render(); }
   function say(msg) { toast.textContent = msg; toast.classList.add('show'); clearTimeout(say.t); say.t = setTimeout(() => toast.classList.remove('show'), 2400); }
@@ -322,7 +332,7 @@
       cb.setAttribute('aria-label', S.on ? 'Kết thúc tiết học' : 'Bắt đầu lên lớp'); }
     S.panels.forEach((p, k) => { const b = bar.querySelector(`[data-n="${k}"]`); if (b) b.setAttribute('aria-pressed', String(p.open)); });
     if (nav) {
-      const show = n > 0 && L.nav !== false && isPhone();
+      const show = n > 0 && L.nav !== false && isPhone() && !APP;
       nav.classList.toggle('show', show);
       document.body.classList.toggle('bgs-nav-on', show);
       if (show) {
@@ -345,10 +355,13 @@
       const def = typeof p.open === 'function' ? !!p.open() : !!p.open;
       return Object.assign({}, p, { key, open: saved == null ? def : saved === '1' });
     });
+    if (APP) document.querySelectorAll('[data-app-bang]').forEach((el, k) => {
+      S.panels.push({ label: el.dataset.appBang, key: `bgs:${L.id}:app${k}`, open: false, apply: (o) => el.classList.toggle('bgs-app-mo', o) });
+    });
   }
   // desktop: true = bảng chỉ là ngăn kéo trên màn rộng; trên điện thoại bảng nằm trong trang (cuộn tới), luôn hiện
   // vỏ app: bảng của bài đóng hết, app hiện chữ của bước ở lớp kính riêng
-  const effOpen = (p) => (APP ? false : p.desktop && isPhone() ? true : p.open);
+  const effOpen = (p) => (APP ? !!p.appOpen : p.desktop && isPhone() ? true : p.open);
   function applyPanels(initial) {
     for (const p of S.panels) {
       const o = effOpen(p);
@@ -359,6 +372,7 @@
   }
   function togglePanel(k, v) {
     const p = S.panels[k]; if (!p) return;
+    if (APP) { p.appOpen = v == null ? !p.appOpen : !!v; applyPanels(false); broadcast(); setTimeout(() => dispatchEvent(new Event('resize')), 30); return; }
     p.open = v == null ? !p.open : !!v; store.set(p.key, p.open ? '1' : '0');
     if (p.open && p.exclusive !== false && isPhone()) S.panels.forEach((q, j) => { if (j !== k && q.open) { q.open = false; store.set(q.key, '0'); } });
     applyPanels(false); render();
@@ -733,11 +747,23 @@
       } else { const b = document.createElement('base'); b.target = '_top'; document.head.prepend(b); }
       document.body.classList.add('bgs-embed');
       addEventListener('message', (e) => { if (e.source !== window.parent || !e.data) return; const d = e.data;
-        if (d.t === 'go') go(d.i, true); else if (d.t === 'next') next(true); else if (d.t === 'prev') prev(true); else if (d.t === 'start') start(); else if (d.t === 'stop') stop(); });
+        if (d.t === 'go') go(d.i, true); else if (d.t === 'next') next(true); else if (d.t === 'prev') prev(true); else if (d.t === 'start') start(); else if (d.t === 'stop') stop();
+        else if (APP && d.t === 'pnl') togglePanel(+d.n, d.open);
+        else if (APP && d.t === 'vung' && d.v) setVung(d.v); });
       toParent(snapshot());
     }
     render(); dropLoader(); firstHint(L);
     return api;
+  }
+  // vỏ app báo phần màn hình lớp kính của app đang chiếm (px, tính từ mép khung). Bài đọc biến CSS --app-t, --app-r,
+  // --app-b, --app-l hoặc BGShell.vung để đặt bảng số, nhãn và tâm cảnh vào phần còn trống; sự kiện 'bgs-vung' báo khi đổi.
+  function setVung(d) {
+    const v = {}; for (const k of ['t', 'r', 'b', 'l']) v[k] = Math.max(0, Math.min(4000, Math.round(+d[k] || 0)));
+    const o = S.vung; if (o && o.t === v.t && o.r === v.r && o.b === v.b && o.l === v.l) return;
+    S.vung = v; const st = document.documentElement.style;
+    for (const k in v) st.setProperty('--app-' + k, v[k] + 'px');
+    dispatchEvent(new CustomEvent('bgs-vung', { detail: v }));
+    dispatchEvent(new Event('resize'));
   }
   // bài tự chuyển bước (nút, phím của bài): vỏ đi theo; không tự bật chế độ lên lớp
   function update(i) {
@@ -792,7 +818,7 @@
     addEventListener('offline', () => ui.status('Điện thoại mất mạng'));
   }
 
-  const api = { version: VERSION, mount, update, refresh: () => broadcast(), go, next, prev, start, stop, phonePage, runRemote, projector, panel: togglePanel, say, lite,
-    get state() { return snapshot(); }, _handle: handle, icon: ico };
+  const api = { version: VERSION, mount, update, refresh: () => broadcast(), go, next, prev, start, stop, phonePage, runRemote, projector, panel: (k, v) => (APP ? undefined : togglePanel(k, v)), say, lite,
+    get state() { return snapshot(); }, get app() { return APP; }, get vung() { return S.vung || { t: 0, r: 0, b: 0, l: 0 }; }, _handle: handle, icon: ico };
   window.BGShell = api;
 })();

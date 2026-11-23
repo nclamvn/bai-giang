@@ -436,6 +436,19 @@ body:not(.debug) #hud,body:not(.debug) #benchBtn,body:not(.debug) #benchCard,bod
 body.bgs-nav-on .lesson .lf{display:none!important}
 @media (max-width:560px){.pin:not([aria-pressed="true"]) .t{display:none!important}} /* điện thoại: chỉ nhãn của bộ phận đang chọn, còn lại là số */
 body.bgs-nav-on .lesson{bottom:8px!important}
+/* ===== vỏ app (app/, khung bgs-canh ?app=1): cảnh tràn khung; lời bước do app hiện; Điều khiển và Thông tin mở bằng nút bảng của app.
+   --app-t/r/b/l: phần màn hình lớp kính của app đang chiếm (shell/bg-shell.js) ===== */
+html.bgs-app-html body{padding:0!important}
+html.bgs-app-html .wrap{padding:0!important;max-width:none!important}
+html.bgs-app-html .wrap>:not(.main),html.bgs-app-html .main>:not(.stage):not(aside){display:none!important}
+html.bgs-app-html #viewport{position:fixed!important;inset:0!important;width:auto!important;height:auto!important;min-height:0!important;border-radius:0!important;margin:0!important;border:0!important}
+html.bgs-app-html .stage{height:auto!important;border:0!important;box-shadow:none!important}
+html.bgs-app-html #viewport .mode-chip{top:var(--app-t,64px)!important;left:12px!important}
+html.bgs-app-html .scalebar{left:12px!important;bottom:calc(var(--app-b,0px) + 12px)!important}
+html.bgs-app-html aside#aside{position:fixed!important;z-index:50;right:12px;top:var(--app-t,64px);bottom:12px;width:min(380px,calc(100vw - 24px));overflow:auto}
+html.bgs-app-html .illus{right:calc(var(--app-r,0px) + 12px)!important;bottom:calc(var(--app-b,0px) + 12px)!important}
+html.bgs-app-html .main.wide aside#aside{display:none!important}
+html.bgs-app-html body[data-bgs-panels^="0"] aside#aside{display:none!important}
 /* chế độ Máy chiếu: chữ đậm, nền bảng đặc */
 html[data-chieu] .card,html[data-chieu] .lesson,html[data-chieu] .callout,html[data-chieu] .controls,html[data-chieu] .pcard{background:#fff!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;color:#000}
 html[data-chieu] .small,html[data-chieu] .why,html[data-chieu] .src,html[data-chieu] .lbl,html[data-chieu] .eyebrow{color:#1a1a1a!important}
@@ -501,7 +514,7 @@ html[data-chieu]{--bg-ink:#000000;--bg-ink2:#141414;--bg-ink3:#262626;--bg-glass
         <button type="button" class="pin herotag" id="heroTag" hidden><span class="n">↓</span><span class="t">Ribosome thật · phóng tới nguyên tử</span></button>
         <div class="callout" id="callout" hidden></div>
         <div class="ov glass caption" id="caption" hidden></div>
-        <section class="ov lesson" id="lesson" hidden aria-live="polite" aria-label="Chế độ lên lớp">
+        <section class="ov lesson" id="lesson" data-app="an" hidden aria-live="polite" aria-label="Chế độ lên lớp">
           <div class="lh"><span class="lk" id="lsK"></span><button type="button" class="lx" id="lsMin" title="Thu gọn hoặc mở rộng (phím H)" aria-label="Thu gọn">–</button><button type="button" class="lx" id="lsX" aria-label="Kết thúc tiết học">×</button></div>
           <h3 id="lsT"></h3><p id="lsB"></p><p class="ask" id="lsA"></p>
           <details id="lsND" hidden><summary>Gợi ý cho giáo viên</summary><p class="note" id="lsN"></p></details>
@@ -521,7 +534,7 @@ html[data-chieu]{--bg-ink:#000000;--bg-ink2:#141414;--bg-ink3:#262626;--bg-glass
         <div><dt>Thang</dt><dd id="sScale">5 µm</dd></div>
         <div><dt>Quá trình bật</dt><dd id="sProcs">5 / 5</dd></div>
       </dl>
-      <div class="controls">
+      <div class="controls" data-app-bang="Điều khiển">
         <div class="grp">
           <span class="lbl" id="stainLbl">Nhuộm</span>
           <div class="seg" role="group" aria-labelledby="stainLbl" id="stainSeg">
@@ -615,7 +628,7 @@ body.bgs-on :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible
 </style><!--BG-STD:end-->
 <!--BG-SHELL:start-->
 <script>window.BG_SEQ={"slug": "te-bao", "title": "Hành Trình Vào Tế Bào", "crumb": [{"t": "Sinh học 10", "href": "chu-de/sinh-hoc-te-bao/"}], "next": {"title": "Vận chuyển các chất qua màng", "href": "thu-vien/transport-step.html", "sub": "Sinh học tế bào 10 · bài 2/6"}, "cover": "thu-vien/covers/te-bao.webp", "subject": "Sinh học", "s": "sinh", "pack": "giao-vien/te-bao/", "plan": [{"t": "Câu hỏi mở đầu", "m": [0, 5], "gv": "Chiếu toàn cảnh tế bào. Nêu tình huống: tế bào tuyến tụy làm ra insulin rồi đưa insulin vào máu. Hỏi: phân tử insulin đi qua những đâu để ra khỏi tế bào? Cho 2 phút, gọi hai em đọc dự đoán, chưa nhận xét đúng sai.", "hs": "Ghi dự đoán vào mục 1 của phiếu."}, {"t": "Công thức nằm trong nhân", "m": [5, 8], "gv": "Phóng vào nhân, chỉ chất nhiễm sắc. Nói gọn: gen trên DNA được phiên mã thành bản sao mRNA. Hỏi câu trên màn chiếu, nghe hai, ba ý.", "hs": "Trả lời miệng. Ghi chặng 1 vào mục 2, trả lời câu 3a."}, {"t": "mRNA rời khỏi nhân", "m": [8, 11], "gv": "Để cả lớp nhìn phân tử mRNA chui qua lỗ nhân. Hỏi: nếu bịt kín mọi lỗ nhân thì sao?", "hs": "Quan sát, trả lời miệng."}, {"t": "Lưới nội chất hạt", "m": [11, 14], "gv": "Chỉ các hạt ribosome trên màng. Nhắc: ribosome đang được vẽ to hơn thật nhiều lần để dễ thấy.", "hs": "Ghi chặng 2 vào mục 2."}, {"t": "Phóng tới một ribosome thật", "m": [14, 17], "gv": "Để camera phóng liền một mạch xuống cấp nguyên tử (khoảng 10 giây), rồi dừng lại hỏi câu ước lượng. Cho 2 phút tính, gọi một em lên bảng.", "hs": "Tính ở câu 3b."}, {"t": "tRNA đọc mã trên mRNA", "m": [17, 20], "gv": "Chỉ tRNA nằm sâu trong ribosome: anticodon khớp với codon trên mRNA nên amino acid được nối đúng thứ tự.", "hs": "Trả lời câu 3c."}, {"t": "Chuỗi protein chui vào lưới nội chất", "m": [20, 23], "gv": "Chỉ chuỗi màu cam đi qua đường hầm và kênh Sec61 vào lòng lưới nội chất. Nói rõ đường đi của chuỗi là ước lượng. Hỏi: nếu kênh Sec61 bị chặn thì sao?", "hs": "Trả lời miệng."}, {"t": "Bộ máy Golgi sửa và đóng gói", "m": [23, 26], "gv": "Chỉ mặt cis và mặt trans. Hỏi hướng đi của protein qua Golgi và màu trong cảnh nói gì về hướng đó.", "hs": "Ghi chặng 3 vào mục 2."}, {"t": "Xuất bào", "m": [26, 29], "gv": "Theo một túi tiết tới màng sinh chất. Hỏi: sau khi túi hoà vào màng, màng của túi đi đâu?", "hs": "Ghi chặng 4 và 5 vào mục 2."}, {"t": "Năng lượng cho cả hành trình", "m": [29, 33], "gv": "Chỉ ty thể và các hạt ATP. Mời một em kể lại cả hành trình trong một câu, cả lớp đối chiếu với dự đoán đầu giờ.", "hs": "Đếm số chặng đoán đúng, ghi vào mục 5."}, {"t": "Kiểm tra", "m": [33, 45], "gv": "Bảy câu trên màn chiếu (33–40 phút). Câu chỉ bào quan: mời một em lên bấm vào mô hình. Câu trắc nghiệm: cả lớp giơ một, hai hoặc ba ngón tay cho A, B, C rồi giáo viên bấm. Màn chiếu báo số câu đúng ngay lần đầu. Phút 40–45: học sinh làm mục 4 của phiếu; thu phiếu hoặc giao về nhà.", "hs": "Trả lời trên màn chiếu, rồi làm mục 4 và 5 của phiếu."}]};</script>
-<script src="../shell/dist/bg-shell.min.js?v=fa37c18fa3"></script>
+<script src="../shell/dist/bg-shell.min.js?v=07add7edbd"></script>
 <!--BG-SHELL:end-->
 <script type="importmap">
 {

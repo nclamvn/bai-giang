@@ -11,15 +11,16 @@
   const vis = (el) => { if (!el) return null; const cs = getComputedStyle(el); if (cs.display === 'none' || cs.visibility === 'hidden') return null; const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0 ? r : null; };
   const panels = () => ['left', 'right'].map((id) => document.getElementById(id)).filter((e) => e && !e.classList.contains('collapsed')).map(vis).filter(Boolean);
   const side = (r) => r.height >= innerHeight * 0.5;
-  window.__bgL = () => { let x = 0; for (const r of panels()) if (side(r) && r.left + r.width / 2 < innerWidth / 2) x = Math.max(x, r.right); return x; };
-  window.__bgR = (W) => { let x = W; for (const r of panels()) if (side(r) && r.left + r.width / 2 >= innerWidth / 2) x = Math.min(x, r.left); return x; };
-  window.__bgB = (b) => { let y = b; for (const r of panels()) if (!side(r)) y = Math.min(y, r.top); const t = vis(document.getElementById('mtabs')); if (t && t.top > innerHeight * 0.4) y = Math.min(y, t.top); return y; };
+  const V = () => (window.BGShell && window.BGShell.app ? window.BGShell.vung : null);
+  window.__bgL = () => { let x = V() ? V().l : 0; for (const r of panels()) if (side(r) && r.left + r.width / 2 < innerWidth / 2) x = Math.max(x, r.right); return x; };
+  window.__bgR = (W) => { let x = V() ? W - V().r : W; for (const r of panels()) if (side(r) && r.left + r.width / 2 >= innerWidth / 2) x = Math.min(x, r.left); return x; };
+  window.__bgB = (b) => { let y = V() ? Math.min(b, innerHeight - V().b) : b; for (const r of panels()) if (!side(r)) y = Math.min(y, r.top); const t = vis(document.getElementById('mtabs')); if (t && t.top > innerHeight * 0.4) y = Math.min(y, t.top); return y; };
   // Bài gốc luôn đặt tâm cảnh ở giữa màn hình. Trên điện thoại xoay ngang khung trống nằm nửa trái, dựng đứng thì nằm dải
   // trên, nên dời tâm chiếu của camera về giữa khung trống (setViewOffset); phép chọn vật và nhãn dùng cùng camera nên vẫn khớp.
   const mobile = () => matchMedia('(max-width:700px), (orientation:portrait) and (max-width:1100px), (orientation:landscape) and (max-height:520px)').matches;
   const recenter = () => {
     const L = window.__lab, cam = L && L.camera; if (!cam || !L.freeRect) return;
-    if (!mobile()) { if (cam.userData.bgOffset) { cam.clearViewOffset(); cam.userData.bgOffset = false; } return; }
+    if (!mobile() && !V()) { if (cam.userData.bgOffset) { cam.clearViewOffset(); cam.userData.bgOffset = false; } return; }
     const f = L.freeRect(), W = innerWidth, H = innerHeight;
     if (f.r - f.l < 40 || f.b - f.t < 40) return;
     cam.setViewOffset(W, H, W / 2 - (f.l + f.r) / 2, H / 2 - (f.t + f.b) / 2, W, H); cam.userData.bgOffset = true;
@@ -28,6 +29,15 @@
   let busy = false;
   const kick = () => { clearTimeout(kick.t); kick.t = setTimeout(() => { recenter(); busy = true; dispatchEvent(new Event('resize')); busy = false; }, 60); };
   addEventListener('resize', () => { if (!busy) kick(); });
+  // vỏ app: lời bước, thanh bước, nút Bước trước/sau và tab bảng của bài do app vẽ; bảng chỉ mở khi bấm nút bảng của app;
+  // khung phương trình nằm dưới tên bài của app, tránh cột chữ bên phải
+  if (window.name === 'bgs-canh' && /[?&]app=1\b/.test(location.search)) {
+    const css = document.createElement('style');
+    css.textContent = 'body.bgs-app footer#foot,body.bgs-app #mtabs,body.bgs-app header#top{display:none!important}'
+      + 'body.bgs-app #eqb{left:12px!important;right:auto!important;top:var(--app-t,64px)!important;transform:none!important;max-width:min(520px,calc(100vw - var(--app-r,0px) - 24px))!important}'
+      + 'body.bgs-app aside#left,body.bgs-app aside#right{top:var(--app-t,64px)!important}';
+    document.head.appendChild(css);
+  }
   const go = () => {
     new MutationObserver(kick).observe(document.body, {attributes: true, attributeFilter: ['class']});
     let n = 0; const wait = setInterval(() => { if (window.__lab && window.__lab.camera) { clearInterval(wait); kick(); } else if (++n > 120) clearInterval(wait); }, 250);

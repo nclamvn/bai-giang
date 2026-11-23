@@ -95,12 +95,13 @@ export function createStage({canvas, extent = 1.6, grid = 0.1, fade = 6, fov = 2
   let texel = (2 * extent) / sun.shadow.mapSize.x;
   // cam: {tx, ty, tz, az, el (rad), d (m), sx, sy (px offset on the 1600x900 canvas)}
   // framing: bố cục tài liệu bỏ bảng hai bên nên kéo máy lại gần (k) và giảm độ lệch né bảng (off)
-  const framing = {k: 1, off: 1};
+  // ix, iy: dời tâm cảnh (px) để né lớp kính của vỏ app (kit/live.js, chế độ app)
+  const framing = {k: 1, off: 1, ix: 0, iy: 0};
   const frame = (cam, shadowAt) => {
     const d = cam.d * framing.k;
     camera.position.set(cam.tx + d * Math.cos(cam.el) * Math.sin(cam.az), cam.ty + d * Math.sin(cam.el), cam.tz + d * Math.cos(cam.el) * Math.cos(cam.az));
     camera.lookAt(cam.tx, cam.ty, cam.tz);
-    camera.setViewOffset(size.w, size.h, -(cam.sx ?? 0) * framing.off, -(cam.sy ?? 0) * framing.off, size.w, size.h);
+    camera.setViewOffset(size.w, size.h, -(cam.sx ?? 0) * framing.off + framing.ix, -(cam.sy ?? 0) * framing.off + framing.iy, size.w, size.h);
     camera.updateMatrixWorld();
     groundMat.uniforms.uC.value.set(cam.tx, 0, cam.tz);
     tmp.copy(shadowAt || new V3(cam.tx, cam.ty * 0.5, cam.tz));

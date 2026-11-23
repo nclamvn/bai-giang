@@ -168,6 +168,22 @@ body.bgs-on header.top{padding-top:14px}
   body.bgs-on .timeline{order:1}
 }
 body.bgs-nav-on .lesson .nav{display:none!important}
+/* ===== vỏ app (app/, khung bgs-canh ?app=1): cảnh tràn khung; lời bước, thanh bước do app vẽ.
+   Bảng Điều khiển (cột trái) và Thông tin mở bằng nút bảng của app; khi một bảng mở, app ẩn lớp chữ của mình.
+   --app-t/r/b/l: phần màn hình lớp kính của app đang chiếm (shell/bg-shell.js) ===== */
+body.bgs-app .app{position:fixed!important;inset:0!important;display:block!important;padding:0!important;overflow:hidden!important}
+body.bgs-app #stagewrap{position:absolute!important;inset:0!important;height:auto!important;min-height:0!important;border-radius:0!important;box-shadow:none!important;order:0}
+body.bgs-app .leftcol{display:flex!important;position:absolute!important;left:12px!important;top:var(--app-t,64px)!important;bottom:auto!important;width:min(404px,calc(100vw - 24px))!important;max-height:calc(100% - var(--app-t,64px) - 12px)!important;overflow:auto!important}
+body.bgs-app #info{position:absolute!important;right:12px!important;top:var(--app-t,64px)!important;bottom:12px!important;width:min(372px,calc(100vw - 24px))!important;overflow:auto!important}
+body.bgs-app .timeline{position:absolute!important;left:12px!important;right:calc(var(--app-r,0px) + 12px)!important;bottom:calc(var(--app-b,0px) + 12px)!important;top:auto!important}
+body.bgs-app #badge{left:12px!important;top:var(--app-t,64px)!important;bottom:auto!important}
+body.bgs-app #compass{right:calc(var(--app-r,0px) + 12px)!important;bottom:calc(var(--app-b,0px) + 96px)!important}
+body.bgs-app #bLesson{display:none!important}
+body.bgs-app[data-bgs-panels^="1"] #badge{display:none!important}
+@media (max-width:760px),(orientation:landscape) and (max-height:520px){
+  body.bgs-app[data-bgs-panels="00"] .timeline{display:none!important}
+  body.bgs-app #compass{bottom:calc(var(--app-b,0px) + 12px)!important}
+}
 @media (max-width:760px){.pin:not(.ring):not(.on) span{display:none}} /* điện thoại: nhãn vòng thành và vật đang chọn, ghim khác là chấm */
 html[data-chieu] #info,html[data-chieu] .leftcol>*,html[data-chieu] .timeline{background:#fff!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 html[data-chieu] #info{font-size:18px}html[data-chieu] #info h2{font-size:28px}html[data-chieu] .hint,html[data-chieu] .small{color:#1a1a1a}

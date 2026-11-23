@@ -37,7 +37,7 @@
         <button type="button" class="pin herotag" id="heroTag" hidden><span class="n">↓</span><span class="t">Ribosome thật · phóng tới nguyên tử</span></button>
         <div class="callout" id="callout" hidden></div>
         <div class="ov glass caption" id="caption" hidden></div>
-        <section class="ov lesson" id="lesson" hidden aria-live="polite" aria-label="Chế độ lên lớp">
+        <section class="ov lesson" id="lesson" data-app="an" hidden aria-live="polite" aria-label="Chế độ lên lớp">
           <div class="lh"><span class="lk" id="lsK"></span><button type="button" class="lx" id="lsMin" title="Thu gọn hoặc mở rộng (phím H)" aria-label="Thu gọn">–</button><button type="button" class="lx" id="lsX" aria-label="Kết thúc tiết học">×</button></div>
           <h3 id="lsT"></h3><p id="lsB"></p><p class="ask" id="lsA"></p>
           <details id="lsND" hidden><summary>Gợi ý cho giáo viên</summary><p class="note" id="lsN"></p></details>
@@ -57,7 +57,7 @@
         <div><dt>Thang</dt><dd id="sScale">5 µm</dd></div>
         <div><dt>Quá trình bật</dt><dd id="sProcs">5 / 5</dd></div>
       </dl>
-      <div class="controls">
+      <div class="controls" data-app-bang="Điều khiển">
         <div class="grp">
           <span class="lbl" id="stainLbl">Nhuộm</span>
           <div class="seg" role="group" aria-labelledby="stainLbl" id="stainSeg">

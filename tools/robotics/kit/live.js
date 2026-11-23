@@ -54,6 +54,16 @@ body.full .mob.back{display:block!important}
 /* Bản 14: thẻ lời giảng kiểu nhà; cảnh 3D là màn hình ở mọi cỡ màn, bảng số là ngăn kéo của thanh đầu bài */
 body.bgs-on .mob.top,body.bgs-on .mob.back{display:none!important}
 body.bgs-on .turn{display:none!important}
+body.kit-app .mob.cap{left:calc(12px + env(safe-area-inset-left));right:calc(var(--app-r,0px) + 12px);top:var(--app-t,64px);bottom:auto;width:auto;max-height:none;overflow:visible;padding:0;background:none;border:0;box-shadow:none}
+body.kit-app .mob.cap>.k,body.kit-app .mob.cap>.t,body.kit-app .mob.cap>.b,body.kit-app .mob.cap>.e,body.kit-app .mob .row [data-m="min"],body.kit-app .mob .row [data-m="full"]{display:none}
+body.kit-app .mob .row,body.kit-app .mob.cap .row{position:static;margin:0;padding:0 12px 0 0;background:none;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+@media (max-width:700px){body.kit-app .lv-time{display:none!important}}
+body.kit-app .lv-time{top:calc(var(--app-t,64px) + 54px);right:calc(var(--app-r,0px) + 12px);background:rgba(14,12,26,.58);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);box-shadow:none;border:1px solid rgba(255,255,255,.16);color:#fff}
+body.kit-app .lv-time button{color:rgba(255,255,255,.86)}body.kit-app .lv-time button.on{background:#fff;color:#0E0C1A}
+body.kit-app .lv-insp{right:calc(var(--app-r,0px) + 16px);top:calc(var(--app-t,64px) + 56px);max-height:calc(100svh - var(--app-t,64px) - var(--app-b,0px) - 72px)}
+@media (max-width:700px){body.kit-app .lv-insp{left:8px;right:8px;top:calc(var(--app-t,64px) + 56px)}}
+body.kit-app .mob .row button{height:44px;padding:0 16px;border-radius:22px;border:1px solid rgba(255,255,255,.16);background:rgba(14,12,26,.58);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);color:#fff;font:500 14px var(--bg-font,system-ui,sans-serif);letter-spacing:0}
+body.kit-app .mob .row button.on,body.kit-app .mob .row button.acc{background:#fff;color:#0E0C1A;border-color:#fff}
 .mob.cap{left:16px;right:auto;bottom:16px;width:min(440px,calc(100vw - 32px));padding:14px 16px 14px;border-radius:14px;max-height:min(52svh,520px)}
 .mob.cap .k{font:600 13px/1.3 var(--bg-font,system-ui,sans-serif);letter-spacing:.01em;text-transform:none;color:#5B6472}
 .mob.cap .k span:last-child{font-family:var(--bg-mono,monospace);color:#626773}
@@ -138,7 +148,16 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
   applyTier(); addEventListener('resize', fit);
   addEventListener('orientationchange', () => setTimeout(fit, 250));
   // bản 15: trang tài liệu cuộn dọc (kit/doc.js) là mặc định; ?doc=0 về bố cục khung 1600 × 900
-  if (new URLSearchParams(location.search).get('doc') !== '0' && !window.NO_DOC) {
+  // vỏ app (app/, khung bgs-canh mở ?app=1): cảnh tràn khung, chữ của bước do app hiện; dời tâm cảnh né lớp kính của app
+  const APPM = window.name === 'bgs-canh' && /[?&]app=1\b/.test(location.search);
+  if (APPM) {
+    document.body.classList.add('kit-app');
+    if (st.framing) st.framing.off = 0;
+    const vung = (v) => { if (!st.framing || !v) return; const H = innerHeight, free = Math.max(H * 0.35, H - v.t - v.b);
+      st.framing.ix = (v.r - v.l) / 2; st.framing.iy = (v.b - v.t) / 2; st.framing.k = Math.min(1.5, Math.sqrt(H / free)); };
+    addEventListener('bgs-vung', (e) => vung(e.detail));
+  }
+  if (new URLSearchParams(location.search).get('doc') !== '0' && !window.NO_DOC && !APPM) {
     if (st.framing) Object.assign(st.framing, {k: window.DOC_K ?? 0.76, off: 0.3});
     DOC = makeDoc({ui, app, captions, W, H, onStep: (i) => { takeOver(); classGo(i); }, onTour: () => { if (AP.on) takeOver(); else { classEnd(); startTour(); } }});
     fit();

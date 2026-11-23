@@ -425,6 +425,19 @@ body:not(.debug) #hud,body:not(.debug) #benchBtn,body:not(.debug) #benchCard,bod
 body.bgs-nav-on .lesson .lf{display:none!important}
 @media (max-width:560px){.pin:not([aria-pressed="true"]) .t{display:none!important}} /* điện thoại: chỉ nhãn của bộ phận đang chọn, còn lại là số */
 body.bgs-nav-on .lesson{bottom:8px!important}
+/* ===== vỏ app (app/, khung bgs-canh ?app=1): cảnh tràn khung; lời bước do app hiện; Điều khiển và Thông tin mở bằng nút bảng của app.
+   --app-t/r/b/l: phần màn hình lớp kính của app đang chiếm (shell/bg-shell.js) ===== */
+html.bgs-app-html body{padding:0!important}
+html.bgs-app-html .wrap{padding:0!important;max-width:none!important}
+html.bgs-app-html .wrap>:not(.main),html.bgs-app-html .main>:not(.stage):not(aside){display:none!important}
+html.bgs-app-html #viewport{position:fixed!important;inset:0!important;width:auto!important;height:auto!important;min-height:0!important;border-radius:0!important;margin:0!important;border:0!important}
+html.bgs-app-html .stage{height:auto!important;border:0!important;box-shadow:none!important}
+html.bgs-app-html #viewport .mode-chip{top:var(--app-t,64px)!important;left:12px!important}
+html.bgs-app-html .scalebar{left:12px!important;bottom:calc(var(--app-b,0px) + 12px)!important}
+html.bgs-app-html aside#aside{position:fixed!important;z-index:50;right:12px;top:var(--app-t,64px);bottom:12px;width:min(380px,calc(100vw - 24px));overflow:auto}
+html.bgs-app-html .illus{right:calc(var(--app-r,0px) + 12px)!important;bottom:calc(var(--app-b,0px) + 12px)!important}
+html.bgs-app-html .main.wide aside#aside{display:none!important}
+html.bgs-app-html body[data-bgs-panels^="0"] aside#aside{display:none!important}
 /* chế độ Máy chiếu: chữ đậm, nền bảng đặc */
 html[data-chieu] .card,html[data-chieu] .lesson,html[data-chieu] .callout,html[data-chieu] .controls,html[data-chieu] .pcard{background:#fff!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;color:#000}
 html[data-chieu] .small,html[data-chieu] .why,html[data-chieu] .src,html[data-chieu] .lbl,html[data-chieu] .eyebrow{color:#1a1a1a!important}

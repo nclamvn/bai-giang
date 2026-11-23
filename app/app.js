@@ -118,13 +118,12 @@
     if (cur === b && $('canh').getAttribute('src')) return;
     cur = b; st = null;
     const r = load(); resume = r && r.slug === b.slug && r.i > 0 ? r.i : -1;
-    $('cap').hidden = true; $('next-l').hidden = true;
+    $('cap').hidden = true; $('next-l').hidden = true; $('pnl').hidden = true; $('stage').classList.remove('pnl-mo');
     const u = new URL(b.href, location.href); u.searchParams.set('app', '1');
     $('canh').src = u.href;
     clearTimeout(stateTimer);
     // bài không báo trạng thái (không gắn vỏ hoặc vỏ cũ): vẫn xem được cảnh, chỉ có nút đóng
     stateTimer = setTimeout(() => { if (!st) $('cap').hidden = true; }, 15000);
-    $('dong').focus({ preventScroll: true });
   }
   function closeLesson() {
     if ($('stage').hidden) return;
@@ -137,6 +136,8 @@
   function onState(d) {
     const L = d.lesson; if (!L || !cur) return;
     st = d; clearTimeout(stateTimer);
+    renderPanels(d.panels || []);
+    requestAnimationFrame(sendVung);
     const steps = L.steps || [], n = steps.length, i = d.i;
     if (resume > 0 && i <= 0 && resume < n) { const k = resume; resume = -1; send({ t: 'go', i: k }); return; }
     resume = -1;
@@ -151,8 +152,7 @@
     const P = $('cap-p'), compact = !(innerWidth >= 840 && innerHeight > 500);
     P.classList.toggle('gon', compact); $('cap-more').hidden = true;
     if (compact) requestAnimationFrame(() => { const dai = P.scrollHeight > P.clientHeight + 2; $('cap-more').hidden = !dai; $('cap-more').setAttribute('aria-expanded', 'false'); $('cap-more').textContent = 'Đọc thêm'; });
-    const q = i >= 0 && s.ask ? (typeof s.ask === 'string' ? s.ask : s.ask.q) : '';
-    $('cap-ask').hidden = !q; if (q) $('cap-ask').innerHTML = '<b>Câu hỏi</b>' + esc(text(q));
+    renderAsk(i >= 0 ? s.ask : null, k);
     const box = $('steps');
     box.classList.toggle('nhieu', n > (innerWidth >= 840 || innerHeight <= 500 ? 6 : 4));
     // đủ chỗ cho mỗi bước một nút 44 px thì thanh bước bấm được; thiếu chỗ thì chỉ là thanh tiến độ, chuyển bước bằng nút trước, sau
@@ -170,13 +170,54 @@
     if (nx) { $('next-l').href = '#/bai/' + nx.slug; $('next-l').innerHTML = `<span class="k">Bài tiếp theo</span><b>${esc(nx.title)}</b>`; }
   }
 
+  // câu hỏi của bước: có phương án thì bấm chọn, app báo đúng sai và hiện lời giải của bài (ask.e); chỉ nhớ trong lần mở này
+  const answered = new Map();
+  function renderAsk(a, k) {
+    const box = $('cap-ask');
+    const q = a ? (typeof a === 'string' ? a : a.q) : '';
+    box.hidden = !q; if (!q) return;
+    const opts = a && Array.isArray(a.o) && a.o.length ? a.o : null;
+    const pick = answered.get(cur.slug + ':' + k);
+    let h = '<b>Câu hỏi</b>' + esc(text(q));
+    if (opts) {
+      h += '<span class="opts">' + opts.map((o, j) => {
+        const st = pick == null ? '' : j === a.a ? ' dung' : j === pick ? ' sai' : '';
+        return `<button type="button" class="opt${st}" data-j="${j}"${pick != null ? ' disabled' : ''}>${esc(text(o))}</button>`;
+      }).join('') + '</span>';
+      if (pick != null) h += `<span class="kq" role="status">${pick === a.a ? 'Đúng.' : 'Chưa đúng.'}${a.e ? ' ' + esc(text(a.e)) : ''}</span>`;
+    }
+    box.innerHTML = h;
+    box.onclick = (e) => { const b = e.target.closest('button[data-j]'); if (!b || pick != null) return; answered.set(cur.slug + ':' + k, +b.dataset.j); renderAsk(a, k); requestAnimationFrame(sendVung); };
+  }
+  // bảng của bài (Bảng số, Điều khiển…): nút kính dưới tên bài; bảng mở thì lớp chữ của app nhường chỗ
+  function renderPanels(ps) {
+    const box = $('pnl'), any = ps.some((p) => p.open);
+    box.hidden = !ps.length;
+    box.innerHTML = ps.map((p, k) => `<button type="button" data-n="${k}" aria-pressed="${p.open}">${esc(p.label)}</button>`).join('');
+    $('stage').classList.toggle('pnl-mo', any);
+  }
+  // vùng lớp kính của app đang chiếm, báo cho bài để bảng số, nhãn và tâm cảnh nằm trong phần còn trống
+  function sendVung() {
+    if ($('stage').hidden) return;
+    const W = innerWidth, H = innerHeight, top = $('pnl').hidden ? $('dong') : $('pnl');
+    const v = { t: Math.round(top.getBoundingClientRect().bottom + 8), r: 0, b: 0, l: 0 };
+    const cap = $('cap');
+    if (!cap.hidden && getComputedStyle(cap).display !== 'none') {
+      const r = cap.getBoundingClientRect();
+      if (r.left > W * 0.4) v.r = Math.round(W - r.left + 8);       // cột kính bên phải
+      else v.b = Math.round(H - r.top + 8);                         // lớp chữ dưới đáy
+    }
+    send({ t: 'vung', v });
+  }
   function wire() {
+    $('pnl').addEventListener('click', (e) => { const b = e.target.closest('button[data-n]'); if (b) send({ t: 'pnl', n: +b.dataset.n }); });
+    addEventListener('resize', () => { clearTimeout(sendVung.t); sendVung.t = setTimeout(sendVung, 120); });
     $('chips').addEventListener('click', (e) => { const c = e.target.closest('.chip'); if (!c) return; filterS = c.dataset.s; filter(); });
     $('q').addEventListener('input', (e) => { query = e.target.value; filter(); });
     $('dong').addEventListener('click', () => { location.hash = '#/thu-vien'; });
-    $('an').addEventListener('click', () => { const on = $('stage').classList.toggle('sach'); $('an').setAttribute('aria-pressed', String(on)); $('an').setAttribute('aria-label', on ? 'Hiện chữ của bài' : 'Ẩn chữ để xem cảnh'); });
+    $('an').addEventListener('click', () => { const on = $('stage').classList.toggle('sach'); $('an').setAttribute('aria-pressed', String(on)); $('an').setAttribute('aria-label', on ? 'Hiện chữ của bài' : 'Ẩn chữ để xem cảnh'); sendVung(); });
     $('truoc').addEventListener('click', () => send({ t: 'prev' }));
-    $('cap-more').addEventListener('click', () => { const g = $('cap-p').classList.toggle('gon'); $('cap-more').textContent = g ? 'Đọc thêm' : 'Thu gọn'; $('cap-more').setAttribute('aria-expanded', String(!g)); });
+    $('cap-more').addEventListener('click', () => { const g = $('cap-p').classList.toggle('gon'); $('cap-more').textContent = g ? 'Đọc thêm' : 'Thu gọn'; $('cap-more').setAttribute('aria-expanded', String(!g)); requestAnimationFrame(sendVung); });
     $('sau').addEventListener('click', () => {
       if (!st) return;
       const n = (st.lesson.steps || []).length;

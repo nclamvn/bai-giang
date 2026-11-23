@@ -28,7 +28,7 @@ App vì thế là một vỏ ngoài mới theo hướng sân khấu, dùng lại
 |---|---|---|---|
 | M0 · Chốt concept | Hướng sân khấu, 9 màn concept | Người dùng chốt | Xong |
 | M1 · Vỏ app web (xong) | `app/`: Thư viện, Bài học sân khấu, Đã tải. Chế độ `?app=1` trong vỏ bài ẩn thanh của vỏ. Danh mục sinh từ nguồn duy nhất. Cài được như PWA | `build_all --check` sạch, cổng bố cục ở 6 bề rộng, mở thử được bài riêng, bài kit và bài thư viện trong app, CI xanh | Claude |
-| M2 · Cầu nối từng bài | Bài báo vị trí nhãn trên màn hình cho app vẽ nhãn kính. Ẩn bảng riêng của bài trong chế độ app, hoặc chuyển bảng sang app | Mọi bài báo bước đúng trong app, kiểm bằng mắt từng nhóm bài | Claude |
+| M2 · Cầu nối từng bài (xong) | Bài báo vị trí nhãn trên màn hình cho app vẽ nhãn kính. Ẩn bảng riêng của bài trong chế độ app, hoặc chuyển bảng sang app | Mọi bài báo bước đúng trong app, kiểm bằng mắt từng nhóm bài | Claude |
 | M3 · Gói ngoại tuyến | Tải trọn một bài (trang và tài nguyên) bằng một nút. Đo dung lượng thật từng gói để điền thay ô trống | Bật chế độ máy bay, mở lại được mọi bài đã tải | Claude, kiểm trên máy thật: người dùng |
 | M4 · Android | Capacitor 8, dựng APK trong GitHub Actions | Cài và chạy trên ít nhất 2 máy Android thật | Claude dựng, người dùng cài thử |
 | M5 · iPhone và iPad | Capacitor iOS, dựng trên máy chạy macOS (runner GitHub hoặc máy Mac) | Chạy qua TestFlight trên iPhone và iPad thật | Cần tài khoản Apple Developer của người dùng |
@@ -52,14 +52,46 @@ App vì thế là một vỏ ngoài mới theo hướng sân khấu, dùng lại
 - Cổng: `kiem_bo_cuc.py` thêm ba trang app, đạt ở 6 bề rộng; `ve_sinh_ui.py` đạt.
 - Kiểm bằng mắt trên máy dựng: neuron ở điện thoại dọc, ngang, tablet; Cổ Loa và một bài thư viện báo bước đúng trong app.
 
-## Việc chuyển sang M2
+## M2 đã làm (cầu nối từng bài)
 
-- Gắn `data-app="an"` hoặc `layout.apply({app})` cho từng nhóm bài để bỏ chữ trùng: Cổ Loa (bố cục trang có cột trái và dòng thời gian), Tế Bào, Ty Thể, Cơ thể người, 31 bài kit, 54 bài thư viện.
-- Đưa số đo quan trọng của bài (ví dụ điện thế màng của neuron) lên lớp kính của app thay vì ẩn.
-- Nhãn chỉ vào bộ phận: bài báo toạ độ màn hình của các điểm, app vẽ nhãn kính.
-- Bài nặng chụp bằng trình duyệt không có card đồ hoạ bị quá thời gian (sứa robot): kiểm lại trên máy thật.
+Quyết định: nhãn chỉ vào bộ phận do chính bài vẽ (ghim, chú thích trên cảnh đã có ở mọi bài và bám đúng góc nhìn), app không vẽ lại. App lo chữ của bước, câu hỏi, thanh bước và nút bảng; bài lo cảnh, nhãn và điều khiển riêng.
+
+### Giao thức vỏ app (cho người viết bài)
+
+| Hướng | Thông điệp | Ý nghĩa |
+|---|---|---|
+| bài → app | `{t:'state', lesson:{title, steps:[{t, note, ask:{q, o, a, e}}], next}, i, panels:[{label, open}]}` | trạng thái bài, gửi mỗi khi đổi bước hay đổi bảng |
+| bài → app | `{t:'nav', href}` | liên kết trong bài sang trang khác của site, app mở trong app |
+| app → bài | `{t:'go', i}`, `{t:'next'}`, `{t:'prev'}` | chuyển bước |
+| app → bài | `{t:'pnl', n}` | bật, tắt bảng thứ n của bài |
+| app → bài | `{t:'vung', v:{t, r, b, l}}` | phần màn hình lớp kính của app đang chiếm (px) |
+
+Trong bài, chế độ app có sẵn (shell/bg-shell.js 2.4.0):
+- `html.bgs-app-html` từ khung hình đầu, `body.bgs-app` sau khi gắn vỏ; `BGShell.app`, `BGShell.vung`, sự kiện `bgs-vung`.
+- Biến CSS `--app-t`, `--app-r`, `--app-b`, `--app-l`; `--bg-bar` thành khoảng dưới tên bài của app, nên bài đã đặt bảng theo thanh đầu bài của vỏ tự nằm dưới tên bài của app.
+- `data-app="an"`: phần tử trùng với chữ app hiện (tên bài, lời của bước) bị ẩn.
+- `data-app-bang="Tên"`: nhóm điều khiển của bài thành bảng của app, mở bằng nút kính dưới tên bài.
+- Bảng của bài đóng mặc định trong app; bài tự gọi `BGShell.panel` không mở bảng. Khi một bảng mở, app ẩn lớp chữ của mình để bảng không bị che.
+
+### Theo nhóm bài
+
+- Bộ kit (31 bài, tools/robotics/kit): không dựng trang tài liệu trong app; cảnh tràn khung; thẻ lời giảng điện thoại chỉ giữ hàng nút (Tự chạy, góc máy, hành động) đặt dưới tên bài; thanh tốc độ, bảng xem bộ phận nằm trong vùng trống; tâm cảnh dời và lùi máy theo vùng trống (`framing.ix`, `iy`, `k`). Bảng số mở bằng nút của app.
+- 54 bài thư viện (shell/adapter-thu-vien.js): ẩn thanh bước dưới, tab bảng và đầu trang của bài; khung phương trình dưới tên bài, trái cột chữ; khung trống của cảnh tính cả lớp kính của app. Bước này, Điều khiển mở bằng nút của app.
+- Neuron: tên bài, nhãn cảnh, lời bước, hai bảng phụ ẩn; số đo điện thế màng nằm dưới tên bài trên tablet.
+- Cổ Loa: cảnh tràn khung; Điều khiển (cột trái) và Thông tin mở bằng nút; dòng thời gian nổi trên lớp chữ ở tablet, hiện cùng bảng Điều khiển ở điện thoại.
+- Tế Bào: cảnh tràn khung, nội dung trang ngoài cảnh ẩn; thanh điều khiển thành bảng "Điều khiển"; bảng Thông tin nổi bên phải khi mở.
+- Ty Thể: cảnh tràn khung; thanh điều khiển thành bảng "Điều khiển"; ô giải thích, thước, ghi chú trong vùng trống.
+- Cơ thể người: thẻ bước ẩn; thanh công cụ dưới đáy thành bảng "Công cụ"; trên tablet trang thu bề rộng để các nút neo mép phải nằm trái cột chữ.
+- App: câu hỏi có phương án bấm chọn được, báo đúng sai và hiện lời giải của bài.
+
+### Cổng
+
+- `tests/kiem_app.py`: mở từng bài qua app ở 390 × 844 và 1180 × 820, đo A1 (bài báo trạng thái), A2 (chữ của bài lặp lời bước của app), A3 (phần tử có chữ hoặc bấm được của bài nằm dưới lớp kính của app). Chạy trước khi đẩy thay đổi ở vỏ bài, bộ kit, khuôn thư viện hay vỏ app.
+- Kết quả trên máy dựng (23/11/2026): 90/90 bài đạt cả A1, A2, A3 ở điện thoại 390 × 844. Tablet 1180 × 820 vẽ bằng phần mềm chậm (vài phút mỗi bài) nên đo mẫu: 5 bài riêng, 6 bài kit, 3 bài thư viện, tất cả đạt. Cổng bố cục đạt với ba trang app.
+- Chưa kiểm trên điện thoại, tablet thật.
 
 ## Nhật ký
 
 - M0 xong: chốt hướng sân khấu.
 - M1 xong phần dựng và cổng trên máy dựng. Chưa kiểm trên điện thoại, tablet thật.
+- M2 xong phần dựng và cổng trên máy dựng: mọi bài chạy gọn trong app, không lặp chữ, không bị lớp kính che.

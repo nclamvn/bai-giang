@@ -13,6 +13,11 @@ body.bgs-on .navigation-pad{top:calc(var(--top) + var(--bg-bar) + 155px)!importa
 body.bgs-on #tool-menu{max-height:calc(100dvh - var(--top) - var(--bottom) - var(--bg-bar) - 20px)!important}
 /* thanh đầu bài đã có logo, toàn màn hình; mã nguồn và ghi công ở mục "Về bài này" */
 body.bgs-on .atlas-brand,body.bgs-on #github-link,body.bgs-on #share-site,body.bgs-on #fullscreen{display:none!important}
+/* vỏ app: --bg-bar thành khoảng dưới tên bài của app (shell/bg-shell.js); không chừa đáy cho thanh công cụ đã thành bảng */
+html.bgs-app-html body.bgs-on #workspace{height:calc(100dvh - var(--top) - var(--bg-bar))!important}
+/* tablet: giao diện BodyVista có nhiều nút neo mép phải; thu bề rộng trang để chúng nằm trái cột chữ của app (transform làm body thành khung chứa của phần tử fixed) */
+html.bgs-app-html #bug-feedback{display:none!important}
+html.bgs-app-html body.bgs-on{transform:translateZ(0);width:calc(100vw - var(--app-r,0px));height:100dvh;overflow:hidden}
 .app-header{background:var(--bg-surface,#fff)!important;border-bottom:1px solid var(--bg-hair,#e6e8ec)!important}
 .workspace-tabs button{font-weight:600!important;letter-spacing:0!important}
 .workspace-tabs button[aria-selected="true"]{color:var(--bg-ink)!important}

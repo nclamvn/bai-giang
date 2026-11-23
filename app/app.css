@@ -105,6 +105,12 @@ main{padding-bottom:calc(100px + var(--sb))}
 .more{align-self:flex-start;min-height:44px;margin:-8px 0 -6px;padding:0;border:0;background:transparent;color:var(--nhan-c);font-size:14px;font-weight:600}
 .cap .ask{padding:10px 12px;border-radius:12px;border:1px solid var(--vien2);font-size:14px;color:#fff}
 .cap .ask b{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mo);display:block;margin-bottom:2px}
+.cap .opts{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.opt{min-height:44px;padding:8px 14px;border-radius:12px;border:1px solid var(--vien2);background:rgba(255,255,255,.04);color:#fff;text-align:left;font-size:14px;line-height:1.4}
+.opt:disabled{cursor:default;opacity:.7}
+.opt.dung{opacity:1;border-color:var(--xanh);background:rgba(123,224,166,.14)}
+.opt.sai{opacity:1;border-color:var(--nhan-s);background:rgba(255,77,115,.14)}
+.kq{display:block;margin-top:10px;font-size:14px;line-height:1.5;color:var(--mo2)}
 .steps{display:flex;gap:4px;margin-top:6px}
 .steps button{flex:1;min-width:0;height:44px;padding:0;border:0;background:transparent;display:flex;flex-direction:column;justify-content:center;gap:6px;text-align:left}
 .steps .bar{flex:none;width:100%}
@@ -118,7 +124,10 @@ main{padding-bottom:calc(100px + var(--sb))}
 .next-l{position:absolute;z-index:3;left:50%;transform:translateX(-50%);top:calc(70px + var(--st));padding:12px 18px;border-radius:16px;text-decoration:none;display:flex;flex-direction:column;gap:2px;max-width:min(92vw,420px)}
 .next-l .k{color:var(--nhan-c)}
 .next-l b{font-size:16px}
-.stage.sach .cap,.stage.sach .scrim-b,.stage.sach .next-l{display:none}
+.stage.sach .cap,.stage.sach .scrim-b,.stage.sach .next-l,.stage.pnl-mo .cap,.stage.pnl-mo .scrim-b,.stage.pnl-mo .next-l{display:none}
+.st-pnl{position:absolute;z-index:2;top:calc(64px + var(--st));left:calc(12px + var(--sl));display:flex;flex-wrap:wrap;gap:8px;max-width:calc(100vw - 24px)}
+.st-pnl button{height:44px;padding:0 16px;border-radius:22px;font-size:14px;font-weight:500;color:#fff;border:1px solid var(--vien);background:var(--kinh);-webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%)}
+.st-pnl button[aria-pressed="true"]{background:#fff;color:var(--nen);border-color:#fff}
 
 /* điện thoại ngang và tablet: chữ thành cột kính bên phải, cảnh trải phía sau */
 @media (min-width:840px),(orientation:landscape) and (max-height:500px){

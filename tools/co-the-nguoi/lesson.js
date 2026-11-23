@@ -53,6 +53,7 @@ function showCard(i) {
   const s = STEPS[i]; if (!s) return;
   if (!card) {
     card = document.createElement('aside'); card.id = 'sak-lesson'; card.setAttribute('aria-live', 'polite');
+    card.dataset.app = 'an'; // vỏ app: lời bước và câu hỏi do app hiện
     document.getElementById('canvas-area')?.append(card) || document.body.append(card);
     card.addEventListener('click', (e) => {
       if (e.target.closest('[data-x]')) card.hidden = true;
@@ -68,6 +69,8 @@ function showCard(i) {
 
 function start() {
   const B = window.BodyVista, S = window.BGShell;
+  // vỏ app: thanh công cụ dưới đáy (Các hệ, Công cụ, Tìm) thành bảng mở bằng nút của app, không nằm dưới lớp chữ của app
+  const tools = document.querySelector('footer.tools'); if (tools) tools.dataset.appBang = 'Công cụ';
   S.mount({
     id: 'co-the-nguoi', title: 'Cơ thể người 3D', subject: 'Khoa học tự nhiên 8', variant: 'pho-thong', nav: false,
     objectives: ['Nêu được tên và chức năng chính của các hệ cơ quan trong cơ thể người', 'Trình bày được sự phối hợp giữa các hệ cơ quan', 'Quan sát được một số quá trình sinh lí: co cơ, tuần hoàn, hô hấp, lọc máu, phản xạ'],
