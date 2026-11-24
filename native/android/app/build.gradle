@@ -8,8 +8,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         // bản phát hành (.github/workflows/phat-hanh.yml) đặt số bản theo tag v<x.y.z> và số lần chạy; bản thử giữ 1 và 0.4.0
-        versionCode (System.getenv('SAK_VERSION_CODE') ?: '1') as Integer
-        versionName System.getenv('SAK_VERSION_NAME') ?: "0.4.0"
+        versionCode Integer.parseInt(System.getenv('SAK_VERSION_CODE') ?: '1')
+        versionName(System.getenv('SAK_VERSION_NAME') ?: '0.4.0')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

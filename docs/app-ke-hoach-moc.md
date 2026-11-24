@@ -33,7 +33,7 @@ App vì thế là một vỏ ngoài mới theo hướng sân khấu, dùng lại
 | M4 · Android (dựng xong, chờ máy thật) | Capacitor 8, dựng APK trong GitHub Actions | Cài và chạy trên ít nhất 2 máy Android thật | Claude dựng, người dùng cài thử |
 | M5 · iPhone và iPad (móng xong, chờ tài khoản Apple) | Capacitor iOS, dựng trên máy chạy macOS (runner GitHub hoặc máy Mac) | Chạy qua TestFlight trên iPhone và iPad thật | Cần tài khoản Apple Developer của người dùng |
 | M6 · Lớp học (dựng xong, chờ dạy thử) | Chế độ chiếu cảnh tối và cảnh sáng, điều khiển từ điện thoại giáo viên (dùng lại kết nối PeerJS đã có) | Dạy thử một tiết thật | Claude, người dùng dạy thử |
-| M7 · Phát hành | Trang cửa hàng, chính sách riêng tư, giảm rủi ro guideline 4.2 | Được duyệt trên Google Play và App Store | Người dùng nộp, Claude soạn hồ sơ |
+| M7 · Phát hành (hồ sơ sẵn, chờ tài khoản và nộp) | Trang cửa hàng, chính sách riêng tư, giảm rủi ro guideline 4.2 | Được duyệt trên Google Play và App Store | Người dùng nộp, Claude soạn hồ sơ |
 
 ## Giới hạn cần nói rõ
 
@@ -147,6 +147,20 @@ Trong bài, chế độ app có sẵn (shell/bg-shell.js 2.4.1):
 - Giới hạn đã biết: điện thoại xoay ngang (cao 390 px) chiếu cho cả lớp thì vùng trống quá hẹp, hàng nút riêng của bài (ví dụ Tạm dừng, Thử phá ở Neuron) có thể đè lên tên bước. Máy chiếu, TV và máy tính bảng không gặp.
 - Chưa kiểm: điện thoại thật nối qua PeerJS (máy dựng không ra được máy chủ của PeerJS), máy chiếu thật, bút trình chiếu thật. Cổng của M6: dạy thử một tiết thật.
 
+## M7 đã làm (chuẩn bị phát hành, chưa nộp)
+
+Hồ sơ đầy đủ: `docs/phat-hanh.md` (việc người dùng phải làm, chữ cửa hàng, bảng hỏi an toàn dữ liệu và phân loại tuổi, quy tắc duyệt 4.2 và 2.5.2 của Apple, ghi chú cho người duyệt, các bước dựng bản phát hành, danh sách kiểm trước khi nộp).
+
+- Trang `chinh-sach-rieng-tu/` và `gioi-thieu/` (Giới thiệu, nguồn và giấy phép), sinh bởi `tools/build_phap_ly.py`. Mục giấy phép và nguồn lấy từ README (một nguồn). Chính sách riêng tư ghi đúng những gì app làm, kiểm ngày 24/11/2026: quyền Android chỉ Internet; PeerJS 1.5.4 mặc định máy môi giới `0.peerjs.com`, STUN của Google, TURN của PeerJS. Hai trang tự chứa (phông, token nhúng sẵn), nằm trong gói ngoại tuyến và trong app. Màn Đã tải có liên kết tới hai trang.
+- Bản phát hành Android: `native/android/app/build.gradle` ký bằng khoá tải lên khi có biến môi trường (không bao giờ trong kho; `.gitignore` chặn `.jks`, `.p12`); số bản và mã bản theo tag. `.github/workflows/phat-hanh.yml` chạy khi đẩy tag `v<x.y.z>`: dựng AAB và APK, ký nếu có secrets, tạo bản nháp phát hành trên GitHub. CI Android hằng ngày dựng thêm AAB chưa ký để kiểm cấu hình.
+- Ảnh cửa hàng: `tools/anh_cua_hang.py` chụp từ chính `native/www` (giả lập môi trường app) ở kích thước cửa hàng đang yêu cầu: iPhone 1179 × 2556 và 1320 × 2868, iPad 13 inch 2064 × 2752, Google Play điện thoại 1080 × 1920 và máy tính bảng 1920 × 1080, ảnh nổi bật 1024 × 500, biểu tượng 512. Đầu ra `design/cua-hang/` (bộ nhớ đệm của site bỏ qua thư mục này).
+- Ba lỗi lộ ra khi chụp ảnh, đã sửa cho mọi máy:
+  - trên điện thoại, câu hỏi dài đẩy nút Bước tiếp ra khỏi màn; hàng nút nay dính ở đáy vùng cuộn;
+  - lời bước của bộ kit dính tiêu đề vào đoạn; nay giữ ngắt đoạn;
+  - màn Đã tải trong app hiện bộ nhớ trình duyệt ("dưới 0,1 MB") thay vì dung lượng bài trong tệp cài; nay hiện dung lượng thật từ `goi.json`.
+- Ràng buộc giấy phép: 54 bài thư viện (CC BY-NC 4.0) và một phần mô hình giải phẫu chỉ dùng phi thương mại, nên app trên cửa hàng phải miễn phí, không quảng cáo, không bán trong app.
+- Chờ người dùng: tài khoản Google Play Console và Apple Developer, tên gói chốt, khoá tải lên Android trong GitHub secrets, email liên hệ, 12 người thử kín 14 ngày (tài khoản cá nhân mới của Google Play), và ba cổng còn mở (M4 máy Android thật, M5 TestFlight, M6 dạy thử).
+
 ## Nhật ký
 
 - M0 xong: chốt hướng sân khấu.
@@ -157,3 +171,4 @@ Trong bài, chế độ app có sẵn (shell/bg-shell.js 2.4.1):
 - M4: đo cảnh 3D từng bài trên máy ảo, sửa hai lỗi gặp trên mọi máy cũ (canvas color-mix ở 54 bài thư viện; khối uniform quá 16 KB ở bài WebGPURenderer). Bốn bài WebGPURenderer còn trống cảnh trên máy ảo, chờ máy thật.
 - M5 xong phần móng: dự án iOS, dựng và chạy thử trên máy ảo iPhone, iPad trong CI. Chờ tài khoản Apple Developer.
 - M6 xong phần dựng: chế độ Lớp học trong app, điều khiển bằng phím, bút trình chiếu, điện thoại, màn hình giáo viên cùng máy. Chờ dạy thử một tiết.
+- M7 xong phần chuẩn bị: trang chính sách riêng tư và giấy phép, cấu hình và workflow bản phát hành Android, ảnh và hồ sơ cửa hàng (`docs/phat-hanh.md`). Chờ tài khoản cửa hàng và nộp.
