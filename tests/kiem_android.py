@@ -46,9 +46,29 @@ def chup(ten):
     with open(f'{OUT}/{ten}.png', 'wb') as f: f.write(subprocess.run(['adb', 'exec-out', 'screencap', '-p'], capture_output=True, timeout=60).stdout)
 
 
+_CDP = {}
+
+
+def chu_trang():
+    """Chữ của trang app đọc qua cổng gỡ lỗi WebView (chỉ bản debug). Dùng khi uiautomator không đọc được cây giao diện:
+    nó chờ màn hình đứng yên, mà cảnh 3D chạy liên tục nên có lúc trả về rỗng."""
+    try:
+        if 'pg' not in _CDP:
+            from playwright.sync_api import sync_playwright
+            pid = adb('shell', 'pidof', PKG).strip().split()[0]
+            adb('forward', 'tcp:9334', f'localabstract:webview_devtools_remote_{pid}')
+            _CDP['pw'] = sync_playwright().start()
+            b = _CDP['pw'].chromium.connect_over_cdp('http://127.0.0.1:9334')
+            _CDP['pg'] = next(x for c in b.contexts for x in c.pages if '/app/' in x.url)
+        return _CDP['pg'].evaluate('() => document.body.innerText')
+    except Exception as e:
+        _CDP.clear(); return f'(không đọc được trang: {str(e)[:80]})'
+
+
 def cay():
     adb('shell', 'uiautomator', 'dump', '/sdcard/cay.xml', timeout=60)
-    return adb('shell', 'cat', '/sdcard/cay.xml')
+    x = adb('shell', 'cat', '/sdcard/cay.xml')
+    return x if '<hierarchy' in x else chu_trang()
 
 
 def cho_chu(mau, han=120):
@@ -87,6 +107,7 @@ def mo_bai():
 
 
 def mo_app():
+    _CDP.clear()  # app tắt thì cổng gỡ lỗi cũ hết hiệu lực
     adb('shell', 'am', 'force-stop', PKG); time.sleep(2)
     adb('shell', 'monkey', '-p', PKG, '-c', 'android.intent.category.LAUNCHER', '1')
 
