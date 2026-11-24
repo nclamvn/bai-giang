@@ -94,7 +94,7 @@
     $('lop-t').textContent = b.title;
     const L = d && d.lesson, steps = (L && L.steps) || [], n = steps.length, i = d ? d.i : -1;
     const k = Math.max(0, Math.min(i, n - 1)), s = steps[k];
-    $('lop-k').textContent = !n ? '' : i < 0 ? `${n} bước · bấm Bắt đầu` : `Bước ${pad(k + 1)} / ${pad(n)}`;
+    $('lop-k').textContent = !d ? 'Đang mở bài…' : !n ? '' : i < 0 ? `${n} bước · bấm Bắt đầu` : `Bước ${pad(k + 1)} / ${pad(n)}`;
     $('lop-h').textContent = !n || i < 0 ? (L && L.title) || b.title : s.t;
     $('lop-p').textContent = !n || i < 0 ? '' : text(s.note);
     const tien = $('lop-tien');
