@@ -114,7 +114,13 @@ Trong bài, chế độ app có sẵn (shell/bg-shell.js 2.4.1):
   - Gọi tràn viền trước khi BridgeActivity đổi theme để lại thanh tiêu đề mang ảnh khởi động bị kéo dẹt.
   - Máy chủ nội bộ của Capacitor trả trang gốc cho địa chỉ thư mục (`/ten-bai/`), nên bài không nạp; app nay mở thẳng `index.html`.
   - Trên WebView 113, nhãn của thanh bước tràn chồng lên nhau; nút bước nay tự cắt phần tràn.
-- Rủi ro còn mở: trên máy ảo, cảnh 3D của Neuron đen vì chương trình đổ bóng WebGL2 của three.js không liên kết được ("uniform buffer not large enough") trên GPU giả lập bằng phần mềm. Cùng bài chạy đúng trên Chromium của máy dựng, nên nhiều khả năng là giới hạn của máy ảo, nhưng máy thật đời cũ (WebView cũ, GPU yếu) có thể gặp tương tự. Phải xem trên máy thật.
+- Đo cảnh 3D từng bài trong app (`tests/kiem_android_canh.py`, nối WebView qua cổng gỡ lỗi của bản debug bằng CDP thô `tests/cdp_android.py`; bản phát hành tắt cổng này). Máy ảo: WebView 113, GPU "Android Emulator OpenGL ES Translator (SwiftShader)", khối uniform tối đa 16 KB, có đủ phần mở rộng float, khung RGBA16F dùng được. Kết quả 24/11/2026:
+  - Bộ kit (WebGLRenderer cổ điển: Sứa robot, Robot sáu chân, Gói tin qua ba chặng) và bài thư viện (Enzyme) hiện cảnh đầy đủ, không lỗi.
+  - Hai lỗi thật tìm ra, đã sửa cho mọi máy:
+    - 54 bài thư viện ném lỗi `addColorStop` (449 lần ở Enzyme) vì canvas của WebView cũ không hiểu `color-mix()`. Vỏ bài 2.4.1 đổi sang `rgba()` theo màu CSS tính sẵn, chỉ bật khi canvas không hiểu. Sau sửa: 0 lỗi.
+    - three 0.180 đưa ma trận InstancedMesh (tới 1.000 bản) vào một khối uniform; khối 16.640 byte vượt mức tối thiểu 16.384 byte của OpenGL ES 3, shader không liên kết được (Neuron, Tế Bào, Cổ Loa). `shell/three-webgpu.js` (import map của `tools/sri.py` trỏ `three/webgpu` vào đây) vá lúc chạy: quá 256 bản thì đi đường thuộc tính đỉnh. Tệp three.js giữ nguyên từng byte. Đo trên máy dựng: khối lớn nhất Neuron 1.920 byte, Tế Bào 15.360, Ty Thể 9.600, Cổ Loa 448. Trên máy ảo hết lỗi shader.
+  - Còn mở: bốn bài dùng WebGPURenderer (Neuron, Tế Bào, Ty Thể, Cổ Loa) chạy nhánh WebGL2, không còn lỗi GL nào, logic chạy (nhãn được chiếu, bộ đếm chạy), nền được xoá đúng màu, nhưng không hình khối nào hiện, kể cả sau 60 giây. Cả bốn bài cùng một kiểu, nên là chỗ không tương thích giữa nhánh WebGL2 của WebGPURenderer với bộ dịch OpenGL ES của máy ảo và WebView 113, không riêng bài nào. Chưa biết máy thật có gặp không: máy thật có GPU thật và WebView được cập nhật qua Play Store. Đây là câu hỏi số một cho lần cài thử trên máy thật.
+  - Nhịp khung hình trên máy ảo (vẽ bằng phần mềm) không đại diện cho máy thật: 1 khung/giây bài WebGPURenderer, 3 đến 4 khung/giây bộ kit.
 - Cổng của M4 chưa qua: cần người dùng cài APK lên ít nhất 2 máy Android thật. Cần ghi: tên máy, phiên bản Android, cảnh 3D có hiện không (Neuron, Tế Bào, một bài kit), độ mượt, chế độ máy bay.
 
 ## Nhật ký
@@ -124,3 +130,4 @@ Trong bài, chế độ app có sẵn (shell/bg-shell.js 2.4.1):
 - M2 xong phần dựng và cổng trên máy dựng: mọi bài chạy gọn trong app, không lặp chữ, không bị lớp kính che.
 - M3 xong phần dựng và cổng trên máy dựng: tải trọn từng bài bằng một nút, mở lại được khi mất mạng.
 - M4 xong phần dựng: APK 42,9 MB dựng và chạy thử trên máy ảo trong CI, bản thử ở github.com/nclamvn/bai-giang/releases/tag/android-thu. Chờ cài thử trên 2 máy thật.
+- M4: đo cảnh 3D từng bài trên máy ảo, sửa hai lỗi gặp trên mọi máy cũ (canvas color-mix ở 54 bài thư viện; khối uniform quá 16 KB ở bài WebGPURenderer). Bốn bài WebGPURenderer còn trống cảnh trên máy ảo, chờ máy thật.
