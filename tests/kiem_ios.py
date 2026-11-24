@@ -65,11 +65,21 @@ def con_chay(udid):
     return f'UIKitApplication:{BUNDLE}' in chay('xcrun', 'simctl', 'spawn', udid, 'launchctl', 'list', timeout=60)
 
 
+def khoi_chay(udid, env=None):
+    """simctl launch; máy ảo vừa khởi động có lúc chậm: thử lại một lần với thời gian chờ dài hơn."""
+    for han in (180, 420):
+        try:
+            r = subprocess.run(['xcrun', 'simctl', 'launch', udid, BUNDLE], capture_output=True, text=True, timeout=han, env=env)
+            if r.returncode: raise RuntimeError('không khởi chạy được app: ' + r.stderr.strip()[-200:])
+            return
+        except subprocess.TimeoutExpired:
+            chay('xcrun', 'simctl', 'terminate', udid, BUNDLE, timeout=60)
+    raise RuntimeError('simctl launch không trả lời sau hai lần')
+
+
 def mo_lk(udid, duong):
     chay('xcrun', 'simctl', 'terminate', udid, BUNDLE, timeout=60)
-    env = dict(os.environ, SIMCTL_CHILD_SAK_LIEN_KET='sangankhoai://' + duong)
-    r = subprocess.run(['xcrun', 'simctl', 'launch', udid, BUNDLE], capture_output=True, text=True, timeout=120, env=env)
-    if r.returncode: raise RuntimeError('không khởi chạy được app: ' + r.stderr.strip()[-200:])
+    khoi_chay(udid, dict(os.environ, SIMCTL_CHILD_SAK_LIEN_KET='sangankhoai://' + duong))
 
 
 def con_song(udid, ten):
@@ -88,8 +98,7 @@ def main():
         chay('xcrun', 'simctl', 'boot', u, timeout=300)
         chay('xcrun', 'simctl', 'bootstatus', u, '-b', timeout=900)
         chay('xcrun', 'simctl', 'install', u, app, timeout=300, check=True)
-        chay('xcrun', 'simctl', 'launch', u, BUNDLE, timeout=120, check=True)
-        buoc = [(f'I1 {m["name"]}: Thư viện hiện', lambda: cho_chu(u, f'{ten}-1-thu-vien', r'thu vien|tim bai', 240))]
+        buoc = [(f'I1 {m["name"]}: mở app, Thư viện hiện', lambda: (khoi_chay(u), cho_chu(u, f'{ten}-1-thu-vien', r'thu vien|tim bai', 240)))]
         buoc.append((f'I2 {m["name"]}: liên kết mở bài, lớp chữ hiện bước', lambda: (mo_lk(u, 'bai/than-kinh'), cho_chu(u, f'{ten}-2-bai', r'buoc \d+ / \d+|bam bat dau', 240))))
         buoc.append((f'I3 {m["name"]}: liên kết mở chế độ Lớp học', lambda: (mo_lk(u, 'lop/than-kinh'), cho_chu(u, f'{ten}-3-lop', r'lop hoc', 180))))
         buoc.append((f'I4 {m["name"]}: app còn chạy', lambda: con_song(u, ten)))
