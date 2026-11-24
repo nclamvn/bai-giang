@@ -48,6 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 class MainViewController: CAPBridgeViewController {
     override open func capacitorDidLoad() {
         bridge?.registerPluginInstance(ManHinhPlugin())
+        // Bộ thử trên máy ảo (tests/kiem_ios.py): mở liên kết sangankhoai:// qua biến môi trường SAK_LIEN_KET
+        // (xcrun simctl launch với SIMCTL_CHILD_SAK_LIEN_KET), đi đúng đường liên kết của Capacitor (sự kiện appUrlOpen)
+        // mà không qua hộp hỏi "Open in" của hệ thống. Máy thật không đặt được biến này.
+        if let s = ProcessInfo.processInfo.environment["SAK_LIEN_KET"], let url = URL(string: s), url.scheme == "sangankhoai" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                _ = ApplicationDelegateProxy.shared.application(UIApplication.shared, open: url, options: [:])
+            }
+        }
     }
 }
 

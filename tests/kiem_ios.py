@@ -5,7 +5,9 @@
 
 Mỗi máy ảo (iPhone, iPad mới nhất có trên máy macOS):
   I1  cài và mở app: màn Thư viện hiện (đọc chữ trên ảnh chụp bằng Vision, tests/ocr_ios.swift)
-  I2  liên kết sangankhoai://bai/than-kinh (xcrun simctl openurl): bài mở, lớp chữ của app hiện bước
+  I2  liên kết sangankhoai://bai/than-kinh: bài mở, lớp chữ của app hiện bước. Liên kết đi qua biến SAK_LIEN_KET khi khởi chạy
+      (AppDelegate.swift chuyển cho Capacitor như liên kết thật): simctl openurl làm hệ thống hiện hộp hỏi "Open in" mà máy ảo
+      không có cách bấm bằng công cụ của Apple
   I3  liên kết sangankhoai://lop/than-kinh: chế độ Lớp học hiện (nhãn LỚP HỌC, nút Thoát chế độ lớp trên iPad)
   I4  app còn chạy, không có báo cáo văng app
 Ảnh chụp và chữ đọc được ở kiem-ios/. Chỉ dùng công cụ của Apple (simctl, Vision). Thoát mã 1 nếu một bước hỏng.
@@ -42,7 +44,9 @@ def chon_may():
 
 
 def chup(udid, ten):
-    f = f'{OUT}/{ten}.png'; chay('xcrun', 'simctl', 'io', udid, 'screenshot', f, timeout=60)
+    f = f'{OUT}/{ten}.png'
+    try: chay('xcrun', 'simctl', 'io', udid, 'screenshot', f, timeout=180)
+    except subprocess.TimeoutExpired: return ''   # máy ảo bận (vừa khởi động): lần chờ sau chụp lại
     chu = chay('swift', os.path.join(HERE, 'ocr_ios.swift'), f, timeout=240)
     with open(f'{OUT}/{ten}.txt', 'w') as g: g.write(chu)
     return bo_dau(chu)
@@ -62,7 +66,10 @@ def con_chay(udid):
 
 
 def mo_lk(udid, duong):
-    chay('xcrun', 'simctl', 'openurl', udid, 'sangankhoai://' + duong, timeout=60, check=True)
+    chay('xcrun', 'simctl', 'terminate', udid, BUNDLE, timeout=60)
+    env = dict(os.environ, SIMCTL_CHILD_SAK_LIEN_KET='sangankhoai://' + duong)
+    r = subprocess.run(['xcrun', 'simctl', 'launch', udid, BUNDLE], capture_output=True, text=True, timeout=120, env=env)
+    if r.returncode: raise RuntimeError('không khởi chạy được app: ' + r.stderr.strip()[-200:])
 
 
 def con_song(udid, ten):
