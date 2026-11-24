@@ -44,7 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 // Sáng Ăn Khoai (docs/app-ke-hoach-moc.md, mốc M5). Màn hình bài học của app: CAPBridgeViewController có thêm plugin ManHinh.
-// Đặt ở đây (tệp đã có trong target) để không phải sửa tay App.xcodeproj. Main.storyboard dùng lớp MainViewController.
+// Đặt ở đây (tệp đã có trong target) để không phải sửa tay App.xcodeproj. SceneDelegate.swift tạo màn này (Capacitor 8
+// dùng scene, không đọc lớp trong Main.storyboard); Main.storyboard cũng khai lớp này cho thống nhất.
 class MainViewController: CAPBridgeViewController {
     override open func capacitorDidLoad() {
         bridge?.registerPluginInstance(ManHinhPlugin())
