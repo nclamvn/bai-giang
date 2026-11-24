@@ -50,6 +50,7 @@
     document.documentElement.classList.add('native');
   }
   function moLienKet(url) {
+    console.info('[app] liên kết', url);
     const m = /^sangankhoai:\/\/(bai|lop)\/([a-z0-9-]+)/i.exec(String(url || ''));
     if (m && BY.has(m[2].toLowerCase())) location.hash = '#/' + m[1].toLowerCase() + '/' + m[2].toLowerCase();
   }

@@ -96,6 +96,9 @@ def main():
         for t, f in buoc:
             try: f(); print('đạt ', t)
             except Exception as e: loi.append(t); print('LỖI ', t, '·', str(e)[:240])
+        # nhật ký của app (NSLog của Swift, lời console của trang qua Capacitor) để tra khi một bước hỏng
+        with open(f'{OUT}/log-{ten}.txt', 'w') as g:
+            g.write(chay('xcrun', 'simctl', 'spawn', u, 'log', 'show', '--last', '20m', '--style', 'compact', '--predicate', 'process == "App"', timeout=300)[-400000:])
         chay('xcrun', 'simctl', 'shutdown', u, timeout=120)
     van = [f for f in glob.glob(os.path.expanduser('~/Library/Logs/DiagnosticReports/App*')) if os.path.getmtime(f) > t_bat_dau]
     if van:

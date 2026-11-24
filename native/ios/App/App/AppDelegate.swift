@@ -51,7 +51,9 @@ class MainViewController: CAPBridgeViewController {
         // Bộ thử trên máy ảo (tests/kiem_ios.py): mở liên kết sangankhoai:// qua biến môi trường SAK_LIEN_KET
         // (xcrun simctl launch với SIMCTL_CHILD_SAK_LIEN_KET), đi đúng đường liên kết của Capacitor (sự kiện appUrlOpen)
         // mà không qua hộp hỏi "Open in" của hệ thống. Máy thật không đặt được biến này.
+        NSLog("SAK MainViewController: capacitorDidLoad")
         if let s = ProcessInfo.processInfo.environment["SAK_LIEN_KET"], let url = URL(string: s), url.scheme == "sangankhoai" {
+            NSLog("SAK liên kết từ biến môi trường: %@", s)
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 _ = ApplicationDelegateProxy.shared.application(UIApplication.shared, open: url, options: [:])
             }
