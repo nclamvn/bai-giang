@@ -52,6 +52,12 @@ jobs:
           emulator -avd thu -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -no-snapshot > emulator.log 2>&1 &
           echo $! > emulator.pid
           python3 tests/kiem_android.py sang-an-khoai.apk
+      - name: Đo cảnh 3D từng bài trong app (để đo, không chặn bản thử)
+        continue-on-error: true
+        run: |
+          export PATH="$ANDROID_HOME/platform-tools:$PATH"
+          pip install -q playwright pillow
+          python3 tests/kiem_android_canh.py
       - uses: actions/upload-artifact@v5
         if: always()
         with:
