@@ -66,7 +66,7 @@ Quyết định: nhãn chỉ vào bộ phận do chính bài vẽ (ghim, chú th
 | app → bài | `{t:'pnl', n}` | bật, tắt bảng thứ n của bài |
 | app → bài | `{t:'vung', v:{t, r, b, l}}` | phần màn hình lớp kính của app đang chiếm (px) |
 
-Trong bài, chế độ app có sẵn (shell/bg-shell.js 2.4.0):
+Trong bài, chế độ app có sẵn (shell/bg-shell.js 2.4.1):
 - `html.bgs-app-html` từ khung hình đầu, `body.bgs-app` sau khi gắn vỏ; `BGShell.app`, `BGShell.vung`, sự kiện `bgs-vung`.
 - Biến CSS `--app-t`, `--app-r`, `--app-b`, `--app-l`; `--bg-bar` thành khoảng dưới tên bài của app, nên bài đã đặt bảng theo thanh đầu bài của vỏ tự nằm dưới tên bài của app.
 - `data-app="an"`: phần tử trùng với chữ app hiện (tên bài, lời của bước) bị ẩn.

@@ -17,7 +17,42 @@
 (function () {
   'use strict';
   if (window.BGShell && window.BGShell.version) return;
-  const VERSION = '2.4.0';
+  const VERSION = '2.4.1';
+  // Canvas của trình duyệt cũ (WebView Android 113 đo được trên máy ảo, Chrome cũ) không hiểu color-mix(): addColorStop ném lỗi,
+  // fillStyle bỏ qua. Bài đọc bảng màu từ biến CSS (có color-mix) rồi vẽ canvas, nên đổi chuỗi đó sang rgba() theo màu CSS tính sẵn.
+  // Trình duyệt hiểu color-mix trong canvas thì không đụng gì.
+  const BG_CANVAS_MIX = {};  // BGShell.canvasMix: hàm đổi, chỉ có khi đã bật lớp đổi (để kiểm)
+  (function canvasColorMix() {
+    try {
+      const c = document.createElement('canvas').getContext('2d');
+      if (!c || typeof CanvasGradient === 'undefined') return;
+      c.fillStyle = '#000'; c.fillStyle = 'color-mix(in srgb, #fff 50%, #fff)';
+      if (c.fillStyle !== '#000000') return;
+    } catch (_) { return; }
+    const nho = new Map(); let thu = null;
+    const doi = (v) => {
+      if (typeof v !== 'string' || v.indexOf('color-mix(') < 0) return v;
+      let r = nho.get(v); if (r) return r;
+      if (!thu) { thu = document.createElement('i'); thu.style.display = 'none'; }
+      (document.body || document.documentElement).appendChild(thu);
+      thu.style.color = ''; thu.style.color = v; r = getComputedStyle(thu).color; thu.remove();
+      const m = /^color\(srgb\s+([-\d.e]+)\s+([-\d.e]+)\s+([-\d.e]+)(?:\s*\/\s*([-\d.e]+%?))?\s*\)$/.exec(r);
+      if (m) {
+        const k = (x) => Math.round(Math.min(1, Math.max(0, +x)) * 255);
+        const a = m[4] == null ? 1 : m[4].endsWith('%') ? parseFloat(m[4]) / 100 : +m[4];
+        r = 'rgba(' + k(m[1]) + ',' + k(m[2]) + ',' + k(m[3]) + ',' + a + ')';
+      }
+      nho.set(v, r); return r;
+    };
+    const G = CanvasGradient.prototype, them = G.addColorStop;
+    G.addColorStop = function (o, mau) { return them.call(this, o, doi(mau)); };
+    const ps = [window.CanvasRenderingContext2D, window.OffscreenCanvasRenderingContext2D].filter(Boolean).map((x) => x.prototype);
+    for (const P of ps) for (const k of ['fillStyle', 'strokeStyle', 'shadowColor']) {
+      const d = Object.getOwnPropertyDescriptor(P, k); if (!d || !d.set) continue;
+      Object.defineProperty(P, k, { configurable: true, enumerable: d.enumerable, get: d.get, set(v) { d.set.call(this, doi(v)); } });
+    }
+    BG_CANVAS_MIX.doi = doi;
+  })();
   // Bài có thanh đầu riêng (bản dự phòng khi vỏ không tải được) ẩn thanh đó ngay từ khung hình đầu theo lớp bgs-pre,
   // để không nháy thanh cũ rồi mới đổi sang vỏ. Quá 8 giây mà bài chưa gắn vỏ thì trả lại thanh dự phòng.
   const PRE = document.documentElement; PRE.classList.add('bgs-pre'); const preT = setTimeout(() => PRE.classList.remove('bgs-pre'), 8000);
@@ -820,7 +855,7 @@
     addEventListener('offline', () => ui.status('Điện thoại mất mạng'));
   }
 
-  const api = { version: VERSION, mount, update, refresh: () => broadcast(), go, next, prev, start, stop, phonePage, runRemote, projector, panel: (k, v) => (APP ? undefined : togglePanel(k, v)), say, lite,
+  const api = { version: VERSION, canvasMix: BG_CANVAS_MIX, mount, update, refresh: () => broadcast(), go, next, prev, start, stop, phonePage, runRemote, projector, panel: (k, v) => (APP ? undefined : togglePanel(k, v)), say, lite,
     get state() { return snapshot(); }, get app() { return APP; }, get vung() { return S.vung || { t: 0, r: 0, b: 0, l: 0 }; }, _handle: handle, icon: ico };
   window.BGShell = api;
 })();

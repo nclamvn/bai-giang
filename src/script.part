@@ -2,12 +2,13 @@
 <script type="importmap">
 {
  "imports": {
-  "three": "../vendor/three@0.180.0/build/three.webgpu.min.js",
-  "three/webgpu": "../vendor/three@0.180.0/build/three.webgpu.min.js",
+  "three": "../shell/three-webgpu.js",
+  "three/webgpu": "../shell/three-webgpu.js",
   "three/tsl": "../vendor/three@0.180.0/build/three.tsl.min.js",
   "three/addons/": "../vendor/three@0.180.0/examples/jsm/"
  },
  "integrity": {
+  "../shell/three-webgpu.js": "sha384-7brZBpdfV5mP+d3NAKnup/K2oQYsoPin5zv/9n/s0MC++JDv6ADwPZ+o5dHcHxUD",
   "../vendor/three@0.180.0/build/three.webgpu.min.js": "sha384-NCNdkY3IypDZC52aoiNzj/OAv8Wk8xpiOppv2J2Ab3S0PGMD8KCb1C3BOofS+AJX",
   "../vendor/three@0.180.0/build/three.core.min.js": "sha384-Aa12tAyxIBJJAFu3qP8FVQCMM0U5JQGdmu9Plhyw4kRdmajEzNw8jChNzDqgEu9x",
   "../vendor/three@0.180.0/build/three.tsl.min.js": "sha384-bePwW2N2vMPxBVlXHpvO0I+c0dtLMTUEDSaACqzVDDcUH8phkM8q0ube0obSB9or",

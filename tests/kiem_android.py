@@ -74,6 +74,8 @@ def cho_chu(mau, han=120):
     while time.time() - t0 < han:
         x = cay()
         if re.search(mau, x, re.I): return x
+        y = chu_trang()  # cây uiautomator có thể thiếu nội dung WebView khi cảnh chạy liên tục
+        if re.search(mau, y, re.I): return x
         time.sleep(4)
     raise RuntimeError(f'không thấy "{mau}" sau {han} giây')
 

@@ -14,6 +14,7 @@ J = 'https://cdn.jsdelivr.net/npm/'
 T = J + 'three@0.180.0/'
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 VENDOR = 'vendor/three@0.180.0/'
+BOC = 'shell/three-webgpu.js'
 # tệp three.js trang dùng (đúng tập này: addon không import gì ngoài three, three/tsl, three/webgpu và GaussianBlurNode cạnh nó)
 LOCAL = ['build/three.webgpu.min.js', 'build/three.core.min.js', 'build/three.tsl.min.js', 'examples/jsm/controls/OrbitControls.js',
          'examples/jsm/environments/RoomEnvironment.js', 'examples/jsm/objects/SkyMesh.js', 'examples/jsm/tsl/display/BloomNode.js',
@@ -30,9 +31,11 @@ HASH = {
 def importmap(root):
     """Import map three.js dùng chung cho Tế Bào, Ty Thể, Cổ Loa, Neuron. root: đường dẫn từ trang về gốc site ('../')."""
     V = root + VENDOR
-    m = {'imports': {'three': V + 'build/three.webgpu.min.js', 'three/webgpu': V + 'build/three.webgpu.min.js',
+    # three và three/webgpu trỏ vào mô-đun bọc shell/three-webgpu.js: export * từ bản tự lưu, kèm bản vá lúc chạy (khối uniform 16 KB)
+    W = root + BOC
+    m = {'imports': {'three': W, 'three/webgpu': W,
                      'three/tsl': V + 'build/three.tsl.min.js', 'three/addons/': V + 'examples/jsm/'},
-         'integrity': {V + f: sha((ROOT / VENDOR / f).read_bytes()) for f in LOCAL}}
+         'integrity': {W: sha((ROOT / BOC).read_bytes()), **{V + f: sha((ROOT / VENDOR / f).read_bytes()) for f in LOCAL}}}
     body = json.dumps(m, indent=1, ensure_ascii=False)
     return '<script type="importmap">\n' + body + '\n</script>'
 
