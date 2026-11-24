@@ -7,8 +7,9 @@ android {
         applicationId "io.github.nclamvn.sangankhoai"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "0.4.0"   // theo mốc của docs/app-ke-hoach-moc.md: M4 = bản Android đầu tiên
+        // bản phát hành (.github/workflows/phat-hanh.yml) đặt số bản theo tag v<x.y.z> và số lần chạy; bản thử giữ 1 và 0.4.0
+        versionCode (System.getenv('SAK_VERSION_CODE') ?: '1') as Integer
+        versionName System.getenv('SAK_VERSION_NAME') ?: "0.4.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -25,12 +26,22 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        // khoá tải lên Google Play: chỉ có khi workflow phát hành giải mã từ GitHub secrets ra tệp tạm (không bao giờ nằm trong kho)
+        if (System.getenv('SAK_KEYSTORE')) {
+            release {
+                storeFile file(System.getenv('SAK_KEYSTORE'))
+                storePassword System.getenv('SAK_KEYSTORE_PASSWORD')
+                keyAlias System.getenv('SAK_KEY_ALIAS')
+                keyPassword System.getenv('SAK_KEY_PASSWORD')
+            }
+        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
         release {
+            if (System.getenv('SAK_KEYSTORE')) signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

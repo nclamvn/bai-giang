@@ -18,7 +18,7 @@
   const SITE_PROD = 'https://nclamvn.github.io/bai-giang/';
   const KINH = 'sak-lop-kinh';   // kính giáo viên chọn cho từng bài (trên máy này)
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const text = (h) => { const t = document.createElement('template'); t.innerHTML = String(h || ''); return t.content.textContent.replace(/\s+/g, ' ').trim(); };
+  const doan = (h) => { const t = document.createElement('template'); t.innerHTML = String(h || ''); return t.content.textContent.split(/\n\s*\n/).map((x) => x.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n'); };
   const pad = (n) => String(n).padStart(2, '0');
   const doc = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } };
   const ghi = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* chế độ riêng tư */ } };
@@ -96,7 +96,7 @@
     const k = Math.max(0, Math.min(i, n - 1)), s = steps[k];
     $('lop-k').textContent = !d ? 'Đang mở bài…' : !n ? '' : i < 0 ? `${n} bước · bấm Bắt đầu` : `Bước ${pad(k + 1)} / ${pad(n)}`;
     $('lop-h').textContent = !n || i < 0 ? (L && L.title) || b.title : s.t;
-    $('lop-p').textContent = !n || i < 0 ? '' : text(s.note);
+    $('lop-p').textContent = !n || i < 0 ? '' : doan(s.note);
     const tien = $('lop-tien');
     tien.innerHTML = steps.map((x, j) => `<i${j <= i ? ' class="xong"' : ''}></i>`).join('');
     tien.setAttribute('aria-label', `Bước ${Math.max(i + 1, 0)} trên ${n}`);

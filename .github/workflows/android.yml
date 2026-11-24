@@ -35,7 +35,9 @@ jobs:
         run: |
           cd native/android
           echo "sdk.dir=$ANDROID_HOME" > local.properties
-          ./gradlew assembleDebug --no-daemon
+          # dựng thêm gói phát hành (AAB, chưa ký) để biết cấu hình phát hành của mốc M7 vẫn dựng được; bản ký: phat-hanh.yml
+          ./gradlew assembleDebug bundleRelease --no-daemon
+          ls -l app/build/outputs/bundle/release/
           cp app/build/outputs/apk/debug/app-debug.apk "$GITHUB_WORKSPACE/sang-an-khoai.apk"
           ls -l "$GITHUB_WORKSPACE/sang-an-khoai.apk"
       - name: Chạy thử trên máy ảo Android (API 34)

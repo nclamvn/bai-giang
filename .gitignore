@@ -29,3 +29,9 @@ native/android/build/
 native/android/app/build/
 native/android/local.properties
 native/android/capacitor-cordova-android-plugins/build/
+
+# khoá ký phát hành (khoá tải lên Google Play, chứng chỉ Apple): không bao giờ đưa vào kho; workflow phát hành giải mã từ GitHub secrets
+*.jks
+*.p12
+*.mobileprovision
+upload-keystore*

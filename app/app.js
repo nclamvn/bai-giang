@@ -17,6 +17,8 @@
   const KEY = 'sak-app-gan-day';
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const text = (h) => { const t = document.createElement('template'); t.innerHTML = String(h || ''); return t.content.textContent.replace(/\s+/g, ' ').trim(); };
+  // lời của bước giữ ngắt đoạn (bộ kit chia tiêu đề, nội dung, ghi chú bằng dòng trống); #cap-p hiện bằng white-space:pre-line
+  const doan = (h) => { const t = document.createElement('template'); t.innerHTML = String(h || ''); return t.content.textContent.split(/\n\s*\n/).map((x) => x.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n'); };
   const fold = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase();
   const pad = (n) => String(n).padStart(2, '0');
   const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (e) { return null; } };
@@ -224,8 +226,9 @@
     $('rows').firstElementChild.insertAdjacentHTML('beforeend', '<span class="sub">Học được cả khi mất mạng, không cần tải thêm.</span>');
     $('rows-mo').innerHTML = ngoai.map((b) => `<li data-slug="${esc(b.slug)}"><a href="#/bai/${esc(b.slug)}"><img src="${esc(b.cover)}" alt="" loading="lazy">
       <span><span class="tt">${esc(b.title)}</span><br><span class="sub">Bài nặng, mở từ site khi có mạng</span></span></a></li>`).join('');
-    let e = null; try { e = navigator.storage && navigator.storage.estimate ? await navigator.storage.estimate() : null; } catch (err) { e = null; }
-    $('use').textContent = e && e.usage != null ? mb(e.usage) : 'không đo được';
+    // bài nằm trong tệp cài: dung lượng thật từ goi.json (phần chung và gói của mọi bài trong app); bộ nhớ trình duyệt không tính phần này
+    $('use').previousElementSibling.textContent = 'Bài trong app chiếm';
+    $('use').textContent = (await goiData()) ? mb(byteOf([...new Set([...GOI.chung, ...CAT.bai.filter((b) => !remoteOf(b)).flatMap((b) => GOI.bai[b.slug] || [])])].map((i) => GOI.tep[i][0]))) : 'không đo được';
     $('ben').textContent = 'Bài trong app nằm trong tệp cài, không bị xoá khi máy đầy bộ nhớ.';
   }
   function netLine() {
@@ -321,7 +324,7 @@
     $('cap').hidden = false;
     $('cap-k').textContent = i < 0 ? `${n} bước · bấm Bắt đầu` : `Bước ${pad(k + 1)} / ${pad(n)}`;
     $('cap-h').textContent = i < 0 ? (L.title || cur.title) : s.t;
-    $('cap-p').textContent = i < 0 ? '' : text(s.note);
+    $('cap-p').textContent = i < 0 ? '' : doan(s.note);
     // điện thoại (dọc và ngang): lời dài gọn 4 dòng để cảnh còn chỗ; bấm Đọc thêm để mở hết
     const P = $('cap-p'), compact = !(innerWidth >= 840 && innerHeight > 500);
     P.classList.toggle('gon', compact); $('cap-more').hidden = true;
