@@ -41,7 +41,17 @@
       else if (!$('v-da-tai').hidden) location.hash = '#/thu-vien';
       else P.App.minimizeApp().catch(() => P.App.exitApp());
     });
+    // liên kết mở thẳng vào bài (mã QR của giáo viên): sangankhoai://bai/<slug> hoặc sangankhoai://lop/<slug> (chế độ lớp học)
+    if (P.App) {
+      P.App.addListener('appUrlOpen', (e) => moLienKet(e && e.url));
+      // app mở lần đầu bằng liên kết: danh mục (BY) đã có từ trước; route() đọc hash ngay hoặc hashchange chạy lại
+      P.App.getLaunchUrl().then((e) => { if (e && e.url) moLienKet(e.url); }).catch(() => {});
+    }
     document.documentElement.classList.add('native');
+  }
+  function moLienKet(url) {
+    const m = /^sangankhoai:\/\/(bai|lop)\/([a-z0-9-]+)/i.exec(String(url || ''));
+    if (m && BY.has(m[2].toLowerCase())) location.hash = '#/' + m[1].toLowerCase() + '/' + m[2].toLowerCase();
   }
   const giuSang = (bat) => { if (P.ManHinh) P.ManHinh.giuSang({ bat }).catch(() => {}); };
   let cur = null, st = null, resume = -1, stateTimer = 0, filterS = '', query = '';

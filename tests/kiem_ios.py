@@ -5,9 +5,10 @@
 
 Mỗi máy ảo (iPhone, iPad mới nhất có trên máy macOS):
   I1  cài và mở app: màn Thư viện hiện (đọc chữ trên ảnh chụp bằng Vision, tests/ocr_ios.swift)
-  I2  (khi có idb) bấm nút ở ảnh lớn: bài mở, lớp chữ của app hiện bước
-  I3  app còn chạy sau khi mở bài, không có báo cáo văng app
-Ảnh chụp và chữ đọc được ở kiem-ios/. Không có idb thì bỏ I2 và nói rõ. Thoát mã 1 nếu một bước hỏng.
+  I2  liên kết sangankhoai://bai/than-kinh (xcrun simctl openurl): bài mở, lớp chữ của app hiện bước
+  I3  liên kết sangankhoai://lop/than-kinh: chế độ Lớp học hiện (nhãn LỚP HỌC, nút Thoát chế độ lớp trên iPad)
+  I4  app còn chạy, không có báo cáo văng app
+Ảnh chụp và chữ đọc được ở kiem-ios/. Chỉ dùng công cụ của Apple (simctl, Vision). Thoát mã 1 nếu một bước hỏng.
 Máy ảo không có GPU thật như máy thật: cảnh 3D trên máy ảo không đại diện cho máy thật.
 """
 import glob, json, os, re, shutil, subprocess, sys, time, unicodedata
@@ -60,17 +61,13 @@ def con_chay(udid):
     return f'UIKitApplication:{BUNDLE}' in chay('xcrun', 'simctl', 'spawn', udid, 'launchctl', 'list', timeout=60)
 
 
+def mo_lk(udid, duong):
+    chay('xcrun', 'simctl', 'openurl', udid, 'sangankhoai://' + duong, timeout=60, check=True)
+
+
 def con_song(udid, ten):
-    time.sleep(10); chup(udid, f'{ten}-3-sau')
+    time.sleep(10); chup(udid, f'{ten}-4-sau')
     if not con_chay(udid): raise RuntimeError('app đã tắt')
-
-
-def idb_bam(udid, mau):
-    """Bấm phần tử có nhãn trợ năng khớp mẫu (chọn cái cuối: nút ở ảnh lớn nằm sau thanh dưới)."""
-    cay = json.loads(chay('idb', 'ui', 'describe-all', '--udid', udid, '--json', timeout=120) or '[]')
-    ms = [e for e in cay if re.search(mau, bo_dau((e.get('AXLabel') or '') + ' ' + (e.get('AXValue') or '')))]
-    if not ms: raise RuntimeError(f'không thấy nút "{mau}" trong cây trợ năng ({len(cay)} phần tử)')
-    f = ms[-1]['frame']; chay('idb', 'ui', 'tap', str(int(f['x'] + f['width'] / 2)), str(int(f['y'] + f['height'] / 2)), '--udid', udid, timeout=60)
 
 
 def main():
@@ -78,20 +75,17 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     rt, mays = chon_may()
     print('iOS:', rt.split('.')[-1], '· máy ảo:', ', '.join(m['name'] for m in mays))
-    co_idb = bool(shutil.which('idb'))
-    if not co_idb: print('không có idb: bỏ bước bấm mở bài (I2)')
     loi, t_bat_dau = [], time.time()
     for m in mays:
         u, ten = m['udid'], re.sub(r'[^a-z0-9]+', '-', m['name'].lower()).strip('-')
         chay('xcrun', 'simctl', 'boot', u, timeout=300)
         chay('xcrun', 'simctl', 'bootstatus', u, '-b', timeout=900)
-        if co_idb: chay('idb', 'connect', u, timeout=120)
         chay('xcrun', 'simctl', 'install', u, app, timeout=300, check=True)
         chay('xcrun', 'simctl', 'launch', u, BUNDLE, timeout=120, check=True)
         buoc = [(f'I1 {m["name"]}: Thư viện hiện', lambda: cho_chu(u, f'{ten}-1-thu-vien', r'thu vien|tim bai', 240))]
-        if co_idb:
-            buoc.append((f'I2 {m["name"]}: mở bài, lớp chữ hiện bước', lambda: (idb_bam(u, r'bat dau|hoc tiep'), cho_chu(u, f'{ten}-2-bai', r'buoc \d+ / \d+|bam bat dau', 240))))
-        buoc.append((f'I3 {m["name"]}: app còn chạy', lambda: con_song(u, ten)))
+        buoc.append((f'I2 {m["name"]}: liên kết mở bài, lớp chữ hiện bước', lambda: (mo_lk(u, 'bai/than-kinh'), cho_chu(u, f'{ten}-2-bai', r'buoc \d+ / \d+|bam bat dau', 240))))
+        buoc.append((f'I3 {m["name"]}: liên kết mở chế độ Lớp học', lambda: (mo_lk(u, 'lop/than-kinh'), cho_chu(u, f'{ten}-3-lop', r'lop hoc', 180))))
+        buoc.append((f'I4 {m["name"]}: app còn chạy', lambda: con_song(u, ten)))
         for t, f in buoc:
             try: f(); print('đạt ', t)
             except Exception as e: loi.append(t); print('LỖI ', t, '·', str(e)[:240])

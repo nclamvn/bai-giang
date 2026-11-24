@@ -9,6 +9,7 @@ Cần adb và một máy ảo (hoặc máy thật cắm cáp) đang khởi độ
   D3  nút Back của máy: về Thư viện
   D4  bật chế độ máy bay, tắt hẳn app rồi mở lại: Thư viện và bài vẫn mở (bài nằm sẵn trong app)
   D5  không có lỗi văng app (FATAL EXCEPTION) của gói trong logcat
+  D6  liên kết sangankhoai://lop/than-kinh: app mở bài ở chế độ Lớp học
 Thoát mã 1 nếu một bước hỏng.
 """
 import os, re, subprocess, sys, time
@@ -128,6 +129,8 @@ def main():
         ('D4 chế độ máy bay', lambda: (adb('shell', 'cmd', 'connectivity', 'airplane-mode', 'enable'), time.sleep(3), mo_app(),
                                       cho_chu(r'Thư viện', 180), mo_bai(), cho_chu(r'Bước \d+ / \d+|bấm Bắt đầu', 180),
                                       time.sleep(5), chup('d4-may-bay'), adb('shell', 'cmd', 'connectivity', 'airplane-mode', 'disable'))),
+        ('D6 liên kết mở chế độ Lớp học', lambda: (adb('shell', 'am', 'start', '-a', 'android.intent.action.VIEW', '-d', 'sangankhoai://lop/than-kinh', PKG),
+                                                  cho_chu(r'Lớp học', 120), time.sleep(4), chup('d6-lop-hoc'))),
     ]
     for ten, f in buoc:
         try: f(); print('đạt ', ten)

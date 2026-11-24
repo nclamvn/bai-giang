@@ -38,15 +38,6 @@ jobs:
           APP=build/ios/Build/Products/Debug-iphonesimulator/App.app
           test -d "$APP" && du -sh "$APP"
           (cd build/ios/Build/Products/Debug-iphonesimulator && zip -qry "$GITHUB_WORKSPACE/sang-an-khoai-ios-may-ao.zip" App.app)
-      - name: Công cụ bấm trên máy ảo (idb), có thì dùng
-        continue-on-error: true
-        run: |
-          brew tap facebook/fb && brew install idb-companion
-          python3 -m pip install --break-system-packages fb-idb
-          # pip đặt lệnh idb vào thư mục scripts của Python, không nằm trong PATH mặc định của máy macOS
-          for d in "$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts"))')" "$(python3 -m site --user-base)/bin"; do
-            if [ -x "$d/idb" ]; then echo "$d" >> "$GITHUB_PATH"; "$d/idb" --help > /dev/null && echo "có idb ở $d"; fi
-          done
       - name: Chạy thử trên máy ảo iPhone và iPad
         run: python3 tests/kiem_ios.py build/ios/Build/Products/Debug-iphonesimulator/App.app
       - uses: actions/upload-artifact@v5

@@ -21,6 +21,13 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- liên kết mở thẳng vào bài: sangankhoai://bai/<slug>, sangankhoai://lop/<slug> (mã QR của giáo viên) -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="sangankhoai" />
+            </intent-filter>
 
         </activity>
 
