@@ -81,6 +81,7 @@
     <button class="ib glass" id="dong" type="button" aria-label="Đóng bài, về Thư viện"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     <div class="st-title"><span class="k" id="st-k"></span><span class="t" id="st-t"></span></div>
     <button class="ib glass tai" id="tai" type="button" aria-label="Tải bài về máy" hidden><svg class="i-tai" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><svg class="i-xong" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="pt" aria-hidden="true"></span></button>
+    <button class="ib glass" id="lop-vao" type="button" aria-label="Chế độ lớp học: chiếu cho cả lớp"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></button>
     <button class="ib glass" id="an" type="button" aria-pressed="false" aria-label="Ẩn chữ để xem cảnh"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
   </header>
   <p class="st-msg glass" id="st-msg" role="status" hidden></p>
@@ -98,8 +99,46 @@
     </div>
   </aside>
   <a class="next-l glass" id="next-l" hidden></a>
+
+  <!-- Chế độ lớp học (mốc M6, app/lop-hoc.js): chiếu cho cả lớp; điều khiển bằng bàn phím, bút trình chiếu, điện thoại -->
+  <div class="lop" id="lop" hidden>
+    <div class="lop-che" id="lop-che" aria-hidden="true"></div>
+    <div class="lop-tro" id="lop-tro" aria-hidden="true" hidden></div>
+    <header class="lop-top">
+      <span class="lop-nhan">Lớp học</span><span class="lop-t" id="lop-t"></span>
+      <span class="lop-noi" id="lop-noi" role="status" hidden></span>
+      <span class="lop-gian"></span>
+      <button class="lop-b kinh" id="lop-kinh" type="button" aria-pressed="false" aria-label="Đổi kính sáng hoặc tối cho hợp phòng học"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span class="nho">Kính</span></button>
+      <button class="lop-b kinh" id="lop-dt" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><span class="nho">Điều khiển</span></button>
+      <button class="lop-b kinh" id="lop-thoat" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span class="nho">Thoát chế độ lớp</span></button>
+    </header>
+    <section class="lop-cap" id="lop-cap" aria-live="polite">
+      <span class="lop-k" id="lop-k"></span>
+      <h1 id="lop-h"></h1>
+      <p id="lop-p"></p>
+    </section>
+    <footer class="lop-bar kinh" aria-label="Bảng điều khiển của giáo viên">
+      <button class="lop-tron" id="lop-truoc" type="button" aria-label="Bước trước"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button class="lop-sau" id="lop-sau" type="button">Bước tiếp</button>
+      <div class="lop-tien" id="lop-tien" role="img"></div>
+      <div class="lop-cu" id="lop-cu">
+        <button class="lop-c" id="lop-khoa" type="button" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Khoá góc nhìn</button>
+        <button class="lop-c" id="lop-nhan" type="button" aria-pressed="false">Ẩn nhãn để hỏi bài</button>
+        <button class="lop-c" id="lop-chi" type="button" aria-pressed="false">Chỉ điểm</button>
+        <span class="lop-pnl" id="lop-pnl"></span>
+        <button class="lop-c" id="lop-den" type="button" aria-pressed="false" aria-label="Màn đen (phím B)">Màn đen</button>
+      </div>
+    </footer>
+    <div class="lop-hop kinh" id="lop-hop" role="dialog" aria-modal="true" aria-labelledby="lop-hop-h" hidden>
+      <button class="lop-b kinh lop-hop-x" id="lop-hop-x" type="button" aria-label="Đóng"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <h2 id="lop-hop-h">Điều khiển từ điện thoại</h2>
+      <div class="lop-hop-in" id="lop-hop-in"></div>
+    </div>
+    <div class="lop-den" id="lop-mden" hidden><span>Màn đen · bấm B hoặc nút trên điện thoại để chiếu lại</span></div>
+  </div>
 </section>
 
+<script src="lop-hoc.js" defer></script>
 <script src="app.js" defer></script>
 </body>
 </html>

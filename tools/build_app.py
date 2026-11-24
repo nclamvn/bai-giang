@@ -15,6 +15,10 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / 'app/danh-muc.json'
 GOI = ROOT / 'app/goi.json'
 FEATURED = 'than-kinh'   # bài mở sẵn ở ảnh lớn Thư viện khi máy chưa học bài nào
+# Lớp học (mốc M6): bài có cảnh nền tối dùng kính tối, còn lại kính sáng; giáo viên đổi được trên màn chiếu.
+# Đo ngày 24/11/2026: độ sáng trung bình ảnh bìa (thang 0 đến 255) Neuron 51, Cá thở bằng mang 63, các bài khác từ 104 trở lên;
+# Tế Bào có bìa sáng nhưng nền cảnh đen (ảnh chụp cảnh trên máy dựng và máy ảo Android).
+TOI = {'than-kinh', 'mang', 'te-bao'}
 
 
 def main():
@@ -25,11 +29,12 @@ def main():
         href = path[:-len('index.html')] if path.endswith('/index.html') else path
         nhom = d['crumb'][-1]['t'] if d.get('crumb') else d['subject']
         bai.append({'slug': d['slug'], 'title': d['title'], 'href': '../' + href, 'cover': '../' + d['cover'],
-                    'mon': d['subject'], 's': d['s'], 'nhom': nhom})
+                    'mon': d['subject'], 's': d['s'], 'nhom': nhom, **({'toi': 1} if d['slug'] in TOI else {})})
     if loi: sys.exit('build_app: ' + '; '.join(loi))
     slugs = [b['slug'] for b in bai]
     assert len(slugs) == len(set(slugs)), 'trùng slug'
     assert FEATURED in slugs, f'bài nổi bật {FEATURED} không có trong danh mục'
+    assert TOI <= set(slugs), f'bài kính tối không có trong danh mục: {TOI - set(slugs)}'
     mon = []
     for b in bai:
         if (b['s'], b['mon']) not in mon: mon.append((b['s'], b['mon']))

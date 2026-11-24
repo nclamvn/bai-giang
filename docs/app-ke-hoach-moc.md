@@ -31,8 +31,8 @@ App vì thế là một vỏ ngoài mới theo hướng sân khấu, dùng lại
 | M2 · Cầu nối từng bài (xong) | Bài báo vị trí nhãn trên màn hình cho app vẽ nhãn kính. Ẩn bảng riêng của bài trong chế độ app, hoặc chuyển bảng sang app | Mọi bài báo bước đúng trong app, kiểm bằng mắt từng nhóm bài | Claude |
 | M3 · Gói ngoại tuyến (xong) | Tải trọn một bài (trang và tài nguyên) bằng một nút. Đo dung lượng thật từng gói để điền thay ô trống | Bật chế độ máy bay, mở lại được mọi bài đã tải | Claude, kiểm trên máy thật: người dùng |
 | M4 · Android (dựng xong, chờ máy thật) | Capacitor 8, dựng APK trong GitHub Actions | Cài và chạy trên ít nhất 2 máy Android thật | Claude dựng, người dùng cài thử |
-| M5 · iPhone và iPad | Capacitor iOS, dựng trên máy chạy macOS (runner GitHub hoặc máy Mac) | Chạy qua TestFlight trên iPhone và iPad thật | Cần tài khoản Apple Developer của người dùng |
-| M6 · Lớp học | Chế độ chiếu cảnh tối và cảnh sáng, điều khiển từ điện thoại giáo viên (dùng lại kết nối PeerJS đã có) | Dạy thử một tiết thật | Claude, người dùng dạy thử |
+| M5 · iPhone và iPad (móng xong, chờ tài khoản Apple) | Capacitor iOS, dựng trên máy chạy macOS (runner GitHub hoặc máy Mac) | Chạy qua TestFlight trên iPhone và iPad thật | Cần tài khoản Apple Developer của người dùng |
+| M6 · Lớp học (dựng xong, chờ dạy thử) | Chế độ chiếu cảnh tối và cảnh sáng, điều khiển từ điện thoại giáo viên (dùng lại kết nối PeerJS đã có) | Dạy thử một tiết thật | Claude, người dùng dạy thử |
 | M7 · Phát hành | Trang cửa hàng, chính sách riêng tư, giảm rủi ro guideline 4.2 | Được duyệt trên Google Play và App Store | Người dùng nộp, Claude soạn hồ sơ |
 
 ## Giới hạn cần nói rõ
@@ -123,6 +123,27 @@ Trong bài, chế độ app có sẵn (shell/bg-shell.js 2.4.1):
   - Nhịp khung hình trên máy ảo (vẽ bằng phần mềm) không đại diện cho máy thật: 1 khung/giây bài WebGPURenderer, 3 đến 4 khung/giây bộ kit.
 - Cổng của M4 chưa qua: cần người dùng cài APK lên ít nhất 2 máy Android thật. Cần ghi: tên máy, phiên bản Android, cảnh 3D có hiện không (Neuron, Tế Bào, một bài kit), độ mượt, chế độ máy bay.
 
+## M5 đã làm (móng iPhone và iPad, chưa có tài khoản Apple)
+
+- `native/ios/`: dự án Capacitor iOS 8.6.2, gói Swift (SPM, không CocoaPods), cùng gói `io.github.nclamvn.sangankhoai` và cùng thư mục web `native/www` với Android (89 bài nằm sẵn trong app, Cơ thể người mở từ site). iOS 15 trở lên, iPhone và iPad, xoay mọi hướng; iPad dùng chế độ trang di động (`preferredContentMode: mobile`) để bố cục app đúng như máy tính bảng.
+- Biểu tượng 1024 px và màn khởi động tối dựng từ `design/logo/mark.png` (nền `#0E0C1A`); thanh trạng thái chữ sáng; yêu cầu máy arm64.
+- Giữ màn hình sáng khi học: plugin `ManHinh` viết bằng Swift (`AppDelegate.swift`, `UIApplication.isIdleTimerDisabled`), cùng tên với plugin Android nên `app/app.js` không đổi. Màn chính dùng lớp `MainViewController` để đăng ký plugin.
+- `.github/workflows/ios.yml` (máy macOS của GitHub): dựng bản cho máy ảo, không ký; chạy `tests/kiem_ios.py` trên máy ảo iPhone và iPad mới nhất: I1 Thư viện hiện (đọc chữ trên ảnh chụp bằng Vision của macOS, `tests/ocr_ios.swift`), I2 bấm ảnh lớn mở bài (khi cài được idb), I3 app còn chạy, không có báo cáo văng app. Ảnh chụp và gói app máy ảo nằm trong gói tải về của mỗi lần chạy.
+- Cần tài khoản Apple Developer cho phần còn lại: ký, TestFlight, cài lên iPhone và iPad thật (cổng của M5). Cần người dùng quyết ai đứng tên tài khoản.
+
+## M6 đã làm (Lớp học)
+
+- Vào từ nút màn chiếu trên thanh đầu sân khấu, hoặc địa chỉ `#/lop/<slug>`. Theo concept LopHoc (kính tối) và LopHocSang (kính sáng): cảnh tràn màn; chữ của bước cỡ lớn (tên bước tới 60 px ở màn 1180 px, co theo màn); thanh kính của giáo viên: bước trước, Bước tiếp (ở bước cuối thành Bài tiếp, mở bài sau vẫn ở chế độ lớp), tiến độ, Khoá góc nhìn, Ẩn nhãn để hỏi bài, Chỉ điểm, bảng của bài, Màn đen.
+- Kính tối cho cảnh nền tối (Neuron, Cá thở bằng mang, Tế Bào: chọn theo độ sáng ảnh bìa đo ngày 24/11/2026 và nền cảnh), kính sáng cho các bài khác; giáo viên đổi bằng nút Kính, app nhớ theo từng bài trên máy.
+- Bài nhận chế độ máy chiếu của vỏ bài (chữ đậm, cỡ lớn 1,25 lần, bỏ kính mờ; không ghi nhớ ra ngoài chế độ lớp). Vỏ bài 2.5.0 nhận thêm lệnh `{t:'chieu', v}` và `{t:'nhan', an}`.
+- Ẩn nhãn để hỏi bài: vỏ bài gắn `data-an-nhan`, ẩn nhãn chỉ vào bộ phận của các nhóm bài (`.pin`, `.callout` ở Tế Bào, Ty Thể, Cổ Loa; `.lab` ở bài thư viện; `.call` ở bộ kit; bài khác tự khai `data-nhan`), app ẩn tên và lời của bước. Nhãn vẽ thẳng vào cảnh 3D (không phải phần tử trang) không ẩn được theo cách này.
+- Khoá góc nhìn (mặc định bật): lớp chắn trong suốt của app che cảnh, bấm nhầm không xoay cảnh. Chỉ điểm: chấm đỏ đi theo chuột hoặc ngón tay. Hai công cụ ở mức app nên dùng được cho mọi bài.
+- Điều khiển: bàn phím và bút trình chiếu (→, PageDown, dấu cách: bước sau; ←, PageUp: bước trước; B hoặc dấu chấm: màn đen; Esc: thoát); điện thoại quét mã QR mở trang `dieu-khien/` của site, nối thẳng hai máy bằng PeerJS (WebRTC, cần mạng; điện thoại thứ hai phải được giáo viên cho phép trên màn chiếu); màn hình giáo viên ở cửa sổ thứ hai trên cùng máy (`dieu-khien/?cung-may=1`, BroadcastChannel, không cần mạng; ẩn trong app điện thoại). App là trạm chuyển tiếp: lệnh từ điện thoại vào bài như lệnh của app, trạng thái của bài ra điện thoại kèm trạng thái màn đen. Ở bước cuối, lệnh từ điện thoại không tự đổi bài.
+- Màn hình giữ sáng (Wake Lock trên trình duyệt, plugin ManHinh trong app), toàn màn hình khi vào chế độ lớp trên trình duyệt.
+- `tests/kiem_lop_hoc.py` (L1 đến L10): vào chế độ lớp, phím chuyển bước, ẩn nhãn, màn đen, khoá góc nhìn, chỉ điểm, màn hình giáo viên cùng máy điều khiển hai chiều, kính sáng và nhớ kính, thoát, bố cục ở 5 cỡ màn. Kết quả trên máy dựng (24/11/2026): đạt cả L1 đến L10 (bố cục ở 1920 × 1080, 1280 × 720, 1024 × 768, 768 × 1024, 844 × 390, với Neuron kính tối và Robot sáu chân kính sáng). CI chạy L1 đến L9 mỗi lần đẩy.
+- Giới hạn đã biết: điện thoại xoay ngang (cao 390 px) chiếu cho cả lớp thì vùng trống quá hẹp, hàng nút riêng của bài (ví dụ Tạm dừng, Thử phá ở Neuron) có thể đè lên tên bước. Máy chiếu, TV và máy tính bảng không gặp.
+- Chưa kiểm: điện thoại thật nối qua PeerJS (máy dựng không ra được máy chủ của PeerJS), máy chiếu thật, bút trình chiếu thật. Cổng của M6: dạy thử một tiết thật.
+
 ## Nhật ký
 
 - M0 xong: chốt hướng sân khấu.
@@ -131,3 +152,5 @@ Trong bài, chế độ app có sẵn (shell/bg-shell.js 2.4.1):
 - M3 xong phần dựng và cổng trên máy dựng: tải trọn từng bài bằng một nút, mở lại được khi mất mạng.
 - M4 xong phần dựng: APK 42,9 MB dựng và chạy thử trên máy ảo trong CI, bản thử ở github.com/nclamvn/bai-giang/releases/tag/android-thu. Chờ cài thử trên 2 máy thật.
 - M4: đo cảnh 3D từng bài trên máy ảo, sửa hai lỗi gặp trên mọi máy cũ (canvas color-mix ở 54 bài thư viện; khối uniform quá 16 KB ở bài WebGPURenderer). Bốn bài WebGPURenderer còn trống cảnh trên máy ảo, chờ máy thật.
+- M5 xong phần móng: dự án iOS, dựng và chạy thử trên máy ảo iPhone, iPad trong CI. Chờ tài khoản Apple Developer.
+- M6 xong phần dựng: chế độ Lớp học trong app, điều khiển bằng phím, bút trình chiếu, điện thoại, màn hình giáo viên cùng máy. Chờ dạy thử một tiết.

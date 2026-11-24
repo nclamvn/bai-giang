@@ -189,6 +189,82 @@ main{padding-bottom:calc(100px + var(--sb))}
   .hero .t{font-size:40px}
   .cap h2{font-size:32px}
 }
+/* ---------- Lớp học (mốc M6, app/lop-hoc.js): chiếu cho cả lớp, theo concept LopHoc và LopHocSang ----------
+   Kính tối cho cảnh nền tối, kính sáng (frost) cho cảnh nền sáng. Chữ lớn đọc được từ cuối lớp; mọi nút ≥ 48 px. */
+.lop{position:absolute;inset:0;z-index:5;pointer-events:none;--lk:rgba(14,12,26,.62);--lv:rgba(255,255,255,.16);--lv2:rgba(255,255,255,.24);
+  --lc:#fff;--lc2:rgba(255,255,255,.86);--lnut:transparent;--lbat:#fff;--lbatc:#0E0C1A;--lkh:#FF8AA4;--ltien:#FF4D73;--ltien0:rgba(255,255,255,.24);color:var(--lc)}
+.lop.sang{--lk:rgba(255,255,255,.74);--lv:rgba(17,17,19,.1);--lv2:rgba(17,17,19,.24);--lc:#111113;--lc2:#2A2A2E;--lnut:#fff;--lbat:#111113;--lbatc:#fff;
+  --lkh:#BE1740;--ltien:#BE1740;--ltien0:rgba(17,17,19,.18)}
+.lop>*{pointer-events:auto}
+.lop .kinh{background:var(--lk);-webkit-backdrop-filter:blur(24px) saturate(140%);backdrop-filter:blur(24px) saturate(140%);border:1px solid var(--lv);color:var(--lc)}
+.stage.lop-on .st-top,.stage.lop-on .cap,.stage.lop-on .scrim-t,.stage.lop-on .st-pnl,.stage.lop-on .next-l,.stage.lop-on .st-msg{display:none!important}
+.stage.lop-on .scrim-b{display:block;height:min(46vh,400px);background:linear-gradient(to top,rgba(10,9,20,.94) 35%,rgba(10,9,20,0))}
+.stage.lop-on.lop-sang .scrim-b{display:none}
+.lop-che{position:absolute;inset:0;pointer-events:none}
+.lop.khoa .lop-che,.lop.chi .lop-che{pointer-events:auto}
+.lop.chi .lop-che{cursor:none}
+.lop-tro{position:absolute;left:0;top:0;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#FF2D55;box-shadow:0 0 0 6px rgba(255,45,85,.28),0 0 24px 6px rgba(255,45,85,.55);pointer-events:none;z-index:4}
+.lop-top{position:absolute;left:calc(32px + var(--sl));right:calc(28px + var(--sr));top:calc(22px + var(--st));display:flex;align-items:center;gap:12px;pointer-events:none}
+.lop-top>*{pointer-events:auto}
+.lop-nhan{padding:7px 12px;border-radius:8px;background:#BE1740;color:#fff;font:500 13px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;flex:none}
+.lop-t{font-size:18px;font-weight:600;text-shadow:0 1px 8px rgba(0,0,0,.5);min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lop.sang .lop-t{text-shadow:none}
+.lop-noi{font:500 13px/1.2 var(--mono);padding:6px 10px;border-radius:8px;background:rgba(123,224,166,.18);color:#7BE0A6;white-space:nowrap}
+.lop.sang .lop-noi{background:#E5F4EC;color:#1F7A4D}
+.lop-gian{flex:1}
+.lop-b{height:48px;padding:0 18px;border-radius:24px;display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:500;flex:none}
+.lop-b svg{width:18px;height:18px}
+.lop-b[aria-pressed="true"]{background:var(--lbat);color:var(--lbatc);border-color:transparent}
+.lop-cap{position:absolute;left:calc(32px + var(--sl));bottom:calc(var(--lbh,84px) + 48px + var(--sb));width:min(760px,64vw);display:flex;flex-direction:column;gap:12px;pointer-events:none}
+.lop.sang .lop-cap{width:min(420px,34vw)}  /* góc dưới trái: phía trên là hàng nút của bài (bộ kit đặt dưới tên bài) */
+.lop-k{font:500 clamp(13px,1.4vw,16px)/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--lkh)}
+.lop-cap h1{margin:0;font-size:clamp(32px,5.1vw,60px);line-height:1.04;font-weight:600;letter-spacing:-.03em;text-wrap:balance}
+.lop.sang .lop-cap h1{font-size:clamp(30px,4.7vw,56px)}
+.lop-cap p{margin:0;font-size:clamp(17px,2vw,24px);line-height:1.4;color:var(--lc2);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.lop.sang .lop-cap p{-webkit-line-clamp:7}
+.lop.an-nhan .lop-cap h1,.lop.an-nhan .lop-cap p{visibility:hidden}
+.stage.pnl-mo .lop-cap{display:none}
+.lop-bar{position:absolute;left:calc(32px + var(--sl));right:calc(32px + var(--sr));bottom:calc(24px + var(--sb));min-height:84px;border-radius:42px;display:flex;align-items:center;gap:10px;padding:12px}
+.lop-tron{width:60px;height:60px;border-radius:30px;border:1px solid var(--lv2);background:var(--lnut);color:var(--lc);display:flex;align-items:center;justify-content:center;padding:0;flex:none}
+.lop-tron svg{width:26px;height:26px}
+.lop-tron:disabled{opacity:.4;cursor:default}
+.lop-sau{height:60px;padding:0 28px;border-radius:30px;border:0;background:#BE1740;color:#fff;font-size:19px;font-weight:600;flex:none}
+.lop-tien{flex:1;display:flex;gap:4px;padding:0 16px;min-width:60px}
+.lop-tien i{flex:1;height:4px;border-radius:2px;background:var(--ltien0)}
+.lop-tien i.xong{background:var(--ltien)}
+.lop-cu{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.lop-pnl{display:contents}
+.lop-c{height:56px;padding:0 18px;border-radius:28px;border:1px solid var(--lv2);background:var(--lnut);color:var(--lc);font-size:15px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.lop-c svg{width:18px;height:18px}
+.lop-c[aria-pressed="true"]{background:var(--lbat);color:var(--lbatc);border-color:transparent;font-weight:600}
+.lop-hop{position:absolute;z-index:6;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;border-radius:28px;padding:28px 28px 24px}
+.lop-hop h2{margin:0 0 8px;font-size:26px;letter-spacing:-.02em}
+.lop-hop p{margin:0 0 14px;color:var(--lc2);font-size:16px}
+.lop-hop-x{position:absolute;right:16px;top:16px;width:48px;padding:0;justify-content:center}
+.lop-qr{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;margin:8px 0 16px}
+.lop-qr img{width:200px;height:200px;border-radius:12px;background:#fff;padding:10px;image-rendering:pixelated}
+.lop-ma{font:600 34px/1.1 var(--mono);letter-spacing:.18em}
+.lop-hop .lop-c{height:52px}
+.lop-den{position:absolute;inset:0;z-index:7;background:#000;display:flex;align-items:flex-end;justify-content:center;padding-bottom:calc(16px + var(--sb))}
+.lop-den span{font-size:13px;color:rgba(255,255,255,.35)}
+/* màn hẹp (máy tính bảng dọc, điện thoại chiếu qua cáp): thu chữ của nút, hàng công cụ xuống dòng */
+@media (max-width:1099px){
+  .lop-b .nho{display:none}.lop-b{width:48px;padding:0;justify-content:center}
+  .lop-bar{flex-wrap:wrap;border-radius:28px;bottom:calc(12px + var(--sb));left:calc(12px + var(--sl));right:calc(12px + var(--sr))}
+  .lop-cu{width:100%;justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}
+  .lop-cap{bottom:calc(var(--lbh,150px) + 32px + var(--sb));width:auto;right:calc(32px + var(--sr))}
+  .lop.sang .lop-cap{width:min(420px,calc(100vw - 64px))}
+  .lop-top{left:calc(16px + var(--sl));right:calc(16px + var(--sr))}
+}
+/* màn thấp (điện thoại xoay ngang chiếu qua cáp, cửa sổ thấp): bỏ đoạn lời, thu tên bước và nút (vẫn ≥ 44 px) */
+@media (max-height:560px){
+  .lop-top{top:calc(10px + var(--st))}
+  .lop-cap p{display:none}
+  .lop-cap{gap:4px}
+  .lop-cap h1,.lop.sang .lop-cap h1{font-size:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lop-tron{width:48px;height:48px}.lop-sau{height:48px;font-size:17px;padding:0 20px}.lop-c{height:48px}
+  .lop-bar{min-height:0;padding:8px}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 /* phông của site (design/fonts, giấy phép OFL) */

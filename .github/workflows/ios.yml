@@ -1,0 +1,56 @@
+# App iOS (docs/app-ke-hoach-moc.md, mốc M5): dựng app iPhone và iPad từ app/ của site bằng Capacitor (native/ios),
+# bản cho máy ảo, không ký (chưa có tài khoản Apple Developer); chạy thử trên máy ảo iPhone và iPad (tests/kiem_ios.py).
+# Ký, đưa lên TestFlight và cài lên máy thật cần tài khoản Apple Developer: làm sau khi chốt ai đứng tên tài khoản.
+name: iOS
+on:
+  push:
+    branches: [main]
+    paths: ['app/**', 'shell/**', 'native/ios/**', 'native/package.json', 'native/package-lock.json', 'native/capacitor.config.json',
+            'tools/build_native.py', 'tools/goi_bai.py', 'tools/build_app.py', 'tools/sri.py', 'tests/kiem_ios.py', 'tests/ocr_ios.swift',
+            '.github/workflows/ios.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ios
+  cancel-in-progress: true
+jobs:
+  app:
+    runs-on: macos-15
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Thư viện Capacitor
+        run: cd native && npm ci
+      - name: Thư mục web của app (native/www) và đồng bộ vào dự án iOS
+        run: |
+          python3 tools/build_native.py
+          cd native && npx cap sync ios
+      - name: Dựng app cho máy ảo (không ký)
+        run: |
+          set -o pipefail
+          xcodebuild -version
+          xcodebuild -project native/ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' -derivedDataPath build/ios CODE_SIGNING_ALLOWED=NO build | tail -n 40
+          APP=build/ios/Build/Products/Debug-iphonesimulator/App.app
+          test -d "$APP" && du -sh "$APP"
+          (cd build/ios/Build/Products/Debug-iphonesimulator && zip -qry "$GITHUB_WORKSPACE/sang-an-khoai-ios-may-ao.zip" App.app)
+      - name: Công cụ bấm trên máy ảo (idb), có thì dùng
+        continue-on-error: true
+        run: |
+          brew tap facebook/fb && brew install idb-companion
+          python3 -m pip install --break-system-packages fb-idb
+          idb --help > /dev/null && echo "có idb"
+      - name: Chạy thử trên máy ảo iPhone và iPad
+        run: python3 tests/kiem_ios.py build/ios/Build/Products/Debug-iphonesimulator/App.app
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: sang-an-khoai-ios
+          path: |
+            sang-an-khoai-ios-may-ao.zip
+            kiem-ios/
+          if-no-files-found: ignore

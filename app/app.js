@@ -7,7 +7,8 @@
  * đếm tệp còn thiếu, xoá tệp ({t:'goi'|'luu'|'xoa', files}).
  * App Android (M4, native/, Capacitor): bài nằm sẵn trong app (tools/build_native.py), bài nặng ở app/ban-dia.json mở từ site;
  * nút Back của máy đóng bài, về Thư viện; màn hình giữ sáng khi đang học (plugin ManHinh viết trong native/android).
- * Không phụ thuộc thư viện ngoài, không đo đếm người dùng. Mã MIT, repo nclamvn/bai-giang. */
+ * Lớp học (M6, app/lop-hoc.js): #/lop/<slug> mở bài ở chế độ chiếu cho cả lớp, điều khiển bằng bàn phím, bút trình chiếu, điện thoại.
+ * Không phụ thuộc thư viện ngoài (trừ PeerJS và mã QR, chỉ nạp khi giáo viên nối điện thoại), không đo đếm người dùng. Mã MIT, repo nclamvn/bai-giang. */
 (function () {
   'use strict';
   const $ = (id) => document.getElementById(id);
@@ -35,7 +36,8 @@
     if (C && C.registerPlugin) { P.App = C.registerPlugin('App'); P.ManHinh = C.registerPlugin('ManHinh'); }
     // nút Back của máy: đóng bảng chữ hay bài, về Thư viện; ở Thư viện thì thu app xuống
     if (P.App) P.App.addListener('backButton', () => {
-      if (!$('stage').hidden) location.hash = '#/thu-vien';
+      if (window.SakLop && SakLop.on && cur) location.hash = '#/bai/' + cur.slug;
+      else if (!$('stage').hidden) location.hash = '#/thu-vien';
       else if (!$('v-da-tai').hidden) location.hash = '#/thu-vien';
       else P.App.minimizeApp().catch(() => P.App.exitApp());
     });
@@ -52,7 +54,9 @@
     for (const b of CAT.bai) { BY.set(b.slug, b); BYFILE.set(fileOf(b.href), b); }
     if (NATIVE) await moNative();
     await scanCache();
-    buildLib(); wire(); route();
+    buildLib(); wire();
+    if (window.SakLop) SakLop.init({ send, state: () => st, bai: () => cur, tiep: nextOf, native: NATIVE, remote: () => BANDIA && BANDIA.remote, sendVung });
+    route();
     addEventListener('hashchange', route);
   }
   async function scanCache() {
@@ -69,7 +73,9 @@
   function route() {
     const h = location.hash.replace(/^#\/?/, '');
     const [v, arg] = h.split('/');
-    if (v === 'bai' && BY.has(arg)) return openLesson(BY.get(arg));
+    const lop = window.SakLop;
+    if (v === 'lop' && BY.has(arg)) { openLesson(BY.get(arg)); if (lop) lop.bat(); return; }
+    if (v === 'bai' && BY.has(arg)) { if (lop) lop.tat(); return openLesson(BY.get(arg)); }
     if (v === 'hoc-tiep') { const r = load(); const b = (r && BY.get(r.slug)) || BY.get(CAT.noi_bat); return void location.replace('#/bai/' + b.slug); }
     closeLesson();
     show(v === 'da-tai' ? 'da-tai' : 'thu-vien');
@@ -248,6 +254,7 @@
   }
   function closeLesson() {
     if ($('stage').hidden) return;
+    if (window.SakLop) SakLop.tat();
     $('stage').hidden = true; document.body.classList.remove('mo-bai');
     $('canh').src = 'about:blank'; cur = null; st = null; clearTimeout(stateTimer); giuSang(false);
     $('stage').classList.remove('sach'); $('an').setAttribute('aria-pressed', 'false'); $('st-msg').hidden = true;
@@ -291,6 +298,7 @@
   function onState(d) {
     const L = d.lesson; if (!L || !cur) return;
     st = d; clearTimeout(stateTimer);
+    if (window.SakLop) SakLop.onState(d);
     renderPanels(d.panels || []);
     requestAnimationFrame(sendVung);
     const steps = L.steps || [], n = steps.length, i = d.i;
@@ -320,10 +328,12 @@
     $('truoc').disabled = i <= 0;
     const last = i >= n - 1;
     $('sau').textContent = i < 0 ? 'Bắt đầu' : last ? 'Xong bài' : 'Bước tiếp';
-    const nx = last && L.next ? CAT.bai.find((b) => b.title === L.next.title) : null;
+    const nx = last ? nextOf(L) : null;
     $('next-l').hidden = !nx;
     if (nx) { $('next-l').href = '#/bai/' + nx.slug; $('next-l').innerHTML = `<span class="k">Bài tiếp theo</span><b>${esc(nx.title)}</b>`; }
   }
+
+  const nextOf = (L) => (L && L.next ? CAT.bai.find((b) => b.title === L.next.title) || null : null);
 
   // câu hỏi của bước: có phương án thì bấm chọn, app báo đúng sai và hiện lời giải của bài (ask.e); chỉ nhớ trong lần mở này
   const answered = new Map();
@@ -354,6 +364,7 @@
   // vùng lớp kính của app đang chiếm, báo cho bài để bảng số, nhãn và tâm cảnh nằm trong phần còn trống
   function sendVung() {
     if ($('stage').hidden) return;
+    if (window.SakLop && SakLop.on) return send({ t: 'vung', v: SakLop.vung() });
     const W = innerWidth, H = innerHeight, top = $('pnl').hidden ? $('dong') : $('pnl');
     const v = { t: Math.round(top.getBoundingClientRect().bottom + 8), r: 0, b: 0, l: 0 };
     const cap = $('cap');
@@ -398,6 +409,7 @@
     });
     addEventListener('keydown', (e) => {
       if ($('stage').hidden || e.target.closest('input,textarea,select')) return;
+      if (window.SakLop && SakLop.on) { if (SakLop.phim(e)) e.preventDefault(); return; }
       if (e.key === 'Escape') location.hash = '#/thu-vien';
       else if (e.key === 'ArrowRight') send({ t: 'next' });
       else if (e.key === 'ArrowLeft') send({ t: 'prev' });

@@ -1,17 +1,19 @@
 {
   "name": "sang-an-khoai-native",
   "private": true,
-  "description": "Vỏ app Android (và sau này iOS) của Sáng Ăn Khoai, dựng bằng Capacitor từ app/ của site. Xem docs/app-ke-hoach-moc.md mốc M4.",
+  "description": "Vỏ app Android và iOS của Sáng Ăn Khoai, dựng bằng Capacitor từ app/ của site. Xem docs/app-ke-hoach-moc.md mốc M4, M5.",
   "license": "MIT",
   "scripts": {
     "www": "python3 ../tools/build_native.py",
     "sync": "npm run www && npx cap sync android",
-    "apk": "npm run sync && cd android && ./gradlew assembleDebug"
+    "apk": "npm run sync && cd android && ./gradlew assembleDebug",
+    "sync-ios": "npm run www && npx cap sync ios"
   },
   "dependencies": {
     "@capacitor/android": "8.6.2",
     "@capacitor/app": "8.1.2",
-    "@capacitor/core": "8.6.2"
+    "@capacitor/core": "8.6.2",
+    "@capacitor/ios": "8.6.2"
   },
   "devDependencies": {
     "@capacitor/cli": "8.6.2"

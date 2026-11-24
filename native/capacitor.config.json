@@ -17,5 +17,10 @@
       "insetsHandling": "css",
       "style": "DARK"
     }
+  },
+  "ios": {
+    "backgroundColor": "#0E0C1A",
+    "contentInset": "never",
+    "preferredContentMode": "mobile"
   }
 }

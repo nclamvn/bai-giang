@@ -17,7 +17,7 @@
 (function () {
   'use strict';
   if (window.BGShell && window.BGShell.version) return;
-  const VERSION = '2.4.1';
+  const VERSION = '2.5.0';
   // Canvas của trình duyệt cũ (WebView Android 113 đo được trên máy ảo, Chrome cũ) không hiểu color-mix(): addColorStop ném lỗi,
   // fillStyle bỏ qua. Bài đọc bảng màu từ biến CSS (có color-mix) rồi vẽ canvas, nên đổi chuỗi đó sang rgba() theo màu CSS tính sẵn.
   // Trình duyệt hiểu color-mix trong canvas thì không đụng gì.
@@ -191,6 +191,8 @@
   /* chế độ nhẹ: máy yếu (khung hình chậm kéo dài) thì bỏ làm mờ nền sau bảng, bảng đục hơn; cảnh 3D giữ nguyên */
   html:root[data-bg-lite]{--bg-glass:rgba(255,255,255,.97)!important;--bg-glass-strong:#fff!important;--bg-blur:none!important;--lg-blur:none!important;--glass-blur:none!important;--lg-fill:linear-gradient(180deg,rgba(255,255,255,.97),rgba(255,255,255,.94))!important;--lg-fill-strong:linear-gradient(180deg,#fff,rgba(255,255,255,.97))!important;--glass:rgba(255,255,255,.97)!important;--glass-2:rgba(255,255,255,.96)!important;--glass-bar:rgba(255,255,255,.97)!important}
   html[data-bg-lite] *,html[data-bg-lite] *::before,html[data-bg-lite] *::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  /* Lớp học trong app: Ẩn nhãn để hỏi bài. Nhãn chỉ vào bộ phận của các nhóm bài; bài khác tự khai bằng data-nhan */
+  html[data-an-nhan] :is([data-nhan],.pin,.callout,.lab,.call){visibility:hidden!important}
   /* cỡ màn */
   @media (max-width:1100px){.bgs-home b{display:none}.bgs-b .l{display:none}.bgs-b.lb{padding:0;width:40px}.bgs-prog .r{display:none}}
   @media (max-width:640px),(max-height:520px){.bgs-desk{display:none!important}.bgs-bar{gap:2px;padding-left:max(6px,env(safe-area-inset-left));padding-right:max(6px,env(safe-area-inset-right))}.bgs-sep,.bgs-prog,.bgs-cls,.bgs-nextb{display:none!important}.bgs-crumb .s{display:none}.bgs-crumb h1{font-size:var(--bg-fs-sm)}.bgs-home{padding:0 6px}.bgs-pop{position:fixed!important;left:8px!important;right:8px!important;top:auto!important;bottom:max(8px,env(safe-area-inset-bottom))!important;max-width:none;max-height:75svh}.bgs-next{bottom:calc(76px + env(safe-area-inset-bottom));right:8px;width:calc(100vw - 16px)}}
@@ -263,9 +265,9 @@
   }
   function setBlack(v) { S.black = v; black.classList.toggle('show', v); broadcast(); }
   function fullscreen() { const d = document; if (d.fullscreenElement) d.exitFullscreen(); else (d.documentElement.requestFullscreen || d.documentElement.webkitRequestFullscreen || (() => {})).call(d.documentElement); }
-  function projector(v) {
+  function projector(v, nho = true) {
     const on = v == null ? !document.documentElement.hasAttribute('data-chieu') : !!v;
-    document.documentElement.toggleAttribute('data-chieu', on); store.set('bg-chieu', on ? '1' : '0');
+    document.documentElement.toggleAttribute('data-chieu', on); if (nho) store.set('bg-chieu', on ? '1' : '0');
     if (S.L && S.L.onProjector) { try { S.L.onProjector(on); } catch (e) { console.error(e); } }
     dispatchEvent(new Event('resize')); render(); return on;
   }
@@ -786,7 +788,10 @@
       addEventListener('message', (e) => { if (e.source !== window.parent || !e.data) return; const d = e.data;
         if (d.t === 'go') go(d.i, true); else if (d.t === 'next') next(true); else if (d.t === 'prev') prev(true); else if (d.t === 'start') start(); else if (d.t === 'stop') stop();
         else if (APP && d.t === 'pnl') togglePanel(+d.n, d.open);
-        else if (APP && d.t === 'vung' && d.v) setVung(d.v); });
+        else if (APP && d.t === 'vung' && d.v) setVung(d.v)
+        // Lớp học trong app: chế độ máy chiếu (chữ đậm, cỡ lớn; không ghi nhớ) và ẩn nhãn để hỏi bài
+        else if (APP && d.t === 'chieu') projector(!!d.v, false)
+        else if (APP && d.t === 'nhan') { document.documentElement.toggleAttribute('data-an-nhan', !!d.an); dispatchEvent(new CustomEvent('bg:nhan', { detail: { an: !!d.an } })); } });
       toParent(snapshot());
     }
     render(); dropLoader(); firstHint(L);
@@ -839,6 +844,17 @@
     });
     const code = /^[A-Z0-9]{6}$/.test(code0) ? code0 : await askCode();
     let handler = null, conn = null;
+    // ?cung-may=1: màn hình giáo viên mở trên cùng máy với app (cửa sổ thứ hai, màn hình phụ): nối qua BroadcastChannel,
+    // không cần mạng, không qua máy chủ. App (app/lop-hoc.js) nghe kênh 'sak-lop-<mã>'.
+    if (/[?&]cung-may=1\b/.test(location.search) && 'BroadcastChannel' in window) {
+      const bc = new BroadcastChannel('sak-lop-' + code.toLowerCase());
+      const ui1 = runRemote(document, { send: (m) => bc.postMessage({ tu: 'dk', m }), onMessage: (fn) => { handler = fn; } }, 'pho-thong', 'window', R);
+      let noi = false;
+      bc.onmessage = (e) => { const d = e.data; if (d && d.tu === 'app' && handler) { handler(d.m); if (!noi) { noi = true; ui1.status('Đã nối', true); } } };
+      bc.postMessage({ tu: 'dk', m: { t: 'hello' } });
+      ui1.status('Đang nối với app trên máy này…');
+      return;
+    }
     const ui = runRemote(document, { send: (m) => conn && conn.open && conn.send(m), onMessage: (fn) => { handler = fn; } }, 'pho-thong', 'phone', R);
     ui.status('Đang tải bộ kết nối…');
     try { if (!window.Peer) await loadScript(PEERJS); } catch (e) { ui.status('Cần mạng Internet để kết nối'); return; }
