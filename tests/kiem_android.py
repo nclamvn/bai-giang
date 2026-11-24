@@ -50,17 +50,14 @@ _CDP = {}
 
 
 def chu_trang():
-    """Chữ của trang app đọc qua cổng gỡ lỗi WebView (chỉ bản debug). Dùng khi uiautomator không đọc được cây giao diện:
-    nó chờ màn hình đứng yên, mà cảnh 3D chạy liên tục nên có lúc trả về rỗng."""
+    """Chữ của trang app đọc qua cổng gỡ lỗi WebView (chỉ bản debug, tests/cdp_android.py). Dùng khi uiautomator không đọc được
+    cây giao diện: nó chờ màn hình đứng yên, mà cảnh 3D chạy liên tục nên có lúc trả về rỗng."""
     try:
-        if 'pg' not in _CDP:
-            from playwright.sync_api import sync_playwright
-            pid = adb('shell', 'pidof', PKG).strip().split()[0]
-            adb('forward', 'tcp:9334', f'localabstract:webview_devtools_remote_{pid}')
-            _CDP['pw'] = sync_playwright().start()
-            b = _CDP['pw'].chromium.connect_over_cdp('http://127.0.0.1:9334')
-            _CDP['pg'] = next(x for c in b.contexts for x in c.pages if '/app/' in x.url)
-        return _CDP['pg'].evaluate('() => document.body.innerText')
+        if 't' not in _CDP:
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            from cdp_android import Trang
+            _CDP['t'] = Trang(9334)
+        return _CDP['t'].js('document.body.innerText') or ''
     except Exception as e:
         _CDP.clear(); return f'(không đọc được trang: {str(e)[:80]})'
 
@@ -107,6 +104,7 @@ def mo_bai():
 
 
 def mo_app():
+    if 't' in _CDP: _CDP['t'].dong()
     _CDP.clear()  # app tắt thì cổng gỡ lỗi cũ hết hiệu lực
     adb('shell', 'am', 'force-stop', PKG); time.sleep(2)
     adb('shell', 'monkey', '-p', PKG, '-c', 'android.intent.category.LAUNCHER', '1')
