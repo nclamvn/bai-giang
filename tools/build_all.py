@@ -33,6 +33,7 @@ STEPS = [
     ('the-chia-se', [[PY, 'tools/the_chia_se.py', '--strict']]),
     ('chuyen-canh', [[PY, 'tools/chuyen_canh.py']]),
     # sau mọi bước sửa trang (thẻ chia sẻ, chuyển cảnh): số byte trong gói ngoại tuyến app/goi.json là số byte cuối cùng
+    ('phap-ly', [[PY, 'tools/build_phap_ly.py']]),
     ('app', [[PY, 'tools/build_app.py']]),
     ('bo-nho-dem', [[PY, 'tools/sw.py']]),
 ]

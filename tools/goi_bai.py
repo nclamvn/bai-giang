@@ -23,7 +23,8 @@ R_ATTR = re.compile(r'\b(?:src|href|data-src|poster)\s*=\s*["\']([^"\']+)["\']',
 R_URL = re.compile(r'url\(\s*["\']?([^"\')]+)["\']?\s*\)', re.I)
 R_MAP = re.compile(r'<script[^>]*type=["\']importmap["\'][^>]*>(.*?)</script>', re.S | re.I)
 APP_CORE = ['app/index.html', 'app/app.css', 'app/app.js', 'app/lop-hoc.js', 'app/danh-muc.json', 'app/goi.json', 'app/manifest.webmanifest',
-            'app/icon-192.png', 'app/icon-512.png', 'app/icon-maskable-512.png', 'design/logo/favicon-32.png', 'design/logo/apple-touch-icon.png']
+            'app/icon-192.png', 'app/icon-512.png', 'app/icon-maskable-512.png', 'design/logo/favicon-32.png', 'design/logo/apple-touch-icon.png',
+            'chinh-sach-rieng-tu/index.html', 'gioi-thieu/index.html']   # trang pháp lý (tools/build_phap_ly.py) mở được khi mất mạng
 
 
 class Do:

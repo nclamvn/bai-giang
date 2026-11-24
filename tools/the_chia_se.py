@@ -33,6 +33,8 @@ EXTRA = {
     'giao-vien/index.html': {'cover': 'mosaic-gv', 'eye': 'Cho giáo viên · Gói dạy thử 45 phút'},
     'kiem-may/index.html': {'cover': None, 'eye': 'Cho giáo viên · Dụng cụ lên lớp'},
     'dieu-khien/index.html': {'cover': None, 'eye': 'Cho giáo viên · Dụng cụ lên lớp'},
+    'chinh-sach-rieng-tu/index.html': {'cover': None, 'eye': 'Không thu thập dữ liệu cá nhân'},
+    'gioi-thieu/index.html': {'cover': None, 'eye': 'Giới thiệu · nguồn và giấy phép'},
     # trang nền tối: chữ đặt thẳng lên ảnh, không thẻ trắng
     'toan/riemann/index.html': {'cover': 'toan/riemann/bia.webp', 'eye': 'Toán · Phim tương tác 3D', 'dark': True},
     'te-bao/ar.html': {'cover': 'thu-vien/covers/te-bao.webp', 'eye': 'Sinh học 10 · Thực tế tăng cường'},

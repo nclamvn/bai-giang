@@ -265,6 +265,8 @@ main{padding-bottom:calc(100px + var(--sb))}
   .lop-tron{width:48px;height:48px}.lop-sau{height:48px;font-size:17px;padding:0 20px}.lop-c{height:48px}
   .lop-bar{min-height:0;padding:8px}
 }
+.phap-ly{display:flex;flex-wrap:wrap;gap:4px 20px;margin:20px 0 0}
+.phap-ly a{display:inline-flex;align-items:center;min-height:44px;color:var(--mo2);font-size:15px;text-underline-offset:3px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 /* phông của site (design/fonts, giấy phép OFL) */
