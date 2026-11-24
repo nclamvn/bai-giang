@@ -73,6 +73,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release delete android-thu --yes --cleanup-tag 2>/dev/null || true
-          gh release create android-thu sang-an-khoai.apk --prerelease --target "$GITHUB_SHA" \
+          # gắn tag vào đúng commit đã dựng trước rồi mới tạo bản phát hành: GitHub chặn token của workflow tạo bản phát hành trỏ
+          # vào commit có sửa tệp workflow mà không còn ref nào trỏ tới (main đã đi tiếp), changelog GitHub 02/11/2023
+          git tag -f android-thu "$GITHUB_SHA" && git push -f origin refs/tags/android-thu
+          gh release create android-thu sang-an-khoai.apk --prerelease --verify-tag \
             --title "App Android bản thử (${GITHUB_SHA::7})" \
             --notes "Bản thử dựng tự động từ ${GITHUB_SHA::7}. Cài: tải tệp sang-an-khoai.apk trên điện thoại Android 7.0 trở lên, cho phép cài từ nguồn này. Ký bằng khoá debug: không dùng để phát hành. Xem docs/app-ke-hoach-moc.md mốc M4."
