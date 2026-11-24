@@ -2,7 +2,8 @@
 """Ảnh cho hồ sơ cửa hàng (docs/phat-hanh.md, mốc M7), chụp từ chính app: thư mục native/www (tools/build_native.py), phục vụ như
 máy chủ nội bộ của Capacitor, giả lập môi trường native để màn Đã tải hiện đúng như trong app. Không vẽ thêm chữ quảng cáo lên ảnh.
 
-  python3 tools/build_native.py && python3 tools/anh_cua_hang.py        (cần Playwright; máy không có GPU vẽ cảnh 3D chậm, vài phút)
+  python3 tools/build_native.py && python3 tools/anh_cua_hang.py        (cần Playwright; máy không có GPU vẽ cảnh 3D chậm, vài chục phút)
+  python3 tools/anh_cua_hang.py --bo play                                 chỉ các bộ có tên chứa "play"; ảnh đã có thì giữ, thêm --lai để chụp lại
 
 Kích thước theo quy định tra ngày 24/11/2026:
   App Store  iPhone màn vừa có Dynamic Island 1179×2556 (bắt buộc), iPhone màn lớn 1320×2868, iPad 13 inch 2064×2752 (bắt buộc khi chạy trên iPad)
@@ -54,7 +55,8 @@ def chup_man(pg, man, out):
         kieu, slug = man.split('-', 1)
         pg.goto(base + f'#/{"lop" if kieu == "lop" else "bai"}/{slug}')
         sel = '#lop-k' if kieu == 'lop' else '#cap-k'
-        pg.wait_for_function(f"() => document.querySelector('{sel}').textContent.length > 0", timeout=180000)
+        # chờ bài báo trạng thái thật (có số bước), không phải chữ "Đang mở bài…" của chế độ lớp
+        pg.wait_for_function(f"() => /bước/i.test(document.querySelector('{sel}').textContent)", timeout=180000)
         pg.evaluate("() => document.fullscreenElement && document.exitFullscreen()")
         pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(1500); pg.keyboard.press('ArrowRight')
         pg.wait_for_timeout(14000)   # cảnh 3D chạy đủ để vào khung bước (máy không có GPU vẽ chậm)
@@ -70,7 +72,7 @@ html,body{margin:0;width:1024px;height:500px;overflow:hidden;background:#0E0C1A;
 .lg{display:flex;align-items:center;gap:14px;font-size:22px}.lg img{width:56px;height:56px}
 h1{margin:0;font-size:58px;line-height:1.04;letter-spacing:-.03em;font-weight:600}p{margin:0;font-size:22px;color:rgba(255,255,255,.8)}</style></head>
 <body><img class="anh" src="../thu-vien/covers/than-kinh.webp" alt=""><div class="chu"><div class="lg"><img src="../design/logo/mark.png" alt="">Sáng Ăn Khoai</div>
-<h1>Bài học 3D tiếng Việt</h1><p>Học từng bước, học khi mất mạng, chiếu cho cả lớp.</p></div></body></html>"""
+<h1>Bài học 3D<br>tiếng Việt</h1><p>Học từng bước, học khi mất mạng,<br>chiếu cho cả lớp.</p></div></body></html>"""
 
 
 def main():
@@ -80,16 +82,25 @@ def main():
     try:
         with sync_playwright() as p:
             b = p.chromium.launch()
+            loc = sys.argv[sys.argv.index('--bo') + 1] if '--bo' in sys.argv else ''
             for thu_muc, w, h, dpr, mans in BO:
+                if loc not in thu_muc: continue
                 d = OUT / thu_muc; d.mkdir(parents=True, exist_ok=True)
-                ctx = b.new_context(viewport={'width': w, 'height': h}, device_scale_factor=dpr, has_touch=w < 900)
-                ctx.add_init_script(GIA_NATIVE)
-                pg = ctx.new_page()
                 for k, man in enumerate(mans, 1):
-                    f = d / f'{k}-{man}.jpg'; chup_man(pg, man, f)
+                    f = d / f'{k}-{man}.jpg'
+                    if f.exists() and '--lai' not in sys.argv: continue
+                    # một trình duyệt mới cho mỗi ảnh: dùng chung lâu thì trình duyệt cạn bộ nhớ đồ hoạ phần mềm, không chụp được nữa
+                    for lan in range(2):
+                        bb = p.chromium.launch()
+                        ctx = bb.new_context(viewport={'width': w, 'height': h}, device_scale_factor=dpr, has_touch=w < 900)
+                        ctx.add_init_script(GIA_NATIVE)
+                        try: chup_man(ctx.new_page(), man, f); break
+                        except Exception as e:
+                            if lan: raise
+                            print('  chụp lại', f.name, str(e)[:80])
+                        finally: bb.close()
                     im = Image.open(f); assert im.size == (round(w * dpr), round(h * dpr)), (f, im.size)
                     print(f'{f.relative_to(ROOT)} {im.size[0]}×{im.size[1]}')
-                ctx.close()
             # ảnh nổi bật của Google Play: trang HTML tạm trong native/www (phông và ảnh bìa có sẵn ở đó)
             (WWW / 'app/_noi-bat.html').write_text(ANH_NOI_BAT, encoding='utf-8')
             pg = b.new_page(viewport={'width': 1024, 'height': 500}); pg.goto(f'http://127.0.0.1:{PORT}/app/_noi-bat.html'); pg.wait_for_timeout(1500)

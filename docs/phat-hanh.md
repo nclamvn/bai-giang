@@ -105,7 +105,7 @@ Căn cứ: `chinh-sach-rieng-tu/` (sinh bởi `tools/build_phap_ly.py`), quyền
 - Đẩy tag `v1.0.0` (hoặc bấm chạy tay trên GitHub). Workflow dựng AAB và APK bản phát hành, số bản theo tag, mã bản tăng theo số lần chạy.
 - Có khoá trong secrets thì ký; chưa có thì dựng bản chưa ký và ghi rõ ở tóm tắt.
 - Workflow tạo bản nháp phát hành trên GitHub kèm hai tệp. Tải tệp `.aab` lên Play Console, vào kênh thử kín trước.
-- Workflow Android hằng ngày (`android.yml`) dựng thêm AAB chưa ký để biết cấu hình phát hành vẫn dựng được.
+- Workflow Android hằng ngày (`android.yml`) dựng thêm AAB chưa ký để biết cấu hình phát hành vẫn dựng được. Lần đầu (24/11/2026): AAB 38,7 MB (Google Play cho tối đa 200 MB cho gói nén tải về; kiểm lại giới hạn lúc nộp).
 
 **iOS** (khi có tài khoản Apple Developer):
 1. Trong App Store Connect, tạo app với bundle ID `io.github.nclamvn.sangankhoai` (hoặc tên đã chốt).
