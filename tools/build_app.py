@@ -27,13 +27,16 @@ NHO_W = 560
 
 def bia_nho(cover):
     """thu-vien/covers/x.webp -> thu-vien/covers/the/x.webp (560 px; covers/nho/ là ảnh 264 px của mục lục trang chính, tools/anh_nho.py). Dựng khi chưa có hoặc bìa gốc mới hơn; None nếu bìa đã nhỏ."""
-    from PIL import Image
     src = ROOT / cover
+    dst = src.parent / 'the' / src.name
+    # bản sao mới của kho: mọi tệp cùng giờ lấy về, thứ tự mtime ngẫu nhiên; máy không có Pillow (CI) thì dùng bản đã có
+    try: from PIL import Image
+    except ImportError: return dst.relative_to(ROOT).as_posix() if dst.exists() else None
+    if dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime - 2: return dst.relative_to(ROOT).as_posix()
     with Image.open(src) as im:
         if im.width <= NHO_W * 1.15: return None
-        dst = src.parent / 'the' / src.name
-        if not dst.exists() or dst.stat().st_mtime < src.stat().st_mtime:
-            dst.parent.mkdir(exist_ok=True)
+        dst.parent.mkdir(exist_ok=True)
+        if True:
             im.convert('RGB').resize((NHO_W, round(im.height * NHO_W / im.width)), Image.LANCZOS).save(dst, 'WEBP', quality=84, method=6)
     return dst.relative_to(ROOT).as_posix()
 
