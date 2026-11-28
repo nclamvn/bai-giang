@@ -63,6 +63,8 @@ body.kit-app .lv-time{top:auto;right:auto;bottom:calc(var(--app-b,0px) + 16px + 
 body.kit-app .lv-time .lb{color:rgba(255,255,255,.72)}body.kit-app .lv-time button{color:rgba(255,255,255,.86)}body.kit-app .lv-time button.on{background:#fff;color:#0E0C1A}
 body.kit-app .lv-insp{right:calc(var(--app-r,0px) + 16px);top:calc(var(--app-t,64px) + 56px);max-height:calc(100svh - var(--app-t,64px) - var(--app-b,0px) - 72px)}
 @media (max-width:700px){body.kit-app .lv-insp{left:8px;right:8px;top:calc(var(--app-t,64px) + 56px)}}
+/* app vẽ thanh công cụ thống nhất (shell 2.8.0): ẩn các hàng nút riêng của bài */
+body.kit-cu .mob.cap,body.kit-cu .cutbar,body.kit-cu .lv-time{display:none!important}
 body.kit-app .mob .row button{height:44px;padding:0 16px;border-radius:22px;border:1px solid rgba(255,255,255,.16);background:rgba(14,12,26,.58);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);color:#fff;font:500 14px var(--bg-font,system-ui,sans-serif);letter-spacing:0}
 body.kit-app .mob .row button.on,body.kit-app .mob .row button.acc{background:#fff;color:#0E0C1A;border-color:#fff}
 .mob.cap{left:16px;right:auto;bottom:16px;width:min(440px,calc(100vw - 32px));padding:14px 16px 14px;border-radius:14px;max-height:min(52svh,520px)}
@@ -340,7 +342,37 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
     mCap.querySelectorAll('[data-v]').forEach((b) => b.classList.toggle('on', b.dataset.v === view));
     mCap.querySelectorAll('[data-a]').forEach((b) => b.classList.toggle('on', !!sim.isOn?.(b.dataset.a)));
     const t = mCap.querySelector('[data-m="tour"]'); t.textContent = AP.on ? 'Dừng tự chạy' : 'Tự chạy'; t.classList.toggle('acc', !AP.on);
+    if (APPM) guiCu();
   };
+  // vỏ app (shell 2.8.0): các hàng nút của bài (tự chạy, góc máy, thao tác, tốc độ, tháo rời) thành một thanh công cụ kính
+  // do app vẽ, mỗi nhóm một nút, nhóm nhiều lựa chọn mở trình đơn. Bài giữ nút gốc (ẩn) và chỉ chuyển lệnh bấm sang nút đó.
+  const nutCu = (id) => {
+    const [k, v] = [id.slice(0, 1), id.slice(2)];
+    if (id === 'tour') return mCap.querySelector('[data-m="tour"]');
+    if (k === 'v') return mCap.querySelector(`[data-v="${window.CSS.escape(v)}"]`);
+    if (k === 'a') return mCap.querySelector(`[data-a="${window.CSS.escape(v)}"]`);
+    if (k === 'r') return tBar.querySelector(`[data-r="${window.CSS.escape(v)}"]`);
+    if (k === 'c') return document.querySelector(`.cutbar [data-c="${window.CSS.escape(v)}"]`);
+    return null;
+  };
+  let coCu = false;
+  function guiCu() {
+    if (!window.BGShell || !BGShell.congCu) return;
+    const chu = (b) => (b.textContent || '').replace(/^▶\s*/, '').trim();
+    const nhom = [{id: 'tour', kieu: 'bat', ten: AP.on ? 'Dừng tự chạy' : 'Tự chạy', icon: AP.on ? 'dung' : 'chay', on: AP.on}];
+    const vs = [...mCap.querySelectorAll('[data-v]')];
+    if (vs.length) nhom.push({id: 'goc', kieu: 'chon', ten: 'Góc nhìn', icon: 'goc', items: vs.map((b) => ({id: 'v:' + b.dataset.v, ten: chu(b), on: b.classList.contains('on')}))});
+    const as = [...mCap.querySelectorAll('[data-a]')];
+    if (as.length === 1) nhom.push({id: 'a:' + as[0].dataset.a, kieu: 'bat', ten: chu(as[0]), icon: 'thao-tac', on: as[0].classList.contains('on')});
+    else if (as.length) nhom.push({id: 'tt', kieu: 'menu', ten: 'Thao tác', icon: 'thao-tac', items: as.map((b) => ({id: 'a:' + b.dataset.a, ten: chu(b), on: b.classList.contains('on')}))});
+    const cb = document.querySelector('.cutbar');
+    if (cb) nhom.push({id: 'thao', kieu: 'menu', ten: 'Tháo rời', icon: 'thao', items: [...cb.querySelectorAll('[data-c]')].map((b) => ({id: 'c:' + b.dataset.c, ten: chu(b), on: b.classList.contains('on')}))});
+    nhom.push({id: 'toc', kieu: 'chon', ten: 'Tốc độ', icon: 'toc', items: [...tBar.querySelectorAll('[data-r]')].map((b) => ({id: 'r:' + b.dataset.r, ten: b.dataset.r === '0' ? 'Tạm dừng' : chu(b), on: b.classList.contains('on')}))});
+    const ok = BGShell.congCu(nhom, (id) => { const b = nutCu(id); if (b) b.click(); mSync(); });   // mSync cập nhật trạng thái nút gốc rồi gửi lại ngay, không chờ khung hình sau
+    if (ok && !coCu) { coCu = true; document.body.classList.add('kit-cu'); }
+  }
+  // gửi ngay khi bài dựng xong, không chờ khung hình đầu (máy chậm biên dịch shader lâu); lần sau để kịp hàng Tháo của bài
+  if (APPM) { setTimeout(mSync, 0); setTimeout(mSync, 1200); }
 
   // khung hình
   startTour();

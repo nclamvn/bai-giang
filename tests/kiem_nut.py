@@ -15,6 +15,8 @@ Ra đời sau lỗi thấy trên máy thật (28/11/2026): đang ở Thư viện
   N7  bấm thẻ bài mở đúng bài
   N8  sân khấu: Bắt đầu, Bước tiếp, Bước trước, nút trên thanh bước, câu hỏi báo đúng sai, Ẩn chữ, Đọc thêm (nếu có),
       bảng của bài (nếu có), Xong bài ở bước cuối về Thư viện, nút Đóng về Thư viện, nút Lớp học vào và thoát chế độ lớp
+  N11 thanh công cụ của cảnh (bài kit): một hàng duy nhất, hàng nút riêng của bài ẩn; Tự chạy bật tắt; trình đơn Góc nhìn mở,
+      chọn một góc thì trình đơn đóng và nút hiện góc mới; Tháo rời mở bộ phận; Tốc độ đổi; bấm ra ngoài đóng trình đơn
   N9  Đã tải: ba nút Chất lượng hình đổi lựa chọn; liên kết Giới thiệu, Chính sách riêng tư mở trang và có đường Về app
   N10 mọi nút, liên kết đang hiện của app có tên đọc được (chữ hoặc aria-label) và vùng bấm không nhỏ hơn 44 px
 Thoát mã 1 nếu một bước hỏng.
@@ -37,7 +39,7 @@ def kiem(ten, dk, chi_tiet=''):
 
 def thu(ten, f):
     try: f()
-    except Exception as e: kiem(ten, False, 'lỗi bộ kiểm: ' + str(e)[:200])
+    except Exception as e: kiem(ten, False, 'lỗi bộ kiểm: ' + str(e)[:900])
 
 
 # nút đang hiện trong vỏ app (không tính khung bài), thiếu tên hoặc nhỏ hơn 44 px
@@ -161,11 +163,11 @@ def main():
                 pg.tap('#cap-more'); pg.wait_for_timeout(150)
                 if pg.get_attribute('#cap-more', 'aria-expanded') != 'true': sai.append('Đọc thêm')
                 pg.tap('#cap-more')
-            pn = pg.query_selector_all('#pnl button')
+            pn = pg.query_selector_all('#pnl button[data-n]')
             if pn:
                 pn[0].tap(); pg.wait_for_timeout(700)
-                if pg.get_attribute('#pnl button', 'aria-pressed') != 'true': sai.append('bảng của bài không mở')
-                pg.query_selector('#pnl button').tap(); pg.wait_for_timeout(700)
+                if pg.get_attribute('#pnl button[data-n]', 'aria-pressed') != 'true': sai.append('bảng của bài không mở')
+                pg.query_selector('#pnl button[data-n]').tap(); pg.wait_for_timeout(700)
             # bước cuối: Xong bài về Thư viện
             for _ in range(30):
                 if 'Xong' in pg.text_content('#sau'): break
@@ -181,6 +183,27 @@ def main():
             if not vao or pg.is_visible('#lop'): sai.append(f'Lớp học vào={vao} thoát={not pg.is_visible("#lop")}')
             kiem('N8 nút của sân khấu bài học', not sai, '; '.join(sai))
         thu('N8', n8)
+
+        # N11
+        def n11():
+            pg.goto('about:blank'); pg.goto(R + '#/bai/hexapod'); cho_buoc(); pg.wait_for_selector('#pnl [data-cu-nhom="goc"]', timeout=30000); sai = []
+            fr = pg.frame(name='bgs-canh')
+            if fr.evaluate("() => [...document.querySelectorAll('.mob.cap, .cutbar, .lv-time')].some((e) => e.offsetParent)"): sai.append('hàng nút riêng của bài còn hiện')
+            if pg.evaluate("() => { const p = document.getElementById('pnl'); return p.scrollWidth > p.clientWidth + 1 }"): sai.append('thanh công cụ tràn')
+            t0 = pg.get_attribute('[data-cu="tour"]', 'aria-pressed'); pg.tap('[data-cu="tour"]'); pg.wait_for_timeout(800)
+            if pg.get_attribute('[data-cu="tour"]', 'aria-pressed') == t0: sai.append('Tự chạy không đổi')
+            for nhom, muc, chu in (('goc', 'v:top', 'Trên'), ('toc', 'r:2', '2×'), ('thao', 'c:all', '')):
+                pg.tap(f'[data-cu-nhom="{nhom}"]'); pg.wait_for_timeout(500)
+                if pg.is_hidden('#cu-menu') or not pg.query_selector(f'#cu-menu [data-cu="{muc}"]'): sai.append(f'trình đơn {nhom} không mở'); continue
+                pg.tap(f'#cu-menu [data-cu="{muc}"]'); pg.wait_for_timeout(1200)
+                if not pg.is_hidden('#cu-menu'): sai.append(f'trình đơn {nhom} không đóng sau khi chọn')
+                nhan = pg.get_attribute(f'[data-cu-nhom="{nhom}"]', 'aria-label') or ''
+                if chu and chu not in nhan: sai.append(f'nút {nhom} không hiện lựa chọn mới: {nhan}')
+            if not fr.evaluate("() => { const b = document.querySelector('.cutbar [data-c=all]'); return !!b && (b.classList.contains('on') || b.classList.contains('acc')) }"): sai.append('Tháo rời không chạy')
+            pg.tap('[data-cu-nhom="goc"]'); pg.wait_for_timeout(400); pg.mouse.click(W // 2, H // 2); pg.wait_for_timeout(400)
+            if not pg.is_hidden('#cu-menu'): sai.append('bấm ra ngoài không đóng trình đơn')
+            kiem('N11 thanh công cụ của cảnh và trình đơn kính', not sai, '; '.join(sai))
+        thu('N11', n11)
 
         # N9
         def n9():

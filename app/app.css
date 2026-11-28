@@ -30,9 +30,9 @@ svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-l
 .glass{background:var(--lg-sheen),var(--lg-tint);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);border:0;box-shadow:var(--lg-rim),var(--lg-drop)}
 /* máy tắt trong suốt, hoặc Tiết kiệm pin: kính đặc, không làm mờ (đỡ GPU) */
 @media (prefers-reduced-transparency:reduce){.glass,.glass-p{--lg-tint:rgba(24,22,40,.95);-webkit-backdrop-filter:none!important;backdrop-filter:none!important}}
-html[data-hinh="tiet-kiem"] .glass,html[data-hinh="tiet-kiem"] .st-pnl button{--lg-tint:rgba(24,22,40,.93);-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html[data-hinh="tiet-kiem"] .glass{--lg-tint:rgba(24,22,40,.93);-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 /* phản hồi khi bấm: co nhẹ rồi nảy lại */
-.tab a,.chip,.btn-w,.ib,.go,.opt,.rows .act,.hinh button,.st-pnl button,.more,.card .ph,.hero{transition:transform .32s var(--nhay),background-color .2s,color .2s,box-shadow .2s}
+.tab a,.chip,.btn-w,.ib,.go,.opt,.rows .act,.hinh button,.st-pnl button,.lop-c,.more,.card .ph,.hero{transition:transform .32s var(--nhay),background-color .2s,color .2s,box-shadow .2s}
 .tab a:active,.chip:active,.ib:active,.go:active,.rows .act:active,.hinh button:active,.st-pnl button:active{transform:scale(.94);transition-duration:.08s}
 .btn-w:active,.opt:active,.hero:active{transform:scale(.97);transition-duration:.08s}
 .card:active .ph{transform:scale(.96);transition-duration:.08s}
@@ -173,25 +173,52 @@ main{padding-bottom:calc(100px + var(--sb))}
 .go:disabled{opacity:.5;cursor:default}
 .next-l{position:absolute;z-index:3;left:50%;transform:translateX(-50%);top:calc(70px + var(--st));padding:12px 18px;border-radius:16px;text-decoration:none;display:flex;flex-direction:column;gap:2px;max-width:min(92vw,420px)}
 .next-l .k{color:var(--nhan-c)}
+/* có thanh công cụ dưới tên bài: thẻ Bài tiếp theo nằm dưới thanh, không che nút */
+.stage:has(#pnl:not([hidden])) .next-l{top:calc(128px + var(--st))}
 .next-l b{font-size:16px}
 .stage.sach .cap,.stage.sach .scrim-b,.stage.sach .next-l,.stage.pnl-mo .cap,.stage.pnl-mo .scrim-b,.stage.pnl-mo .next-l{display:none}
-.st-pnl{position:absolute;z-index:2;top:calc(64px + var(--st));left:calc(12px + var(--sl));display:flex;flex-wrap:wrap;gap:8px;max-width:calc(100vw - 24px)}
-.st-pnl button{height:44px;padding:0 16px;border-radius:22px;font-size:14px;font-weight:500;color:#fff;border:0;background:var(--lg-sheen),var(--lg-tint);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);box-shadow:var(--lg-rim),var(--lg-drop)}
-.st-pnl button[aria-pressed="true"]{background:linear-gradient(180deg,#fff,#ECEAF2);color:var(--nen)}
+/* thanh công cụ của cảnh: một viên kính duy nhất dưới tên bài; nút trong suốt, bật thì sáng trắng; nhóm có trình đơn có mũi tên */
+.st-pnl{position:absolute;z-index:2;top:calc(66px + var(--st));left:calc(12px + var(--sl));display:flex;gap:2px;padding:4px;border-radius:26px;max-width:calc(100vw - 24px - var(--sl) - var(--sr));overflow-x:auto;scrollbar-width:none;
+  background:var(--lg-sheen),var(--lg-tint);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);box-shadow:var(--lg-rim),var(--lg-drop)}
+.st-pnl::-webkit-scrollbar{display:none}
+.st-pnl .ic-gon,.st-pnl.chat .chu-gon{display:none}.st-pnl.chat .ic-gon{display:block}
+.st-pnl button{flex:none;height:44px;padding:0 14px;border-radius:22px;display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:500;color:#fff;border:0;background:transparent;white-space:nowrap}
+.st-pnl button svg,.lop-c svg{width:18px;height:18px}
+.st-pnl button .cv,.lop-c .cv{width:14px;height:14px;margin:0 -3px 0 -2px;opacity:.7;transition:transform .3s var(--nhay)}
+.st-pnl button[aria-expanded="true"] .cv,.lop-c[aria-expanded="true"] .cv{transform:rotate(180deg)}
+.st-pnl button[aria-expanded="true"]{background:rgba(255,255,255,.14)}
+.st-pnl button.dang{color:var(--nhan-c)}
+.st-pnl button[aria-pressed="true"]{background:linear-gradient(180deg,#fff,#ECEAF2);color:var(--nen);box-shadow:0 4px 12px -6px rgba(0,0,0,.6)}
+/* trình đơn kính của một nhóm công cụ */
+.cu-menu{position:fixed;z-index:60;min-width:200px;max-width:min(300px,calc(100vw - 16px));max-height:min(60vh,420px);overflow:auto;padding:6px;border-radius:22px;
+  background:var(--lg-sheen),var(--lg-tint-dam);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);box-shadow:var(--lg-rim),0 24px 48px -16px rgba(0,0,0,.7);
+  opacity:0;transform:scale(.86);transition:opacity .16s,transform .34s var(--nhay)}
+.cu-menu.mo{opacity:1;transform:none}
+.cu-che{position:fixed;inset:0;z-index:59}
+.cu-h{margin:6px 12px 4px;font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mo)}
+.cu-menu button{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:46px;padding:0 12px;border:0;border-radius:14px;background:transparent;color:#fff;font-size:15px;text-align:left}
+.cu-menu button+button{box-shadow:inset 0 .5px 0 rgba(255,255,255,.08)}
+.cu-menu button:active,.cu-menu button:focus-visible{background:rgba(255,255,255,.12)}
+@media (hover:hover){.cu-menu button:hover{background:rgba(255,255,255,.1)}}
+.cu-menu button[aria-checked="true"]{font-weight:600}
+.cu-menu button svg{width:18px;height:18px;color:var(--nhan-c)}
+html[data-hinh="tiet-kiem"] .st-pnl,html[data-hinh="tiet-kiem"] .cu-menu{--lg-tint:rgba(24,22,40,.93);--lg-tint-dam:rgba(20,18,34,.97);-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 
 /* điện thoại ngang và tablet: chữ thành cột kính bên phải, cảnh trải phía sau */
 @media (min-width:840px),(orientation:landscape) and (max-height:500px){
   .scrim-b{display:none}
-  .cap{left:auto;top:calc(76px + var(--st));right:calc(16px + var(--sr));bottom:calc(16px + var(--sb));width:372px;max-height:none;padding:24px 24px 0;border-radius:28px;background:var(--lg-sheen),var(--lg-tint-dam);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);box-shadow:var(--lg-rim),var(--lg-drop)}
+  /* bảng chữ ôm theo nội dung, neo đáy; lời dài thì cao tới dưới thanh đầu rồi cuộn */
+  .cap{left:auto;top:auto;right:calc(16px + var(--sr));bottom:calc(16px + var(--sb));width:372px;max-height:calc(100% - 92px - var(--st) - var(--sb));padding:24px 24px 0;border-radius:28px;background:var(--lg-sheen),var(--lg-tint-dam);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);box-shadow:var(--lg-rim),var(--lg-drop)}
   /* chân bảng kính: dải mờ thêm một lớp, cùng bo góc với bảng; chữ cuộn xuống dưới hàng nút thì nhoè đi */
   .cap .ctl{margin:auto -24px 0;padding:12px 24px 24px;border-radius:0 0 28px 28px;background:rgba(14,12,26,.42);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:inset 0 .5px 0 rgba(255,255,255,.12)}
   .st-top{right:calc(404px + var(--sr))}
   .st-msg{right:calc(404px + var(--sr))}
   .st-title{align-items:flex-start;text-align:left}
   .next-l{left:calc(16px + var(--sl));transform:none;top:auto;bottom:calc(16px + var(--sb))}
+  .stage:has(#pnl:not([hidden])) .next-l{top:auto}
 }
 @media (orientation:landscape) and (max-height:500px){
-  .cap{top:calc(12px + var(--st));bottom:calc(12px + var(--sb));width:300px;padding:16px 16px 0;gap:8px}
+  .cap{top:auto;bottom:calc(12px + var(--sb));max-height:calc(100% - 24px - var(--st) - var(--sb));width:300px;padding:16px 16px 0;gap:8px}
   .cap .ctl{margin:auto -16px 0;padding:10px 16px 16px}
   .cap h2{font-size:21px}
   .cap p{font-size:14px}

@@ -11,13 +11,15 @@
  *   phần tử của bài mang data-app="an" (tên bài, lời của bước trùng chữ app hiện) cũng ẩn. Bài nhận layout.apply({app}).
  *   App mở bảng của bài bằng {t:'pnl', n}; app báo vùng lớp kính chiếm bằng {t:'vung', v:{t, r, b, l}}: vỏ đặt biến CSS
  *   --app-t/r/b/l trên <html>, BGShell.vung, sự kiện 'bgs-vung'.
+ *   Công cụ của cảnh (2.8.0): bài khai BGShell.congCu(nhom, bam) thì app vẽ một thanh công cụ kính thống nhất thay hàng nút
+ *   riêng của bài. nhom = [{id, kieu:'bat'|'chon'|'menu', ten, icon, on, items:[{id, ten, on}]}]; app gửi {t:'cu', id}, vỏ gọi bam(id).
  * Gắn bài: BGShell.mount({ id, title, subject, crumb, next, steps:[{t, note, ask, sr}], go(i), end(), panels, credit, … })
  * Bài tự chuyển bước thì báo: BGShell.update(i). Xem docs/he-thiet-ke.md. Mã MIT, repo nclamvn/bai-giang.
  */
 (function () {
   'use strict';
   if (window.BGShell && window.BGShell.version) return;
-  const VERSION = '2.7.0';
+  const VERSION = '2.8.0';
   // Canvas của trình duyệt cũ (WebView Android 113 đo được trên máy ảo, Chrome cũ) không hiểu color-mix(): addColorStop ném lỗi,
   // fillStyle bỏ qua. Bài đọc bảng màu từ biến CSS (có color-mix) rồi vẽ canvas, nên đổi chuỗi đó sang rgba() theo màu CSS tính sẵn.
   // Trình duyệt hiểu color-mix trong canvas thì không đụng gì.
@@ -223,7 +225,14 @@
     const L = S.L;
     return { t: 'state', v: VERSION, lesson: L ? { id: L.id, title: L.title, subject: L.subject || '', variant: S.variant, accent: L.accent || '', objectives: L.objectives || [], next: L.next || null, pack: L.pack || '', steps: (L.steps || []).map((s, k) => ({ t: s.t, note: s.note || '', ask: s.ask || null, plan: L.plan && L.plan[k] && L.plan[k].t === s.t ? L.plan[k] : null })) } : null,
       i: S.i, on: S.on, black: S.black, elapsed: S.on ? Date.now() - S.t0 : 0,
-      panels: (S.panels || []).map((p) => ({ label: p.label, open: !!effOpen(p) })) };
+      panels: (S.panels || []).map((p) => ({ label: p.label, open: !!effOpen(p) })), cu: S.cu || null };
+  }
+  // công cụ của cảnh cho thanh công cụ của app; gọi lại mỗi khi trạng thái nút đổi (bật tự chạy, đổi góc máy…)
+  function congCu(nhom, bam) {
+    if (typeof bam === 'function') S.cuBam = bam;
+    const moi = Array.isArray(nhom) && nhom.length ? nhom : null, cu = JSON.stringify(S.cu || null);
+    S.cu = moi; if (JSON.stringify(moi) !== cu) toParent(snapshot());
+    return APP;
   }
   // khung tài liệu (shell/khung.js): bài chạy trong khung cảnh của trang dọc, báo trạng thái cho trang ngoài
   const EMBED = window.name === 'bgs-canh' && window.parent !== window;
@@ -822,6 +831,7 @@
       addEventListener('message', (e) => { if (e.source !== window.parent || !e.data) return; const d = e.data;
         if (d.t === 'go') go(d.i, true); else if (d.t === 'next') next(true); else if (d.t === 'prev') prev(true); else if (d.t === 'start') start(); else if (d.t === 'stop') stop();
         else if (APP && d.t === 'pnl') togglePanel(+d.n, d.open);
+        else if (APP && d.t === 'cu' && typeof d.id === 'string' && S.cuBam) { try { S.cuBam(d.id); } catch (e) { console.error(e); } }
         else if (APP && d.t === 'vung' && d.v) setVung(d.v)
         // Lớp học trong app: chế độ máy chiếu (chữ đậm, cỡ lớn; không ghi nhớ) và ẩn nhãn để hỏi bài
         else if (APP && d.t === 'chieu') projector(!!d.v, false)
@@ -905,7 +915,7 @@
     addEventListener('offline', () => ui.status('Điện thoại mất mạng'));
   }
 
-  const api = { version: VERSION, canvasMix: BG_CANVAS_MIX, mount, update, refresh: () => broadcast(), go, next, prev, start, stop, phonePage, runRemote, projector, panel: (k, v) => (APP ? undefined : togglePanel(k, v)), say, lite,
+  const api = { version: VERSION, canvasMix: BG_CANVAS_MIX, mount, update, refresh: () => broadcast(), go, next, prev, start, stop, phonePage, runRemote, projector, congCu, panel: (k, v) => (APP ? undefined : togglePanel(k, v)), say, lite,
     get state() { return snapshot(); }, get app() { return APP; }, get vung() { return S.vung || { t: 0, r: 0, b: 0, l: 0 }; }, _handle: handle, icon: ico };
   window.BGShell = api;
 })();

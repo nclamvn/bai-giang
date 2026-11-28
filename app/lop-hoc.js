@@ -105,7 +105,9 @@
     $('lop-sau').textContent = i < 0 ? 'Bắt đầu' : !last ? 'Bước tiếp' : nx ? 'Bài tiếp' : 'Xong bài';
     $('lop-sau').disabled = !n;
     const ps = (d && d.panels) || [];
-    $('lop-pnl').innerHTML = ps.map((p, j) => `<button class="lop-c" type="button" data-n="${j}" aria-pressed="${p.open}">${esc(p.label)}</button>`).join('');
+    // công cụ của cảnh và bảng của bài: cùng thanh công cụ với sân khấu (app.js cuHtml), nút cỡ của chế độ lớp
+    const h = C.cuHtml ? C.cuHtml(d, 'lop-c') : ps.map((p, j) => `<button class="lop-c" type="button" data-n="${j}" aria-pressed="${p.open}">${esc(p.label)}</button>`).join('');
+    if ($('lop-pnl').dataset.h !== h) { $('lop-pnl').dataset.h = h; $('lop-pnl').innerHTML = h; }
     $('stage').classList.toggle('pnl-mo', ps.some((p) => p.open));
     doThanh(); phat(d);
   }
@@ -259,6 +261,7 @@
     $('lop-sau').addEventListener('click', () => lenh({ t: 'next' }, 'thanh'));
     $('lop-cu').addEventListener('click', (e) => {
       const b = e.target.closest('button'); if (!b) return;
+      if (b.dataset.cu || b.dataset.cuNhom) return;   // công cụ của cảnh: app.js lo
       if (b.dataset.n != null) C.send({ t: 'pnl', n: +b.dataset.n }); else cong(b.id);
     });
     $('lop-mden').addEventListener('click', () => setDen(false));

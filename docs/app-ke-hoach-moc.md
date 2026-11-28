@@ -66,6 +66,8 @@ Quyết định: nhãn chỉ vào bộ phận do chính bài vẽ (ghim, chú th
 | app → bài | `{t:'go', i}`, `{t:'next'}`, `{t:'prev'}` | chuyển bước |
 | app → bài | `{t:'pnl', n}` | bật, tắt bảng thứ n của bài |
 | app → bài | `{t:'vung', v:{t, r, b, l}}` | phần màn hình lớp kính của app đang chiếm (px) |
+| bài → app | `state.cu = [{id, kieu:'bat'\|'chon'\|'menu', ten, icon, on, items:[{id, ten, on}]}]` | công cụ của cảnh (vỏ bài 2.8.0, bài khai bằng `BGShell.congCu(nhom, bam)`); app vẽ thành thanh công cụ |
+| app → bài | `{t:'cu', id}` | bấm một công cụ hay một mục trong trình đơn |
 
 Trong bài, chế độ app có sẵn (shell/bg-shell.js 2.4.1):
 - `html.bgs-app-html` từ khung hình đầu, `body.bgs-app` sau khi gắn vỏ; `BGShell.app`, `BGShell.vung`, sự kiện `bgs-vung`.
@@ -182,6 +184,13 @@ Nghiệm thu giả lập trải nghiệm (`tests/kiem_trai_nghiem.py`): mở t�
 - Không lỗi trang, không tệp hỏng, không tràn ngang ở bài nào. Nút nhỏ duy nhất: liên kết "Tongjiang Lab" trong câu ghi công của bài thư viện (liên kết giữa câu chữ, WCAG 2.5.8 miễn).
 - Thời gian mở bài trên máy dựng (vẽ bằng phần mềm) dài nhất: Tế Bào 6 đến 11 giây, vài bài thư viện 6 đến 10 giây; phần lớn dưới 3 giây. Máy thật có GPU sẽ nhanh hơn, cần đo.
 
+## Sau M8: rà nút, kính lỏng, thanh công cụ (28/11/2026, theo phản hồi trên máy Android thật)
+
+- Lỗi trên máy thật: đang ở Thư viện bấm tab Thư viện không có tác dụng (địa chỉ không đổi). Nay bấm lại tab đang mở: Thư viện cuộn tới danh sách bài, bấm nữa về đầu; Đã tải về đầu trang.
+- `tests/kiem_nut.py` (N1 đến N11, chạy trong CI): bấm mọi nút, liên kết của app như người dùng (tab, ảnh lớn, 9 nút lọc, ô tìm, thẻ bài, mọi nút của sân khấu, Đã tải, thanh công cụ và trình đơn), kiểm tác dụng, tên đọc được, vùng bấm ≥ 44 px. Đạt ở 360, 390 và 1180 px. Lỗi tìm ra khi viết bộ kiểm, đã sửa: thẻ Bài tiếp theo che thanh dưới tên bài trên điện thoại; trên máy tính bảng thanh tốc độ của bộ kit đè hàng Tháo; chạm vào cảnh 3D không đóng được trình đơn (sự kiện không ra khỏi khung bài, nay có lớp chắn trong suốt); hàng nút vẽ lại cả hàng mỗi lần bài báo trạng thái nên có lúc mất cú chạm (nay cập nhật từng nút tại chỗ).
+- Kính lỏng (theo tinh thần Liquid Glass của Apple): một bộ token cho mọi bề mặt kính (lớp màu mỏng, làm mờ và tăng bão hoà, ánh phản chiếu mép trên, viền sáng mảnh, bóng mềm); viên kính chỉ tab đang chọn trượt và nảy; nút co nhẹ khi bấm; mép cuộn mờ dưới thanh trạng thái và thanh tab; bảng chữ tối hơn để chữ trắng đọc rõ trên cảnh sáng, trên máy tính bảng ôm theo nội dung. Máy tắt trong suốt hoặc chọn Tiết kiệm pin thì kính đặc, không làm mờ.
+- Thanh công cụ của cảnh (người dùng thấy ba hàng nút của bộ kit rối): một viên kính duy nhất dưới tên bài thay ba hàng (nút bảng của app, hàng tự chạy và góc máy, hàng Tháo của bộ kit). Tự chạy là nút bật tắt; Góc nhìn, Tháo rời, Tốc độ, Thao tác là nút mở trình đơn kính (dấu chọn ở mục đang dùng); bảng của bài cùng hàng. Bộ kit (31 bài) khai công cụ qua vỏ bài 2.8.0 và giữ nút gốc ẩn, lệnh của app chuyển sang nút gốc nên mọi hành vi giữ nguyên. Màn hẹp: nhóm chọn chỉ hiện lựa chọn đang dùng, nhóm trình đơn chỉ hiện biểu tượng; vẫn tràn thì gộp tốc độ và nút thao tác riêng vào trình đơn Thêm (⋯) chia mục. Đo ở 360 px: không bài nào tràn. Chế độ Lớp học dùng cùng thanh công cụ với nút cỡ lớn.
+
 ## Nhật ký
 
 - M0 xong: chốt hướng sân khấu.
@@ -194,3 +203,4 @@ Nghiệm thu giả lập trải nghiệm (`tests/kiem_trai_nghiem.py`): mở t�
 - M6 xong phần dựng: chế độ Lớp học trong app, điều khiển bằng phím, bút trình chiếu, điện thoại, màn hình giáo viên cùng máy. Chờ dạy thử một tiết.
 - M7 xong phần chuẩn bị: trang chính sách riêng tư và giấy phép, cấu hình và workflow bản phát hành Android, ảnh và hồ sơ cửa hàng (`docs/phat-hanh.md`). Chờ tài khoản cửa hàng và nộp.
 - M8 xong trên máy dựng: gói cài nhẹ hơn 2,2 MB, chất lượng hình chọn được (vỏ bài 2.7.0), nghiệm thu giả lập 89 bài ở cỡ điện thoại, sửa lỗi treo khi chuyển bước ở bài mạng. Chờ đo trên máy thật.
+- Sau M8: sửa tab Thư viện bấm không tác dụng (thấy trên máy thật), bộ kiểm mọi nút, giao diện kính lỏng, thanh công cụ một hàng thay ba hàng nút của bộ kit.

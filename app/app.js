@@ -68,7 +68,7 @@
     if (NATIVE) await moNative();
     await scanCache();
     buildLib(); wire();
-    if (window.SakLop) SakLop.init({ send, state: () => st, bai: () => cur, tiep: nextOf, native: NATIVE, remote: () => BANDIA && BANDIA.remote, sendVung });
+    if (window.SakLop) SakLop.init({ cuHtml, send, state: () => st, bai: () => cur, tiep: nextOf, native: NATIVE, remote: () => BANDIA && BANDIA.remote, sendVung });
     route();
     addEventListener('hashchange', route);
   }
@@ -291,7 +291,7 @@
     if (cur === b && $('canh').getAttribute('src')) return;
     cur = b; st = null;
     const r = load(); resume = r && r.slug === b.slug && r.i > 0 ? r.i : -1;
-    $('cap').hidden = true; $('next-l').hidden = true; $('pnl').hidden = true; $('stage').classList.remove('pnl-mo');
+    $('cap').hidden = true; $('next-l').hidden = true; $('pnl').hidden = true; $('pnl').dataset.h = ''; delete $('pnl').dataset.gop; dongMenu(); $('stage').classList.remove('pnl-mo');
     nutTai(b);
     // trong app Android, máy chủ nội bộ của Capacitor trả trang gốc cho địa chỉ thư mục (/ten-bai/): mở thẳng index.html
     const xa = remoteOf(b), u = new URL(xa || (NATIVE ? new URL(fileOf(b.href), SITE).href : b.href), location.href); u.searchParams.set('app', '1');
@@ -350,7 +350,7 @@
     const L = d.lesson; if (!L || !cur) return;
     st = d; clearTimeout(stateTimer);
     if (window.SakLop) SakLop.onState(d);
-    renderPanels(d.panels || []);
+    renderPanels(d);
     requestAnimationFrame(sendVung);
     const steps = L.steps || [], n = steps.length, i = d.i;
     if (resume > 0 && i <= 0 && resume < n) { const k = resume; resume = -1; send({ t: 'go', i: k }); return; }
@@ -405,12 +405,102 @@
     box.innerHTML = h;
     box.onclick = (e) => { const b = e.target.closest('button[data-j]'); if (!b || pick != null) return; answered.set(cur.slug + ':' + k, +b.dataset.j); renderAsk(a, k); requestAnimationFrame(sendVung); };
   }
-  // bảng của bài (Bảng số, Điều khiển…): nút kính dưới tên bài; bảng mở thì lớp chữ của app nhường chỗ
-  function renderPanels(ps) {
-    const box = $('pnl'), any = ps.some((p) => p.open);
-    box.hidden = !ps.length;
-    box.innerHTML = ps.map((p, k) => `<button type="button" data-n="${k}" aria-pressed="${p.open}">${esc(p.label)}</button>`).join('');
+  /* ---------- thanh công cụ kính của cảnh ----------
+     Một thanh duy nhất dưới tên bài, thay cho nhiều hàng nút riêng của bài: công cụ bài khai qua vỏ (BGShell.congCu: tự chạy,
+     góc nhìn, thao tác, tháo rời, tốc độ) và các bảng của bài (Bảng số, Điều khiển…). Nhóm nhiều lựa chọn là một nút mở trình đơn
+     kính; nút bật tắt sáng lên khi bật. Bảng mở thì lớp chữ của app nhường chỗ. */
+  const ICON = {
+    chay: '<path d="M8 5.5v13l11-6.5z" fill="currentColor" stroke="none"/>',
+    dung: '<rect x="7" y="5.5" width="3.6" height="13" rx="1" fill="currentColor" stroke="none"/><rect x="13.4" y="5.5" width="3.6" height="13" rx="1" fill="currentColor" stroke="none"/>',
+    goc: '<path d="M3 8.5V6a2 2 0 0 1 2-2h2.5M16.5 4H19a2 2 0 0 1 2 2v2.5M21 15.5V18a2 2 0 0 1-2 2h-2.5M7.5 20H5a2 2 0 0 1-2-2v-2.5"/><circle cx="12" cy="12" r="3.2"/>',
+    thao: '<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M14 7h3.5v3.5M10 17H6.5v-3.5"/>',
+    'thao-tac': '<path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>',
+    toc: '<path d="M4.5 16a8 8 0 1 1 15 0"/><path d="M12 13l4-4"/>',
+    them: '<circle cx="6" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="18" cy="12" r="1.6" fill="currentColor" stroke="none"/>',
+    bang: '<rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M4 9.5h16M9.5 9.5V20"/>',
+    xuong: '<path d="M7 10l5 5 5-5"/>', chon: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  };
+  const ic = (k, c = '') => `<svg viewBox="0 0 24 24" aria-hidden="true"${c ? ` class="${c}"` : ''}>${ICON[k] || ''}</svg>`;
+  let CU = { cu: [], panels: [], them: null };
+  // màn hẹp mà vẫn tràn: gộp tốc độ và nút thao tác riêng của bài vào một trình đơn Thêm (⋯) chia mục
+  function gopThem(cu) {
+    const vao = (g) => g.id === 'toc' || g.id === 'tt' || (g.kieu === 'bat' && g.id !== 'tour');
+    const gop = cu.filter(vao); if (gop.length < 2) return { cu, them: null };
+    const items = [];
+    for (const g of gop) {
+      if (g.kieu === 'bat') items.push({ id: g.id, ten: g.ten, on: !!g.on, vai: 'menuitemcheckbox' });
+      else { items.push({ hdr: g.ten }); for (const x of g.items || []) items.push({ ...x, vai: g.kieu === 'chon' ? 'menuitemradio' : 'menuitemcheckbox' }); }
+    }
+    const them = { id: 'them', kieu: 'menu', ten: 'Thêm', icon: 'them', items };
+    return { cu: [...cu.filter((g) => !vao(g)), them], them };
+  }
+  // HTML các nút của thanh (dùng cho sân khấu và chế độ lớp học: cls là lớp nút của chế độ đó)
+  function cuHtml(d, cls = '', gop = false) {
+    const ps = (d && d.panels) || [], gon = innerWidth < 600 && !cls;
+    let cu = (d && d.cu) || [];
+    if (gop) { const r = gopThem(cu); cu = r.cu; CU.them = r.them; } else if (!cls) CU.them = null;
+    const nut = cu.map((g) => {
+      if (g.kieu === 'bat') return `<button type="button" class="${cls}" data-cu="${esc(g.id)}" aria-pressed="${!!g.on}"${gon && g.id === 'tour' ? ` aria-label="${esc(g.ten)}"` : ''}>${ic(g.icon)}${gon && g.id === 'tour' ? '' : `<span>${esc(g.ten)}</span>`}</button>`;
+      const cur = g.kieu === 'chon' ? (g.items || []).find((x) => x.on) : null;
+      const nhan = g.id === 'toc' && cur ? cur.ten.replace('Tạm dừng', '❚❚') : cur ? cur.ten : g.ten;
+      const bat = g.kieu === 'menu' && (g.items || []).some((x) => x.on && x.vai !== 'menuitemradio');
+      // điện thoại: nhóm chọn chỉ hiện lựa chọn đang dùng (không biểu tượng), nhóm trình đơn chỉ hiện biểu tượng
+      const hienIc = !gon || g.kieu === 'menu', hienChu = !gon || g.kieu === 'chon';
+      // thanh vẫn tràn (thêm nút thao tác riêng của bài): lớp .chat thu nhóm chọn về biểu tượng (app.css)
+      const gonIc = gon && g.kieu === 'chon' && g.id !== 'toc';
+      return `<button type="button" class="${cls} co-menu${bat ? ' dang' : ''}" data-cu-nhom="${esc(g.id)}" aria-haspopup="menu" aria-expanded="false" aria-label="${esc(g.ten + (cur ? ': ' + cur.ten : ''))}">${hienIc ? ic(g.icon) : gonIc ? ic(g.icon, 'ic-gon') : ''}${hienChu ? `<span${gonIc ? ' class="chu-gon"' : ''}>${esc(nhan)}</span>` : ''}${ic('xuong', 'cv')}</button>`;
+    }).join('');
+    const motBang = gon && ps.length === 1;
+    return nut + ps.map((p, k) => `<button type="button" class="${cls}" data-n="${k}" aria-pressed="${p.open}"${motBang ? ` aria-label="${esc(p.label)}"` : ''}>${ic('bang')}${motBang ? '' : `<span>${esc(p.label)}</span>`}</button>`).join('');
+  }
+  function renderPanels(d) {
+    CU = { cu: (d && d.cu) || [], panels: (d && d.panels) || [] };
+    const box = $('pnl'), any = CU.panels.some((p) => p.open);
+    box.hidden = !CU.cu.length && !CU.panels.length;
+    // vẽ lại chỉ khi đổi, để trình đơn đang mở không bị mất nút gốc
+    let h = cuHtml(CU, '', !!box.dataset.gop);
+    if (box.dataset.h !== h) {
+      box.dataset.h = h; vaNut(box, h);
+      if (!box.hidden && !box.dataset.gop) {
+        box.classList.remove('chat');
+        if (box.scrollWidth > box.clientWidth + 1) box.classList.add('chat');
+        if (box.scrollWidth > box.clientWidth + 1) { box.dataset.gop = '1'; h = cuHtml(CU, '', true); box.dataset.h = h; box.innerHTML = h; box.classList.remove('chat'); if (box.scrollWidth > box.clientWidth + 1) box.classList.add('chat'); }
+      } const m = $('cu-menu'); if (!m.hidden && m.dataset.nhom) moMenu(m.dataset.nhom, true); }
     $('stage').classList.toggle('pnl-mo', any);
+  }
+  // cập nhật nút tại chỗ (không thay cả hàng): ngón tay đang chạm một nút thì nút đó không bị gỡ khỏi trang giữa chừng
+  function vaNut(box, h) {
+    const t = document.createElement('div'); t.innerHTML = h;
+    const moi = [...t.children], cu = [...box.children];
+    const khoa = (e) => e.dataset.cu || e.dataset.cuNhom || 'n' + e.dataset.n;
+    if (moi.length !== cu.length || moi.some((e, k) => khoa(e) !== khoa(cu[k]))) { box.innerHTML = h; return; }
+    moi.forEach((e, k) => {
+      const o = cu[k]; if (o.outerHTML === e.outerHTML) return;
+      for (const a of [...o.attributes]) if (!e.hasAttribute(a.name) && a.name !== 'aria-expanded') o.removeAttribute(a.name);
+      for (const a of [...e.attributes]) if (a.name !== 'aria-expanded') o.setAttribute(a.name, a.value);
+      if (o.innerHTML !== e.innerHTML) o.innerHTML = e.innerHTML;
+    });
+  }
+  // trình đơn kính của một nhóm, mở dưới nút (hoặc phía trên nếu nút ở nửa dưới màn: thanh của chế độ lớp học)
+  function moMenu(id, giuCho) {
+    const g = CU.cu.find((x) => x.id === id) || (id === 'them' ? CU.them : null), m = $('cu-menu');
+    const nut = [...document.querySelectorAll(`[data-cu-nhom="${CSS.escape(id)}"]`)].find((b) => b.offsetParent);
+    if (!g || !nut) return dongMenu();
+    m.dataset.nhom = id;
+    m.innerHTML = (id === 'them' ? '' : `<p class="cu-h">${esc(g.ten)}</p>`) + (g.items || []).map((x) => x.hdr ? `<p class="cu-h">${esc(x.hdr)}</p>`
+      : `<button type="button" role="${x.vai || (g.kieu === 'chon' ? 'menuitemradio' : 'menuitemcheckbox')}" aria-checked="${!!x.on}" data-cu="${esc(x.id)}"><span>${esc(x.ten)}</span>${x.on ? ic('chon') : ''}</button>`).join('');
+    m.hidden = false; $('cu-che').hidden = false;
+    document.querySelectorAll('[data-cu-nhom]').forEach((b) => b.setAttribute('aria-expanded', String(b.dataset.cuNhom === id)));
+    const r = nut.getBoundingClientRect(), w = m.offsetWidth, h = m.offsetHeight;
+    const x = Math.max(8, Math.min(innerWidth - w - 8, r.left)), duoi = r.top < innerHeight / 2;
+    m.style.left = x + 'px'; m.style.top = (duoi ? r.bottom + 8 : r.top - h - 8) + 'px';
+    m.style.transformOrigin = `${r.left + r.width / 2 - x}px ${duoi ? 0 : h}px`;
+    if (!giuCho) { m.classList.remove('mo'); requestAnimationFrame(() => m.classList.add('mo')); const f = m.querySelector('[aria-checked="true"]') || m.querySelector('button'); if (f && matchMedia('(pointer:fine)').matches) f.focus(); }
+  }
+  function dongMenu() {
+    const m = $('cu-menu'); if (m.hidden) return;
+    m.hidden = true; $('cu-che').hidden = true; m.classList.remove('mo'); delete m.dataset.nhom;
+    document.querySelectorAll('[data-cu-nhom]').forEach((b) => b.setAttribute('aria-expanded', 'false'));
   }
   // vùng lớp kính của app đang chiếm, báo cho bài để bảng số, nhãn và tâm cảnh nằm trong phần còn trống
   function sendVung() {
@@ -437,6 +527,18 @@
     $('tai').addEventListener('click', bamTai);
     $('rows').addEventListener('click', onDlClick); $('rows-mo').addEventListener('click', onDlClick);
     $('pnl').addEventListener('click', (e) => { const b = e.target.closest('button[data-n]'); if (b) send({ t: 'pnl', n: +b.dataset.n }); });
+    // nút của thanh công cụ (cả trên sân khấu và trong chế độ lớp học) và mục trong trình đơn
+    document.addEventListener('click', (e) => {
+      const nhom = e.target.closest('[data-cu-nhom]');
+      if (nhom) { const m = $('cu-menu'); if (!m.hidden && m.dataset.nhom === nhom.dataset.cuNhom) dongMenu(); else moMenu(nhom.dataset.cuNhom); return; }
+      const b = e.target.closest('[data-cu]');
+      if (b) { send({ t: 'cu', id: b.dataset.cu }); if (b.closest('#cu-menu')) setTimeout(dongMenu, 140); return; }
+      if (!e.target.closest('#cu-menu')) dongMenu();
+    });
+    addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('cu-menu').hidden) { e.stopImmediatePropagation(); dongMenu(); } }, true);
+    addEventListener('resize', dongMenu);
+    // chạm vào cảnh 3D (khung bài, sự kiện không tới trang app) khi trình đơn mở: lớp chắn trong suốt đóng trình đơn
+    $('cu-che').addEventListener('pointerdown', (e) => { e.preventDefault(); dongMenu(); });
     addEventListener('resize', () => { clearTimeout(sendVung.t); sendVung.t = setTimeout(sendVung, 120); });
     $('chips').addEventListener('click', (e) => { const c = e.target.closest('.chip'); if (!c) return; filterS = c.dataset.s; filter(); });
     $('q').addEventListener('input', (e) => { query = e.target.value; filter(); });
