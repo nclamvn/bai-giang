@@ -198,7 +198,7 @@ Nghiệm thu giả lập trải nghiệm (`tests/kiem_trai_nghiem.py`): mở t�
 - Phông chữ chính của trang chủ (Be Vietnam Pro 600, latin và tiếng Việt) tải trước, tránh chữ nhảy khi phông về.
 - Ô tìm nằm trên nền phẳng: bỏ làm mờ phía sau (nhìn không khác), đỡ GPU khi cuộn. Thanh tab giữ kính.
 - Thanh công cụ của cảnh: bộ kit và Neuron gửi trạng thái tối đa 5 lần mỗi giây thay vì mỗi khung (bấm nút vẫn gửi ngay).
-- Android: app xuống nền thì gọi `WebView.onPause()` (dừng hoạt cảnh, cảnh 3D), mở lại thì `onResume()`.
+- Android: thử gọi `WebView.onPause()`/`onResume()` theo vòng đời app; hai lần chạy CI liền sau đó máy ảo mất kết nối adb ở bước chế độ máy bay (D4), nên đã gỡ lại để tách nguyên nhân. WebView vốn ngừng vẽ khung (requestAnimationFrame) khi cửa sổ bị ẩn.
 - Không đổi vì đã tốt hoặc không gỡ được: đóng bài đặt khung về `about:blank` nên ngữ cảnh WebGL được giải phóng (mở, đóng 8 lượt Robot sáu chân và Neuron: bộ nhớ JS của app đứng ở 3,1 MB, số nút trang không tăng); PeerJS, mã QR chỉ tải khi mở Lớp học; chọn bộ phận bằng tia chỉ chạy khi chạm, không mỗi khung; Tế Bào tải ribosome 1,5 MB không chặn lần vẽ đầu; 54 bài thư viện là bản dựng sẵn của Tongjiang Lab (mỗi bài kèm three.js, không gộp được).
 
 ## Nhật ký
