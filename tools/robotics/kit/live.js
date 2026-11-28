@@ -309,7 +309,12 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
     const goal = capAt[i] ?? 0, h = 1 / 60;
     for (let t = 0; t <= goal + 1e-6; t += h) { // tua nhanh: chạy sự kiện và mô phỏng, không vẽ
       while (AP.ev < E.length && E[AP.ev].at <= t) fire(E[AP.ev++], t);
-      if (AP.slide) { const s = AP.slide, k = clamp((t - s.at) / s.dur, 0, 1); sim.slide(s.key, s.from + (s.to - s.from) * ease(k)); if (k >= 1) AP.slide = null; }
+      // thanh trượt đang chạy: khi tua chỉ cập nhật 4 lần mỗi giây và ở mốc cuối. Bài tính lại kết quả mỗi lần tham số đổi
+      // (bài mạng chạy mô phỏng hàng đợi hàng chục nghìn gói), cập nhật mỗi khung làm trang treo hàng chục giây ở bước sau
+      if (AP.slide) {
+        const s = AP.slide, k = clamp((t - s.at) / s.dur, 0, 1), q = Math.floor(t * 4);
+        if (k >= 1 || t + h > goal || q !== AP.slideQ) { AP.slideQ = q; sim.slide(s.key, s.from + (s.to - s.from) * ease(k)); if (k >= 1) AP.slide = null; }
+      }
       if (t < goal) sim.step(h, T);
     }
     // bước cộng dồn 1/60 có thể dừng ngay trước mốc của bước (vd 50,9999 < 51): chạy nốt sự kiện đúng mốc

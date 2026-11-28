@@ -60,7 +60,17 @@ export function nguonPoisson(des, r, {lam, coGoi, lop = 0, den, toi = Infinity, 
 
 // Một hàng đợi đơn có thống kê: phục vụ cho kiểm M/M/1, M/D/1, M/M/1/K và cho các bài cần trễ hàng đợi theo tải.
 // coGoi: 'mu' (cỡ gói mũ, trung bình Lbit) | 'co-dinh' | hàm. Trả về trễ trong hệ, chờ, mất gói, mức sử dụng, phân vị.
-export function chayHangDoi({C, Lbit, rho, buffer = Infinity, n = 40000, warm = 2000, seed = 7, coGoi = 'mu'}) {
+// Kết quả tất định theo tham số (cùng hạt giống): nhớ 48 lần chạy gần nhất. Bài kéo thanh trượt không đổi tham số hàng đợi
+// (ví dụ cỡ gói thăm dò ở Gói tin qua ba chặng) thì không chạy lại mô phỏng hàng chục nghìn gói mỗi khung hình.
+const NHO = new Map();
+export function chayHangDoi(o) {
+  const k = typeof o.coGoi === 'function' ? null : JSON.stringify(o);
+  if (k && NHO.has(k)) { const v = NHO.get(k); NHO.delete(k); NHO.set(k, v); return v; }
+  const v = chayHangDoi0(o);
+  if (k) { NHO.set(k, v); if (NHO.size > 48) NHO.delete(NHO.keys().next().value); }
+  return v;
+}
+function chayHangDoi0({C, Lbit, rho, buffer = Infinity, n = 40000, warm = 2000, seed = 7, coGoi = 'mu'}) {
   const des = new DES(), r = rng(seed), mu = C / Lbit, lam = rho * mu;
   const lk = new LienKet(des, {C, buffer});
   const kich = coGoi === 'mu' ? (rr) => expo(rr, Lbit) : coGoi === 'co-dinh' ? () => Lbit : coGoi;
