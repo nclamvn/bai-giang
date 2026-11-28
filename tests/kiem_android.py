@@ -106,6 +106,12 @@ def mo_bai():
             cho_chu(r'Thư viện', 120)
         try: return bam(cay(), r'Bắt đầu|Học tiếp', cuoi=True)
         except RuntimeError:
+            # cây uiautomator có lúc thiếu nội dung WebView (cảnh ảnh lớn đang vẽ): bấm ảnh lớn qua cổng gỡ lỗi
+            try:
+                chu_trang()
+                if 't' in _CDP and _CDP['t'].js("(() => { const h = document.getElementById('hero'); if (!h || !h.offsetParent) return false; h.click(); return true })()"):
+                    print('  bấm ảnh lớn qua cổng gỡ lỗi (cây giao diện thiếu nút)'); return
+            except Exception: pass
             if lan: raise
             time.sleep(5)
 
