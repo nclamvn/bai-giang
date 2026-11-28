@@ -100,6 +100,24 @@
     if (v === 'thu-vien') renderHero();
     if (v === 'da-tai') renderDl();
     scrollTo(0, 0);
+    requestAnimationFrame(datPill);
+  }
+  // viên kính dưới tab đang chọn (app.css .tab-pill): trượt tới đúng ô của tab
+  function datPill() {
+    const pill = $('tab-pill'), a = document.querySelector('#tab a[aria-current="page"]');
+    if (!pill) return;
+    if (!a || !a.offsetWidth) { pill.style.opacity = '0'; return; }
+    pill.style.width = a.offsetWidth + 'px'; pill.style.transform = `translateX(${a.offsetLeft}px)`; pill.style.opacity = '1';
+  }
+  // bấm lại tab đang mở (như iOS): Thư viện cuộn tới đầu danh sách bài, bấm lần nữa về đầu trang; Đã tải về đầu trang.
+  // Trước đây địa chỉ không đổi nên bấm không có tác dụng gì.
+  function bamTabDangMo(v) {
+    const mu = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    if (v === 'thu-vien') {
+      const tren = parseFloat(getComputedStyle($('tab')).top) || 0, rong = innerWidth >= 840;
+      const dich = Math.max(0, $('v-thu-vien').querySelector('.lib-in').getBoundingClientRect().top + scrollY - (rong ? tren + 72 : 12) - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--st')) || 0));
+      scrollTo({ top: scrollY < dich - 8 ? dich : 0, behavior: mu });
+    } else scrollTo({ top: 0, behavior: mu });
   }
 
   /* ---------- Thư viện ---------- */
@@ -189,6 +207,7 @@
 
   /* ---------- Đã tải ---------- */
   const ICON_XOA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>';
+  document.documentElement.dataset.hinh = hinh();
   function renderHinh() {
     const h = hinh();
     for (const b of document.querySelectorAll('#hinh button')) b.setAttribute('aria-pressed', String(b.dataset.hinh === h));
@@ -408,6 +427,13 @@
     send({ t: 'vung', v });
   }
   function wire() {
+    $('tab').addEventListener('click', (e) => {
+      const a = e.target.closest('a[data-v]'); if (!a) return;
+      const sec = $('v-' + a.dataset.v);
+      if (sec && !sec.hidden && $('stage').hidden) { e.preventDefault(); bamTabDangMo(a.dataset.v); }
+    });
+    addEventListener('resize', () => requestAnimationFrame(datPill));
+    if (document.fonts) document.fonts.ready.then(datPill);
     $('tai').addEventListener('click', bamTai);
     $('rows').addEventListener('click', onDlClick); $('rows-mo').addEventListener('click', onDlClick);
     $('pnl').addEventListener('click', (e) => { const b = e.target.closest('button[data-n]'); if (b) send({ t: 'pnl', n: +b.dataset.n }); });
@@ -428,6 +454,7 @@
     $('hinh').addEventListener('click', (e) => {
       const b = e.target.closest('button[data-hinh]'); if (!b) return;
       ghi(HINH_K, b.dataset.hinh === 'tu-dong' ? null : b.dataset.hinh); ghi(CHAM_K, null); renderHinh();
+      document.documentElement.dataset.hinh = hinh();
     });
     $('steps').addEventListener('click', (e) => { const b = e.target.closest('button[data-i]'); if (b) send({ t: 'go', i: +b.dataset.i }); });
     addEventListener('message', (e) => {

@@ -58,8 +58,9 @@ body.kit-app .mob.cap{left:calc(12px + env(safe-area-inset-left));right:calc(var
 body.kit-app .mob.cap>.k,body.kit-app .mob.cap>.t,body.kit-app .mob.cap>.b,body.kit-app .mob.cap>.e,body.kit-app .mob .row [data-m="min"],body.kit-app .mob .row [data-m="full"]{display:none}
 body.kit-app .mob .row,body.kit-app .mob.cap .row{position:static;margin:0;padding:0 12px 0 0;background:none;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
 @media (max-width:700px){body.kit-app .lv-time{display:none!important}}
-body.kit-app .lv-time{top:calc(var(--app-t,64px) + 54px);right:calc(var(--app-r,0px) + 12px);background:rgba(14,12,26,.58);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);box-shadow:none;border:1px solid rgba(255,255,255,.16);color:#fff}
-body.kit-app .lv-time button{color:rgba(255,255,255,.86)}body.kit-app .lv-time button.on{background:#fff;color:#0E0C1A}
+/* trong app: thanh tốc độ ở góc dưới trái vùng trống (phía trên là hàng nút góc máy và hàng Tháo, trải ngang có thể chạm tới góc phải), kính lỏng như vỏ app */
+body.kit-app .lv-time{top:auto;right:auto;bottom:calc(var(--app-b,0px) + 16px + env(safe-area-inset-bottom));left:calc(var(--app-l,0px) + 16px);background:radial-gradient(130% 90% at 28% -10%,rgba(255,255,255,.2),rgba(255,255,255,0) 58%),rgba(22,20,38,.52);-webkit-backdrop-filter:blur(22px) saturate(185%);backdrop-filter:blur(22px) saturate(185%);box-shadow:inset 0 1px 0 rgba(255,255,255,.34),inset 0 0 0 .5px rgba(255,255,255,.2),0 12px 32px -12px rgba(0,0,0,.62);border:0;color:#fff}
+body.kit-app .lv-time .lb{color:rgba(255,255,255,.72)}body.kit-app .lv-time button{color:rgba(255,255,255,.86)}body.kit-app .lv-time button.on{background:#fff;color:#0E0C1A}
 body.kit-app .lv-insp{right:calc(var(--app-r,0px) + 16px);top:calc(var(--app-t,64px) + 56px);max-height:calc(100svh - var(--app-t,64px) - var(--app-b,0px) - 72px)}
 @media (max-width:700px){body.kit-app .lv-insp{left:8px;right:8px;top:calc(var(--app-t,64px) + 56px)}}
 body.kit-app .mob .row button{height:44px;padding:0 16px;border-radius:22px;border:1px solid rgba(255,255,255,.16);background:rgba(14,12,26,.58);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);color:#fff;font:500 14px var(--bg-font,system-ui,sans-serif);letter-spacing:0}
