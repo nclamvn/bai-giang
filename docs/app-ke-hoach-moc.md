@@ -167,7 +167,7 @@ Hồ sơ đầy đủ: `docs/phat-hanh.md` (việc người dùng phải làm, c
 Rà dung lượng (gói `native/www` trước khi sửa: 84 MB thô, 35 MB nén):
 - Trang HTML 55 MB thô, 15,5 MB nén: 54 bài thư viện là bản dựng sẵn của Tongjiang Lab, mỗi bài một gói esbuild khoảng 950 KB đã kèm three.js. Không có mã nguồn nên không gộp three.js dùng chung được.
 - Mô hình GLB 13,1 MB nén: lớn nhất `stilt.glb` 6,6 MB (Máy đi bộ, 352 nghìn tam giác có khung xương) đã nén meshopt, lượng tử hoá, kết cấu WebP; cá đã có bản nhẹ `_lo`. Chưa giảm thêm được mà không làm lại mô hình.
-- Đã bỏ khỏi gói: trang xem Tế Bào bằng AR (`te-bao/ar.html`) và mô hình ribosome 4,2 MB (2,2 MB nén) chỉ trang đó dùng. Trang AR vốn cần mạng (model-viewer tải từ CDN); app mở nó trên site bằng trình duyệt của máy (`app/ban-dia.json`, mục `trang_xa`). Gói còn 76,2 MB thô.
+- Đã bỏ khỏi gói: trang xem Tế Bào bằng AR (`te-bao/ar.html`) và mô hình ribosome 4,2 MB (2,2 MB nén) chỉ trang đó dùng. Trang AR vốn cần mạng (model-viewer tải từ CDN); app mở nó trên site bằng trình duyệt của máy (`app/ban-dia.json`, mục `trang_xa`). Gói còn 76,2 MB thô; APK thử từ d6dd610 nặng 40,8 MB (40.792.022 byte, trước 42,98 MB), máy ảo Android đạt D1 đến D6.
 
 Rà đồ hoạ: phần lớn bài chặn mật độ điểm ảnh ở 2 (bài thư viện 1,75 đến 2, có bóng đổ và khử răng cưa); bộ kit có bậc chất lượng và tự hạ; chỉ Neuron, Ty Thể, Cổ Loa phản ứng với chế độ nhẹ `bg:lite` của vỏ bài; 54 bài thư viện không tự hạ độ phân giải. Vì vậy phần đồ hoạ làm ở vỏ bài, áp cho mọi bài không cần sửa từng bài:
 - Vỏ bài 2.7.0, trong app: Tự động chặn mật độ 1,5 trên điện thoại, 1,75 trên máy tính bảng (điện thoại màn 3 lần vẽ ít hơn khoảng 44% điểm ảnh so với mức 2).
