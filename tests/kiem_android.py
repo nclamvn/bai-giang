@@ -75,7 +75,8 @@ def cho_chu(mau, han=120):
     while time.time() - t0 < han:
         # máy ảo bật chế độ máy bay có lúc làm tiến trình Google Play services khởi động lại, hệ thống giết luôn app
         # đang dùng phông của nó ("depends on provider ... FontsProvider in dying process"): mở lại app, ghi vào nhật ký
-        if not adb('shell', 'pidof', PKG).strip() and lai < 2:
+        # chỉ mở lại khi app vắng hai lần cách 6 giây (lúc vừa bấm mở, tiến trình có thể chưa kịp lên)
+        if not adb('shell', 'pidof', PKG).strip() and lai < 2 and (time.sleep(6) or not adb('shell', 'pidof', PKG).strip()):
             lai += 1; print(f'  app không còn chạy (hệ thống giết), mở lại lần {lai}', flush=True); mo_app(); time.sleep(5)
         x = cay()
         if re.search(mau, x, re.I): return x
