@@ -447,12 +447,12 @@ async function frame(now) {
   const dt = Math.min(0.05, (now - last) / 1000); last = now;
   if (playing) { t += reduced ? dt * 0.6 : dt; if (stopAt !== null && t >= stopAt) { t = stopAt - 0.001; playing = false; stopAt = null; $('bPlay').textContent = 'Phát'; } if (t >= DUR) t -= DUR; }
   update(t); await post.renderAsync();
-  cuApp();
+  if (now - cuLuc > 200) { cuLuc = now; cuApp(); }   // thanh công cụ của app: tối đa 5 lần mỗi giây
   requestAnimationFrame(frame);
 }
 // vỏ app (shell 2.8.0): ba nút của bài (Phát hoặc Tạm dừng, Xem lại từ đầu, Thử phá) vào thanh công cụ kính của app,
 // hàng nút giữa màn ẩn đi; lệnh của app bấm nút gốc nên mọi hành vi giữ nguyên
-let coCu = false;
+let coCu = false, cuLuc = -1e9;
 function cuApp() {
   if (!window.BGShell || !BGShell.congCu) return;
   const ok = BGShell.congCu([

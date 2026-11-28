@@ -342,8 +342,10 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
     mCap.querySelectorAll('[data-v]').forEach((b) => b.classList.toggle('on', b.dataset.v === view));
     mCap.querySelectorAll('[data-a]').forEach((b) => b.classList.toggle('on', !!sim.isOn?.(b.dataset.a)));
     const t = mCap.querySelector('[data-m="tour"]'); t.textContent = AP.on ? 'Dừng tự chạy' : 'Tự chạy'; t.classList.toggle('acc', !AP.on);
-    if (APPM) guiCu();
+    // thanh công cụ của app: gửi tối đa 5 lần mỗi giây (mSync chạy mỗi khung; bấm nút thì gửi ngay qua bam)
+    if (APPM && T - cuLuc > 0.2) { cuLuc = T; guiCu(); }
   };
+  let cuLuc = -1;
   // vỏ app (shell 2.8.0): các hàng nút của bài (tự chạy, góc máy, thao tác, tốc độ, tháo rời) thành một thanh công cụ kính
   // do app vẽ, mỗi nhóm một nút, nhóm nhiều lựa chọn mở trình đơn. Bài giữ nút gốc (ẩn) và chỉ chuyển lệnh bấm sang nút đó.
   const nutCu = (id) => {
@@ -368,7 +370,7 @@ export function runLive({stage: st, ui, sim, views, script, captions, keys = {},
     const cb = document.querySelector('.cutbar');
     if (cb) nhom.push({id: 'thao', kieu: 'menu', ten: 'Tháo rời', icon: 'thao', items: [...cb.querySelectorAll('[data-c]')].map((b) => ({id: 'c:' + b.dataset.c, ten: chu(b), on: b.classList.contains('on')}))});
     nhom.push({id: 'toc', kieu: 'chon', ten: 'Tốc độ', icon: 'toc', items: [...tBar.querySelectorAll('[data-r]')].map((b) => ({id: 'r:' + b.dataset.r, ten: b.dataset.r === '0' ? 'Tạm dừng' : chu(b), on: b.classList.contains('on')}))});
-    const ok = BGShell.congCu(nhom, (id) => { const b = nutCu(id); if (b) b.click(); mSync(); });   // mSync cập nhật trạng thái nút gốc rồi gửi lại ngay, không chờ khung hình sau
+    const ok = BGShell.congCu(nhom, (id) => { const b = nutCu(id); if (b) b.click(); cuLuc = -1; mSync(); });   // mSync cập nhật trạng thái nút gốc rồi gửi lại ngay, không chờ khung hình sau
     if (ok && !coCu) { coCu = true; document.body.classList.add('kit-cu'); }
   }
   // gửi ngay khi bài dựng xong, không chờ khung hình đầu (máy chậm biên dịch shader lâu); lần sau để kịp hàng Tháo của bài

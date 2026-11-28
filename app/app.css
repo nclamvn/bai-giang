@@ -75,6 +75,8 @@ main{padding-bottom:calc(100px + var(--sb))}
 .lib-head{display:flex;flex-direction:column;gap:12px}
 .lib-head h1,.dl-in h1{margin:0;font-size:34px;line-height:1.05;font-weight:600;letter-spacing:-.03em}
 .search{display:flex;align-items:center;gap:10px;height:48px;padding:0 14px;border-radius:24px;color:var(--mo)}
+/* ô tìm nằm trên nền phẳng: làm mờ phía sau không thấy khác gì, chỉ tốn GPU mỗi lần cuộn */
+.search.glass{-webkit-backdrop-filter:none;backdrop-filter:none;--lg-tint:rgba(30,28,48,.72)}
 .search input{flex:1;min-width:0;border:0;background:transparent;outline:none;font-size:16px;color:#fff}
 .search input::placeholder{color:var(--mo)}
 .search input::-webkit-search-cancel-button{filter:invert(1)}

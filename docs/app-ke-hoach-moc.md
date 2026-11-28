@@ -191,6 +191,16 @@ Nghiệm thu giả lập trải nghiệm (`tests/kiem_trai_nghiem.py`): mở t�
 - Kính lỏng (theo tinh thần Liquid Glass của Apple): một bộ token cho mọi bề mặt kính (lớp màu mỏng, làm mờ và tăng bão hoà, ánh phản chiếu mép trên, viền sáng mảnh, bóng mềm); viên kính chỉ tab đang chọn trượt và nảy; nút co nhẹ khi bấm; mép cuộn mờ dưới thanh trạng thái và thanh tab; bảng chữ tối hơn để chữ trắng đọc rõ trên cảnh sáng, trên máy tính bảng ôm theo nội dung. Máy tắt trong suốt hoặc chọn Tiết kiệm pin thì kính đặc, không làm mờ.
 - Thanh công cụ của cảnh (người dùng thấy ba hàng nút của bộ kit rối): một viên kính duy nhất dưới tên bài thay ba hàng (nút bảng của app, hàng tự chạy và góc máy, hàng Tháo của bộ kit). Tự chạy là nút bật tắt; Góc nhìn, Tháo rời, Tốc độ, Thao tác là nút mở trình đơn kính (dấu chọn ở mục đang dùng); bảng của bài cùng hàng. Bộ kit (31 bài) khai công cụ qua vỏ bài 2.8.0 và giữ nút gốc ẩn, lệnh của app chuyển sang nút gốc nên mọi hành vi giữ nguyên. Màn hẹp: nhóm chọn chỉ hiện lựa chọn đang dùng, nhóm trình đơn chỉ hiện biểu tượng; vẫn tràn thì gộp tốc độ và nút thao tác riêng vào trình đơn Thêm (⋯) chia mục. Đo ở 360 px: không bài nào tràn. Chế độ Lớp học dùng cùng thanh công cụ với nút cỡ lớn.
 
+## Rà hiệu năng lần 2 (28/11/2026): không đổi hình, không đổi trải nghiệm
+
+Đo trên site thật (Playwright, cỡ điện thoại, không bộ nhớ đệm) và máy dựng (vẽ bằng phần mềm, nên chỉ số khung hình không đại diện máy thật; chỉ dùng số byte, công việc JS, bộ nhớ):
+- Trang chủ app lần đầu: 1,1 MB, trong đó ảnh bìa 930 KB (34 ảnh do tải lười gần màn hình). Thẻ Thư viện rộng khoảng 180 px CSS (540 điểm ảnh ở màn 3 lần) mà bìa gốc 800 đến 1200 px. Đã thêm bìa 560 px `thu-vien/covers/the/` (sinh bởi `tools/build_app.py`, tất định) và `srcset`, `sizes` theo bố cục: ảnh trang chủ còn 463 KB (giảm 50%), số điểm ảnh phải giải mã khi cuộn ít hơn khoảng 3 lần; sai khác so với bìa gốc thu nhỏ trung bình dưới 2,7/255. Ảnh lớn đầu Thư viện vẫn dùng bìa gốc, ưu tiên tải (`fetchpriority`). Đổi lại: gói `native/www` thêm 1,4 MB (77,6 MB).
+- Phông chữ chính của trang chủ (Be Vietnam Pro 600, latin và tiếng Việt) tải trước, tránh chữ nhảy khi phông về.
+- Ô tìm nằm trên nền phẳng: bỏ làm mờ phía sau (nhìn không khác), đỡ GPU khi cuộn. Thanh tab giữ kính.
+- Thanh công cụ của cảnh: bộ kit và Neuron gửi trạng thái tối đa 5 lần mỗi giây thay vì mỗi khung (bấm nút vẫn gửi ngay).
+- Android: app xuống nền thì gọi `WebView.onPause()` (dừng hoạt cảnh, cảnh 3D), mở lại thì `onResume()`.
+- Không đổi vì đã tốt hoặc không gỡ được: đóng bài đặt khung về `about:blank` nên ngữ cảnh WebGL được giải phóng (mở, đóng 8 lượt Robot sáu chân và Neuron: bộ nhớ JS của app đứng ở 3,1 MB, số nút trang không tăng); PeerJS, mã QR chỉ tải khi mở Lớp học; chọn bộ phận bằng tia chỉ chạy khi chạm, không mỗi khung; Tế Bào tải ribosome 1,5 MB không chặn lần vẽ đầu; 54 bài thư viện là bản dựng sẵn của Tongjiang Lab (mỗi bài kèm three.js, không gộp được).
+
 ## Nhật ký
 
 - M0 xong: chốt hướng sân khấu.

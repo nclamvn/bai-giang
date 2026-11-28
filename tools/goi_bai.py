@@ -84,7 +84,7 @@ class Do:
 
     def chung(self):
         # ảnh bìa mọi bài trong danh mục app: Thư viện đủ ảnh khi mất mạng, kể cả bài chưa tải
-        try: bia = {posixpath.normpath(posixpath.join('app', b['cover'])) for b in json.loads((ROOT / 'app/danh-muc.json').read_text(encoding='utf-8'))['bai']}
+        try: bia = {posixpath.normpath(posixpath.join('app', b[k])) for b in json.loads((ROOT / 'app/danh-muc.json').read_text(encoding='utf-8'))['bai'] for k in ('cover', 'nho') if k in b}
         except (OSError, ValueError, KeyError): bia = set()
         return ({x for x in self.served if x.startswith('design/fonts/') and x.endswith('.woff2')} | {x for x in APP_CORE if x in self.served}
                 | {x for x in bia if x in self.served})

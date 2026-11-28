@@ -19,6 +19,23 @@ FEATURED = 'than-kinh'   # bài mở sẵn ở ảnh lớn Thư viện khi máy 
 # Đo ngày 24/11/2026: độ sáng trung bình ảnh bìa (thang 0 đến 255) Neuron 51, Cá thở bằng mang 63, các bài khác từ 104 trở lên;
 # Tế Bào có bìa sáng nhưng nền cảnh đen (ảnh chụp cảnh trên máy dựng và máy ảo Android).
 TOI = {'than-kinh', 'mang', 'te-bao'}
+# Ảnh bìa nhỏ cho thẻ Thư viện và danh sách Đã tải: thẻ rộng nhiều nhất khoảng 180 px CSS ở điện thoại màn 3 lần (540 điểm ảnh)
+# và 260 px CSS ở máy tính bảng màn 2 lần (520), nên bản 560 px đủ nét như bản gốc 800 đến 1200 px; ảnh lớn đầu Thư viện vẫn dùng bản gốc.
+# Đo 28/11/2026: 90 bìa gốc 2,2 MB. Bản nhỏ giảm số byte tải và bộ nhớ giải mã khi cuộn (ít hơn khoảng 3 lần số điểm ảnh).
+NHO_W = 560
+
+
+def bia_nho(cover):
+    """thu-vien/covers/x.webp -> thu-vien/covers/the/x.webp (560 px; covers/nho/ là ảnh 264 px của mục lục trang chính, tools/anh_nho.py). Dựng khi chưa có hoặc bìa gốc mới hơn; None nếu bìa đã nhỏ."""
+    from PIL import Image
+    src = ROOT / cover
+    with Image.open(src) as im:
+        if im.width <= NHO_W * 1.15: return None
+        dst = src.parent / 'the' / src.name
+        if not dst.exists() or dst.stat().st_mtime < src.stat().st_mtime:
+            dst.parent.mkdir(exist_ok=True)
+            im.convert('RGB').resize((NHO_W, round(im.height * NHO_W / im.width)), Image.LANCZOS).save(dst, 'WEBP', quality=84, method=6)
+    return dst.relative_to(ROOT).as_posix()
 
 
 def main():
@@ -28,7 +45,8 @@ def main():
         if not (ROOT / d['cover']).is_file(): loi.append(f'thiếu ảnh bìa {d["cover"]}')
         href = path[:-len('index.html')] if path.endswith('/index.html') else path
         nhom = d['crumb'][-1]['t'] if d.get('crumb') else d['subject']
-        bai.append({'slug': d['slug'], 'title': d['title'], 'href': '../' + href, 'cover': '../' + d['cover'],
+        nho = bia_nho(d['cover']) if (ROOT / d['cover']).is_file() else None
+        bai.append({'slug': d['slug'], 'title': d['title'], 'href': '../' + href, 'cover': '../' + d['cover'], **({'nho': '../' + nho} if nho else {}),
                     'mon': d['subject'], 's': d['s'], 'nhom': nhom, **({'toi': 1} if d['slug'] in TOI else {})})
     if loi: sys.exit('build_app: ' + '; '.join(loi))
     slugs = [b['slug'] for b in bai]

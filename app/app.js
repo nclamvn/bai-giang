@@ -126,7 +126,7 @@
     const mk = (s, ten) => `<button class="chip" type="button" data-s="${esc(s)}" aria-pressed="${s === filterS}">${esc(ten)}</button>`;
     chips.innerHTML = mk('', 'Tất cả') + CAT.mon.map((m) => mk(m.s, m.ten)).join('');
     $('grid').innerHTML = CAT.bai.map((b) => `<li data-s="${esc(b.s)}" data-q="${esc(fold(b.title + ' ' + b.nhom + ' ' + b.mon))}"><a class="card" href="#/bai/${esc(b.slug)}">
-      <span class="ph"><img src="${esc(b.cover)}" alt="" loading="lazy" decoding="async">${NATIVE ? (remoteOf(b) ? '<span class="badge glass can-mang">CẦN MẠNG</span>' : '') : daTai().has(b.slug) ? '<span class="badge glass">ĐÃ TẢI</span>' : ''}</span>
+      <span class="ph"><img src="${esc(b.nho || b.cover)}"${b.nho ? ` srcset="${esc(b.nho)} 560w, ${esc(b.cover)} 960w" sizes="${THE_SIZES}"` : ''} alt="" loading="lazy" decoding="async">${NATIVE ? (remoteOf(b) ? '<span class="badge glass can-mang">CẦN MẠNG</span>' : '') : daTai().has(b.slug) ? '<span class="badge glass">ĐÃ TẢI</span>' : ''}</span>
       <span class="tt">${esc(b.title)}</span><span class="sub">${esc(b.nhom)}</span></a></li>`).join('');
   }
   function filter() {
@@ -224,7 +224,7 @@
     for (const b of CAT.bai) {
       if (s.has(b.slug) || dangTai.has(b.slug)) co.push(b); else if (isCached(b)) mo.push(b);
     }
-    const row = (b, sub, act) => `<li data-slug="${esc(b.slug)}"><a href="#/bai/${esc(b.slug)}"><img src="${esc(b.cover)}" alt="" loading="lazy">
+    const row = (b, sub, act) => `<li data-slug="${esc(b.slug)}"><a href="#/bai/${esc(b.slug)}"><img src="${esc(b.nho || b.cover)}" alt="" loading="lazy" decoding="async">
       <span><span class="tt">${esc(b.title)}</span><br><span class="sub">${sub}</span></span></a>${act}</li>`;
     // dung lượng riêng của bài (không tính phần chung: phông, lõi app, ảnh bìa, tải một lần cho mọi bài)
     const size = (b) => GOI ? mb(byteOf((GOI.bai[b.slug] || []).map((i) => GOI.tep[i][0]))) : '';
@@ -260,7 +260,7 @@
     $('dl-empty').hidden = true; $('h-mo').hidden = $('rows-mo').hidden = ngoai.length === 0; $('h-mo').textContent = 'Cần mạng';
     $('rows').innerHTML = `<li><span class="tt">${co} bài có sẵn trong app</span></li>`;
     $('rows').firstElementChild.insertAdjacentHTML('beforeend', '<span class="sub">Học được cả khi mất mạng, không cần tải thêm.</span>');
-    $('rows-mo').innerHTML = ngoai.map((b) => `<li data-slug="${esc(b.slug)}"><a href="#/bai/${esc(b.slug)}"><img src="${esc(b.cover)}" alt="" loading="lazy">
+    $('rows-mo').innerHTML = ngoai.map((b) => `<li data-slug="${esc(b.slug)}"><a href="#/bai/${esc(b.slug)}"><img src="${esc(b.nho || b.cover)}" alt="" loading="lazy" decoding="async">
       <span><span class="tt">${esc(b.title)}</span><br><span class="sub">Bài nặng, mở từ site khi có mạng</span></span></a></li>`).join('');
     // bài nằm trong tệp cài: dung lượng thật từ goi.json (phần chung và gói của mọi bài trong app); bộ nhớ trình duyệt không tính phần này
     $('use').previousElementSibling.textContent = 'Bài trong app chiếm';
@@ -409,6 +409,8 @@
      Một thanh duy nhất dưới tên bài, thay cho nhiều hàng nút riêng của bài: công cụ bài khai qua vỏ (BGShell.congCu: tự chạy,
      góc nhìn, thao tác, tháo rời, tốc độ) và các bảng của bài (Bảng số, Điều khiển…). Nhóm nhiều lựa chọn là một nút mở trình đơn
      kính; nút bật tắt sáng lên khi bật. Bảng mở thì lớp chữ của app nhường chỗ. */
+  // bề rộng thẻ Thư viện theo bố cục (app.css .grid): trình duyệt chọn bìa 560 px hay bản gốc theo mật độ màn hình
+  const THE_SIZES = '(min-width: 1100px) 280px, (min-width: 600px) 31vw, calc(50vw - 18px)';
   const ICON = {
     chay: '<path d="M8 5.5v13l11-6.5z" fill="currentColor" stroke="none"/>',
     dung: '<rect x="7" y="5.5" width="3.6" height="13" rx="1" fill="currentColor" stroke="none"/><rect x="13.4" y="5.5" width="3.6" height="13" rx="1" fill="currentColor" stroke="none"/>',

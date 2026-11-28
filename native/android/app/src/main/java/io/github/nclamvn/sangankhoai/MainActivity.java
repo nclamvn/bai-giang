@@ -18,4 +18,18 @@ public class MainActivity extends BridgeActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
     }
+
+    // App xuống nền (về màn hình chính, tắt màn hình): báo WebView dừng việc phụ của trang (hoạt cảnh, cảnh 3D), mở lại thì chạy tiếp.
+    // Không dùng pauseTimers (dừng hẹn giờ của mọi WebView trong tiến trình).
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (getBridge() != null && getBridge().getWebView() != null) getBridge().getWebView().onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getBridge() != null && getBridge().getWebView() != null) getBridge().getWebView().onResume();
+    }
 }

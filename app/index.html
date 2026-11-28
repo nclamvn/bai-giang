@@ -17,6 +17,8 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="../design/logo/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="../design/logo/apple-touch-icon.png">
+<link rel="preload" href="../design/fonts/be-vietnam-pro-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../design/fonts/be-vietnam-pro-vietnamese-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="app.css">
 <style id="bg-vt">@view-transition{navigation:auto}#bgs-load{view-transition-name:bg-bia}::view-transition-group(bg-bia){animation-duration:.42s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}::view-transition-old(root),::view-transition-new(root){animation-duration:.24s}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
 <script id="bg-vt-js">addEventListener("pageswap",function(e){try{if(!e.viewTransition||!e.activation||!e.activation.entry)return;var n=function(u){return new URL(u,location.href).pathname.replace(/index\.html$/,"")},p=n(e.activation.entry.url);document.querySelectorAll("img").forEach(function(i){if(i.style.viewTransitionName==="bg-bia")i.style.viewTransitionName=""});var as=document.querySelectorAll("a[href]");for(var k=0;k<as.length;k++){if(n(as[k].href)!==p)continue;var c=as[k].closest(".card,article,li")||as[k],im=c.querySelector("img");if(im&&im.getBoundingClientRect().width){im.style.viewTransitionName="bg-bia";break}}}catch(_){}});</script>
@@ -37,7 +39,7 @@
   <!-- Thư viện -->
   <section class="view lib" id="v-thu-vien" aria-labelledby="h-lib" hidden>
     <a class="hero" id="hero" href="#/thu-vien">
-      <img id="hero-img" alt="" width="960" height="600" decoding="async">
+      <img id="hero-img" alt="" width="960" height="600" decoding="async" fetchpriority="high">
       <span class="hero-txt">
         <span class="k" id="hero-k">Bài nổi bật</span>
         <span class="t" id="hero-t"></span>
