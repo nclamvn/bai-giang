@@ -17,7 +17,7 @@
 (function () {
   'use strict';
   if (window.BGShell && window.BGShell.version) return;
-  const VERSION = '2.5.0';
+  const VERSION = '2.6.0';
   // Canvas của trình duyệt cũ (WebView Android 113 đo được trên máy ảo, Chrome cũ) không hiểu color-mix(): addColorStop ném lỗi,
   // fillStyle bỏ qua. Bài đọc bảng màu từ biến CSS (có color-mix) rồi vẽ canvas, nên đổi chuỗi đó sang rgba() theo màu CSS tính sẵn.
   // Trình duyệt hiểu color-mix trong canvas thì không đụng gì.
@@ -231,6 +231,15 @@
   const APP = EMBED && /[?&]app=1\b/.test(location.search);
   // lớp trên <html> ngay từ đầu: bài đặt bố cục chế độ app từ khung hình đầu, không nhảy khi vỏ gắn xong
   if (APP) document.documentElement.classList.add('bgs-app-html');
+  // App trên máy cảm ứng: giới hạn mật độ điểm ảnh dựng hình (điện thoại 1,5; máy tính bảng 1,75) trước khi bài tạo renderer.
+  // Các bài đặt pixel ratio từ devicePixelRatio (thường chặn ở 2): điện thoại vẽ ít hơn khoảng 44% điểm ảnh, đỡ nóng máy và giật.
+  // Chữ, nhãn là phần tử trang, không bị ảnh hưởng. 54 bài thư viện không tự hạ độ phân giải khi giật, nên phần này giúp nhất ở đó.
+  if (APP && matchMedia('(pointer: coarse)').matches) {
+    try {
+      const tran = Math.min(screen.width, screen.height) < 600 ? 1.5 : 1.75, d0 = window.devicePixelRatio || 1;
+      if (d0 > tran) Object.defineProperty(window, 'devicePixelRatio', { configurable: true, get: () => tran });
+    } catch (e) { /* trình duyệt không cho đổi: giữ nguyên */ }
+  }
   // app Android (Capacitor, https://localhost) mở bài nặng thẳng từ site: trang app khác nguồn với bài, app báo nguồn của mình qua ?o=
   const PARENT = (() => { const o = new URLSearchParams(location.search).get('o'); return o && /^(https?|capacitor):\/\/localhost(:\d+)?$/.test(o) ? o : (location.origin === 'null' ? '*' : location.origin); })();
   const toParent = (m) => { if (EMBED) { try { window.parent.postMessage(m, PARENT); } catch (e) { /* bỏ qua */ } } };

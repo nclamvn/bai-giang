@@ -35,3 +35,4 @@ native/android/capacitor-cordova-android-plugins/build/
 *.p12
 *.mobileprovision
 upload-keystore*
+kiem-trai-nghiem/

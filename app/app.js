@@ -418,7 +418,9 @@
         if (u.origin === location.origin) b = BYFILE.get(fileOf(u.href));
         else if (rb && u.origin === rb.origin && u.pathname.startsWith(rb.pathname)) b = BYFILE.get(fileOf(new URL('../' + u.pathname.slice(rb.pathname.length), location.href).href));
         else return;
-        if (b) location.hash = '#/bai/' + b.slug; else location.assign(u.href);
+        // trang phụ không có trong app (xem bằng AR): mở trên site; Capacitor mở địa chỉ ngoài bằng trình duyệt của máy
+        const xa = !b && BANDIA && (BANDIA.trang_xa || []).find((x) => fileOf(u.href).endsWith(x));
+        if (b) location.hash = '#/bai/' + b.slug; else location.assign(xa ? BANDIA.remote + xa : u.href);
       }
     });
     addEventListener('keydown', (e) => {
