@@ -416,6 +416,7 @@
     thao: '<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M14 7h3.5v3.5M10 17H6.5v-3.5"/>',
     'thao-tac': '<path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>',
     toc: '<path d="M4.5 16a8 8 0 1 1 15 0"/><path d="M12 13l4-4"/>',
+    lai: '<path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4.5v4h4"/>',
     them: '<circle cx="6" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="18" cy="12" r="1.6" fill="currentColor" stroke="none"/>',
     bang: '<rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M4 9.5h16M9.5 9.5V20"/>',
     xuong: '<path d="M7 10l5 5 5-5"/>', chon: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',

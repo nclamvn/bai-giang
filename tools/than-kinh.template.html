@@ -70,6 +70,7 @@ body.clean .hud,body.clean #fade{display:none!important}
 #play{position:fixed;z-index:6;left:50%;bottom:64px;transform:translateX(-50%);display:flex;gap:8px;pointer-events:auto}
 #play button{min-height:44px;padding:0 18px;white-space:nowrap;border-radius:999px;border:0;background:rgba(255,255,255,.94);color:var(--bg-ink,#1D1B16);font:600 14px var(--bg-font,system-ui);cursor:pointer;box-shadow:var(--bg-sh-1,0 6px 18px -10px rgba(16,24,40,.28)),0 0 0 .5px rgba(16,24,40,.08)}
 @media (hover:hover){#play button:hover{box-shadow:var(--bg-sh-2,0 18px 44px -18px rgba(16,24,40,.34)),0 0 0 .5px rgba(16,24,40,.12)}}
+body.co-cu #play{display:none}
 #play button[aria-expanded="true"]{background:var(--bg-ink,#1D1B16);color:#fff}
 body.film #play,body.film .bgs{display:none!important}
 /* nút xem giữa đáy cần chỗ: sơ đồ vị trí (phụ, trùng nội dung bảng Số đọc) chỉ hiện trên màn rộng */
@@ -380,7 +381,20 @@ async function frame(now) {
   const dt = Math.min(0.05, (now - last) / 1000); last = now;
   if (playing) { t += reduced ? dt * 0.6 : dt; if (stopAt !== null && t >= stopAt) { t = stopAt - 0.001; playing = false; stopAt = null; $('bPlay').textContent = 'Phát'; } if (t >= DUR) t -= DUR; }
   update(t); await post.renderAsync();
+  cuApp();
   requestAnimationFrame(frame);
+}
+// vỏ app (shell 2.8.0): ba nút của bài (Phát hoặc Tạm dừng, Xem lại từ đầu, Thử phá) vào thanh công cụ kính của app,
+// hàng nút giữa màn ẩn đi; lệnh của app bấm nút gốc nên mọi hành vi giữ nguyên
+let coCu = false;
+function cuApp() {
+  if (!window.BGShell || !BGShell.congCu) return;
+  const ok = BGShell.congCu([
+    {id: 'play', kieu: 'bat', ten: playing ? 'Tạm dừng' : 'Phát', icon: playing ? 'dung' : 'chay', on: playing},
+    {id: 're', kieu: 'bat', ten: 'Xem lại', icon: 'lai', on: false},
+    {id: 'bk', kieu: 'bat', ten: 'Thử phá', icon: 'thao-tac', on: !$('bk').hidden},
+  ], (id) => { const b = $({play: 'bPlay', re: 'bRe', bk: 'bBk'}[id]); if (b) b.click(); cuApp(); });
+  if (ok && !coCu) { coCu = true; document.body.classList.add('co-cu'); }
 }
 $('bPlay').onclick = () => { playing = !playing; stopAt = null; $('bPlay').textContent = playing ? 'Tạm dừng' : 'Phát'; };
 $('bRe').onclick = () => { t = 0; playing = true; stopAt = null; $('bPlay').textContent = 'Tạm dừng'; };
