@@ -46,6 +46,8 @@ jobs:
           python tests/kiem_ngoai_tuyen.py 8777 --bai than-kinh,enzyme-step
           # chế độ Lớp học của app: phím, ẩn nhãn, màn đen, khoá góc nhìn, chỉ điểm, màn hình giáo viên cùng máy, kính, thoát
           python tests/kiem_lop_hoc.py 8777 --nhanh
+          # chất lượng hình: Tự động, Tiết kiệm pin (30 khung/giây), máy chậm, Đẹp nhất
+          python tests/kiem_hinh.py 8777
   # Cổng bố cục chạy song song với job trên: sáu bề rộng cộng các trạng thái sau khi bấm mất khoảng 20 phút,
   # gộp chung thì vượt giới hạn 30 phút của một job. Tệp đã dựng nằm sẵn trong kho nên không cần bước dựng.
   bo-cuc:

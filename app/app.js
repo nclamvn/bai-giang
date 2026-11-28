@@ -132,6 +132,15 @@
 
   /* ---------- gói ngoại tuyến ---------- */
   const DL = 'sak-app-da-tai';   // bài đã tải trọn trên máy này (đánh dấu nhanh cho thư viện; màn Đã tải hỏi sw.js để xác minh)
+  // Chất lượng hình (màn Đã tải): 'tu-dong' (mặc định), 'tiet-kiem', 'dep'. Ở Tự động, bài nào chạy chậm (vỏ bài đo nhịp khung hình,
+  // shell/bg-shell.js) thì báo app; chậm ở 2 bài khác nhau thì app ghi máy này là máy chậm và từ đó mở bài bằng hình nhẹ (?hinh=yeu).
+  const HINH_K = 'sak-hinh', CHAM_K = 'sak-hinh-cham';
+  const doc = (k, d) => { try { return localStorage.getItem(k) || d; } catch (e) { return d; } };
+  const ghi = (k, v) => { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { /* bỏ qua */ } };
+  const hinh = () => { const h = doc(HINH_K, 'tu-dong'); return h === 'dep' || h === 'tiet-kiem' ? h : 'tu-dong'; };
+  const baiCham = () => { try { return JSON.parse(doc(CHAM_K, '[]')); } catch (e) { return []; } };
+  const mayCham = () => baiCham().length >= 2;
+  const thamSoHinh = () => (hinh() !== 'tu-dong' ? hinh() : mayCham() ? 'yeu' : '');
   const daTai = () => { try { return new Set(JSON.parse(localStorage.getItem(DL)) || []); } catch (e) { return new Set(); } };
   const ghiDaTai = (s) => { try { localStorage.setItem(DL, JSON.stringify([...s])); } catch (e) { /* bỏ qua */ } };
   let GOI = null, SIZE = null;
@@ -180,8 +189,16 @@
 
   /* ---------- Đã tải ---------- */
   const ICON_XOA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>';
+  function renderHinh() {
+    const h = hinh();
+    for (const b of document.querySelectorAll('#hinh button')) b.setAttribute('aria-pressed', String(b.dataset.hinh === h));
+    $('hinh-note').textContent = h === 'dep' ? 'Vẽ nét nhất màn hình cho phép, không tự hạ khi giật. Máy nóng và tốn pin hơn.'
+      : h === 'tiet-kiem' ? 'Vẽ ít điểm ảnh hơn, tối đa 30 khung mỗi giây, tắt hiệu ứng kính mờ. Đỡ nóng máy, pin lâu hơn.'
+      : mayCham() ? 'Tự động: cảnh từng chạy chậm trên máy này nên app đang vẽ hình nhẹ (ít điểm ảnh hơn, không kính mờ).'
+      : 'Tự động: vẽ vừa đủ nét cho màn hình; bài nào chạy chậm thì tự chuyển sang hình nhẹ.';
+  }
   async function renderDl() {
-    netLine();
+    netLine(); renderHinh();
     if (NATIVE) return renderDlNative();
     await scanCache(); await goiData();
     const s = daTai(), co = [], mo = [];
@@ -259,6 +276,7 @@
     nutTai(b);
     // trong app Android, máy chủ nội bộ của Capacitor trả trang gốc cho địa chỉ thư mục (/ten-bai/): mở thẳng index.html
     const xa = remoteOf(b), u = new URL(xa || (NATIVE ? new URL(fileOf(b.href), SITE).href : b.href), location.href); u.searchParams.set('app', '1');
+    if (thamSoHinh()) u.searchParams.set('hinh', thamSoHinh());
     if (xa) { u.searchParams.set('o', location.origin); if (navigator.onLine === false) baoTin('Bài này mở từ site, cần có mạng.', 5000); }
     giuSang(true);
     $('canh').src = u.href;
@@ -407,11 +425,20 @@
       else if (st.i >= n - 1) location.hash = '#/thu-vien';
       else send({ t: 'next' });
     });
+    $('hinh').addEventListener('click', (e) => {
+      const b = e.target.closest('button[data-hinh]'); if (!b) return;
+      ghi(HINH_K, b.dataset.hinh === 'tu-dong' ? null : b.dataset.hinh); ghi(CHAM_K, null); renderHinh();
+    });
     $('steps').addEventListener('click', (e) => { const b = e.target.closest('button[data-i]'); if (b) send({ t: 'go', i: +b.dataset.i }); });
     addEventListener('message', (e) => {
       if (e.source !== $('canh').contentWindow || !e.data || typeof e.data !== 'object') return;
       const d = e.data;
       if (d.t === 'state') onState(d);
+      else if (d.t === 'hinh' && d.yeu && cur && hinh() === 'tu-dong' && !mayCham()) {
+        const ds = baiCham(); if (!ds.includes(cur.slug)) ds.push(cur.slug);
+        ghi(CHAM_K, JSON.stringify(ds.slice(-4)));
+        if (mayCham()) baoTin('Cảnh 3D chạy chậm trên máy này: từ bài sau app vẽ hình nhẹ hơn cho mượt. Đổi ở Đã tải, mục Chất lượng hình.', 7000);
+      }
       else if (d.t === 'nav' && typeof d.href === 'string') {
         const u = new URL(d.href, location.href), rb = BANDIA && BANDIA.remote ? new URL(BANDIA.remote) : null;
         let b = null;

@@ -17,7 +17,7 @@
 (function () {
   'use strict';
   if (window.BGShell && window.BGShell.version) return;
-  const VERSION = '2.6.0';
+  const VERSION = '2.7.0';
   // Canvas của trình duyệt cũ (WebView Android 113 đo được trên máy ảo, Chrome cũ) không hiểu color-mix(): addColorStop ném lỗi,
   // fillStyle bỏ qua. Bài đọc bảng màu từ biến CSS (có color-mix) rồi vẽ canvas, nên đổi chuỗi đó sang rgba() theo màu CSS tính sẵn.
   // Trình duyệt hiểu color-mix trong canvas thì không đụng gì.
@@ -231,14 +231,36 @@
   const APP = EMBED && /[?&]app=1\b/.test(location.search);
   // lớp trên <html> ngay từ đầu: bài đặt bố cục chế độ app từ khung hình đầu, không nhảy khi vỏ gắn xong
   if (APP) document.documentElement.classList.add('bgs-app-html');
-  // App trên máy cảm ứng: giới hạn mật độ điểm ảnh dựng hình (điện thoại 1,5; máy tính bảng 1,75) trước khi bài tạo renderer.
-  // Các bài đặt pixel ratio từ devicePixelRatio (thường chặn ở 2): điện thoại vẽ ít hơn khoảng 44% điểm ảnh, đỡ nóng máy và giật.
-  // Chữ, nhãn là phần tử trang, không bị ảnh hưởng. 54 bài thư viện không tự hạ độ phân giải khi giật, nên phần này giúp nhất ở đó.
-  if (APP && matchMedia('(pointer: coarse)').matches) {
+  // Chất lượng hình do app chọn (Đã tải, mục Chất lượng hình), gửi qua ?hinh=: 'dep' (đẹp nhất), 'tiet-kiem' (tiết kiệm pin),
+  // 'yeu' (Tự động, máy từng chạy chậm ở bài trước); không có tham số là Tự động. Chỉ có hiệu lực trong app.
+  const HINH = APP ? (/[?&]hinh=(dep|tiet-kiem|yeu)\b/.exec(location.search) || [])[1] || 'tu-dong' : '';
+  // Giới hạn mật độ điểm ảnh dựng hình trước khi bài tạo renderer. Các bài đặt pixel ratio từ devicePixelRatio (thường chặn ở 2):
+  // Tự động trên máy cảm ứng chặn 1,5 (điện thoại) và 1,75 (máy tính bảng), điện thoại vẽ ít hơn khoảng 44% điểm ảnh;
+  // Tiết kiệm pin và máy chậm chặn 1. Chữ, nhãn là phần tử trang, không bị ảnh hưởng. 54 bài thư viện không tự hạ độ phân giải
+  // khi giật, nên phần này giúp nhất ở đó.
+  if (APP && HINH !== 'dep') {
     try {
-      const tran = Math.min(screen.width, screen.height) < 600 ? 1.5 : 1.75, d0 = window.devicePixelRatio || 1;
-      if (d0 > tran) Object.defineProperty(window, 'devicePixelRatio', { configurable: true, get: () => tran });
+      const tran = HINH === 'tiet-kiem' || HINH === 'yeu' ? 1 : matchMedia('(pointer: coarse)').matches ? (Math.min(screen.width, screen.height) < 600 ? 1.5 : 1.75) : 0;
+      if (tran && (window.devicePixelRatio || 1) > tran) Object.defineProperty(window, 'devicePixelRatio', { configurable: true, get: () => tran });
     } catch (e) { /* trình duyệt không cho đổi: giữ nguyên */ }
+  }
+  // Tiết kiệm pin và máy chậm: chế độ nhẹ (bỏ kính mờ) bật từ khung hình đầu; sự kiện 'bg:lite' phát khi vỏ gắn xong (perfWatch)
+  if (HINH === 'tiet-kiem' || HINH === 'yeu') document.documentElement.dataset.bgLite = '1';
+  // Tiết kiệm pin: vẽ tối đa 30 khung mỗi giây cho mọi bài (bọc requestAnimationFrame trước khi bài chạy). Mọi lời gọi trong cùng một
+  // khung màn hình cùng được chạy hoặc cùng được hoãn, nên hoạt cảnh vẫn khớp nhau; thời gian thật vẫn đúng nên vật vẫn chạy đúng tốc độ.
+  if (HINH === 'tiet-kiem' && window.requestAnimationFrame) {
+    const raf0 = window.requestAnimationFrame.bind(window), caf0 = window.cancelAnimationFrame.bind(window);
+    const that = new Map(); let id = 0, moc = -1e9, tKhung = -1, chay = false;
+    window.requestAnimationFrame = (cb) => {
+      const k = ++id;
+      const f = (t) => {
+        if (t !== tKhung) { tKhung = t; chay = t - moc >= 30; if (chay) moc = t; }
+        if (!chay) { that.set(k, raf0(f)); return; }
+        that.delete(k); cb(t);
+      };
+      that.set(k, raf0(f)); return k;
+    };
+    window.cancelAnimationFrame = (k) => { const n = that.get(k); if (n != null) { caf0(n); that.delete(k); } };
   }
   // app Android (Capacitor, https://localhost) mở bài nặng thẳng từ site: trang app khác nguồn với bài, app báo nguồn của mình qua ?o=
   const PARENT = (() => { const o = new URLSearchParams(location.search).get('o'); return o && /^(https?|capacitor):\/\/localhost(:\d+)?$/.test(o) ? o : (location.origin === 'null' ? '*' : location.origin); })();
@@ -697,15 +719,18 @@
   }
   /* đo nhịp khung hình: 3 lượt liền (mỗi lượt 90 khung hoặc 2,5 giây) có p90 trên 25 ms thì bật chế độ nhẹ một lần, phát sự kiện 'bg:lite'
      để bài tự hạ độ phân giải. Máy đủ mạnh giữ nguyên kính mờ. ?lite=1 ép bật, ?lite=0 tắt hẳn. Tab ẩn: trình duyệt tự dừng. */
-  function lite(why) {
+  function lite(why, doLuong) {
     const H = document.documentElement; if (H.dataset.bgLite) return;
     H.dataset.bgLite = '1'; dispatchEvent(new CustomEvent('bg:lite', { detail: { why } }));
+    // app Tự động: báo app để từ bài sau mở bằng hình nhẹ (mật độ điểm ảnh 1) ngay từ đầu
+    if (doLuong && HINH === 'tu-dong') toParent({ t: 'hinh', yeu: true, why });
   }
   function perfWatch() {
     if (perfWatch.on) return; perfWatch.on = true;
     const q = location.search;
     if (/[?&]lite=1/.test(q)) return lite('ép');
-    if (/[?&]lite=0/.test(q)) return;
+    if (HINH === 'tiet-kiem' || HINH === 'yeu') return dispatchEvent(new CustomEvent('bg:lite', { detail: { why: HINH } }));
+    if (/[?&]lite=0/.test(q) || HINH === 'dep') return;
     let last = 0, buf = [], slow = 0, t0 = 0;
     const tick = (t) => {
       if (document.documentElement.dataset.bgLite) return;
@@ -715,7 +740,7 @@
         t0 = t;
         buf.sort((a, b) => a - b); const p90 = buf[Math.floor(buf.length * 0.9)]; buf = [];
         slow = p90 > 25 ? slow + 1 : 0;
-        if (slow >= 3) return lite(Math.round(p90) + ' ms');
+        if (slow >= 3) return lite(Math.round(p90) + ' ms', true);
       }
       requestAnimationFrame(tick);
     };
