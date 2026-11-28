@@ -71,8 +71,12 @@ def cay():
 
 def cho_chu(mau, han=120):
     """Chờ tới khi cây giao diện có nút hay chữ khớp mẫu; trả về cây."""
-    t0 = time.time(); x = ''
+    t0 = time.time(); x = ''; lai = 0
     while time.time() - t0 < han:
+        # máy ảo bật chế độ máy bay có lúc làm tiến trình Google Play services khởi động lại, hệ thống giết luôn app
+        # đang dùng phông của nó ("depends on provider ... FontsProvider in dying process"): mở lại app, ghi vào nhật ký
+        if not adb('shell', 'pidof', PKG).strip() and lai < 2:
+            lai += 1; print(f'  app không còn chạy (hệ thống giết), mở lại lần {lai}', flush=True); mo_app(); time.sleep(5)
         x = cay()
         if re.search(mau, x, re.I): return x
         y = chu_trang()  # cây uiautomator có thể thiếu nội dung WebView khi cảnh chạy liên tục
