@@ -51,8 +51,11 @@ def main():
           requestAnimationFrame(f); requestAnimationFrame(h); })""")
         kiem('H4 tối đa 30 khung mỗi giây, cùng nhịp, huỷ được', nhip['a'] <= 64 and abs(nhip['a'] - nhip['g']) <= 1 and nhip['x'] == 0, str(nhip))
         chon('tu-dong')
-        for s in ('enzyme-step', 'than-kinh'):
-            mo(s); pg.frame(name='bgs-canh').evaluate("() => parent.postMessage({t: 'hinh', yeu: true, why: 'thử'}, location.origin)"); pg.wait_for_timeout(400)
+        for k, s in enumerate(('enzyme-step', 'than-kinh'), 1):
+            mo(s); pg.frame(name='bgs-canh').evaluate("() => parent.postMessage({t: 'hinh', yeu: true, why: 'thử'}, location.origin)")
+            # máy CI chậm: chờ app ghi nhận xong rồi mới mở bài khác
+            try: pg.wait_for_function(f"() => JSON.parse(localStorage.getItem('sak-hinh-cham') || '[]').length >= {k}", timeout=20000)
+            except Exception: pass
         tin = pg.text_content('#st-msg') or ''
         r = mo('enzyme-step')
         kiem('H5 chậm ở 2 bài: báo người học, bài sau vẽ hình nhẹ', 'chạy chậm' in tin and r['dpr'] == 1 and r['lite'] and 'hinh=yeu' in r['q'], str(r))

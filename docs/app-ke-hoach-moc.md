@@ -33,6 +33,7 @@ App vì thế là một vỏ ngoài mới theo hướng sân khấu, dùng lại
 | M4 · Android (dựng xong, chờ máy thật) | Capacitor 8, dựng APK trong GitHub Actions | Cài và chạy trên ít nhất 2 máy Android thật | Claude dựng, người dùng cài thử |
 | M5 · iPhone và iPad (móng xong, chờ tài khoản Apple) | Capacitor iOS, dựng trên máy chạy macOS (runner GitHub hoặc máy Mac) | Chạy qua TestFlight trên iPhone và iPad thật | Cần tài khoản Apple Developer của người dùng |
 | M6 · Lớp học (dựng xong, chờ dạy thử) | Chế độ chiếu cảnh tối và cảnh sáng, điều khiển từ điện thoại giáo viên (dùng lại kết nối PeerJS đã có) | Dạy thử một tiết thật | Claude, người dùng dạy thử |
+| M8 · Hiệu năng và đồ hoạ (xong trên máy dựng) | Rà dung lượng gói cài và đồ hoạ; chất lượng hình chọn được; nghiệm thu giả lập mọi bài ở cỡ điện thoại | Mọi bài mở, đi hết các bước, không lỗi trang trong app giả lập; máy thật: người dùng | Claude |
 | M7 · Phát hành (hồ sơ sẵn, chờ tài khoản và nộp) | Trang cửa hàng, chính sách riêng tư, giảm rủi ro guideline 4.2 | Được duyệt trên Google Play và App Store | Người dùng nộp, Claude soạn hồ sơ |
 
 ## Giới hạn cần nói rõ
@@ -161,6 +162,26 @@ Hồ sơ đầy đủ: `docs/phat-hanh.md` (việc người dùng phải làm, c
 - Ràng buộc giấy phép: 54 bài thư viện (CC BY-NC 4.0) và một phần mô hình giải phẫu chỉ dùng phi thương mại, nên app trên cửa hàng phải miễn phí, không quảng cáo, không bán trong app.
 - Chờ người dùng: tài khoản Google Play Console và Apple Developer, tên gói chốt, khoá tải lên Android trong GitHub secrets, email liên hệ, 12 người thử kín 14 ngày (tài khoản cá nhân mới của Google Play), và ba cổng còn mở (M4 máy Android thật, M5 TestFlight, M6 dạy thử).
 
+## M8 đã làm (hiệu năng và đồ hoạ, rà ngày 27 và 28/11/2026)
+
+Rà dung lượng (gói `native/www` trước khi sửa: 84 MB thô, 35 MB nén):
+- Trang HTML 55 MB thô, 15,5 MB nén: 54 bài thư viện là bản dựng sẵn của Tongjiang Lab, mỗi bài một gói esbuild khoảng 950 KB đã kèm three.js. Không có mã nguồn nên không gộp three.js dùng chung được.
+- Mô hình GLB 13,1 MB nén: lớn nhất `stilt.glb` 6,6 MB (Máy đi bộ, 352 nghìn tam giác có khung xương) đã nén meshopt, lượng tử hoá, kết cấu WebP; cá đã có bản nhẹ `_lo`. Chưa giảm thêm được mà không làm lại mô hình.
+- Đã bỏ khỏi gói: trang xem Tế Bào bằng AR (`te-bao/ar.html`) và mô hình ribosome 4,2 MB (2,2 MB nén) chỉ trang đó dùng. Trang AR vốn cần mạng (model-viewer tải từ CDN); app mở nó trên site bằng trình duyệt của máy (`app/ban-dia.json`, mục `trang_xa`). Gói còn 76,2 MB thô.
+
+Rà đồ hoạ: phần lớn bài chặn mật độ điểm ảnh ở 2 (bài thư viện 1,75 đến 2, có bóng đổ và khử răng cưa); bộ kit có bậc chất lượng và tự hạ; chỉ Neuron, Ty Thể, Cổ Loa phản ứng với chế độ nhẹ `bg:lite` của vỏ bài; 54 bài thư viện không tự hạ độ phân giải. Vì vậy phần đồ hoạ làm ở vỏ bài, áp cho mọi bài không cần sửa từng bài:
+- Vỏ bài 2.7.0, trong app: Tự động chặn mật độ 1,5 trên điện thoại, 1,75 trên máy tính bảng (điện thoại màn 3 lần vẽ ít hơn khoảng 44% điểm ảnh so với mức 2).
+- Màn Đã tải có mục Chất lượng hình: Tự động, Tiết kiệm pin (mật độ 1, tối đa 30 khung mỗi giây bằng cách bọc `requestAnimationFrame`, tắt kính mờ), Đẹp nhất (không chặn, không tự hạ). App gửi lựa chọn cho bài qua `?hinh=`.
+- Tự động học theo máy: vỏ bài đo nhịp khung hình (3 lượt liền p90 trên 25 ms); bài chậm báo app; chậm ở 2 bài khác nhau thì app báo người học một lần và từ bài sau mở bằng hình nhẹ (`?hinh=yeu`). Chọn lại một mục thì xoá ghi nhận.
+- `tests/kiem_hinh.py` (H1 đến H6) chạy trong CI. Đo trên máy dựng: giới hạn 30 khung cho đúng nửa nhịp gốc (121 xuống 61 khung trong 2 giây), hai vòng vẽ cùng nhịp, huỷ được.
+- Chưa đo được trên máy thật: mức đỡ nóng máy, tiết kiệm pin.
+
+Nghiệm thu giả lập trải nghiệm (`tests/kiem_trai_nghiem.py`): mở từng bài qua app ở 390 × 844 có cảm ứng, đi hết các bước bằng nút Bước tiếp như người học, bấm thử câu hỏi, ghi lỗi trang, tệp tải hỏng, tràn ngang, nút nhỏ hơn 32 px, thời gian mở, tác vụ dài. Kết quả `kiem-trai-nghiem/` (không nằm trong git).
+- Lần đầu (89 bài): 86 đạt. Ba bài mạng (Gói tin qua ba chặng, Hàng đợi, 5G) treo khi bấm Bước tiếp: tác vụ dài tăng theo bước, 12 giây ở bước 4, 37 giây ở bước 13 trên máy dựng. Nguyên nhân: nhảy tới bước i tua nhanh chuyến tham quan từ đầu theo bước 1/60 giây, thanh trượt tự chạy đổi tham số mỗi khung và bài tính lại mô phỏng hàng đợi hàng chục nghìn gói mỗi lần. Sửa ở `kit/live.js` (khi tua, thanh trượt cập nhật 4 lần mỗi giây và ở mốc cuối) và `kit/mang/mo-phong.js` (nhớ 48 kết quả mô phỏng tất định). Sau sửa: 0,4 đến 2,2 giây mỗi lần chuyển bước trên cùng máy; `tests/mang_check.mjs` 55/55.
+- Chạy lại 36 bài không thuộc thư viện (bộ kit, bài riêng, bài mạng) sau sửa: 36/36 đạt. Tổng hợp hai lượt: 89/89 bài đạt ở cỡ điện thoại.
+- Không lỗi trang, không tệp hỏng, không tràn ngang ở bài nào. Nút nhỏ duy nhất: liên kết "Tongjiang Lab" trong câu ghi công của bài thư viện (liên kết giữa câu chữ, WCAG 2.5.8 miễn).
+- Thời gian mở bài trên máy dựng (vẽ bằng phần mềm) dài nhất: Tế Bào 6 đến 11 giây, vài bài thư viện 6 đến 10 giây; phần lớn dưới 3 giây. Máy thật có GPU sẽ nhanh hơn, cần đo.
+
 ## Nhật ký
 
 - M0 xong: chốt hướng sân khấu.
@@ -172,3 +193,4 @@ Hồ sơ đầy đủ: `docs/phat-hanh.md` (việc người dùng phải làm, c
 - M5 xong phần móng: dự án iOS, dựng và chạy thử trên máy ảo iPhone, iPad trong CI. Chờ tài khoản Apple Developer.
 - M6 xong phần dựng: chế độ Lớp học trong app, điều khiển bằng phím, bút trình chiếu, điện thoại, màn hình giáo viên cùng máy. Chờ dạy thử một tiết.
 - M7 xong phần chuẩn bị: trang chính sách riêng tư và giấy phép, cấu hình và workflow bản phát hành Android, ảnh và hồ sơ cửa hàng (`docs/phat-hanh.md`). Chờ tài khoản cửa hàng và nộp.
+- M8 xong trên máy dựng: gói cài nhẹ hơn 2,2 MB, chất lượng hình chọn được (vỏ bài 2.7.0), nghiệm thu giả lập 89 bài ở cỡ điện thoại, sửa lỗi treo khi chuyển bước ở bài mạng. Chờ đo trên máy thật.
