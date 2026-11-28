@@ -457,6 +457,7 @@
     CU = { cu: (d && d.cu) || [], panels: (d && d.panels) || [] };
     const box = $('pnl'), any = CU.panels.some((p) => p.open);
     box.hidden = !CU.cu.length && !CU.panels.length;
+    box.classList.toggle('day', CU.cu.length + CU.panels.length >= 2);
     // vẽ lại chỉ khi đổi, để trình đơn đang mở không bị mất nút gốc
     let h = cuHtml(CU, '', !!box.dataset.gop);
     if (box.dataset.h !== h) {

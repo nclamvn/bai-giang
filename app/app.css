@@ -135,12 +135,18 @@ main{padding-bottom:calc(100px + var(--sb))}
 .scrim-b{bottom:0;height:min(62vh,460px);background:linear-gradient(to top,rgba(10,9,20,.95) 0%,rgba(10,9,20,.8) 48%,rgba(10,9,20,0) 100%)}
 .st-top{position:absolute;z-index:2;top:calc(12px + var(--st));left:calc(12px + var(--sl));right:calc(12px + var(--sr));display:flex;align-items:center;gap:10px;pointer-events:none}
 .st-top>*{pointer-events:auto}
+/* lưới của sân khấu: lề 12 px hai bên; hàng trên cao 44 px (nút Đóng, tên bài, nhóm nút của bài); cách 12 px là thanh công cụ
+   cao 52 px trải đúng bề ngang hàng trên, nên mép trái của nút Đóng và thanh, mép phải của nhóm nút và thanh thẳng hàng */
+.st-grp{display:flex;align-items:center;height:44px;border-radius:22px;flex-shrink:0}
+.st-grp .ib{width:44px;height:44px;border:0;background:transparent}
+.st-grp .ib+.ib{margin-left:-2px}
+.st-grp .ib[aria-pressed="true"],.st-grp .tai.xong{background:linear-gradient(180deg,#fff,#ECEAF2);color:var(--nen)}
 .ib{width:44px;height:44px;border-radius:22px;display:inline-flex;align-items:center;justify-content:center;padding:0;color:#fff;border:1px solid var(--vien);flex-shrink:0}
 .ib.glass{border:0}
 .ib svg{width:20px;height:20px}
 .ib.ghost{border:0;background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.03));box-shadow:var(--lg-rim);width:52px;height:52px;border-radius:26px}
 .ib[aria-pressed="true"]{background:linear-gradient(180deg,#fff,#ECEAF2);color:var(--nen);border-color:#fff}
-.st-title{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;line-height:1.25;pointer-events:none!important;text-shadow:0 1px 10px rgba(0,0,0,.55)}
+.st-title{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding-left:2px;line-height:1.25;pointer-events:none!important;text-shadow:0 1px 2px rgba(0,0,0,.45)}  /* bóng mờ rộng bị overflow cắt thành hộp chữ nhật: chỉ dùng bóng sát chữ */
 .st-title .k{font-size:12px;color:var(--mo2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .st-title .t{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .cap{position:absolute;z-index:2;left:0;right:0;bottom:0;max-height:56vh;overflow:auto;padding:0 calc(20px + var(--sr)) 0 calc(20px + var(--sl));display:flex;flex-direction:column;gap:10px;scrollbar-width:none}
@@ -174,13 +180,16 @@ main{padding-bottom:calc(100px + var(--sb))}
 .next-l{position:absolute;z-index:3;left:50%;transform:translateX(-50%);top:calc(70px + var(--st));padding:12px 18px;border-radius:16px;text-decoration:none;display:flex;flex-direction:column;gap:2px;max-width:min(92vw,420px)}
 .next-l .k{color:var(--nhan-c)}
 /* có thanh công cụ dưới tên bài: thẻ Bài tiếp theo nằm dưới thanh, không che nút */
-.stage:has(#pnl:not([hidden])) .next-l{top:calc(128px + var(--st))}
+.stage:has(#pnl:not([hidden])) .next-l{top:calc(132px + var(--st))}
 .next-l b{font-size:16px}
 .stage.sach .cap,.stage.sach .scrim-b,.stage.sach .next-l,.stage.pnl-mo .cap,.stage.pnl-mo .scrim-b,.stage.pnl-mo .next-l{display:none}
 /* thanh công cụ của cảnh: một viên kính duy nhất dưới tên bài; nút trong suốt, bật thì sáng trắng; nhóm có trình đơn có mũi tên */
-.st-pnl{position:absolute;z-index:2;top:calc(66px + var(--st));left:calc(12px + var(--sl));display:flex;gap:2px;padding:4px;border-radius:26px;max-width:calc(100vw - 24px - var(--sl) - var(--sr));overflow-x:auto;scrollbar-width:none;
+.st-pnl{position:absolute;z-index:2;top:calc(68px + var(--st));left:calc(12px + var(--sl));display:flex;gap:2px;padding:4px;border-radius:26px;max-width:calc(100vw - 24px - var(--sl) - var(--sr));overflow-x:auto;scrollbar-width:none;
   background:var(--lg-sheen),var(--lg-tint);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);box-shadow:var(--lg-rim),var(--lg-drop)}
 .st-pnl::-webkit-scrollbar{display:none}
+/* từ hai nút trở lên: thanh trải đủ bề ngang hàng trên, các nút chia đều */
+.st-pnl.day{right:calc(12px + var(--sr));max-width:none}
+.st-pnl.day button{flex:1 1 0;justify-content:center}
 .st-pnl .ic-gon,.st-pnl.chat .chu-gon{display:none}.st-pnl.chat .ic-gon{display:block}
 .st-pnl button{flex:none;height:44px;padding:0 14px;border-radius:22px;display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:500;color:#fff;border:0;background:transparent;white-space:nowrap}
 .st-pnl button svg,.lop-c svg{width:18px;height:18px}
@@ -212,8 +221,8 @@ html[data-hinh="tiet-kiem"] .st-pnl,html[data-hinh="tiet-kiem"] .cu-menu{--lg-ti
   /* chân bảng kính: dải mờ thêm một lớp, cùng bo góc với bảng; chữ cuộn xuống dưới hàng nút thì nhoè đi */
   .cap .ctl{margin:auto -24px 0;padding:12px 24px 24px;border-radius:0 0 28px 28px;background:rgba(14,12,26,.42);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:inset 0 .5px 0 rgba(255,255,255,.12)}
   .st-top{right:calc(404px + var(--sr))}
+  .st-pnl.day{right:calc(404px + var(--sr))}
   .st-msg{right:calc(404px + var(--sr))}
-  .st-title{align-items:flex-start;text-align:left}
   .next-l{left:calc(16px + var(--sl));transform:none;top:auto;bottom:calc(16px + var(--sb))}
   .stage:has(#pnl:not([hidden])) .next-l{top:auto}
 }
@@ -223,6 +232,7 @@ html[data-hinh="tiet-kiem"] .st-pnl,html[data-hinh="tiet-kiem"] .cu-menu{--lg-ti
   .cap h2{font-size:21px}
   .cap p{font-size:14px}
   .st-top{right:calc(328px + var(--sr))}
+  .st-pnl.day{right:calc(328px + var(--sr))}
   .st-msg{right:calc(328px + var(--sr))}
   .go{height:46px}
   .ib.ghost{width:46px;height:46px}
